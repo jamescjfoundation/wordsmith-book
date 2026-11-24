@@ -35,6 +35,9 @@ pub struct Piece {
     pub section: Option<SectionId>,
     /// Its number (parts and chapters, each counting on its own).
     pub number: Option<u32>,
+    /// Its number line as printed ("Chapter One"), from the book's numbering; none when it is
+    /// unnumbered, the style is none, or its title is already a number line.
+    pub label: Option<String>,
     /// Its title.
     pub title: String,
     /// A subtitle (Book's setting).
@@ -101,6 +104,7 @@ fn piece(project: &BookProject, s: &Section, what: What) -> Piece {
         what,
         section: Some(s.id),
         number: s.number,
+        label: None,
         title: s.title.clone(),
         subtitle: settings.subtitle,
         epigraph: (!settings.epigraph.is_empty()).then_some((settings.epigraph, settings.epigraph_source)),
@@ -172,6 +176,7 @@ pub fn assemble(project: &BookProject, book: &Book, edition: Option<&Edition>) -
                 what: What::Element(kind),
                 section: None,
                 number: None,
+                label: None,
                 title: if e.title.is_empty() { kind.title().to_owned() } else { e.title.clone() },
                 subtitle: String::new(),
                 epigraph: None,
@@ -192,5 +197,24 @@ pub fn assemble(project: &BookProject, book: &Book, edition: Option<&Edition>) -
         }
     }
     body(project, &book.body, &mut a.body);
+    for p in &mut a.body {
+        p.label = number_line(project, p);
+    }
     a
+}
+
+/// A part's or chapter's number line under the book's numbering.
+pub fn number_line(project: &BookProject, p: &Piece) -> Option<String> {
+    let n = p.number?;
+    if p.unnumbered || wordsmith_book_model::numbers::is_number_line(&p.title) {
+        return None;
+    }
+    let num = &project.numbering;
+    match p.what {
+        What::Part => wordsmith_book_model::numbers::label(num.parts, n, if num.part_label.is_empty() { "Part" } else { &num.part_label }),
+        What::Chapter => {
+            wordsmith_book_model::numbers::label(num.chapters, n, if num.chapter_label.is_empty() { "Chapter" } else { &num.chapter_label })
+        }
+        _ => None,
+    }
 }

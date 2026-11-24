@@ -190,3 +190,17 @@ fn a_thousand_section_outline_draws_within_50_ms_a_frame() {
     let per_frame = start.elapsed() / 20;
     assert!(per_frame.as_millis() < 50, "{per_frame:?} a frame");
 }
+
+#[test]
+fn numbering_and_chapter_settings_are_undoable_commands() {
+    let (mut app, _) = linked_app("numbering");
+    app.command(commands::NUMBERING, &json!({ "chapters": "roman", "part_label": "Voyage" })).unwrap();
+    let first = app.book.as_ref().unwrap().source.as_ref().unwrap().book.body[0].children[0].id;
+    app.command(commands::SECTION, &json!({ "id": first.as_text(), "subtitle": "Of the Author", "only": "print" })).unwrap();
+    let p = &app.book.as_ref().unwrap().files.project;
+    assert_eq!(p.numbering.chapters, wordsmith_book_model::NumberStyle::Roman);
+    assert_eq!(p.section(first).subtitle, "Of the Author");
+    assert!(app.command(commands::NUMBERING, &json!({ "chapters": "fancy" })).is_err());
+    app.command("edit.undo", &json!({})).unwrap();
+    assert_eq!(app.book.as_ref().unwrap().files.project.section(first).subtitle, "");
+}

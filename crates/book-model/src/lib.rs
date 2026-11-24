@@ -10,6 +10,7 @@
 
 pub mod document;
 pub mod matter;
+pub mod numbers;
 
 use std::collections::BTreeMap;
 

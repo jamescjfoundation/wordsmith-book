@@ -32,6 +32,12 @@ pub const CLEANUP_APPLY: &str = "book.cleanup.apply";
 pub const CLEANUP_UNDO: &str = "book.cleanup.undo";
 /// "Keep exactly as written": `{"on": true}` proposes no cleanup.
 pub const CLEANUP_KEEP: &str = "book.cleanup.keepExactly";
+/// Set chapter and part numbering: `{"chapters", "parts", "chapter_label", "part_label"}`
+/// (styles: label-words, label-figures, words, figures, roman, none).
+pub const NUMBERING: &str = "book.numbering";
+/// Set Book's settings for a section: `{"id", "subtitle", "epigraph", "epigraph_source",
+/// "unnumbered", "only"}`.
+pub const SECTION: &str = "book.section";
 /// Close the book.
 pub const CLOSE: &str = "book.close";
 /// Save the whole project as one packed file: `{"path": file}`.
@@ -70,6 +76,8 @@ pub fn list() -> Vec<CommandInfo> {
         CommandInfo::new(IMPORT_CONFIRM, "Import", ""),
         p(CommandInfo::new(IMPORT, "Import a File into a New Book", "")),
         CommandInfo::new(CLEANUP_LIST, "Cleanup Changes", ""),
+        p(CommandInfo::new(NUMBERING, "Chapter Numbers", "")),
+        p(CommandInfo::new(SECTION, "Chapter Settings", "")),
         p(CommandInfo::new(CLEANUP_APPLY, "Make Cleanup Changes", "")),
         CommandInfo::new(CLEANUP_UNDO, "Undo Last Cleanup", ""),
         p(CommandInfo::new(CLEANUP_KEEP, "Keep Exactly as Written", "")),
@@ -181,6 +189,66 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         ids::NEW_FROM_TEMPLATE | NEW => new_book(app, params),
         CLOSE => {
             app.book = None;
+            Ok(Value::Null)
+        }
+        NUMBERING => {
+            let style = |k: &str| -> Result<Option<wordsmith_book_model::NumberStyle>, String> {
+                params.get(k).map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not a number style"))).transpose()
+            };
+            let (chapters, parts) = (style("chapters")?, style("parts")?);
+            let (cl, pl) = (
+                params.get("chapter_label").and_then(Value::as_str).map(str::to_owned),
+                params.get("part_label").and_then(Value::as_str).map(str::to_owned),
+            );
+            app.open_book()?.edit(|f| {
+                let n = &mut f.project.numbering;
+                if let Some(c) = chapters {
+                    n.chapters = c;
+                }
+                if let Some(p) = parts {
+                    n.parts = p;
+                }
+                if let Some(l) = cl {
+                    n.chapter_label = l;
+                }
+                if let Some(l) = pl {
+                    n.part_label = l;
+                }
+                Ok(())
+            })?;
+            Ok(Value::Null)
+        }
+        SECTION => {
+            let id: SectionId = s(params, "id")?.parse().map_err(|e: wordsmith_manuscript_model::BadId| e.to_string())?;
+            let only: Option<wordsmith_book_model::Only> = params
+                .get("only")
+                .map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not both, print or ebook")))
+                .transpose()?;
+            let text = |k: &str| params.get(k).and_then(Value::as_str).map(str::to_owned);
+            let (sub, epi, src) = (text("subtitle"), text("epigraph"), text("epigraph_source"));
+            let unnumbered = params.get("unnumbered").and_then(Value::as_bool);
+            app.open_book()?.edit(|f| {
+                let s = f.project.sections.entry(id).or_default();
+                if let Some(v) = sub {
+                    s.subtitle = v;
+                }
+                if let Some(v) = epi {
+                    s.epigraph = v;
+                }
+                if let Some(v) = src {
+                    s.epigraph_source = v;
+                }
+                if let Some(v) = unnumbered {
+                    s.unnumbered = v;
+                }
+                if let Some(v) = only {
+                    s.only = v;
+                }
+                if *s == wordsmith_book_model::SectionSettings::default() {
+                    f.project.sections.remove(&id);
+                }
+                Ok(())
+            })?;
             Ok(Value::Null)
         }
         CLEANUP_LIST => crate::cleanup::list_json(app.open_book()?),

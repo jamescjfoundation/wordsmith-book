@@ -106,9 +106,7 @@ pub fn default_template(kind: ElementKind) -> Option<&'static str> {
     match kind {
         ElementKind::HalfTitle => Some("{title}"),
         ElementKind::TitlePage => Some("{title}\n{subtitle}\n{byline}\n{credits}\n{imprint}"),
-        ElementKind::Copyright => Some(
-            "Copyright © {year} {holder}\n{rights}\n{isbn_line}\n{series}\nPublished by {imprint}\n{address}\n{website}",
-        ),
+        ElementKind::Copyright => Some("Copyright © {year} {holder}\n{rights}\n{isbn_line}\n{series}\nPublished by {imprint}\n{address}\n{website}"),
         ElementKind::AboutTheAuthor => Some("{about}"),
         _ => None,
     }
@@ -208,7 +206,13 @@ pub fn lines(kind: ElementKind, text: &str, m: &Meta) -> (Vec<Line>, Vec<String>
     }
     let template = if text.is_empty() { default_template(kind).unwrap_or("") } else { text };
     let (filled, unknown) = fill(template, m);
-    let out = filled.split('\n').map(str::trim).filter(|l| !l.is_empty()).enumerate().map(|(i, l)| Line { text: l.to_owned(), style: styled(kind, i) }).collect();
+    let out = filled
+        .split('\n')
+        .map(str::trim)
+        .filter(|l| !l.is_empty())
+        .enumerate()
+        .map(|(i, l)| Line { text: l.to_owned(), style: styled(kind, i) })
+        .collect();
     (out, unknown)
 }
 

@@ -19,9 +19,17 @@ fn fixture() -> wordsmith_manuscript_model::Project {
 fn project() -> BookProject {
     let mut p = BookProject::new(Source::Manuscript("../Gulliver.wsm".into()), "2026-11-24");
     p.elements = default_elements();
-    p.metadata.imprint = Some(Imprint { name: "Harbour Light Books".into(), address: vec!["1 Quay Street".into()], website: "https://example.org".into(), ..Imprint::default() });
+    p.metadata.imprint = Some(Imprint {
+        name: "Harbour Light Books".into(),
+        address: vec!["1 Quay Street".into()],
+        website: "https://example.org".into(),
+        ..Imprint::default()
+    });
     p.metadata.contributors.push(Contributor { name: "A. Editor".into(), role: Role::Editor });
-    p.metadata.also_by = vec![OtherBook { title: "A Tale of a Tub".into(), series: String::new() }, OtherBook { title: "A Modest Proposal".into(), series: String::new() }];
+    p.metadata.also_by = vec![
+        OtherBook { title: "A Tale of a Tub".into(), series: String::new() },
+        OtherBook { title: "A Modest Proposal".into(), series: String::new() },
+    ];
     p.metadata.about_author = "Jonathan Swift was a satirist and a dean.".into();
     p.editions[0].isbn = "978-0-306-40615-7".into();
     p
@@ -42,7 +50,9 @@ fn each_element_is_made_from_the_metadata() {
     let b = book::from_project(&src);
     let p = project();
     let a = assemble(&p, &b, p.edition("paperback"));
-    let find = |k: ElementKind| a.front.iter().chain(&a.back).find(|x| x.what == What::Element(k)).map(|x| text(&x.blocks)).unwrap_or_else(|| panic!("{k:?}"));
+    let find = |k: ElementKind| {
+        a.front.iter().chain(&a.back).find(|x| x.what == What::Element(k)).map(|x| text(&x.blocks)).unwrap_or_else(|| panic!("{k:?}"))
+    };
     assert_eq!(find(ElementKind::HalfTitle), ["Gulliver’s Travels"]);
     let tp = find(ElementKind::TitlePage);
     assert_eq!(&tp[..3], ["Gulliver’s Travels", "into Several Remote Nations of the World", "Jonathan Swift"]);
@@ -86,11 +96,14 @@ fn edited_elements_round_trip_through_the_format() {
 fn a_sources_own_pages_are_used_never_doubled() {
     let mut src = fixture();
     let id = ItemId::from_counter(9_000);
-    let _ = src.binder.insert(Place::end_of(Area::Manuscript), Item::with_id(id, Kind::Text, "Copyright").role(wordsmith_manuscript_model::Role::FrontMatter));
+    let _ = src
+        .binder
+        .insert(Place::end_of(Area::Manuscript), Item::with_id(id, Kind::Text, "Copyright").role(wordsmith_manuscript_model::Role::FrontMatter));
     src.texts.insert(id, ItemText::with_body(Text::from_paragraphs(&["The writer's own copyright page."])));
     let b = book::from_project(&src);
     let a = assemble(&project(), &b, None);
-    let copyrights: Vec<_> = a.front.iter().filter(|x| matches!(x.what, What::Element(ElementKind::Copyright) | What::Matter(FrontKind::Copyright))).collect();
+    let copyrights: Vec<_> =
+        a.front.iter().filter(|x| matches!(x.what, What::Element(ElementKind::Copyright) | What::Matter(FrontKind::Copyright))).collect();
     assert_eq!(copyrights.len(), 1);
     assert_eq!(copyrights[0].what, What::Matter(FrontKind::Copyright));
     assert_eq!(text(&copyrights[0].blocks), ["The writer's own copyright page."]);
@@ -102,4 +115,42 @@ fn a_sources_own_pages_are_used_never_doubled() {
     // The fixture's own title page is used too, so Book's is not made.
     assert!(!order.contains(&What::Element(ElementKind::TitlePage)));
     let _ = Edition::paperback();
+}
+
+#[test]
+fn parts_and_chapters_are_numbered_each_on_their_own() {
+    use wordsmith_book_model::{NumberStyle, Numbering, SectionSettings};
+    let b = book::from_project(&fixture());
+    let mut p = project();
+    let a = assemble(&p, &b, None);
+    let parts: Vec<_> = a.body.iter().filter(|x| x.what == What::Part).map(|x| x.label.clone().unwrap()).collect();
+    assert_eq!(parts, ["Part One", "Part Two", "Part Three", "Part Four"]);
+    let chapters: Vec<_> = a.body.iter().filter(|x| x.what == What::Chapter).map(|x| x.label.clone().unwrap()).collect();
+    assert_eq!(chapters.first().map(String::as_str), Some("Chapter One"));
+    assert_eq!(chapters.last().map(String::as_str), Some("Chapter Thirty-Nine"));
+    // Other styles, a label of the user's, a chapter left unnumbered, a subtitle and an epigraph.
+    p.numbering = Numbering { chapters: NumberStyle::Roman, parts: NumberStyle::LabelFigures, part_label: "Voyage".into(), ..Numbering::default() };
+    let first = b.body[0].children[0].id;
+    p.sections.insert(
+        first,
+        SectionSettings {
+            subtitle: "Of the Author".into(),
+            epigraph: "All is well.".into(),
+            epigraph_source: "A sailor".into(),
+            unnumbered: true,
+            ..SectionSettings::default()
+        },
+    );
+    let a = assemble(&p, &b, None);
+    assert_eq!(a.body[0].label.as_deref(), Some("Voyage 1"));
+    assert_eq!(a.body[1].label, None);
+    assert_eq!(a.body[1].subtitle, "Of the Author");
+    assert_eq!(a.body[1].epigraph, Some(("All is well.".into(), "A sailor".into())));
+    assert_eq!(a.body[2].label.as_deref(), Some("II"));
+    // A title that is already a number line ("CHAPTER I.") gets no second one.
+    let mut src = fixture();
+    let ch = b.body[0].children[1].id;
+    src.binder.get_mut(ch).unwrap().title = "CHAPTER II.".into();
+    let a = assemble(&project(), &book::from_project(&src), None);
+    assert_eq!(a.body[2].label, None);
 }
