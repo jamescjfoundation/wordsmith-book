@@ -1,0 +1,36 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "literary"
+name = "Literary"
+about = "A sturdy reading serif, openings set low and to the left, and space between scenes."
+genres = ["literary", "contemporary"]
+moods = ["quiet", "modern"]
+
+[body]
+font = "reading-serif"
+size = 10.5
+leading = 1.4
+indent = 1.0
+hyphenation = "strict"
+
+[chapter]
+font = "reading-serif"
+sink = 0.33
+number_size = 10.0
+number_case = "as-written"
+title_size = 18.0
+align = "left"
+first_line = "none"
+
+[scene_break]
+style = "space"
+mark = "*"
+
+[heads]
+style = "title-chapter"
+folio = "head"
+size = 8.5
+small_caps = false
+
+[ebook]
+first_line = "none"

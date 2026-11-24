@@ -1,0 +1,35 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "thriller"
+name = "Thriller"
+about = "Big sans-serif numbers and capitals at a chapter's head: fast, hard openings."
+genres = ["thriller", "mystery", "crime", "science-fiction"]
+moods = ["tense", "modern"]
+
+[body]
+font = "reading-serif"
+size = 10.5
+leading = 1.3
+indent = 1.0
+
+[chapter]
+font = "sans"
+sink = 0.2
+number_size = 40.0
+number_case = "as-written"
+title_size = 14.0
+title_case = "capitals"
+align = "left"
+first_line = "none"
+
+[scene_break]
+mark = "* * *"
+
+[heads]
+style = "title-chapter"
+folio = "head"
+size = 8.5
+small_caps = false
+
+[ebook]
+first_line = "none"

@@ -1,0 +1,25 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "classic"
+name = "Classic"
+about = "An old-style serif, small-capital openings and a fleuron: a traditional trade book."
+genres = ["classic", "literary", "historical"]
+moods = ["traditional", "warm"]
+
+[body]
+font = "classic-serif"
+size = 11.0
+leading = 1.32
+indent = 1.2
+
+[chapter]
+font = "classic-serif"
+sink = 0.25
+number_size = 11.5
+number_case = "small-caps"
+title_size = 20.0
+ornament = "❧"
+first_line = "small-caps"
+
+[scene_break]
+mark = "❦"

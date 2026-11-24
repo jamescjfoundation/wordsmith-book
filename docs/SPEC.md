@@ -245,9 +245,22 @@ dedication, epigraph, contents, then the body. [Verified] An ebook puts the copy
     each following the rules of this section; their own choices are listed in section 4.1.
     [Designed]
 
-### 4.1 The built-in designs
+### 4.1 The built-in designs (DSN-2)
 
-Filled in by step M4.2: for each design, its fonts by role, sizes, opening, scene breaks and heads.
+Six designs at 0.1, written by the project (`assets/designs/`). All follow the rules of section 4:
+justified body text with a first-line indent and no space between paragraphs, the first paragraph
+of a chapter and after a scene break not indented, two lines at least on either side of a page
+break, hyphenation by the book's language, running heads off on openings and blank pages.
+[Designed]
+
+| Design | Body | Openings | Scene breaks | Heads and folios |
+| --- | --- | --- | --- | --- |
+| Classic | Classic serif 11/14.5 pt, indent 1.2 em | Right-hand page, sunk a quarter; number in small capitals, title 20 pt, a fleuron; small-capital lead-in | A fleuron | Author left, title right, in small capitals; folio at the foot |
+| Literary | Reading serif 10.5/14.7 pt, indent 1 em, strict hyphenation | Right-hand page, sunk a third, set left; plain number and title | A blank line, the next scene starting in small capitals | Title left, chapter right; folio in the head |
+| Romance | Classic serif 11/15.2 pt | Right-hand page; display title 26 pt; a fleuron; three-line drop cap | A fleuron | Author and title in small capitals; folio at the foot |
+| Thriller | Reading serif 10.5/13.7 pt, indent 1 em | Right-hand page, sunk a fifth, set left; 40 pt sans-serif number, title in capitals | Three asterisks | Title and chapter; folio in the head |
+| Fantasy | Classic serif 11.5/15.5 pt | Right-hand page; display capitals for the title, ornaments, three-line drop cap; part titles 30 pt | Three ornaments | Author and title in small capitals; folio at the foot |
+| Non-fiction | Reading serif 10.5/14.7 pt, indent 1 em | Any page, sunk a little, set left; sans-serif number and title 22 pt | Three asterisks | Title and chapter; folio in the head |
 
 ## 5. Print rules and profiles (PRT-1 to PRT-6, PRE-4)
 

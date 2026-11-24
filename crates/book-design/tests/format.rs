@@ -76,11 +76,13 @@ fn each_validation_message_says_what_is_wrong() {
     assert!(problem(|d| d.chapter.sink = 0.9).contains("chapter sink"));
     assert!(problem(|d| d.chapter.number_size = 100.0).contains("chapter number size"));
     assert!(problem(|d| d.chapter.title_size = 1.0).contains("chapter title size"));
-    assert!(problem(|d| {
-        d.chapter.first_line = FirstLine::DropCap;
-        d.chapter.drop_lines = 7;
-    })
-    .contains("drop cap"));
+    assert!(
+        problem(|d| {
+            d.chapter.first_line = FirstLine::DropCap;
+            d.chapter.drop_lines = 7;
+        })
+        .contains("drop cap")
+    );
     assert!(problem(|d| d.chapter.ornament = "too many glyphs here".into()).contains("ornament"));
     assert!(problem(|d| d.scene_break.mark = " ".into()).contains("needs a mark"));
     assert!(problem(|d| d.scene_break.mark = "end".into()).contains("no letters"));

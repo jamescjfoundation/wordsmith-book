@@ -137,7 +137,16 @@ pub struct Body {
 
 impl Default for Body {
     fn default() -> Self {
-        Body { font: "classic-serif".into(), size: 11.0, leading: 1.3, indent: 1.2, justify: true, hyphenation: Hyphenation::Normal, orphans: 2, widows: 2 }
+        Body {
+            font: "classic-serif".into(),
+            size: 11.0,
+            leading: 1.3,
+            indent: 1.2,
+            justify: true,
+            hyphenation: Hyphenation::Normal,
+            orphans: 2,
+            widows: 2,
+        }
     }
 }
 
@@ -337,7 +346,9 @@ impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Error::TooLarge => write!(f, "the design file is larger than {} KB", MAX_FILE >> 10),
-            Error::Newer(v) => write!(f, "this design was made by a newer version of Wordsmith Book (design format {v}; this version reads up to {SCHEMA})"),
+            Error::Newer(v) => {
+                write!(f, "this design was made by a newer version of Wordsmith Book (design format {v}; this version reads up to {SCHEMA})")
+            }
             Error::NotADesign(why) => write!(f, "this is not a design file: {why}"),
             Error::Invalid(problems) => write!(f, "the design cannot be used: {}", problems.join(" ")),
         }
