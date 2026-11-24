@@ -19,6 +19,7 @@ pub mod ebook_preview;
 pub mod import_review;
 pub mod metadata;
 pub mod outline;
+pub mod preflight;
 pub mod preview;
 
 use std::path::PathBuf;
@@ -68,6 +69,8 @@ pub struct BookApp {
     pub print_preview: preview::PrintPreview,
     /// The ebook preview.
     pub ebook_preview: ebook_preview::EbookPreview,
+    /// The preflight panel.
+    pub preflight: preflight::Panel,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -317,10 +320,11 @@ impl App for BookApp {
             PanelSpec::new("designs", "Designs", "style", Side::Right),
             PanelSpec::new("preview", "Print Preview", "print", Side::Right),
             PanelSpec::new("ebook", "Ebook Preview", "book", Side::Right),
+            PanelSpec::new("preflight", "Preflight", "check", Side::Right),
         ]
     }
 
-    fn panel_ui(&mut self, panel: &str, ui: &mut egui::Ui, _shell: &mut Shell) {
+    fn panel_ui(&mut self, panel: &str, ui: &mut egui::Ui, shell: &mut Shell) {
         brand::ensure_fonts(ui.ctx());
         match panel {
             "outline" => self.outline_ui(ui),
@@ -353,6 +357,27 @@ impl App for BookApp {
                 };
                 if let Some(piece) = clicked {
                     self.outline.selected = Some(outline::key_of_piece(&piece));
+                }
+            }
+            "preflight" => {
+                let go = match &self.book {
+                    Some(b) => self.preflight.ui(ui, b),
+                    None => None,
+                };
+                let open = |shell: &mut Shell, id: &str| {
+                    if !shell.layout.is_open(id) {
+                        shell.run(jcj_shell::Cmd::with(jcj_shell::commands::shell_ids::PANEL, json!({ "panel": id })));
+                    }
+                };
+                match go {
+                    Some(preflight::GoTo::Page(n)) => {
+                        self.print_preview.edition.clone_from(&self.preflight.edition);
+                        self.print_preview.scroll_to = Some(n.saturating_sub(1));
+                        open(shell, "preview");
+                    }
+                    Some(preflight::GoTo::Section(piece)) => self.outline.selected = Some(outline::key_of_piece(&piece)),
+                    Some(preflight::GoTo::Edition(_)) => open(shell, "details"),
+                    None => {}
                 }
             }
             "ebook" => {

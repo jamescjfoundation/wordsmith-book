@@ -546,6 +546,34 @@ impl Typeset {
             .ok_or_else(|| Error::Page(format!("there is no page {}", index + 1)))
     }
 
+    /// The smallest type the book's text is set in (points), with some of the text in it: every
+    /// run of the body that prints letters, and the running heads and folios. Superscript note
+    /// numbers are left out (print services measure the text, not its marks).
+    pub fn smallest_type(&self, look: &Look) -> Option<(f32, String)> {
+        let mut best: Option<(f32, String)> = None;
+        let mut consider = |size: f32, text: &str| {
+            if best.as_ref().is_none_or(|(b, _)| size < *b) {
+                best = Some((size, text.chars().take(40).collect()));
+            }
+        };
+        let default = self.doc.styles.default_chr.size.unwrap_or(11.0);
+        for (_, p) in jcj_doc::walk::body_paragraphs(&self.doc) {
+            let mut at = 0;
+            for r in &p.runs {
+                let text: String = p.text.get(at..at + r.len).unwrap_or("").to_owned();
+                at += r.len;
+                if r.props.vert_align == Some(jcj_doc::props::VertAlign::Superscript) || !text.chars().any(char::is_alphanumeric) {
+                    continue;
+                }
+                consider(r.props.size.or(p.mark.size).unwrap_or(default), &text);
+            }
+        }
+        if look.heads != Heads::None || look.folios {
+            consider(look.head_size, "running heads and page numbers");
+        }
+        best
+    }
+
     /// The text the book's body area prints, paragraph by paragraph: (the paragraph's text,
     /// whether it is the author's words).
     pub fn printed_paragraphs(&self) -> Vec<(String, bool)> {

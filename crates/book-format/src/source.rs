@@ -29,13 +29,16 @@ pub enum Kind {
     Owned,
 }
 
+#[derive(Clone)]
 enum Watch {
     Folder(wordsmith_manuscript_format::folder::Folder),
     Packed([u8; 32]),
 }
 
 /// An opened source: the book view, the project it came from (for the writer's decisions on
-/// offers), and what is needed to notice outside changes.
+/// offers), and what is needed to notice outside changes. A clone is a snapshot (for work on
+/// another thread).
+#[derive(Clone)]
 pub struct Opened {
     /// The book view.
     pub book: Book,

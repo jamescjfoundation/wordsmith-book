@@ -348,7 +348,8 @@ break, hyphenation by the book's language, running heads off on openings and bla
    licensed for embedding (fonts whose embedding bits forbid it block export); nothing under the
    minimum type size; images at 300 dpi or more; blank-page runs within limits; page count within
    the profile; no annotations; the words of the PDF match the source letter by letter. [Designed,
-   from section 5]
+   from section 5] The smallest type is read from the laid-out text; superscript note
+   numbers are not counted. Pages are blank when they print no letters. [Designed]
 4. Ebook checks: container, package, manifest and spine, navigation targets, ids unique, links
    resolve, XHTML well-formed, CSS within the supported subset, alternative text present,
    accessibility metadata present and consistent with the content, the words of the EPUB match

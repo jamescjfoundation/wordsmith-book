@@ -97,6 +97,10 @@ pub const PREVIEW_PAGE: &str = "book.preview.page";
 /// only writes it; gives its path.
 pub const EBOOK_OPEN: &str = "book.ebook.openInReadingApp";
 
+/// Build an edition and check it: `{"edition": id}` (the first edition when left out); gives
+/// whether export is blocked and every finding with its link.
+pub const PREFLIGHT: &str = "book.preflight";
+
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
     let p = |mut c: CommandInfo| {
@@ -147,6 +151,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(PREVIEW_SHOW, "Show in Print Preview", "")),
         p(CommandInfo::new(PREVIEW_PAGE, "Section of a Preview Page", "")),
         p(CommandInfo::new(EBOOK_OPEN, "Open in a Reading App", "")),
+        p(CommandInfo::new(PREFLIGHT, "Preflight", "")),
     ]
 }
 
@@ -286,6 +291,17 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             ))
         }
         PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
+        PREFLIGHT => {
+            let b = app.open_book()?;
+            let edition = match params.get("edition").and_then(Value::as_str) {
+                Some(e) => e.to_owned(),
+                None => b.files.project.editions.first().map(|e| e.id.clone()).ok_or("the book has no editions")?,
+            };
+            let r = crate::preflight::run(b, &edition)?;
+            Ok(
+                json!({ "edition": r.edition, "blocked": r.blocked(), "findings": r.findings.iter().map(crate::preflight::finding_json).collect::<Vec<_>>() }),
+            )
+        }
         EBOOK_OPEN => ebook_open(app.open_book()?, params.get("open").and_then(Value::as_bool).unwrap_or(true)),
         DESIGNS => Ok(crate::designs::list_json(app.open_book()?)),
         DESIGN_CHOOSE => crate::designs::choose(app.open_book()?, s(params, "id")?).map(|()| Value::Null),
