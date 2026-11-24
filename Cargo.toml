@@ -47,6 +47,8 @@ jcj-project = { git = "https://github.com/jamescjfoundation/open-source-core", t
 jcj-features = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.10" }
 jcj-interchange = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.10" }
 jcj-shell = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.10" }
+jcj-engine = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.10" }
+jcj-agents = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.10" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 toml = "1"

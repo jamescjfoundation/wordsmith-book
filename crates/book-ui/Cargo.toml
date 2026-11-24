@@ -23,6 +23,8 @@ jcj-doc = { workspace = true }
 wordsmith-manuscript-model = { workspace = true }
 wordsmith-manuscript-format = { workspace = true }
 jcj-shell = { workspace = true }
+jcj-engine = { workspace = true }
+jcj-agents = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 

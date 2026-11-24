@@ -2059,6 +2059,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3bd1574e617a9a6c1f8f8181bd7e841e1f20e4277607ef28945765188d6284d4"
 
 [[package]]
+name = "jcj-agents"
+version = "0.1.10"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.10#116300d0478eaac822cc74ccfa46a8afbfd324bd"
+dependencies = [
+ "jcj-engine",
+ "jcj-upstream 0.1.10",
+ "serde_json",
+]
+
+[[package]]
 name = "jcj-doc"
 version = "0.1.4"
 source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.4#b924c9dc139c4e80cedc43f17d1ca66458ec9f05"
@@ -5544,7 +5554,9 @@ name = "wordsmith-book-ui"
 version = "0.1.0"
 dependencies = [
  "egui_kittest",
+ "jcj-agents",
  "jcj-doc 0.1.10",
+ "jcj-engine",
  "jcj-features",
  "jcj-shell",
  "serde",
