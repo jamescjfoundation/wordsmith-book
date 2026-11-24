@@ -48,9 +48,14 @@ impl Review {
     /// Read `file` and find its structure with the default rules.
     pub fn open(file: &Path) -> Result<Review, String> {
         let format = format_of(file)?;
-        let doc = wordsmith_book_import::read(format, &read_file(file)?).map_err(|e| e.to_string())?;
-        let paras = wordsmith_book_import::paras_of(&doc);
+        let bytes = read_file(file)?;
         let rules = ImportRules::default();
+        let doc = if format == Format::Text {
+            wordsmith_book_import::text::read(std::str::from_utf8(&bytes).map_err(|_| "the text is not UTF-8".to_owned())?, &rules)
+        } else {
+            wordsmith_book_import::read(format, &bytes).map_err(|e| e.to_string())?
+        };
+        let paras = wordsmith_book_import::paras_of(&doc);
         let marks = detect::detect(&paras, &rules);
         let target = file.with_extension(wordsmith_book_format::EXTENSION).display().to_string();
         Ok(Review { file: file.to_path_buf(), target, format, doc, paras, rules, marks })

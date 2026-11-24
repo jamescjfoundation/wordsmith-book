@@ -51,7 +51,7 @@ pub enum Mark {
 }
 
 /// The rules, by name, with what each does (for the review).
-pub const RULES: [(&str, &str); 8] = [
+pub const RULES: [(&str, &str); 10] = [
     ("heading-styles", "Paragraphs with heading styles start parts and chapters"),
     ("part-lines", "Lines like “Part Two” or “PART I. ...” start parts"),
     ("chapter-lines", "Lines like “Chapter 12” or “CHAPTER XII.” start chapters"),
@@ -60,6 +60,8 @@ pub const RULES: [(&str, &str); 8] = [
     ("symbol-breaks", "A line of symbols (* * *, #, ~) is a scene break"),
     ("empty-paragraph-breaks", "Two or more empty paragraphs are a scene break, when there are no symbol lines"),
     ("matter-titles", "Headings like “Dedication” or “About the Author” are front or back matter"),
+    ("underline-italic", "Underlined text is shown in italic"),
+    ("underscores-italic", "In plain text, _underscored_ words are italic"),
 ];
 
 /// The page break character inside a paragraph's text.
@@ -113,7 +115,7 @@ const FRONT: [&str; 12] = [
     "a note on the text",
 ];
 
-const BACK: [&str; 11] = [
+const BACK: [&str; 13] = [
     "about the author",
     "acknowledgements",
     "acknowledgments",
@@ -121,6 +123,8 @@ const BACK: [&str; 11] = [
     "epilogue",
     "glossary",
     "notes",
+    "footnotes",
+    "endnotes",
     "author's note",
     "author’s note",
     "also by",

@@ -8,6 +8,7 @@
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
 pub mod detect;
+pub mod text;
 
 use std::collections::BTreeMap;
 use std::sync::Arc;
@@ -350,12 +351,27 @@ pub fn import_document(doc: &Document, rules: &ImportRules, title: &str) -> Resu
     if italic > 0 {
         report.kept.insert("italic", italic);
     }
-    check(&doc, &b.project, &b.named, &mut report)?;
+    // Scene-break marks are not the author's words (a mark the user chose may hold letters):
+    // the check leaves them out on the source's side too.
+    let mut checked = doc.clone();
+    checked.body = doc.body.iter().zip(&marks).filter(|(_, m)| !matches!(m, Mark::Break(_))).map(|(b, _)| b.clone()).collect();
+    check(&checked, &b.project, &b.named, &mut report)?;
     Ok(Imported { project: b.project, report, named: b.named })
 }
 
-/// Import a file's bytes.
+/// Import a file's bytes. Plain text is read by Book's own reader ([`text`]); every other format
+/// through the core.
 pub fn import(format: Format, bytes: &[u8], rules: &ImportRules, title: &str) -> Result<Imported, Error> {
+    if format == Format::Text {
+        let s = std::str::from_utf8(bytes).map_err(|_| Error::Read("the text is not UTF-8".into()))?;
+        let doc = text::read(s, rules);
+        // The reader keeps every word of the file.
+        let check = Check::of(&text::words(s, rules), &verify::document_words(&doc));
+        if !check.passed() {
+            return Err(Error::Words(check.to_string()));
+        }
+        return import_document(&doc, rules, title);
+    }
     let doc = read(format, bytes)?;
     import_document(&doc, rules, title)
 }
