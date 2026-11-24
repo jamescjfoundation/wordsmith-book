@@ -274,7 +274,9 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         }
         DESIGNS => Ok(crate::designs::list_json(app.open_book()?)),
         DESIGN_CHOOSE => crate::designs::choose(app.open_book()?, s(params, "id")?).map(|()| Value::Null),
-        DESIGN_MIX => crate::designs::mix_part(app.open_book()?, s(params, "part")?, params.get("from").and_then(Value::as_str)).map(|()| Value::Null),
+        DESIGN_MIX => {
+            crate::designs::mix_part(app.open_book()?, s(params, "part")?, params.get("from").and_then(Value::as_str)).map(|()| Value::Null)
+        }
         DESIGN_SAVE_AS => crate::designs::save_as(app.open_book()?, s(params, "name")?).map(|id| json!({ "id": id })),
         DESIGN_EXPORT => crate::designs::export(app.open_book()?, &PathBuf::from(s(params, "path")?)).map(|()| Value::Null),
         DESIGN_IMPORT => crate::designs::import(app.open_book()?, &PathBuf::from(s(params, "path")?)).map(|id| json!({ "id": id })),

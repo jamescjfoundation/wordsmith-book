@@ -32,7 +32,10 @@ fn every_pair_of_built_in_designs_mixes_into_a_valid_design() {
 
 #[test]
 fn a_mixed_choice_resolves_and_saves_and_exports_exactly() {
-    let choice = DesignChoice { id: "classic".into(), mix: BTreeMap::from([(DesignPart::ChapterOpening, "fantasy".into()), (DesignPart::RunningHeads, "literary".into())]) };
+    let choice = DesignChoice {
+        id: "classic".into(),
+        mix: BTreeMap::from([(DesignPart::ChapterOpening, "fantasy".into()), (DesignPart::RunningHeads, "literary".into())]),
+    };
     let mut own = BTreeMap::new();
     let d = resolve(&choice, &own).unwrap();
     assert_eq!(d.chapter, builtin::get("fantasy").unwrap().chapter);

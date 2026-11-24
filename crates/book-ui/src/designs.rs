@@ -51,7 +51,8 @@ pub fn choose(b: &mut OpenBook, id: &str) -> Result<(), String> {
 
 /// Take one part of the book's design from another design (or put it back with `from` = none).
 pub fn mix_part(b: &mut OpenBook, part: &str, from: Option<&str>) -> Result<(), String> {
-    let part: DesignPart = serde_json::from_value(Value::String(part.to_owned())).map_err(|_| format!("`{part}` is not a part of a design (body, chapter-opening, scene-breaks, running-heads)"))?;
+    let part: DesignPart = serde_json::from_value(Value::String(part.to_owned()))
+        .map_err(|_| format!("`{part}` is not a part of a design (body, chapter-opening, scene-breaks, running-heads)"))?;
     if let Some(id) = from {
         mix::find(id, &b.files.designs).map_err(err)?;
     }

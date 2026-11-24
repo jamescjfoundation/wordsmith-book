@@ -15,6 +15,27 @@ pub const ICON_256: &[u8] = include_bytes!("../../../assets/brand/book/icon-256.
 /// The ribbon marker's color (the palette's gilt).
 pub const GILT: Color32 = Color32::from_rgb(201, 162, 74);
 
+/// The name of the fallback font that draws Book's ornaments and typographic marks in the
+/// window (the interface fonts lack fleurons).
+pub const ORNAMENTS: &str = "book-ornaments";
+
+/// Make sure the window can draw ornaments: Book's classic serif as the last fallback.
+pub fn ensure_fonts(ctx: &jcj_shell::egui::Context) {
+    use jcj_shell::egui::epaint::text::{FontData, FontInsert, FontPriority, InsertFontFamily};
+    if ctx.fonts(|f| f.definitions().font_data.contains_key(ORNAMENTS)) {
+        return;
+    }
+    let Some(face) = wordsmith_book_design::fonts::regular(wordsmith_book_design::fonts::Role::ClassicSerif) else { return };
+    ctx.add_font(FontInsert {
+        name: ORNAMENTS.into(),
+        data: FontData::from_static(face.bytes),
+        families: vec![
+            InsertFontFamily { family: jcj_shell::egui::FontFamily::Proportional, priority: FontPriority::Lowest },
+            InsertFontFamily { family: jcj_shell::egui::FontFamily::Monospace, priority: FontPriority::Lowest },
+        ],
+    });
+}
+
 /// Book's tokens; the neutral set if the shipped file could not be read (a test guards it).
 pub fn tokens() -> Tokens {
     Tokens::from_json(TOKENS_JSON).unwrap_or_default()

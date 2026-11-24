@@ -57,7 +57,8 @@ pub fn resolve(choice: &DesignChoice, own: &BTreeMap<String, String>) -> Result<
 
 /// A design id not yet taken in `own` or by a built-in design, from `wanted`.
 pub fn free_id(wanted: &str, own: &BTreeMap<String, String>) -> String {
-    let base: String = wanted.to_lowercase().chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '-' }).collect::<String>().trim_matches('-').to_owned();
+    let base: String =
+        wanted.to_lowercase().chars().map(|c| if c.is_ascii_alphanumeric() { c } else { '-' }).collect::<String>().trim_matches('-').to_owned();
     let base = if base.is_empty() { "my-design".to_owned() } else { base };
     let taken = |id: &str| own.contains_key(id) || crate::builtin::FILES.iter().any(|(b, _)| *b == id);
     if !taken(&base) {

@@ -10,6 +10,7 @@
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
 pub mod brand;
+pub mod chooser;
 pub mod cleanup;
 pub mod commands;
 pub mod designs;
@@ -57,6 +58,8 @@ pub struct BookApp {
     pub cleanup: cleanup::Panel,
     /// The details panel.
     pub details: metadata::Panel,
+    /// The design chooser.
+    pub chooser: chooser::Chooser,
     /// A paragraph being fixed: its section, its number and the text so far.
     pub fixing: Option<(wordsmith_book_model::SectionId, usize, String)>,
     /// The last message for the user.
@@ -243,6 +246,7 @@ impl App for BookApp {
 
     fn document_ui(&mut self, ui: &mut egui::Ui, shell: &mut Shell) {
         let ctx = ui.ctx().clone();
+        brand::ensure_fonts(&ctx);
         self.draw_open_dialog(&ctx, shell);
         if let Some(b) = &mut self.book
             && ctx.input(|i| i.focused)
@@ -295,12 +299,25 @@ impl App for BookApp {
             PanelSpec::new("outline", "Outline", "outline", Side::Left),
             PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right),
             PanelSpec::new("details", "Details", "info", Side::Right),
+            PanelSpec::new("designs", "Designs", "style", Side::Right),
         ]
     }
 
     fn panel_ui(&mut self, panel: &str, ui: &mut egui::Ui, _shell: &mut Shell) {
+        brand::ensure_fonts(ui.ctx());
         match panel {
             "outline" => self.outline_ui(ui),
+            "designs" => {
+                let run = match &self.book {
+                    Some(b) => self.chooser.ui(ui, b),
+                    None => None,
+                };
+                if let Some((id, params)) = run
+                    && let Err(m) = self.command(id, &params)
+                {
+                    self.message = Some(m);
+                }
+            }
             "details" => {
                 let run = match &self.book {
                     Some(b) => self.details.ui(ui, b),
