@@ -11,6 +11,7 @@
 pub mod assemble;
 pub mod folder;
 pub mod limits;
+pub mod needs;
 pub mod pack;
 pub mod source;
 pub mod toml_file;

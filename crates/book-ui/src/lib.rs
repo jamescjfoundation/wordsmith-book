@@ -14,6 +14,7 @@ pub mod cleanup;
 pub mod commands;
 pub mod doc;
 pub mod import_review;
+pub mod metadata;
 pub mod outline;
 
 use std::path::PathBuf;
@@ -53,6 +54,8 @@ pub struct BookApp {
     pub last_report: Option<wordsmith_book_import::Report>,
     /// The cleanup panel.
     pub cleanup: cleanup::Panel,
+    /// The details panel.
+    pub details: metadata::Panel,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -251,12 +254,23 @@ impl App for BookApp {
     }
 
     fn panels(&self) -> Vec<PanelSpec> {
-        vec![PanelSpec::new("outline", "Outline", "outline", Side::Left), PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right)]
+        vec![PanelSpec::new("outline", "Outline", "outline", Side::Left), PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right), PanelSpec::new("details", "Details", "info", Side::Right)]
     }
 
     fn panel_ui(&mut self, panel: &str, ui: &mut egui::Ui, _shell: &mut Shell) {
         match panel {
             "outline" => self.outline_ui(ui),
+            "details" => {
+                let run = match &self.book {
+                    Some(b) => self.details.ui(ui, b),
+                    None => None,
+                };
+                if let Some((id, params)) = run
+                    && let Err(m) = self.command(id, &params)
+                {
+                    self.message = Some(m);
+                }
+            }
             "cleanup" => {
                 let run = match &self.book {
                     Some(b) => self.cleanup.ui(ui, b),

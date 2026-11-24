@@ -38,6 +38,18 @@ pub const NUMBERING: &str = "book.numbering";
 /// Set Book's settings for a section: `{"id", "subtitle", "epigraph", "epigraph_source",
 /// "unnumbered", "only"}`.
 pub const SECTION: &str = "book.section";
+/// The book's metadata, editions and needs.
+pub const METADATA: &str = "book.metadata";
+/// Set a metadata field Book keeps: `{"field", "value"}`.
+pub const METADATA_SET: &str = "book.metadata.set";
+/// Add a contributor: `{"name", "role"}`.
+pub const CONTRIBUTOR_ADD: &str = "book.contributor.add";
+/// Add an edition: `{"format"}` (paperback, hardcover, ebook, large-print); gives its id.
+pub const EDITION_ADD: &str = "book.edition.add";
+/// Change an edition: `{"id", "isbn", "trim", "paper", ...}`.
+pub const EDITION_SET: &str = "book.edition.set";
+/// Remove an edition: `{"id"}`.
+pub const EDITION_REMOVE: &str = "book.edition.remove";
 /// Close the book.
 pub const CLOSE: &str = "book.close";
 /// Save the whole project as one packed file: `{"path": file}`.
@@ -77,6 +89,12 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(IMPORT, "Import a File into a New Book", "")),
         CommandInfo::new(CLEANUP_LIST, "Cleanup Changes", ""),
         p(CommandInfo::new(NUMBERING, "Chapter Numbers", "")),
+        CommandInfo::new(METADATA, "Book Details", ""),
+        p(CommandInfo::new(METADATA_SET, "Set a Book Detail", "")),
+        p(CommandInfo::new(CONTRIBUTOR_ADD, "Add a Contributor", "")),
+        p(CommandInfo::new(EDITION_ADD, "Add an Edition", "")),
+        p(CommandInfo::new(EDITION_SET, "Change an Edition", "")),
+        p(CommandInfo::new(EDITION_REMOVE, "Remove an Edition", "")),
         p(CommandInfo::new(SECTION, "Chapter Settings", "")),
         p(CommandInfo::new(CLEANUP_APPLY, "Make Cleanup Changes", "")),
         CommandInfo::new(CLEANUP_UNDO, "Undo Last Cleanup", ""),
@@ -189,6 +207,20 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         ids::NEW_FROM_TEMPLATE | NEW => new_book(app, params),
         CLOSE => {
             app.book = None;
+            Ok(Value::Null)
+        }
+        METADATA => Ok(crate::metadata::as_json(app.open_book()?)),
+        METADATA_SET => crate::metadata::set(app.open_book()?, s(params, "field")?, s(params, "value")?).map(|()| Value::Null),
+        CONTRIBUTOR_ADD => crate::metadata::add_contributor(app.open_book()?, s(params, "name")?, s(params, "role")?).map(|()| Value::Null),
+        EDITION_ADD => crate::metadata::add_edition(app.open_book()?, s(params, "format")?).map(|id| json!({ "id": id })),
+        EDITION_SET => crate::metadata::set_edition(app.open_book()?, params).map(|()| Value::Null),
+        EDITION_REMOVE => {
+            let id = s(params, "id")?.to_owned();
+            app.open_book()?.edit(|f| {
+                let before = f.project.editions.len();
+                f.project.editions.retain(|e| e.id != id);
+                if f.project.editions.len() == before { Err(format!("there is no edition `{id}`")) } else { Ok(()) }
+            })?;
             Ok(Value::Null)
         }
         NUMBERING => {

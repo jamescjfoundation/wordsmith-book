@@ -9,6 +9,7 @@
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
 pub mod document;
+pub mod isbn;
 pub mod matter;
 pub mod numbers;
 
@@ -19,6 +20,29 @@ use serde::{Deserialize, Serialize};
 /// The stable id of a section of the book: the id Manuscript gives each item, which Book keys its
 /// own layer by (plan section 6.1).
 pub use wordsmith_manuscript_model::ItemId as SectionId;
+
+/// How much a finding matters (preflight, metadata needs).
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum Severity {
+    /// Export is blocked until it is fixed.
+    Blocks,
+    /// Worth fixing; export goes ahead.
+    Warning,
+    /// For information.
+    Note,
+}
+
+impl Severity {
+    /// The severity's name as shown.
+    pub fn title(self) -> &'static str {
+        match self {
+            Severity::Blocks => "Blocks export",
+            Severity::Warning => "Warning",
+            Severity::Note => "Note",
+        }
+    }
+}
 
 /// The schema version of `book.toml` this build writes and the newest it reads. Until Book's
 /// first release tag, version 1 is extended in place (plan section 6.1).
