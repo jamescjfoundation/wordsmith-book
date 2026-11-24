@@ -5552,6 +5552,7 @@ dependencies = [
  "wordsmith-book-format",
  "wordsmith-book-import",
  "wordsmith-book-model",
+ "wordsmith-book-typeset",
  "wordsmith-manuscript-format",
  "wordsmith-manuscript-model",
 ]

@@ -93,6 +93,10 @@ pub const PREVIEW_SHOW: &str = "book.preview.show";
 /// Which section a page of the print preview belongs to: `{"page": n}` (from 1); gives its id.
 pub const PREVIEW_PAGE: &str = "book.preview.page";
 
+/// Build the ebook and hand it to the reading app the user has installed: `{"open": false}`
+/// only writes it; gives its path.
+pub const EBOOK_OPEN: &str = "book.ebook.openInReadingApp";
+
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
     let p = |mut c: CommandInfo| {
@@ -142,6 +146,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(SET_ELEMENT, "Edit Element", "")),
         p(CommandInfo::new(PREVIEW_SHOW, "Show in Print Preview", "")),
         p(CommandInfo::new(PREVIEW_PAGE, "Section of a Preview Page", "")),
+        p(CommandInfo::new(EBOOK_OPEN, "Open in a Reading App", "")),
     ]
 }
 
@@ -281,6 +286,7 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             ))
         }
         PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
+        EBOOK_OPEN => ebook_open(app.open_book()?, params.get("open").and_then(Value::as_bool).unwrap_or(true)),
         DESIGNS => Ok(crate::designs::list_json(app.open_book()?)),
         DESIGN_CHOOSE => crate::designs::choose(app.open_book()?, s(params, "id")?).map(|()| Value::Null),
         DESIGN_MIX => {
@@ -502,4 +508,39 @@ fn preview_command(app: &mut BookApp, id: &str, params: &Value) -> Result<Value,
         .flatten()
         .ok_or_else(|| format!("there is no page {n}"))?;
     Ok(json!({ "section": piece }))
+}
+
+/// Build the book's first ebook edition into the system's temporary folder and, with `open`,
+/// hand it to the reading app the user has installed.
+fn ebook_open(b: &mut OpenBook, open: bool) -> Result<Value, String> {
+    let src = b.source.as_ref().map_err(Clone::clone)?;
+    let project = &b.files.project;
+    let edition = project.editions.iter().find(|e| !e.format.is_print()).cloned().unwrap_or_else(wordsmith_book_model::Edition::ebook);
+    let book = wordsmith_book_format::fixes::book_for_build(&project.fixes, src);
+    let (assembled, ebook) = wordsmith_book_check::build::ebook(project, &b.files.designs, &book, &edition, &|p| b.picture(p))?;
+    let name: String = assembled.meta.title.chars().filter(|c| c.is_alphanumeric() || *c == ' ' || *c == '-').collect();
+    let name = if name.trim().is_empty() { "Book".to_owned() } else { name.trim().to_owned() };
+    let dir = std::env::temp_dir().join("wordsmith-book-preview");
+    std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
+    let path = dir.join(format!("{name}.epub"));
+    std::fs::write(&path, &ebook.bytes).map_err(|e| e.to_string())?;
+    if open {
+        open_with_system(&path)?;
+    }
+    Ok(json!({ "path": path.display().to_string() }))
+}
+
+/// Hand a file to the app the system opens it with.
+fn open_with_system(path: &std::path::Path) -> Result<(), String> {
+    #[cfg(target_os = "macos")]
+    let mut cmd = std::process::Command::new("open");
+    #[cfg(target_os = "windows")]
+    let mut cmd = {
+        let mut c = std::process::Command::new("cmd");
+        c.args(["/C", "start", ""]);
+        c
+    };
+    #[cfg(not(any(target_os = "macos", target_os = "windows")))]
+    let mut cmd = std::process::Command::new("xdg-open");
+    cmd.arg(path).spawn().map(|_| ()).map_err(|e| format!("no reading app could be started: {e}"))
 }

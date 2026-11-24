@@ -95,6 +95,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         folio_head: d.heads.folio == design::Folio::Head,
         head_size: d.heads.size,
         head_small_caps: d.heads.small_caps,
+        folios: true,
     })
 }
 

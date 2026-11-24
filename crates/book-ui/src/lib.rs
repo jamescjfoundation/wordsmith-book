@@ -15,6 +15,7 @@ pub mod cleanup;
 pub mod commands;
 pub mod designs;
 pub mod doc;
+pub mod ebook_preview;
 pub mod import_review;
 pub mod metadata;
 pub mod outline;
@@ -65,6 +66,8 @@ pub struct BookApp {
     pub fixing: Option<(wordsmith_book_model::SectionId, usize, String)>,
     /// The print preview.
     pub print_preview: preview::PrintPreview,
+    /// The ebook preview.
+    pub ebook_preview: ebook_preview::EbookPreview,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -313,6 +316,7 @@ impl App for BookApp {
             PanelSpec::new("details", "Details", "info", Side::Right),
             PanelSpec::new("designs", "Designs", "style", Side::Right),
             PanelSpec::new("preview", "Print Preview", "print", Side::Right),
+            PanelSpec::new("ebook", "Ebook Preview", "book", Side::Right),
         ]
     }
 
@@ -349,6 +353,20 @@ impl App for BookApp {
                 };
                 if let Some(piece) = clicked {
                     self.outline.selected = Some(outline::key_of_piece(&piece));
+                }
+            }
+            "ebook" => {
+                let run = match &self.book {
+                    Some(b) => self.ebook_preview.ui(ui, b),
+                    None => None,
+                };
+                if let Some((id, params)) = run {
+                    match self.command(id, &params) {
+                        Ok(v) => {
+                            self.message = v.get("path").and_then(|p| p.as_str()).map(|p| format!("The ebook was handed to your reading app: {p}"))
+                        }
+                        Err(m) => self.message = Some(m),
+                    }
                 }
             }
             "cleanup" => {

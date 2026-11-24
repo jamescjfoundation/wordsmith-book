@@ -602,7 +602,7 @@ fn section_props(
         Heads::TitleChapter => (doc.core.title.clone(), if s.head.is_empty() { doc.core.title.clone() } else { s.head.clone() }),
         Heads::None => (String::new(), String::new()),
     };
-    let folio_pages = !blank && !matches!(s.kind, Kind::Plain);
+    let folio_pages = look.folios && !blank && !matches!(s.kind, Kind::Plain);
     if shows_heads {
         sp.headers.even = Some(bands.head(doc, look, &verso, false, text_width));
         sp.headers.default = Some(bands.head(doc, look, &recto, true, text_width));

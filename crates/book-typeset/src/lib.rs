@@ -18,6 +18,7 @@
 mod build;
 pub mod fonts;
 pub mod from_book;
+pub mod screen;
 
 use std::collections::BTreeSet;
 
@@ -276,6 +277,8 @@ pub struct Look {
     pub head_size: f32,
     /// Heads in small capitals.
     pub head_small_caps: bool,
+    /// Folios on the pages (off for screens).
+    pub folios: bool,
 }
 
 impl Default for Look {
@@ -307,6 +310,7 @@ impl Default for Look {
             folio_head: false,
             head_size: 9.0,
             head_small_caps: true,
+            folios: true,
         }
     }
 }
