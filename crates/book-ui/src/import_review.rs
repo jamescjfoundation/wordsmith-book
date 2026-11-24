@@ -90,6 +90,7 @@ impl Review {
         let rules = self.rules.clone();
         book.edit(|f| {
             f.project.cleanup.rules = rules;
+            f.project.elements = wordsmith_book_model::matter::default_elements();
             Ok(())
         })?;
         book.save()?;

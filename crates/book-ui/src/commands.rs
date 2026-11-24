@@ -155,7 +155,12 @@ fn new_book(app: &mut BookApp, params: &Value) -> Result<Value, String> {
             Source::default()
         }
     };
-    let b = OpenBook::create(&path, source, &date)?;
+    let mut b = OpenBook::create(&path, source, &date)?;
+    b.edit(|f| {
+        f.project.elements = wordsmith_book_model::matter::default_elements();
+        Ok(())
+    })?;
+    b.save()?;
     app.message = b.notice.clone();
     app.book = Some(b);
     app.outline = Default::default();

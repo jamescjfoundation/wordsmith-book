@@ -91,7 +91,9 @@ fn outline_commands_are_undoable_save_and_never_touch_the_manuscript() {
     app.command(commands::SET_ELEMENT, &json!({ "id": ded, "text": "For the travellers." })).unwrap();
     app.command(commands::MOVE_ELEMENT, &json!({ "id": about, "target": { "heading": "front" }, "zone": "inside" })).unwrap();
     let ids: Vec<_> = app.book.as_ref().unwrap().files.project.elements.iter().map(|e| (e.id.clone(), e.placement)).collect();
-    assert_eq!(ids, vec![(about.clone(), Placement::Front), (ded.clone(), Placement::Front)]);
+    // The new book's own elements, then the two added; the moved one first of the front matter.
+    assert_eq!(ids.first(), Some(&(about.clone(), Placement::Front)));
+    assert_eq!(ids.last(), Some(&(ded.clone(), Placement::Front)));
     // A source section cannot be moved, and the error says where to change it.
     let first_chapter = app.book.as_ref().unwrap().source.as_ref().unwrap().book.body[0].children[0].id;
     let e =
@@ -99,7 +101,7 @@ fn outline_commands_are_undoable_save_and_never_touch_the_manuscript() {
     assert!(e.contains("Manuscript"));
     // Undo and redo.
     app.command("edit.undo", &json!({})).unwrap();
-    assert_eq!(app.book.as_ref().unwrap().files.project.elements[0].id, ded);
+    assert_ne!(app.book.as_ref().unwrap().files.project.elements[0].id, about);
     app.command("edit.redo", &json!({})).unwrap();
     assert_eq!(app.book.as_ref().unwrap().files.project.elements[0].id, about);
     // Save and reopen: the same elements.
