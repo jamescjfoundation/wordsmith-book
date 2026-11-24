@@ -12,6 +12,7 @@
 pub mod brand;
 pub mod cleanup;
 pub mod commands;
+pub mod designs;
 pub mod doc;
 pub mod import_review;
 pub mod metadata;

@@ -12,5 +12,6 @@ publish.workspace = true
 workspace = true
 
 [dependencies]
+wordsmith-book-model = { workspace = true }
 serde = { workspace = true }
 toml = { workspace = true }

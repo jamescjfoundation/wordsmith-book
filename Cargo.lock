@@ -5455,6 +5455,7 @@ version = "0.1.0"
 dependencies = [
  "serde",
  "toml",
+ "wordsmith-book-model",
 ]
 
 [[package]]
@@ -5520,6 +5521,7 @@ dependencies = [
  "jcj-features",
  "jcj-shell",
  "serde_json",
+ "wordsmith-book-design",
  "wordsmith-book-format",
  "wordsmith-book-import",
  "wordsmith-book-model",

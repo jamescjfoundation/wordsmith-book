@@ -56,6 +56,18 @@ pub const FIX_ADD: &str = "book.fix.add";
 pub const FIX_EDIT: &str = "book.fix.edit";
 /// The fixes and where each stands.
 pub const FIX_LIST: &str = "book.fix.list";
+/// The designs the book can use.
+pub const DESIGNS: &str = "book.designs";
+/// Choose a design: `{"id"}`.
+pub const DESIGN_CHOOSE: &str = "book.design.choose";
+/// Take a part from another design: `{"part", "from"}` (no `from`: the book's design's own).
+pub const DESIGN_MIX: &str = "book.design.mix";
+/// Save the book's design as the user's own: `{"name"}`; gives its id.
+pub const DESIGN_SAVE_AS: &str = "book.design.saveAs";
+/// Export the book's design as one file: `{"path"}`.
+pub const DESIGN_EXPORT: &str = "book.design.export";
+/// Import a design file: `{"path"}`; gives its id.
+pub const DESIGN_IMPORT: &str = "book.design.import";
 /// Close the book.
 pub const CLOSE: &str = "book.close";
 /// Save the whole project as one packed file: `{"path": file}`.
@@ -96,6 +108,12 @@ pub fn list() -> Vec<CommandInfo> {
         CommandInfo::new(CLEANUP_LIST, "Cleanup Changes", ""),
         p(CommandInfo::new(NUMBERING, "Chapter Numbers", "")),
         CommandInfo::new(METADATA, "Book Details", ""),
+        CommandInfo::new(DESIGNS, "Designs", ""),
+        p(CommandInfo::new(DESIGN_CHOOSE, "Choose a Design", "")),
+        p(CommandInfo::new(DESIGN_MIX, "Take a Part from Another Design", "")),
+        p(CommandInfo::new(DESIGN_SAVE_AS, "Save Design as My Own", "")),
+        p(CommandInfo::new(DESIGN_EXPORT, "Export Design", "")),
+        p(CommandInfo::new(DESIGN_IMPORT, "Import Design", "")),
         p(CommandInfo::new(FIX_ADD, "Fix Words", "")),
         p(CommandInfo::new(FIX_EDIT, "Fix a Paragraph", "")),
         CommandInfo::new(FIX_LIST, "Fixes", ""),
@@ -254,6 +272,12 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
                     .collect(),
             ))
         }
+        DESIGNS => Ok(crate::designs::list_json(app.open_book()?)),
+        DESIGN_CHOOSE => crate::designs::choose(app.open_book()?, s(params, "id")?).map(|()| Value::Null),
+        DESIGN_MIX => crate::designs::mix_part(app.open_book()?, s(params, "part")?, params.get("from").and_then(Value::as_str)).map(|()| Value::Null),
+        DESIGN_SAVE_AS => crate::designs::save_as(app.open_book()?, s(params, "name")?).map(|id| json!({ "id": id })),
+        DESIGN_EXPORT => crate::designs::export(app.open_book()?, &PathBuf::from(s(params, "path")?)).map(|()| Value::Null),
+        DESIGN_IMPORT => crate::designs::import(app.open_book()?, &PathBuf::from(s(params, "path")?)).map(|id| json!({ "id": id })),
         METADATA => Ok(crate::metadata::as_json(app.open_book()?)),
         METADATA_SET => crate::metadata::set(app.open_book()?, s(params, "field")?, s(params, "value")?).map(|()| Value::Null),
         CONTRIBUTOR_ADD => crate::metadata::add_contributor(app.open_book()?, s(params, "name")?, s(params, "role")?).map(|()| Value::Null),

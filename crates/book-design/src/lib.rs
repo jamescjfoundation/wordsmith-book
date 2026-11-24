@@ -8,6 +8,7 @@
 pub mod builtin;
 pub mod design;
 pub mod fonts;
+pub mod mix;
 
 pub use design::Design;
 
