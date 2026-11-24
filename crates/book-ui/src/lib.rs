@@ -20,6 +20,7 @@ pub mod import_review;
 pub mod metadata;
 pub mod outline;
 pub mod preflight;
+pub mod prefs;
 pub mod preview;
 
 use std::path::PathBuf;
@@ -71,6 +72,8 @@ pub struct BookApp {
     pub ebook_preview: ebook_preview::EbookPreview,
     /// The preflight panel.
     pub preflight: preflight::Panel,
+    /// Book's own preferences.
+    pub prefs: prefs::BookPrefs,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -360,8 +363,9 @@ impl App for BookApp {
                 }
             }
             "preflight" => {
+                let validator = self.prefs.validator_settings();
                 let go = match &self.book {
-                    Some(b) => self.preflight.ui(ui, b),
+                    Some(b) => self.preflight.ui(ui, b, &validator),
                     None => None,
                 };
                 let open = |shell: &mut Shell, id: &str| {
@@ -407,6 +411,10 @@ impl App for BookApp {
             }
             _ => {}
         }
+    }
+
+    fn preferences_ui(&mut self, ui: &mut egui::Ui, _shell: &mut Shell) {
+        prefs::ui(ui, &mut self.prefs);
     }
 
     fn templates(&self) -> Vec<TemplateSpec> {

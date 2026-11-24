@@ -99,3 +99,32 @@ fn preflight_lists_findings_and_follows_their_links() {
     h.run_steps(3);
     assert!(h.state().shell.layout.is_open("details"), "the edition's details open");
 }
+
+#[test]
+fn an_ebook_preflight_runs_the_validator_from_the_preferences() {
+    let mut app = linked_app("preflight-validator");
+    let ebook = app.book.as_ref().unwrap().files.project.editions.iter().find(|e| !e.format.is_print()).unwrap().id.clone();
+    let v = app.command(commands::PREFLIGHT, &json!({ "edition": ebook })).unwrap();
+    let notes: Vec<_> = v["findings"].as_array().unwrap().iter().filter(|f| f["rule"] == "validator").cloned().collect();
+    assert_eq!(notes.len(), 1, "{v}");
+    assert_eq!(notes[0]["severity"], "Note");
+    // Preferences keep the validator's place; a missing key takes its default.
+    let p: jcj_shell::prefs::Prefs<wordsmith_book_ui::prefs::BookPrefs> = serde_json::from_str(r#"{"app": {"validator": "/x/v.jar"}}"#).unwrap();
+    assert_eq!(p.app.validator, "/x/v.jar");
+    assert_eq!(p.app.validator_seconds, 0);
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::PermissionsExt as _;
+        let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join("preflight-validator");
+        let prog = dir.join("validator");
+        std::fs::write(&prog, "#!/bin/sh\necho 'ERROR(RSC-005): book.epub/EPUB/text/s006.xhtml(3,1): written for the test'\n").unwrap();
+        std::fs::set_permissions(&prog, std::fs::Permissions::from_mode(0o755)).unwrap();
+        app.prefs.validator = prog.display().to_string();
+        let v = app.command(commands::PREFLIGHT, &json!({ "edition": ebook })).unwrap();
+        let found: Vec<_> = v["findings"].as_array().unwrap().iter().filter(|f| f["rule"] == "validator").cloned().collect();
+        assert_eq!(found.len(), 1, "{v}");
+        assert_eq!(found[0]["severity"], "Blocks export");
+        assert_eq!(found[0]["link"]["file"], "EPUB/text/s006.xhtml");
+        assert_eq!(v["blocked"], true);
+    }
+}

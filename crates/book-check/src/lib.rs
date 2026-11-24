@@ -9,4 +9,5 @@ pub mod build;
 pub mod epub;
 pub mod preflight;
 pub mod profile;
+pub mod validator;
 pub mod verify;

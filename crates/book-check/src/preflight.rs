@@ -508,3 +508,10 @@ pub fn preflight(
     report.sort();
     (report, bytes)
 }
+
+/// Add the external EPUB validator's findings to an ebook's report (a note when it is not set
+/// up).
+pub fn add_validator(report: &mut Report, epub: &[u8], settings: &crate::validator::Settings) {
+    report.findings.extend(crate::validator::check(settings, epub));
+    report.sort();
+}

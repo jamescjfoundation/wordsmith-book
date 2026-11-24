@@ -46,11 +46,16 @@ pub fn finding_json(f: &Finding) -> Value {
     json!({ "rule": f.rule, "severity": f.severity.title(), "message": f.message, "link": link })
 }
 
-/// Run preflight for an edition of the open book (on this thread).
-pub fn run(b: &OpenBook, edition: &str) -> Result<Report, String> {
+/// Run preflight for an edition of the open book (on this thread), with the EPUB validator for
+/// ebooks.
+pub fn run(b: &OpenBook, edition: &str, validator: &wordsmith_book_check::validator::Settings) -> Result<Report, String> {
     let src = b.source.as_ref().map_err(Clone::clone)?;
     let e = b.files.project.editions.iter().find(|e| e.id == edition).ok_or_else(|| format!("there is no edition `{edition}`"))?;
-    Ok(wordsmith_book_check::preflight::preflight(&b.files.project, &b.files.designs, src, e, &|p| b.picture(p)).0)
+    let (mut r, bytes) = wordsmith_book_check::preflight::preflight(&b.files.project, &b.files.designs, src, e, &|p| b.picture(p));
+    if let Some(bytes) = bytes.filter(|_| !e.format.is_print()) {
+        wordsmith_book_check::preflight::add_validator(&mut r, &bytes, validator);
+    }
+    Ok(r)
 }
 
 impl Panel {
@@ -60,7 +65,7 @@ impl Panel {
     }
 
     /// Start preflight for an edition on a worker thread.
-    pub fn start(&mut self, b: &OpenBook, edition: &str) {
+    pub fn start(&mut self, b: &OpenBook, edition: &str, validator: wordsmith_book_check::validator::Settings) {
         let Ok(src) = &b.source else { return };
         let Some(e) = b.files.project.editions.iter().find(|e| e.id == edition).cloned() else { return };
         let project = b.files.project.clone();
@@ -75,7 +80,10 @@ impl Panel {
         let revision = b.revision;
         let (tx, rx) = channel();
         std::thread::spawn(move || {
-            let (r, _) = wordsmith_book_check::preflight::preflight(&project, &designs, &src, &e, &|p| pictures.get(p).cloned());
+            let (mut r, bytes) = wordsmith_book_check::preflight::preflight(&project, &designs, &src, &e, &|p| pictures.get(p).cloned());
+            if let Some(bytes) = bytes.filter(|_| !e.format.is_print()) {
+                wordsmith_book_check::preflight::add_validator(&mut r, &bytes, &validator);
+            }
             let _ = tx.send(r);
         });
         self.job = Some(rx);
@@ -104,7 +112,7 @@ impl Panel {
     }
 
     /// Draw the panel; gives where to go when a finding's link is followed.
-    pub fn ui(&mut self, ui: &mut egui::Ui, b: &OpenBook) -> Option<GoTo> {
+    pub fn ui(&mut self, ui: &mut egui::Ui, b: &OpenBook, validator: &wordsmith_book_check::validator::Settings) -> Option<GoTo> {
         self.poll();
         let editions = b.files.project.editions.clone();
         let chosen = self.edition.clone().filter(|id| editions.iter().any(|e| &e.id == id)).or_else(|| editions.first().map(|e| e.id.clone()));
@@ -121,7 +129,7 @@ impl Panel {
             return None;
         };
         if ui.add_enabled(!self.running(), egui::Button::new("Run Preflight")).clicked() {
-            self.start(b, &edition);
+            self.start(b, &edition, validator.clone());
         }
         if self.running() {
             ui.horizontal(|ui| {

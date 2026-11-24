@@ -5,19 +5,39 @@
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
 use std::process::ExitCode;
+use std::time::Instant;
 
-use jcj_shell::Shell;
-use jcj_shell::egui;
+use jcj_shell::prefs::{Prefs, PrefsFile, settings_dir};
+use jcj_shell::{App as _, Shell, egui};
+use wordsmith_book_ui::prefs::BookPrefs;
 use wordsmith_book_ui::{BookApp, NAME, brand, shell_options};
 
 struct Window {
     shell: Shell,
     app: BookApp,
+    prefs: Option<PrefsFile<Prefs<BookPrefs>>>,
+}
+
+impl Window {
+    /// Write the preferences when they changed (at most once a second unless `force`).
+    fn save_prefs(&mut self, force: bool) {
+        if let Some(file) = &mut self.prefs {
+            let now = Prefs { shell: self.shell.prefs(), app: self.app.prefs.clone() };
+            if let Err(e) = file.save(&now, Instant::now(), force) {
+                self.app.message = Some(format!("Preferences could not be saved: {e}"));
+            }
+        }
+    }
 }
 
 impl eframe::App for Window {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         self.shell.ui(ui, &mut self.app);
+        self.save_prefs(false);
+    }
+
+    fn on_exit(&mut self, _gl: Option<&eframe::glow::Context>) {
+        self.save_prefs(true);
     }
 }
 
@@ -29,14 +49,22 @@ fn icon() -> Option<egui::IconData> {
 }
 
 fn main() -> ExitCode {
-    let shell = Shell::new(NAME, env!("CARGO_PKG_VERSION"), brand::tokens()).with_options(shell_options());
+    let mut shell = Shell::new(NAME, env!("CARGO_PKG_VERSION"), brand::tokens()).with_options(shell_options());
     let mut app = BookApp::new();
+    // Preferences: the shell's and Book's, from the app's settings folder.
+    let prefs = settings_dir("wordsmith-book", NAME).and_then(|dir| std::fs::create_dir_all(&dir).ok().map(|()| dir)).map(|dir| {
+        let (file, prefs, problem): (PrefsFile<Prefs<BookPrefs>>, _, _) = PrefsFile::open(&dir);
+        shell.apply_prefs(&prefs.shell, &app.panels());
+        app.prefs = prefs.app;
+        app.message = problem;
+        file
+    });
     if let Some(path) = std::env::args().nth(1)
         && let Err(e) = app.open_path(&path)
     {
         app.message = Some(e);
     }
-    let window = Window { shell, app };
+    let window = Window { shell, app, prefs };
     let mut viewport = egui::ViewportBuilder::default().with_title(NAME).with_app_id("org.jcjfoundation.book");
     if let Some(icon) = icon() {
         viewport = viewport.with_icon(icon);

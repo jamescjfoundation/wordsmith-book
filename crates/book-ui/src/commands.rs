@@ -292,12 +292,13 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         }
         PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
         PREFLIGHT => {
+            let validator = app.prefs.validator_settings();
             let b = app.open_book()?;
             let edition = match params.get("edition").and_then(Value::as_str) {
                 Some(e) => e.to_owned(),
                 None => b.files.project.editions.first().map(|e| e.id.clone()).ok_or("the book has no editions")?,
             };
-            let r = crate::preflight::run(b, &edition)?;
+            let r = crate::preflight::run(b, &edition, &validator)?;
             Ok(
                 json!({ "edition": r.edition, "blocked": r.blocked(), "findings": r.findings.iter().map(crate::preflight::finding_json).collect::<Vec<_>>() }),
             )
