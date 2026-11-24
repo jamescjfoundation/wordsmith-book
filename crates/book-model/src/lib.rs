@@ -12,6 +12,7 @@ pub mod document;
 pub mod isbn;
 pub mod matter;
 pub mod numbers;
+pub mod picture;
 
 use std::collections::BTreeMap;
 
@@ -326,6 +327,9 @@ pub struct Edition {
     /// For store editions (STR-10): the store's name as the user gave it.
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub store: String,
+    /// For ebooks: the cover image, by its path in the project (`assets/cover.jpg`) (EBK-5).
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub cover: String,
 }
 
 impl Edition {
@@ -632,6 +636,10 @@ pub struct BookProject {
     /// Light fixes, oldest first.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub fixes: Vec<Fix>,
+    /// Pictures marked decorative, by their path in the source: they need no alternative text
+    /// and are hidden from assistive technology (SPEC 6.6).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub decorative: Vec<String>,
 }
 
 impl BookProject {

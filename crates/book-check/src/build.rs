@@ -70,6 +70,7 @@ pub fn ebook(
         language: book.metadata.info.language.clone(),
         date: if project.date.is_empty() { "2000-01-01".to_owned() } else { project.date.clone() },
         seed: project.date.clone(),
+        decorative: project.decorative.clone(),
     };
     let ebook = wordsmith_book_epub::ebook(&assembled, &design, edition, &settings, images).map_err(|e| e.to_string())?;
     Ok((assembled, ebook))

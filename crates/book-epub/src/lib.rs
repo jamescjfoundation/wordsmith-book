@@ -9,7 +9,10 @@
 #![forbid(unsafe_code)]
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
+pub mod access;
+pub mod cover;
 pub mod css;
+pub mod fonts;
 pub mod package;
 
 use std::collections::BTreeMap;
@@ -34,6 +37,8 @@ pub struct Settings {
     /// A seed for the identifier when the edition has no ISBN (the project's creation date and
     /// the book's title and author are used with it).
     pub seed: String,
+    /// Pictures marked decorative, by their path in the source (no alternative text needed).
+    pub decorative: Vec<String>,
 }
 
 /// What the ebook left out, for the build report.
@@ -54,6 +59,10 @@ pub struct Ebook {
     pub package: Package,
     /// What was left out.
     pub left: Left,
+    /// What is wrong with the cover, in words (empty when there is no cover or nothing is).
+    pub cover_problems: Vec<String>,
+    /// Font faces whose license does not allow embedding, left out.
+    pub fonts_refused: Vec<String>,
 }
 
 /// Why an ebook could not be made.
@@ -61,6 +70,11 @@ pub struct Ebook {
 pub enum Error {
     /// The edition is not an ebook.
     NotEbook,
+    /// Pictures with no alternative text that are not marked decorative, by their path in the
+    /// source: export waits until each has some (SPEC 6.6).
+    NoAltText(Vec<String>),
+    /// The edition names a cover file that is missing or not a PNG or JPEG image.
+    Cover(String),
     /// The package could not be written.
     Package(package::PackageError),
 }
@@ -69,6 +83,8 @@ impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Error::NotEbook => write!(f, "the edition is not an ebook"),
+            Error::NoAltText(p) => write!(f, "{} picture(s) need alternative text or to be marked decorative: {}", p.len(), p.join(", ")),
+            Error::Cover(p) => write!(f, "the cover “{p}” is missing or is not a PNG or JPEG image"),
             Error::Package(e) => e.fmt(f),
         }
     }
@@ -190,6 +206,9 @@ struct Writer<'a> {
     pictures: BTreeMap<String, (String, String, Vec<u8>)>,
     left: Left,
     design: &'a Design,
+    decorative: &'a [String],
+    /// Pictures shown that carry meaning.
+    meaningful: usize,
 }
 
 impl Writer<'_> {
@@ -292,7 +311,19 @@ impl Writer<'_> {
                             ImageRole::Wide => "wide",
                             ImageRole::Page => "page",
                         };
-                        out.push_str(&format!("<figure class=\"{class}\"><img src=\"../{}\" alt=\"{}\"/></figure>\n", escape(&href), escape(alt)));
+                        if self.decorative.contains(src) {
+                            out.push_str(&format!(
+                                "<figure class=\"{class}\" role=\"presentation\"><img src=\"../{}\" alt=\"\"/></figure>\n",
+                                escape(&href)
+                            ));
+                        } else {
+                            self.meaningful += 1;
+                            out.push_str(&format!(
+                                "<figure class=\"{class}\"><img src=\"../{}\" alt=\"{}\"/></figure>\n",
+                                escape(&href),
+                                escape(alt)
+                            ));
+                        }
                     }
                     None => self.left.pictures.push(src.clone()),
                 },
@@ -425,8 +456,12 @@ pub fn ebook(
     if edition.format.is_print() {
         return Err(Error::NotEbook);
     }
+    let missing = access::missing_alt_text(a, &settings.decorative);
+    if !missing.is_empty() {
+        return Err(Error::NoAltText(missing));
+    }
     let lang = if settings.language.is_empty() { "en" } else { settings.language.as_str() };
-    let mut w = Writer { lang, images, pictures: BTreeMap::new(), left: Left::default(), design };
+    let mut w = Writer { lang, images, pictures: BTreeMap::new(), left: Left::default(), design, decorative: &settings.decorative, meaningful: 0 };
     let mut items = Vec::new();
     let mut spine = Vec::new();
     let mut nav_in_spine = None;
@@ -493,14 +528,44 @@ pub fn ebook(
             }
         }
     }
+    let nav = Nav { items, spine, nav_in_spine, toc, landmarks };
+    finish(a, design, edition, settings, lang, w, nav)
+}
+
+/// The navigation and reading order built from the pieces.
+struct Nav {
+    items: Vec<Item>,
+    spine: Vec<(String, bool)>,
+    nav_in_spine: Option<usize>,
+    toc: Vec<NavPoint>,
+    landmarks: Vec<Landmark>,
+}
+
+/// The stylesheet, fonts, pictures, cover and metadata around the pieces, and the package.
+fn finish(a: &Assembled, design: &Design, edition: &Edition, settings: &Settings, lang: &str, w: Writer<'_>, mut nav: Nav) -> Result<Ebook, Error> {
+    let (font_items, font_css, fonts_refused) = if edition.embed_fonts { fonts::embedded(design) } else { Default::default() };
     let mut manifest = vec![Item {
         id: "css".into(),
         href: "css/book.css".into(),
         media_type: "text/css".into(),
         properties: Vec::new(),
-        bytes: css::stylesheet(design, &css::Fonts::default()).into_bytes(),
+        bytes: css::stylesheet(design, &font_css).into_bytes(),
     }];
-    manifest.extend(items);
+    let meta = &a.meta;
+    // The cover: its image, and its page first in the reading order.
+    let mut cover_problems = Vec::new();
+    if !edition.cover.is_empty() {
+        let bytes = (w.images)(&edition.cover).ok_or_else(|| Error::Cover(edition.cover.clone()))?;
+        let media = media_type(&bytes).filter(|m| matches!(*m, "image/png" | "image/jpeg")).ok_or_else(|| Error::Cover(edition.cover.clone()))?;
+        cover_problems = cover::problems(&bytes);
+        let (image, page) = cover::items(bytes, media, &meta.title, lang);
+        manifest.push(page);
+        manifest.push(image);
+        nav.spine.insert(0, ("cover".into(), true));
+        nav.nav_in_spine = nav.nav_in_spine.map(|i| i + 1);
+        nav.landmarks.insert(0, Landmark { kind: "cover".into(), label: "Cover".into(), href: "text/cover.xhtml#cover".into() });
+    }
+    manifest.extend(nav.items);
     for (i, (_, (href, media, bytes))) in w.pictures.iter().enumerate() {
         manifest.push(Item {
             id: format!("img{:03}", i + 1),
@@ -510,7 +575,7 @@ pub fn ebook(
             bytes: bytes.clone(),
         });
     }
-    let meta = &a.meta;
+    manifest.extend(font_items);
     let mut dc = Vec::new();
     if !meta.imprint.is_empty() {
         dc.push(("publisher".to_owned(), meta.imprint.clone()));
@@ -522,6 +587,7 @@ pub fn ebook(
         dc.push(("date".to_owned(), meta.year.clone()));
     }
     let date = if settings.date.len() >= 10 { &settings.date[..10] } else { "2000-01-01" };
+    let certifier = if meta.imprint.is_empty() { meta.byline.as_str() } else { meta.imprint.as_str() };
     let package = Package {
         metadata: Metadata {
             identifier: identifier(&edition.isbn, &meta.title, &meta.byline, &settings.seed),
@@ -530,19 +596,19 @@ pub fn ebook(
             creators: if meta.byline.is_empty() { Vec::new() } else { vec![meta.byline.clone()] },
             modified: format!("{date}T00:00:00Z"),
             dc,
-            meta: Vec::new(),
+            meta: access::metadata(access::Content { pictures: w.meaningful > 0, page_list: false }, certifier),
             links: Vec::new(),
         },
         items: manifest,
-        spine,
-        nav_in_spine,
+        spine: nav.spine,
+        nav_in_spine: nav.nav_in_spine,
         nav_title: "Contents".into(),
         nav_css: Some("css/book.css".into()),
-        toc,
-        landmarks,
+        toc: nav.toc,
+        landmarks: nav.landmarks,
     };
     let bytes = package::write(&package).map_err(Error::Package)?;
-    Ok(Ebook { bytes, package, left: w.left })
+    Ok(Ebook { bytes, package, left: w.left, cover_problems, fonts_refused })
 }
 
 /// A plain page's name in the contents.

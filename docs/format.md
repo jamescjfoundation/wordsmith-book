@@ -40,6 +40,7 @@ written in this order; empty values are left out.
 # A Wordsmith Book project (docs/format.md).
 schema = 1
 date = "2026-11-24"   # the date builds carry, so a build repeats exactly
+decorative = ["media/rule.png"]   # pictures that need no alternative text (SPEC 6.6)
 
 [source]
 manuscript = "../The Lighthouse.wsm"   # or: owned = "source.wsm"
@@ -97,6 +98,7 @@ name = "Ebook"
 format = "ebook"
 notes = "chapter-end"    # popup (default), chapter-end, book-end
 embed_fonts = false      # default true
+cover = "assets/cover.jpg"   # the ebook cover, a PNG or JPEG in the project (EBK-5)
 
 [[elements]]
 id = "dedication"
