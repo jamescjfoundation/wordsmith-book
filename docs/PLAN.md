@@ -617,7 +617,8 @@ what kind of source (rule 4 of section 4). Profiles at 0.1: `pod-paperback` and 
 
 Book → JSON data + design values + profile → the fixed template → pages → PDF and page images and
 the page map. The gutter depends on the page count, so a build lays out, reads the count, sets the
-gutter and lays out again until the count is stable (at most three passes, tested).
+gutter and lays out again until the count is stable (at most four passes, tested; changed from three because right-hand starts, the gutter and the
+contents' page numbers each settle in turn on the core's layout, decision 0003).
 
 ### 9.3 The ebook pipeline
 
@@ -887,7 +888,7 @@ PRT-3, PRT-4, PRT-5: mirrored margins, recto chapter starts, roman and arabic fo
 (author and title, book and chapter, none) and the pages that suppress them, blank-page control.
 - Tests: page sizes per trim; the gutter for page counts on each side of every threshold in the
   profile; recto starts; folio sequence; no running head on chapter openings or blank pages;
-  blank-page runs within limits; the layout loop stops within three passes.
+  blank-page runs within limits; the layout loop stops within four passes (section 9.2).
 - Done when: those pass.
 
 **M5.3 `m5/openings`**: chapter openings from the design (sink, number, title, ornament, image

@@ -1,0 +1,77 @@
+# A print profile (docs/SPEC.md section 5): data only, changed without code.
+id = "pod-paperback"
+name = "Print-on-demand paperback"
+checked = "2026-11-24"
+source = "a print-on-demand service's public file guide, as known on the date checked; to be rechecked by a person"
+bleed = 0.125
+min_type = 7.0
+blank_run_inside = 2
+blank_run_end = 10
+spine_text_min_pages = 79
+barcode = [2.0, 1.2]
+min_pages = 24
+even_pages = true
+
+[paper]
+white = 0.002252
+cream = 0.0025
+color = 0.002347
+
+[max_pages]
+white = 828
+cream = 776
+color = 600
+
+[minimum]
+outside = 0.25
+outside_bleed = 0.375
+top = 0.25
+bottom = 0.25
+
+[[trims]]
+id = "5x8"
+name = "5 × 8 in"
+width = 5.0
+height = 8.0
+margins = [0.5, 0.5, 0.65, 0.7]
+
+[[trims]]
+id = "5.25x8"
+name = "5.25 × 8 in"
+width = 5.25
+height = 8.0
+margins = [0.5, 0.55, 0.65, 0.7]
+
+[[trims]]
+id = "5.5x8.5"
+name = "5.5 × 8.5 in"
+width = 5.5
+height = 8.5
+margins = [0.5, 0.55, 0.7, 0.75]
+
+[[trims]]
+id = "6x9"
+name = "6 × 9 in"
+width = 6.0
+height = 9.0
+margins = [0.5, 0.6, 0.75, 0.75]
+
+[[gutter]]
+pages = 150
+inches = 0.375
+
+[[gutter]]
+pages = 300
+inches = 0.5
+
+[[gutter]]
+pages = 500
+inches = 0.625
+
+[[gutter]]
+pages = 700
+inches = 0.75
+
+[[gutter]]
+pages = 100000
+inches = 0.875

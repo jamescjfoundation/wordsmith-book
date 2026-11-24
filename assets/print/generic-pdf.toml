@@ -1,0 +1,61 @@
+# A print profile (docs/SPEC.md section 5): data only, changed without code.
+id = "generic-pdf"
+name = "Generic print PDF"
+checked = "2026-11-24"
+source = "general practice for print-ready PDFs (fonts embedded, no annotations); no service's own limits"
+bleed = 0.125
+min_type = 6.0
+blank_run_inside = 3
+blank_run_end = 20
+spine_text_min_pages = 100
+barcode = [2.0, 1.2]
+min_pages = 1
+even_pages = false
+
+[paper]
+white = 0.0025
+cream = 0.0027
+color = 0.0025
+
+[max_pages]
+white = 100000
+cream = 100000
+color = 100000
+
+[minimum]
+outside = 0.25
+outside_bleed = 0.375
+top = 0.25
+bottom = 0.25
+
+[[trims]]
+id = "5x8"
+name = "5 × 8 in"
+width = 5.0
+height = 8.0
+margins = [0.75, 0.5, 0.65, 0.7]
+
+[[trims]]
+id = "5.25x8"
+name = "5.25 × 8 in"
+width = 5.25
+height = 8.0
+margins = [0.75, 0.55, 0.65, 0.7]
+
+[[trims]]
+id = "5.5x8.5"
+name = "5.5 × 8.5 in"
+width = 5.5
+height = 8.5
+margins = [0.8, 0.55, 0.7, 0.75]
+
+[[trims]]
+id = "6x9"
+name = "6 × 9 in"
+width = 6.0
+height = 9.0
+margins = [0.85, 0.6, 0.75, 0.75]
+
+[[gutter]]
+pages = 100000
+inches = 0.0

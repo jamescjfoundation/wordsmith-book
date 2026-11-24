@@ -11,6 +11,7 @@ fonts; everywhere else they go by role names.
 
 | Path | What | License |
 | --- | --- | --- |
+| `assets/print/` | Print profiles: trims, gutters, margins, paper and limits, written by the project | MIT OR Apache-2.0 (this project) |
 | `assets/designs/` | The built-in designs, written by the project | MIT OR Apache-2.0 (this project) |
 | `assets/brand/book/` | Wordsmith Book's tokens, mark and app icons, drawn by `tools/brand-icons.py` | MIT OR Apache-2.0 (this project) |
 

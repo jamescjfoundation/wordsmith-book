@@ -5444,6 +5444,8 @@ dependencies = [
  "jcj-interchange",
  "jcj-layout",
  "jcj-output",
+ "serde",
+ "toml",
  "wordsmith-book-design",
  "wordsmith-book-format",
  "wordsmith-book-import",

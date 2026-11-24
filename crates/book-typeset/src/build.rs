@@ -517,10 +517,12 @@ pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Doc
             empty.props.page_break_before = Some(false);
             // The blank page is a section of its own with no head or folio.
             let mut sp = section_props(look, &mut bands, &mut doc, s, w, h, inside, outside, top, bottom, text_width, true);
-            sp.page_num_format = if s.front { NumFormat::LowerRoman } else { NumFormat::Decimal };
+            // It belongs to the section before it (a blank page before the first chapter is front matter).
+            let front = i > 0 && book.sections[i - 1].front;
+            sp.page_num_format = if front { NumFormat::LowerRoman } else { NumFormat::Decimal };
             ends.push(b.body.len());
             b.body.push(empty);
-            if s.front {
+            if front {
                 front_sections.push(props_of.len());
             }
             props_of.push(sp);
