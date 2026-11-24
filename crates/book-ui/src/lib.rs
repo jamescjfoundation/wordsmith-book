@@ -279,7 +279,10 @@ impl App for BookApp {
         let clicked = egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| views::document(ui, b, selected.as_ref())).inner;
         if let (Some((section, n)), Some(Key::Section(_))) = (clicked, &selected) {
             let old = b.source.as_ref().ok().and_then(|s| wordsmith_book_format::fixes::section(&s.book, section)).and_then(|s| {
-                wordsmith_manuscript_model::Text { blocks: s.content.clone(), notes: vec![] }.inline_runs().get(n).map(|r| wordsmith_manuscript_model::text::plain(r))
+                wordsmith_manuscript_model::Text { blocks: s.content.clone(), notes: vec![] }
+                    .inline_runs()
+                    .get(n)
+                    .map(|r| wordsmith_manuscript_model::text::plain(r))
             });
             self.fixing = old.map(|t| (section, n, t));
         }

@@ -53,7 +53,13 @@ fn a_linked_source_gets_an_offer_and_stays_untouched() {
     assert!(list[0]["state"].as_str().unwrap().contains("Not yet accepted"), "{list}");
     // A fix whose words are not there once is refused before anything is written.
     assert!(app.command(commands::FIX_ADD, &json!({ "section": ch.as_text(), "find": "the", "replace": "a" })).is_err());
-    assert_eq!(wordsmith_manuscript_format::offers::read(&std::fs::read(wordsmith_manuscript_format::offers::offers_path(&ms)).unwrap()).unwrap().offers.len(), 1);
+    assert_eq!(
+        wordsmith_manuscript_format::offers::read(&std::fs::read(wordsmith_manuscript_format::offers::offers_path(&ms)).unwrap())
+            .unwrap()
+            .offers
+            .len(),
+        1
+    );
 }
 
 #[test]

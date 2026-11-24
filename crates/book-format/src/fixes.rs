@@ -161,7 +161,8 @@ pub fn offer(root: &Path, fix: &Fix) -> Result<(), Error> {
     let section = fix.section.ok_or_else(|| Error::Write("a fix needs its section".into()))?;
     let path = offers::offers_path(root);
     let mut file = if path.exists() {
-        let bytes = jcj_project::files::read_bounded(&path, offers::MAX_FILE).map_err(|e| Error::Io { file: path.display().to_string(), why: e.to_string() })?;
+        let bytes = jcj_project::files::read_bounded(&path, offers::MAX_FILE)
+            .map_err(|e| Error::Io { file: path.display().to_string(), why: e.to_string() })?;
         offers::read(&bytes).map_err(|why| Error::Damaged { file: path.display().to_string(), why })?
     } else {
         OffersFile { version: offers::VERSION, offers: Vec::new() }
@@ -169,7 +170,14 @@ pub fn offer(root: &Path, fix: &Fix) -> Result<(), Error> {
     if file.offers.iter().any(|o| o.id == fix.id) {
         return Err(Error::Write(format!("the offer `{}` is already in the offers file", fix.id)));
     }
-    file.offers.push(Offer { id: fix.id.clone(), item: section, find: fix.find.clone(), replace: fix.replace.clone(), note: fix.note.clone(), made: fix.made.clone() });
+    file.offers.push(Offer {
+        id: fix.id.clone(),
+        item: section,
+        find: fix.find.clone(),
+        replace: fix.replace.clone(),
+        note: fix.note.clone(),
+        made: fix.made.clone(),
+    });
     let bytes = offers::write(&file).map_err(Error::Write)?;
     jcj_project::files::write_atomic(&path, &bytes).map_err(|e| Error::Io { file: path.display().to_string(), why: e.to_string() })
 }

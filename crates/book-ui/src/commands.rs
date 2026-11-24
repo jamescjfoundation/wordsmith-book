@@ -235,7 +235,8 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             let sec = wordsmith_book_format::fixes::section(&src.book, section).ok_or("there is no such section")?;
             let text = wordsmith_manuscript_model::Text { blocks: sec.content.clone(), notes: sec.notes.clone() };
             let old = text.inline_runs().get(n).map(|r| wordsmith_manuscript_model::text::plain(r)).ok_or("there is no such paragraph")?;
-            let (find, replace) = wordsmith_book_format::fixes::from_edit(&old, &new, &text).ok_or("Nothing changed, or the change cannot be told apart from the same words elsewhere.")?;
+            let (find, replace) = wordsmith_book_format::fixes::from_edit(&old, &new, &text)
+                .ok_or("Nothing changed, or the change cannot be told apart from the same words elsewhere.")?;
             let id = b.add_fix(section, &find, &replace, &note, &crate::today())?;
             Ok(json!({ "id": id, "find": find, "replace": replace }))
         }
@@ -243,7 +244,15 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             let b = app.open_book()?;
             let src = b.source.as_ref().map_err(Clone::clone)?;
             let states = wordsmith_book_format::fixes::states(&b.files.project.fixes, src);
-            Ok(Value::Array(b.files.project.fixes.iter().zip(states).map(|(f, st)| json!({ "id": f.id, "find": f.find, "replace": f.replace, "state": st.describe() })).collect()))
+            Ok(Value::Array(
+                b.files
+                    .project
+                    .fixes
+                    .iter()
+                    .zip(states)
+                    .map(|(f, st)| json!({ "id": f.id, "find": f.find, "replace": f.replace, "state": st.describe() }))
+                    .collect(),
+            ))
         }
         METADATA => Ok(crate::metadata::as_json(app.open_book()?)),
         METADATA_SET => crate::metadata::set(app.open_book()?, s(params, "field")?, s(params, "value")?).map(|()| Value::Null),

@@ -43,7 +43,15 @@ fn setup(name: &str) -> (PathBuf, PathBuf) {
 }
 
 fn fix(id: &str, section: wordsmith_book_model::SectionId, find: &str, replace: &str) -> Fix {
-    Fix { id: id.into(), section: Some(section), find: find.into(), replace: replace.into(), note: "typo".into(), made: "2026-11-24".into(), offered: true }
+    Fix {
+        id: id.into(),
+        section: Some(section),
+        find: find.into(),
+        replace: replace.into(),
+        note: "typo".into(),
+        made: "2026-11-24".into(),
+        offered: true,
+    }
 }
 
 #[test]
@@ -111,7 +119,10 @@ fn every_decision_state_is_shown_and_waiting_fixes_apply_in_builds() {
 
 #[test]
 fn a_fix_keeps_the_marks_and_must_be_found_once() {
-    let mut t = Text { blocks: vec![Block::Para(vec![Inline::plain("The "), Inline::marked("old harbour", Marks::italic()), Inline::plain(" lay still.")])], notes: vec![] };
+    let mut t = Text {
+        blocks: vec![Block::Para(vec![Inline::plain("The "), Inline::marked("old harbour", Marks::italic()), Inline::plain(" lay still.")])],
+        notes: vec![],
+    };
     fixes::apply(&mut t, "old harbour lay", "new harbour lay").unwrap();
     assert_eq!(t.blocks[0], Block::Para(vec![Inline::plain("The "), Inline::marked("new harbour lay", Marks::italic()), Inline::plain(" still.")]));
     let mut twice = Text::from_paragraphs(&["a cat and a cat"]);

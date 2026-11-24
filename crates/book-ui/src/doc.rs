@@ -222,7 +222,15 @@ impl OpenBook {
             n += 1;
             id = format!("fix-{n}");
         }
-        let fix = wordsmith_book_model::Fix { id: id.clone(), section: Some(section), find: find.to_owned(), replace: replace.to_owned(), note: note.to_owned(), made: made.to_owned(), offered: false };
+        let fix = wordsmith_book_model::Fix {
+            id: id.clone(),
+            section: Some(section),
+            find: find.to_owned(),
+            replace: replace.to_owned(),
+            note: note.to_owned(),
+            made: made.to_owned(),
+            offered: false,
+        };
         // The words must be there once, whichever the source.
         let now = wordsmith_book_format::fixes::section(&src.book, section).ok_or("there is no such section")?;
         let mut text = wordsmith_manuscript_model::Text { blocks: now.content.clone(), notes: now.notes.clone() };

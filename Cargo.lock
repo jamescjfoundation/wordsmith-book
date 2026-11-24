@@ -5452,6 +5452,10 @@ version = "0.1.0"
 [[package]]
 name = "wordsmith-book-design"
 version = "0.1.0"
+dependencies = [
+ "serde",
+ "toml",
+]
 
 [[package]]
 name = "wordsmith-book-epub"
@@ -5493,6 +5497,7 @@ dependencies = [
  "jcj-doc 0.1.9",
  "proptest",
  "serde",
+ "serde_json",
  "wordsmith-manuscript-model",
 ]
 
