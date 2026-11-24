@@ -482,6 +482,12 @@ impl Typeset {
         jcj_layout::page_boxes(&self.layout).get(index).map(|b| (b.page.w, b.page.h))
     }
 
+    /// Page `index`'s body area (inside its margins) in points: (x, y from the top, width,
+    /// height).
+    pub fn body_area(&self, index: usize) -> Option<(f32, f32, f32, f32)> {
+        jcj_layout::page_boxes(&self.layout).get(index).map(|b| (b.body.x, b.body.y, b.body.w, b.body.h))
+    }
+
     /// The folio for page `index` (from 0): roman in the front matter, else arabic.
     pub fn folio(&self, index: usize) -> String {
         let boxes = jcj_layout::page_boxes(&self.layout);

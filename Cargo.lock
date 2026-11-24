@@ -5547,6 +5547,7 @@ dependencies = [
  "jcj-features",
  "jcj-shell",
  "serde_json",
+ "wordsmith-book-check",
  "wordsmith-book-design",
  "wordsmith-book-format",
  "wordsmith-book-import",

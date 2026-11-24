@@ -240,3 +240,25 @@ fn checksums_cover_every_section_and_change_with_words() {
     assert_eq!(source::changed_sections(&new, &fewer), vec![(ids.about, Change::Removed)]);
     assert_eq!(source::changed_sections(&fewer, &new), vec![(ids.about, Change::Added)]);
 }
+
+#[test]
+fn a_sources_pictures_are_read_by_path_and_only_under_media() {
+    use wordsmith_book_format::source::picture_path_ok;
+    assert!(picture_path_ok("media/0001.png"));
+    for bad in ["../x.png", "media/../../etc", "/media/x.png", "text/x.md", "media\\x.png", "C:media/x"] {
+        assert!(!picture_path_ok(bad), "{bad}");
+    }
+    let dir = std::path::Path::new(env!("CARGO_TARGET_TMPDIR")).join("pictures");
+    let _ = std::fs::remove_dir_all(&dir);
+    std::fs::create_dir_all(&dir).unwrap();
+    let novels = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/novels");
+    let src = dir.join("book.wsm");
+    let (_, project) = wordsmith_manuscript_format::folder::Folder::open(&novels.join("gullivers-travels.wsm")).unwrap();
+    wordsmith_manuscript_format::folder::Folder::create(&src, &project).unwrap();
+    std::fs::create_dir_all(src.join("media")).unwrap();
+    std::fs::write(src.join("media/map.png"), b"picture bytes").unwrap();
+    let opened = wordsmith_book_format::source::open(&dir, &wordsmith_book_model::Source::Manuscript("book.wsm".into())).unwrap();
+    assert_eq!(opened.picture("media/map.png").as_deref(), Some(&b"picture bytes"[..]));
+    assert!(opened.picture("media/none.png").is_none());
+    assert!(opened.picture("../book.wsm/media/map.png").is_none());
+}

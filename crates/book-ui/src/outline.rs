@@ -20,6 +20,23 @@ pub enum Key {
     Element(String),
 }
 
+/// The outline key of an assembled piece's id (a section's id, or `element:<id>`).
+pub fn key_of_piece(piece: &str) -> Key {
+    match piece.strip_prefix("element:") {
+        Some(id) => Key::Element(id.to_owned()),
+        None => piece.parse::<SectionId>().map_or_else(|_| Key::Element(piece.to_owned()), Key::Section),
+    }
+}
+
+/// The assembled piece id of an outline key, if it names one.
+pub fn piece_of_key(key: &Key) -> Option<String> {
+    match key {
+        Key::Section(id) => Some(id.to_string()),
+        Key::Element(id) => Some(format!("element:{id}")),
+        Key::Heading(..) => None,
+    }
+}
+
 /// What the outline says about a source's section that cannot be moved here.
 pub const READ_ONLY: &str = "The manuscript's order is the writer's: change this in Manuscript.";
 

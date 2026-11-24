@@ -18,6 +18,7 @@ pub mod doc;
 pub mod import_review;
 pub mod metadata;
 pub mod outline;
+pub mod preview;
 
 use std::path::PathBuf;
 
@@ -62,6 +63,8 @@ pub struct BookApp {
     pub chooser: chooser::Chooser,
     /// A paragraph being fixed: its section, its number and the text so far.
     pub fixing: Option<(wordsmith_book_model::SectionId, usize, String)>,
+    /// The print preview.
+    pub print_preview: preview::PrintPreview,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -281,6 +284,15 @@ impl App for BookApp {
             return;
         };
         let selected = self.outline.selected.clone();
+        if let Some(piece) = selected.as_ref().and_then(outline::piece_of_key)
+            && !preview::print_editions(b).is_empty()
+            && ui.button("Show in Print Preview").clicked()
+        {
+            self.print_preview.target = Some(piece);
+            if !shell.layout.is_open("preview") {
+                shell.run(jcj_shell::Cmd::with(jcj_shell::commands::shell_ids::PANEL, json!({ "panel": "preview" })));
+            }
+        }
         let clicked = egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| views::document(ui, b, selected.as_ref())).inner;
         if let (Some((section, n)), Some(Key::Section(_))) = (clicked, &selected) {
             let old = b.source.as_ref().ok().and_then(|s| wordsmith_book_format::fixes::section(&s.book, section)).and_then(|s| {
@@ -300,6 +312,7 @@ impl App for BookApp {
             PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right),
             PanelSpec::new("details", "Details", "info", Side::Right),
             PanelSpec::new("designs", "Designs", "style", Side::Right),
+            PanelSpec::new("preview", "Print Preview", "print", Side::Right),
         ]
     }
 
@@ -327,6 +340,15 @@ impl App for BookApp {
                     && let Err(m) = self.command(id, &params)
                 {
                     self.message = Some(m);
+                }
+            }
+            "preview" => {
+                let clicked = match &self.book {
+                    Some(b) => self.print_preview.ui(ui, b),
+                    None => None,
+                };
+                if let Some(piece) = clicked {
+                    self.outline.selected = Some(outline::key_of_piece(&piece));
                 }
             }
             "cleanup" => {

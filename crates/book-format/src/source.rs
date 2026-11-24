@@ -104,7 +104,29 @@ pub fn open(project_root: &Path, source: &Source) -> Result<Opened, Error> {
     Ok(Opened { book: b, project, kind: Kind::LinkedPacked, path, watch: Watch::Packed(digest(&bytes)) })
 }
 
+/// Largest picture read from a source, in bytes.
+pub const MAX_PICTURE: u64 = 64 << 20;
+
+/// Whether `src` is a picture path a source may hold: relative, under `media/`, no `..`.
+pub fn picture_path_ok(src: &str) -> bool {
+    src.starts_with("media/") && !src.contains("..") && !src.contains('\\') && !src.contains(':') && src.len() < 512
+}
+
 impl Opened {
+    /// A picture of the source by its path (`media/<id>.png`), from its folder or its packed
+    /// file; `None` if the path is not a picture path, or the file is missing or too large.
+    pub fn picture(&self, src: &str) -> Option<Vec<u8>> {
+        if !picture_path_ok(src) {
+            return None;
+        }
+        if self.path.is_dir() {
+            return jcj_project::files::read_bounded(&self.path.join(src), MAX_PICTURE).ok();
+        }
+        let bytes = jcj_project::files::read_bounded(&self.path, wordsmith_manuscript_format::pack::MAX_PACKED).ok()?;
+        let mut files = wordsmith_manuscript_format::pack::unpack(&bytes).ok()?;
+        files.remove(src).filter(|b| b.len() as u64 <= MAX_PICTURE)
+    }
+
     /// Whether the source changed on disk since it was opened (FIL-2).
     pub fn changed_on_disk(&self) -> Result<bool, Error> {
         match &self.watch {

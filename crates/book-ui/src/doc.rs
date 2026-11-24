@@ -55,6 +55,14 @@ pub fn project_folder(path: &Path) -> Result<PathBuf, String> {
 }
 
 impl OpenBook {
+    /// A picture by its path: Book's own (`assets/…`) or the source's (`media/…`).
+    pub fn picture(&self, src: &str) -> Option<Vec<u8>> {
+        match src.strip_prefix("assets/") {
+            Some(name) => self.files.assets.get(name).cloned(),
+            None => self.source.as_ref().ok()?.picture(src),
+        }
+    }
+
     /// Open the project at `path` (see [`project_folder`]). Unsaved work recovered from a crash
     /// is loaded and left unsaved, with a notice.
     pub fn open(path: &Path) -> Result<OpenBook, String> {

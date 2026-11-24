@@ -87,6 +87,12 @@ pub const MOVE_ELEMENT: &str = "book.element.move";
 /// Change an element's title or text: `{"id", "title"?, "text"?}`.
 pub const SET_ELEMENT: &str = "book.element.set";
 
+/// Build the print preview and go to a section's first page: `{"section": id}` (a section's id
+/// or `element:<id>`); gives the page (from 1).
+pub const PREVIEW_SHOW: &str = "book.preview.show";
+/// Which section a page of the print preview belongs to: `{"page": n}` (from 1); gives its id.
+pub const PREVIEW_PAGE: &str = "book.preview.page";
+
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
     let p = |mut c: CommandInfo| {
@@ -134,6 +140,8 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(REMOVE_ELEMENT, "Remove Element", "")),
         p(CommandInfo::new(MOVE_ELEMENT, "Move Element", "")),
         p(CommandInfo::new(SET_ELEMENT, "Edit Element", "")),
+        p(CommandInfo::new(PREVIEW_SHOW, "Show in Print Preview", "")),
+        p(CommandInfo::new(PREVIEW_PAGE, "Section of a Preview Page", "")),
     ]
 }
 
@@ -272,6 +280,7 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
                     .collect(),
             ))
         }
+        PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
         DESIGNS => Ok(crate::designs::list_json(app.open_book()?)),
         DESIGN_CHOOSE => crate::designs::choose(app.open_book()?, s(params, "id")?).map(|()| Value::Null),
         DESIGN_MIX => {
@@ -467,4 +476,30 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         }
         other => Err(format!("unknown command {other}")),
     }
+}
+
+/// The print preview's commands: build if needed (waiting up to a minute), then answer.
+fn preview_command(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String> {
+    let b = app.book.as_ref().ok_or("no book is open")?;
+    app.print_preview.update(b);
+    app.print_preview.wait(std::time::Duration::from_secs(60));
+    app.print_preview.update(b);
+    app.print_preview.wait(std::time::Duration::from_secs(60));
+    if let Some(e) = &app.print_preview.error {
+        return Err(format!("the preview could not be built: {e}"));
+    }
+    let built = app.print_preview.built.clone().ok_or("the preview is not ready")?;
+    if id == PREVIEW_SHOW {
+        let section = params.get("section").and_then(Value::as_str).ok_or("give the section's id")?;
+        let page = app.print_preview.page_of(section).ok_or_else(|| format!("“{section}” is not in the print edition"))?;
+        app.print_preview.scroll_to = Some(page);
+        app.outline.selected = Some(outline::key_of_piece(section));
+        return Ok(json!({ "page": page + 1 }));
+    }
+    let n = params.get("page").and_then(Value::as_u64).and_then(|n| usize::try_from(n).ok()).ok_or("give the page number")?;
+    let piece = (n >= 1 && n <= built.print.typeset.page_count())
+        .then(|| built.print.typeset.section_of_page(n - 1))
+        .flatten()
+        .ok_or_else(|| format!("there is no page {n}"))?;
+    Ok(json!({ "section": piece }))
 }
