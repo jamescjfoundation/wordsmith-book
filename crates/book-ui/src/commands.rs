@@ -17,6 +17,13 @@ use crate::outline::{self, Key};
 /// Make a new book: `{"path": folder, "manuscript": path of a Manuscript project}` links it;
 /// without `manuscript` the book gets an empty source of its own.
 pub const NEW: &str = "book.new";
+/// Review a file before importing it: `{"file": path}`.
+pub const IMPORT_REVIEW: &str = "book.importReview";
+/// Import the reviewed file with the review's rules.
+pub const IMPORT_CONFIRM: &str = "book.importConfirm";
+/// Import a file straight into a new book: `{"file", "path", "off": [rule names]}`; gives the
+/// report.
+pub const IMPORT: &str = "book.import";
 /// Close the book.
 pub const CLOSE: &str = "book.close";
 /// Save the whole project as one packed file: `{"path": file}`.
@@ -51,6 +58,9 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(ids::NEW_FROM_TEMPLATE, "New Book from Template", "")),
         p(CommandInfo::new(NEW, "New Book", "Mod+N")),
         CommandInfo::new(CLOSE, "Close Book", "Mod+W"),
+        p(CommandInfo::new(IMPORT_REVIEW, "Import a File…", "Mod+Shift+I")),
+        CommandInfo::new(IMPORT_CONFIRM, "Import", ""),
+        p(CommandInfo::new(IMPORT, "Import a File into a New Book", "")),
         p(CommandInfo::new(SAVE_AS_ONE_FILE, "Save as One File", "")),
         CommandInfo::new(BACKUP, "Back Up Now", ""),
         CommandInfo::new(RELOAD_SOURCE, "Read the Manuscript Again", ""),
@@ -147,10 +157,39 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         ids::UNDO => Ok(json!({ "undone": app.open_book()?.undo() })),
         ids::REDO => Ok(json!({ "redone": app.open_book()?.redo() })),
         ids::OPEN_PATH => app.open_path(s(params, "path")?).map(|()| Value::Null),
+        ids::NEW_FROM_TEMPLATE if params.get("template").and_then(Value::as_str) == Some("import") && params.get("file").is_none() => {
+            app.message = Some("Choose Import a File… and give the file's path.".into());
+            Ok(Value::Null)
+        }
         ids::NEW_FROM_TEMPLATE | NEW => new_book(app, params),
         CLOSE => {
             app.book = None;
             Ok(Value::Null)
+        }
+        IMPORT_REVIEW => {
+            app.review = Some(crate::import_review::Review::open(&PathBuf::from(s(params, "file")?))?);
+            Ok(Value::Null)
+        }
+        IMPORT_CONFIRM => {
+            let review = app.review.as_ref().ok_or("nothing is being reviewed")?;
+            let (book, report) = review.import()?;
+            let out = crate::import_review::report_json(&report);
+            app.book = Some(book);
+            app.review = None;
+            app.last_report = Some(report);
+            app.outline = Default::default();
+            Ok(out)
+        }
+        IMPORT => {
+            let mut review = crate::import_review::Review::open(&PathBuf::from(s(params, "file")?))?;
+            if let Some(path) = params.get("path").and_then(Value::as_str) {
+                review.target = path.to_owned();
+            }
+            for name in params.get("off").and_then(Value::as_array).into_iter().flatten().filter_map(Value::as_str) {
+                review.set_rule(name, false);
+            }
+            app.review = Some(review);
+            run(app, IMPORT_CONFIRM, &Value::Null)
         }
         SAVE_AS_ONE_FILE => {
             let path = PathBuf::from(s(params, "path")?);

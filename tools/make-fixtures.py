@@ -141,7 +141,7 @@ def waverley(text):
     body = lines[start:notes_at]
     _, parts = split_sections(body, lambda l: re.match(r"^(Volume|VOLUME) [IVX]+\.$", l) is not None)
     for head, rest in parts:
-        _, chapters = chapters_of(rest, r"^CHAPTER [IVXLC]+\.$", True)
+        _, chapters = chapters_of(rest, r"^CHAPTER [IVXLC]+\.?$", True)
         b.parts.append((head, chapters))
     label = None
     for par in blocks_of(lines[notes_at:]):

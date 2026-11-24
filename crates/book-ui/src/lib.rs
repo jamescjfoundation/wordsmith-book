@@ -12,6 +12,7 @@
 pub mod brand;
 pub mod commands;
 pub mod doc;
+pub mod import_review;
 pub mod outline;
 
 use std::path::PathBuf;
@@ -45,6 +46,10 @@ pub struct BookApp {
     pub outline: TreeState<Key>,
     /// The open dialog's path field, while it shows.
     pub open_dialog: Option<String>,
+    /// The import review, while it shows.
+    pub review: Option<import_review::Review>,
+    /// The last import's report.
+    pub last_report: Option<wordsmith_book_import::Report>,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -104,8 +109,8 @@ impl BookApp {
         let Some(mut path) = self.open_dialog.take() else { return };
         let mut keep = true;
         egui::Window::new("Open a Book").collapsible(false).resizable(false).show(ctx, |ui| {
-            ui.label("The path of a book project (.wsbk folder or .wsbkz file):");
-            let r = ui.text_edit_singleline(&mut path);
+            let label = ui.label("The path of a book project (.wsbk folder or .wsbkz file):");
+            let r = ui.text_edit_singleline(&mut path).labelled_by(label.id);
             ui.horizontal(|ui| {
                 let enter = r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter));
                 if ui.button("Open").clicked() || enter {
@@ -221,6 +226,17 @@ impl App for BookApp {
             }
             ui.separator();
         }
+        if let Some(review) = &mut self.review {
+            let (go, cancel) = egui::ScrollArea::vertical().show(ui, |ui| review.ui(ui)).inner;
+            if go {
+                if let Err(m) = self.command(commands::IMPORT_CONFIRM, &json!({})) {
+                    self.message = Some(m);
+                }
+            } else if cancel {
+                self.review = None;
+            }
+            return;
+        }
         let Some(b) = &self.book else {
             ui.centered_and_justified(|ui| ui.label("Open or create a book to begin."));
             return;
@@ -245,6 +261,7 @@ impl App for BookApp {
         vec![
             TemplateSpec::new("link", "From a Manuscript project", "A book on a Wordsmith Manuscript project, read and never changed."),
             TemplateSpec::new("empty", "An empty book", "A book with its own source, to import a file into."),
+            TemplateSpec::new("import", "Import a file", "A book from a DOCX, ODT, RTF, Markdown or text file, reviewed before import."),
         ]
     }
 
@@ -257,7 +274,7 @@ impl App for BookApp {
     }
 
     fn has_document(&self) -> bool {
-        self.book.is_some()
+        self.book.is_some() || self.review.is_some() || self.open_dialog.is_some()
     }
 
     fn about(&self) -> About {

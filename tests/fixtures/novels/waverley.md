@@ -3724,7 +3724,7 @@ This, indeed, Charles Edward considered as a lady’s secret; for although Rose�
 
 When Janet had once finished the leading facts of this narrative, Waverley was easily enabled to apply the clue which they afforded to other mazes of the labyrinth in which he had been engaged. To Rose Bradwardine, then, he owed the life which he now thought he could willingly have laid down to serve her. A little reflection convinced him, however, that to live for her sake was more convenient and agreeable, and that, being possessed of independence, she might share it with him either in foreign countries or in his own. The pleasure of being allied to a man of the Baron’s high worth, and who was so much valued by his uncle Sir Everard, was also an agreeable consideration, had anything been wanting to recommend the match. His absurdities, which had appeared grotesquely ludicrous during his prosperity, seemed, in the sunset of his fortune, to be harmonised and assimilated with the noble features of his character, so as to add peculiarity without exciting ridicule. His mind occupied with such projects of future happiness, Edward sought Little Veolan, the habitation of Mr. Duncan Macwheeble.
 
-CHAPTER XXXVII
+## CHAPTER XXXVII
 
 Now is Cupid a child of conscience—he makes restitution. SHAKSPEARE.
 
@@ -3762,7 +3762,7 @@ MY DEAR EDWARD,—I am just arrived here, and yet I have finished my business; i
 
 “Ever, dear Waverley, yours most truly, “PHILIP TALBOT.”
 
-CHAPTER XXXVIII
+## CHAPTER XXXVIII
 
 Happy’s the wooing That’s not long a doing.
 
@@ -3812,7 +3812,7 @@ The Colonel was still in Edinburgh, and proposed to wait there for some months u
 
 Such was the reasoning of those times, held even by brave and humane men towards a vanquished enemy. Let us devoutly hope that, in this respect at least, we shall never see the scenes or hold the sentiments that were general in Britain Sixty Years Since.
 
-CHAPTER XXXIX
+## CHAPTER XXXIX
 
 Tomorrow? O that’s sudden!—Spare him, spare him! SHAKSPEARE.
 
@@ -3884,7 +3884,7 @@ When he was recalled, after the space of nearly half an hour, he found that, by 
 
 She gave him her hand, on which Edward shed a torrent of tears, and with a faltering step withdrew from the apartment, and returned to the town of Carlisle. At the inn he found a letter from his law friend intimating that he would be admitted to Fergus next morning as soon as the Castle gates were opened, and permitted to remain with him till the arrival of the Sheriff gave signal for the fatal procession.
 
-CHAPTER XL
+## CHAPTER XL
 
 A darker departure is near, The death-drum is muffled, and sable the bier. CAMPBELL.
 
@@ -3982,7 +3982,7 @@ But his pride found some consolation in reflecting that, he and his son-in-law h
 
 The marriage took place on the appointed day. The Reverend Mr. Rubrick, kinsman to the proprietor of the hospitable mansion where it was solemnised, and chaplain to the Baron of Bradwardine, had the satisfaction to unite their hands; and Frank Stanley acted as bridesman, having joined Edward with that view soon after his arrival. Lady Emily and Colonel Talbot had proposed being present; but Lady Emily’s health, when the day approached, was found inadequate to the journey. In amends it was arranged that Edward Waverley and his lady, who, with the Baron, proposed an immediate journey to Waverley-Honour, should in their way spend a few days at an estate which Colonel Talbot had been tempted to purchase in Scotland as a very great bargain, and at which he proposed to reside for some time.
 
-CHAPTER XLII
+## CHAPTER XLII
 
 This is no mine ain house, I ken by the bigging o’t. *Old Song*.
 

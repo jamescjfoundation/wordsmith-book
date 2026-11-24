@@ -189,7 +189,9 @@ pub fn to_document(text: &Text) -> Document {
     doc
 }
 
-fn inlines_of(doc: &Document, p: &Paragraph, notes: &mut Vec<Note>, dropped: &mut Dropped) -> Inlines {
+/// The inlines of a paragraph. In a note's own paragraphs (`in_note`), a note reference is the
+/// note's own number mark, as word processors keep it: it is left out, never followed.
+fn inlines_of(doc: &Document, p: &Paragraph, notes: &mut Vec<Note>, dropped: &mut Dropped, in_note: bool) -> Inlines {
     let objects: BTreeMap<usize, &InlineObject> = p.objects_with_offsets().collect();
     let mut out: Inlines = Vec::new();
     let mut at = 0usize;
@@ -204,6 +206,7 @@ fn inlines_of(doc: &Document, p: &Paragraph, notes: &mut Vec<Note>, dropped: &mu
                     out.push(Inline::marked(std::mem::take(&mut buf), marks.clone()));
                 }
                 match objects.get(&(at + i)) {
+                    Some(InlineObject::NoteRef { .. }) if in_note => {}
                     Some(InlineObject::NoteRef { id, custom, .. }) => {
                         let label = if custom.is_empty() { (notes.len() + 1).to_string() } else { custom.clone() };
                         if !notes.iter().any(|n| n.label == label) {
@@ -211,7 +214,11 @@ fn inlines_of(doc: &Document, p: &Paragraph, notes: &mut Vec<Note>, dropped: &mu
                                 .parts
                                 .get(id)
                                 .map(|part| {
-                                    part.blocks.iter().filter_map(|b| b.as_para()).map(|np| inlines_of(doc, np, &mut Vec::new(), dropped)).collect()
+                                    part.blocks
+                                        .iter()
+                                        .filter_map(|b| b.as_para())
+                                        .map(|np| inlines_of(doc, np, &mut Vec::new(), dropped, true))
+                                        .collect()
                                 })
                                 .unwrap_or_default();
                             notes.push(Note { label: label.clone(), paras });
@@ -276,7 +283,7 @@ pub fn from_document(doc: &Document) -> (Text, Dropped) {
         }
         let style_level = p.props.style.as_deref().and_then(|s| s.strip_prefix("Heading")).and_then(|n| n.parse::<u8>().ok());
         let kind = kind.unwrap_or_else(|| if style_level.is_some() { "heading".into() } else { "para".into() });
-        let content = inlines_of(doc, p, &mut notes, &mut dropped);
+        let content = inlines_of(doc, p, &mut notes, &mut dropped, false);
         match kind.as_str() {
             "quote" | "verse" | "aside" => {
                 let g = GROUP.get_or_none(p).unwrap_or(0);

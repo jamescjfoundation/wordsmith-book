@@ -14,7 +14,7 @@ core), **app-first** (built here, marked `// core-candidate:`, waiting for a sec
 | C5 | Book typesetting (a book layer over the core's layout, decision 0003) | `crates/book-typeset/src/lib.rs` | [#19](https://github.com/jamescjfoundation/open-source-core/issues/19) | app-first |
 | C6 | EPUB 3 package layer | `crates/book-epub` (from M6.1) | [#20](https://github.com/jamescjfoundation/open-source-core/issues/20) | open (app-first from M6.1) |
 | C7 | The core's EPUB writer drops notes | – | [#21](https://github.com/jamescjfoundation/open-source-core/issues/21) | open (core fix in R2) |
-| C8 | Structure detection for imports | `crates/book-import` (from M2.2) | [#22](https://github.com/jamescjfoundation/open-source-core/issues/22) | open (app-first from M2.2) |
+| C8 | Structure detection for imports | `crates/book-import/src/detect.rs` | [#22](https://github.com/jamescjfoundation/open-source-core/issues/22) | app-first |
 | C9 | PDF facts for preflight | – | [#23](https://github.com/jamescjfoundation/open-source-core/issues/23) | open (core change in M8.1) |
 | C10 | Manuscript's repository allowed as a git source in `deny.toml` | – | [#15](https://github.com/jamescjfoundation/open-source-core/issues/15) | released in core v0.1.5 |
 | – | `cargo xtask sync` finds the app's own core when two core releases are in the graph | – | [#16](https://github.com/jamescjfoundation/open-source-core/issues/16) | released in core v0.1.6 |
