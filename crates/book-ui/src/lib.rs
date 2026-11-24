@@ -206,6 +206,33 @@ impl BookApp {
     }
 }
 
+/// Every command the window has: Book's, then the window's own that Book does not replace.
+pub fn every_command() -> Vec<CommandInfo> {
+    let mut all = commands::list();
+    for c in jcj_shell::commands::shell_commands() {
+        if !all.iter().any(|a| a.id == c.id) {
+            all.push(c);
+        }
+    }
+    all
+}
+
+/// The guide's keys page (`docs/guide/keys.md`), made from the commands.
+pub fn keys_page() -> String {
+    let mut out = String::from(
+        "# Keys\n\nMade from Book's commands by a test, so it is always current. `Mod` is Ctrl, or the Command key on systems that use it.\nEvery command, keyed or not, is also in the command palette (Mod+Shift+P).\n\n| Key | Command |\n| --- | --- |\n",
+    );
+    let mut keyed: Vec<(String, String)> = every_command()
+        .into_iter()
+        .flat_map(|c| c.shortcut.split(" / ").map(str::trim).filter(|k| !k.is_empty()).map(|k| (k.to_owned(), c.label.clone())).collect::<Vec<_>>())
+        .collect();
+    keyed.sort();
+    for (k, label) in keyed {
+        out.push_str(&format!("| {k} | {label} |\n"));
+    }
+    out
+}
+
 impl Commands for BookApp {
     fn command(&self, id: &str) -> Option<CommandInfo> {
         self.all_commands().into_iter().find(|c| c.id == id)
