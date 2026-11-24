@@ -94,3 +94,22 @@ fn an_import_whose_words_would_change_is_refused() {
     // Not a document at all.
     assert!(matches!(import(Format::Docx, b"not a zip", &ImportRules::default(), "x"), Err(Error::Read(_))));
 }
+
+/// M2's milestone: every fixture file imports with a passing word check.
+#[test]
+fn every_fixture_imports_with_a_passing_check() {
+    let mut n = 0;
+    let mut names: Vec<_> = std::fs::read_dir(novels()).unwrap().flatten().map(|e| e.path()).filter(|p| p.is_file()).collect();
+    names.sort();
+    for path in names {
+        let ext = path.extension().and_then(|e| e.to_str()).unwrap_or("");
+        let Some(format) = Format::from_extension(ext) else { continue };
+        let bytes = std::fs::read(&path).unwrap();
+        let name = path.file_name().unwrap().to_string_lossy().into_owned();
+        let i = import(format, &bytes, &ImportRules::default(), &name).unwrap_or_else(|e| panic!("{name}: {e}"));
+        assert!(i.report.passed(), "{name}");
+        assert!(i.report.made.get("chapters").copied().unwrap_or(0) > 30, "{name}: {:?}", i.report.made);
+        n += 1;
+    }
+    assert_eq!(n, 13, "every text, Markdown, DOCX, ODT and RTF fixture");
+}

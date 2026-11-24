@@ -15,6 +15,7 @@ workspace = true
 wordsmith-book-model = { workspace = true }
 wordsmith-book-format = { workspace = true }
 wordsmith-book-import = { workspace = true }
+jcj-features = { workspace = true }
 jcj-doc = { workspace = true }
 wordsmith-manuscript-model = { workspace = true }
 wordsmith-manuscript-format = { workspace = true }

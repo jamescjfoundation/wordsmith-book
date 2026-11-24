@@ -22,7 +22,12 @@ fn markdown_fixtures_import_with_their_structure_and_notes() {
         let bytes = std::fs::read(novels().join(name)).unwrap();
         let i = import(Format::Markdown, &bytes, &ImportRules::default(), name).unwrap_or_else(|e| panic!("{name}: {e}"));
         assert!(i.report.passed(), "{name}: {:?}", i.report.words);
-        assert_eq!((made(&i.report, "parts"), made(&i.report, "chapters"), made(&i.report, "front matter")), (parts, chapters, front), "{name}: {:?}", i.report.made);
+        assert_eq!(
+            (made(&i.report, "parts"), made(&i.report, "chapters"), made(&i.report, "front matter")),
+            (parts, chapters, front),
+            "{name}: {:?}",
+            i.report.made
+        );
     }
 }
 

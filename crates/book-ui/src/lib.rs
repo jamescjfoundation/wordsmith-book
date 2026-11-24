@@ -10,6 +10,7 @@
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
 pub mod brand;
+pub mod cleanup;
 pub mod commands;
 pub mod doc;
 pub mod import_review;
@@ -50,6 +51,8 @@ pub struct BookApp {
     pub review: Option<import_review::Review>,
     /// The last import's report.
     pub last_report: Option<wordsmith_book_import::Report>,
+    /// The cleanup panel.
+    pub cleanup: cleanup::Panel,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -248,12 +251,24 @@ impl App for BookApp {
     }
 
     fn panels(&self) -> Vec<PanelSpec> {
-        vec![PanelSpec::new("outline", "Outline", "outline", Side::Left)]
+        vec![PanelSpec::new("outline", "Outline", "outline", Side::Left), PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right)]
     }
 
     fn panel_ui(&mut self, panel: &str, ui: &mut egui::Ui, _shell: &mut Shell) {
-        if panel == "outline" {
-            self.outline_ui(ui);
+        match panel {
+            "outline" => self.outline_ui(ui),
+            "cleanup" => {
+                let run = match &self.book {
+                    Some(b) => self.cleanup.ui(ui, b),
+                    None => None,
+                };
+                if let Some((id, params)) = run
+                    && let Err(m) = self.command(id, &params)
+                {
+                    self.message = Some(m);
+                }
+            }
+            _ => {}
         }
     }
 

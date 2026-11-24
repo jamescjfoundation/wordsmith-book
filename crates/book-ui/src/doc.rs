@@ -29,6 +29,8 @@ pub struct OpenBook {
     saved_revision: u64,
     /// A message for the user about the project (recovered work, a source that changed).
     pub notice: Option<String>,
+    /// The owned source as it was before each cleanup, newest last (for undo).
+    source_undo: Vec<wordsmith_manuscript_model::Project>,
 }
 
 fn err(e: impl std::fmt::Display) -> String {
@@ -59,7 +61,18 @@ impl OpenBook {
         let root = project_folder(path)?;
         let (folder, files) = Folder::open(&root).map_err(err)?;
         let source = source::open(&root, &files.project.source).map_err(err);
-        let mut b = OpenBook { root, folder, files, source, undo: Vec::new(), redo: Vec::new(), revision: 0, saved_revision: 0, notice: None };
+        let mut b = OpenBook {
+            root,
+            folder,
+            files,
+            source,
+            undo: Vec::new(),
+            redo: Vec::new(),
+            revision: 0,
+            saved_revision: 0,
+            notice: None,
+            source_undo: Vec::new(),
+        };
         if let Some(recovered) = pack::recovered(&b.root)
             && recovered != b.files
         {
@@ -173,6 +186,39 @@ impl OpenBook {
     /// Write a packed backup, keeping the newest [`KEEP_BACKUPS`].
     pub fn backup(&self, at: SystemTime) -> Result<PathBuf, String> {
         pack::backup(&self.root, &self.files, &self.backup_dir(), &self.name(), KEEP_BACKUPS, at).map_err(err)
+    }
+
+    /// The owned source's project, or why there is none (a linked source is the writer's).
+    pub fn owned_project(&self) -> Result<&wordsmith_manuscript_model::Project, String> {
+        match (&self.files.project.source, &self.source) {
+            (Source::Owned(_), Ok(s)) => Ok(&s.project),
+            (Source::Owned(_), Err(e)) => Err(e.clone()),
+            (Source::Manuscript(_), _) => {
+                Err("This changes a book's own source only; a linked Manuscript project is the writer's: change it in Manuscript, or offer a fix."
+                    .into())
+            }
+        }
+    }
+
+    /// Write a new version of the owned source (keeping the old one for undo) and read it again.
+    pub fn write_owned(&mut self, project: &wordsmith_manuscript_model::Project) -> Result<(), String> {
+        let old = self.owned_project()?.clone();
+        let Source::Owned(name) = self.files.project.source.clone() else { return Err("no owned source".into()) };
+        source::write_owned(&self.root, &name, project).map_err(err)?;
+        self.source_undo.push(old);
+        self.source = source::open(&self.root, &self.files.project.source).map_err(err);
+        self.revision += 1;
+        Ok(())
+    }
+
+    /// Put the owned source back as it was before the last [`OpenBook::write_owned`].
+    pub fn undo_owned(&mut self) -> Result<bool, String> {
+        let Some(old) = self.source_undo.pop() else { return Ok(false) };
+        let Source::Owned(name) = self.files.project.source.clone() else { return Ok(false) };
+        source::write_owned(&self.root, &name, &old).map_err(err)?;
+        self.source = source::open(&self.root, &self.files.project.source).map_err(err);
+        self.revision += 1;
+        Ok(true)
     }
 
     /// Read the source again if it changed on disk (FIL-2); true when it did.

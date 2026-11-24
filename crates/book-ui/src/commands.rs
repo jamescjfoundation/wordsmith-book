@@ -24,6 +24,14 @@ pub const IMPORT_CONFIRM: &str = "book.importConfirm";
 /// Import a file straight into a new book: `{"file", "path", "off": [rule names]}`; gives the
 /// report.
 pub const IMPORT: &str = "book.import";
+/// The cleanup changes proposed for the book's own source.
+pub const CLEANUP_LIST: &str = "book.cleanup.list";
+/// Make cleanup changes: `{"ids": [..]}`, or all of them; gives how many were made.
+pub const CLEANUP_APPLY: &str = "book.cleanup.apply";
+/// Put the source back as it was before the last cleanup.
+pub const CLEANUP_UNDO: &str = "book.cleanup.undo";
+/// "Keep exactly as written": `{"on": true}` proposes no cleanup.
+pub const CLEANUP_KEEP: &str = "book.cleanup.keepExactly";
 /// Close the book.
 pub const CLOSE: &str = "book.close";
 /// Save the whole project as one packed file: `{"path": file}`.
@@ -61,6 +69,10 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(IMPORT_REVIEW, "Import a File…", "Mod+Shift+I")),
         CommandInfo::new(IMPORT_CONFIRM, "Import", ""),
         p(CommandInfo::new(IMPORT, "Import a File into a New Book", "")),
+        CommandInfo::new(CLEANUP_LIST, "Cleanup Changes", ""),
+        p(CommandInfo::new(CLEANUP_APPLY, "Make Cleanup Changes", "")),
+        CommandInfo::new(CLEANUP_UNDO, "Undo Last Cleanup", ""),
+        p(CommandInfo::new(CLEANUP_KEEP, "Keep Exactly as Written", "")),
         p(CommandInfo::new(SAVE_AS_ONE_FILE, "Save as One File", "")),
         CommandInfo::new(BACKUP, "Back Up Now", ""),
         CommandInfo::new(RELOAD_SOURCE, "Read the Manuscript Again", ""),
@@ -164,6 +176,25 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         ids::NEW_FROM_TEMPLATE | NEW => new_book(app, params),
         CLOSE => {
             app.book = None;
+            Ok(Value::Null)
+        }
+        CLEANUP_LIST => crate::cleanup::list_json(app.open_book()?),
+        CLEANUP_APPLY => {
+            let ids: Option<Vec<usize>> = params
+                .get("ids")
+                .and_then(Value::as_array)
+                .map(|a| a.iter().filter_map(Value::as_u64).filter_map(|n| usize::try_from(n).ok()).collect());
+            let n = crate::cleanup::apply(app.open_book()?, ids.as_deref())?;
+            app.cleanup = crate::cleanup::Panel::default();
+            Ok(json!({ "made": n }))
+        }
+        CLEANUP_UNDO => Ok(json!({ "undone": app.open_book()?.undo_owned()? })),
+        CLEANUP_KEEP => {
+            let on = params.get("on").and_then(Value::as_bool).unwrap_or(true);
+            app.open_book()?.edit(|f| {
+                f.project.cleanup.keep_exactly = on;
+                Ok(())
+            })?;
             Ok(Value::Null)
         }
         IMPORT_REVIEW => {
