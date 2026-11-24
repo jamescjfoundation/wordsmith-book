@@ -50,6 +50,12 @@ pub const EDITION_ADD: &str = "book.edition.add";
 pub const EDITION_SET: &str = "book.edition.set";
 /// Remove an edition: `{"id"}`.
 pub const EDITION_REMOVE: &str = "book.edition.remove";
+/// Make a light fix: `{"section", "find", "replace", "note"}`; gives its id.
+pub const FIX_ADD: &str = "book.fix.add";
+/// Make a light fix from an edited paragraph: `{"section", "paragraph": n, "text", "note"}`.
+pub const FIX_EDIT: &str = "book.fix.edit";
+/// The fixes and where each stands.
+pub const FIX_LIST: &str = "book.fix.list";
 /// Close the book.
 pub const CLOSE: &str = "book.close";
 /// Save the whole project as one packed file: `{"path": file}`.
@@ -90,6 +96,9 @@ pub fn list() -> Vec<CommandInfo> {
         CommandInfo::new(CLEANUP_LIST, "Cleanup Changes", ""),
         p(CommandInfo::new(NUMBERING, "Chapter Numbers", "")),
         CommandInfo::new(METADATA, "Book Details", ""),
+        p(CommandInfo::new(FIX_ADD, "Fix Words", "")),
+        p(CommandInfo::new(FIX_EDIT, "Fix a Paragraph", "")),
+        CommandInfo::new(FIX_LIST, "Fixes", ""),
         p(CommandInfo::new(METADATA_SET, "Set a Book Detail", "")),
         p(CommandInfo::new(CONTRIBUTOR_ADD, "Add a Contributor", "")),
         p(CommandInfo::new(EDITION_ADD, "Add an Edition", "")),
@@ -208,6 +217,33 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         CLOSE => {
             app.book = None;
             Ok(Value::Null)
+        }
+        FIX_ADD => {
+            let section: SectionId = s(params, "section")?.parse().map_err(|e: wordsmith_manuscript_model::BadId| e.to_string())?;
+            let note = params.get("note").and_then(Value::as_str).unwrap_or("");
+            let (find, replace) = (s(params, "find")?.to_owned(), s(params, "replace")?.to_owned());
+            let id = app.open_book()?.add_fix(section, &find, &replace, note, &crate::today())?;
+            Ok(json!({ "id": id }))
+        }
+        FIX_EDIT => {
+            let section: SectionId = s(params, "section")?.parse().map_err(|e: wordsmith_manuscript_model::BadId| e.to_string())?;
+            let n = params.get("paragraph").and_then(Value::as_u64).and_then(|n| usize::try_from(n).ok()).ok_or("`paragraph` is needed")?;
+            let new = s(params, "text")?.to_owned();
+            let note = params.get("note").and_then(Value::as_str).unwrap_or("").to_owned();
+            let b = app.open_book()?;
+            let src = b.source.as_ref().map_err(Clone::clone)?;
+            let sec = wordsmith_book_format::fixes::section(&src.book, section).ok_or("there is no such section")?;
+            let text = wordsmith_manuscript_model::Text { blocks: sec.content.clone(), notes: sec.notes.clone() };
+            let old = text.inline_runs().get(n).map(|r| wordsmith_manuscript_model::text::plain(r)).ok_or("there is no such paragraph")?;
+            let (find, replace) = wordsmith_book_format::fixes::from_edit(&old, &new, &text).ok_or("Nothing changed, or the change cannot be told apart from the same words elsewhere.")?;
+            let id = b.add_fix(section, &find, &replace, &note, &crate::today())?;
+            Ok(json!({ "id": id, "find": find, "replace": replace }))
+        }
+        FIX_LIST => {
+            let b = app.open_book()?;
+            let src = b.source.as_ref().map_err(Clone::clone)?;
+            let states = wordsmith_book_format::fixes::states(&b.files.project.fixes, src);
+            Ok(Value::Array(b.files.project.fixes.iter().zip(states).map(|(f, st)| json!({ "id": f.id, "find": f.find, "replace": f.replace, "state": st.describe() })).collect()))
         }
         METADATA => Ok(crate::metadata::as_json(app.open_book()?)),
         METADATA_SET => crate::metadata::set(app.open_book()?, s(params, "field")?, s(params, "value")?).map(|()| Value::Null),

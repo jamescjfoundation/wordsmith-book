@@ -25,7 +25,9 @@ pub fn as_json(b: &OpenBook) -> Value {
         .source
         .as_ref()
         .ok()
-        .map(|s| needs(p, &s.book).into_iter().map(|n| json!({ "severity": n.severity.title(), "message": n.message, "edition": n.edition })).collect())
+        .map(|s| {
+            needs(p, &s.book).into_iter().map(|n| json!({ "severity": n.severity.title(), "message": n.message, "edition": n.edition })).collect()
+        })
         .unwrap_or_default();
     json!({ "source": source, "additions": p.metadata, "editions": p.editions, "needs": needs })
 }
@@ -109,7 +111,8 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
     {
         isbn::check(i)?;
     }
-    let paper: Option<Paper> = params.get("paper").map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not white, cream or color"))).transpose()?;
+    let paper: Option<Paper> =
+        params.get("paper").map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not white, cream or color"))).transpose()?;
     let (name, trim, profile, price, store) = (text("name"), text("trim"), text("profile"), text("price_notes"), text("store"));
     b.edit(|f| {
         let e = f.project.editions.iter_mut().find(|e| e.id == id).ok_or_else(|| format!("there is no edition `{id}`"))?;

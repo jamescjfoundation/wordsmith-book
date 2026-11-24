@@ -48,7 +48,10 @@ pub fn check(s: &str) -> Result<String, String> {
         let want = check10(&n);
         let got = if last == "X" { 10 } else { last.chars().next().and_then(|c| c.to_digit(10)).unwrap_or(99) };
         if want != got {
-            return Err(format!("“{s}” has the wrong check character (it should be {}).", if want == 10 { "X".to_owned() } else { want.to_string() }));
+            return Err(format!(
+                "“{s}” has the wrong check character (it should be {}).",
+                if want == 10 { "X".to_owned() } else { want.to_string() }
+            ));
         }
         return Ok(to13(&n));
     }

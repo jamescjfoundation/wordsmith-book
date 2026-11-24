@@ -44,7 +44,11 @@ pub fn needs(project: &BookProject, b: &Book) -> Vec<Need> {
             match isbn::check(&e.isbn) {
                 Ok(d) => {
                     if let Some((other, _)) = seen.iter().find(|(_, x)| *x == d) {
-                        out.push(need(Severity::Blocks, format!("The {} and the {} have the same ISBN; each edition needs its own.", other.to_lowercase(), e.name.to_lowercase()), Some(&e.id)));
+                        out.push(need(
+                            Severity::Blocks,
+                            format!("The {} and the {} have the same ISBN; each edition needs its own.", other.to_lowercase(), e.name.to_lowercase()),
+                            Some(&e.id),
+                        ));
                     }
                     seen.push((e.name.clone(), d));
                 }

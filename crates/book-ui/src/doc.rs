@@ -211,6 +211,46 @@ impl OpenBook {
         Ok(())
     }
 
+    /// Make a light fix: in the book's own source it is made in the text; for a linked Manuscript
+    /// project it is offered to the writer (appended to the offers file beside the project) and
+    /// used in Book's builds while it waits. Gives the fix's id.
+    pub fn add_fix(&mut self, section: wordsmith_book_model::SectionId, find: &str, replace: &str, note: &str, made: &str) -> Result<String, String> {
+        let src = self.source.as_ref().map_err(Clone::clone)?;
+        let mut n = self.files.project.fixes.len() + 1;
+        let mut id = format!("fix-{n}");
+        while self.files.project.fixes.iter().any(|f| f.id == id) {
+            n += 1;
+            id = format!("fix-{n}");
+        }
+        let fix = wordsmith_book_model::Fix { id: id.clone(), section: Some(section), find: find.to_owned(), replace: replace.to_owned(), note: note.to_owned(), made: made.to_owned(), offered: false };
+        // The words must be there once, whichever the source.
+        let now = wordsmith_book_format::fixes::section(&src.book, section).ok_or("there is no such section")?;
+        let mut text = wordsmith_manuscript_model::Text { blocks: now.content.clone(), notes: now.notes.clone() };
+        wordsmith_book_format::fixes::apply(&mut text, find, replace)?;
+        if src.kind == source::Kind::Owned {
+            let mut project = src.project.clone();
+            let t = project.texts.get_mut(&section).ok_or("the section has no text")?;
+            wordsmith_book_format::fixes::apply(&mut t.body, find, replace)?;
+            self.write_owned(&project)?;
+            self.edit(|f| {
+                f.project.fixes.push(fix);
+                Ok(())
+            })?;
+        } else {
+            let root = src.path.clone();
+            let mut offered = fix.clone();
+            offered.offered = true;
+            wordsmith_book_format::fixes::offer(&root, &offered).map_err(err)?;
+            self.edit(|f| {
+                f.project.fixes.push(offered);
+                Ok(())
+            })?;
+            // Saved now: the offer is already in the writer's offers file.
+            self.save()?;
+        }
+        Ok(id)
+    }
+
     /// Put the owned source back as it was before the last [`OpenBook::write_owned`].
     pub fn undo_owned(&mut self) -> Result<bool, String> {
         let Some(old) = self.source_undo.pop() else { return Ok(false) };

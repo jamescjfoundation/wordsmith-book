@@ -56,6 +56,8 @@ pub struct BookApp {
     pub cleanup: cleanup::Panel,
     /// The details panel.
     pub details: metadata::Panel,
+    /// A paragraph being fixed: its section, its number and the text so far.
+    pub fixing: Option<(wordsmith_book_model::SectionId, usize, String)>,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -130,6 +132,32 @@ impl BookApp {
         });
         if keep {
             self.open_dialog = Some(path);
+        }
+    }
+
+    fn fix_editor(&mut self, ctx: &egui::Context) {
+        let Some((section, n, mut text)) = self.fixing.take() else { return };
+        let mut keep = true;
+        let mut run = false;
+        egui::Window::new("Fix Words").collapsible(false).show(ctx, |ui| {
+            let label = ui.label("Change the words of this paragraph. A linked manuscript gets the fix as an offer the writer decides on.");
+            ui.add(egui::TextEdit::multiline(&mut text).desired_width(520.0)).labelled_by(label.id);
+            ui.horizontal(|ui| {
+                run = ui.button("Make Fix").clicked();
+                if ui.button("Cancel").clicked() {
+                    keep = false;
+                }
+            });
+        });
+        if run {
+            keep = false;
+            match self.command(commands::FIX_EDIT, &json!({ "section": section.as_text(), "paragraph": n, "text": text.clone() })) {
+                Ok(_) => self.message = Some("The fix was made.".into()),
+                Err(m) => self.message = Some(m),
+            }
+        }
+        if keep {
+            self.fixing = Some((section, n, text));
         }
     }
 
@@ -248,13 +276,22 @@ impl App for BookApp {
             return;
         };
         let selected = self.outline.selected.clone();
-        egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| {
-            views::document(ui, b, selected.as_ref());
-        });
+        let clicked = egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| views::document(ui, b, selected.as_ref())).inner;
+        if let (Some((section, n)), Some(Key::Section(_))) = (clicked, &selected) {
+            let old = b.source.as_ref().ok().and_then(|s| wordsmith_book_format::fixes::section(&s.book, section)).and_then(|s| {
+                wordsmith_manuscript_model::Text { blocks: s.content.clone(), notes: vec![] }.inline_runs().get(n).map(|r| wordsmith_manuscript_model::text::plain(r))
+            });
+            self.fixing = old.map(|t| (section, n, t));
+        }
+        self.fix_editor(&ctx);
     }
 
     fn panels(&self) -> Vec<PanelSpec> {
-        vec![PanelSpec::new("outline", "Outline", "outline", Side::Left), PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right), PanelSpec::new("details", "Details", "info", Side::Right)]
+        vec![
+            PanelSpec::new("outline", "Outline", "outline", Side::Left),
+            PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right),
+            PanelSpec::new("details", "Details", "info", Side::Right),
+        ]
     }
 
     fn panel_ui(&mut self, panel: &str, ui: &mut egui::Ui, _shell: &mut Shell) {
@@ -340,18 +377,26 @@ pub mod views {
         None
     }
 
-    /// Draw the document area.
-    pub fn document(ui: &mut egui::Ui, b: &OpenBook, selected: Option<&Key>) {
+    /// Draw the document area; gives the paragraph whose fix button was clicked.
+    pub fn document(ui: &mut egui::Ui, b: &OpenBook, selected: Option<&Key>) -> Option<(wordsmith_book_model::SectionId, usize)> {
+        let mut clicked = None;
         let book = b.source.as_ref().ok().map(|s| &s.book);
         match (selected, book) {
             (Some(Key::Section(id)), Some(book)) => {
                 let all: Vec<_> = book.front.iter().chain(&book.body).chain(&book.back).cloned().collect();
                 if let Some(s) = find(&all, *id) {
                     ui.heading(if s.title.is_empty() { "Untitled" } else { s.title.as_str() });
+                    let mut n = 0usize;
                     for blk in &s.content {
                         match blk {
                             Block::Para(c) | Block::Heading { content: c, .. } => {
-                                ui.label(wordsmith_manuscript_model::text::plain(c));
+                                ui.horizontal_wrapped(|ui| {
+                                    if ui.small_button("Fix").on_hover_text("Fix words in this paragraph").clicked() {
+                                        clicked = Some((s.id, n));
+                                    }
+                                    ui.label(wordsmith_manuscript_model::text::plain(c));
+                                });
+                                n += 1;
                             }
                             Block::SceneBreak => {
                                 ui.vertical_centered(|ui| ui.label("* * *"));
@@ -359,6 +404,7 @@ pub mod views {
                             Block::Quote(ps) | Block::Fenced { paras: ps, .. } => {
                                 for p in ps {
                                     ui.label(format!("    {}", wordsmith_manuscript_model::text::plain(p)));
+                                    n += 1;
                                 }
                             }
                             Block::Image { alt, .. } => {
@@ -390,5 +436,6 @@ pub mod views {
                 }
             }
         }
+        clicked
     }
 }

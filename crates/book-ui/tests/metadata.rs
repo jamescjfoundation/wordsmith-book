@@ -77,7 +77,13 @@ fn needs_list_the_sources_missing_metadata_and_books_own() {
     app.command(commands::EDITION_SET, &json!({ "id": "paperback", "isbn": "9780306406157", "trim": "" })).unwrap();
     app.command(commands::EDITION_SET, &json!({ "id": "ebook", "isbn": "978-0-306-40615-7" })).unwrap();
     let m = app.command(commands::METADATA, &json!({})).unwrap();
-    let blocks: Vec<String> = m["needs"].as_array().unwrap().iter().filter(|n| n["severity"] == "Blocks export").map(|n| n["message"].as_str().unwrap().to_owned()).collect();
+    let blocks: Vec<String> = m["needs"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|n| n["severity"] == "Blocks export")
+        .map(|n| n["message"].as_str().unwrap().to_owned())
+        .collect();
     assert!(blocks.iter().any(|n| n.contains("same ISBN")), "{blocks:?}");
     assert!(blocks.iter().any(|n| n.contains("no trim size")), "{blocks:?}");
 }

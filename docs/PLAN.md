@@ -644,7 +644,7 @@ Section 5.8.
 | M0 Foundations | – | Repository, rules, spec, brand, fixtures, core issues, engine spike | done (the spike took the fallback, decision 0003) |
 | M1 Project | 0.1 | Format, sources, saving, outline | done |
 | M2 Import | 0.1 | Verifier, imports, structure detection, cleanup review | done |
-| M3 Structure | 0.1 | Front and back matter, chapters and parts, metadata, editions, fixes | |
+| M3 Structure | 0.1 | Front and back matter, chapters and parts, metadata, editions, fixes | done |
 | M4 Designs | 0.1 | Design format, six designs, mixing, own designs, chooser | |
 | M5 Print | 0.1 | Typesetting, trims and margins, chapter openings, print PDF | |
 | M6 Ebook | 0.1 | EPUB writer, navigation, accessibility, cover, fonts | |
@@ -834,9 +834,11 @@ with ISBN (checksum validated), trim, paper and price notes.
   missing metadata listed from `book::missing_metadata` plus Book's own needs.
 - Done when: those pass.
 
-**M3.4 `m3/fixes`**: STR-7 and section 6.4: fix words in place in a section (one engine session,
-one section at a time, through M1.5); owned source edited; linked source offered back through
-Manuscript's offers file, decisions read and shown.
+**M3.4 `m3/fixes`**: STR-7 and section 6.4: fix words in place in a section, one paragraph at a
+time in a fix editor (changed from "one engine session": a light fix is words within one
+paragraph, which a paragraph editor gives without Book carrying a full text editor; M1.5's
+conversion stays for imports and the ebook preview); owned source edited; linked source offered
+back through Manuscript's offers file, decisions read and shown.
 - Tests: an offers file Book writes is accepted by Manuscript's `offers::read`; the Manuscript
   folder's bytes unchanged; each decision state (accepted, rejected, waiting, stale) shown as
   section 6.4 says; an existing offers file is appended to, never rewritten.
