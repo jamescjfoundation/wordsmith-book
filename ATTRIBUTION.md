@@ -11,6 +11,7 @@ fonts; everywhere else they go by role names.
 
 | Path | What | License |
 | --- | --- | --- |
+| `assets/brand/book/` | Wordsmith Book's tokens, mark and app icons, drawn by `tools/brand-icons.py` | MIT OR Apache-2.0 (this project) |
 
 ## Fonts
 

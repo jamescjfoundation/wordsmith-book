@@ -6,6 +6,8 @@
 #![forbid(unsafe_code)]
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
+pub mod brand;
+
 use jcj_shell::egui;
 use jcj_shell::{About, App, Cmd, CommandInfo, Commands, Shell, ShellOptions};
 
@@ -58,6 +60,14 @@ impl App for BookApp {
 
     fn document_ui(&mut self, ui: &mut egui::Ui, _shell: &mut Shell) {
         ui.centered_and_justified(|ui| ui.label("Open or create a book to begin."));
+    }
+
+    fn mark_width(&self, height: f32) -> f32 {
+        brand::mark_width(height)
+    }
+
+    fn paint_mark(&self, painter: &egui::Painter, rect: egui::Rect, ink: egui::Color32) {
+        brand::paint_mark(painter, rect, ink);
     }
 
     fn has_document(&self) -> bool {

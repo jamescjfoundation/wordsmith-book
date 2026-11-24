@@ -15,6 +15,7 @@ workspace = true
 wordsmith-book-ui = { workspace = true }
 jcj-shell = { workspace = true }
 eframe = { workspace = true }
+image = { workspace = true }
 
 [[bin]]
 name = "wordsmith-book"

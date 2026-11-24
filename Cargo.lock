@@ -5159,6 +5159,7 @@ name = "wordsmith-book"
 version = "0.1.0"
 dependencies = [
  "eframe",
+ "image",
  "jcj-shell",
  "wordsmith-book-ui",
 ]
