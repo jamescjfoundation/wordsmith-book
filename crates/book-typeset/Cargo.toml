@@ -12,3 +12,7 @@ publish.workspace = true
 workspace = true
 
 [dependencies]
+wordsmith-book-design = { workspace = true }
+jcj-doc = { workspace = true }
+jcj-layout = { workspace = true }
+jcj-output = { workspace = true }

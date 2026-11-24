@@ -197,8 +197,8 @@ crates/
   book-design/           the design schema, built-in designs, mixing, design files, versions
   book-import/           DOCX, ODT, RTF, Markdown, text, EPUB into an owned source; structure
                          detection; the cleanup list
-  book-typeset/          print: the book and a design to pages and PDF through the typesetting
-                         engine (section 5.6); page images for the preview
+  book-typeset/          print: the book and a design to a print document laid out and written
+                         by the core (section 5.6); page images for the preview
   book-epub/             ebook: XHTML, CSS, package, navigation, accessibility metadata
   book-check/            preflight: print and ebook checks, print profiles, external validators
   book-ui/               views: outline, text, design chooser, settings, previews, preflight,
@@ -228,7 +228,7 @@ Each layer calls only the layers under it; `cargo xtask app-layers` checks the t
 | --- | --- | --- |
 | 1 | `book-model` | `wordsmith-manuscript-model` (types only), `jcj-doc`, `serde` |
 | 2 | `book-format`, `book-design` | model, `wordsmith-manuscript-format`, `jcj-project` |
-| 3 | `book-import`, `book-typeset`, `book-epub` | layers 1–2, `jcj-interchange`, `jcj-layout`, `jcj-output`, `jcj-proof`, `jcj-features`, the typesetting engine (`book-typeset` only) |
+| 3 | `book-import`, `book-typeset`, `book-epub` | layers 1–2, `jcj-interchange`, `jcj-layout`, `jcj-output`, `jcj-proof`, `jcj-features` |
 | 4 | `book-check` | layers 1–3 |
 | 5 | `book-ui` | everything below, `jcj-engine`, `jcj-shell`, `jcj-theme`, `jcj-agents` |
 | 6 | `apps/*` | the crates above |
@@ -242,10 +242,10 @@ builds books with no window.
 | --- | --- | --- |
 | Rich text model, extension data | `jcj-doc` | Light editing of one section at a time; the ebook preview's documents |
 | Editing, undo, commands, recovery | `jcj-engine` | One session for a section being fixed; Book's commands through `registry_with(commands::merged(..))` |
-| Pages, measuring, fonts | `jcj-layout` | The ebook preview at device sizes (section 9.5) |
-| PDF reading, page images | `jcj-output` | `read` to check exported PDFs letter by letter and their pages; not used for page images (Book's page images come from its own engine) |
+| Pages, measuring, fonts | `jcj-layout` | Print pagination (decision 0003); the ebook preview at device sizes (section 9.5) |
+| PDF writing and reading, page images | `jcj-output` | The print PDF and the preview's page images (decision 0003); `read` to check exported PDFs letter by letter and their pages |
 | DOCX, ODT, RTF, Markdown, text, EPUB reading | `jcj-interchange` | Every import; Book maps the result to its structure |
-| Spelling, hyphenation | `jcj-proof` | Spelling while fixing text; hyphenation exceptions per language as hints to the engine |
+| Spelling, hyphenation | `jcj-proof` | Spelling while fixing text; hyphenation exceptions per language for print |
 | Atomic saves, backups, recovery, auto-save timing | `jcj-project` | Book project files |
 | Comparison | `jcj-features` | Re-import and offer differences (with the word-level diff of C2) |
 | Window, ribbon, panels, File page, start window, preferences, keys, updates | `jcj-shell` | Book implements `App` and supplies tabs, panels, File page sections, templates and About |
@@ -318,14 +318,14 @@ a person in Book's `docs/progress.md`.
 | C2 | Word-level comparison of two texts (paragraphs matched, then words), beside `jcj-features` compare | Promote (Manuscript's `manuscript-model::diff`) | M2.4 | [#17](https://github.com/jamescjfoundation/open-source-core/issues/17) |
 | C3 | A tree widget with drag and drop | Promote (Manuscript's binder tree) | M1.4 | [#6](https://github.com/jamescjfoundation/open-source-core/issues/6) |
 | C4 | An interface translation catalog, and the shell's own texts through it (English unchanged by default) | Promote (Manuscript's `manuscript-ui::i18n`) | R2 (ACC-3) | [#18](https://github.com/jamescjfoundation/open-source-core/issues/18) |
-| C5 | A typesetting engine for books (optimal-fit line breaking, hyphenation, page templates, footnotes, tagged PDF) | Build in app first (`book-typeset`), `core-candidate`; promoted as `jcj-typeset` when a second app uses it (section 5.6) | M0.7, M5 | [#19](https://github.com/jamescjfoundation/open-source-core/issues/19) |
+| C5 | Book typesetting (optimal-fit line breaking, right-hand starts, page templates, running heads, footnotes, tagged PDF) | Build in app first (`book-typeset`, on the core's layout since decision 0003), `core-candidate`; promoted as `jcj-typeset` when a second app uses it (section 5.6) | M0.7, M5 | [#19](https://github.com/jamescjfoundation/open-source-core/issues/19) |
 | C6 | An EPUB 3 package layer (container, package document with accessibility metadata, navigation with landmarks and page list, NCX, deterministic zip) | Build in app first (`book-epub`), `core-candidate` | M6.1 | [#20](https://github.com/jamescjfoundation/open-source-core/issues/20) |
 | C7 | The core's EPUB writer drops notes | Core fix, additive: notes written as numbered endnotes per chapter with links both ways, as Manuscript's reading copy does by hand | R2 | [#21](https://github.com/jamescjfoundation/open-source-core/issues/21) |
 | C8 | Structure detection for imports: sections by heading level and title patterns ("Chapter 12", "Part Two"), scene-break paragraphs | Build in app first (`book-import`), `core-candidate`; Manuscript has its own | M2.2 | [#22](https://github.com/jamescjfoundation/open-source-core/issues/22) |
 | C9 | PDF facts for preflight: page boxes (media, trim, bleed), fonts and whether embedded, annotations, images and their resolution | Core, additive to `jcj_output::read` | M8.1 | [#23](https://github.com/jamescjfoundation/open-source-core/issues/23) |
 | C10 | `deny.toml` allows `https://github.com/jamescjfoundation/wordsmith-manuscript` as a git source | Core, additive (synced settings) | M0.1 | [#15](https://github.com/jamescjfoundation/open-source-core/issues/15) |
 | C11 | A sortable, editable table widget | Promote (Manuscript's outline table) if editions and the ISBN list need it | R4 | [#7](https://github.com/jamescjfoundation/open-source-core/issues/7) |
-| C12 | The PDF names the app that made it | Not needed by Book: Book's PDFs come from its own engine, which sets the producer. Stays blocked upstream for `jcj-output` | – | [#5](https://github.com/jamescjfoundation/open-source-core/issues/5) |
+| C12 | The PDF names the app that made it | Book's PDFs come from `jcj-output` (decision 0003), which does not name the app yet; stays blocked upstream for `jcj-output`, not needed for any step | – | [#5](https://github.com/jamescjfoundation/open-source-core/issues/5) |
 
 Not needed by Book: the stitched view (#9; Book fixes one section at a time), project search (#8),
 story board lanes (#12).
@@ -333,47 +333,37 @@ story board lanes (#12).
 `docs/core-candidates.md` lists every `// core-candidate:` in this repository with its issue and
 state (app-first, promoted in core vX, waiting).
 
-### 5.6 The typesetting engine
+### 5.6 Print typesetting
 
 Print typesetting is the largest technical choice. A book interior needs optimal-fit paragraph
 breaking, hyphenation, widow and orphan control, mirrored pages, running heads that follow
-chapters, drop caps, real small caps, footnotes at the page foot, and precise font handling. The
-core's `jcj-layout` lays out word-processor pages; its page planner does not plan footnotes or
-floats and has no book line breaking.
+chapters, drop caps, real small caps, footnotes at the page foot, and precise font handling.
 
-Plan (decision 0003, made in step M0.7): **Typst** (Apache-2.0, Rust, `typst` 0.15.x on
-crates.io), embedded as a library in `book-typeset`:
+The plan first proposed embedding an open-source typesetting engine (pinned at 0.15.1) in
+`book-typeset`, with a spike in M0.7 to prove it. The spike failed: the engine does not compile
+against the core's patched PDF libraries (decision 0003). Print is therefore built on the core,
+as the plan's fallback said:
 
-- **No markup from user text.** Book writes the book as JSON data (sections, blocks, marks, notes,
-  images, the edition's settings and the design's values) and compiles a fixed Typst template that
-  reads it. The author's text is data, never code, so no text can run as markup.
-- **A closed world.** Book's own `World`: fonts only from `assets/fonts/` and fonts the user added
-  to the project; files only from the project; no package downloads, no network, no system fonts
-  unless the user turns them on; the document date set from the project, so output is
-  reproducible.
-- **Outputs.** PDF through the engine's PDF writer (tagged PDF and PDF/UA-1 and PDF/A options),
-  page images through its renderer for the preview, and the page map (which section and block
-  starts on which page) for the contents, the ebook page list and preflight links.
-- **Pinned and thin.** The engine version is pinned exactly; upgrades are their own step behind
-  the golden files. Everything engine-specific stays in `book-typeset`, so another engine could
-  replace it.
-- **Upstream rules.** The engine project does not accept machine-written contributions. Gaps are
-  worked around in Book or recorded as blocked; nothing is sent upstream from this project's
-  agents.
-- **Core.** `book-typeset` is a `core-candidate` (C5). Core decision 0002 expects a typesetting
-  engine to come into the core as `jcj-typeset`; that happens when a second app (Manuscript's
-  standard manuscript PDF, say) wants it, with its own core decision record.
-
-The engine's PDF writer (`typst-pdf` 0.15.1) needs `krilla` 0.8.2 and its renderer
-(`typst-render`) needs `hayro-interpret` 0.7: the versions the core's patch block replaces with
-craft-libs' copies, so the engine builds against those copies. The spike in M0.7 must show, before
-M5 starts: the engine compiles with the core's patch block and its PDFs and page images are
-correct with the patched copies, its dependency tree passes
-`cargo xtask licenses` and `cargo deny check licenses`, one public-domain chapter typesets in a
-designed layout, and build time and target size are recorded. If any of these fails, the
-fallback is recorded in decision 0003 and this plan changes: book pagination on `jcj-layout`
-with an optimal-fit line-breaking pass in `book-typeset`, and footnotes as endnotes in print until
-the core plans them.
+- **A print document.** `book-typeset` turns the book and the design's values for an edition into
+  a document in the core's model (`jcj-doc`): a section per opening, mirrored margins, running
+  heads on facing pages, folios, small caps, drop caps, hyphenation, widow and orphan control.
+  The author's text is only ever the text of runs, never instructions.
+- **The core lays it out and writes it.** `jcj-layout` paginates; `jcj-output` writes the PDF
+  (fonts embedded, tagged, the project's date, so output is reproducible) and draws the page
+  images for the preview; the page map (which section starts on which page) comes from the
+  layout.
+- **Book's own passes.** Right-hand chapter starts (blank pages added by leaf, not by page
+  number), the gutter from the page count, and an optimal-fit line-breaking pass where the core's
+  measuring allows it, each laying out again until stable (at most four passes).
+- **Fonts** only from `assets/fonts/` and fonts the user added to the project; no system fonts.
+- **Notes.** The core's layout places footnotes at the page foot; print notes are endnotes per
+  chapter in 0.1 and footnotes from R2.4.
+- **Core.** `book-typeset` is a `core-candidate` (C5): a book layer over the core's layout.
+  Core decision 0002 expects a typesetting layer to come into the core as `jcj-typeset`; that
+  happens when a second app wants it. What the core's layout or PDF writer lacks is an additive
+  core change or recorded as blocked.
+- **The engine, later.** If a person moves the core's patch block so a published engine release
+  builds against it, decision 0003 says how to revisit; nothing in Book depends on that.
 
 ### 5.7 The ebook writer and notes
 
@@ -426,7 +416,7 @@ My Book.wsbk/
   source.wsm/             an owned source (section 6.3), when the book was imported
   assets/                 cover images, pictures added in Book, fonts the user added (each with
                           its license file)
-  builds/<edition>.json   the last build's record: page map, word checksum, engine and design
+  builds/<edition>.json   the last build's record: page map, word checksum, core and design
                           versions (for "changed since last export")
   .recovery/              unsaved work while the app runs
 ```
@@ -473,7 +463,7 @@ orphan rules; chapter opening (sink, number style and placement, title and subti
 ornament, image area, first-line treatment: drop cap, small-caps lead-in or none); scene-break
 style (ornament glyph, image, or space with a small-caps restart); part page; running heads and
 folios and the pages that suppress them; front and back matter styles; and the ebook mapping
-(the same choices as conservative CSS). A design is data, never code: the Typst template and the
+(the same choices as conservative CSS). A design is data, never code: the print document and the
 CSS writer read its values. Built-in designs are ours, each with a golden PDF and EPUB.
 
 ## 7. Features by release
@@ -546,7 +536,7 @@ novels; **0.3** (R3) = designs, series and standards; **1.0** (R4) = publishing 
 | PRT-11 | Large-print variant | One click from any design (16 pt and up) | 0.3 |
 | PRT-12 | Tagged and archival PDF | PDF/UA-1 tagging; PDF/A-2b | 0.3 |
 | PRT-13 | Proof PDF | Watermark and line numbers for proofreading | 0.3 |
-| PRT-14 | PDF/X | When the engine supports it; blocked upstream until then (section 12) | after 1.0 |
+| PRT-14 | PDF/X | When the core's PDF writer supports it; blocked upstream until then (section 12) | after 1.0 |
 
 ### Ebook
 
@@ -651,7 +641,7 @@ Section 5.8.
 
 | Milestone | Release | Result | State |
 | --- | --- | --- | --- |
-| M0 Foundations | – | Repository, rules, spec, brand, fixtures, core issues, engine spike | in progress (M0.1–M0.6 done) |
+| M0 Foundations | – | Repository, rules, spec, brand, fixtures, core issues, engine spike | done (the spike took the fallback, decision 0003) |
 | M1 Project | 0.1 | Format, sources, saving, outline | |
 | M2 Import | 0.1 | Verifier, imports, structure detection, cleanup review | |
 | M3 Structure | 0.1 | Front and back matter, chapters and parts, metadata, editions, fixes | |
@@ -730,7 +720,8 @@ features, labelled `core-candidate` where the work starts here; link each from s
 `docs/core-candidates.md`.
 - Done when: every row of 5.5 has an issue link.
 
-**M0.7 `m0/engine`**: the typesetting spike of section 5.6 in `book-typeset`: the engine at an exact
+**M0.7 `m0/engine`** (done; the spike failed and the fallback was taken, decision 0003): the
+typesetting spike of section 5.6 in `book-typeset`: the engine at an exact
 version, Book's closed `World`, the JSON-data template with one design's body and chapter opening,
 one public-domain chapter to PDF and page images. Records build time, added target size and the
 licenses of the new dependency tree. Decision 0003 (the engine, how it is embedded, the fallback).
@@ -885,7 +876,7 @@ first chapter (a placeholder until M5.1 renders, then the real first page).
 book view, notes printed as endnotes until R2's footnotes, images inline and full width with alt
 text carried for tagging, the page map.
 - Tests: every fixture typeset and its PDF checked letter by letter against the source; the
-  engine's own syntax as book text prints literally; the page map points every section at the
+  text that looks like markup or field codes prints literally; the page map points every section at the
   page where it starts.
 - Done when: those pass.
 
@@ -934,7 +925,7 @@ through the core's reader and checked word for word; golden EPUB structure per d
 
 ### M7 Preview
 
-**M7.1 `m7/print-preview`**: PRV-1: spreads from the engine's page images, trim, margin and bleed
+**M7.1 `m7/print-preview`**: PRV-1: spreads from the core's page images, trim, margin and bleed
 guides, zoom, jump between a page and its section; background builds that never block the
 interface; only pages in view drawn.
 - Tests: through the egui harness, a page click opens its section and back; a frame stays under
@@ -1036,7 +1027,7 @@ v0.1 test still passes.
 | R3.2 `r3/large-print` | The large-print variant of any design (PRT-11) | 16 pt and up on every design; preflight passes |
 | R3.3 `r3/box-sets` | Box sets (STR-11) | Each book keeps its matter; one main contents; word checks per book |
 | R3.4 `r3/epub-import` | EPUB import (IMP-9) | An exported EPUB imports back word for word |
-| R3.5 `r3/standards` | Tagged PDF/UA-1 and PDF/A-2b (PRT-12) | Tags and metadata present; the standards' validator where installed |
+| R3.5 `r3/standards` | Tagged PDF/UA-1 and PDF/A-2b (PRT-12), through the core's PDF writer (tagged already; PDF/A as a core change, or recorded as blocked) | Tags and metadata present; the standards' validator where installed |
 | R3.6 `r3/proof` | Proof PDFs (PRT-13) | Watermark and line numbers present; never the default export |
 | R3.7 `r3/close` | Polish from use, CHANGELOG for 0.3.0 | The v0.1 test and the full `cargo xtask ci` |
 
@@ -1049,7 +1040,7 @@ v0.1 test still passes.
 | R4.3 `r4/series` | Series view (META-4) | "Also by" built from the series; one design across the books |
 | R4.4 `r4/isbns` | ISBN list (META-5; C11 promoted if the table is needed) | Each ISBN used once; checksums |
 | R4.5 `r4/onix` | ONIX for Books 3.0 export (META-6) | The record validates against the published schema's structure |
-| R4.6 `r4/engine` | The engine moved to its newest release | Every golden file compared; changes reviewed and recorded |
+| R4.6 `r4/engine` | Print moved to the newest core release's layout | Every golden file compared; changes reviewed and recorded |
 | R4.7 `r4/close` | CHANGELOG for 1.0.0, guide complete | The v0.1 test and the full `cargo xtask ci` |
 
 ## 11. Testing and quality gates
@@ -1062,7 +1053,7 @@ v0.1 test still passes.
 | Word for word | Every importer and exporter on every fixture: import against source; PDF letter by letter; EPUB read back | Every step touching them |
 | Golden output | Print PDF text, page breaks and page boxes; EPUB structure; per design on the v0.1 test books | Every step touching print, ebook or designs |
 | Reproducible | Every build twice, same bytes | Every step touching print or ebook |
-| No markup injection | Book text containing the engine's syntax prints literally | Every step touching `book-typeset` |
+| No markup injection | Book text that looks like markup or field codes prints literally | Every step touching `book-typeset` |
 | Data safety | Crash injection during save; damaged and hostile files (sizes, depth, counts, bad UTF-8, broken zip, hostile DOCX and EPUB) | Every step touching files |
 | Never writes Manuscript | Every test that uses a linked source checks the Manuscript folder's bytes are unchanged | Every step touching sources |
 | Scale | A 300,000-word book: opens under 2 s, typesets a 6 × 9 paperback under 30 s, first preview page under 1 s after a design change (recorded in `docs/performance.md`) | Each milestone from M5 |
@@ -1077,9 +1068,9 @@ never committed.
 | Risk | Impact | Mitigation |
 | --- | --- | --- |
 | Changing an author's words | Fatal for trust | Word-for-word checks on every import and export; cleanup listed and reversible; linked sources never written |
-| The engine does not fit (licenses, the core's `krilla` patch, build size) | Print pipeline rework | The M0.7 spike decides before M5; fallback written in decision 0003 |
-| The engine is pre-1.0 and changes between releases | Upgrade churn | Exact pin; upgrades are their own step behind golden files; the engine stays inside `book-typeset` |
-| The engine's project does not accept machine-written contributions | Gaps cannot be fixed upstream by this project's agents | Work around in Book or record as blocked; people may contribute by hand |
+| The embedded engine did not fit the core's patched PDF libraries | Print on the core's layout instead (decision 0003) | Done in M0.7; Book's passes add what a book needs; gaps are core changes or recorded as blocked |
+| The core's layout changes between releases | Print output moves | Golden files; core moves are their own step (R4.6) |
+| Word-processor layout falls short of book typography | Lower quality than a typesetting engine | Book's own passes (right-hand starts, gutter, optimal-fit breaking); designs reviewed by a person; revisit decision 0003 if the engine becomes buildable |
 | No PDF/X output | Some print services ask for PDF/X | Most print-on-demand services take plain PDF with embedded fonts; PDF/X recorded as blocked upstream (PRT-14), not waited on |
 | Manuscript has no release tags yet | Book pins a non-release tag (`book-view-1`) | Decision 0001 records it; Book moves to a release tag when a step needs one |
 | Two copies of the core (Book ahead of Manuscript's pin) | Slower builds, more disk | No `jcj-` types cross the boundary; request Manuscript to move; move Book's Manuscript reference when one exists |
@@ -1105,8 +1096,9 @@ None open for the build. Answered on 2026-11-24 (decisions 0001 and 0003 record 
 2. **Manuscript reference.** Book depends on Manuscript's tag `book-view-1` (commit `952d226`), a
    non-release tag for the book view; it passes the core's source rules once C10 lists
    Manuscript's address.
-3. **The typesetting engine** is embedded in Book (`book-typeset`, core-candidate C5), not in the
-   core yet (section 5.6).
+3. **The typesetting engine** was to be embedded in Book (`book-typeset`, core-candidate C5), not in the
+   core yet (section 5.6). The spike failed against the core's patched PDF libraries; print is built on the core
+   instead (decision 0003).
 4. **Core-candidates** each have a core issue; `docs/core-candidates.md` is the index here.
 5. **Format versions**: version 1 is extended in place until Book's first release tag (section
    6.1).
@@ -1123,7 +1115,7 @@ are re-checked before each is added; `cargo xtask licenses` and `cargo deny` enf
 
 | Project | Use | License | When |
 | --- | --- | --- | --- |
-| [typst](https://crates.io/crates/typst), `typst-pdf`, `typst-render` | Print typesetting, PDF, page images (section 5.6) | Apache-2.0 | M0.7 |
+| [typst](https://crates.io/crates/typst), `typst-pdf`, `typst-render` | Not used: proposed for print, failed the M0.7 spike against the core's patched PDF libraries (decision 0003) | Apache-2.0 | – |
 | [toml](https://crates.io/crates/toml) | `book.toml`, designs, print profiles (already in the core's lock file) | MIT OR Apache-2.0 | M1.1 |
 | [uuid](https://crates.io/crates/uuid) | Ids for Book's own elements and offers | MIT OR Apache-2.0 | M1.1 |
 | [zip](https://crates.io/crates/zip) | `.wsbkz` and EPUB packing, at the core's version and with its reading rules | MIT | M1.3 |

@@ -17,3 +17,4 @@ fonts; everywhere else they go by role names.
 
 | Path | Role | Family | Source | License |
 | --- | --- | --- | --- | --- |
+| `assets/fonts/classic-serif/` | Classic serif (regular, italic, bold, bold italic) | EB Garamond | https://github.com/octaviopardo/EBGaramond12 (static TTF, fetched 2026-11-24) | OFL-1.1 (`OFL.txt` beside the files) |

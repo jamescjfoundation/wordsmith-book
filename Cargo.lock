@@ -20,7 +20,7 @@ dependencies = [
  "accesskit",
  "accesskit_consumer",
  "atspi-common",
- "phf",
+ "phf 0.14.0",
  "serde",
  "zvariant",
 ]
@@ -522,6 +522,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "brotli"
+version = "8.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5cc91aac060a7a1e25823bdccbfb6af1875b88f17c6daac97894eed8207166b3"
+dependencies = [
+ "alloc-no-stdlib 2.0.4",
+ "alloc-stdlib",
+ "brotli-decompressor 5.0.3",
+]
+
+[[package]]
 name = "brotli-decompressor"
 version = "5.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -898,6 +909,8 @@ name = "craft-pdf"
 version = "0.1.0"
 source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
 dependencies = [
+ "hayro-interpret",
+ "hayro-syntax",
  "krilla",
  "thiserror 2.0.21",
 ]
@@ -1823,6 +1836,78 @@ dependencies = [
 ]
 
 [[package]]
+name = "hayro-ccitt"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9f4d0e94ddd48749f06bbe4e5389fb9799a0c45bcaf00495042076ef05e3241a"
+
+[[package]]
+name = "hayro-cmap"
+version = "0.1.0"
+source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
+dependencies = [
+ "brotli",
+ "hayro-postscript",
+]
+
+[[package]]
+name = "hayro-interpret"
+version = "0.7.0"
+source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
+dependencies = [
+ "bitflags 2.13.2",
+ "hayro-cmap",
+ "hayro-syntax",
+ "kurbo",
+ "moxcms",
+ "phf 0.13.1",
+ "rustc-hash 2.1.3",
+ "siphasher",
+ "skrifa 0.47.0",
+ "smallvec",
+ "yoke",
+]
+
+[[package]]
+name = "hayro-jbig2"
+version = "0.3.0"
+source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
+dependencies = [
+ "fearless_simd",
+ "hayro-ccitt",
+]
+
+[[package]]
+name = "hayro-jpeg2000"
+version = "0.3.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c75ab947623ef4ccaa7acf0579edf7cbb5a73838e3839a7be73335e522f433a1"
+dependencies = [
+ "fearless_simd",
+]
+
+[[package]]
+name = "hayro-postscript"
+version = "0.1.0"
+source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
+
+[[package]]
+name = "hayro-syntax"
+version = "0.7.2"
+source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
+dependencies = [
+ "flate2",
+ "hayro-ccitt",
+ "hayro-jbig2",
+ "hayro-jpeg2000",
+ "memchr",
+ "rustc-hash 2.1.3",
+ "smallvec",
+ "stringprep",
+ "zune-jpeg",
+]
+
+[[package]]
 name = "hermit-abi"
 version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1973,10 +2058,10 @@ dependencies = [
 
 [[package]]
 name = "jcj-doc"
-version = "0.1.6"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.6#757af2a5e31eed0b0f362d8434c9ccfe71606410"
+version = "0.1.7"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.7#7fae60185cf8b5c02a3b429cde2b752c8f6bbd26"
 dependencies = [
- "jcj-upstream 0.1.6",
+ "jcj-upstream 0.1.7",
  "serde",
  "serde_json",
 ]
@@ -1991,13 +2076,24 @@ dependencies = [
 
 [[package]]
 name = "jcj-layout"
-version = "0.1.6"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.6#757af2a5e31eed0b0f362d8434c9ccfe71606410"
+version = "0.1.7"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.7#7fae60185cf8b5c02a3b429cde2b752c8f6bbd26"
 dependencies = [
- "jcj-doc 0.1.6",
- "jcj-upstream 0.1.6",
+ "jcj-doc 0.1.7",
+ "jcj-upstream 0.1.7",
  "log",
  "serde_json",
+]
+
+[[package]]
+name = "jcj-output"
+version = "0.1.7"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.7#7fae60185cf8b5c02a3b429cde2b752c8f6bbd26"
+dependencies = [
+ "jcj-doc 0.1.7",
+ "jcj-layout",
+ "jcj-upstream 0.1.7",
+ "kurbo",
 ]
 
 [[package]]
@@ -2017,13 +2113,13 @@ dependencies = [
 
 [[package]]
 name = "jcj-shell"
-version = "0.1.6"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.6#757af2a5e31eed0b0f362d8434c9ccfe71606410"
+version = "0.1.7"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.7#7fae60185cf8b5c02a3b429cde2b752c8f6bbd26"
 dependencies = [
  "egui",
  "image",
  "jcj-theme",
- "jcj-upstream 0.1.6",
+ "jcj-upstream 0.1.7",
  "log",
  "serde",
  "serde_json",
@@ -2031,8 +2127,8 @@ dependencies = [
 
 [[package]]
 name = "jcj-theme"
-version = "0.1.6"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.6#757af2a5e31eed0b0f362d8434c9ccfe71606410"
+version = "0.1.7"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.7#7fae60185cf8b5c02a3b429cde2b752c8f6bbd26"
 dependencies = [
  "egui",
  "jcj-layout",
@@ -2063,11 +2159,12 @@ dependencies = [
 
 [[package]]
 name = "jcj-upstream"
-version = "0.1.6"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.6#757af2a5e31eed0b0f362d8434c9ccfe71606410"
+version = "0.1.7"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.7#7fae60185cf8b5c02a3b429cde2b752c8f6bbd26"
 dependencies = [
  "craft-atomic 0.1.0 (git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b)",
  "craft-dialogs",
+ "craft-pdf",
  "craft-proof",
  "craft-update",
  "wordcraft-control-key",
@@ -2907,13 +3004,33 @@ dependencies = [
 
 [[package]]
 name = "phf"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c1562dc717473dbaa4c1f85a36410e03c047b2e7df7f45ee938fbef64ae7fadf"
+dependencies = [
+ "phf_macros 0.13.1",
+ "phf_shared 0.13.1",
+]
+
+[[package]]
+name = "phf"
 version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "010378780309880b08997fae13be7834dba947d36393bd372f2b1556deb2a2f6"
 dependencies = [
- "phf_macros",
- "phf_shared",
+ "phf_macros 0.14.0",
+ "phf_shared 0.14.0",
  "serde",
+]
+
+[[package]]
+name = "phf_generator"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "135ace3a761e564ec88c03a77317a7c6b80bb7f7135ef2544dbe054243b89737"
+dependencies = [
+ "fastrand",
+ "phf_shared 0.13.1",
 ]
 
 [[package]]
@@ -2923,7 +3040,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aeb62e0959d5a1bebc965f4d15d9e2b7cea002b6b0f5ba8cde6cc26738467100"
 dependencies = [
  "fastrand",
- "phf_shared",
+ "phf_shared 0.14.0",
+]
+
+[[package]]
+name = "phf_macros"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "812f032b54b1e759ccd5f8b6677695d5268c588701effba24601f6932f8269ef"
+dependencies = [
+ "phf_generator 0.13.1",
+ "phf_shared 0.13.1",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
 ]
 
 [[package]]
@@ -2932,11 +3062,20 @@ version = "0.14.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5fa8d0ca26d424d27630da600c6624696e7dec8bf7b3b492b383c5dc49e5e085"
 dependencies = [
- "phf_generator",
- "phf_shared",
+ "phf_generator 0.14.0",
+ "phf_shared 0.14.0",
  "proc-macro2",
  "quote",
  "syn 2.0.119",
+]
+
+[[package]]
+name = "phf_shared"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e57fef6bc5981e38c2ce2d63bfa546861309f875b8a75f092d1d54ae2d64f266"
+dependencies = [
+ "siphasher",
 ]
 
 [[package]]
@@ -3785,6 +3924,17 @@ name = "strict-num"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6637bab7722d379c8b41ba849228d680cc12d0a45ba1fa2b48f2a30577a06731"
+
+[[package]]
+name = "stringprep"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b4df3d392d81bd458a8a621b8bffbd2302a12ffe288a9d931670948749463b1"
+dependencies = [
+ "unicode-bidi",
+ "unicode-normalization",
+ "unicode-properties",
+]
 
 [[package]]
 name = "subsetter"
@@ -5202,6 +5352,12 @@ dependencies = [
 [[package]]
 name = "wordsmith-book-typeset"
 version = "0.1.0"
+dependencies = [
+ "jcj-doc 0.1.7",
+ "jcj-layout",
+ "jcj-output",
+ "wordsmith-book-design",
+]
 
 [[package]]
 name = "wordsmith-book-ui"
@@ -5649,28 +5805,3 @@ dependencies = [
  "syn 3.0.10",
  "winnow",
 ]
-
-[[patch.unused]]
-name = "hayro-cmap"
-version = "0.1.0"
-source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
-
-[[patch.unused]]
-name = "hayro-interpret"
-version = "0.7.0"
-source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
-
-[[patch.unused]]
-name = "hayro-jbig2"
-version = "0.3.0"
-source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
-
-[[patch.unused]]
-name = "hayro-postscript"
-version = "0.1.0"
-source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"
-
-[[patch.unused]]
-name = "hayro-syntax"
-version = "0.7.2"
-source = "git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b#6e03f65bf45181db77ba6229716e6624db9eb25b"

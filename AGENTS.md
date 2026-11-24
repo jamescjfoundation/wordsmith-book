@@ -159,9 +159,9 @@ and every finished step adds a line to `docs/progress.md`.
    and recorded in `docs/golden.md`.
 8. **Fixtures** are public-domain texts or written for the test, made by scripts in `tools/`
    (standard library only) or by `cargo xtask fixtures`, and recorded in `docs/fixtures.md`.
-9. **The typesetting engine stays in `book-typeset`.** Book's text reaches it only as data,
-   never as markup; its package manager and network access stay off. Nothing is sent to the
-   engine's project by this project's agents.
+9. **Print stays in `book-typeset`** (decision 0003): it builds a print document in the core's
+   model and the core lays it out and writes it. Book's text is only ever the text of runs, never
+   instructions; print uses only Book's bundled fonts and fonts added to the project.
 
 ### Where each crate's code goes
 
@@ -169,7 +169,7 @@ and every finished step adds a line to `docs/progress.md`.
 | --- | --- | --- | --- |
 | `book-model` | 1 | Editions, design choices, overrides and fixes keyed by ids, metadata additions, cleanup decisions; no files, no interface | `wordsmith-manuscript-model` (types only), `jcj-doc`, `serde` |
 | `book-format`, `book-design` | 2 | The project folder, the source, offers; the design schema, built-in designs, mixing | the model, `wordsmith-manuscript-format`, `jcj-project` |
-| `book-import`, `book-typeset`, `book-epub` | 3 | Imports and structure detection; print typesetting (the only crate that uses the engine); the ebook writer | layers 1–2, `jcj-interchange`, `jcj-layout`, `jcj-output`, `jcj-proof`, `jcj-features` |
+| `book-import`, `book-typeset`, `book-epub` | 3 | Imports and structure detection; print typesetting on the core's layout (decision 0003); the ebook writer | layers 1–2, `jcj-interchange`, `jcj-layout`, `jcj-output`, `jcj-proof`, `jcj-features` |
 | `book-check` | 4 | Preflight, print profiles, external validators | layers 1–3 |
 | `book-ui` | 5 | Views, commands, ribbon tabs, panels, agent tools | everything below, `jcj-engine`, `jcj-shell`, `jcj-theme`, `jcj-agents` |
 | `apps/*` | 6 | The desktop app, the command line | the crates above |

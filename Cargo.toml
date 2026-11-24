@@ -26,6 +26,7 @@ publish = false
 [workspace.dependencies]
 # Ours
 wordsmith-book-model = { path = "crates/book-model" }
+wordsmith-book-design = { path = "crates/book-design" }
 wordsmith-book-ui = { path = "crates/book-ui" }
 
 # Wordsmith Manuscript's book view, at the tag of decision 0001 (book view version 1).
@@ -34,7 +35,10 @@ wordsmith-manuscript-format = { git = "https://github.com/jamescjfoundation/word
 
 # The core, at a release tag. Apps use only jcj- interface crates (never jcj-upstream, WordCraft or
 # craft-libs); `cargo xtask layers` checks it. Move all of them together.
-jcj-shell = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.6" }
+jcj-doc = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.7" }
+jcj-layout = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.7" }
+jcj-output = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.7" }
+jcj-shell = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.7" }
 image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
 # Tests of the views (egui's test harness, at the core's egui fork through the patch block).
 egui_kittest = { version = "0.37", default-features = false }
