@@ -112,7 +112,10 @@ pub struct Profile {
 }
 
 /// The built-in profiles, by id.
-pub const FILES: [(&str, &str); 2] = [("pod-paperback", include_str!("../../../assets/print/pod-paperback.toml")), ("generic-pdf", include_str!("../../../assets/print/generic-pdf.toml"))];
+pub const FILES: [(&str, &str); 2] = [
+    ("pod-paperback", include_str!("../../../assets/print/pod-paperback.toml")),
+    ("generic-pdf", include_str!("../../../assets/print/generic-pdf.toml")),
+];
 
 /// Read a profile file.
 pub fn read(text: &str) -> Result<Profile, String> {
@@ -146,7 +149,11 @@ impl Profile {
     /// table. Unknown trims fall back to the profile's first.
     pub fn geometry(&self, edition: &Edition) -> Result<Geometry, String> {
         let t = self.trim(&edition.trim).ok_or_else(|| format!("the {} profile has no “{}” trim", self.name.to_lowercase(), edition.trim))?;
-        Ok(Geometry { trim: (t.width, t.height), margins: (t.margins[0], t.margins[1], t.margins[2], t.margins[3]), gutter: self.gutter.iter().map(|g| (g.pages, g.inches)).collect() })
+        Ok(Geometry {
+            trim: (t.width, t.height),
+            margins: (t.margins[0], t.margins[1], t.margins[2], t.margins[3]),
+            gutter: self.gutter.iter().map(|g| (g.pages, g.inches)).collect(),
+        })
     }
 
     /// The spine width for `pages` pages of `paper`, inches.

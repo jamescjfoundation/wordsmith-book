@@ -31,7 +31,13 @@ pub struct Print {
 
 /// Build `edition` of the project from `book` (the source's view, with waiting fixes applied),
 /// the project's own designs (`designs`, by id), and `images` (a picture's bytes by its path).
-pub fn print(project: &BookProject, designs: &BTreeMap<String, String>, book: &Book, edition: &Edition, images: &dyn Fn(&str) -> Option<Vec<u8>>) -> Result<Print, String> {
+pub fn print(
+    project: &BookProject,
+    designs: &BTreeMap<String, String>,
+    book: &Book,
+    edition: &Edition,
+    images: &dyn Fn(&str) -> Option<Vec<u8>>,
+) -> Result<Print, String> {
     if !edition.format.is_print() {
         return Err(format!("the {} is not a printed edition", edition.name.to_lowercase()));
     }

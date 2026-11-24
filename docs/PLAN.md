@@ -615,8 +615,8 @@ what kind of source (rule 4 of section 4). Profiles at 0.1: `pod-paperback` and 
 
 ### 9.2 The print pipeline
 
-Book → JSON data + design values + profile → the fixed template → pages → PDF and page images and
-the page map. The gutter depends on the page count, so a build lays out, reads the count, sets the
+Book → the assembled book, the design's values and the profile → a print document in the core's
+model → the core's layout → pages → PDF and page images and the page map (decision 0003). The gutter depends on the page count, so a build lays out, reads the count, sets the
 gutter and lays out again until the count is stable (at most four passes, tested; changed from three because right-hand starts, the gutter and the
 contents' page numbers each settle in turn on the core's layout, decision 0003).
 

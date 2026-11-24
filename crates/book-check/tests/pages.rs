@@ -23,7 +23,8 @@ fn gulliver_print(design: &str, trim: &str) -> build::Print {
 /// Each page's text above the body (heads) and below it (feet), and whether it prints anything.
 fn bands(t: &wordsmith_book_typeset::Typeset) -> Vec<(String, String, usize)> {
     let pdf = t.pdf().unwrap();
-    let pages = jcj_output::read_pages(&pdf, &jcj_output::ReadLimits { max_input_bytes: 256 << 20, max_pages: 10_000, max_glyphs_per_page: 20_000 }).unwrap();
+    let pages =
+        jcj_output::read_pages(&pdf, &jcj_output::ReadLimits { max_input_bytes: 256 << 20, max_pages: 10_000, max_glyphs_per_page: 20_000 }).unwrap();
     let boxes = jcj_layout::page_boxes(t.layout());
     pages
         .iter()
@@ -39,7 +40,11 @@ fn bands(t: &wordsmith_book_typeset::Typeset) -> Vec<(String, String, usize)> {
                     foot.push_str(&text);
                 }
             }
-            (head.trim().to_owned(), foot.trim().to_owned(), p.glyphs.iter().filter(|g| g.text.as_deref().is_some_and(|t| !t.trim().is_empty())).count())
+            (
+                head.trim().to_owned(),
+                foot.trim().to_owned(),
+                p.glyphs.iter().filter(|g| g.text.as_deref().is_some_and(|t| !t.trim().is_empty())).count(),
+            )
         })
         .collect()
 }
