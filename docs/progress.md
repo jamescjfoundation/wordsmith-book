@@ -11,6 +11,7 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
 | 2026-11-24 | M0.3 m0/spec | `docs/SPEC.md`: behavior for every 0.1 feature id (indexed), each statement marked Verified, Sourced or Designed, standards cited by address, service rules recorded generically; awaiting a person's review | 31 |
 | 2026-11-24 | M0.4 m0/brand | `assets/brand/book/`: tokens (light, dark, extra-dark), the mark and app icons drawn by `tools/brand-icons.py`; the window uses the tokens, the mark and the icon; interface fonts are the core's bundled OFL faces | 33 |
 | 2026-11-24 | M0.5 m0/fixtures | Three public-domain novels as text (*Waverley*, parts, notes and verse; *Gulliver's Travels*; *Middlemarch*, 316,000 words for scale), DOCX, ODT, RTF and Markdown with real notes and a DOCX shaped like an online word processor's download, all by `tools/make-fixtures.py`; `docs/fixtures.md` and a test that every fixture is listed; files from real word processors to add by a person | 34 |
+| 2026-11-24 | M0.6 m0/core-issues | Core issues opened for C2, C4 to C9 (open-source-core #17 to #23; C5, C6 and C8 labelled `core-candidate`) beside C10's #15; every row of plan 5.5 links its issue; `docs/core-candidates.md` lists them all; M0 done | 34 |
 
 ## Waiting on a person
 

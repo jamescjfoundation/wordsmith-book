@@ -315,15 +315,15 @@ a person in Book's `docs/progress.md`.
 | Id | Change | Kind | Needed by | Core issue |
 | --- | --- | --- | --- | --- |
 | C1 | Word-for-word verification: the words of a source and a result in reading order, compared, first difference with context | Promote (Manuscript's `manuscript-io::verify`) | M2.1 | [#10](https://github.com/jamescjfoundation/open-source-core/issues/10) |
-| C2 | Word-level comparison of two texts (paragraphs matched, then words), beside `jcj-features` compare | Promote (Manuscript's `manuscript-model::diff`) | M2.4 | new |
+| C2 | Word-level comparison of two texts (paragraphs matched, then words), beside `jcj-features` compare | Promote (Manuscript's `manuscript-model::diff`) | M2.4 | [#17](https://github.com/jamescjfoundation/open-source-core/issues/17) |
 | C3 | A tree widget with drag and drop | Promote (Manuscript's binder tree) | M1.4 | [#6](https://github.com/jamescjfoundation/open-source-core/issues/6) |
-| C4 | An interface translation catalog, and the shell's own texts through it (English unchanged by default) | Promote (Manuscript's `manuscript-ui::i18n`) | R2 (ACC-3) | new |
-| C5 | A typesetting engine for books (optimal-fit line breaking, hyphenation, page templates, footnotes, tagged PDF) | Build in app first (`book-typeset`), `core-candidate`; promoted as `jcj-typeset` when a second app uses it (section 5.6) | M0.7, M5 | new |
-| C6 | An EPUB 3 package layer (container, package document with accessibility metadata, navigation with landmarks and page list, NCX, deterministic zip) | Build in app first (`book-epub`), `core-candidate` | M6.1 | new |
-| C7 | The core's EPUB writer drops notes | Core fix, additive: notes written as numbered endnotes per chapter with links both ways, as Manuscript's reading copy does by hand | R2 | new |
-| C8 | Structure detection for imports: sections by heading level and title patterns ("Chapter 12", "Part Two"), scene-break paragraphs | Build in app first (`book-import`), `core-candidate`; Manuscript has its own | M2.2 | new |
-| C9 | PDF facts for preflight: page boxes (media, trim, bleed), fonts and whether embedded, annotations, images and their resolution | Core, additive to `jcj_output::read` | M8.1 | new |
-| C10 | `deny.toml` allows `https://github.com/jamescjfoundation/wordsmith-manuscript` as a git source | Core, additive (synced settings) | M0.1 | new |
+| C4 | An interface translation catalog, and the shell's own texts through it (English unchanged by default) | Promote (Manuscript's `manuscript-ui::i18n`) | R2 (ACC-3) | [#18](https://github.com/jamescjfoundation/open-source-core/issues/18) |
+| C5 | A typesetting engine for books (optimal-fit line breaking, hyphenation, page templates, footnotes, tagged PDF) | Build in app first (`book-typeset`), `core-candidate`; promoted as `jcj-typeset` when a second app uses it (section 5.6) | M0.7, M5 | [#19](https://github.com/jamescjfoundation/open-source-core/issues/19) |
+| C6 | An EPUB 3 package layer (container, package document with accessibility metadata, navigation with landmarks and page list, NCX, deterministic zip) | Build in app first (`book-epub`), `core-candidate` | M6.1 | [#20](https://github.com/jamescjfoundation/open-source-core/issues/20) |
+| C7 | The core's EPUB writer drops notes | Core fix, additive: notes written as numbered endnotes per chapter with links both ways, as Manuscript's reading copy does by hand | R2 | [#21](https://github.com/jamescjfoundation/open-source-core/issues/21) |
+| C8 | Structure detection for imports: sections by heading level and title patterns ("Chapter 12", "Part Two"), scene-break paragraphs | Build in app first (`book-import`), `core-candidate`; Manuscript has its own | M2.2 | [#22](https://github.com/jamescjfoundation/open-source-core/issues/22) |
+| C9 | PDF facts for preflight: page boxes (media, trim, bleed), fonts and whether embedded, annotations, images and their resolution | Core, additive to `jcj_output::read` | M8.1 | [#23](https://github.com/jamescjfoundation/open-source-core/issues/23) |
+| C10 | `deny.toml` allows `https://github.com/jamescjfoundation/wordsmith-manuscript` as a git source | Core, additive (synced settings) | M0.1 | [#15](https://github.com/jamescjfoundation/open-source-core/issues/15) |
 | C11 | A sortable, editable table widget | Promote (Manuscript's outline table) if editions and the ISBN list need it | R4 | [#7](https://github.com/jamescjfoundation/open-source-core/issues/7) |
 | C12 | The PDF names the app that made it | Not needed by Book: Book's PDFs come from its own engine, which sets the producer. Stays blocked upstream for `jcj-output` | – | [#5](https://github.com/jamescjfoundation/open-source-core/issues/5) |
 
@@ -651,7 +651,7 @@ Section 5.8.
 
 | Milestone | Release | Result | State |
 | --- | --- | --- | --- |
-| M0 Foundations | – | Repository, rules, spec, brand, fixtures, core issues, engine spike | |
+| M0 Foundations | – | Repository, rules, spec, brand, fixtures, core issues, engine spike | in progress (M0.1–M0.6 done) |
 | M1 Project | 0.1 | Format, sources, saving, outline | |
 | M2 Import | 0.1 | Verifier, imports, structure detection, cleanup review | |
 | M3 Structure | 0.1 | Front and back matter, chapters and parts, metadata, editions, fixes | |
