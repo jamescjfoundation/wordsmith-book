@@ -1,0 +1,385 @@
+# package
+identifier = urn:uuid:…
+title = Waverley
+language = en
+creator = Walter Scott
+dcterms:modified = 2026-11-24T00:00:00Z
+schema:accessMode = textual
+schema:accessModeSufficient = textual
+schema:accessibilityFeature = structuralNavigation
+schema:accessibilityFeature = tableOfContents
+schema:accessibilityFeature = readingOrder
+schema:accessibilityHazard = none
+schema:accessibilitySummary = This ebook has a table of contents, landmarks and headings for its structure, and its reading order follows the book. Text can be resized and restyled by the reading system.
+dcterms:conformsTo = EPUB Accessibility 1.1 - WCAG 2.2 Level AA
+a11y:certifiedBy = Walter Scott
+# manifest
+nav.xhtml application/xhtml+xml nav
+toc.ncx application/x-dtbncx+xml
+css/book.css text/css
+text/s001.xhtml application/xhtml+xml
+text/s002.xhtml application/xhtml+xml
+text/s003.xhtml application/xhtml+xml
+text/s004.xhtml application/xhtml+xml
+text/s005.xhtml application/xhtml+xml
+text/s006.xhtml application/xhtml+xml
+text/s007.xhtml application/xhtml+xml
+text/s008.xhtml application/xhtml+xml
+text/s009.xhtml application/xhtml+xml
+text/s010.xhtml application/xhtml+xml
+text/s011.xhtml application/xhtml+xml
+text/s012.xhtml application/xhtml+xml
+text/s013.xhtml application/xhtml+xml
+text/s014.xhtml application/xhtml+xml
+text/s015.xhtml application/xhtml+xml
+text/s016.xhtml application/xhtml+xml
+text/s017.xhtml application/xhtml+xml
+text/s018.xhtml application/xhtml+xml
+text/s019.xhtml application/xhtml+xml
+text/s020.xhtml application/xhtml+xml
+text/s021.xhtml application/xhtml+xml
+text/s022.xhtml application/xhtml+xml
+text/s023.xhtml application/xhtml+xml
+text/s024.xhtml application/xhtml+xml
+text/s025.xhtml application/xhtml+xml
+text/s026.xhtml application/xhtml+xml
+text/s027.xhtml application/xhtml+xml
+text/s028.xhtml application/xhtml+xml
+text/s029.xhtml application/xhtml+xml
+text/s030.xhtml application/xhtml+xml
+text/s031.xhtml application/xhtml+xml
+text/s032.xhtml application/xhtml+xml
+text/s033.xhtml application/xhtml+xml
+text/s034.xhtml application/xhtml+xml
+text/s035.xhtml application/xhtml+xml
+text/s036.xhtml application/xhtml+xml
+text/s037.xhtml application/xhtml+xml
+text/s038.xhtml application/xhtml+xml
+text/s039.xhtml application/xhtml+xml
+text/s040.xhtml application/xhtml+xml
+text/s041.xhtml application/xhtml+xml
+text/s042.xhtml application/xhtml+xml
+text/s043.xhtml application/xhtml+xml
+text/s044.xhtml application/xhtml+xml
+text/s045.xhtml application/xhtml+xml
+text/s046.xhtml application/xhtml+xml
+text/s047.xhtml application/xhtml+xml
+text/s048.xhtml application/xhtml+xml
+text/s049.xhtml application/xhtml+xml
+text/s050.xhtml application/xhtml+xml
+text/s051.xhtml application/xhtml+xml
+text/s052.xhtml application/xhtml+xml
+text/s053.xhtml application/xhtml+xml
+text/s054.xhtml application/xhtml+xml
+text/s055.xhtml application/xhtml+xml
+text/s056.xhtml application/xhtml+xml
+text/s057.xhtml application/xhtml+xml
+text/s058.xhtml application/xhtml+xml
+text/s059.xhtml application/xhtml+xml
+text/s060.xhtml application/xhtml+xml
+text/s061.xhtml application/xhtml+xml
+text/s062.xhtml application/xhtml+xml
+text/s063.xhtml application/xhtml+xml
+text/s064.xhtml application/xhtml+xml
+text/s065.xhtml application/xhtml+xml
+text/s066.xhtml application/xhtml+xml
+text/s067.xhtml application/xhtml+xml
+text/s068.xhtml application/xhtml+xml
+text/s069.xhtml application/xhtml+xml
+text/s070.xhtml application/xhtml+xml
+text/s071.xhtml application/xhtml+xml
+text/s072.xhtml application/xhtml+xml
+text/s073.xhtml application/xhtml+xml
+text/s074.xhtml application/xhtml+xml
+text/s075.xhtml application/xhtml+xml
+text/s076.xhtml application/xhtml+xml
+fonts/classic-serif-regular.ttf font/ttf
+fonts/classic-serif-italic.ttf font/ttf
+fonts/classic-serif-bold.ttf font/ttf
+fonts/classic-serif-bold-italic.ttf font/ttf
+fonts/display-regular.ttf font/ttf
+fonts/display-italic.ttf font/ttf
+fonts/display-bold.ttf font/ttf
+fonts/display-bold-italic.ttf font/ttf
+# spine
+s001
+s002
+nav
+s003
+s004
+s005
+s006
+s007
+s008
+s009
+s010
+s011
+s012
+s013
+s014
+s015
+s016
+s017
+s018
+s019
+s020
+s021
+s022
+s023
+s024
+s025
+s026
+s027
+s028
+s029
+s030
+s031
+s032
+s033
+s034
+s035
+s036
+s037
+s038
+s039
+s040
+s041
+s042
+s043
+s044
+s045
+s046
+s047
+s048
+s049
+s050
+s051
+s052
+s053
+s054
+s055
+s056
+s057
+s058
+s059
+s060
+s061
+s062
+s063
+s064
+s065
+s066
+s067
+s068
+s069
+s070
+s071
+s072
+s073
+s074
+s075
+s076
+# navigation
+Title Page -> text/s001.xhtml#s001
+Volume I. -> text/s003.xhtml#s003
+  Chapter One: CHAPTER I. INTRODUCTORY -> text/s004.xhtml#s004
+  Chapter Two: CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT -> text/s005.xhtml#s005
+  Chapter Three: CHAPTER III. EDUCATION -> text/s006.xhtml#s006
+  Chapter Four: CHAPTER IV. CASTLE-BUILDING -> text/s007.xhtml#s007
+  Chapter Five: CHAPTER V. CHOICE OF A PROFESSION -> text/s008.xhtml#s008
+  Chapter Six: CHAPTER VI. THE ADIEUS OF WAVERLEY -> text/s009.xhtml#s009
+  Chapter Seven: CHAPTER VII. A HORSE-QUARTER IN SCOTLAND -> text/s010.xhtml#s010
+  Chapter Eight: CHAPTER VIII. A SCOTTISH MANOR-HOUSE SIXTY YEARS SINCE -> text/s011.xhtml#s011
+  Chapter Nine: CHAPTER IX. MORE OF THE MANOR-HOUSE AND ITS ENVIRONS -> text/s012.xhtml#s012
+  Chapter Ten: CHAPTER X. ROSE BRADWARDINE AND HER FATHER -> text/s013.xhtml#s013
+  Chapter Eleven: CHAPTER XI. THE BANQUET -> text/s014.xhtml#s014
+  Chapter Twelve: CHAPTER XII. REPENTANCE AND A RECONCILIATION -> text/s015.xhtml#s015
+  Chapter Thirteen: CHAPTER XIII. A MORE RATIONAL DAY THAN THE LAST -> text/s016.xhtml#s016
+  Chapter Fourteen: CHAPTER XIV. A DISCOVERY—WAVERLEY BECOMES DOMESTICATED AT TULLY-VEOLAN -> text/s017.xhtml#s017
+  Chapter Fifteen: CHAPTER XV. A CREAGH, AND ITS CONSEQUENCES -> text/s018.xhtml#s018
+  Chapter Sixteen: CHAPTER XVI. AN UNEXPECTED ALLY APPEARS -> text/s019.xhtml#s019
+  Chapter Seventeen: CHAPTER XVII. THE HOLD OF A HIGHLAND ROBBER -> text/s020.xhtml#s020
+  Chapter Eighteen: CHAPTER XVIII. WAVERLEY PROCEEDS ON HIS JOURNEY -> text/s021.xhtml#s021
+  Chapter Nineteen: CHAPTER XIX. THE CHIEF AND HIS MANSION -> text/s022.xhtml#s022
+  Chapter Twenty: CHAPTER XX. A HIGHLAND FEAST -> text/s023.xhtml#s023
+  Chapter Twenty-One: CHAPTER XXI. THE CHIEFTAIN’S SISTER -> text/s024.xhtml#s024
+  Chapter Twenty-Two: CHAPTER XXII. HIGHLAND MINSTRELSY -> text/s025.xhtml#s025
+  Chapter Twenty-Three: CHAPTER XXIII. WAVERLEY CONTINUES AT GLENNAQUOICH -> text/s026.xhtml#s026
+  Chapter Twenty-Four: CHAPTER XXIV. A STAG-HUNT AND ITS CONSEQUENCES -> text/s027.xhtml#s027
+  Chapter Twenty-Five: CHAPTER XXV. NEWS FROM ENGLAND -> text/s028.xhtml#s028
+  Chapter Twenty-Six: CHAPTER XXVI. AN ECLAIRCISSEMENT -> text/s029.xhtml#s029
+  Chapter Twenty-Seven: CHAPTER XXVII. UPON THE SAME SUBJECT -> text/s030.xhtml#s030
+  Chapter Twenty-Eight: CHAPTER XXVIII. A LETTER FROM TULLY-VEOLAN -> text/s031.xhtml#s031
+  Chapter Twenty-Nine: CHAPTER XXIX. WAVERLEY’S RECEPTION IN THE LOWLANDS AFTER HIS HIGHLAND TOUR -> text/s032.xhtml#s032
+VOLUME II. -> text/s033.xhtml#s033
+  Chapter Thirty: CHAPTER I. SHOWS THAT THE LOSS OF A HORSE’S SHOE MAY BE A SERIOUS INCONVENIENCE -> text/s034.xhtml#s034
+  Chapter Thirty-One: CHAPTER II. AN EXAMINATION -> text/s035.xhtml#s035
+  Chapter Thirty-Two: CHAPTER III. A CONFERENCE AND THE CONSEQUENCE -> text/s036.xhtml#s036
+  Chapter Thirty-Three: CHAPTER IV. A CONFIDANT -> text/s037.xhtml#s037
+  Chapter Thirty-Four: CHAPTER V. THINGS MEND A LITTLE -> text/s038.xhtml#s038
+  Chapter Thirty-Five: CHAPTER VI. A VOLUNTEER SIXTY YEARS SINCE -> text/s039.xhtml#s039
+  Chapter Thirty-Six: CHAPTER VII. AN INCIDENT -> text/s040.xhtml#s040
+  Chapter Thirty-Seven: CHAPTER VIII. WAVERLEY IS STILL IN DISTRESS -> text/s041.xhtml#s041
+  Chapter Thirty-Eight: CHAPTER IX. A NOCTURNAL ADVENTURE -> text/s042.xhtml#s042
+  Chapter Thirty-Nine: CHAPTER X. THE JOURNEY IS CONTINUED -> text/s043.xhtml#s043
+  Chapter Forty: CHAPTER XI. AN OLD AND A NEW ACQUAINTANCE -> text/s044.xhtml#s044
+  Chapter Forty-One: CHAPTER XII. THE MYSTERY BEGINS TO BE CLEARED UP -> text/s045.xhtml#s045
+  Chapter Forty-Two: CHAPTER XIII. A SOLDIER’S DINNER -> text/s046.xhtml#s046
+  Chapter Forty-Three: CHAPTER XIV. THE BALL -> text/s047.xhtml#s047
+  Chapter Forty-Four: CHAPTER XV. THE MARCH -> text/s048.xhtml#s048
+  Chapter Forty-Five: CHAPTER XVI. AN INCIDENT GIVES RISE TO UNAVAILING REFLECTIONS -> text/s049.xhtml#s049
+  Chapter Forty-Six: CHAPTER XVII. THE EVE OF BATTLE -> text/s050.xhtml#s050
+  Chapter Forty-Seven: CHAPTER XVIII. THE CONFLICT -> text/s051.xhtml#s051
+  Chapter Forty-Eight: CHAPTER XIX. AN UNEXPECTED EMBARRASSMENT -> text/s052.xhtml#s052
+  Chapter Forty-Nine: CHAPTER XX. THE ENGLISH PRISONER -> text/s053.xhtml#s053
+  Chapter Fifty: CHAPTER XXI. RATHER UNIMPORTANT -> text/s054.xhtml#s054
+  Chapter Fifty-One: CHAPTER XXII. INTRIGUES OF LOVE AND POLITICS -> text/s055.xhtml#s055
+  Chapter Fifty-Two: CHAPTER XXIII. INTRIGUES OF SOCIETY AND LOVE -> text/s056.xhtml#s056
+  Chapter Fifty-Three: CHAPTER XXIV. FERGUS A SUITOR -> text/s057.xhtml#s057
+  Chapter Fifty-Four: CHAPTER XXV. “TO ONE THING CONSTANT NEVER” -> text/s058.xhtml#s058
+  Chapter Fifty-Five: CHAPTER XXVI. A BRAVE MAN IN SORROW -> text/s059.xhtml#s059
+  Chapter Fifty-Six: CHAPTER XXVII. EXERTION -> text/s060.xhtml#s060
+  Chapter Fifty-Seven: CHAPTER XXVIII. THE MARCH -> text/s061.xhtml#s061
+  Chapter Fifty-Eight: CHAPTER XXIX. THE CONFUSION OF KING AGRAMANT’S CAMP -> text/s062.xhtml#s062
+  Chapter Fifty-Nine: CHAPTER XXX. A SKIRMISH -> text/s063.xhtml#s063
+  Chapter Sixty: CHAPTER XXXI. CHAPTER OF ACCIDENTS -> text/s064.xhtml#s064
+  Chapter Sixty-One: CHAPTER XXXII. A JOURNEY TO LONDON -> text/s065.xhtml#s065
+  Chapter Sixty-Two: CHAPTER XXXIII. WHAT’S TO BE DONE NEXT? -> text/s066.xhtml#s066
+  Chapter Sixty-Three: CHAPTER XXXIV. DESOLATION -> text/s067.xhtml#s067
+  Chapter Sixty-Four: CHAPTER XXXV. COMPARING OF NOTES -> text/s068.xhtml#s068
+  Chapter Sixty-Five: CHAPTER XXXVI. MORE EXPLANATION -> text/s069.xhtml#s069
+  CHAPTER XXXVII -> text/s070.xhtml#s070
+  CHAPTER XXXVIII -> text/s071.xhtml#s071
+  CHAPTER XXXIX -> text/s072.xhtml#s072
+  CHAPTER XL -> text/s073.xhtml#s073
+  Chapter Seventy: CHAPTER XLI. DULCE DOMUM -> text/s074.xhtml#s074
+  CHAPTER XLII -> text/s075.xhtml#s075
+  Chapter Seventy-Two: CHAPTER XLIII. A POSTSCRIPT WHICH SHOULD HAVE BEEN A PREFACE -> text/s076.xhtml#s076
+[titlepage] Title page -> text/s001.xhtml#s001
+[copyright-page] Copyright -> text/s002.xhtml#s002
+[toc] Contents -> nav.xhtml
+[bodymatter] Start of the book -> text/s003.xhtml#s003
+# stylesheet
+/* Made from the book's design; sizes in em so reading settings apply. */
+@font-face { font-family: "book-classic-serif"; font-weight: 400; font-style: normal; src: url("../fonts/classic-serif-regular.ttf"); }
+@font-face { font-family: "book-classic-serif"; font-weight: 400; font-style: italic; src: url("../fonts/classic-serif-italic.ttf"); }
+@font-face { font-family: "book-classic-serif"; font-weight: 700; font-style: normal; src: url("../fonts/classic-serif-bold.ttf"); }
+@font-face { font-family: "book-classic-serif"; font-weight: 700; font-style: italic; src: url("../fonts/classic-serif-bold-italic.ttf"); }
+@font-face { font-family: "book-display"; font-weight: 400; font-style: normal; src: url("../fonts/display-regular.ttf"); }
+@font-face { font-family: "book-display"; font-weight: 400; font-style: italic; src: url("../fonts/display-italic.ttf"); }
+@font-face { font-family: "book-display"; font-weight: 700; font-style: normal; src: url("../fonts/display-bold.ttf"); }
+@font-face { font-family: "book-display"; font-weight: 700; font-style: italic; src: url("../fonts/display-bold-italic.ttf"); }
+body { margin: 0 5%; font-family: "book-classic-serif", serif; }
+p { margin: 0; text-indent: 1.20em; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+h1 + p, h2 + p, h3 + p, h4 + p, header + p, hr + p, blockquote + p, .verse + p, figure + p, p.first, p.centered, .opening p:first-of-type { text-indent: 0; }
+header { text-align: center; margin: 3em 0 2em 0; font-family: "book-display", serif; }
+header .label { margin: 0; text-indent: 0; text-align: center; font-size: 0.9em; font-variant: small-caps; letter-spacing: 0.05em; }
+h1 { font-size: 1.6em; font-weight: normal; margin: 0.3em 0 0 0; }
+header .subtitle { margin: 0.5em 0 0 0; text-indent: 0; text-align: inherit; font-style: italic; }
+h2 { font-size: 1.25em; font-weight: normal; margin: 1.5em 0 0.5em 0; }
+h3, h4 { font-size: 1.1em; font-weight: normal; font-style: italic; margin: 1.2em 0 0.4em 0; }
+.part header { margin-top: 30%; }
+.part h1 { font-size: 2em; }
+.epigraph { margin: 0 10% 2em 10%; font-style: italic; }
+.epigraph p { text-indent: 0; text-align: left; }
+.epigraph .attribution { text-align: right; font-style: normal; }
+p.centered { text-align: center; }
+.matter-plain { margin-top: 20%; text-align: center; }
+.matter-plain p { text-indent: 0; text-align: center; margin: 0.5em 0; }
+blockquote { margin: 1em 2em; }
+blockquote p { text-indent: 0; }
+.verse { margin: 1em 2em; }
+.verse p { text-indent: -1em; padding-left: 1em; text-align: left; }
+hr.break { border: none; margin: 1em 0; height: 1.5em; text-align: center; }
+hr.break::after { content: attr(data-mark); }
+p.break { text-align: center; text-indent: 0; margin: 0.75em 0; }
+.lead { font-variant: small-caps; letter-spacing: 0.05em; }
+.sc { font-variant: small-caps; }
+.strike { text-decoration: line-through; }
+figure { margin: 1em 0; text-align: center; }
+figure img { max-width: 100%; height: auto; }
+figure.page img { max-height: 95vh; }
+a.noteref { vertical-align: super; font-size: 0.75em; line-height: 0; text-decoration: none; }
+section.notes { margin-top: 2em; font-size: 0.9em; }
+section.notes h2 { font-size: 1.1em; }
+section.notes li p { text-indent: 0; }
+nav ol { list-style: none; padding-left: 0; }
+nav ol ol { padding-left: 1.5em; }
+nav li { margin: 0.3em 0; }
+# documents
+text/s001.xhtml titlepage “”: 0 paragraphs, 0 words
+text/s002.xhtml copyright-page “”: 2 paragraphs, 10 words
+text/s003.xhtml part “Volume I.”: 0 paragraphs, 0 words
+text/s004.xhtml chapter “CHAPTER I. INTRODUCTORY”: 5 paragraphs, 1942 words
+text/s005.xhtml chapter “CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT”: 25 paragraphs, 5426 words
+text/s006.xhtml chapter “CHAPTER III. EDUCATION”: 6 paragraphs, 2759 words
+text/s007.xhtml chapter “CHAPTER IV. CASTLE-BUILDING”: 10 paragraphs, 3448 words
+text/s008.xhtml chapter “CHAPTER V. CHOICE OF A PROFESSION”: 23 paragraphs, 5569 words
+text/s009.xhtml chapter “CHAPTER VI. THE ADIEUS OF WAVERLEY”: 18 paragraphs, 4954 words
+text/s010.xhtml chapter “CHAPTER VII. A HORSE-QUARTER IN SCOTLAND”: 10 paragraphs, 3764 words
+text/s011.xhtml chapter “CHAPTER VIII. A SCOTTISH MANOR-HOUSE SIXTY YEARS SINCE”: 10 paragraphs, 3313 words
+text/s012.xhtml chapter “CHAPTER IX. MORE OF THE MANOR-HOUSE AND ITS ENVIRONS”: 26 paragraphs, 3943 words
+text/s013.xhtml chapter “CHAPTER X. ROSE BRADWARDINE AND HER FATHER”: 15 paragraphs, 2717 words
+text/s014.xhtml chapter “CHAPTER XI. THE BANQUET”: 37 paragraphs, 5612 words
+text/s015.xhtml chapter “CHAPTER XII. REPENTANCE AND A RECONCILIATION”: 24 paragraphs, 4088 words
+text/s016.xhtml chapter “CHAPTER XIII. A MORE RATIONAL DAY THAN THE LAST”: 40 paragraphs, 5259 words
+text/s017.xhtml chapter “CHAPTER XIV. A DISCOVERY—WAVERLEY BECOMES DOMESTICATED AT TULLY-VEOLAN”: 17 paragraphs, 4952 words
+text/s018.xhtml chapter “CHAPTER XV. A CREAGH, AND ITS CONSEQUENCES”: 36 paragraphs, 5372 words
+text/s019.xhtml chapter “CHAPTER XVI. AN UNEXPECTED ALLY APPEARS”: 29 paragraphs, 5823 words
+text/s020.xhtml chapter “CHAPTER XVII. THE HOLD OF A HIGHLAND ROBBER”: 15 paragraphs, 3659 words
+text/s021.xhtml chapter “CHAPTER XVIII. WAVERLEY PROCEEDS ON HIS JOURNEY”: 65 paragraphs, 7904 words
+text/s022.xhtml chapter “CHAPTER XIX. THE CHIEF AND HIS MANSION”: 23 paragraphs, 5458 words
+text/s023.xhtml chapter “CHAPTER XX. A HIGHLAND FEAST”: 26 paragraphs, 3871 words
+text/s024.xhtml chapter “CHAPTER XXI. THE CHIEFTAIN’S SISTER”: 11 paragraphs, 3155 words
+text/s025.xhtml chapter “CHAPTER XXII. HIGHLAND MINSTRELSY”: 50 paragraphs, 6845 words
+text/s026.xhtml chapter “CHAPTER XXIII. WAVERLEY CONTINUES AT GLENNAQUOICH”: 35 paragraphs, 2932 words
+text/s027.xhtml chapter “CHAPTER XXIV. A STAG-HUNT AND ITS CONSEQUENCES”: 270 paragraphs, 8430 words
+text/s028.xhtml chapter “CHAPTER XXV. NEWS FROM ENGLAND”: 31 paragraphs, 6172 words
+text/s029.xhtml chapter “CHAPTER XXVI. AN ECLAIRCISSEMENT”: 37 paragraphs, 2920 words
+text/s030.xhtml chapter “CHAPTER XXVII. UPON THE SAME SUBJECT”: 46 paragraphs, 5554 words
+text/s031.xhtml chapter “CHAPTER XXVIII. A LETTER FROM TULLY-VEOLAN”: 36 paragraphs, 4566 words
+text/s032.xhtml chapter “CHAPTER XXIX. WAVERLEY’S RECEPTION IN THE LOWLANDS AFTER HIS HIGHLAND TOUR”: 78 paragraphs, 6100 words
+text/s033.xhtml part “VOLUME II.”: 0 paragraphs, 0 words
+text/s034.xhtml chapter “CHAPTER I. SHOWS THAT THE LOSS OF A HORSE’S SHOE MAY BE A SERIOUS INCONVENIENCE”: 32 paragraphs, 4433 words
+text/s035.xhtml chapter “CHAPTER II. AN EXAMINATION”: 69 paragraphs, 6174 words
+text/s036.xhtml chapter “CHAPTER III. A CONFERENCE AND THE CONSEQUENCE”: 38 paragraphs, 4200 words
+text/s037.xhtml chapter “CHAPTER IV. A CONFIDANT”: 24 paragraphs, 3703 words
+text/s038.xhtml chapter “CHAPTER V. THINGS MEND A LITTLE”: 5 paragraphs, 1543 words
+text/s039.xhtml chapter “CHAPTER VI. A VOLUNTEER SIXTY YEARS SINCE”: 15 paragraphs, 2212 words
+text/s040.xhtml chapter “CHAPTER VII. AN INCIDENT”: 22 paragraphs, 3361 words
+text/s041.xhtml chapter “CHAPTER VIII. WAVERLEY IS STILL IN DISTRESS”: 17 paragraphs, 4893 words
+text/s042.xhtml chapter “CHAPTER IX. A NOCTURNAL ADVENTURE”: 24 paragraphs, 4138 words
+text/s043.xhtml chapter “CHAPTER X. THE JOURNEY IS CONTINUED”: 36 paragraphs, 5761 words
+text/s044.xhtml chapter “CHAPTER XI. AN OLD AND A NEW ACQUAINTANCE”: 23 paragraphs, 4249 words
+text/s045.xhtml chapter “CHAPTER XII. THE MYSTERY BEGINS TO BE CLEARED UP”: 29 paragraphs, 4746 words
+text/s046.xhtml chapter “CHAPTER XIII. A SOLDIER’S DINNER”: 47 paragraphs, 3836 words
+text/s047.xhtml chapter “CHAPTER XIV. THE BALL”: 37 paragraphs, 5082 words
+text/s048.xhtml chapter “CHAPTER XV. THE MARCH”: 26 paragraphs, 4945 words
+text/s049.xhtml chapter “CHAPTER XVI. AN INCIDENT GIVES RISE TO UNAVAILING REFLECTIONS”: 30 paragraphs, 3327 words
+text/s050.xhtml chapter “CHAPTER XVII. THE EVE OF BATTLE”: 24 paragraphs, 4074 words
+text/s051.xhtml chapter “CHAPTER XVIII. THE CONFLICT”: 25 paragraphs, 6493 words
+text/s052.xhtml chapter “CHAPTER XIX. AN UNEXPECTED EMBARRASSMENT”: 25 paragraphs, 2913 words
+text/s053.xhtml chapter “CHAPTER XX. THE ENGLISH PRISONER”: 39 paragraphs, 3840 words
+text/s054.xhtml chapter “CHAPTER XXI. RATHER UNIMPORTANT”: 26 paragraphs, 3906 words
+text/s055.xhtml chapter “CHAPTER XXII. INTRIGUES OF LOVE AND POLITICS”: 30 paragraphs, 4670 words
+text/s056.xhtml chapter “CHAPTER XXIII. INTRIGUES OF SOCIETY AND LOVE”: 20 paragraphs, 4056 words
+text/s057.xhtml chapter “CHAPTER XXIV. FERGUS A SUITOR”: 27 paragraphs, 3559 words
+text/s058.xhtml chapter “CHAPTER XXV. “TO ONE THING CONSTANT NEVER””: 20 paragraphs, 2459 words
+text/s059.xhtml chapter “CHAPTER XXVI. A BRAVE MAN IN SORROW”: 26 paragraphs, 2664 words
+text/s060.xhtml chapter “CHAPTER XXVII. EXERTION”: 31 paragraphs, 2934 words
+text/s061.xhtml chapter “CHAPTER XXVIII. THE MARCH”: 33 paragraphs, 4219 words
+text/s062.xhtml chapter “CHAPTER XXIX. THE CONFUSION OF KING AGRAMANT’S CAMP”: 66 paragraphs, 9012 words
+text/s063.xhtml chapter “CHAPTER XXX. A SKIRMISH”: 43 paragraphs, 7413 words
+text/s064.xhtml chapter “CHAPTER XXXI. CHAPTER OF ACCIDENTS”: 20 paragraphs, 3802 words
+text/s065.xhtml chapter “CHAPTER XXXII. A JOURNEY TO LONDON”: 22 paragraphs, 3222 words
+text/s066.xhtml chapter “CHAPTER XXXIII. WHAT’S TO BE DONE NEXT?”: 340 paragraphs, 8680 words
+text/s067.xhtml chapter “CHAPTER XXXIV. DESOLATION”: 39 paragraphs, 5888 words
+text/s068.xhtml chapter “CHAPTER XXXV. COMPARING OF NOTES”: 16 paragraphs, 2978 words
+text/s069.xhtml chapter “CHAPTER XXXVI. MORE EXPLANATION”: 24 paragraphs, 6620 words
+text/s070.xhtml chapter “CHAPTER XXXVII”: 18 paragraphs, 4608 words
+text/s071.xhtml chapter “CHAPTER XXXVIII”: 24 paragraphs, 5127 words
+text/s072.xhtml chapter “CHAPTER XXXIX”: 35 paragraphs, 4977 words
+text/s073.xhtml chapter “CHAPTER XL”: 36 paragraphs, 5063 words
+text/s074.xhtml chapter “CHAPTER XLI. DULCE DOMUM”: 12 paragraphs, 3063 words
+text/s075.xhtml chapter “CHAPTER XLII”: 49 paragraphs, 6402 words
+text/s076.xhtml chapter “CHAPTER XLIII. A POSTSCRIPT WHICH SHOULD HAVE BEEN A PREFACE”: 11 paragraphs, 2260 words

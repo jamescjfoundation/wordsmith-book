@@ -338,13 +338,17 @@ impl Writer<'_> {
         let types = kind.to_owned();
         let type_attr = if types.is_empty() { String::new() } else { format!(" epub:type=\"{types}\"") };
         let role_attr = role.map(|r| format!(" role=\"{r}\"")).unwrap_or_default();
-        let class = if plain(p) {
-            " class=\"matter-plain\""
+        // Classes say what a section is; `generated` marks text Book wrote, not the author.
+        let mut classes = Vec::new();
+        if plain(p) {
+            classes.push("matter-plain");
         } else if p.what == What::Part {
-            " class=\"part\""
-        } else {
-            ""
-        };
+            classes.push("part");
+        }
+        if matches!(p.what, What::Element(_)) {
+            classes.push("generated");
+        }
+        let class = if classes.is_empty() { String::new() } else { format!(" class=\"{}\"", classes.join(" ")) };
         let heading = !plain(p) && (!p.title.is_empty() || p.label.is_some());
         let labelled = if heading { format!(" aria-labelledby=\"{id}-h\"") } else { String::new() };
         body += &format!("<section id=\"{id}\"{type_attr}{role_attr}{class}{labelled}>\n");
@@ -352,7 +356,7 @@ impl Writer<'_> {
             body += "<header>\n";
             match (&p.label, p.title.is_empty()) {
                 (Some(l), false) => body += &format!("<p class=\"label\">{}</p>\n<h1 id=\"{id}-h\">{}</h1>\n", escape(l), escape(&p.title)),
-                (Some(l), true) => body += &format!("<h1 id=\"{id}-h\">{}</h1>\n", escape(l)),
+                (Some(l), true) => body += &format!("<h1 id=\"{id}-h\" class=\"label\">{}</h1>\n", escape(l)),
                 (None, _) => body += &format!("<h1 id=\"{id}-h\">{}</h1>\n", escape(&p.title)),
             }
             if !p.subtitle.is_empty() {
@@ -408,7 +412,7 @@ impl Writer<'_> {
         out.push_str("<section class=\"notes\" epub:type=\"endnotes\" role=\"doc-endnotes\">\n<h2>Notes</h2>\n<ol>\n");
         for (i, n) in notes.iter().enumerate() {
             let k = i + 1;
-            out.push_str(&format!("<li id=\"{id}n{k}\" epub:type=\"endnote\" role=\"doc-endnote\">"));
+            out.push_str(&format!("<li id=\"{id}n{k}\" epub:type=\"endnote\">"));
             for (j, p) in n.paras.iter().enumerate() {
                 let back = if j + 1 == n.paras.len() {
                     format!(" <a href=\"#{id}r{k}\" role=\"doc-backlink\" title=\"Back to the text\">↩</a>")

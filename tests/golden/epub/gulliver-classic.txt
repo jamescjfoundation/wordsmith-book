@@ -1,0 +1,268 @@
+# package
+identifier = urn:uuid:…
+title = Gulliver’s Travels
+language = en
+creator = Jonathan Swift
+publisher = Fixture Press
+rights = This text is in the public domain.
+dcterms:modified = 2026-11-24T00:00:00Z
+schema:accessMode = textual
+schema:accessModeSufficient = textual
+schema:accessibilityFeature = structuralNavigation
+schema:accessibilityFeature = tableOfContents
+schema:accessibilityFeature = readingOrder
+schema:accessibilityHazard = none
+schema:accessibilitySummary = This ebook has a table of contents, landmarks and headings for its structure, and its reading order follows the book. Text can be resized and restyled by the reading system.
+dcterms:conformsTo = EPUB Accessibility 1.1 - WCAG 2.2 Level AA
+a11y:certifiedBy = Fixture Press
+# manifest
+nav.xhtml application/xhtml+xml nav
+toc.ncx application/x-dtbncx+xml
+css/book.css text/css
+text/s001.xhtml application/xhtml+xml
+text/s002.xhtml application/xhtml+xml
+text/s003.xhtml application/xhtml+xml
+text/s004.xhtml application/xhtml+xml
+text/s005.xhtml application/xhtml+xml
+text/s006.xhtml application/xhtml+xml
+text/s007.xhtml application/xhtml+xml
+text/s008.xhtml application/xhtml+xml
+text/s009.xhtml application/xhtml+xml
+text/s010.xhtml application/xhtml+xml
+text/s011.xhtml application/xhtml+xml
+text/s012.xhtml application/xhtml+xml
+text/s013.xhtml application/xhtml+xml
+text/s014.xhtml application/xhtml+xml
+text/s015.xhtml application/xhtml+xml
+text/s016.xhtml application/xhtml+xml
+text/s017.xhtml application/xhtml+xml
+text/s018.xhtml application/xhtml+xml
+text/s019.xhtml application/xhtml+xml
+text/s020.xhtml application/xhtml+xml
+text/s021.xhtml application/xhtml+xml
+text/s022.xhtml application/xhtml+xml
+text/s023.xhtml application/xhtml+xml
+text/s024.xhtml application/xhtml+xml
+text/s025.xhtml application/xhtml+xml
+text/s026.xhtml application/xhtml+xml
+text/s027.xhtml application/xhtml+xml
+text/s028.xhtml application/xhtml+xml
+text/s029.xhtml application/xhtml+xml
+text/s030.xhtml application/xhtml+xml
+text/s031.xhtml application/xhtml+xml
+text/s032.xhtml application/xhtml+xml
+text/s033.xhtml application/xhtml+xml
+text/s034.xhtml application/xhtml+xml
+text/s035.xhtml application/xhtml+xml
+text/s036.xhtml application/xhtml+xml
+text/s037.xhtml application/xhtml+xml
+text/s038.xhtml application/xhtml+xml
+text/s039.xhtml application/xhtml+xml
+text/s040.xhtml application/xhtml+xml
+text/s041.xhtml application/xhtml+xml
+text/s042.xhtml application/xhtml+xml
+text/s043.xhtml application/xhtml+xml
+text/s044.xhtml application/xhtml+xml
+text/s045.xhtml application/xhtml+xml
+text/s046.xhtml application/xhtml+xml
+text/s047.xhtml application/xhtml+xml
+text/s048.xhtml application/xhtml+xml
+fonts/classic-serif-regular.ttf font/ttf
+fonts/classic-serif-italic.ttf font/ttf
+fonts/classic-serif-bold.ttf font/ttf
+fonts/classic-serif-bold-italic.ttf font/ttf
+# spine
+s001
+s002
+nav
+s003
+s004
+s005
+s006
+s007
+s008
+s009
+s010
+s011
+s012
+s013
+s014
+s015
+s016
+s017
+s018
+s019
+s020
+s021
+s022
+s023
+s024
+s025
+s026
+s027
+s028
+s029
+s030
+s031
+s032
+s033
+s034
+s035
+s036
+s037
+s038
+s039
+s040
+s041
+s042
+s043
+s044
+s045
+s046
+s047
+s048
+# navigation
+Title Page -> text/s001.xhtml#s001
+THE PUBLISHER TO THE READER -> text/s003.xhtml#s003
+A LETTER FROM CAPTAIN GULLIVER TO HIS COUSIN SYMPSON -> text/s004.xhtml#s004
+Part One: A VOYAGE TO LILLIPUT -> text/s005.xhtml#s005
+  Chapter One -> text/s006.xhtml#s006
+  Chapter Two -> text/s007.xhtml#s007
+  Chapter Three -> text/s008.xhtml#s008
+  Chapter Four -> text/s009.xhtml#s009
+  Chapter Five -> text/s010.xhtml#s010
+  Chapter Six -> text/s011.xhtml#s011
+  Chapter Seven -> text/s012.xhtml#s012
+  Chapter Eight -> text/s013.xhtml#s013
+Part Two: A VOYAGE TO BROBDINGNAG -> text/s014.xhtml#s014
+  Chapter Nine -> text/s015.xhtml#s015
+  Chapter Ten -> text/s016.xhtml#s016
+  Chapter Eleven -> text/s017.xhtml#s017
+  Chapter Twelve -> text/s018.xhtml#s018
+  Chapter Thirteen -> text/s019.xhtml#s019
+  Chapter Fourteen -> text/s020.xhtml#s020
+  Chapter Fifteen -> text/s021.xhtml#s021
+  Chapter Sixteen -> text/s022.xhtml#s022
+Part Three: A VOYAGE TO LAPUTA, BALNIBARBI, GLUBBDUBDRIB, LUGGNAGG AND -> text/s023.xhtml#s023
+  Chapter Seventeen -> text/s024.xhtml#s024
+  Chapter Eighteen -> text/s025.xhtml#s025
+  Chapter Nineteen -> text/s026.xhtml#s026
+  Chapter Twenty -> text/s027.xhtml#s027
+  Chapter Twenty-One -> text/s028.xhtml#s028
+  Chapter Twenty-Two -> text/s029.xhtml#s029
+  Chapter Twenty-Three -> text/s030.xhtml#s030
+  Chapter Twenty-Four -> text/s031.xhtml#s031
+  Chapter Twenty-Five -> text/s032.xhtml#s032
+  Chapter Twenty-Six -> text/s033.xhtml#s033
+  Chapter Twenty-Seven -> text/s034.xhtml#s034
+Part Four: A VOYAGE TO THE COUNTRY OF THE HOUYHNHNMS -> text/s035.xhtml#s035
+  Chapter Twenty-Eight -> text/s036.xhtml#s036
+  Chapter Twenty-Nine -> text/s037.xhtml#s037
+  Chapter Thirty -> text/s038.xhtml#s038
+  Chapter Thirty-One -> text/s039.xhtml#s039
+  Chapter Thirty-Two -> text/s040.xhtml#s040
+  Chapter Thirty-Three -> text/s041.xhtml#s041
+  Chapter Thirty-Four -> text/s042.xhtml#s042
+  Chapter Thirty-Five -> text/s043.xhtml#s043
+  Chapter Thirty-Six -> text/s044.xhtml#s044
+  Chapter Thirty-Seven -> text/s045.xhtml#s045
+  Chapter Thirty-Eight -> text/s046.xhtml#s046
+  Chapter Thirty-Nine -> text/s047.xhtml#s047
+About the Author -> text/s048.xhtml#s048
+[titlepage] Title page -> text/s001.xhtml#s001
+[copyright-page] Copyright -> text/s002.xhtml#s002
+[toc] Contents -> nav.xhtml
+[bodymatter] Start of the book -> text/s005.xhtml#s005
+[backmatter] Back matter -> text/s048.xhtml#s048
+# stylesheet
+/* Made from the book's design; sizes in em so reading settings apply. */
+@font-face { font-family: "book-classic-serif"; font-weight: 400; font-style: normal; src: url("../fonts/classic-serif-regular.ttf"); }
+@font-face { font-family: "book-classic-serif"; font-weight: 400; font-style: italic; src: url("../fonts/classic-serif-italic.ttf"); }
+@font-face { font-family: "book-classic-serif"; font-weight: 700; font-style: normal; src: url("../fonts/classic-serif-bold.ttf"); }
+@font-face { font-family: "book-classic-serif"; font-weight: 700; font-style: italic; src: url("../fonts/classic-serif-bold-italic.ttf"); }
+body { margin: 0 5%; font-family: "book-classic-serif", serif; }
+p { margin: 0; text-indent: 1.20em; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+h1 + p, h2 + p, h3 + p, h4 + p, header + p, hr + p, blockquote + p, .verse + p, figure + p, p.first, p.centered, .opening p:first-of-type { text-indent: 0; }
+header { text-align: center; margin: 3em 0 2em 0; font-family: "book-classic-serif", serif; }
+header .label { margin: 0; text-indent: 0; text-align: center; font-size: 0.9em; font-variant: small-caps; letter-spacing: 0.05em; }
+h1 { font-size: 1.6em; font-weight: normal; margin: 0.3em 0 0 0; }
+header .subtitle { margin: 0.5em 0 0 0; text-indent: 0; text-align: inherit; font-style: italic; }
+h2 { font-size: 1.25em; font-weight: normal; margin: 1.5em 0 0.5em 0; }
+h3, h4 { font-size: 1.1em; font-weight: normal; font-style: italic; margin: 1.2em 0 0.4em 0; }
+.part header { margin-top: 30%; }
+.part h1 { font-size: 2em; }
+.epigraph { margin: 0 10% 2em 10%; font-style: italic; }
+.epigraph p { text-indent: 0; text-align: left; }
+.epigraph .attribution { text-align: right; font-style: normal; }
+p.centered { text-align: center; }
+.matter-plain { margin-top: 20%; text-align: center; }
+.matter-plain p { text-indent: 0; text-align: center; margin: 0.5em 0; }
+blockquote { margin: 1em 2em; }
+blockquote p { text-indent: 0; }
+.verse { margin: 1em 2em; }
+.verse p { text-indent: -1em; padding-left: 1em; text-align: left; }
+hr.break { border: none; margin: 1em 0; height: 1.5em; text-align: center; }
+hr.break::after { content: attr(data-mark); }
+p.break { text-align: center; text-indent: 0; margin: 0.75em 0; }
+.lead { font-variant: small-caps; letter-spacing: 0.05em; }
+.sc { font-variant: small-caps; }
+.strike { text-decoration: line-through; }
+figure { margin: 1em 0; text-align: center; }
+figure img { max-width: 100%; height: auto; }
+figure.page img { max-height: 95vh; }
+a.noteref { vertical-align: super; font-size: 0.75em; line-height: 0; text-decoration: none; }
+section.notes { margin-top: 2em; font-size: 0.9em; }
+section.notes h2 { font-size: 1.1em; }
+section.notes li p { text-indent: 0; }
+nav ol { list-style: none; padding-left: 0; }
+nav ol ol { padding-left: 1.5em; }
+nav li { margin: 0.3em 0; }
+# documents
+text/s001.xhtml titlepage “”: 2 paragraphs, 8 words
+text/s002.xhtml copyright-page “”: 3 paragraphs, 27 words
+text/s003.xhtml - “THE PUBLISHER TO THE READER”: 8 paragraphs, 908 words
+text/s004.xhtml - “A LETTER FROM CAPTAIN GULLIVER TO HIS COUSIN SYMPSON”: 11 paragraphs, 1925 words
+text/s005.xhtml part “A VOYAGE TO LILLIPUT”: 1 paragraphs, 3 words
+text/s006.xhtml chapter “Chapter One”: 11 paragraphs, 6321 words
+text/s007.xhtml chapter “Chapter Two”: 14 paragraphs, 6291 words
+text/s008.xhtml chapter “Chapter Three”: 21 paragraphs, 5274 words
+text/s009.xhtml chapter “Chapter Four”: 6 paragraphs, 2929 words
+text/s010.xhtml chapter “Chapter Five”: 11 paragraphs, 3932 words
+text/s011.xhtml chapter “Chapter Six”: 24 paragraphs, 7080 words
+text/s012.xhtml chapter “Chapter Seven”: 30 paragraphs, 5518 words
+text/s013.xhtml chapter “Chapter Eight”: 13 paragraphs, 4605 words
+text/s014.xhtml part “A VOYAGE TO BROBDINGNAG”: 1 paragraphs, 3 words
+text/s015.xhtml chapter “Chapter Nine”: 17 paragraphs, 9822 words
+text/s016.xhtml chapter “Chapter Ten”: 9 paragraphs, 3284 words
+text/s017.xhtml chapter “Chapter Eleven”: 16 paragraphs, 7234 words
+text/s018.xhtml chapter “Chapter Twelve”: 10 paragraphs, 3497 words
+text/s019.xhtml chapter “Chapter Thirteen”: 17 paragraphs, 7542 words
+text/s020.xhtml chapter “Chapter Fourteen”: 19 paragraphs, 6302 words
+text/s021.xhtml chapter “Chapter Fifteen”: 13 paragraphs, 4757 words
+text/s022.xhtml chapter “Chapter Sixteen”: 18 paragraphs, 9331 words
+text/s023.xhtml part “A VOYAGE TO LAPUTA, BALNIBARBI, GLUBBDUBDRIB, LUGGNAGG AND”: 1 paragraphs, 3 words
+text/s024.xhtml chapter “Chapter Seventeen”: 14 paragraphs, 4079 words
+text/s025.xhtml chapter “Chapter Eighteen”: 18 paragraphs, 5819 words
+text/s026.xhtml chapter “Chapter Nineteen”: 20 paragraphs, 4656 words
+text/s027.xhtml chapter “Chapter Twenty”: 16 paragraphs, 4123 words
+text/s028.xhtml chapter “Chapter Twenty-One”: 26 paragraphs, 4868 words
+text/s029.xhtml chapter “Chapter Twenty-Two”: 19 paragraphs, 3650 words
+text/s030.xhtml chapter “Chapter Twenty-Three”: 12 paragraphs, 2912 words
+text/s031.xhtml chapter “Chapter Twenty-Four”: 13 paragraphs, 3936 words
+text/s032.xhtml chapter “Chapter Twenty-Five”: 8 paragraphs, 1994 words
+text/s033.xhtml chapter “Chapter Twenty-Six”: 23 paragraphs, 4555 words
+text/s034.xhtml chapter “Chapter Twenty-Seven”: 8 paragraphs, 1951 words
+text/s035.xhtml part “A VOYAGE TO THE COUNTRY OF THE HOUYHNHNMS”: 1 paragraphs, 3 words
+text/s036.xhtml chapter “Chapter Twenty-Eight”: 11 paragraphs, 5001 words
+text/s037.xhtml chapter “Chapter Twenty-Nine”: 11 paragraphs, 3136 words
+text/s038.xhtml chapter “Chapter Thirty”: 15 paragraphs, 2976 words
+text/s039.xhtml chapter “Chapter Thirty-One”: 8 paragraphs, 2478 words
+text/s040.xhtml chapter “Chapter Thirty-Two”: 17 paragraphs, 4220 words
+text/s041.xhtml chapter “Chapter Thirty-Three”: 21 paragraphs, 4132 words
+text/s042.xhtml chapter “Chapter Thirty-Four”: 22 paragraphs, 3480 words
+text/s043.xhtml chapter “Chapter Thirty-Five”: 18 paragraphs, 2983 words
+text/s044.xhtml chapter “Chapter Thirty-Six”: 13 paragraphs, 2529 words
+text/s045.xhtml chapter “Chapter Thirty-Seven”: 16 paragraphs, 3835 words
+text/s046.xhtml chapter “Chapter Thirty-Eight”: 20 paragraphs, 5180 words
+text/s047.xhtml chapter “Chapter Thirty-Nine”: 18 paragraphs, 3626 words
+text/s048.xhtml contributors “About the Author”: 1 paragraphs, 15 words

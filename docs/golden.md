@@ -30,3 +30,22 @@ to the media box, every font embedded, no annotations, links or bookmarks (read 
 **State:** written 2026-11-24 from the builds of M5.4; **awaiting a person's look** at the PDFs
 they summarise (build one with `cargo test -p wordsmith-book-check --test pages_for_review --
 --ignored`, or from the app once export lands in M8).
+
+## EPUB structure (M6.3)
+
+`tests/golden/epub/<book>-<design>.txt`, checked by `crates/book-check/tests/epub_check.rs`.
+Each file is the structure of one EPUB, read back from it: the package metadata (the
+identifier's kind only), the manifest, the reading order, every navigation entry and landmark,
+the whole stylesheet, and for each document its kind, heading, paragraph count and word count.
+Gulliver's Travels (the Manuscript fixture) and Waverley (imported from its DOCX) in all six
+designs.
+
+The same test file checks every one of those EPUBs with Book's own checks (`book-check::epub`),
+reads it back through the core's reader word for word against Book's reader, and checks that
+the author's words in it are exactly the source's. When `BOOK_EPUB_VALIDATOR` names the standard EPUB
+validator's jar (and `BOOK_JAVA` a Java runtime), the validator runs on all twelve and any
+error or warning fails the test.
+
+**State:** written 2026-11-24 from the builds of M6.3; **awaiting a person's look** at the EPUBs
+in a reading app (`cargo test -p wordsmith-book-check --test epub -- --ignored` writes them to
+`target/review/`).
