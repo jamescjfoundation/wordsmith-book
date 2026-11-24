@@ -20,7 +20,8 @@ fn print_with(design: &str, book: &wordsmith_manuscript_format::book::Book) -> b
 
 /// The glyphs of page `index`: (text, x, y from the top).
 fn glyphs(pr: &build::Print, pdf: &[u8], index: usize) -> Vec<(String, f64, f64)> {
-    let pages = jcj_output::read_pages(pdf, &jcj_output::ReadLimits { max_input_bytes: 256 << 20, max_pages: 10_000, max_glyphs_per_page: 20_000 }).unwrap();
+    let pages =
+        jcj_output::read_pages(pdf, &jcj_output::ReadLimits { max_input_bytes: 256 << 20, max_pages: 10_000, max_glyphs_per_page: 20_000 }).unwrap();
     let h = f64::from(pr.typeset.page_size(index).unwrap().1);
     pages[index].glyphs.iter().filter_map(|g| g.text.clone().filter(|t| !t.trim().is_empty()).map(|t| (t, g.x, h - g.y))).collect()
 }
@@ -37,7 +38,12 @@ fn every_designs_opening_sinks_and_drops_its_capital() {
         let g = glyphs(&pr, &pdf, page);
         // The chapter's text starts with "The author gives some account".
         let letters: Vec<String> = g.iter().map(|(t, _, _)| t.to_lowercase()).collect();
-        let first = (0..g.len()).find(|&k| letters[k].chars().all(char::is_alphabetic) && letters[k..].iter().filter(|t| t.chars().all(char::is_alphabetic)).take(9).cloned().collect::<String>() == "theauthor").unwrap_or_else(|| panic!("{}: no first words", d.id));
+        let first = (0..g.len())
+            .find(|&k| {
+                letters[k].chars().all(char::is_alphabetic)
+                    && letters[k..].iter().filter(|t| t.chars().all(char::is_alphabetic)).take(9).cloned().collect::<String>() == "theauthor"
+            })
+            .unwrap_or_else(|| panic!("{}: no first words", d.id));
         let first_y = g[first].2;
         let sink = f64::from(body.y) + f64::from(d.chapter.sink * body.h);
         assert!(first_y > sink, "{}: the text starts at {first_y:.0}, below the sink at {sink:.0}", d.id);

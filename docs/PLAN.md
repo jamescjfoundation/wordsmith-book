@@ -322,7 +322,7 @@ a person in Book's `docs/progress.md`.
 | C6 | An EPUB 3 package layer (container, package document with accessibility metadata, navigation with landmarks and page list, NCX, deterministic zip) | Build in app first (`book-epub`), `core-candidate` | M6.1 | [#20](https://github.com/jamescjfoundation/open-source-core/issues/20) |
 | C7 | The core's EPUB writer drops notes | Core fix, additive: notes written as numbered endnotes per chapter with links both ways, as Manuscript's reading copy does by hand | R2 | [#21](https://github.com/jamescjfoundation/open-source-core/issues/21) |
 | C8 | Structure detection for imports: sections by heading level and title patterns ("Chapter 12", "Part Two"), scene-break paragraphs | Build in app first (`book-import`), `core-candidate`; Manuscript has its own | M2.2 | [#22](https://github.com/jamescjfoundation/open-source-core/issues/22) |
-| C9 | PDF facts for preflight: page boxes (media, trim, bleed), fonts and whether embedded, annotations, images and their resolution | Core, additive to `jcj_output::read` | M8.1 | [#23](https://github.com/jamescjfoundation/open-source-core/issues/23) |
+| C9 | PDF facts for preflight: page boxes (media, trim, bleed), fonts and whether embedded, annotations, images and their resolution | Core, additive to `jcj_output` (`read_facts`, core v0.1.10) | M5.4 (brought forward from M8.1: M5.4's tests need it) | [#23](https://github.com/jamescjfoundation/open-source-core/issues/23) |
 | C10 | `deny.toml` allows `https://github.com/jamescjfoundation/wordsmith-manuscript` as a git source | Core, additive (synced settings) | M0.1 | [#15](https://github.com/jamescjfoundation/open-source-core/issues/15) |
 | C11 | A sortable, editable table widget | Promote (Manuscript's outline table) if editions and the ISBN list need it | R4 | [#7](https://github.com/jamescjfoundation/open-source-core/issues/7) |
 | C12 | The PDF names the app that made it | Book's PDFs come from `jcj-output` (decision 0003), which does not name the app yet; stays blocked upstream for `jcj-output`, not needed for any step | – | [#5](https://github.com/jamescjfoundation/open-source-core/issues/5) |
@@ -647,7 +647,7 @@ Section 5.8.
 | M2 Import | 0.1 | Verifier, imports, structure detection, cleanup review | done |
 | M3 Structure | 0.1 | Front and back matter, chapters and parts, metadata, editions, fixes | done |
 | M4 Designs | 0.1 | Design format, six designs, mixing, own designs, chooser | done |
-| M5 Print | 0.1 | Typesetting, trims and margins, chapter openings, print PDF | |
+| M5 Print | 0.1 | Typesetting, trims and margins, chapter openings, print PDF | done |
 | M6 Ebook | 0.1 | EPUB writer, navigation, accessibility, cover, fonts | |
 | M7 Preview | 0.1 | Print spreads, ebook preview, live updates | |
 | M8 Preflight and export | 0.1 | Checks, validators, export, bundle | |
@@ -950,7 +950,7 @@ preview page after a design change recorded in `docs/performance.md`.
 
 **M8.1 `m8/preflight`**: PRE-1 and PRE-4 in `book-check`, on C9 (PDF facts promoted into the core
 first): every rule of section 9.4 with severity and links; the preflight panel.
-- Needs: C9 in a core release.
+- Needs: C9 in a core release (released in core v0.1.10 during M5.4).
 - Tests: for each rule, a book written to break it and one that passes; each finding links to the
   right page or section.
 - Done when: those pass and the v0.1 test books pass preflight for `pod-paperback`.
