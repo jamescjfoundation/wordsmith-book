@@ -101,6 +101,11 @@ pub const EBOOK_OPEN: &str = "book.ebook.openInReadingApp";
 /// whether export is blocked and every finding with its link.
 pub const PREFLIGHT: &str = "book.preflight";
 
+/// Export: `{"folder": path, "editions": [ids] (all when left out), "bundle": bool}`; each
+/// edition is built, word-checked and preflighted first and nothing is written if anything
+/// blocks; gives the files written.
+pub const EXPORT: &str = "book.export";
+
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
     let p = |mut c: CommandInfo| {
@@ -152,6 +157,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(PREVIEW_PAGE, "Section of a Preview Page", "")),
         p(CommandInfo::new(EBOOK_OPEN, "Open in a Reading App", "")),
         p(CommandInfo::new(PREFLIGHT, "Preflight", "")),
+        p(CommandInfo::new(EXPORT, "Export", "")),
     ]
 }
 
@@ -291,6 +297,18 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             ))
         }
         PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
+        EXPORT => {
+            let validator = app.prefs.validator_settings();
+            let b = app.open_book()?;
+            let editions: Vec<String> = match params.get("editions").and_then(Value::as_array) {
+                Some(v) => v.iter().filter_map(Value::as_str).map(str::to_owned).collect(),
+                None => b.files.project.editions.iter().map(|e| e.id.clone()).collect(),
+            };
+            let bundle = params.get("bundle").and_then(Value::as_bool).unwrap_or(false);
+            let folder = params.get("folder").and_then(Value::as_str).map_or_else(|| crate::export::default_folder(b), PathBuf::from);
+            let paths = crate::export::run(b, &editions, bundle, &folder, Some(&validator))?;
+            Ok(json!({ "files": paths.iter().map(|p| p.display().to_string()).collect::<Vec<_>>() }))
+        }
         PREFLIGHT => {
             let validator = app.prefs.validator_settings();
             let b = app.open_book()?;

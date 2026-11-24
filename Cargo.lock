@@ -5444,6 +5444,7 @@ dependencies = [
  "jcj-interchange",
  "jcj-layout",
  "jcj-output",
+ "jcj-project 0.1.10",
  "roxmltree",
  "serde",
  "toml",

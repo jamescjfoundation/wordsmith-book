@@ -7,6 +7,7 @@
 
 pub mod build;
 pub mod epub;
+pub mod export;
 pub mod preflight;
 pub mod profile;
 pub mod validator;

@@ -16,6 +16,7 @@ pub mod commands;
 pub mod designs;
 pub mod doc;
 pub mod ebook_preview;
+pub mod export;
 pub mod import_review;
 pub mod metadata;
 pub mod outline;
@@ -74,6 +75,8 @@ pub struct BookApp {
     pub preflight: preflight::Panel,
     /// Book's own preferences.
     pub prefs: prefs::BookPrefs,
+    /// The Export page.
+    pub export: export::Page,
     /// The last message for the user.
     pub message: Option<String>,
     revision: u64,
@@ -266,6 +269,13 @@ impl App for BookApp {
         {
             self.message.clone_from(&b.notice);
         }
+        if let Some(b) = &self.book {
+            let before = self.export.last.clone();
+            self.export.poll(b);
+            if self.export.last != before {
+                self.message.clone_from(&self.export.last);
+            }
+        }
         if let Some(m) = self.message.clone() {
             let mut dismiss = false;
             ui.horizontal(|ui| {
@@ -410,6 +420,18 @@ impl App for BookApp {
                 }
             }
             _ => {}
+        }
+    }
+
+    fn file_page_ui(&mut self, page: &jcj_shell::Page, ui: &mut egui::Ui, _shell: &mut Shell) {
+        if *page == jcj_shell::Page::Export {
+            let validator = self.prefs.validator_settings();
+            match &self.book {
+                Some(b) => self.export.ui(ui, b, &validator),
+                None => {
+                    ui.label("Open a book to export it.");
+                }
+            }
         }
     }
 
