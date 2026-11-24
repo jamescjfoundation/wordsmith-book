@@ -5472,6 +5472,14 @@ dependencies = [
 [[package]]
 name = "wordsmith-book-cli"
 version = "0.1.0"
+dependencies = [
+ "serde_json",
+ "wordsmith-book-check",
+ "wordsmith-book-format",
+ "wordsmith-book-import",
+ "wordsmith-book-ui",
+ "wordsmith-manuscript-format",
+]
 
 [[package]]
 name = "wordsmith-book-design"

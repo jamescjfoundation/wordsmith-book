@@ -12,7 +12,16 @@ publish.workspace = true
 workspace = true
 
 [dependencies]
+wordsmith-book-ui = { workspace = true }
+wordsmith-book-check = { workspace = true }
+wordsmith-book-format = { workspace = true }
+wordsmith-book-import = { workspace = true }
+wordsmith-manuscript-format = { workspace = true }
+serde_json = { workspace = true }
 
 [[bin]]
 name = "book-cli"
 path = "src/main.rs"
+
+[dev-dependencies]
+serde_json = { workspace = true }
