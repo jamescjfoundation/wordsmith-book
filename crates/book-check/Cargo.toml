@@ -12,3 +12,10 @@ publish.workspace = true
 workspace = true
 
 [dependencies]
+wordsmith-manuscript-model = { workspace = true }
+wordsmith-manuscript-format = { workspace = true }
+jcj-doc = { workspace = true }
+jcj-features = { workspace = true }
+
+[dev-dependencies]
+jcj-interchange = { workspace = true }

@@ -18,6 +18,7 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
 | 2026-11-24 | M1.3 m1/save | Packed projects (`.wsbkz`: deterministic, `mimetype` first, sorted, fixed times; the owned source's files or a packed copy of a linked source inside), bounded unpacking into a new folder, recovery around every save (`save_safely`), rotating backups with a number kept; crash injection after every write reopens whole with the work saved or recoverable; hostile and damaged packs refused. The shell's auto-save is wired with the app's projects in M1.4 | 59 |
 | 2026-11-24 | M1.4 m1/outline | C3 promoted into the core as `jcj_shell::tree` (core v0.1.8, #6) and Book moved to it; the app opens and creates books (start window templates, an open dialog, `file.openPath`, a path on the command line, `.wsbkz` unpacked beside it), auto-saves through the shell, offers recovered work; the outline panel (front matter, parts, chapters, back matter; Book's elements move by drag, the source's sections are read-only with "change this in Manuscript"); every change a command with undo; harness tests including 1,000 sections under 50 ms a frame; M1 done | 63 |
 | 2026-11-24 | M1.5 m1/document | Book's own conversion between the book view's text (every block, mark and note) and `jcj_doc::Document` with `book.` keys, in book-model; property tests that text → document → text is exact; every section of the Manuscript fixture converts exactly; formatting the view cannot hold is dropped and listed | 66 |
+| 2026-11-24 | M2.1 m2/verify | C1 promoted into the core as `jcj_features::verify` with C2 (`wordiff`) in core v0.1.9 (#10, #17); Book moved to it; `book-check::verify` gives the words of a book view (with or without notes), documents and texts; every text, document and Manuscript fixture checks against itself and finds one changed word with context | 69 |
 
 ## Waiting on a person
 
@@ -39,4 +40,4 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
   platforms before packaging (M9.4).
 
 - **Core:** move Wordsmith Script and Wordsmith Manuscript to the newest core release (core
-  v0.1.8 so far; every release in this run is additive).
+  v0.1.9 so far; every release in this run is additive).
