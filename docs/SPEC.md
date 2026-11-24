@@ -302,6 +302,8 @@ break, hyphenation by the book's language, running heads off on openings and bla
 3. **Navigation** (EBK-2): a navigation document with a `toc` nav (every part and chapter and
    the main front and back matter), a `landmarks` nav (cover, title page, contents, start of the
    body, copyright and back matter where present) and, from 0.2, a `page-list` nav. [Verified]
+   The ebook leaves out the half title (a printed book's page); the contents page is the
+   navigation document itself, read where the contents stand. [Designed]
 4. **Semantics**: `epub:type` on every front and back matter section (`titlepage`,
    `copyright-page`, `dedication`, `epigraph`, `toc`, `acknowledgments`, `colophon`,
    `bodymatter`, `chapter`, `part`, `footnote`, `endnote`, `noteref`), with the matching ARIA

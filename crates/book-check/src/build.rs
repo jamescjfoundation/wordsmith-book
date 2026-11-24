@@ -51,3 +51,26 @@ pub fn print(
     let typeset = typeset(&pbook, &look, if project.date.is_empty() { "2000-01-01" } else { &project.date }).map_err(|e| e.to_string())?;
     Ok(Print { assembled, book: pbook, look, typeset, profile, left })
 }
+
+/// Build ebook `edition` of the project from `book`, the project's own designs and `images`, as
+/// [`print`] does for print.
+pub fn ebook(
+    project: &BookProject,
+    designs: &BTreeMap<String, String>,
+    book: &Book,
+    edition: &Edition,
+    images: &dyn Fn(&str) -> Option<Vec<u8>>,
+) -> Result<(Assembled, wordsmith_book_epub::Ebook), String> {
+    if edition.format.is_print() {
+        return Err(format!("the {} is not an ebook", edition.name.to_lowercase()));
+    }
+    let design = mix::resolve(&project.design, designs).map_err(|e| e.to_string())?;
+    let assembled = assemble(project, book, Some(edition));
+    let settings = wordsmith_book_epub::Settings {
+        language: book.metadata.info.language.clone(),
+        date: if project.date.is_empty() { "2000-01-01".to_owned() } else { project.date.clone() },
+        seed: project.date.clone(),
+    };
+    let ebook = wordsmith_book_epub::ebook(&assembled, &design, edition, &settings, images).map_err(|e| e.to_string())?;
+    Ok((assembled, ebook))
+}

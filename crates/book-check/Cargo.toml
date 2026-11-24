@@ -16,6 +16,7 @@ wordsmith-book-model = { workspace = true }
 wordsmith-book-format = { workspace = true }
 wordsmith-book-design = { workspace = true }
 wordsmith-book-typeset = { workspace = true }
+wordsmith-book-epub = { workspace = true }
 wordsmith-manuscript-model = { workspace = true }
 wordsmith-manuscript-format = { workspace = true }
 jcj-doc = { workspace = true }
@@ -25,6 +26,8 @@ serde = { workspace = true }
 toml = { workspace = true }
 
 [dev-dependencies]
+roxmltree = { workspace = true }
+zip = { workspace = true }
 jcj-interchange = { workspace = true }
 wordsmith-book-import = { workspace = true }
 jcj-layout = { workspace = true }

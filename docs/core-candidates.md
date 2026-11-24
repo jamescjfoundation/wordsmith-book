@@ -12,7 +12,7 @@ core), **app-first** (built here, marked `// core-candidate:`, waiting for a sec
 | C3 | A tree widget with drag and drop (`jcj_shell::tree`) | – | [#6](https://github.com/jamescjfoundation/open-source-core/issues/6) | released in core v0.1.8 |
 | C4 | Interface translation catalogs | – | [#18](https://github.com/jamescjfoundation/open-source-core/issues/18) | open (promotion in R2) |
 | C5 | Book typesetting (a book layer over the core's layout, decision 0003) | `crates/book-typeset/src/lib.rs` | [#19](https://github.com/jamescjfoundation/open-source-core/issues/19) | app-first |
-| C6 | EPUB 3 package layer | `crates/book-epub` (from M6.1) | [#20](https://github.com/jamescjfoundation/open-source-core/issues/20) | open (app-first from M6.1) |
+| C6 | EPUB 3 package layer | `crates/book-epub/src/package.rs` | [#20](https://github.com/jamescjfoundation/open-source-core/issues/20) | app-first |
 | C7 | The core's EPUB writer drops notes | – | [#21](https://github.com/jamescjfoundation/open-source-core/issues/21) | open (core fix in R2) |
 | C8 | Structure detection for imports | `crates/book-import/src/detect.rs` | [#22](https://github.com/jamescjfoundation/open-source-core/issues/22) | app-first |
 | C9 | PDF facts for preflight | – | [#23](https://github.com/jamescjfoundation/open-source-core/issues/23) | released in core v0.1.10 (`jcj_output::read_facts`; brought forward to M5.4) |

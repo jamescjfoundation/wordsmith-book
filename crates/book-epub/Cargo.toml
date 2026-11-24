@@ -12,3 +12,10 @@ publish.workspace = true
 workspace = true
 
 [dependencies]
+wordsmith-book-model = { workspace = true }
+wordsmith-book-format = { workspace = true }
+wordsmith-book-design = { workspace = true }
+wordsmith-manuscript-model = { workspace = true }
+wordsmith-manuscript-format = { workspace = true }
+sha2 = { workspace = true }
+zip = { workspace = true }

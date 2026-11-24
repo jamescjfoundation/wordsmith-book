@@ -5444,15 +5444,18 @@ dependencies = [
  "jcj-interchange",
  "jcj-layout",
  "jcj-output",
+ "roxmltree",
  "serde",
  "toml",
  "wordsmith-book-design",
+ "wordsmith-book-epub",
  "wordsmith-book-format",
  "wordsmith-book-import",
  "wordsmith-book-model",
  "wordsmith-book-typeset",
  "wordsmith-manuscript-format",
  "wordsmith-manuscript-model",
+ "zip 3.0.0",
 ]
 
 [[package]]
@@ -5471,6 +5474,15 @@ dependencies = [
 [[package]]
 name = "wordsmith-book-epub"
 version = "0.1.0"
+dependencies = [
+ "sha2 0.11.1",
+ "wordsmith-book-design",
+ "wordsmith-book-format",
+ "wordsmith-book-model",
+ "wordsmith-manuscript-format",
+ "wordsmith-manuscript-model",
+ "zip 3.0.0",
+]
 
 [[package]]
 name = "wordsmith-book-format"
