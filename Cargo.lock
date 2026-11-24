@@ -5428,6 +5428,8 @@ version = "0.1.0"
 name = "wordsmith-book-model"
 version = "0.1.0"
 dependencies = [
+ "jcj-doc 0.1.8",
+ "proptest",
  "serde",
  "wordsmith-manuscript-model",
 ]

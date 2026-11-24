@@ -13,4 +13,8 @@ workspace = true
 
 [dependencies]
 wordsmith-manuscript-model = { workspace = true }
+jcj-doc = { workspace = true }
 serde = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }
