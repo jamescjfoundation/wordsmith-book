@@ -202,4 +202,31 @@ it (`assets/fonts/<name>.ttf` and `assets/fonts/<name>.txt`). Names follow the r
 
 ## Packed projects (`.wsbkz`)
 
-Added in step M1.3.
+One file holding a whole project, for sending, backups and recovery (core decision 0009): a zip
+whose first entry is `mimetype` (stored, `application/x-wordsmith-book-packed`), then every file
+in name order, with fixed times, so the same project packs to the same bytes.
+
+```text
+mimetype
+book.toml
+designs/<id>.toml
+assets/<path>
+builds/<edition>.json
+source.wsm/<path>        the owned source's files, when the book has one
+linked.wsmz              a packed copy of a linked Manuscript project (read-only), so the
+                         project travels whole; read when the linked path is not found
+```
+
+Reading never trusts the file: at most 2 GB packed, 50,000 entries, 512 MB an entry and 4 GB
+unpacked; entries are read one by one into memory (never extracted); names are checked (no
+folders above, no absolute or hidden names); `mimetype` must come first and match. A pack opens
+as a new project folder, never over a folder that holds something.
+
+**Recovery.** While there are unsaved changes, the project's own files are packed to
+`.recovery/unsaved.wsbkz` inside the project folder before each save; a save that finishes
+removes it. After a crash the project opens whole (each file is written atomically) and the
+recovered work is offered.
+
+**Backups** are packed projects named `<name> <YYYY-MM-DD HH.MM.SS> UTC.wsbkz` (a number added for
+a second backup in the same second), in a folder the app chooses, the oldest removed beyond the
+number kept.

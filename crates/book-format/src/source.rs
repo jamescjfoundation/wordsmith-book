@@ -92,6 +92,10 @@ pub fn open(project_root: &Path, source: &Source) -> Result<Opened, Error> {
     if owned {
         return Err(Error::Source(format!("the owned source `{}` is missing from the project", path.display())));
     }
+    // A linked source that is not where the project says (a project opened from a bundle on
+    // another machine) is read from the packed copy the project carries, if it has one.
+    let copy = project_root.join(crate::pack::LINKED_COPY);
+    let path = if !path.exists() && copy.is_file() { copy } else { path };
     let bytes = jcj_project::files::read_bounded(&path, wordsmith_manuscript_format::pack::MAX_PACKED)
         .map_err(|e| Error::Source(format!("{}: {e}", path.display())))?;
     let project = wordsmith_manuscript_format::pack::read_packed(&bytes).map_err(source_err)?;

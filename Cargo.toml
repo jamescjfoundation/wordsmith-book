@@ -44,6 +44,7 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 toml = "1"
 sha2 = "0.11"
+zip = { version = "3", default-features = false, features = ["deflate"] }
 proptest = { version = "1", default-features = false, features = ["std"] }
 image = { version = "0.25", default-features = false, features = ["png", "jpeg"] }
 # Tests of the views (egui's test harness, at the core's egui fork through the patch block).

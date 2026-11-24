@@ -20,6 +20,8 @@ serde = { workspace = true }
 serde_json = { workspace = true }
 toml = { workspace = true }
 sha2 = { workspace = true }
+zip = { workspace = true }
 
 [dev-dependencies]
 proptest = { workspace = true }
+zip = { workspace = true }

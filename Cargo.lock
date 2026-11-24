@@ -5417,6 +5417,7 @@ dependencies = [
  "wordsmith-book-model",
  "wordsmith-manuscript-format",
  "wordsmith-manuscript-model",
+ "zip 3.0.0",
 ]
 
 [[package]]

@@ -10,6 +10,7 @@
 
 pub mod folder;
 pub mod limits;
+pub mod pack;
 pub mod source;
 pub mod toml_file;
 
