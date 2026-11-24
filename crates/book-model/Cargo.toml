@@ -13,3 +13,4 @@ workspace = true
 
 [dependencies]
 wordsmith-manuscript-model = { workspace = true }
+serde = { workspace = true }

@@ -13,4 +13,13 @@ workspace = true
 
 [dependencies]
 wordsmith-book-model = { workspace = true }
+wordsmith-manuscript-model = { workspace = true }
 wordsmith-manuscript-format = { workspace = true }
+jcj-project = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+toml = { workspace = true }
+sha2 = { workspace = true }
+
+[dev-dependencies]
+proptest = { workspace = true }

@@ -1,0 +1,6 @@
+schema = 0
+design = "literary"
+
+[source]
+kind = "manuscript"
+path = "../The Lighthouse.wsm"

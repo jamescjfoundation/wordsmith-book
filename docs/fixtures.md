@@ -51,6 +51,14 @@ the part titles and Heading 2 to the chapter titles, save, and add the files her
 ("an open-source word processor, version N"), never by product, with the program's name removed
 from the files' metadata.
 
+## Book projects (`tests/fixtures/projects/`)
+
+Written for the test by hand.
+
+| Folder | What it is |
+| --- | --- |
+| `tests/fixtures/projects/version-0.wsbk/` | A Book project in the never-released draft schema 0 (`docs/format.md`), for the migration path |
+
 ## The Manuscript project fixture
 
 Added in step M1.2 (`cargo xtask fixtures`).
