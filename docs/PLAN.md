@@ -649,7 +649,7 @@ Section 5.8.
 | M4 Designs | 0.1 | Design format, six designs, mixing, own designs, chooser | done |
 | M5 Print | 0.1 | Typesetting, trims and margins, chapter openings, print PDF | done |
 | M6 Ebook | 0.1 | EPUB writer, navigation, accessibility, cover, fonts | done |
-| M7 Preview | 0.1 | Print spreads, ebook preview, live updates | |
+| M7 Preview | 0.1 | Print spreads, ebook preview, live updates | done |
 | M8 Preflight and export | 0.1 | Checks, validators, export, bundle | |
 | M9 Release | 0.1 | CLI, agent tools, guide, packaging, the v0.1 test | |
 | R2 | 0.2 | Parity for most novels | |

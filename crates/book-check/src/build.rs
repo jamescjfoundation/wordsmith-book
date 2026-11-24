@@ -52,6 +52,32 @@ pub fn print(
     Ok(Print { assembled, book: pbook, look, typeset, profile, left })
 }
 
+/// Build only the opening of print `edition`: the front matter and the first chapter (or part
+/// and chapter), so a preview can show its first pages at once while the whole book is built.
+/// The contents' page numbers are placeholders until the whole book is laid out.
+pub fn print_opening(
+    project: &BookProject,
+    designs: &BTreeMap<String, String>,
+    book: &Book,
+    edition: &Edition,
+    images: &dyn Fn(&str) -> Option<Vec<u8>>,
+) -> Result<Print, String> {
+    if !edition.format.is_print() {
+        return Err(format!("the {} is not a printed edition", edition.name.to_lowercase()));
+    }
+    let profile_id = if edition.profile.is_empty() { "pod-paperback" } else { edition.profile.as_str() };
+    let profile = profile::get(profile_id).ok_or_else(|| format!("there is no print profile “{profile_id}”"))?;
+    let geometry = profile.geometry(edition)?;
+    let design = mix::resolve(&project.design, designs).map_err(|e| e.to_string())?;
+    let assembled = assemble(project, book, Some(edition));
+    let lang = if book.metadata.info.language.is_empty() { "en".to_owned() } else { book.metadata.info.language.clone() };
+    let (mut pbook, look, left) = print_book(&assembled, &design, &geometry, &lang, images).map_err(|e| e.to_string())?;
+    let first = pbook.sections.iter().position(|s| s.kind == wordsmith_book_typeset::Kind::Chapter).map_or(pbook.sections.len(), |i| i + 1);
+    pbook.sections.truncate(first);
+    let typeset = typeset(&pbook, &look, if project.date.is_empty() { "2000-01-01" } else { &project.date }).map_err(|e| e.to_string())?;
+    Ok(Print { assembled, book: pbook, look, typeset, profile, left })
+}
+
 /// Build ebook `edition` of the project from `book`, the project's own designs and `images`, as
 /// [`print`] does for print.
 pub fn ebook(

@@ -26,13 +26,16 @@ pub struct Built {
     pub edition: String,
     /// The laid-out edition.
     pub print: Print,
-    /// How long it took.
+    /// How long it took from the request.
     pub took: Duration,
+    /// Only the opening (front matter and first chapter); the whole book follows.
+    pub opening: bool,
 }
 
 /// A page image drawn for the preview, at a resolution.
 struct Drawn {
     revision: u64,
+    opening: bool,
     page: usize,
     ppi: u32,
     image: Option<Pixels>,
@@ -48,6 +51,9 @@ struct Pixels {
 enum Job {
     Build(u64, String),
 }
+
+/// What a build worker sends: the opening first, then the whole book.
+type Stage = Result<Built, String>;
 
 /// What the preview shows and the work it has in hand.
 pub struct PrintPreview {
@@ -67,12 +73,12 @@ pub struct PrintPreview {
     pub built: Option<Arc<Built>>,
     /// Why the last build failed, if it did.
     pub error: Option<String>,
-    job: Option<(Job, Receiver<Result<Built, String>>)>,
+    job: Option<(Job, Receiver<Stage>)>,
     renderer: Option<(Sender<(Arc<Built>, usize, u32)>, Receiver<Drawn>)>,
-    requested: BTreeSet<(u64, usize, u32)>,
+    requested: BTreeSet<(u64, bool, usize, u32)>,
     textures: BTreeMap<(usize, u32), egui::TextureHandle>,
-    /// The revision and edition the textures belong to.
-    texture_key: (u64, String),
+    /// The revision, edition and stage the textures belong to.
+    texture_key: (u64, String, bool),
 }
 
 impl Default for PrintPreview {
@@ -90,7 +96,7 @@ impl Default for PrintPreview {
             renderer: None,
             requested: BTreeSet::new(),
             textures: BTreeMap::new(),
-            texture_key: (u64::MAX, String::new()),
+            texture_key: (u64::MAX, String::new(), false),
         }
     }
 }
@@ -135,7 +141,7 @@ impl PrintPreview {
     pub fn update(&mut self, b: &OpenBook) {
         self.poll();
         let Some(edition) = self.edition_of(b) else { return };
-        let current = self.built.as_ref().is_some_and(|x| x.revision == b.revision && x.edition == edition.id);
+        let current = self.built.as_ref().is_some_and(|x| x.revision == b.revision && x.edition == edition.id && !x.opening);
         let running = matches!(&self.job, Some((Job::Build(r, e), _)) if *r == b.revision && *e == edition.id);
         if current || running || self.job.is_some() {
             return;
@@ -151,11 +157,19 @@ impl PrintPreview {
         let id = edition.id.clone();
         std::thread::spawn(move || {
             let start = Instant::now();
-            let out = build::print(&project, &designs, &book, &edition, &|p| pictures.get(p).cloned()).map(|print| Built {
+            let images = |p: &str| pictures.get(p).cloned();
+            // The opening first, so the first pages show at once; then the whole book.
+            if let Ok(print) = build::print_opening(&project, &designs, &book, &edition, &images)
+                && tx.send(Ok(Built { revision, edition: edition.id.clone(), print, took: start.elapsed(), opening: true })).is_err()
+            {
+                return;
+            }
+            let out = build::print(&project, &designs, &book, &edition, &images).map(|print| Built {
                 revision,
                 edition: edition.id.clone(),
                 print,
                 took: start.elapsed(),
+                opening: false,
             });
             let _ = tx.send(out);
         });
@@ -164,18 +178,21 @@ impl PrintPreview {
 
     /// Take a finished build, if there is one.
     pub fn poll(&mut self) {
-        if let Some((_, rx)) = &self.job {
+        while let Some((_, rx)) = &self.job {
             match rx.try_recv() {
                 Ok(Ok(built)) => {
+                    let done = !built.opening;
                     self.built = Some(Arc::new(built));
                     self.error = None;
-                    self.job = None;
+                    if done {
+                        self.job = None;
+                    }
                 }
                 Ok(Err(e)) => {
                     self.error = Some(e);
                     self.job = None;
                 }
-                Err(std::sync::mpsc::TryRecvError::Empty) => {}
+                Err(std::sync::mpsc::TryRecvError::Empty) => break,
                 Err(std::sync::mpsc::TryRecvError::Disconnected) => {
                     self.error = Some("the build stopped".into());
                     self.job = None;
@@ -194,6 +211,12 @@ impl PrintPreview {
         self.job.is_none()
     }
 
+    /// Whether page `index` of the latest build is drawn and ready to show.
+    pub fn page_ready(&self, index: usize) -> bool {
+        self.built.as_ref().is_some_and(|b| self.texture_key.0 == b.revision && self.texture_key.2 == b.opening)
+            && self.textures.range((index, 0)..=(index, u32::MAX)).next().is_some()
+    }
+
     /// The first page of a piece (a section id or `element:<id>`), from 0.
     pub fn page_of(&self, piece: &str) -> Option<usize> {
         let built = self.built.as_ref()?;
@@ -209,7 +232,7 @@ impl PrintPreview {
                     #[allow(clippy::cast_precision_loss, reason = "a resolution in pixels per inch")]
                     let image =
                         built.print.typeset.page_image(page, ppi as f32).ok().map(|i| Pixels { width: i.width, height: i.height, pixels: i.pixels });
-                    if back.send(Drawn { revision: built.revision, page, ppi, image }).is_err() {
+                    if back.send(Drawn { revision: built.revision, opening: built.opening, page, ppi, image }).is_err() {
                         break;
                     }
                 }
@@ -221,7 +244,7 @@ impl PrintPreview {
     /// Take drawn pages and turn them into textures.
     fn receive(&mut self, ctx: &egui::Context) {
         let Some(built) = self.built.clone() else { return };
-        let key = (built.revision, built.edition.clone());
+        let key = (built.revision, built.edition.clone(), built.opening);
         if self.texture_key != key {
             self.textures.clear();
             self.requested.clear();
@@ -232,7 +255,7 @@ impl PrintPreview {
             None => return,
         };
         for d in drawn {
-            if d.revision != built.revision {
+            if d.revision != built.revision || d.opening != built.opening {
                 continue;
             }
             if let Some(img) = d.image {
@@ -246,7 +269,7 @@ impl PrintPreview {
 
     fn request(&mut self, page: usize, ppi: u32) {
         let Some(built) = self.built.clone() else { return };
-        if self.textures.contains_key(&(page, ppi)) || !self.requested.insert((built.revision, page, ppi)) {
+        if self.textures.contains_key(&(page, ppi)) || !self.requested.insert((built.revision, built.opening, page, ppi)) {
             return;
         }
         let _ = self.renderer().0.send((built, page, ppi));
@@ -307,7 +330,11 @@ impl PrintPreview {
         }
         let t = &built.print.typeset;
         let pages = t.page_count();
-        ui.label(format!("{pages} pages · gutter {:.3} in · built in {:.1} s", t.gutter(), built.took.as_secs_f32()));
+        if built.opening {
+            ui.label("The opening pages; laying out the rest of the book…");
+        } else {
+            ui.label(format!("{pages} pages · gutter {:.3} in · built in {:.1} s", t.gutter(), built.took.as_secs_f32()));
+        }
         let (pw, ph) = t.page_size(0).unwrap_or((432.0, 648.0));
         let bleed = if self.guides { built.print.profile.bleed * 72.0 } else { 0.0 };
         if self.fit {
