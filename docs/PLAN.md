@@ -642,7 +642,7 @@ Section 5.8.
 | Milestone | Release | Result | State |
 | --- | --- | --- | --- |
 | M0 Foundations | – | Repository, rules, spec, brand, fixtures, core issues, engine spike | done (the spike took the fallback, decision 0003) |
-| M1 Project | 0.1 | Format, sources, saving, outline | |
+| M1 Project | 0.1 | Format, sources, saving, outline | done |
 | M2 Import | 0.1 | Verifier, imports, structure detection, cleanup review | |
 | M3 Structure | 0.1 | Front and back matter, chapters and parts, metadata, editions, fixes | |
 | M4 Designs | 0.1 | Design format, six designs, mixing, own designs, chooser | |

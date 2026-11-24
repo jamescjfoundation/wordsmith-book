@@ -67,8 +67,12 @@ pub fn pack(p: &Packed) -> Result<Vec<u8>, Error> {
     }
     let mut w = zip::ZipWriter::new(Cursor::new(Vec::new()));
     let fixed = zip::DateTime::default();
-    let stored = zip::write::SimpleFileOptions::default().compression_method(zip::CompressionMethod::Stored).last_modified_time(fixed).unix_permissions(0o644);
-    let deflated = zip::write::SimpleFileOptions::default().compression_method(zip::CompressionMethod::Deflated).last_modified_time(fixed).unix_permissions(0o644);
+    let stored =
+        zip::write::SimpleFileOptions::default().compression_method(zip::CompressionMethod::Stored).last_modified_time(fixed).unix_permissions(0o644);
+    let deflated = zip::write::SimpleFileOptions::default()
+        .compression_method(zip::CompressionMethod::Deflated)
+        .last_modified_time(fixed)
+        .unix_permissions(0o644);
     w.start_file("mimetype", stored).map_err(|e| Error::Write(e.to_string()))?;
     w.write_all(MIMETYPE.as_bytes()).map_err(|e| Error::Write(e.to_string()))?;
     for (name, bytes) in &entries {

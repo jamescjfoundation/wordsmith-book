@@ -30,7 +30,13 @@ fn icon() -> Option<egui::IconData> {
 
 fn main() -> ExitCode {
     let shell = Shell::new(NAME, env!("CARGO_PKG_VERSION"), brand::tokens()).with_options(shell_options());
-    let window = Window { shell, app: BookApp::new() };
+    let mut app = BookApp::new();
+    if let Some(path) = std::env::args().nth(1)
+        && let Err(e) = app.open_path(&path)
+    {
+        app.message = Some(e);
+    }
+    let window = Window { shell, app };
     let mut viewport = egui::ViewportBuilder::default().with_title(NAME).with_app_id("org.jcjfoundation.book");
     if let Some(icon) = icon() {
         viewport = viewport.with_icon(icon);
