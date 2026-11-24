@@ -7,3 +7,4 @@ open-source-core's `docs/decisions/`, never here.
 | Number | Decision |
 | --- | --- |
 | [0001](0001-built-on-open-source-core-and-manuscripts-book-view.md) | Built on open-source-core and Manuscript's book view |
+| [0002](0002-name-and-extensions.md) | The name and the file extensions (`.wsbk`, `.wsbkz`) |

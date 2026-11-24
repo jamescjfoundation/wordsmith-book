@@ -415,10 +415,10 @@ Specified in `docs/format.md` (step M1.1); the design format in `docs/design-for
 
 ### 6.2 Layout
 
-A Book project is a folder (extension checked in M0.2; proposed `.wsb`, packed `.wsbz`):
+A Book project is a folder (extensions checked in M0.2, decision 0002: `.wsbk`, packed `.wsbkz`):
 
 ```text
-My Book.wsb/
+My Book.wsbk/
   book.toml               schema, the source, metadata additions, editions, the design in use
                           and per-edition design overrides, print-only and ebook-only flags,
                           cleanup decisions, fixes and their offer ids
@@ -434,7 +434,7 @@ My Book.wsb/
 - `book.toml` names its source: `source = { manuscript = "../My Novel.wsm" }` (a path from the
   Book project's folder to a Manuscript folder or `.wsmz`), or `source = { owned = "source.wsm" }`.
 - Saving writes changed files only, each atomically through `jcj-project`, `book.toml` last.
-- Packing (`.wsbz`), backups and recovery follow the core's container rules (core decision 0009):
+- Packing (`.wsbkz`), backups and recovery follow the core's container rules (core decision 0009):
   deterministic zip, `mimetype` first, sorted entries, fixed times, entries read one by one into
   memory with sizes and counts capped. A packed Book project with a linked source carries a
   packed copy of the source (read-only) so it travels whole.
@@ -764,11 +764,11 @@ in `docs/requests-to-manuscript.md`).
 - Done when: those pass and the review is written and marked as awaiting a person's sign-off.
 
 **M1.3 `m1/save`**: atomic saves through `jcj-project`, auto-save on the core's timing driven by
-`jcj-shell`, recovery, packed backups (`.wsbz`) with a number kept, Save as one file, open
-`.wsbz`.
-- Tests: crash injection (stop after each file write); packing twice; damaged and hostile `.wsbz`.
+`jcj-shell`, recovery, packed backups (`.wsbkz`) with a number kept, Save as one file, open
+`.wsbkz`.
+- Tests: crash injection (stop after each file write); packing twice; damaged and hostile `.wsbkz`.
 - Done when: every crash reopens to the last good save or the recovered work, packing is
-  deterministic, and a damaged `.wsbz` is refused cleanly.
+  deterministic, and a damaged `.wsbkz` is refused cleanly.
 
 **M1.4 `m1/outline`**: the app opens and creates Book projects (start window and templates from
 the core); the outline panel on the promoted tree widget (C3, released in the core first): front
@@ -1126,7 +1126,7 @@ are re-checked before each is added; `cargo xtask licenses` and `cargo deny` enf
 | [typst](https://crates.io/crates/typst), `typst-pdf`, `typst-render` | Print typesetting, PDF, page images (section 5.6) | Apache-2.0 | M0.7 |
 | [toml](https://crates.io/crates/toml) | `book.toml`, designs, print profiles (already in the core's lock file) | MIT OR Apache-2.0 | M1.1 |
 | [uuid](https://crates.io/crates/uuid) | Ids for Book's own elements and offers | MIT OR Apache-2.0 | M1.1 |
-| [zip](https://crates.io/crates/zip) | `.wsbz` and EPUB packing, at the core's version and with its reading rules | MIT | M1.3 |
+| [zip](https://crates.io/crates/zip) | `.wsbkz` and EPUB packing, at the core's version and with its reading rules | MIT | M1.3 |
 | [ttf-parser](https://crates.io/crates/ttf-parser) | Font names and embedding bits in preflight (likely already in the lock file) | MIT OR Apache-2.0 | M8.1 |
 | [image](https://crates.io/crates/image) | Image sizes and resolution checks | MIT OR Apache-2.0 | M5.1 |
 | [proptest](https://crates.io/crates/proptest) | Property tests (dev only) | MIT OR Apache-2.0 | M1.1 |

@@ -7,8 +7,12 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
 | Date | Step | What changed | Tests |
 | --- | --- | --- | --- |
 | 2026-11-24 | M0.1 m0/template | Workspace from the core's template: eight crates and two apps with crate-root rules, licenses, NOTICE, SECURITY, CONTRIBUTING, conduct, ATTRIBUTION, AGENTS.md with Book's own rules; `app-layers`, `assets` and `names` tasks; Manuscript's format and model at `book-view-1`; C10 released as core v0.1.5 and the sync fix for two cores in one graph as core v0.1.6, Book pinned to v0.1.6; decision 0001; the empty app's window shows Book's name (harness test) | 31 |
+| 2026-11-24 | M0.2 m0/name | Decision 0002: `.wsb` is taken on one desktop platform, so a Book project is `.wsbk` and the packed project `.wsbkz`; the plan changed to match. Note: the core's pre-push hook cannot diff against `origin/main` on the first push to an empty repository; the first push set a local `origin/main` to the plan commit so the hook checked everything | 31 |
 
 ## Waiting on a person
+
+- **Names:** recheck decision 0002's finding that `.wsbk` and `.wsbkz` are free on the three desktop
+  platforms before packaging (M9.4).
 
 - **Core:** move Wordsmith Script and Wordsmith Manuscript to the newest core release (core
   v0.1.6 so far; every release in this run is additive).
