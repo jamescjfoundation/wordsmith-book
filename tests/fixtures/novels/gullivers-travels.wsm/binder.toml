@@ -1,0 +1,384 @@
+schema = 3
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-000000000001"
+kind = "text"
+role = "front-matter"
+title = "Title Page"
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-000000000002"
+kind = "text"
+role = "front-matter"
+title = "THE PUBLISHER TO THE READER"
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-000000000003"
+kind = "text"
+role = "front-matter"
+title = "A LETTER FROM CAPTAIN GULLIVER TO HIS COUSIN SYMPSON"
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-000000000004"
+kind = "folder"
+role = "part"
+title = "A VOYAGE TO LILLIPUT"
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-000000000005"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-000000000006"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-000000000007"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-000000000008"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-000000000009"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-00000000000a"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-00000000000b"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-00000000000c"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000004"
+id = "00000000-0000-7000-8000-00000000000d"
+kind = "text"
+role = "chapter"
+title = "A Scene Cut from Lilliput"
+include = false
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-00000000000e"
+kind = "folder"
+role = "part"
+title = "A VOYAGE TO BROBDINGNAG"
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-00000000000f"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-000000000010"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-000000000011"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-000000000012"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-000000000013"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-000000000014"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-000000000015"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-00000000000e"
+id = "00000000-0000-7000-8000-000000000016"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-000000000017"
+kind = "folder"
+role = "part"
+title = "A VOYAGE TO LAPUTA, BALNIBARBI, GLUBBDUBDRIB, LUGGNAGG AND"
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-000000000018"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-000000000019"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-00000000001a"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-00000000001b"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-00000000001c"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-00000000001d"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-00000000001e"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-00000000001f"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-000000000020"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-000000000021"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000017"
+id = "00000000-0000-7000-8000-000000000022"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-000000000023"
+kind = "folder"
+role = "part"
+title = "A VOYAGE TO THE COUNTRY OF THE HOUYHNHNMS"
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-000000000024"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-000000000025"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-000000000026"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-000000000027"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-000000000028"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-000000000029"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-00000000002a"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-00000000002b"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-00000000002c"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-00000000002d"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-00000000002e"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+parent = "00000000-0000-7000-8000-000000000023"
+id = "00000000-0000-7000-8000-00000000002f"
+kind = "text"
+role = "chapter"
+title = ""
+
+[[item]]
+area = "manuscript"
+id = "00000000-0000-7000-8000-000000000030"
+kind = "text"
+role = "back-matter"
+title = "About the Author"
+
+[[item]]
+area = "research"
+id = "00000000-0000-7000-8000-000000000031"
+kind = "text"
+title = "Notes on Ships"

@@ -65,6 +65,7 @@ fn main() -> ExitCode {
         "install-hooks" => util::git_output(&root, &["config", "core.hooksPath", "hooks"]).map(|_| println!("git hooks on")),
         "third-party-licenses" => licenses::task(&root, SHIPPED, PRODUCT, rest.first().map(String::as_str)),
         "privacy" => privacy::task(&root, rest),
+        "fixtures" => book::fixtures(&root),
         name => match TASKS.iter().find(|(n, _)| *n == name) {
             Some((n, _)) => run_task(n, &root, &Affected::All),
             None => {

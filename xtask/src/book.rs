@@ -205,6 +205,16 @@ pub fn names(root: &Path) -> TaskResult {
     report(failures, "no listed name in tracked files or commit messages")
 }
 
+/// The Manuscript project fixture: its source text and the folder written from it.
+pub const MANUSCRIPT_FIXTURE: (&str, &str) = ("tests/fixtures/novels/gullivers-travels.txt", "tests/fixtures/novels/gullivers-travels.wsm");
+
+/// `cargo xtask fixtures`: write the fixtures that need Rust (the Manuscript project, through
+/// Manuscript's public writer). The others come from `tools/make-fixtures.py`.
+pub fn fixtures(root: &Path) -> TaskResult {
+    let (src, out) = MANUSCRIPT_FIXTURE;
+    crate::util::cargo(root, &["run", "--quiet", "-p", "wordsmith-book-format", "--example", "manuscript_fixture", "--", src, out])
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

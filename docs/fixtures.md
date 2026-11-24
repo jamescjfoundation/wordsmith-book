@@ -59,6 +59,12 @@ Written for the test by hand.
 | --- | --- |
 | `tests/fixtures/projects/version-0.wsbk/` | A Book project in the never-released draft schema 0 (`docs/format.md`), for the migration path |
 
-## The Manuscript project fixture
+## The Manuscript project fixture (`tests/fixtures/novels/`)
 
-Added in step M1.2 (`cargo xtask fixtures`).
+Written through Wordsmith Manuscript's public folder writer by `cargo xtask fixtures` (which runs
+`crates/book-format/examples/manuscript_fixture`; a Rust generator because the format's writer
+is Rust). Deterministic: ids come from a counter, so the same text gives the same files.
+
+| Folder | Made from | What it is |
+| --- | --- | --- |
+| `tests/fixtures/novels/gullivers-travels.wsm/` | `novels/gullivers-travels.txt` | A Manuscript project: book metadata; a title page, the publisher's note and the letter as front matter; four parts with their 39 chapters, italic and the text's notes as notes at their references; an "About the Author" page as back matter; and, to test what the book view leaves out, a chapter excluded from export, a research note and a comment anchored on the first words |
