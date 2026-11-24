@@ -1,0 +1,18 @@
+[package]
+name = "wordsmith-book-cli"
+description = "Wordsmith Book on the command line: build, check, verify, convert, report, run, mcp"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+
+[[bin]]
+name = "book-cli"
+path = "src/main.rs"

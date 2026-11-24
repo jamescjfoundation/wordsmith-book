@@ -1,0 +1,21 @@
+[package]
+name = "wordsmith-book"
+description = "Wordsmith Book, the desktop app"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+wordsmith-book-ui = { workspace = true }
+jcj-shell = { workspace = true }
+eframe = { workspace = true }
+
+[[bin]]
+name = "wordsmith-book"
+path = "src/main.rs"
