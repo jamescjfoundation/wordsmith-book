@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 //! Print: a book and a design to pages, PDF, page images and the page map (plan section 5.6).
 //!
-//! Decision 0003: the embedded engine the plan proposed does not build against the core's
-//! patched PDF libraries, so print takes the plan's fallback. A [`PrintBook`] (the book's
-//! sections and blocks, already in reading order) and a [`Look`] (the design's values for one
-//! edition) become a print document in the core's model (`jcj-doc`): mirrored margins, a section
-//! per chapter opening on a right-hand page when the design says so, running heads on facing
-//! pages and folios, small caps, drop caps, hyphenation and widow and orphan control. The core
-//! lays it out (`jcj-layout`) and writes the PDF and page images (`jcj-output`). Book's text is
-//! always data in the document's runs, never instructions.
+//! Decision 0003: print is built on the core. A [`PrintBook`] (the book's sections and blocks in
+//! reading order, made from the assembled book by [`from_book`]) and a [`Look`] (the design's
+//! values for one edition) become a print document in the core's model (`jcj-doc`): a section per
+//! opening, mirrored margins, running heads on facing pages and folios (roman in the front
+//! matter), small caps, drop caps, hyphenation by the book's language, widow and orphan control,
+//! endnotes per chapter, pictures with their alternative text, and the contents with page
+//! numbers. The core lays it out (`jcj-layout`) and writes the PDF and page images
+//! (`jcj-output`). Book's text is always data in the document's runs, never instructions.
 //!
 // core-candidate: open-source-core#19 (C5, a typesetting layer for books)
 
@@ -17,17 +17,24 @@
 
 mod build;
 pub mod fonts;
+pub mod from_book;
+
+use std::collections::BTreeSet;
 
 use jcj_doc::Document;
 use jcj_layout::{DocLayout, LayoutCache};
 
-pub use build::print_document;
+pub use build::{SOURCE, print_document};
 
 /// Points per inch.
 pub const INCH: f32 = 72.0;
 
 /// The name PDFs give as the program that made them.
 pub const CREATOR: &str = "Wordsmith Book";
+
+/// The most layout passes one build runs (right-hand starts, the contents' page numbers, the
+/// gutter from the page count).
+pub const MAX_PASSES: usize = 4;
 
 /// Why a build failed.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -52,7 +59,7 @@ impl std::fmt::Display for Error {
 
 impl std::error::Error for Error {}
 
-/// A run of text with its marks. The text is the author's, exactly.
+/// A run of text with its marks. The text is exactly as given.
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct Span {
     /// The words.
@@ -63,6 +70,12 @@ pub struct Span {
     pub bold: bool,
     /// Small capitals.
     pub small_caps: bool,
+    /// Struck through.
+    pub strike: bool,
+    /// A language tag, for hyphenation.
+    pub lang: Option<String>,
+    /// Raised small (a note's number).
+    pub superscript: bool,
 }
 
 impl Span {
@@ -72,6 +85,18 @@ impl Span {
     }
 }
 
+/// A picture's place.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum ImageFit {
+    /// At its own size, no wider than the text.
+    #[default]
+    Inline,
+    /// As wide as the text.
+    Wide,
+    /// On a page of its own, as large as the text block.
+    Page,
+}
+
 /// A block of a section's text.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Block {
@@ -79,25 +104,72 @@ pub enum Block {
     Para(Vec<Span>),
     /// A scene break.
     Break,
-    /// Verse: lines of one stanza.
+    /// Verse: the lines of one stanza.
     Verse(Vec<Vec<Span>>),
-    /// A block quote of paragraphs.
+    /// A block quote (or an aside) of paragraphs.
     Quote(Vec<Vec<Span>>),
     /// A subheading.
     Heading(Vec<Span>),
+    /// A centered line of a front matter page, at `scale` times the body size (in hundredths).
+    Centered(Vec<Span>, u16),
+    /// A line of the contents: its text and the id of the section it points at.
+    Entry(Vec<Span>, String),
+    /// A picture: its bytes (PNG or JPEG), pixel size, alternative text and place.
+    Image {
+        /// The picture file.
+        bytes: Vec<u8>,
+        /// Its width and height in pixels.
+        pixels: (u32, u32),
+        /// Its alternative text (carried into the tagged PDF).
+        alt: String,
+        /// Its place.
+        fit: ImageFit,
+    },
 }
 
-/// One section that opens on a new page: a chapter, a part page, a front or back matter page.
-#[derive(Clone, Debug, PartialEq, Eq)]
+/// What a section is, which decides how it opens.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum Kind {
+    /// A chapter (or another body section): the designed opening.
+    #[default]
+    Chapter,
+    /// A part page.
+    Part,
+    /// A front or back matter page with a title (a dedication, acknowledgements).
+    Matter,
+    /// A front matter page without a title (the half title, the title page, the copyright page).
+    Plain,
+}
+
+/// One section that opens on a new page.
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct Section {
     /// Its stable id (for the page map).
     pub id: String,
-    /// The number line ("Chapter One"), if shown.
-    pub number: Option<String>,
-    /// The title, if shown.
+    /// How it opens.
+    pub kind: Kind,
+    /// In the front matter (roman folios).
+    pub front: bool,
+    /// Opens on a right-hand page.
+    pub recto: bool,
+    /// The number line ("Chapter One").
+    pub label: Option<String>,
+    /// The title.
     pub title: String,
+    /// A subtitle.
+    pub subtitle: String,
+    /// An epigraph and its attribution.
+    pub epigraph: Option<(String, String)>,
     /// The text.
     pub blocks: Vec<Block>,
+    /// Its notes, printed at its end, numbered from 1 (endnotes until footnotes arrive).
+    pub notes: Vec<Vec<Span>>,
+    /// The running head on right-hand pages when heads show chapters.
+    pub head: String,
+    /// The section's title is the book's own words (a generated page's), not the author's.
+    pub generated_title: bool,
+    /// The section's text is the book's own words (a generated page), not the author's.
+    pub generated: bool,
 }
 
 /// The book to print, in reading order.
@@ -125,6 +197,30 @@ pub enum FirstLine {
     SmallCaps,
 }
 
+/// How a line of the opening is set.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum Case {
+    /// As written.
+    #[default]
+    AsWritten,
+    /// Small capitals.
+    SmallCaps,
+    /// Capitals.
+    Capitals,
+}
+
+/// Running heads.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum Heads {
+    /// The author on the left, the title on the right.
+    #[default]
+    AuthorTitle,
+    /// The title on the left, the chapter on the right.
+    TitleChapter,
+    /// None.
+    None,
+}
+
 /// The design's values for one edition, in points unless named otherwise.
 #[derive(Clone, Debug, PartialEq)]
 pub struct Look {
@@ -132,6 +228,8 @@ pub struct Look {
     pub trim: (f32, f32),
     /// Inside (gutter side), outside, top and bottom margins, inches.
     pub margins: (f32, f32, f32, f32),
+    /// The gutter added to the inside margin by page count: (pages up to, inches).
+    pub gutter: Vec<(usize, f32)>,
     /// The body font family.
     pub body_font: String,
     /// The heading font family.
@@ -142,26 +240,42 @@ pub struct Look {
     pub leading: f32,
     /// First-line indent, ems.
     pub indent: f32,
+    /// Justified.
+    pub justify: bool,
     /// Hyphenate.
     pub hyphenate: bool,
-    /// Chapters start on a right-hand page.
-    pub recto: bool,
-    /// The chapter opening's sink from the top margin, inches.
+    /// Never two hyphenated lines in a row.
+    pub strict_hyphens: bool,
+    /// The opening's sink, a fraction of the text block.
     pub sink: f32,
     /// The number line's size.
     pub number_size: f32,
+    /// The number line's case.
+    pub number_case: Case,
     /// The title's size.
     pub title_size: f32,
+    /// The title's case.
+    pub title_case: Case,
+    /// The opening centered (else at the left).
+    pub center: bool,
     /// An ornament under the title ("" for none).
     pub ornament: String,
     /// The first line of each chapter.
     pub first_line: FirstLine,
-    /// The scene break's mark ("" for a blank line).
+    /// The scene break's mark.
     pub break_mark: String,
-    /// Running heads (author on the left page, title on the right).
-    pub heads: bool,
-    /// Running heads' and folios' size.
+    /// A scene break is a blank line and the next scene starts in small capitals.
+    pub break_space: bool,
+    /// The part page's number size, title size and sink.
+    pub part: (f32, f32, f32),
+    /// Running heads.
+    pub heads: Heads,
+    /// Folios in the head (else at the foot).
+    pub folio_head: bool,
+    /// Heads' and folios' size.
     pub head_size: f32,
+    /// Heads in small capitals.
+    pub head_small_caps: bool,
 }
 
 impl Default for Look {
@@ -169,22 +283,38 @@ impl Default for Look {
         Look {
             trim: (6.0, 9.0),
             margins: (0.75, 0.6, 0.75, 0.75),
+            gutter: Vec::new(),
             body_font: String::new(),
             heading_font: String::new(),
             body_size: 11.0,
             leading: 1.3,
             indent: 1.2,
+            justify: true,
             hyphenate: true,
-            recto: true,
-            sink: 1.8,
+            strict_hyphens: false,
+            sink: 0.25,
             number_size: 11.0,
+            number_case: Case::SmallCaps,
             title_size: 20.0,
+            title_case: Case::AsWritten,
+            center: true,
             ornament: String::new(),
             first_line: FirstLine::SmallCaps,
             break_mark: "*".into(),
-            heads: true,
+            break_space: false,
+            part: (14.0, 24.0, 0.33),
+            heads: Heads::AuthorTitle,
+            folio_head: false,
             head_size: 9.0,
+            head_small_caps: true,
         }
+    }
+}
+
+impl Look {
+    /// The gutter for a book of `pages` pages, inches.
+    pub fn gutter_for(&self, pages: usize) -> f32 {
+        self.gutter.iter().find(|(upto, _)| pages <= *upto).or(self.gutter.last()).map_or(0.0, |(_, g)| *g)
     }
 }
 
@@ -193,8 +323,21 @@ impl Default for Look {
 pub struct Start {
     /// The section's id.
     pub id: String,
-    /// The page it starts on, from 1.
+    /// The page it starts on, from 1 (the physical page).
     pub page: usize,
+    /// The folio printed for that page ("vii", "12").
+    pub folio: String,
+}
+
+/// The choices one layout pass is built with.
+#[derive(Clone, Debug, Default, PartialEq)]
+pub struct Pass {
+    /// Sections that get a blank page before them (to open on a right-hand page).
+    pub blanks: BTreeSet<usize>,
+    /// The contents' folios, by section id.
+    pub folios: std::collections::BTreeMap<String, String>,
+    /// The gutter, inches.
+    pub gutter: f32,
 }
 
 /// A finished layout: its pages, its page map, and what can be made from it.
@@ -206,48 +349,107 @@ pub struct Typeset {
     author: String,
     date: String,
     passes: usize,
+    gutter: f32,
+}
+
+/// `n` in lower-case roman numerals (front matter folios).
+pub fn roman_lower(n: u32) -> String {
+    const TABLE: [(u32, &str); 13] = [
+        (1000, "m"),
+        (900, "cm"),
+        (500, "d"),
+        (400, "cd"),
+        (100, "c"),
+        (90, "xc"),
+        (50, "l"),
+        (40, "xl"),
+        (10, "x"),
+        (9, "ix"),
+        (5, "v"),
+        (4, "iv"),
+        (1, "i"),
+    ];
+    let mut n = n;
+    let mut out = String::new();
+    for (v, s) in TABLE {
+        while n >= v {
+            out.push_str(s);
+            n -= v;
+        }
+    }
+    out
+}
+
+/// A first guess at the page count, so the first pass starts with the gutter it will most
+/// likely end with: the characters of the book over the characters a page holds, plus the pages
+/// each section opens.
+pub fn estimate_pages(book: &PrintBook, look: &Look) -> usize {
+    let chars: usize = book
+        .sections
+        .iter()
+        .flat_map(|s| &s.blocks)
+        .map(|b| match b {
+            Block::Para(sp) | Block::Heading(sp) | Block::Centered(sp, _) | Block::Entry(sp, _) => {
+                sp.iter().map(|s| s.text.chars().count()).sum::<usize>() + 40
+            }
+            Block::Verse(l) | Block::Quote(l) => l.iter().flatten().map(|s| s.text.chars().count()).sum::<usize>() + 80 * l.len(),
+            Block::Break => 120,
+            Block::Image { .. } => 1500,
+        })
+        .sum();
+    let (w, h) = look.trim;
+    let (i, o, t, b) = look.margins;
+    let per_line = ((w - i - o - look.gutter_for(300)).max(1.0) * INCH / (look.body_size * 0.47)).max(10.0);
+    let lines = ((h - t - b).max(1.0) * INCH / (look.body_size * look.leading)).max(5.0);
+    let pages = chars as f32 / (per_line * lines);
+    pages as usize + book.sections.len() * 3 / 2
 }
 
 /// Lay out `book` with `look`. `date` (`YYYY-MM-DD`) is the date the PDF carries, from the
 /// project, so the same book gives the same bytes.
 ///
-/// Chapters that must open on a right-hand page get a blank page before them where they would
-/// fall on a left-hand one; adding one moves everything after it, so the layout runs again until
-/// nothing moves (at most [`MAX_PASSES`] times).
+/// A book is laid out again until nothing moves (at most [`MAX_PASSES`] times): chapters that
+/// must open on a right-hand page get a blank page before them, the contents get the folios
+/// their sections landed on, and the gutter follows the page count.
 pub fn typeset(book: &PrintBook, look: &Look, date: &str) -> Result<Typeset, Error> {
-    let mut blanks = std::collections::BTreeSet::new();
-    let mut passes = 0;
+    let mut pass = Pass { gutter: look.gutter_for(estimate_pages(book, look)), ..Pass::default() };
+    let mut n = 0;
     loop {
-        passes += 1;
-        let (doc, starts) = build::print_document(book, look, &blanks)?;
+        n += 1;
+        let (doc, starts) = build::print_document(book, look, &pass)?;
         let mut cache = LayoutCache::new();
         let layout = jcj_layout::print_layout(&doc, &mut cache);
-        let mut t = Typeset { doc, layout, starts, title: book.title.clone(), author: book.author.clone(), date: date.to_owned(), passes };
-        let mut wanted = std::collections::BTreeSet::new();
-        if look.recto {
-            // Each section starts on a new page, so a blank page added or removed before one moves
-            // every later start by one: the shift so far predicts where each would land.
-            let mut shift: i64 = 0;
-            for (i, start) in t.page_map().iter().enumerate().skip(1) {
-                let had = blanks.contains(&i);
-                let without = start.page as i64 + shift - i64::from(had);
-                let need = without % 2 == 0;
-                if need {
-                    wanted.insert(i);
-                }
-                shift += i64::from(need) - i64::from(had);
+        let t = Typeset {
+            doc,
+            layout,
+            starts,
+            title: book.title.clone(),
+            author: book.author.clone(),
+            date: date.to_owned(),
+            passes: n,
+            gutter: pass.gutter,
+        };
+        let map = t.page_map();
+        let mut next = Pass { gutter: look.gutter_for(t.page_count()), ..Pass::default() };
+        // Right-hand starts: each section starts on a new page, so a blank page added or removed
+        // before one moves every later start by one.
+        let mut shift: i64 = 0;
+        for (i, (s, start)) in book.sections.iter().zip(&map).enumerate().skip(1) {
+            let had = pass.blanks.contains(&i);
+            let without = start.page as i64 + shift - i64::from(had);
+            let need = s.recto && without % 2 == 0;
+            if need {
+                next.blanks.insert(i);
             }
+            shift += i64::from(need) - i64::from(had);
         }
-        if wanted == blanks || passes >= MAX_PASSES {
-            t.passes = passes;
+        next.folios = map.iter().map(|s| (s.id.clone(), s.folio.clone())).collect();
+        if (next.blanks == pass.blanks && next.folios == pass.folios && (next.gutter - pass.gutter).abs() < 1e-4) || n >= MAX_PASSES {
             return Ok(t);
         }
-        blanks = wanted;
+        pass = next;
     }
 }
-
-/// The most layout passes one build runs.
-pub const MAX_PASSES: usize = 4;
 
 impl Typeset {
     /// How many pages.
@@ -260,14 +462,35 @@ impl Typeset {
         self.passes
     }
 
+    /// The gutter the build settled on, inches.
+    pub fn gutter(&self) -> f32 {
+        self.gutter
+    }
+
     /// The print document (for checks and the preview).
     pub fn document(&self) -> &Document {
         &self.doc
     }
 
+    /// The layout (for checks and the preview).
+    pub fn layout(&self) -> &DocLayout {
+        &self.layout
+    }
+
     /// Page `index`'s size in points (width, height).
     pub fn page_size(&self, index: usize) -> Option<(f32, f32)> {
         jcj_layout::page_boxes(&self.layout).get(index).map(|b| (b.page.w, b.page.h))
+    }
+
+    /// The folio for page `index` (from 0): roman in the front matter, else arabic.
+    pub fn folio(&self, index: usize) -> String {
+        let boxes = jcj_layout::page_boxes(&self.layout);
+        let Some(b) = boxes.get(index) else { return String::new() };
+        if build::FRONT.get_or_none(&self.doc).is_some_and(|front: Vec<usize>| front.contains(&b.section)) {
+            roman_lower(b.number)
+        } else {
+            b.number.to_string()
+        }
     }
 
     /// Where each section starts, in reading order.
@@ -277,9 +500,14 @@ impl Typeset {
             .iter()
             .filter_map(|(id, block)| {
                 let page = pieces.iter().position(|p| p.iter().any(|piece| piece.block == *block && !piece.continued))?;
-                Some(Start { id: id.clone(), page: page + 1 })
+                Some(Start { id: id.clone(), page: page + 1, folio: self.folio(page) })
             })
             .collect()
+    }
+
+    /// Which section page `index` (from 0) belongs to: the last section starting at or before it.
+    pub fn section_of_page(&self, index: usize) -> Option<String> {
+        self.page_map().into_iter().rev().find(|s| s.page <= index + 1).map(|s| s.id)
     }
 
     /// The PDF: every font embedded, tagged, no links, the project's date, naming the book.
@@ -298,8 +526,22 @@ impl Typeset {
 
     /// Page `index` (from 0) as a PNG at `ppi` pixels per inch, with its pixel size.
     pub fn page_png(&self, index: usize, ppi: f32) -> Result<(u32, u32, Vec<u8>), Error> {
-        let img = jcj_output::render_page(&self.doc, &self.layout, index, ppi / INCH, &jcj_output::RenderSettings::default())
-            .ok_or_else(|| Error::Page(format!("there is no page {}", index + 1)))?;
+        let img = self.page_image(index, ppi)?;
         Ok((img.width, img.height, img.to_png()))
+    }
+
+    /// Page `index` (from 0) as an RGBA image at `ppi` pixels per inch.
+    pub fn page_image(&self, index: usize, ppi: f32) -> Result<jcj_output::PageImage, Error> {
+        jcj_output::render_page(&self.doc, &self.layout, index, ppi / INCH, &jcj_output::RenderSettings::default())
+            .ok_or_else(|| Error::Page(format!("there is no page {}", index + 1)))
+    }
+
+    /// The text the book's body area prints, paragraph by paragraph: (the paragraph's text,
+    /// whether it is the author's words).
+    pub fn printed_paragraphs(&self) -> Vec<(String, bool)> {
+        jcj_doc::walk::body_paragraphs(&self.doc)
+            .into_iter()
+            .map(|(_, p)| (p.text.replace(jcj_doc::para::OBJ, ""), SOURCE.get_or_none(p).unwrap_or(false)))
+            .collect()
     }
 }

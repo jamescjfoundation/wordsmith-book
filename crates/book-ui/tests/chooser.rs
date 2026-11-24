@@ -6,8 +6,8 @@ use std::path::Path;
 
 use egui_kittest::Harness;
 use egui_kittest::kittest::Queryable;
-use jcj_shell::egui;
 use jcj_shell::Shell;
+use jcj_shell::egui;
 use serde_json::json;
 use wordsmith_book_design::builtin;
 use wordsmith_book_ui::chooser::{filter, first_chapter, tags};
@@ -42,7 +42,8 @@ fn the_chooser_previews_the_book_and_chooses_in_one_undo_step() {
     app.command(commands::IMPORT, &json!({ "file": file.display().to_string(), "path": dir.join("T.wsbk").display().to_string() })).unwrap();
     assert_eq!(first_chapter(app.book.as_ref().unwrap()).1, "The lamp burned low over the harbour.");
     let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
-    let mut h = Harness::builder().with_size(egui::vec2(1400.0, 1000.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
+    let mut h =
+        Harness::builder().with_size(egui::vec2(1400.0, 1000.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
     h.run();
     for _ in 0..2 {
         if h.query_by_label("Choose Fantasy").is_none() {

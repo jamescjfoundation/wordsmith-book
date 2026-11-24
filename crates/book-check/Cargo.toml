@@ -19,3 +19,11 @@ jcj-features = { workspace = true }
 
 [dev-dependencies]
 jcj-interchange = { workspace = true }
+wordsmith-book-model = { workspace = true }
+wordsmith-book-format = { workspace = true }
+wordsmith-book-design = { workspace = true }
+wordsmith-book-import = { workspace = true }
+wordsmith-book-typeset = { workspace = true }
+jcj-layout = { workspace = true }
+jcj-output = { workspace = true }
+image = { workspace = true }

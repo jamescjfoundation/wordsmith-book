@@ -29,6 +29,7 @@ wordsmith-book-model = { path = "crates/book-model" }
 wordsmith-book-format = { path = "crates/book-format" }
 wordsmith-book-design = { path = "crates/book-design" }
 wordsmith-book-import = { path = "crates/book-import" }
+wordsmith-book-typeset = { path = "crates/book-typeset" }
 wordsmith-book-ui = { path = "crates/book-ui" }
 
 # Wordsmith Manuscript's book view, at the tag of decision 0001 (book view version 1).

@@ -5438,9 +5438,17 @@ dependencies = [
 name = "wordsmith-book-check"
 version = "0.1.0"
 dependencies = [
+ "image",
  "jcj-doc 0.1.9",
  "jcj-features",
  "jcj-interchange",
+ "jcj-layout",
+ "jcj-output",
+ "wordsmith-book-design",
+ "wordsmith-book-format",
+ "wordsmith-book-import",
+ "wordsmith-book-model",
+ "wordsmith-book-typeset",
  "wordsmith-manuscript-format",
  "wordsmith-manuscript-model",
 ]
@@ -5510,6 +5518,10 @@ dependencies = [
  "jcj-layout",
  "jcj-output",
  "wordsmith-book-design",
+ "wordsmith-book-format",
+ "wordsmith-book-model",
+ "wordsmith-manuscript-format",
+ "wordsmith-manuscript-model",
 ]
 
 [[package]]

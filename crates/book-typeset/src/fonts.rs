@@ -13,11 +13,18 @@ fn load() -> Vec<(Role, String)> {
     let mut out: Vec<(Role, String)> = Vec::new();
     for face in bundled() {
         let name = format!("{}-{}.ttf", face.role.key(), face.style);
-        if let Ok(families) = jcj_layout::fonts::install_user_font(&name, face.bytes) {
-            for family in families {
-                if !out.iter().any(|(r, f)| *r == face.role && *f == family) {
-                    out.push((face.role, family));
-                }
+        let mut families = jcj_layout::fonts::install_user_font(&name, face.bytes).unwrap_or_default();
+        // A family the core's layout already has (it bundles some open fonts) is not added again:
+        // its name comes from the file, and the loaded faces are used.
+        if families.is_empty()
+            && let Some(f) = wordsmith_book_design::fonts::family_name(face.bytes)
+            && jcj_layout::fonts::is_loaded(&f)
+        {
+            families.push(f);
+        }
+        for family in families {
+            if !out.iter().any(|(r, f)| *r == face.role && *f == family) {
+                out.push((face.role, family));
             }
         }
     }

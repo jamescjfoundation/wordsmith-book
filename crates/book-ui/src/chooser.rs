@@ -43,7 +43,11 @@ pub fn first_chapter(b: &OpenBook) -> (String, String) {
     let a = wordsmith_book_format::assemble::assemble(&b.files.project, &src.book, None);
     let Some(ch) = a.body.iter().find(|p| p.what == wordsmith_book_format::assemble::What::Chapter) else { return (String::new(), String::new()) };
     let title = [ch.label.clone().unwrap_or_default(), ch.title.clone()].into_iter().filter(|s| !s.is_empty()).collect::<Vec<_>>().join(" · ");
-    let text = wordsmith_manuscript_model::Text { blocks: ch.blocks.clone(), notes: vec![] }.plain_paragraphs().into_iter().find(|p| !p.trim().is_empty()).unwrap_or_default();
+    let text = wordsmith_manuscript_model::Text { blocks: ch.blocks.clone(), notes: vec![] }
+        .plain_paragraphs()
+        .into_iter()
+        .find(|p| !p.trim().is_empty())
+        .unwrap_or_default();
     (title, text.chars().take(320).collect())
 }
 

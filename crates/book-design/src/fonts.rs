@@ -167,6 +167,40 @@ pub fn has_char(b: &[u8], c: char) -> bool {
     false
 }
 
+/// The font's family name (its `name` table: the typographic family, else the family).
+pub fn family_name(b: &[u8]) -> Option<String> {
+    let (name, len) = table(b, b"name")?;
+    let count = usize::from(u16_at(b, name + 2)?).min(1024);
+    let strings = name + usize::from(u16_at(b, name + 4)?);
+    let mut best: Option<(u16, String)> = None;
+    for i in 0..count {
+        let rec = name + 6 + 12 * i;
+        let (platform, encoding, id) = (u16_at(b, rec)?, u16_at(b, rec + 2)?, u16_at(b, rec + 6)?);
+        if id != 1 && id != 16 {
+            continue;
+        }
+        let (l, off) = (usize::from(u16_at(b, rec + 8)?), usize::from(u16_at(b, rec + 10)?));
+        let start = strings + off;
+        if start + l > name + len {
+            continue;
+        }
+        let raw = b.get(start..start + l)?;
+        let text = if platform == 3 || (platform == 0 && encoding <= 4) {
+            let units: Vec<u16> = raw.as_chunks::<2>().0.iter().map(|c| u16::from_be_bytes([c[0], c[1]])).collect();
+            String::from_utf16(&units).ok()?
+        } else if platform == 1 {
+            raw.iter().map(|&c| char::from(c)).collect()
+        } else {
+            continue;
+        };
+        // The typographic family (16) wins over the family (1).
+        if best.as_ref().is_none_or(|(bid, _)| id > *bid) {
+            best = Some((id, text));
+        }
+    }
+    best.map(|(_, t)| t)
+}
+
 /// What a font's embedding bits (`OS/2` `fsType`) allow.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Embedding {
