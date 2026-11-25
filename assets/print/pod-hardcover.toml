@@ -1,0 +1,82 @@
+# A print profile (docs/SPEC.md section 5): data only, changed without code.
+id = "pod-hardcover"
+name = "Print-on-demand hardcover"
+checked = "2026-11-25"
+source = "a print-on-demand service's public file guide for case-laminate hardcovers, as known on the date checked; to be rechecked by a person"
+bleed = 0.125
+min_type = 7.0
+blank_run_inside = 2
+blank_run_end = 10
+spine_text_min_pages = 79
+barcode = [2.0, 1.2]
+min_pages = 75
+even_pages = true
+
+[paper]
+white = 0.002252
+cream = 0.0025
+color = 0.002347
+
+[max_pages]
+white = 550
+cream = 550
+color = 480
+
+# The case's hinge takes more of the inside, and the boards overhang the pages, so every margin
+# is wider than the paperback's.
+[minimum]
+outside = 0.5
+outside_bleed = 0.625
+top = 0.5
+bottom = 0.5
+
+[[trims]]
+id = "5.5x8.5"
+name = "5.5 × 8.5 in"
+width = 5.5
+height = 8.5
+margins = [0.6, 0.7, 0.8, 0.85]
+
+[[trims]]
+id = "6x9"
+name = "6 × 9 in"
+width = 6.0
+height = 9.0
+margins = [0.6, 0.75, 0.85, 0.9]
+
+[[trims]]
+id = "6.14x9.21"
+name = "6.14 × 9.21 in"
+width = 6.14
+height = 9.21
+margins = [0.6, 0.75, 0.85, 0.9]
+
+[[trims]]
+id = "7x10"
+name = "7 × 10 in"
+width = 7.0
+height = 10.0
+margins = [0.7, 0.8, 0.9, 0.95]
+
+[[trims]]
+id = "8.5x11"
+name = "8.5 × 11 in"
+width = 8.5
+height = 11.0
+margins = [0.75, 0.85, 0.9, 1.0]
+
+[[gutter]]
+pages = 150
+inches = 0.5
+
+[[gutter]]
+pages = 300
+inches = 0.625
+
+[[gutter]]
+pages = 500
+inches = 0.75
+
+[[gutter]]
+pages = 100000
+inches = 1.0

@@ -112,8 +112,9 @@ pub struct Profile {
 }
 
 /// The built-in profiles, by id.
-pub const FILES: [(&str, &str); 2] = [
+pub const FILES: [(&str, &str); 3] = [
     ("pod-paperback", include_str!("../../../assets/print/pod-paperback.toml")),
+    ("pod-hardcover", include_str!("../../../assets/print/pod-hardcover.toml")),
     ("generic-pdf", include_str!("../../../assets/print/generic-pdf.toml")),
 ];
 

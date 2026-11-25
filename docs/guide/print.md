@@ -19,6 +19,9 @@ or running head; runs of blank pages stay within the profile.
 **The print PDF (PRT-6):** single pages at trim size, every font embedded, no crop marks,
 annotations, links or bookmarks. The same project gives the same PDF every time.
 
+**Hardcover (PRT-8):** a hardcover edition uses the `pod-hardcover` profile: case-laminate sizes,
+wider margins and gutter for the hinge, and 75 to 550 pages.
+
 **Print profiles (PRE-4):** `pod-paperback` (a print-on-demand paperback: trims, gutter table,
 margins, page counts, paper) and `generic-pdf` (any trim, fonts embedded, no annotations), as
 data files that say when they were last checked.

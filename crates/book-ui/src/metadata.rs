@@ -89,7 +89,11 @@ pub fn add_edition(b: &mut OpenBook, format: &str) -> Result<String, String> {
         n += 1;
         id = format!("{base}-{n}");
     }
-    let mut e = if format == Format::Ebook { Edition::ebook() } else { Edition::paperback() };
+    let mut e = match format {
+        Format::Ebook => Edition::ebook(),
+        Format::Hardcover => Edition::hardcover(),
+        _ => Edition::paperback(),
+    };
     e.id.clone_from(&id);
     e.format = format;
     e.name = if n == 1 { format.title().to_owned() } else { format!("{} {n}", format.title()) };
@@ -139,7 +143,7 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
         }
         // A printed edition's trim must be one its profile has (an empty one is a need).
         if e.format.is_print() && !e.trim.is_empty() {
-            let pid = if e.profile.is_empty() { "pod-paperback" } else { e.profile.as_str() };
+            let pid = e.profile_id();
             let prof = wordsmith_book_check::profile::get(pid).ok_or_else(|| format!("there is no print profile “{pid}”"))?;
             if prof.trim(&e.trim).is_none() {
                 let ids: Vec<&str> = prof.trims.iter().map(|t| t.id.as_str()).collect();

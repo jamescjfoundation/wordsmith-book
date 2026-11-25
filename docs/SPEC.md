@@ -294,6 +294,11 @@ break, hyphenation by the book's language, running heads off on openings and bla
 11. **Profiles** (PRE-4): `pod-paperback` (the rules above) and `generic-pdf` (any trim, no page
     count limits, fonts embedded, no annotations), as data in `assets/print/`, each recording
     when it was last checked and against what kind of source. [Designed]
+12. **Hardcover** (PRT-8, from 0.2): the `pod-hardcover` profile, used by hardcover editions
+    unless they name another: case-laminate sizes (5.5 × 8.5, 6 × 9, 6.14 × 9.21, 7 × 10,
+    8.5 × 11 in), every margin wider than the paperback's at the same size, a wider gutter at
+    every page count (0.5 in up to 150 pages, then 0.625, 0.75 and 1 in), 75 to 550 pages
+    (480 on colour paper). [Sourced; to be rechecked]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 

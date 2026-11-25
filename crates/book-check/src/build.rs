@@ -41,7 +41,7 @@ pub fn print(
     if !edition.format.is_print() {
         return Err(format!("the {} is not a printed edition", edition.name.to_lowercase()));
     }
-    let profile_id = if edition.profile.is_empty() { "pod-paperback" } else { edition.profile.as_str() };
+    let profile_id = edition.profile_id();
     let profile = profile::get(profile_id).ok_or_else(|| format!("there is no print profile “{profile_id}”"))?;
     let geometry = profile.geometry(edition)?;
     let design = mix::resolve(&project.design, designs).map_err(|e| e.to_string())?;
@@ -65,7 +65,7 @@ pub fn print_opening(
     if !edition.format.is_print() {
         return Err(format!("the {} is not a printed edition", edition.name.to_lowercase()));
     }
-    let profile_id = if edition.profile.is_empty() { "pod-paperback" } else { edition.profile.as_str() };
+    let profile_id = edition.profile_id();
     let profile = profile::get(profile_id).ok_or_else(|| format!("there is no print profile “{profile_id}”"))?;
     let geometry = profile.geometry(edition)?;
     let design = mix::resolve(&project.design, designs).map_err(|e| e.to_string())?;

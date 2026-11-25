@@ -251,6 +251,14 @@ impl Format {
             Format::LargePrint => "Large print",
         }
     }
+    /// The print profile a printed edition of this format uses unless it names one.
+    pub fn default_profile(self) -> &'static str {
+        match self {
+            Format::Hardcover => "pod-hardcover",
+            Format::Paperback | Format::LargePrint => "pod-paperback",
+            Format::Ebook => "",
+        }
+    }
 }
 
 /// Paper for a printed edition.
@@ -345,6 +353,23 @@ impl Edition {
             embed_fonts: true,
             ..Edition::default()
         }
+    }
+
+    /// The default hardcover: case laminate, 6 × 9 in, cream paper, the print-on-demand hardcover
+    /// profile.
+    pub fn hardcover() -> Edition {
+        Edition {
+            id: "hardcover".into(),
+            name: "Hardcover".into(),
+            format: Format::Hardcover,
+            profile: "pod-hardcover".into(),
+            ..Edition::paperback()
+        }
+    }
+
+    /// The print profile this edition uses: its own, else its format's.
+    pub fn profile_id(&self) -> &str {
+        if self.profile.is_empty() { self.format.default_profile() } else { &self.profile }
     }
 
     /// The default ebook.
