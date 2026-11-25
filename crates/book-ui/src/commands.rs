@@ -130,6 +130,10 @@ pub const REIMPORT: &str = "book.reimport";
 /// source kept); gives the set's parts.
 pub const BOX_SET: &str = "book.boxSet.set";
 
+/// Write a proof of a print edition (PRT-13): `{"edition", "folder"}` (folder: the export folder
+/// when left out); gives the file. Never part of an export.
+pub const PROOF: &str = "book.proof";
+
 /// The book's line-break hints (TXT-5): `{}`; gives `{"keep": [...], "hyphenate": [...]}`.
 pub const HINTS: &str = "book.hints";
 /// Set the book's line-break hints (TXT-5): `{"keep": [words and phrases never broken across
@@ -195,6 +199,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(REIMPORT, tl("Import a New Version"), "")),
         CommandInfo::new(HINTS, tl("Line-Break Hints"), ""),
         p(CommandInfo::new(BOX_SET, tl("Make a Box Set"), "")),
+        p(CommandInfo::new(PROOF, tl("Write a Proof"), "")),
         p(CommandInfo::new(HINTS_SET, tl("Set Line-Break Hints"), "")),
     ]
 }
@@ -344,6 +349,13 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         }
         HINTS_SET => hints_set(app.open_book()?, params),
         BOX_SET => box_set(app.open_book()?, params),
+        PROOF => {
+            let b = app.open_book()?;
+            let edition = s(params, "edition")?.to_owned();
+            let folder = params.get("folder").and_then(Value::as_str).map_or_else(|| crate::export::default_folder(b), PathBuf::from);
+            let path = crate::export::proof(b, &edition, &folder)?;
+            Ok(json!({ "file": path.display().to_string() }))
+        }
         EXPORT => {
             let validator = app.prefs.validator_settings();
             let b = app.open_book()?;

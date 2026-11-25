@@ -114,6 +114,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         widow_control: d.body.orphans >= 2 || d.body.widows >= 2,
         min_size: geometry.min_size,
         pdf_standards: geometry.pdf_standards,
+        proof: false,
     })
 }
 

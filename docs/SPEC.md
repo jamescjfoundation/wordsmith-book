@@ -436,6 +436,12 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
     (its program in Preferences) against both standards, each failed rule blocking; not set up
     is a note. The test book's PDF passes the standard validator for both. [Verified: the
     standard PDF validator, PDF/A-2b and PDF/UA-1 profiles]
+20. **Proofs** (PRT-13, from 0.3): a proof of a print edition is its PDF set again with "PROOF"
+    across every page (the document's watermark) and every line numbered in the inside margin,
+    numbering restarting on each page; its pages and lines break as the edition's do. It never
+    declares the PDF standards and is never what export writes: it is written only when asked
+    for (`book.proof`, or the export page's proof buttons), as `<title> - <edition> proof.pdf`.
+    [Designed]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 

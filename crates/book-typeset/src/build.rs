@@ -607,6 +607,9 @@ impl Bands {
     }
 }
 
+/// The word a proof carries across every page (PRT-13).
+pub const PROOF_MARK: &str = "PROOF";
+
 /// The print document for `book` with `look` and the choices of this layout `pass`, and each
 /// section's first body block (its page-map anchor).
 pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Document, Vec<(String, usize)>), Error> {
@@ -628,6 +631,10 @@ pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Doc
     }
     let mut doc = jcj_doc::new_document();
     doc.settings.mirror_margins = true;
+    // A proof (PRT-13): the word on every page, so it is never mistaken for the book.
+    if look.proof {
+        doc.settings.watermark = Some(jcj_doc::Watermark { text: PROOF_MARK.into(), ..jcj_doc::Watermark::default() });
+    }
     doc.settings.even_odd_headers = true;
     doc.settings.auto_hyphenation = look.hyphenate;
     doc.settings.consecutive_hyphen_limit = if look.strict_hyphens { 1 } else { 2 };
@@ -761,6 +768,11 @@ fn section_props(
         ..SectionProps::default()
     };
     sp.start = SectionStart::NextPage;
+    // A proof's lines are numbered on each page, so a correction can name its line.
+    if look.proof {
+        sp.line_numbers =
+            Some(jcj_doc::section::LineNumbering { count_by: 1, start: 1, distance: 0.0, restart: jcj_doc::section::LineNumberRestart::Page });
+    }
     let shows_heads = !blank && look.heads != Heads::None && matches!(s.kind, Kind::Chapter) && !s.front;
     let (verso, recto) = match look.heads {
         Heads::AuthorTitle => (s_author(doc), doc.core.title.clone()),

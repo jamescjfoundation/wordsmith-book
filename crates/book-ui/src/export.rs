@@ -7,7 +7,7 @@ use std::path::{Path, PathBuf};
 use std::sync::mpsc::{Receiver, channel};
 use std::time::Duration;
 
-use jcj_i18n::{tr, trn};
+use jcj_i18n::{tr, tr_with, trn};
 use jcj_shell::egui;
 use wordsmith_book_check::export::{self, Built, Error};
 
@@ -24,6 +24,8 @@ pub struct Page {
     pub folder: String,
     /// What the last export did, in words.
     pub last: Option<String>,
+    /// A proof asked for on the page, by edition id (the app writes it).
+    pub proof_request: Option<String>,
     job: Option<Receiver<Result<Vec<Built>, Error>>>,
 }
 
@@ -31,6 +33,24 @@ pub struct Page {
 pub fn default_folder(b: &OpenBook) -> PathBuf {
     let parent = b.root.parent().map_or_else(|| PathBuf::from("."), Path::to_path_buf);
     parent.join(format!("{} Export", b.name()))
+}
+
+/// Write a proof of print edition `edition` into `folder` (PRT-13): `<title> - <edition> proof.pdf`;
+/// gives its path.
+pub fn proof(b: &OpenBook, edition: &str, folder: &Path) -> Result<PathBuf, String> {
+    let src = b.source.as_ref().map_err(Clone::clone)?;
+    let e = b.files.project.edition(edition).ok_or_else(|| format!("there is no edition `{edition}`"))?;
+    if !e.format.is_print() {
+        return Err(format!("the {} is not printed, so it has no proof", e.name.to_lowercase()));
+    }
+    let book = wordsmith_book_format::fixes::book_for_build(&b.files.project.fixes, src);
+    let pr = wordsmith_book_check::build::proof(&b.files.project, &b.files.designs, &book, e, &|p| b.picture(p))?;
+    let pdf = pr.typeset.pdf().map_err(|e| e.to_string())?;
+    std::fs::create_dir_all(folder).map_err(|e| format!("{}: {e}", folder.display()))?;
+    let title = b.files.project.metadata.overrides.get("title").cloned().unwrap_or_else(|| book.metadata.info.title.clone());
+    let path = folder.join(format!("{}.pdf", wordsmith_book_check::export::file_name(&format!("{title} - {} proof", e.name))));
+    wordsmith_book_check::export::write_file(&path, &pdf)?;
+    Ok(path)
 }
 
 /// Export `editions` (and the bundle) of the open book into `folder` on this thread; gives the
@@ -147,6 +167,19 @@ impl Page {
         }
         if let Some(m) = &self.last {
             ui.label(m.as_str());
+        }
+        // Proofs (PRT-13): never part of the export above; one is written only when asked for.
+        let print: Vec<_> = b.files.project.editions.iter().filter(|e| e.format.is_print()).collect();
+        if !print.is_empty() {
+            ui.separator();
+            ui.label(tr(
+                "A proof is the print PDF with PROOF across every page and its lines numbered, to read and mark; it is never sent to a printer.",
+            ));
+            for e in print {
+                if ui.add_enabled(!self.running(), egui::Button::new(tr_with("Write a Proof of the {edition}", &[("edition", &e.name)]))).clicked() {
+                    self.proof_request = Some(e.id.clone());
+                }
+            }
         }
     }
 }

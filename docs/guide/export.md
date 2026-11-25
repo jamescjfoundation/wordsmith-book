@@ -12,3 +12,7 @@ machine.
 **Reproducible builds (EXP-2).** The same project with the same version of Book gives
 byte-identical files: dates come from the project, zip entries are sorted with fixed times, and
 nothing is random.
+
+**Proofs (PRT-13).** Below the export, *Write a Proof* makes a print edition's proof: the same
+pages with PROOF across each and every line numbered, so readers can mark "page 12, line 7". A
+proof is never part of an export and never goes to a printer.

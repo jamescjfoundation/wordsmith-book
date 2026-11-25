@@ -25,7 +25,7 @@ use std::collections::BTreeSet;
 use jcj_doc::Document;
 use jcj_layout::{DocLayout, LayoutCache};
 
-pub use build::{SOURCE, UNIT, print_document};
+pub use build::{PROOF_MARK, SOURCE, UNIT, print_document};
 
 /// Points per inch.
 pub const INCH: f32 = 72.0;
@@ -311,6 +311,8 @@ pub struct Look {
     pub min_size: f32,
     /// Declare PDF/A-2b and PDF/UA-1 on the PDF (PRT-12).
     pub pdf_standards: bool,
+    /// A proof (PRT-13): a watermark on every page and the lines numbered in the margin.
+    pub proof: bool,
 }
 
 impl Default for Look {
@@ -349,6 +351,7 @@ impl Default for Look {
             widow_control: true,
             min_size: 0.0,
             pdf_standards: false,
+            proof: false,
         }
     }
 }

@@ -28,7 +28,7 @@ pub mod preview;
 
 use std::path::PathBuf;
 
-use jcj_i18n::{tl, tr};
+use jcj_i18n::{tl, tr, tr_with};
 use jcj_shell::commands::ids;
 use jcj_shell::egui;
 use jcj_shell::tree::{TreeEvent, TreeState};
@@ -461,6 +461,13 @@ impl App for BookApp {
                 None => {
                     ui.label(tr("Open a book to export it."));
                 }
+            }
+            if let Some(edition) = self.export.proof_request.take() {
+                let folder = if self.export.folder.trim().is_empty() { None } else { Some(self.export.folder.trim().to_owned()) };
+                self.message = Some(match self.command(commands::PROOF, &json!({ "edition": edition, "folder": folder })) {
+                    Ok(v) => tr_with("The proof is written: {file}", &[("file", v["file"].as_str().unwrap_or(""))]),
+                    Err(e) => e,
+                });
             }
         }
     }

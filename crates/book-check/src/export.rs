@@ -56,6 +56,11 @@ impl std::fmt::Display for Error {
 
 impl std::error::Error for Error {}
 
+/// Write a file whole or not at all (a crash leaves the old one or none).
+pub fn write_file(path: &Path, bytes: &[u8]) -> Result<(), String> {
+    jcj_project::files::write_atomic(path, bytes).map_err(|e| format!("{}: {e}", path.display()))
+}
+
 /// A name safe as a file name on every platform: letters, digits, spaces and a few marks.
 pub fn file_name(s: &str) -> String {
     let clean: String =

@@ -60,6 +60,24 @@ pub fn print_design(project: &BookProject, designs: &BTreeMap<String, String>, e
     Ok(if edition.format == wordsmith_book_model::Format::LargePrint { wordsmith_book_design::large_print::variant(&design) } else { design })
 }
 
+/// A proof of print `edition` (PRT-13): the edition as built, set again with "PROOF" across
+/// every page and its lines numbered in the margin. The pages break as the edition's do (the
+/// numbers sit in the margin); it never declares the PDF standards. Export never writes one for
+/// an edition; only a proof asked for is.
+pub fn proof(
+    project: &BookProject,
+    designs: &BTreeMap<String, String>,
+    book: &Book,
+    edition: &Edition,
+    images: &dyn Fn(&str) -> Option<Vec<u8>>,
+) -> Result<Print, String> {
+    let mut pr = print(project, designs, book, edition, images)?;
+    pr.look.proof = true;
+    pr.look.pdf_standards = false;
+    pr.typeset = typeset(&pr.book, &pr.look, if project.date.is_empty() { "2000-01-01" } else { &project.date }).map_err(|e| e.to_string())?;
+    Ok(pr)
+}
+
 /// Build only the opening of print `edition`: the front matter and the first chapter (or part
 /// and chapter), so a preview can show its first pages at once while the whole book is built.
 /// The contents' page numbers are placeholders until the whole book is laid out.
