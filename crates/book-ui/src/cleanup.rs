@@ -4,6 +4,7 @@
 
 use std::collections::BTreeSet;
 
+use jcj_i18n::{tr, tr_with, trn};
 use jcj_shell::egui;
 use serde_json::{Value, json};
 use wordsmith_book_import::cleanup::{self, Change};
@@ -57,7 +58,7 @@ impl Panel {
     pub fn ui(&mut self, ui: &mut egui::Ui, b: &OpenBook) -> Option<(&'static str, Value)> {
         let mut run = None;
         let mut keep = b.files.project.cleanup.keep_exactly;
-        if ui.checkbox(&mut keep, "Keep exactly as written").changed() {
+        if ui.checkbox(&mut keep, tr("Keep exactly as written")).changed() {
             run = Some((crate::commands::CLEANUP_KEEP, json!({ "on": keep })));
         }
         let changes = match proposed(b) {
@@ -67,25 +68,27 @@ impl Panel {
                 return run;
             }
         };
-        ui.label(format!(
-            "{} changes proposed; {} chosen.",
-            changes.len(),
-            changes.len() - changes.iter().filter(|c| self.undone.contains(&c.id)).count()
+        let chosen = (changes.len() - changes.iter().filter(|c| self.undone.contains(&c.id)).count()).to_string();
+        ui.label(trn(
+            "{n} change proposed; {chosen} chosen.",
+            "{n} changes proposed; {chosen} chosen.",
+            changes.len() as u64,
+            &[("chosen", &chosen)],
         ));
         ui.horizontal(|ui| {
-            if ui.button("Choose All").clicked() {
+            if ui.button(tr("Choose All")).clicked() {
                 self.undone.clear();
             }
-            if ui.button("Choose None").clicked() {
+            if ui.button(tr("Choose None")).clicked() {
                 self.undone = cleanup::all(&changes);
             }
         });
         ui.horizontal(|ui| {
-            if ui.button("Make Chosen Changes").clicked() {
+            if ui.button(tr("Make Chosen Changes")).clicked() {
                 let ids: Vec<usize> = changes.iter().filter(|c| !self.undone.contains(&c.id)).map(|c| c.id).collect();
                 run = Some((crate::commands::CLEANUP_APPLY, json!({ "ids": ids })));
             }
-            if ui.button("Undo Last Cleanup").clicked() {
+            if ui.button(tr("Undo Last Cleanup")).clicked() {
                 run = Some((crate::commands::CLEANUP_UNDO, json!({})));
             }
         });
@@ -109,7 +112,11 @@ impl Panel {
             for c in &changes[range] {
                 ui.horizontal(|ui| {
                     let mut on = !self.undone.contains(&c.id);
-                    let label = format!("{}: “{}” → “{}” in {}", c.kind.title(), c.from.replace(' ', "␣"), c.to.replace(' ', "␣"), title_of(b, c));
+                    let (from, to) = (c.from.replace(' ', "␣"), c.to.replace(' ', "␣"));
+                    let label = tr_with(
+                        "{kind}: “{from}” → “{to}” in {section}",
+                        &[("kind", &tr(c.kind.title())), ("from", &from), ("to", &to), ("section", &title_of(b, c))],
+                    );
                     if ui.checkbox(&mut on, label).changed() {
                         if on {
                             self.undone.remove(&c.id);
@@ -117,7 +124,7 @@ impl Panel {
                             self.undone.insert(c.id);
                         }
                     }
-                    if ui.small_button("Show").clicked() {
+                    if ui.small_button(tr("Show")).clicked() {
                         self.shown = Some(c.id);
                     }
                 });

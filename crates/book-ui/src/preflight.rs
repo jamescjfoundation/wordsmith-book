@@ -5,6 +5,7 @@
 use std::sync::mpsc::{Receiver, channel};
 use std::time::Duration;
 
+use jcj_i18n::{tr, tr_with, trn};
 use jcj_shell::egui;
 use serde_json::{Value, json};
 use wordsmith_book_check::preflight::{Finding, Link, Report};
@@ -125,28 +126,28 @@ impl Panel {
             }
         });
         let Some(edition) = chosen else {
-            ui.label("The book has no editions to check.");
+            ui.label(tr("The book has no editions to check."));
             return None;
         };
-        if ui.add_enabled(!self.running(), egui::Button::new("Run Preflight")).clicked() {
+        if ui.add_enabled(!self.running(), egui::Button::new(tr("Run Preflight"))).clicked() {
             self.start(b, &edition, validator.clone());
         }
         if self.running() {
             ui.horizontal(|ui| {
                 ui.spinner();
-                ui.label("Building and checking the edition…");
+                ui.label(tr("Building and checking the edition…"));
             });
             ui.ctx().request_repaint_after(Duration::from_millis(50));
         }
         let Some((rev, report)) = &self.report else { return None };
         if *rev != b.revision {
-            ui.label(egui::RichText::new("The book changed since this check; run it again.").italics());
+            ui.label(egui::RichText::new(tr("The book changed since this check; run it again.")).italics());
         }
         let blocks = report.of(Severity::Blocks).len();
         let summary = if blocks == 0 {
-            "Nothing blocks export.".to_owned()
+            tr("Nothing blocks export.")
         } else {
-            format!("{blocks} problem{} must be fixed before export.", if blocks == 1 { "" } else { "s" })
+            trn("{n} problem must be fixed before export.", "{n} problems must be fixed before export.", blocks as u64, &[])
         };
         ui.strong(summary);
         egui::ScrollArea::vertical().id_salt("preflight").show(ui, |ui| {
@@ -157,21 +158,21 @@ impl Panel {
                         Severity::Warning => ui.visuals().warn_fg_color,
                         Severity::Note => ui.visuals().weak_text_color(),
                     };
-                    ui.colored_label(color, f.severity.title());
+                    ui.colored_label(color, tr(f.severity.title()));
                     ui.label(&f.message);
                     match &f.link {
                         Link::Page(n) => {
-                            if ui.small_button(format!("Go to Page {n}")).clicked() {
+                            if ui.small_button(tr_with("Go to Page {n}", &[("n", &n.to_string())])).clicked() {
                                 go = Some(GoTo::Page(*n));
                             }
                         }
                         Link::Section(s) => {
-                            if ui.small_button("Open Section").clicked() {
+                            if ui.small_button(tr("Open Section")).clicked() {
                                 go = Some(GoTo::Section(s.clone()));
                             }
                         }
                         Link::Edition(e) => {
-                            if ui.small_button("Open Edition Details").clicked() {
+                            if ui.small_button(tr("Open Edition Details")).clicked() {
                                 go = Some(GoTo::Edition(e.clone()));
                             }
                         }

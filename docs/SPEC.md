@@ -515,3 +515,10 @@ break, hyphenation by the book's language, running heads off on openings and bla
    written. [Designed]
 3. Light and dark themes and every command by keyboard come from the shell (ACC-1). [Designed]
 4. Auto-save, backups and recovery follow the core's timing (FIL-1). [Designed]
+5. **Interface languages** (ACC-3, from 0.2), through the core's translation catalogs (C4,
+   `jcj-i18n`, core v0.1.13): English and Spanish. Book's texts come from
+   `assets/i18n/<language>.toml`, keyed by their English; the shell's from the shell's catalog; a
+   text a catalog lacks shows in English. The language is a preference (Preferences, Language),
+   by default the computer's. Every interface text Book draws is in every catalog and no catalog
+   keeps unused texts (a test). Command replies (also what agents read), preflight findings and
+   build messages stay English at 0.2. [Designed]

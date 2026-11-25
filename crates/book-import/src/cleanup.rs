@@ -37,13 +37,14 @@ impl Kind {
         }
     }
 
-    /// What it does, for the list.
+    /// What it does, for the list (the interface translates it where it shows it).
     pub fn title(self) -> &'static str {
+        use wordsmith_book_model::tl;
         match self {
-            Kind::Quotes => "Straight quotes to curly quotes",
-            Kind::Dashes => "Double hyphens to dashes",
-            Kind::Ellipses => "Three periods to an ellipsis",
-            Kind::Spaces => "Double and trailing spaces",
+            Kind::Quotes => tl("Straight quotes to curly quotes"),
+            Kind::Dashes => tl("Double hyphens to dashes"),
+            Kind::Ellipses => tl("Three periods to an ellipsis"),
+            Kind::Spaces => tl("Double and trailing spaces"),
         }
     }
 }

@@ -12,6 +12,7 @@ use std::sync::Arc;
 use std::sync::mpsc::{Receiver, Sender, channel};
 use std::time::{Duration, Instant};
 
+use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
 use wordsmith_book_check::build::{self, Print};
 use wordsmith_book_model::Edition;
@@ -294,33 +295,33 @@ impl PrintPreview {
                     }
                 }
             }
-            ui.checkbox(&mut self.guides, "Guides");
-            if ui.button("Zoom out").clicked() {
+            ui.checkbox(&mut self.guides, tr("Guides"));
+            if ui.button(tr("Zoom out")).clicked() {
                 self.zoom = (self.zoom / 1.25).max(0.1);
                 self.fit = false;
             }
-            if ui.button("Zoom in").clicked() {
+            if ui.button(tr("Zoom in")).clicked() {
                 self.zoom = (self.zoom * 1.25).min(3.0);
                 self.fit = false;
             }
-            if ui.selectable_label(self.fit, "Fit").clicked() {
+            if ui.selectable_label(self.fit, tr("Fit")).clicked() {
                 self.fit = true;
             }
             ui.label(format!("{:.0}%", self.zoom * 100.0));
         });
         if shown.is_none() {
-            ui.label("The book has no print edition.");
+            ui.label(tr("The book has no print edition."));
             return None;
         }
         if self.building() {
             ui.horizontal(|ui| {
                 ui.spinner();
-                ui.label("Laying out the book…");
+                ui.label(tr("Laying out the book…"));
             });
             ui.ctx().request_repaint_after(Duration::from_millis(50));
         }
         if let Some(e) = &self.error {
-            ui.colored_label(ui.visuals().error_fg_color, format!("The preview could not be built: {e}"));
+            ui.colored_label(ui.visuals().error_fg_color, tr_with("The preview could not be built: {why}", &[("why", &e.to_string())]));
         }
         let built = self.built.clone()?;
         if !self.building()
@@ -331,7 +332,7 @@ impl PrintPreview {
         let t = &built.print.typeset;
         let pages = t.page_count();
         if built.opening {
-            ui.label("The opening pages; laying out the rest of the book…");
+            ui.label(tr("The opening pages; laying out the rest of the book…"));
         } else {
             ui.label(format!("{pages} pages · gutter {:.3} in · built in {:.1} s", t.gutter(), built.took.as_secs_f32()));
         }
@@ -390,8 +391,9 @@ impl PrintPreview {
                             guides(&painter, rect, trim, zoom, bleed, t.body_area(i));
                         }
                         let folio = t.folio(i);
-                        resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, format!("Page {}", i + 1)));
-                        let resp = resp.on_hover_text(format!("Page {} ({folio}): open its section", i + 1));
+                        resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, tr_with("Page {n}", &[("n", &(i + 1).to_string())])));
+                        let resp =
+                            resp.on_hover_text(tr_with("Page {n} ({folio}): open its section", &[("n", &(i + 1).to_string()), ("folio", &folio)]));
                         if resp.clicked() {
                             clicked = t.section_of_page(i);
                         }

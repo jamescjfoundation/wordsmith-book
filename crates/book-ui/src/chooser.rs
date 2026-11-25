@@ -2,6 +2,7 @@
 //! The design chooser (DSN-5): every design the book can use, filtered by genre and mood, each
 //! with a preview of the book's own first chapter. Choosing one is one undo step.
 
+use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
 use serde_json::{Value, json};
 use wordsmith_book_design::Design;
@@ -78,8 +79,8 @@ impl Chooser {
         let (genres, moods) = tags(&designs);
         let mut run = None;
         ui.horizontal_wrapped(|ui| {
-            ui.label("Genre:");
-            if ui.selectable_label(self.genre.is_none(), "Any").clicked() {
+            ui.label(tr("Genre:"));
+            if ui.selectable_label(self.genre.is_none(), tr("Any")).clicked() {
                 self.genre = None;
             }
             for g in &genres {
@@ -89,8 +90,8 @@ impl Chooser {
             }
         });
         ui.horizontal_wrapped(|ui| {
-            ui.label("Mood:");
-            if ui.selectable_label(self.mood.is_none(), "Any mood").clicked() {
+            ui.label(tr("Mood:"));
+            if ui.selectable_label(self.mood.is_none(), tr("Any mood")).clicked() {
                 self.mood = None;
             }
             for m in &moods {
@@ -107,8 +108,8 @@ impl Chooser {
                 ui.horizontal(|ui| {
                     ui.strong(&d.name);
                     if d.id == chosen {
-                        ui.label("(in use)");
-                    } else if ui.button(format!("Choose {}", d.name)).clicked() {
+                        ui.label(tr("(in use)"));
+                    } else if ui.button(tr_with("Choose {design}", &[("design", &d.name)])).clicked() {
                         run = Some((crate::commands::DESIGN_CHOOSE, json!({ "id": d.id })));
                     }
                 });

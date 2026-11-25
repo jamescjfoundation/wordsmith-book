@@ -3,6 +3,7 @@
 //! Book's own elements reorder by drag; the source's sections show in the writer's order,
 //! read-only ("Change this in Manuscript").
 
+use jcj_i18n::{tl, tr, tr_with};
 use wordsmith_book_model::{BookProject, Element, Placement, SectionId};
 use wordsmith_manuscript_format::book::{Book, FrontKind, Section};
 use wordsmith_manuscript_model::Role;
@@ -38,15 +39,15 @@ pub fn piece_of_key(key: &Key) -> Option<String> {
 }
 
 /// What the outline says about a source's section that cannot be moved here.
-pub const READ_ONLY: &str = "The manuscript's order is the writer's: change this in Manuscript.";
+pub const READ_ONLY: &str = tl("The manuscript's order is the writer's: change this in Manuscript.");
 
 fn number_label(s: &Section) -> String {
     match (s.role, s.number) {
-        (Role::Part, Some(n)) if s.title.trim().is_empty() => format!("Part {n}"),
-        (Role::Part, Some(n)) => format!("Part {n}: {}", s.title),
-        (Role::Chapter, Some(n)) if s.title.trim().is_empty() => format!("Chapter {n}"),
+        (Role::Part, Some(n)) if s.title.trim().is_empty() => tr_with("Part {n}", &[("n", &n.to_string())]),
+        (Role::Part, Some(n)) => tr_with("Part {n}: {title}", &[("n", &n.to_string()), ("title", &s.title)]),
+        (Role::Chapter, Some(n)) if s.title.trim().is_empty() => tr_with("Chapter {n}", &[("n", &n.to_string())]),
         (Role::Chapter, Some(n)) => format!("{n}. {}", s.title),
-        _ if s.title.trim().is_empty() => "Untitled".into(),
+        _ if s.title.trim().is_empty() => tr("Untitled"),
         _ => s.title.clone(),
     }
 }
@@ -69,11 +70,11 @@ fn section_rows(s: &Section, depth: usize, out: &mut Vec<TreeRow<Key>>) {
 }
 
 fn element_row(e: &Element) -> TreeRow<Key> {
-    let title = if e.title.is_empty() { e.kind.map_or("Untitled", |k| k.title()).to_owned() } else { e.title.clone() };
+    let title = if e.title.is_empty() { tr(e.kind.map_or("Untitled", |k| k.title())) } else { e.title.clone() };
     let mut r = TreeRow::new(Key::Element(e.id.clone()), 1, title);
     r.accepts_children = false;
     r.glyph = "+".into();
-    r.trailing = "Book".into();
+    r.trailing = tr("Book");
     r
 }
 
@@ -89,7 +90,7 @@ fn heading(placement: Placement, body: bool, label: &str) -> TreeRow<Key> {
 /// The outline's rows for a project and its source's book view (none when the source did not
 /// open: Book's own elements still show).
 pub fn rows(project: &BookProject, book: Option<&Book>) -> Vec<TreeRow<Key>> {
-    let mut out = vec![heading(Placement::Front, false, "Front matter")];
+    let mut out = vec![heading(Placement::Front, false, &tr("Front matter"))];
     for e in project.elements.iter().filter(|e| e.placement == Placement::Front) {
         out.push(element_row(e));
     }
@@ -98,13 +99,13 @@ pub fn rows(project: &BookProject, book: Option<&Book>) -> Vec<TreeRow<Key>> {
             section_rows(s, 1, &mut out);
         }
     }
-    out.push(heading(Placement::Front, true, "Body"));
+    out.push(heading(Placement::Front, true, &tr("Body")));
     if let Some(b) = book {
         for s in &b.body {
             section_rows(s, 1, &mut out);
         }
     }
-    out.push(heading(Placement::Back, false, "Back matter"));
+    out.push(heading(Placement::Back, false, &tr("Back matter")));
     if let Some(b) = book {
         for s in &b.back {
             section_rows(s, 1, &mut out);
@@ -150,14 +151,14 @@ pub fn move_element(project: &mut BookProject, id: &str, target: &Key, zone: Zon
 /// A front matter kind's name, for the source's own front and back matter.
 pub fn kind_title(k: FrontKind) -> &'static str {
     match k {
-        FrontKind::TitlePage => "Title page",
-        FrontKind::Copyright => "Copyright",
-        FrontKind::Dedication => "Dedication",
-        FrontKind::Epigraph => "Epigraph",
-        FrontKind::Contents => "Contents",
-        FrontKind::Acknowledgements => "Acknowledgements",
-        FrontKind::AboutTheAuthor => "About the author",
-        FrontKind::AlsoBy => "Also by",
-        FrontKind::Other => "Other",
+        FrontKind::TitlePage => tl("Title page"),
+        FrontKind::Copyright => tl("Copyright"),
+        FrontKind::Dedication => tl("Dedication"),
+        FrontKind::Epigraph => tl("Epigraph"),
+        FrontKind::Contents => tl("Contents"),
+        FrontKind::Acknowledgements => tl("Acknowledgements"),
+        FrontKind::AboutTheAuthor => tl("About the author"),
+        FrontKind::AlsoBy => tl("Also by"),
+        FrontKind::Other => tl("Other"),
     }
 }

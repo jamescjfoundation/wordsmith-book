@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 //! Book's own preferences, kept with the shell's in the app's preferences file: where the
 //! standard EPUB validator is (PRE-2), the Java runtime that runs it, where the accessibility
-//! checker is, and their time limit.
+//! checker is, their time limit, and the interface language.
 
+use jcj_i18n::{tl, tr};
 use jcj_shell::egui;
 use serde::{Deserialize, Serialize};
 use wordsmith_book_check::validator::Settings;
@@ -19,6 +20,8 @@ pub struct BookPrefs {
     pub validator_seconds: u32,
     /// The accessibility checker: a program (empty: not set up).
     pub access_checker: String,
+    /// The interface language's code (ACC-3; empty: the computer's).
+    pub language: String,
 }
 
 impl BookPrefs {
@@ -35,19 +38,36 @@ impl BookPrefs {
 
 /// The preferences, as the Preferences page draws them.
 pub fn ui(ui: &mut egui::Ui, p: &mut BookPrefs) {
-    ui.heading("Checking ebooks");
-    ui.label("Preflight runs the standard EPUB validator and an accessibility checker too when you have installed them and say where they are.");
+    ui.heading(tr("Language"));
+    ui.horizontal(|ui| {
+        let mut chosen = None;
+        if ui.selectable_label(p.language.is_empty(), tr("The computer's")).clicked() {
+            chosen = Some(String::new());
+        }
+        for (code, name) in crate::languages::LANGUAGES {
+            if ui.selectable_label(p.language == code, name).clicked() {
+                chosen = Some(code.to_owned());
+            }
+        }
+        if let Some(code) = chosen.filter(|c| *c != p.language) {
+            p.language = code;
+            crate::languages::set(&p.language);
+        }
+    });
+    ui.separator();
+    ui.heading(tr("Checking ebooks"));
+    ui.label(tr("Preflight runs the standard EPUB validator and an accessibility checker too when you have installed them and say where they are."));
     let field = |ui: &mut egui::Ui, name: &str, value: &mut String, hint: &str| {
         ui.horizontal(|ui| {
-            let label = ui.label(name);
-            ui.add(egui::TextEdit::singleline(value).hint_text(hint).desired_width(360.0)).labelled_by(label.id);
+            let label = ui.label(tr(name));
+            ui.add(egui::TextEdit::singleline(value).hint_text(tr(hint)).desired_width(360.0)).labelled_by(label.id);
         });
     };
-    field(ui, "EPUB validator", &mut p.validator, "its .jar file, or a program");
-    field(ui, "Java runtime", &mut p.java, "leave empty to use java");
-    field(ui, "Accessibility checker", &mut p.access_checker, "its program");
+    field(ui, tl("EPUB validator"), &mut p.validator, tl("its .jar file, or a program"));
+    field(ui, tl("Java runtime"), &mut p.java, tl("leave empty to use java"));
+    field(ui, tl("Accessibility checker"), &mut p.access_checker, tl("its program"));
     ui.horizontal(|ui| {
-        let label = ui.label("Time limit (seconds)");
+        let label = ui.label(tr("Time limit (seconds)"));
         ui.add(egui::DragValue::new(&mut p.validator_seconds).range(0..=3600)).labelled_by(label.id);
     });
 }

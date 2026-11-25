@@ -10,7 +10,7 @@ core), **app-first** (built here, marked `// core-candidate:`, waiting for a sec
 | C1 | Word-for-word verification (`jcj_features::verify`) | – | [#10](https://github.com/jamescjfoundation/open-source-core/issues/10) | released in core v0.1.9 |
 | C2 | Word-level comparison of two texts (`jcj_features::wordiff`) | – | [#17](https://github.com/jamescjfoundation/open-source-core/issues/17) | released in core v0.1.9 |
 | C3 | A tree widget with drag and drop (`jcj_shell::tree`) | – | [#6](https://github.com/jamescjfoundation/open-source-core/issues/6) | released in core v0.1.8 |
-| C4 | Interface translation catalogs | – | [#18](https://github.com/jamescjfoundation/open-source-core/issues/18) | open (promotion in R2) |
+| C4 | Interface translation catalogs (`jcj-i18n`; the shell's texts through them) | – | [#18](https://github.com/jamescjfoundation/open-source-core/issues/18) | released in core v0.1.13 |
 | C5 | Book typesetting (a book layer over the core's layout, decision 0003) | `crates/book-typeset/src/lib.rs` | [#19](https://github.com/jamescjfoundation/open-source-core/issues/19) | app-first |
 | C6 | EPUB 3 package layer | `crates/book-epub/src/package.rs` | [#20](https://github.com/jamescjfoundation/open-source-core/issues/20) | app-first |
 | C7 | The core's EPUB writer drops notes | – | [#21](https://github.com/jamescjfoundation/open-source-core/issues/21) | released in core v0.1.12 |

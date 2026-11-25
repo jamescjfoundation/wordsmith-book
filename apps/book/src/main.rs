@@ -75,6 +75,8 @@ fn main() -> ExitCode {
         app.message = problem;
         file
     });
+    // The interface language (ACC-3): the preference, else the computer's.
+    wordsmith_book_ui::languages::set(&app.prefs.language);
     if let Some(path) = std::env::args().nth(1)
         && let Err(e) = app.open_path(&path)
     {

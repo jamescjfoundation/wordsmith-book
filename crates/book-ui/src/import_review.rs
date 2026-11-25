@@ -4,6 +4,7 @@
 
 use std::path::{Path, PathBuf};
 
+use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
 use serde_json::{Value, json};
 use wordsmith_book_import::detect::{self, Kind, Mark, Para};
@@ -101,12 +102,14 @@ impl Review {
     /// Draw the review; true when the user asked to import.
     pub fn ui(&mut self, ui: &mut egui::Ui) -> (bool, bool) {
         let (parts, chapters, breaks) = self.counts();
-        ui.label(format!(
-            "{}: {parts} parts, {chapters} chapters, {breaks} scene breaks found.",
-            self.file.file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned())
+        let (p, c, b) = (parts.to_string(), chapters.to_string(), breaks.to_string());
+        let file = self.file.file_name().map_or_else(String::new, |n| n.to_string_lossy().into_owned());
+        ui.label(tr_with(
+            "{file}: {parts} parts, {chapters} chapters, {breaks} scene breaks found.",
+            &[("file", &file), ("parts", &p), ("chapters", &c), ("breaks", &b)],
         ));
         ui.separator();
-        ui.label("Rules");
+        ui.label(tr("Rules"));
         let mut changes: Vec<(String, bool)> = Vec::new();
         for (name, about) in detect::RULES {
             let mut on = !self.rules.off.iter().any(|r| r == name);
@@ -119,27 +122,27 @@ impl Review {
         }
         ui.separator();
         ui.horizontal(|ui| {
-            let label = ui.label("New book:");
+            let label = ui.label(tr("New book:"));
             ui.text_edit_singleline(&mut self.target).labelled_by(label.id);
         });
         let mut go = false;
         let mut cancel = false;
         ui.horizontal(|ui| {
-            go = ui.button("Import").clicked();
-            cancel = ui.button("Cancel").clicked();
+            go = ui.button(tr("Import")).clicked();
+            cancel = ui.button(tr("Cancel")).clicked();
         });
         ui.separator();
         egui::ScrollArea::vertical().max_height(360.0).show(ui, |ui| {
             egui::Grid::new("import-review").striped(true).show(ui, |ui| {
                 for (p, m) in self.paras.iter().zip(&self.marks).take(2000) {
                     let tag = match m {
-                        Mark::Heading(Kind::Part, _) => "Part",
-                        Mark::Heading(Kind::Chapter, _) => "Chapter",
-                        Mark::Heading(Kind::Front, _) => "Front matter",
-                        Mark::Heading(Kind::Back, _) => "Back matter",
-                        Mark::Break(_) => "Scene break",
-                        Mark::Skip => "(left out)",
-                        Mark::Body => "",
+                        Mark::Heading(Kind::Part, _) => tr("Part"),
+                        Mark::Heading(Kind::Chapter, _) => tr("Chapter"),
+                        Mark::Heading(Kind::Front, _) => tr("Front matter"),
+                        Mark::Heading(Kind::Back, _) => tr("Back matter"),
+                        Mark::Break(_) => tr("Scene break"),
+                        Mark::Skip => tr("(left out)"),
+                        Mark::Body => String::new(),
                     };
                     ui.label(tag);
                     ui.label(p.text.chars().take(90).collect::<String>());

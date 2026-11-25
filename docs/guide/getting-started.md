@@ -22,3 +22,7 @@ set in Preferences; it keeps packed backups beside the project (`<name> Backups`
 unsaved work after a crash. **Themes and keys (ACC-1):** light, dark or the system's theme, a
 command palette (Mod+Shift+P), key tips (F10) and every command on a key or in the palette (see
 [Keys](keys.md)).
+
+**Language.** Book's interface comes in English and Spanish. Choose one in Preferences, under
+Language; by default Book follows your computer's language. Preflight findings and messages
+from building the book are in English.

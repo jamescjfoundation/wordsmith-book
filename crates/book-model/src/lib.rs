@@ -38,9 +38,9 @@ impl Severity {
     /// The severity's name as shown.
     pub fn title(self) -> &'static str {
         match self {
-            Severity::Blocks => "Blocks export",
-            Severity::Warning => "Warning",
-            Severity::Note => "Note",
+            Severity::Blocks => tl("Blocks export"),
+            Severity::Warning => tl("Warning"),
+            Severity::Note => tl("Note"),
         }
     }
 }
@@ -48,6 +48,12 @@ impl Severity {
 /// The schema version of `book.toml` this build writes and the newest it reads. Until Book's
 /// first release tag, version 1 is extended in place (plan section 6.1).
 pub const SCHEMA: u32 = 1;
+
+/// An interface text that the interface translates where it shows it (Book's interface catalogs
+/// list it; see `book-ui`'s languages). The text itself.
+pub const fn tl(english: &'static str) -> &'static str {
+    english
+}
 
 fn is_default<T: Default + PartialEq>(v: &T) -> bool {
     *v == T::default()
@@ -249,10 +255,10 @@ impl Format {
     /// The format's name as shown.
     pub fn title(self) -> &'static str {
         match self {
-            Format::Paperback => "Paperback",
-            Format::Hardcover => "Hardcover",
-            Format::Ebook => "Ebook",
-            Format::LargePrint => "Large print",
+            Format::Paperback => tl("Paperback"),
+            Format::Hardcover => tl("Hardcover"),
+            Format::Ebook => tl("Ebook"),
+            Format::LargePrint => tl("Large print"),
         }
     }
     /// The print profile a printed edition of this format uses unless it names one.
@@ -452,27 +458,27 @@ impl ElementKind {
     /// The element's name as shown and its default title.
     pub fn title(self) -> &'static str {
         match self {
-            ElementKind::HalfTitle => "Half title",
-            ElementKind::TitlePage => "Title page",
-            ElementKind::Copyright => "Copyright",
-            ElementKind::Dedication => "Dedication",
-            ElementKind::Epigraph => "Epigraph",
-            ElementKind::Contents => "Contents",
-            ElementKind::AboutTheAuthor => "About the Author",
-            ElementKind::AlsoBy => "Also By",
-            ElementKind::Acknowledgements => "Acknowledgements",
-            ElementKind::Foreword => "Foreword",
-            ElementKind::Preface => "Preface",
-            ElementKind::Introduction => "Introduction",
-            ElementKind::Prologue => "Prologue",
-            ElementKind::Epilogue => "Epilogue",
-            ElementKind::Afterword => "Afterword",
-            ElementKind::Newsletter => "Stay in Touch",
-            ElementKind::Excerpt => "An Excerpt",
-            ElementKind::Glossary => "Glossary",
-            ElementKind::Endnotes => "Notes",
-            ElementKind::Questions => "Questions for Discussion",
-            ElementKind::Other => "Untitled",
+            ElementKind::HalfTitle => tl("Half title"),
+            ElementKind::TitlePage => tl("Title page"),
+            ElementKind::Copyright => tl("Copyright"),
+            ElementKind::Dedication => tl("Dedication"),
+            ElementKind::Epigraph => tl("Epigraph"),
+            ElementKind::Contents => tl("Contents"),
+            ElementKind::AboutTheAuthor => tl("About the Author"),
+            ElementKind::AlsoBy => tl("Also By"),
+            ElementKind::Acknowledgements => tl("Acknowledgements"),
+            ElementKind::Foreword => tl("Foreword"),
+            ElementKind::Preface => tl("Preface"),
+            ElementKind::Introduction => tl("Introduction"),
+            ElementKind::Prologue => tl("Prologue"),
+            ElementKind::Epilogue => tl("Epilogue"),
+            ElementKind::Afterword => tl("Afterword"),
+            ElementKind::Newsletter => tl("Stay in Touch"),
+            ElementKind::Excerpt => tl("An Excerpt"),
+            ElementKind::Glossary => tl("Glossary"),
+            ElementKind::Endnotes => tl("Notes"),
+            ElementKind::Questions => tl("Questions for Discussion"),
+            ElementKind::Other => tl("Untitled"),
         }
     }
 

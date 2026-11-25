@@ -19,6 +19,7 @@ pub mod doc;
 pub mod ebook_preview;
 pub mod export;
 pub mod import_review;
+pub mod languages;
 pub mod metadata;
 pub mod outline;
 pub mod preflight;
@@ -27,6 +28,7 @@ pub mod preview;
 
 use std::path::PathBuf;
 
+use jcj_i18n::{tl, tr};
 use jcj_shell::commands::ids;
 use jcj_shell::egui;
 use jcj_shell::tree::{TreeEvent, TreeState};
@@ -136,16 +138,16 @@ impl BookApp {
     fn draw_open_dialog(&mut self, ctx: &egui::Context, shell: &mut Shell) {
         let Some(mut path) = self.open_dialog.take() else { return };
         let mut keep = true;
-        egui::Window::new("Open a Book").collapsible(false).resizable(false).show(ctx, |ui| {
-            let label = ui.label("The path of a book project (.wsbk folder or .wsbkz file):");
+        egui::Window::new(tr("Open a Book")).collapsible(false).resizable(false).show(ctx, |ui| {
+            let label = ui.label(tr("The path of a book project (.wsbk folder or .wsbkz file):"));
             let r = ui.text_edit_singleline(&mut path).labelled_by(label.id);
             ui.horizontal(|ui| {
                 let enter = r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter));
-                if ui.button("Open").clicked() || enter {
+                if ui.button(tr("Open")).clicked() || enter {
                     shell.run(Cmd::with(ids::OPEN_PATH, json!({ "path": path.clone() })));
                     keep = false;
                 }
-                if ui.button("Cancel").clicked() {
+                if ui.button(tr("Cancel")).clicked() {
                     keep = false;
                 }
             });
@@ -159,12 +161,12 @@ impl BookApp {
         let Some((section, n, mut text)) = self.fixing.take() else { return };
         let mut keep = true;
         let mut run = false;
-        egui::Window::new("Fix Words").collapsible(false).show(ctx, |ui| {
-            let label = ui.label("Change the words of this paragraph. A linked manuscript gets the fix as an offer the writer decides on.");
+        egui::Window::new(tr("Fix Words")).collapsible(false).show(ctx, |ui| {
+            let label = ui.label(tr("Change the words of this paragraph. A linked manuscript gets the fix as an offer the writer decides on."));
             ui.add(egui::TextEdit::multiline(&mut text).desired_width(520.0)).labelled_by(label.id);
             ui.horizontal(|ui| {
-                run = ui.button("Make Fix").clicked();
-                if ui.button("Cancel").clicked() {
+                run = ui.button(tr("Make Fix")).clicked();
+                if ui.button(tr("Cancel")).clicked() {
                     keep = false;
                 }
             });
@@ -172,7 +174,7 @@ impl BookApp {
         if run {
             keep = false;
             match self.command(commands::FIX_EDIT, &json!({ "section": section.as_text(), "paragraph": n, "text": text.clone() })) {
-                Ok(_) => self.message = Some("The fix was made.".into()),
+                Ok(_) => self.message = Some(tr("The fix was made.")),
                 Err(m) => self.message = Some(m),
             }
         }
@@ -183,7 +185,7 @@ impl BookApp {
 
     fn outline_ui(&mut self, ui: &mut egui::Ui) {
         let Some(b) = &self.book else {
-            ui.label("No book open.");
+            ui.label(tr("No book open."));
             return;
         };
         let rows = outline::rows(&b.files.project, b.source.as_ref().ok().map(|s| &s.book));
@@ -196,7 +198,7 @@ impl BookApp {
                 }
                 TreeEvent::Drop { item: Key::Element(id), target, zone } => self
                     .command(commands::MOVE_ELEMENT, &json!({ "id": id, "target": commands::key_json(&target), "zone": commands::zone_name(zone) })),
-                TreeEvent::Drop { .. } => Err(outline::READ_ONLY.to_owned()),
+                TreeEvent::Drop { .. } => Err(tr(outline::READ_ONLY)),
                 _ => Ok(Value::Null),
             };
             if let Err(m) = result {
@@ -245,7 +247,7 @@ impl Commands for BookApp {
 
 impl App for BookApp {
     fn document_name(&self) -> String {
-        self.book.as_ref().map_or_else(|| "No book open".into(), OpenBook::name)
+        self.book.as_ref().map_or_else(|| tr("No book open"), OpenBook::name)
     }
 
     fn document_path(&self) -> Option<String> {
@@ -308,7 +310,7 @@ impl App for BookApp {
             let mut dismiss = false;
             ui.horizontal(|ui| {
                 ui.label(m.as_str());
-                dismiss = ui.small_button("Dismiss").clicked();
+                dismiss = ui.small_button(tr("Dismiss")).clicked();
             });
             if dismiss {
                 self.message = None;
@@ -327,13 +329,13 @@ impl App for BookApp {
             return;
         }
         let Some(b) = &self.book else {
-            ui.centered_and_justified(|ui| ui.label("Open or create a book to begin."));
+            ui.centered_and_justified(|ui| ui.label(tr("Open or create a book to begin.")));
             return;
         };
         let selected = self.outline.selected.clone();
         if let Some(piece) = selected.as_ref().and_then(outline::piece_of_key)
             && !preview::print_editions(b).is_empty()
-            && ui.button("Show in Print Preview").clicked()
+            && ui.button(tr("Show in Print Preview")).clicked()
         {
             self.print_preview.target = Some(piece);
             if !shell.layout.is_open("preview") {
@@ -355,13 +357,13 @@ impl App for BookApp {
 
     fn panels(&self) -> Vec<PanelSpec> {
         vec![
-            PanelSpec::new("outline", "Outline", "outline", Side::Left),
-            PanelSpec::new("cleanup", "Cleanup", "draft", Side::Right),
-            PanelSpec::new("details", "Details", "info", Side::Right),
-            PanelSpec::new("designs", "Designs", "style", Side::Right),
-            PanelSpec::new("preview", "Print Preview", "print", Side::Right),
-            PanelSpec::new("ebook", "Ebook Preview", "book", Side::Right),
-            PanelSpec::new("preflight", "Preflight", "check", Side::Right),
+            PanelSpec::new("outline", tl("Outline"), "outline", Side::Left),
+            PanelSpec::new("cleanup", tl("Cleanup"), "draft", Side::Right),
+            PanelSpec::new("details", tl("Details"), "info", Side::Right),
+            PanelSpec::new("designs", tl("Designs"), "style", Side::Right),
+            PanelSpec::new("preview", tl("Print Preview"), "print", Side::Right),
+            PanelSpec::new("ebook", tl("Ebook Preview"), "book", Side::Right),
+            PanelSpec::new("preflight", tl("Preflight"), "check", Side::Right),
         ]
     }
 
@@ -457,7 +459,7 @@ impl App for BookApp {
             match &self.book {
                 Some(b) => self.export.ui(ui, b, &validator),
                 None => {
-                    ui.label("Open a book to export it.");
+                    ui.label(tr("Open a book to export it."));
                 }
             }
         }
@@ -469,9 +471,9 @@ impl App for BookApp {
 
     fn templates(&self) -> Vec<TemplateSpec> {
         vec![
-            TemplateSpec::new("link", "From a Manuscript project", "A book on a Wordsmith Manuscript project, read and never changed."),
-            TemplateSpec::new("empty", "An empty book", "A book with its own source, to import a file into."),
-            TemplateSpec::new("import", "Import a file", "A book from a DOCX, ODT, RTF, Markdown or text file, reviewed before import."),
+            TemplateSpec::new("link", tl("From a Manuscript project"), tl("A book on a Wordsmith Manuscript project, read and never changed.")),
+            TemplateSpec::new("empty", tl("An empty book"), tl("A book with its own source, to import a file into.")),
+            TemplateSpec::new("import", tl("Import a file"), tl("A book from a DOCX, ODT, RTF, Markdown or text file, reviewed before import.")),
         ]
     }
 
@@ -489,9 +491,9 @@ impl App for BookApp {
 
     fn about(&self) -> About {
         About {
-            summary: "Book design and typesetting: print-ready PDFs and accessible EPUBs from a finished manuscript.".into(),
-            credit: "Built on open-source-core, based on WordCraft by the ArtCraft team.".into(),
-            acknowledgments: "Bundled fonts are listed with their licenses in ATTRIBUTION.md.".into(),
+            summary: tr("Book design and typesetting: print-ready PDFs and accessible EPUBs from a finished manuscript."),
+            credit: tr("Built on open-source-core, based on WordCraft by the ArtCraft team."),
+            acknowledgments: tr("Bundled fonts are listed with their licenses in ATTRIBUTION.md."),
             website: Some("https://github.com/jamescjfoundation/wordsmith-book".into()),
         }
     }
@@ -500,6 +502,7 @@ impl App for BookApp {
 pub mod views {
     //! The central view: the selected section's text, read-only, or the book's summary.
 
+    use jcj_i18n::{tr, tr_with};
     use jcj_shell::egui;
     use wordsmith_manuscript_model::Block;
 
@@ -529,13 +532,13 @@ pub mod views {
             (Some(Key::Section(id)), Some(book)) => {
                 let all: Vec<_> = book.front.iter().chain(&book.body).chain(&book.back).cloned().collect();
                 if let Some(s) = find(&all, *id) {
-                    ui.heading(if s.title.is_empty() { "Untitled" } else { s.title.as_str() });
+                    ui.heading(if s.title.is_empty() { tr("Untitled") } else { s.title.clone() });
                     let mut n = 0usize;
                     for blk in &s.content {
                         match blk {
                             Block::Para(c) | Block::Heading { content: c, .. } => {
                                 ui.horizontal_wrapped(|ui| {
-                                    if ui.small_button("Fix").on_hover_text("Fix words in this paragraph").clicked() {
+                                    if ui.small_button(tr("Fix")).on_hover_text(tr("Fix words in this paragraph")).clicked() {
                                         clicked = Some((s.id, n));
                                     }
                                     ui.label(wordsmith_manuscript_model::text::plain(c));
@@ -552,7 +555,7 @@ pub mod views {
                                 }
                             }
                             Block::Image { alt, .. } => {
-                                ui.label(format!("[Picture: {alt}]"));
+                                ui.label(tr_with("[Picture: {alt}]", &[("alt", alt)]));
                             }
                             Block::Raw { .. } => {}
                         }
@@ -561,21 +564,21 @@ pub mod views {
             }
             (Some(Key::Element(id)), _) => {
                 if let Some(e) = b.files.project.elements.iter().find(|e| &e.id == id) {
-                    ui.heading(if e.title.is_empty() { e.kind.map_or("Untitled", |k| k.title()) } else { e.title.as_str() });
-                    ui.label(if e.text.is_empty() { "Made from the book's details when the book is built." } else { e.text.as_str() });
+                    ui.heading(if e.title.is_empty() { tr(e.kind.map_or("Untitled", |k| k.title())) } else { e.title.clone() });
+                    ui.label(if e.text.is_empty() { tr("Made from the book's details when the book is built.") } else { e.text.clone() });
                 }
             }
             _ => {
                 ui.heading(b.name());
                 match book {
                     Some(book) => {
-                        ui.label(format!("{} by {}", book.metadata.info.title, book.metadata.byline));
+                        ui.label(tr_with("{title} by {author}", &[("title", &book.metadata.info.title), ("author", &book.metadata.byline)]));
                         for (role, n) in wordsmith_manuscript_format::book::counts(book) {
                             ui.label(format!("{role}: {n}"));
                         }
                     }
                     None => {
-                        ui.label("The book's source is not open.");
+                        ui.label(tr("The book's source is not open."));
                     }
                 }
             }

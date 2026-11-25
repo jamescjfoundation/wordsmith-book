@@ -7,6 +7,7 @@
 use std::sync::mpsc::{Receiver, channel};
 use std::time::Duration;
 
+use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
 use wordsmith_book_typeset::screen::{self, DEVICES, TEXT_SIZES};
 
@@ -159,7 +160,7 @@ impl EbookPreview {
     pub fn ui(&mut self, ui: &mut egui::Ui, b: &OpenBook) -> Option<(&'static str, serde_json::Value)> {
         self.update(b);
         let mut run = None;
-        ui.label(egui::RichText::new("Preview: reading apps lay out ebooks their own way.").italics());
+        ui.label(egui::RichText::new(tr("Preview: reading apps lay out ebooks their own way.")).italics());
         ui.horizontal_wrapped(|ui| {
             for d in DEVICES {
                 if ui.selectable_label(self.device == d.id, d.name).clicked() {
@@ -168,7 +169,7 @@ impl EbookPreview {
             }
         });
         ui.horizontal_wrapped(|ui| {
-            ui.label("Text size:");
+            ui.label(tr("Text size:"));
             for (i, (name, _)) in TEXT_SIZES.iter().enumerate() {
                 if ui.selectable_label(self.text == i, *name).clicked() {
                     self.text = i;
@@ -176,31 +177,32 @@ impl EbookPreview {
             }
         });
         ui.horizontal(|ui| {
-            ui.checkbox(&mut self.dark, "Dark page");
-            if ui.button("Open in a Reading App").clicked() {
+            ui.checkbox(&mut self.dark, tr("Dark page"));
+            if ui.button(tr("Open in a Reading App")).clicked() {
                 run = Some((crate::commands::EBOOK_OPEN, serde_json::json!({})));
             }
         });
         if self.busy() {
             ui.horizontal(|ui| {
                 ui.spinner();
-                ui.label("Laying out the chapter…");
+                ui.label(tr("Laying out the chapter…"));
             });
             ui.ctx().request_repaint_after(Duration::from_millis(50));
         }
         if let Some(e) = &self.error {
-            ui.colored_label(ui.visuals().error_fg_color, format!("The preview could not be made: {e}"));
+            ui.colored_label(ui.visuals().error_fg_color, tr_with("The preview could not be made: {why}", &[("why", &e.to_string())]));
         }
         let pages = self.laid.as_ref().map_or(0, |l| l.pages.len());
         if pages == 0 {
             return run;
         }
         ui.horizontal(|ui| {
-            if ui.add_enabled(self.page > 0, egui::Button::new("Previous Page")).clicked() {
+            if ui.add_enabled(self.page > 0, egui::Button::new(tr("Previous Page"))).clicked() {
                 self.page -= 1;
             }
-            ui.label(format!("Page {} of {pages}", self.page + 1));
-            if ui.add_enabled(self.page + 1 < pages, egui::Button::new("Next Page")).clicked() {
+            let (at, of) = ((self.page + 1).to_string(), pages.to_string());
+            ui.label(tr_with("Page {page} of {pages}", &[("page", &at), ("pages", &of)]));
+            if ui.add_enabled(self.page + 1 < pages, egui::Button::new(tr("Next Page"))).clicked() {
                 self.page += 1;
             }
         });
@@ -225,7 +227,9 @@ impl EbookPreview {
                 .corner_radius(10.0)
                 .inner_margin(4.0)
                 .show(ui, |ui| {
-                    ui.add(egui::Image::new((tex.id(), egui::vec2(w * scale, h * scale))).alt_text("The chapter's page as the preview lays it out"));
+                    ui.add(
+                        egui::Image::new((tex.id(), egui::vec2(w * scale, h * scale))).alt_text(tr("The chapter's page as the preview lays it out")),
+                    );
                 });
         }
         run

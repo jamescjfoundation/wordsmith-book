@@ -7,6 +7,7 @@ use std::path::{Path, PathBuf};
 use std::sync::mpsc::{Receiver, channel};
 use std::time::Duration;
 
+use jcj_i18n::{tr, trn};
 use jcj_shell::egui;
 use wordsmith_book_check::export::{self, Built, Error};
 
@@ -91,7 +92,12 @@ impl Page {
         self.job = None;
         let folder = if self.folder.trim().is_empty() { default_folder(b) } else { PathBuf::from(self.folder.trim()) };
         self.last = Some(match out.map_err(|e| e.to_string()).and_then(|built| write(b, built, self.bundle, &folder)) {
-            Ok(paths) => format!("Exported {} file{} to {}.", paths.len(), if paths.len() == 1 { "" } else { "s" }, folder.display()),
+            Ok(paths) => trn(
+                "Exported {n} file to {folder}.",
+                "Exported {n} files to {folder}.",
+                paths.len() as u64,
+                &[("folder", &folder.display().to_string())],
+            ),
             Err(e) => capital(&e),
         });
     }
@@ -109,11 +115,11 @@ impl Page {
     /// Draw the page.
     pub fn ui(&mut self, ui: &mut egui::Ui, b: &OpenBook, validator: &wordsmith_book_check::validator::Settings) {
         self.poll(b);
-        ui.label("Each edition is built, checked word for word and preflighted first; nothing is written if anything blocks export.");
+        ui.label(tr("Each edition is built, checked word for word and preflighted first; nothing is written if anything blocks export."));
         ui.add_space(6.0);
         for e in &b.files.project.editions {
             let mut on = !self.off.contains(&e.id);
-            let kind = if e.format.is_print() { "print PDF" } else { "EPUB" };
+            let kind = if e.format.is_print() { tr("print PDF") } else { tr("EPUB") };
             if ui.checkbox(&mut on, format!("{} ({kind})", e.name)).changed() {
                 if on {
                     self.off.remove(&e.id);
@@ -122,20 +128,20 @@ impl Page {
                 }
             }
         }
-        ui.checkbox(&mut self.bundle, "Project bundle (the book, its designs, pictures and source in one file)");
+        ui.checkbox(&mut self.bundle, tr("Project bundle (the book, its designs, pictures and source in one file)"));
         ui.horizontal(|ui| {
-            let label = ui.label("Folder");
+            let label = ui.label(tr("Folder"));
             let hint = default_folder(b).display().to_string();
             ui.add(egui::TextEdit::singleline(&mut self.folder).hint_text(hint).desired_width(420.0)).labelled_by(label.id);
         });
         let nothing = self.chosen(b).is_empty() && !self.bundle;
-        if ui.add_enabled(!self.running() && !nothing, egui::Button::new("Export Files")).clicked() {
+        if ui.add_enabled(!self.running() && !nothing, egui::Button::new(tr("Export Files"))).clicked() {
             self.start(b, validator.clone());
         }
         if self.running() {
             ui.horizontal(|ui| {
                 ui.spinner();
-                ui.label("Building and checking…");
+                ui.label(tr("Building and checking…"));
             });
             ui.ctx().request_repaint_after(Duration::from_millis(50));
         }

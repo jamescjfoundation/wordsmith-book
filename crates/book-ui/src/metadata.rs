@@ -3,6 +3,7 @@
 //! editions with their ISBNs (checked), trims, paper and price notes, and what the book still
 //! needs. Book's additions live in `book.toml`; a linked source is never written.
 
+use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
 use serde_json::{Value, json};
 use wordsmith_book_format::needs::needs;
@@ -180,25 +181,25 @@ impl Panel {
         let mut run = None;
         if let Ok(s) = &b.source {
             let i = &s.book.metadata.info;
-            ui.strong("From the manuscript");
+            ui.strong(tr("From the manuscript"));
             ui.label(format!("{} — {}", i.title, s.book.metadata.byline));
             if !i.subtitle.is_empty() {
                 ui.label(&i.subtitle);
             }
-            ui.label(format!("Language: {}", i.language));
+            ui.label(tr_with("Language: {language}", &[("language", &i.language)]));
             ui.separator();
-            ui.strong("Still needed");
+            ui.strong(tr("Still needed"));
             for n in needs(&b.files.project, &s.book) {
-                ui.label(format!("{}: {}", n.severity.title(), n.message));
+                ui.label(format!("{}: {}", tr(n.severity.title()), n.message));
             }
         }
         ui.separator();
-        ui.strong("Editions");
+        ui.strong(tr("Editions"));
         for e in &b.files.project.editions {
             ui.horizontal(|ui| {
-                ui.label(format!("{} ({})", e.name, e.format.title()));
+                ui.label(format!("{} ({})", e.name, tr(e.format.title())));
                 let v = self.isbn.entry(e.id.clone()).or_insert_with(|| e.isbn.clone());
-                let label = ui.label("ISBN");
+                let label = ui.label(tr("ISBN"));
                 let r = ui.add(egui::TextEdit::singleline(v).desired_width(150.0)).labelled_by(label.id);
                 if r.lost_focus() && *v != e.isbn {
                     run = Some((crate::commands::EDITION_SET, json!({ "id": e.id, "isbn": v.clone() })));
@@ -211,29 +212,29 @@ impl Panel {
             });
         }
         ui.horizontal(|ui| {
-            if ui.button("Add Paperback").clicked() {
+            if ui.button(tr("Add Paperback")).clicked() {
                 run = Some((crate::commands::EDITION_ADD, json!({ "format": "paperback" })));
             }
-            if ui.button("Add Hardcover").clicked() {
+            if ui.button(tr("Add Hardcover")).clicked() {
                 run = Some((crate::commands::EDITION_ADD, json!({ "format": "hardcover" })));
             }
-            if ui.button("Add Ebook").clicked() {
+            if ui.button(tr("Add Ebook")).clicked() {
                 run = Some((crate::commands::EDITION_ADD, json!({ "format": "ebook" })));
             }
         });
         // Line-break hints (TXT-5), one per line.
         ui.separator();
-        ui.strong("Line breaks");
+        ui.strong(tr("Line breaks"));
         let h = &b.files.project.hints;
         // The project's hints changed elsewhere (an undo, an agent): start again from them.
         if self.hints.as_ref().is_some_and(|x| &x.2 != h) {
             self.hints = None;
         }
         let (keep, hyphenate, _) = self.hints.get_or_insert_with(|| (h.keep.join("\n"), h.hyphenate.join("\n"), h.clone()));
-        let label = ui.label("Never break across lines (one word or phrase a line)");
-        let r1 = ui.add(egui::TextEdit::multiline(keep).desired_rows(2).hint_text("Mr. Smith")).labelled_by(label.id);
-        let label = ui.label("Hyphenate only here (one word a line, a hyphen where it may break; none: never)");
-        let r2 = ui.add(egui::TextEdit::multiline(hyphenate).desired_rows(2).hint_text("man-u-script")).labelled_by(label.id);
+        let label = ui.label(tr("Never break across lines (one word or phrase a line)"));
+        let r1 = ui.add(egui::TextEdit::multiline(keep).desired_rows(2).hint_text(tr("Mr. Smith"))).labelled_by(label.id);
+        let label = ui.label(tr("Hyphenate only here (one word a line, a hyphen where it may break; none: never)"));
+        let r2 = ui.add(egui::TextEdit::multiline(hyphenate).desired_rows(2).hint_text(tr("man-u-script"))).labelled_by(label.id);
         let lines = |t: &str| t.lines().map(str::trim).filter(|l| !l.is_empty()).map(str::to_owned).collect::<Vec<_>>();
         if (r1.lost_focus() || r2.lost_focus()) && (lines(keep) != h.keep || lines(hyphenate) != h.hyphenate) {
             run = Some((crate::commands::HINTS_SET, json!({ "keep": lines(keep), "hyphenate": lines(hyphenate) })));
