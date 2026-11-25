@@ -138,6 +138,21 @@ Sources used:
    and back matter, editions, and each section's settings and fixes, which follow their sections
    to the new version. A linked manuscript changes in Manuscript and is not re-imported. [Designed]
 
+### 1.9 EPUB import (IMP-9, from 0.3)
+
+1. An EPUB imports like any file: its reading-order documents through the core's reader, then
+   the review, the cleanup and the word check. Its structure comes from its own package where it
+   has one: the navigation document (the ebook's own contents) is left out, as Book makes the
+   contents again; a document marked as a part, chapter, front or back matter (`epub:type`)
+   starts a section of that kind at its first heading, and other headings in it are subheadings;
+   a numbering label before a title ("Part One", or a line marked `class="label"`) is left out,
+   as Book's numbering makes it again (a label alone leaves the section untitled). An EPUB
+   without such marks goes through structure detection as any document. [Designed]
+2. Notes come back as notes: each note reference (`epub:type="noteref"`) and its note
+   (`footnote`, `endnote`) are taken out before the core reads the document and made a note
+   again at the reference. What is left out is reported. An EPUB Book exported imports back word
+   for word, with the same parts and chapters. [Designed]
+
 ## 2. Structure and front and back matter (STR-1 to STR-7)
 
 ### 2.1 Outline (STR-1)

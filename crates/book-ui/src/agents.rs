@@ -59,7 +59,7 @@ fn params(id: &str) -> &'static str {
             r#"{"path": folder of the new book, "manuscript": path of a Manuscript project to link (leave out for a book with its own source), "date": "YYYY-MM-DD"}"#
         }
         IMPORT_REVIEW => r#"{"file": path}"#,
-        IMPORT => r#"{"file": DOCX, ODT, RTF, Markdown or text file, "path": folder of the new book, "off": [import rules to turn off]}"#,
+        IMPORT => r#"{"file": DOCX, ODT, RTF, Markdown, text or EPUB file, "path": folder of the new book, "off": [import rules to turn off]}"#,
         CLEANUP_APPLY => r#"{"ids": [change ids] (all when left out)}"#,
         CLEANUP_KEEP => r#"{"on": true|false}"#,
         NUMBERING => r#"{"chapters", "parts": label-words|label-figures|words|figures|roman|none, "chapter_label", "part_label"}"#,
@@ -170,7 +170,7 @@ pub fn command_specs() -> Vec<CommandSpec> {
 
 /// What the agent is told when it connects.
 pub const INSTRUCTIONS: &str = "Wordsmith Book turns a finished manuscript into a print-ready PDF and an EPUB. \
-Start with book_new (link a Manuscript project, or a book with its own source) or book_import (a DOCX, ODT, RTF, Markdown or text file), \
+Start with book_new (link a Manuscript project, or a book with its own source) or book_import (a DOCX, ODT, RTF, Markdown, text or EPUB file), \
 or book_open an existing .wsbk folder or .wsbkz file. Then: book_outline and book_metadata to see the book; book_numbering, \
 book_section, book_element_add and book_metadata_set to shape it; book_designs and book_design_choose to design it; \
 book_edition_set for trim, paper and ISBN; book_preflight to check an edition; book_export to write the PDF, EPUB and bundle \

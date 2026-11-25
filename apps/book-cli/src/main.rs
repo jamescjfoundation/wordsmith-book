@@ -25,7 +25,7 @@ const USAGE: &str = "usage: book-cli <command> [arguments]
   verify <project> <file>
         Check a PDF, EPUB or document against the project's words.
   convert <file> <project folder> [--title <title>]
-        Import a DOCX, ODT, RTF, Markdown or text file into a new Book project.
+        Import a DOCX, ODT, RTF, Markdown, text or EPUB file into a new Book project.
   report <project>
         The book's title, author, editions, sections, words and needs, as JSON.
   run <project> <command id> [<JSON parameters>]

@@ -5536,10 +5536,12 @@ dependencies = [
  "jcj-doc 0.1.14",
  "jcj-features",
  "jcj-interchange",
+ "roxmltree",
  "serde",
  "wordsmith-book-model",
  "wordsmith-manuscript-format",
  "wordsmith-manuscript-model",
+ "zip 3.0.0",
 ]
 
 [[package]]

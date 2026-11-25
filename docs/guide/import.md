@@ -23,6 +23,10 @@ Manuscript project is never cleaned up.
 from. If a word was lost or changed, Book says which, with the words around it, and nothing is
 made.
 
+**EPUB (IMP-9).** An EPUB imports too: Book takes its parts, chapters, front and back matter
+and notes from the ebook's own structure, leaves out its contents page (Book makes the contents
+again) and lists what it left out in the review.
+
 **A new version (IMP-8).** When the writer sends a revised file, *Import a New Version* compares it
 with the book word by word and lists every difference first; taking it keeps the design, the
 book's details, front and back matter and each chapter's settings. It can be undone.

@@ -19,3 +19,5 @@ jcj-interchange = { workspace = true }
 jcj-features = { workspace = true }
 wordsmith-manuscript-format = { workspace = true }
 serde = { workspace = true }
+zip = { workspace = true }
+roxmltree = { workspace = true }

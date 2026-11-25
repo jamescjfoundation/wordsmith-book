@@ -473,7 +473,11 @@ impl App for BookApp {
         vec![
             TemplateSpec::new("link", tl("From a Manuscript project"), tl("A book on a Wordsmith Manuscript project, read and never changed.")),
             TemplateSpec::new("empty", tl("An empty book"), tl("A book with its own source, to import a file into.")),
-            TemplateSpec::new("import", tl("Import a file"), tl("A book from a DOCX, ODT, RTF, Markdown or text file, reviewed before import.")),
+            TemplateSpec::new(
+                "import",
+                tl("Import a file"),
+                tl("A book from a DOCX, ODT, RTF, Markdown, text or EPUB file, reviewed before import."),
+            ),
         ]
     }
 

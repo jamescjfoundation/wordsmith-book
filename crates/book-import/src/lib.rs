@@ -9,6 +9,7 @@
 
 pub mod cleanup;
 pub mod detect;
+pub mod epub;
 pub mod reimport;
 pub mod text;
 
@@ -277,6 +278,12 @@ pub fn check(doc: &Document, project: &Project, named: &std::collections::BTreeS
 /// Import a document: detect its structure with `rules`, make the owned source's project titled
 /// `title`, and check every word.
 pub fn import_document(doc: &Document, rules: &ImportRules, title: &str) -> Result<Imported, Error> {
+    import_with(doc, rules, title, &|_| {})
+}
+
+/// [`import_document`], with what detection found adjusted by `adjust` before the sections are
+/// made (a format that knows its own structure says so).
+pub fn import_with(doc: &Document, rules: &ImportRules, title: &str, adjust: &dyn Fn(&mut Vec<Mark>)) -> Result<Imported, Error> {
     let mut doc = doc.clone();
     let mut report = Report::default();
     if !rules.off.iter().any(|r| r == "underline-italic") {
@@ -291,7 +298,8 @@ pub fn import_document(doc: &Document, rules: &ImportRules, title: &str) -> Resu
         }
     }
     let paras = paras_of(&doc);
-    let marks = detect::detect(&paras, rules);
+    let mut marks = detect::detect(&paras, rules);
+    adjust(&mut marks);
     let mut b = Builder { project: Project::new(), next: 0, part: None, report, named: std::collections::BTreeSet::new() };
     b.project.settings.book.title = title.to_owned();
     // The section being gathered: its kind and title, and its paragraphs.
@@ -373,6 +381,9 @@ pub fn import(format: Format, bytes: &[u8], rules: &ImportRules, title: &str) ->
             return Err(Error::Words(check.to_string()));
         }
         return import_document(&doc, rules, title);
+    }
+    if format == Format::Epub {
+        return epub::import(bytes, rules, title);
     }
     let doc = read(format, bytes)?;
     import_document(&doc, rules, title)
