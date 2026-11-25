@@ -613,3 +613,14 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
    without the house file. Leaving the imprint and series (`book.house.leave`) frees it.
    Joining and leaving are each one undo step. [Designed]
 
+### 13.2 Imprint profiles (META-3)
+
+1. An imprint has a name, address lines, a website, a logo (a PNG or JPEG beside the house
+   file), its copyright wording (a template with the usual placeholders) and a default house
+   design. Joining it copies them into the book (`[metadata.imprint]`, the logo among the book's
+   pictures as `assets/imprint-logo.png`, marked decorative), so the book builds the same
+   without the house file; joining again takes the house file's current details. [Designed]
+2. The title page shows the imprint's name and, under it, its logo (`{logo}`), at the
+   picture's own size; the copyright page uses the imprint's wording when it has one, else
+   Book's. In the ebook the logo is a decorative picture, hidden from screen readers. [Designed]
+

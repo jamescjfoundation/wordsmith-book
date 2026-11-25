@@ -61,6 +61,31 @@ pub fn join(b: &mut OpenBook, house_file: &Path, imprint: Option<&str>, series: 
         Some((id, _, _)) => Some(design_of(house_file, id)?),
         None => None,
     };
+    // The imprint's details (META-3): its logo kept among the book's pictures.
+    let details = match &im {
+        Some(i) => {
+            let logo = if i.logo.trim().is_empty() {
+                None
+            } else {
+                let bytes = wordsmith_book_format::house::beside(house_file, &i.logo).map_err(err)?;
+                let ext = match wordsmith_book_model::picture::size(&bytes) {
+                    Some(_) if bytes.starts_with(b"\x89PNG") => "png",
+                    Some(_) => "jpg",
+                    None => return Err(format!("the imprint's logo “{}” is not a PNG or JPEG", i.logo)),
+                };
+                Some((format!("imprint-logo.{ext}"), bytes))
+            };
+            let imprint = wordsmith_book_model::Imprint {
+                name: i.name.clone(),
+                address: i.address.clone(),
+                website: i.website.clone(),
+                logo: logo.as_ref().map(|(n, _)| format!("assets/{n}")).unwrap_or_default(),
+                copyright: i.copyright.clone(),
+            };
+            Some((imprint, logo))
+        }
+        None => None,
+    };
     let link = HouseLink {
         imprint: im.as_ref().map(|i| i.id.clone()).unwrap_or_default(),
         series: s.as_ref().map(|s| s.id.clone()).unwrap_or_default(),
@@ -77,6 +102,16 @@ pub fn join(b: &mut OpenBook, house_file: &Path, imprint: Option<&str>, series: 
                 f.designs.insert(choice.id.clone(), text);
             }
             f.project.design = choice;
+        }
+        if let Some((imprint, logo)) = details {
+            if let Some((name, bytes)) = logo {
+                let path = format!("assets/{name}");
+                f.assets.insert(name, bytes);
+                if !f.project.decorative.contains(&path) {
+                    f.project.decorative.push(path);
+                }
+            }
+            f.project.metadata.imprint = Some(imprint);
         }
         f.project.house = link;
         Ok(())

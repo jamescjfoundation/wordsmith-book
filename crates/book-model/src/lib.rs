@@ -159,6 +159,9 @@ pub struct Imprint {
     /// Its logo, a path inside the project's `assets/`.
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub logo: String,
+    /// The copyright page's wording, with the usual placeholders (META-3; empty: Book's).
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub copyright: String,
 }
 
 /// What Book adds to the source's metadata. Never written to a linked source.

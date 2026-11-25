@@ -30,6 +30,10 @@ pub struct Meta {
     pub address: Vec<String>,
     /// The imprint's website.
     pub website: String,
+    /// The imprint's logo, a picture path (`assets/…`; empty: none).
+    pub logo: String,
+    /// The imprint's copyright wording (empty: Book's).
+    pub copyright: String,
     /// The edition's ISBN.
     pub isbn: String,
     /// The edition's format, as words ("paperback").
@@ -73,6 +77,8 @@ pub fn meta(info: &BookInfo, byline: &str, add: &Metadata, edition: Option<&Edit
         imprint: if imprint.name.is_empty() { info.publisher.clone() } else { imprint.name },
         address: imprint.address,
         website: imprint.website,
+        logo: imprint.logo,
+        copyright: imprint.copyright,
         isbn: isbn.unwrap_or_default(),
         format: edition.map(|e| e.format.title().to_lowercase()).unwrap_or_default(),
         series: match (info.series.is_empty(), info.series_number) {
@@ -100,12 +106,15 @@ fn credit_word(r: crate::Role) -> &'static str {
     }
 }
 
+/// Marks a filled `{logo}`: the line is the logo picture's path.
+const LOGO: char = '\u{E030}';
+
 /// The default template of an element kind, or none when it is made another way (contents, also
 /// by) or written by the author (dedication, epigraph, acknowledgements, ...).
 pub fn default_template(kind: ElementKind) -> Option<&'static str> {
     match kind {
         ElementKind::HalfTitle => Some("{title}"),
-        ElementKind::TitlePage => Some("{title}\n{subtitle}\n{byline}\n{credits}\n{imprint}"),
+        ElementKind::TitlePage => Some("{title}\n{subtitle}\n{byline}\n{credits}\n{imprint}\n{logo}"),
         ElementKind::Copyright => Some("Copyright © {year} {holder}\n{rights}\n{isbn_line}\n{series}\nPublished by {imprint}\n{address}\n{website}"),
         ElementKind::AboutTheAuthor => Some("{about}"),
         ElementKind::Newsletter => Some("To hear about new books first, sign up at {website}."),
@@ -133,6 +142,14 @@ fn value(m: &Meta, key: &str) -> Option<String> {
         "imprint" => m.imprint.clone(),
         "address" => m.address.join("\n"),
         "website" => m.website.clone(),
+        // The logo is a picture on a line of its own (see `lines`).
+        "logo" => {
+            if m.logo.is_empty() {
+                String::new()
+            } else {
+                format!("{LOGO}{}", m.logo)
+            }
+        }
         "isbn" => m.isbn.clone(),
         "isbn_line" => {
             if m.isbn.is_empty() {
@@ -207,14 +224,22 @@ pub fn lines(kind: ElementKind, text: &str, m: &Meta) -> (Vec<Line>, Vec<String>
         }
         return (out, Vec::new());
     }
-    let template = if text.is_empty() { default_template(kind).unwrap_or("") } else { text };
+    // The imprint's own copyright wording stands in for Book's (META-3).
+    let template = match (text.is_empty(), kind) {
+        (true, ElementKind::Copyright) if !m.copyright.trim().is_empty() => m.copyright.as_str(),
+        (true, _) => default_template(kind).unwrap_or(""),
+        (false, _) => text,
+    };
     let (filled, unknown) = fill(template, m);
     let out = filled
         .split('\n')
         .map(str::trim)
         .filter(|l| !l.is_empty())
         .enumerate()
-        .map(|(i, l)| Line { text: l.to_owned(), style: styled(kind, i) })
+        .map(|(i, l)| match l.strip_prefix(LOGO) {
+            Some(path) => Line { text: path.to_owned(), style: "logo" },
+            None => Line { text: l.to_owned(), style: styled(kind, i) },
+        })
         .collect();
     (out, unknown)
 }
@@ -232,6 +257,8 @@ pub fn blocks(lines: &[Line]) -> Vec<Block> {
             "subtitle" | "heading" => Block::Heading { level: 2, content: vec![Inline::plain(&l.text)] },
             "byline" => Block::Heading { level: 3, content: vec![Inline::plain(&l.text)] },
             "term" => Block::Para(term(&l.text)),
+            // The imprint's logo: a picture, decorative (the imprint's name is on the page).
+            "logo" => Block::Image { alt: String::new(), src: l.text.clone(), role: wordsmith_manuscript_model::ImageRole::Inline },
             "question" => {
                 question += 1;
                 let text = l.text.trim_start_matches(|c: char| c.is_ascii_digit() || c == '.' || c == ')').trim_start();

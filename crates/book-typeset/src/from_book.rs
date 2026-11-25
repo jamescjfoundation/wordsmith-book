@@ -227,7 +227,7 @@ impl Convert<'_> {
     }
 }
 
-fn element_blocks(kind: ElementKind, blocks: &[MBlock]) -> Vec<Block> {
+fn element_blocks(kind: ElementKind, blocks: &[MBlock], images: &dyn Fn(&str) -> Option<Vec<u8>>) -> Vec<Block> {
     let spans = |c: &Inlines| {
         c.iter()
             .filter_map(|i| match i {
@@ -247,6 +247,11 @@ fn element_blocks(kind: ElementKind, blocks: &[MBlock]) -> Vec<Block> {
             (ElementKind::Copyright | ElementKind::TitlePage | ElementKind::HalfTitle, MBlock::Para(c)) => Block::Centered(spans(c), 85),
             (ElementKind::Dedication | ElementKind::Epigraph, MBlock::Para(c)) => Block::Centered(spans(c), 100),
             (_, MBlock::Para(c)) => Block::Para(spans(c)),
+            // A picture on Book's own page (the imprint's logo), at its own size.
+            (_, MBlock::Image { alt, src, .. }) => match images(src).and_then(|bytes| image_size(&bytes).map(|px| (bytes, px))) {
+                Some((bytes, pixels)) => Block::Image { bytes, pixels, alt: alt.clone(), fit: ImageFit::Inline },
+                None => Block::Para(Vec::new()),
+            },
             _ => Block::Para(Vec::new()),
         })
         .collect()
@@ -318,7 +323,7 @@ pub fn print_book(
                     s.recto = kind != ElementKind::Copyright;
                     s.generated = true;
                     s.generated_title = true;
-                    s.blocks = element_blocks(kind, &p.blocks);
+                    s.blocks = element_blocks(kind, &p.blocks, images);
                 }
                 // A prologue or epilogue opens like a chapter, without a number.
                 What::Element(kind @ (ElementKind::Prologue | ElementKind::Epilogue)) => {
@@ -326,7 +331,7 @@ pub fn print_book(
                     s.recto = recto_chapters;
                     s.generated = true;
                     s.generated_title = true;
-                    s.blocks = element_blocks(kind, &p.blocks);
+                    s.blocks = element_blocks(kind, &p.blocks, images);
                 }
                 What::Element(kind) => {
                     s.kind = if matches!(kind, ElementKind::Dedication | ElementKind::Epigraph) { Kind::Plain } else { Kind::Matter };
@@ -337,7 +342,7 @@ pub fn print_book(
                     s.recto = front;
                     s.generated = true;
                     s.generated_title = true;
-                    s.blocks = element_blocks(kind, &p.blocks);
+                    s.blocks = element_blocks(kind, &p.blocks, images);
                 }
                 What::Matter(kind) => {
                     s.kind = if matches!(kind, FrontKind::TitlePage | FrontKind::Copyright | FrontKind::Dedication | FrontKind::Epigraph) {

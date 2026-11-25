@@ -5574,11 +5574,13 @@ name = "wordsmith-book-ui"
 version = "0.1.0"
 dependencies = [
  "egui_kittest",
+ "image",
  "jcj-agents",
  "jcj-doc 0.1.15",
  "jcj-engine",
  "jcj-features",
  "jcj-i18n",
+ "jcj-output",
  "jcj-shell",
  "serde",
  "serde_json",
