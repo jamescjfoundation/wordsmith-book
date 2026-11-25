@@ -648,3 +648,19 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
    house's record stays (an ISBN once given is not handed out again). If the house file cannot
    be written, the book does not keep the ISBN. `book.isbn.list` lists them all. [Designed]
 
+### 13.5 Distributor metadata (META-6)
+
+1. `book.onix` (and *Write the ONIX Record* on the export page) writes the book's ONIX for Books
+   3.0 message, reference tags, `<title> ONIX.xml`: a header (the imprint, else the author, as
+   sender; the project's date) and one product for each edition, in the element order and with
+   the codes of the published schema and its code lists: the record reference, the ISBN-13
+   (else the edition's own identifier), the form (paperback and large print `BC`, hardcover
+   `BB`, ebook `ED` with `E101`, EPUB), the series as a collection with its number, the title and
+   subtitle, the contributors with their roles, the language (ISO 639-2/B), the page count of a
+   print edition as laid out, keywords, the description, the imprint and the publisher (the
+   imprint, else the author), the status
+   and the publishing date (the copyright year, else the project's date). [Designed]
+2. Text is escaped; the same book gives the same bytes. The records validate against the
+   published schema with its code lists (a test, where the validator is installed). [Verified:
+   the published ONIX for Books 3.0 reference schema]
+

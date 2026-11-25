@@ -463,6 +463,13 @@ impl App for BookApp {
                     ui.label(tr("Open a book to export it."));
                 }
             }
+            if std::mem::take(&mut self.export.onix_request) {
+                let folder = if self.export.folder.trim().is_empty() { None } else { Some(self.export.folder.trim().to_owned()) };
+                self.message = Some(match self.command(commands::ONIX, &json!({ "folder": folder })) {
+                    Ok(v) => tr_with("The ONIX record is written: {file}", &[("file", v["file"].as_str().unwrap_or(""))]),
+                    Err(e) => e,
+                });
+            }
             if let Some(edition) = self.export.proof_request.take() {
                 let folder = if self.export.folder.trim().is_empty() { None } else { Some(self.export.folder.trim().to_owned()) };
                 self.message = Some(match self.command(commands::PROOF, &json!({ "edition": edition, "folder": folder })) {

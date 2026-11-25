@@ -26,6 +26,8 @@ pub struct Page {
     pub last: Option<String>,
     /// A proof asked for on the page, by edition id (the app writes it).
     pub proof_request: Option<String>,
+    /// The distributor record asked for on the page (the app writes it).
+    pub onix_request: bool,
     job: Option<Receiver<Result<Vec<Built>, Error>>>,
 }
 
@@ -33,6 +35,32 @@ pub struct Page {
 pub fn default_folder(b: &OpenBook) -> PathBuf {
     let parent = b.root.parent().map_or_else(|| PathBuf::from("."), Path::to_path_buf);
     parent.join(format!("{} Export", b.name()))
+}
+
+/// Write the book's ONIX for Books 3.0 record into `folder` (META-6), one product for each
+/// edition (print editions laid out for their page counts): `<title> ONIX.xml`; gives its path.
+pub fn onix(b: &OpenBook, folder: &Path) -> Result<PathBuf, String> {
+    let src = b.source.as_ref().map_err(Clone::clone)?;
+    let p = &b.files.project;
+    let book = wordsmith_book_format::fixes::book_for_build(&p.fixes, src);
+    let mut pages = Vec::with_capacity(p.editions.len());
+    for e in &p.editions {
+        pages.push(if e.format.is_print() {
+            Some(wordsmith_book_check::build::print(p, &b.files.designs, &book, e, &|x| b.picture(x))?.typeset.page_count())
+        } else {
+            None
+        });
+    }
+    let records: Vec<wordsmith_book_check::onix::Record<'_>> =
+        p.editions.iter().zip(pages).map(|(edition, pages)| wordsmith_book_check::onix::Record { edition, pages }).collect();
+    let meta = wordsmith_book_model::matter::meta(&book.metadata.info, &book.metadata.byline, &p.metadata, None);
+    let sender = if meta.imprint.trim().is_empty() { meta.byline.clone() } else { meta.imprint.clone() };
+    let xml = wordsmith_book_check::onix::message(p, &book, &records, &sender, if p.date.is_empty() { "2000-01-01" } else { &p.date });
+    std::fs::create_dir_all(folder).map_err(|e| format!("{}: {e}", folder.display()))?;
+    let title = p.metadata.overrides.get("title").cloned().unwrap_or_else(|| book.metadata.info.title.clone());
+    let path = folder.join(format!("{}.xml", wordsmith_book_check::export::file_name(&format!("{title} ONIX"))));
+    wordsmith_book_check::export::write_file(&path, xml.as_bytes())?;
+    Ok(path)
 }
 
 /// Write a proof of print edition `edition` into `folder` (PRT-13): `<title> - <edition> proof.pdf`;
@@ -167,6 +195,12 @@ impl Page {
         }
         if let Some(m) = &self.last {
             ui.label(m.as_str());
+        }
+        // The distributor record (META-6).
+        ui.separator();
+        ui.label(tr("Distributors and stores read a book's details from an ONIX for Books record: one product for each edition."));
+        if ui.add_enabled(!self.running(), egui::Button::new(tr("Write the ONIX Record"))).clicked() {
+            self.onix_request = true;
         }
         // Proofs (PRT-13): never part of the export above; one is written only when asked for.
         let print: Vec<_> = b.files.project.editions.iter().filter(|e| e.format.is_print()).collect();

@@ -138,6 +138,10 @@ pub const HOUSE_JOIN: &str = "book.house.join";
 /// series' name and its books in order, each with the design its project uses and whether that
 /// is the series' one design.
 pub const SERIES_VIEW: &str = "book.series.view";
+/// Write the book's ONIX for Books 3.0 record (META-6): `{"folder"}` (the export folder when
+/// left out); one product for each edition. Gives the file.
+pub const ONIX: &str = "book.onix";
+
 /// The house's ISBNs (META-5): `{"house"}`; each with the book and edition that use it (none:
 /// free).
 pub const ISBN_LIST: &str = "book.isbn.list";
@@ -221,6 +225,7 @@ pub fn list() -> Vec<CommandInfo> {
         CommandInfo::new(HOUSE_LEAVE, tl("Leave the Imprint and Series"), ""),
         CommandInfo::new(SERIES_VIEW, tl("Series View"), ""),
         p(CommandInfo::new(ISBN_LIST, tl("The House's ISBNs"), "")),
+        p(CommandInfo::new(ONIX, tl("Write the ONIX Record"), "")),
         p(CommandInfo::new(ISBN_ASSIGN, tl("Take an ISBN from the House"), "")),
         p(CommandInfo::new(HINTS_SET, tl("Set Line-Break Hints"), "")),
     ]
@@ -384,6 +389,11 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             Ok(serde_json::to_value(link).unwrap_or(Value::Null))
         }
         HOUSE_LEAVE => crate::house::leave(app.open_book()?).map(|()| Value::Null),
+        ONIX => {
+            let b = app.open_book()?;
+            let folder = params.get("folder").and_then(Value::as_str).map_or_else(|| crate::export::default_folder(b), PathBuf::from);
+            Ok(json!({ "file": crate::export::onix(b, &folder)?.display().to_string() }))
+        }
         ISBN_LIST => {
             let file = crate::house::file(params.get("house").and_then(Value::as_str), &app.prefs.house_file)?;
             Ok(json!({ "isbns": crate::house::isbn_list(&file)? }))
