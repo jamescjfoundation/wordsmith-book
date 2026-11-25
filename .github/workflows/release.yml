@@ -1,0 +1,106 @@
+# Release: when a maintainer pushes a version tag (v0.1.0), check, test the v0.1 test on the three
+# desktop platforms, build the packages, attest them, and publish a release whose notes are the
+# tag's CHANGELOG.md section. Publishing waits for the `release` environment's approval.
+#
+# Only GitHub's own actions, pinned to full commit SHAs.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_INCREMENTAL: "0"
+  CARGO_NET_RETRY: "10"
+
+jobs:
+  gate:
+    name: cargo xtask ci (everything)
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Toolchain
+        run: rustup show active-toolchain || rustup toolchain install
+      - name: The version is the tag's
+        run: |
+          version=$(cargo metadata --no-deps --format-version 1 | python3 -c 'import sys,json; print([p["version"] for p in json.load(sys.stdin)["packages"] if p["name"]=="wordsmith-book"][0])')
+          test "v$version" = "$GITHUB_REF_NAME" || { echo "the tag $GITHUB_REF_NAME is not v$version"; exit 1; }
+          grep -q "^## $version " CHANGELOG.md || { echo "CHANGELOG.md has no section for $version"; exit 1; }
+      - name: cargo xtask ci
+        run: cargo xtask ci
+
+  package:
+    name: v0.1 test and package (${{ matrix.os }})
+    needs: gate
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          - { runner: ubuntu-latest, os: linux, arch: x86_64 }
+          - { runner: macos-latest, os: macos, arch: arm64 }
+          - { runner: windows-latest, os: windows, arch: x64 }
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 150
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Toolchain
+        run: rustup show active-toolchain || rustup toolchain install
+      - name: The test of v0.1
+        run: cargo test --locked --release -p wordsmith-book-check --test v0_1
+      - name: Build
+        run: cargo build --locked --release -p wordsmith-book -p wordsmith-book-cli
+      - name: Package
+        id: pkg
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          file=$(packaging/package.sh "${{ matrix.os }}" "${{ matrix.arch }}" "$version" | tail -n 1)
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: package-${{ matrix.os }}
+          path: ${{ steps.pkg.outputs.file }}
+          if-no-files-found: error
+
+  publish:
+    name: attest and publish
+    needs: package
+    runs-on: ubuntu-latest
+    environment: release
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          path: dist
+          pattern: package-*
+          merge-multiple: true
+      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: dist/*
+      - name: Release notes from CHANGELOG.md
+        run: |
+          version=${GITHUB_REF_NAME#v}
+          awk -v v="## $version " 'index($0, v) == 1 { on = 1; next } /^## / { on = 0 } on' CHANGELOG.md > notes.md
+          test -s notes.md
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/* --title "Wordsmith Book ${GITHUB_REF_NAME#v}" --notes-file notes.md --verify-tag

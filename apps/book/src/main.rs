@@ -34,10 +34,15 @@ impl eframe::App for Window {
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
         self.shell.ui(ui, &mut self.app);
         self.save_prefs(false);
+        // An installed update starts when this window closes.
+        if self.shell.close_requested() {
+            ui.ctx().send_viewport_cmd(egui::ViewportCommand::Close);
+        }
     }
 
     fn on_exit(&mut self, _gl: Option<&eframe::glow::Context>) {
         self.save_prefs(true);
+        self.shell.finish();
     }
 }
 
@@ -49,7 +54,18 @@ fn icon() -> Option<egui::IconData> {
 }
 
 fn main() -> ExitCode {
-    let mut shell = Shell::new(NAME, env!("CARGO_PKG_VERSION"), brand::tokens()).with_options(shell_options());
+    let mut shell = Shell::new(NAME, env!("CARGO_PKG_VERSION"), brand::tokens()).with_options(shell_options()).with_updates(
+        jcj_shell::updates::desktop::ReleaseSource {
+            id: "wordsmith-book",
+            name: NAME,
+            tagline: "Make print and ebook editions of a finished book",
+            repo: "jamescjfoundation/wordsmith-book",
+            developer: "The J. C. J. Foundation",
+            version: env!("CARGO_PKG_VERSION"),
+            // In place where the updater can replace the app; elsewhere the check offers the download.
+            installs_in_place: !cfg!(target_os = "macos"),
+        },
+    );
     let mut app = BookApp::new();
     // Preferences: the shell's and Book's, from the app's settings folder.
     let prefs = settings_dir("wordsmith-book", NAME).and_then(|dir| std::fs::create_dir_all(&dir).ok().map(|()| dir)).map(|dir| {

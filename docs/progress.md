@@ -46,6 +46,7 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
 | 2026-11-24 | M9.1 m9/agents | AUT-2: every Book command is a tool of the core's agent server (`jcj-agents`): each registered with the core's engine as a command that runs Book's own dispatch on the agent's app (this thread's), with its parameters described and read-only commands marked; the shell's save, undo, redo and open-a-path have `book.` names so every Book action is a `book_…` tool (the Open dialog and template page are window-only); instructions for agents; tests: the Book tools are exactly the Book commands, and Waverley is imported, designed, set up, preflighted, exported and saved through the tools alone | 175 |
 | 2026-11-24 | M9.2 m9/cli | AUT-1: `book-cli` with `build` (editions or all, `--out`, `--bundle`; checked, all or nothing), `check` (preflight with links), `verify` (a PDF against the project's layout letter by letter, an EPUB or a source document word by word as Book imports it), `convert` (a file into a new Book project with its own source, `--title`), `report` (title and author as printed, design, sections, words, metadata as JSON), `run` (any command with JSON parameters; changes saved), `commands` and `mcp` (the agent tools over stdio); exit codes 0 done, 1 a check failed or a command refused, 2 usage or file error; tests run the program on the fixtures, including a blocked check and build that write nothing | 178 |
 | 2026-11-24 | M9.3 m9/guide | The user guide in `docs/guide/`: getting started, import, structure, designs, print, ebook, previews and preflight, export, editions and metadata, working with Manuscript, command line and agents, keys; the keys page made from Book's and the window's commands by a test that refuses two commands sharing a key; every 0.1 feature id of the plan appears in the guide (checked by a test) | 181 |
+| 2026-11-25 | M9.4 m9/release | The test of v0.1 end to end (`book-check/tests/v0_1.rs`): Waverley's DOCX, Gulliver's Travels' DOCX and the Manuscript fixture to a 6 × 9 in paperback PDF and an EPUB in all six designs, every word checked, preflight for `pod-paperback` passed, golden PDF summaries in `tests/golden/v0.1/`, EPUB structure checked (and the standard EPUB validator, no messages), every file the same twice (about two minutes); packaging for Linux (tar.gz with desktop entry, MIME types and an install script; built and installed here), macOS (dmg with Info.plist declaring both project types) and Windows (portable zip with file-type registration), named as the update check reads them; the release workflow (version and changelog check, full gate, v0.1 test and packages on three platforms, attestation, release notes from CHANGELOG.md, publishing behind the `release` environment's approval); update checks from this repository's releases; CHANGELOG.md for 0.1.0; the full `cargo xtask ci` passes; M9 done (the release waits for a person) | 183 |
 
 ## Waiting on a person
 
@@ -61,7 +62,13 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
   online word processor (`docs/fixtures.md`).
 
 - **Golden files:** a look at the print PDFs and EPUBs the golden files in `tests/golden/` stand for
-  (`docs/golden.md`, M5.4 and M6.3).
+  (`docs/golden.md`, M5.4, M6.3 and M9.4).
+
+- **Release (M9.4):** making the v0.1.0 release is a person's decision: create the repository's
+  `release` environment with required reviewers (the publish job waits on it), set the date in
+  `CHANGELOG.md`, and push the tag `v0.1.0`. The packages are not signed: signing needs the
+  project's certificates. The macOS and Windows packages and the release workflow have not run
+  yet (only the Linux package was built and installed here).
 
 - **Reviews:** `docs/SPEC.md` (M0.3); Book's side of the hand-off review, `docs/handoff-review.md` (M1.2). Every [Sourced] rule from a service's public file guide is to
   be rechecked against the current guide, its address added to `.private/sources.md`.

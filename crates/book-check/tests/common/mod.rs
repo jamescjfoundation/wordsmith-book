@@ -78,3 +78,67 @@ pub fn pdf_body_text(t: &Typeset, pdf: &[u8]) -> String {
     }
     out
 }
+
+/// Bounds for reading the test books' PDFs.
+pub const PDF_LIMITS: jcj_output::ReadLimits = jcj_output::ReadLimits { max_input_bytes: 256 << 20, max_pages: 10_000, max_glyphs_per_page: 20_000 };
+
+/// The words of a page's glyphs, by line from the top.
+pub fn page_lines(page: &jcj_output::PdfPage) -> Vec<String> {
+    let mut lines: Vec<(f64, String)> = Vec::new();
+    for g in &page.glyphs {
+        let Some(t) = &g.text else { continue };
+        match lines.iter_mut().find(|(y, _)| (y - g.y).abs() < 1.0) {
+            Some((_, s)) => s.push_str(t),
+            None => lines.push((g.y, t.clone())),
+        }
+    }
+    lines.sort_by(|a, b| b.0.total_cmp(&a.0));
+    // Contents leaders (runs of dots) are shown as one mark.
+    let leaders = |s: &str| {
+        let mut out = String::new();
+        for c in s.chars() {
+            if c == '.' && out.ends_with("..") {
+                if !out.ends_with(" … ") {
+                    out.truncate(out.len() - 2);
+                    out.push_str(" … ");
+                }
+            } else if !(c == '.' && out.ends_with(" … ")) {
+                out.push(c);
+            }
+        }
+        out
+    };
+    lines.into_iter().map(|(_, s)| leaders(&s).split_whitespace().collect::<Vec<_>>().join(" ")).filter(|s| !s.is_empty()).collect()
+}
+
+pub fn ends(s: &str, n: usize, first: bool) -> String {
+    let words: Vec<&str> = s.split_whitespace().collect();
+    if first { words.iter().take(n).copied().collect::<Vec<_>>().join(" ") } else { words[words.len().saturating_sub(n)..].join(" ") }
+}
+
+/// A build's summary: the page size, then per page its folio, section, line count and the first
+/// and last words of its body.
+pub fn summary(pr: &wordsmith_book_check::build::Print, pdf: &[u8]) -> String {
+    let pages = jcj_output::read_pages(pdf, &PDF_LIMITS).unwrap();
+    let t = &pr.typeset;
+    let (w, h) = t.page_size(0).unwrap();
+    let mut out = format!("pages {}\nsize {:.2} x {:.2} pt\ngutter {:.3} in\n", pages.len(), w, h, t.gutter());
+    for (i, page) in pages.iter().enumerate() {
+        let lines = page_lines(page);
+        let text = lines.join(" ");
+        let section = t.section_of_page(i).unwrap_or_default();
+        let folio = t.folio(i);
+        if text.is_empty() {
+            out.push_str(&format!("{:>4} [{folio}] {section}: blank\n", i + 1));
+        } else {
+            out.push_str(&format!(
+                "{:>4} [{folio}] {section}: {} lines | {} … {}\n",
+                i + 1,
+                lines.len(),
+                ends(&text, 4, true),
+                ends(&text, 4, false)
+            ));
+        }
+    }
+    out
+}

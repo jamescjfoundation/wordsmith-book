@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plist version="1.0">
+<dict>
+  <key>CFBundleName</key><string>Wordsmith Book</string>
+  <key>CFBundleDisplayName</key><string>Wordsmith Book</string>
+  <key>CFBundleIdentifier</key><string>org.jcjfoundation.book</string>
+  <key>CFBundleExecutable</key><string>wordsmith-book</string>
+  <key>CFBundleIconFile</key><string>book.icns</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleShortVersionString</key><string>@VERSION@</string>
+  <key>CFBundleVersion</key><string>@VERSION@</string>
+  <key>LSMinimumSystemVersion</key><string>11.0</string>
+  <key>NSHighResolutionCapable</key><true/>
+  <key>CFBundleDocumentTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleTypeName</key><string>Wordsmith Book project</string>
+      <key>CFBundleTypeRole</key><string>Editor</string>
+      <key>LSHandlerRank</key><string>Owner</string>
+      <key>LSTypeIsPackage</key><true/>
+      <key>LSItemContentTypes</key><array><string>org.jcjfoundation.book.project</string></array>
+    </dict>
+    <dict>
+      <key>CFBundleTypeName</key><string>Wordsmith Book project (one file)</string>
+      <key>CFBundleTypeRole</key><string>Editor</string>
+      <key>LSHandlerRank</key><string>Owner</string>
+      <key>LSItemContentTypes</key><array><string>org.jcjfoundation.book.packed</string></array>
+    </dict>
+  </array>
+  <key>UTExportedTypeDeclarations</key>
+  <array>
+    <dict>
+      <key>UTTypeIdentifier</key><string>org.jcjfoundation.book.project</string>
+      <key>UTTypeDescription</key><string>Wordsmith Book project</string>
+      <key>UTTypeConformsTo</key><array><string>public.directory</string></array>
+      <key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>wsbk</string></array></dict>
+    </dict>
+    <dict>
+      <key>UTTypeIdentifier</key><string>org.jcjfoundation.book.packed</string>
+      <key>UTTypeDescription</key><string>Wordsmith Book project (one file)</string>
+      <key>UTTypeConformsTo</key><array><string>public.zip-archive</string></array>
+      <key>UTTypeTagSpecification</key><dict><key>public.filename-extension</key><array><string>wsbkz</string></array></dict>
+    </dict>
+  </array>
+</dict>
+</plist>

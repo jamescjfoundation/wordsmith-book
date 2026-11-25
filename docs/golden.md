@@ -49,3 +49,14 @@ error or warning fails the test.
 **State:** written 2026-11-24 from the builds of M6.3; **awaiting a person's look** at the EPUBs
 in a reading app (`cargo test -p wordsmith-book-check --test epub -- --ignored` writes them to
 `target/review/`).
+
+## The test of v0.1 (M9.4)
+
+`tests/golden/v0.1/<source>-<design>.txt`, checked by `crates/book-check/tests/v0_1.rs`: the
+summaries (as for the print PDFs above) of the 6 × 9 in paperback built from Waverley's DOCX,
+Gulliver's Travels' DOCX and the Manuscript fixture, in each of the six designs. The same test
+checks every word of each PDF and EPUB against the source, preflight for `pod-paperback`, the
+EPUBs' structure (and the standard EPUB validator where set up) and that every file builds the
+same twice. It takes about two minutes.
+
+**State:** written 2026-11-25 from the builds of M9.4; **awaiting a person's look**.

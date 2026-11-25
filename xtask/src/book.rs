@@ -127,10 +127,9 @@ pub fn listed(attribution: &str, file: &str) -> bool {
     }
 }
 
-/// Paths exempt from `names`: the fonts' own files, the public-domain texts and the print golden
-/// summaries (which quote those texts) name what they
-/// name (plan section 12).
-pub const NAMES_EXEMPT: &[&str] = &["ATTRIBUTION.md", "assets/fonts/", "tests/fixtures/novels/", "tests/golden/print/"];
+/// Paths exempt from `names`: the fonts' own files, and the public-domain texts and the golden
+/// files that quote them, name what they name (plan section 12).
+pub const NAMES_EXEMPT: &[&str] = &["ATTRIBUTION.md", "assets/fonts/", "tests/fixtures/novels/", "tests/golden/"];
 
 /// The largest file `names` reads; larger files are data.
 const MAX_NAMES_SCAN: u64 = 16 * 1024 * 1024;
