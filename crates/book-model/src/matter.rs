@@ -81,7 +81,9 @@ pub fn meta(info: &BookInfo, byline: &str, add: &Metadata, edition: Option<&Edit
         copyright: imprint.copyright,
         isbn: isbn.unwrap_or_default(),
         format: edition.map(|e| e.format.title().to_lowercase()).unwrap_or_default(),
+        // A house series the book joined stands in for the source's (META-4).
         series: match (info.series.is_empty(), info.series_number) {
+            _ if add.overrides.get("series").is_some_and(|s| !s.trim().is_empty()) => add.overrides.get("series").cloned().unwrap_or_default(),
             (true, _) => String::new(),
             (false, Some(n)) => format!("{}, Book {n}", info.series),
             (false, None) => info.series.clone(),

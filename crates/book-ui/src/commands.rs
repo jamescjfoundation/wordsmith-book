@@ -4,7 +4,7 @@
 
 use std::path::PathBuf;
 
-use jcj_i18n::{tl, tr};
+use jcj_i18n::{tl, tr, tr_with};
 use jcj_shell::CommandInfo;
 use jcj_shell::commands::ids;
 use jcj_shell::tree::Zone;
@@ -134,6 +134,10 @@ pub const BOX_SET: &str = "book.boxSet.set";
 /// preferences' when left out), "imprint": id, "series": id, "number": n}`; the house design
 /// comes with them, kept when they lock it. Gives what the book is in.
 pub const HOUSE_JOIN: &str = "book.house.join";
+/// The book's series (META-4): `{"house": its file (the preferences' when left out)}`; gives the
+/// series' name and its books in order, each with the design its project uses and whether that
+/// is the series' one design.
+pub const SERIES_VIEW: &str = "book.series.view";
 /// Leave the house's imprint and series: `{}`; the design stays, free to change.
 pub const HOUSE_LEAVE: &str = "book.house.leave";
 
@@ -209,6 +213,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(PROOF, tl("Write a Proof"), "")),
         p(CommandInfo::new(HOUSE_JOIN, tl("Join an Imprint or Series"), "")),
         CommandInfo::new(HOUSE_LEAVE, tl("Leave the Imprint and Series"), ""),
+        CommandInfo::new(SERIES_VIEW, tl("Series View"), ""),
         p(CommandInfo::new(HINTS_SET, tl("Set Line-Break Hints"), "")),
     ]
 }
@@ -371,6 +376,17 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             Ok(serde_json::to_value(link).unwrap_or(Value::Null))
         }
         HOUSE_LEAVE => crate::house::leave(app.open_book()?).map(|()| Value::Null),
+        SERIES_VIEW => {
+            let file = crate::house::file(params.get("house").and_then(Value::as_str), &app.prefs.house_file)?;
+            let (name, rows) = crate::house::series_view(app.open_book()?, &file)?;
+            let off: Vec<String> = rows.iter().filter(|r| !r.matches).map(|r| format!("{} ({})", r.title, r.design)).collect();
+            app.message = Some(if off.is_empty() {
+                tr_with("{series}: {n} books, one design.", &[("series", &name), ("n", &rows.len().to_string())])
+            } else {
+                tr_with("{series}: off the series' design: {books}.", &[("series", &name), ("books", &off.join(", "))])
+            });
+            Ok(json!({ "series": name, "books": rows, "one_design": off.is_empty() }))
+        }
         PROOF => {
             let b = app.open_book()?;
             let edition = s(params, "edition")?.to_owned();

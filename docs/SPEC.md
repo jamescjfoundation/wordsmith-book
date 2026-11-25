@@ -624,3 +624,16 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
    picture's own size; the copyright page uses the imprint's wording when it has one, else
    Book's. In the ebook the logo is a decorative picture, hidden from screen readers. [Designed]
 
+### 13.3 Series (META-4)
+
+1. A series has its books in order (number, title, and the Book project when it is made in
+   Book, by its path from the house file's folder), its imprint, and its design, which the
+   series' books share (locked or not, as 13.1). [Designed]
+2. A book that joins a series as book n gets the copyright page's series line ("Voyages, Book
+   2") and "also by" built from the series' other books, in order, under the series' name
+   (replacing what the book listed for that series before). Leaving keeps them as the book's
+   own. [Designed]
+3. The series view (`book.series.view`, from the command palette too) lists the series' books
+   in order with the design each project uses (this book as it stands, the others from their
+   `book.toml`) and names any book off the series' design. [Designed]
+

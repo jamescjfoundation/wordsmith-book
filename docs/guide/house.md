@@ -15,3 +15,7 @@ own copyright wording. A book that joins it takes them: the title page shows the
 logo, and the copyright page uses the imprint's wording. The book keeps a copy, so it builds the
 same anywhere; join again to take changes from the house file.
 
+**Series (META-4).** Join a series as its book 2, say, and the copyright page says "Voyages,
+Book 2" and the "Also by" page lists the series' other books in order. *Series View* lists the
+series' books with the design each uses and names any that strays from the series' design.
+

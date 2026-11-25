@@ -175,6 +175,7 @@
 "Save" = "Guardar"
 "Scene break" = "Cambio de escena"
 "Section of a Preview Page" = "Sección de una página de la vista previa"
+"Series View" = "Vista de la serie"
 "Set Line-Break Hints" = "Fijar indicaciones de salto de línea"
 "Set a Book Detail" = "Fijar un dato del libro"
 "Show a Paragraph in Print or Ebook Only" = "Mostrar un párrafo solo en papel o solo en el libro electrónico"
@@ -224,4 +225,6 @@
 "{kind}: “{from}” → “{to}” in {section}" = "{kind}: «{from}» → «{to}» en {section}"
 "{n} changes proposed; {chosen} chosen." = { one = "{n} cambio propuesto; {chosen} elegido.", other = "{n} cambios propuestos; {chosen} elegidos." }
 "{n} problems must be fixed before export." = { one = "Hay que corregir {n} problema antes de exportar.", other = "Hay que corregir {n} problemas antes de exportar." }
+"{series}: off the series' design: {books}." = "{series}: fuera del diseño de la serie: {books}."
+"{series}: {n} books, one design." = "{series}: {n} libros, un solo diseño."
 "{title} by {author}" = "{title}, de {author}"

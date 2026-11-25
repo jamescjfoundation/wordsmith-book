@@ -96,12 +96,29 @@ pub fn join(b: &mut OpenBook, house_file: &Path, imprint: Option<&str>, series: 
         },
     };
     let out = link.clone();
+    let series_details = s.clone();
     b.edit(|f| {
         if let Some((choice, text)) = design {
             if let Some(text) = text {
                 f.designs.insert(choice.id.clone(), text);
             }
             f.project.design = choice;
+        }
+        // A series (META-4): the copyright page's series line, and "also by" from its other
+        // books (in order), in place of any the book listed for that series before.
+        if let Some(s) = &series_details {
+            let line = match number {
+                Some(n) => format!("{}, Book {n}", s.name),
+                None => s.name.clone(),
+            };
+            f.project.metadata.overrides.insert("series".into(), line);
+            f.project.metadata.also_by.retain(|b| b.series != s.name);
+            let mut books: Vec<_> = s.books.iter().filter(|b| Some(b.number) != number && !b.title.trim().is_empty()).collect();
+            books.sort_by_key(|b| b.number);
+            f.project
+                .metadata
+                .also_by
+                .extend(books.into_iter().map(|b| wordsmith_book_model::OtherBook { title: b.title.clone(), series: s.name.clone() }));
         }
         if let Some((imprint, logo)) = details {
             if let Some((name, bytes)) = logo {
@@ -134,4 +151,56 @@ pub fn file(given: Option<&str>, prefs: &str) -> Result<PathBuf, String> {
         return Err("no house file: give its path, or set it in Preferences".into());
     }
     Ok(PathBuf::from(p))
+}
+
+/// One book of the book's series, as the series view shows it.
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
+pub struct SeriesRow {
+    /// Its number.
+    pub number: u32,
+    /// Its title.
+    pub title: String,
+    /// Its Book project, from the house file's folder (empty: not made in Book).
+    pub project: String,
+    /// The design its project uses (empty: not read).
+    pub design: String,
+    /// Whether it keeps the series' design (or, without one, this book's).
+    pub matches: bool,
+    /// Why its design could not be read, when it could not.
+    pub problem: String,
+}
+
+/// The book's series (META-4): its books in order with the design each project uses, checked
+/// against the series' one design. This book is read as it stands; the others from their
+/// `book.toml`.
+pub fn series_view(b: &OpenBook, house_file: &Path) -> Result<(String, Vec<SeriesRow>), String> {
+    let house = load(house_file)?;
+    let id = &b.files.project.house.series;
+    let s = house
+        .series(id)
+        .ok_or_else(|| if id.is_empty() { "the book is in no series".to_owned() } else { format!("the house has no series “{id}”") })?;
+    let want = if s.design.is_empty() { b.files.project.design.id.clone() } else { s.design.clone() };
+    let mut rows = Vec::new();
+    let mut books = s.books.clone();
+    books.sort_by_key(|x| x.number);
+    for x in books {
+        let this = Some(x.number) == b.files.project.house.series_number;
+        let (design, problem) = if this {
+            (b.files.project.design.id.clone(), String::new())
+        } else if x.project.trim().is_empty() {
+            (String::new(), String::new())
+        } else {
+            match wordsmith_book_format::house::beside(house_file, &format!("{}/book.toml", x.project.trim_end_matches('/')))
+                .map_err(err)
+                .and_then(|bytes| String::from_utf8(bytes).map_err(|_| "its book.toml is not text".to_owned()))
+                .and_then(|text| wordsmith_book_format::toml_file::read(&text).map_err(err))
+            {
+                Ok(p) => (p.design.id, String::new()),
+                Err(e) => (String::new(), e),
+            }
+        };
+        let matches = design.is_empty() || design == want;
+        rows.push(SeriesRow { number: x.number, title: x.title, project: x.project, design, matches, problem });
+    }
+    Ok((s.name.clone(), rows))
 }

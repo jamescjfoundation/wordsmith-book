@@ -22,7 +22,7 @@ use crate::commands::{
     COVER_TEMPLATE, DESIGN_CHOOSE, DESIGN_EXPORT, DESIGN_IMPORT, DESIGN_MIX, DESIGN_SAVE_AS, DESIGNS, EBOOK_OPEN, EDITION_ADD, EDITION_REMOVE,
     EDITION_SET, EXPORT, FIX_ADD, FIX_EDIT, FIX_LIST, HINTS, HINTS_SET, HOUSE_JOIN, HOUSE_LEAVE, IMPORT, IMPORT_CONFIRM, IMPORT_REVIEW, METADATA,
     METADATA_SET, MOVE_ELEMENT, NEW, NUMBERING, OUTLINE, PREFLIGHT, PREVIEW_PAGE, PREVIEW_SHOW, PROOF, REIMPORT, RELOAD_SOURCE, REMOVE_ELEMENT,
-    SAVE_AS_ONE_FILE, SECTION, SET_ELEMENT, list,
+    SAVE_AS_ONE_FILE, SECTION, SERIES_VIEW, SET_ELEMENT, list,
 };
 
 thread_local! {
@@ -97,7 +97,10 @@ fn params(id: &str) -> &'static str {
 
 /// Commands that only read.
 fn reads_only(id: &str) -> bool {
-    matches!(id, CLEANUP_LIST | METADATA | FIX_LIST | DESIGNS | OUTLINE | PREVIEW_SHOW | PREVIEW_PAGE | PREFLIGHT | IMPORT_REVIEW | HINTS)
+    matches!(
+        id,
+        SERIES_VIEW | CLEANUP_LIST | METADATA | FIX_LIST | DESIGNS | OUTLINE | PREVIEW_SHOW | PREVIEW_PAGE | PREFLIGHT | IMPORT_REVIEW | HINTS
+    )
 }
 
 fn spec(id: &'static str, run: fn(&mut Session, &Value) -> CmdResult) -> CommandSpec {
@@ -166,6 +169,7 @@ pub fn command_specs() -> Vec<CommandSpec> {
         PROOF,
         HOUSE_JOIN,
         HOUSE_LEAVE,
+        SERIES_VIEW,
         "book.save",
         "book.undo",
         "book.redo",
