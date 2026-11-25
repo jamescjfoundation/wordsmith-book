@@ -20,7 +20,10 @@ use std::collections::BTreeMap;
 use sha2::{Digest, Sha256};
 use wordsmith_book_design::design::{BreakStyle, Design, FirstLine};
 use wordsmith_book_format::assemble::{Assembled, Piece, What};
-use wordsmith_book_model::{Edition, ElementKind, Only};
+use wordsmith_book_model::{Edition, ElementKind, NoteStyle, Only};
+
+/// The file of an edition's notes gathered at the book's end.
+pub const NOTES_FILE: &str = "notes.xhtml";
 use wordsmith_manuscript_format::book::FrontKind;
 use wordsmith_manuscript_model::{Block, Fence, ImageRole, Inline, Inlines, Note};
 
@@ -209,6 +212,10 @@ struct Writer<'a> {
     decorative: &'a [String],
     /// Pictures shown that carry meaning.
     meaningful: usize,
+    /// How notes show.
+    style: NoteStyle,
+    /// Notes gathered for the book's end.
+    gathered: String,
 }
 
 impl Writer<'_> {
@@ -239,7 +246,10 @@ impl Writer<'_> {
                 Inline::NoteRef { label, .. } => {
                     if let Some(n) = notes.number(label) {
                         let id = &notes.prefix;
-                        s += &format!("<a class=\"noteref\" epub:type=\"noteref\" role=\"doc-noteref\" id=\"{id}r{n}\" href=\"#{id}n{n}\">{n}</a>");
+                        s += &format!(
+                            "<a class=\"noteref\" epub:type=\"noteref\" role=\"doc-noteref\" id=\"{id}r{n}\" href=\"{}#{id}n{n}\">{n}</a>",
+                            notes.target
+                        );
                     }
                 }
             }
@@ -373,7 +383,8 @@ impl Writer<'_> {
         }
         let opening = matches!(p.what, What::Chapter | What::Other);
         self.blocks(&p.blocks, refs, opening, &mut body);
-        self.notes(&p.notes, refs, &mut body);
+        let name = label_and_title(p);
+        self.notes(&p.notes, refs, &name, &mut body);
         body += "</section>\n";
         (body, heading)
     }
@@ -404,26 +415,53 @@ impl Writer<'_> {
         }
     }
 
-    fn notes(&self, notes: &[Note], refs: &NoteRefs, out: &mut String) {
+    /// A note's paragraphs, the last with its link back to the text.
+    fn note_paras(&self, n: &Note, refs: &NoteRefs, k: usize) -> String {
+        let id = &refs.prefix;
+        let mut out = String::new();
+        for (j, p) in n.paras.iter().enumerate() {
+            let back = if j + 1 == n.paras.len() {
+                format!(" <a href=\"{}#{id}r{k}\" role=\"doc-backlink\" title=\"Back to the text\">↩</a>", refs.back)
+            } else {
+                String::new()
+            };
+            out.push_str(&format!("<p>{}{back}</p>", self.inlines(p, &NoteRefs::default())));
+        }
+        out
+    }
+
+    /// A piece's notes, as the edition shows them: pop-up footnotes after the text, a list at the
+    /// chapter's end, or gathered for the book's end (under `name`).
+    fn notes(&mut self, notes: &[Note], refs: &NoteRefs, name: &str, out: &mut String) {
         if notes.is_empty() {
             return;
         }
-        let id = &refs.prefix;
-        out.push_str("<section class=\"notes\" epub:type=\"endnotes\" role=\"doc-endnotes\">\n<h2>Notes</h2>\n<ol>\n");
-        for (i, n) in notes.iter().enumerate() {
-            let k = i + 1;
-            out.push_str(&format!("<li id=\"{id}n{k}\" epub:type=\"endnote\">"));
-            for (j, p) in n.paras.iter().enumerate() {
-                let back = if j + 1 == n.paras.len() {
-                    format!(" <a href=\"#{id}r{k}\" role=\"doc-backlink\" title=\"Back to the text\">↩</a>")
-                } else {
-                    String::new()
-                };
-                out.push_str(&format!("<p>{}{back}</p>", self.inlines(p, &NoteRefs::default())));
+        let id = refs.prefix.clone();
+        match self.style {
+            NoteStyle::Popup => {
+                for (i, n) in notes.iter().enumerate() {
+                    let k = i + 1;
+                    out.push_str(&format!("<aside id=\"{id}n{k}\" class=\"footnote\" epub:type=\"footnote\" role=\"doc-footnote\">"));
+                    out.push_str(&self.note_paras(n, refs, k));
+                    out.push_str("</aside>\n");
+                }
             }
-            out.push_str("</li>\n");
+            NoteStyle::ChapterEnd | NoteStyle::BookEnd => {
+                let mut list = String::from("<ol>\n");
+                for (i, n) in notes.iter().enumerate() {
+                    let k = i + 1;
+                    list.push_str(&format!("<li id=\"{id}n{k}\" epub:type=\"endnote\">{}</li>\n", self.note_paras(n, refs, k)));
+                }
+                list.push_str("</ol>\n");
+                if self.style == NoteStyle::ChapterEnd {
+                    out.push_str("<section class=\"notes\" epub:type=\"endnotes\" role=\"doc-endnotes\">\n<h2>Notes</h2>\n");
+                    out.push_str(&list);
+                    out.push_str("</section>\n");
+                } else {
+                    self.gathered.push_str(&format!("<h2 class=\"label\">{}</h2>\n{list}", escape(name)));
+                }
+            }
         }
-        out.push_str("</ol>\n</section>\n");
     }
 }
 
@@ -432,6 +470,10 @@ impl Writer<'_> {
 struct NoteRefs {
     prefix: String,
     labels: Vec<String>,
+    /// The file the notes are in, from the text ("" for the same file).
+    target: String,
+    /// The file the text is in, from the notes ("" for the same file).
+    back: String,
 }
 
 impl NoteRefs {
@@ -465,7 +507,17 @@ pub fn ebook(
         return Err(Error::NoAltText(missing));
     }
     let lang = if settings.language.is_empty() { "en" } else { settings.language.as_str() };
-    let mut w = Writer { lang, images, pictures: BTreeMap::new(), left: Left::default(), design, decorative: &settings.decorative, meaningful: 0 };
+    let mut w = Writer {
+        lang,
+        images,
+        pictures: BTreeMap::new(),
+        left: Left::default(),
+        design,
+        decorative: &settings.decorative,
+        meaningful: 0,
+        style: edition.notes,
+        gathered: String::new(),
+    };
     let mut items = Vec::new();
     let mut spine = Vec::new();
     let mut nav_in_spine = None;
@@ -487,7 +539,13 @@ pub fn ebook(
             let id = format!("s{n:03}");
             let href = format!("text/{id}.xhtml");
             let (kind, role) = semantics(p);
-            let refs = NoteRefs { prefix: format!("{id}-"), labels: p.notes.iter().map(|x| x.label.clone()).collect() };
+            let at_end = edition.notes == NoteStyle::BookEnd;
+            let refs = NoteRefs {
+                prefix: format!("{id}-"),
+                labels: p.notes.iter().map(|x| x.label.clone()).collect(),
+                target: if at_end { NOTES_FILE.into() } else { String::new() },
+                back: if at_end { format!("{id}.xhtml") } else { String::new() },
+            };
             let (body, heading) = w.section(p, &id, kind, role, &refs);
             let title = if heading { label_and_title(p) } else { a.meta.title.clone() };
             items.push(Item {
@@ -531,6 +589,22 @@ pub fn ebook(
                 landmarks.push(Landmark { kind: "backmatter".into(), label: "Back matter".into(), href: target });
             }
         }
+    }
+    // Notes gathered for the book's end: their own document, last in the reading order.
+    if !w.gathered.is_empty() {
+        let body = format!(
+            "<section id=\"notes\" epub:type=\"endnotes\" role=\"doc-endnotes\" aria-labelledby=\"notes-h\">\n<header>\n<h1 id=\"notes-h\">Notes</h1>\n</header>\n{}</section>\n",
+            w.gathered
+        );
+        items.push(Item {
+            id: "notes".into(),
+            href: format!("text/{NOTES_FILE}"),
+            media_type: "application/xhtml+xml".into(),
+            properties: Vec::new(),
+            bytes: document(lang, "Notes", "backmatter", &body).into_bytes(),
+        });
+        spine.push(("notes".into(), true));
+        toc.push(NavPoint { label: "Notes".into(), href: format!("text/{NOTES_FILE}#notes"), children: Vec::new() });
     }
     let nav = Nav { items, spine, nav_in_spine, toc, landmarks };
     finish(a, design, edition, settings, lang, w, nav)

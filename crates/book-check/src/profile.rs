@@ -155,6 +155,11 @@ impl Profile {
             margins: (t.margins[0], t.margins[1], t.margins[2], t.margins[3]),
             gutter: self.gutter.iter().map(|g| (g.pages, g.inches)).collect(),
             bleed: if edition.bleed { self.bleed } else { 0.0 },
+            notes: match edition.notes {
+                wordsmith_book_model::NoteStyle::Popup => wordsmith_book_typeset::NotePlace::Footnotes,
+                wordsmith_book_model::NoteStyle::ChapterEnd => wordsmith_book_typeset::NotePlace::ChapterEnd,
+                wordsmith_book_model::NoteStyle::BookEnd => wordsmith_book_typeset::NotePlace::BookEnd,
+            },
         })
     }
 

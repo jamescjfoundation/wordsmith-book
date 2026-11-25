@@ -27,15 +27,15 @@ gutter 0.625 in
   24 [10] 00000000-0000-7000-8000-000000000005: 40 lines | 10Gulliver’s Travels which, as … march the remaining part
   25 [11] 00000000-0000-7000-8000-000000000005: 39 lines | Chapter One11 of the … length in the temple.
   26 [12] 00000000-0000-7000-8000-000000000005: blank
-  27 [13] 00000000-0000-7000-8000-000000000006: 29 lines | Chapter Two The emperor … company came, that 13
-  28 [14] 00000000-0000-7000-8000-000000000006: 40 lines | 14Gulliver’s Travels the offensive … times in my hand,
-  29 [15] 00000000-0000-7000-8000-000000000006: 39 lines | Chapter Two15 and therefore … my advantage at court.
-  30 [16] 00000000-0000-7000-8000-000000000006: 40 lines | 16Gulliver’s Travels Towards night … together with a proportionable
-  31 [17] 00000000-0000-7000-8000-000000000006: 40 lines | Chapter Two17 quantity of … took up the two
-  32 [18] 00000000-0000-7000-8000-000000000006: 40 lines | 18Gulliver’s Travels officers in … and heavy, that my
-  33 [19] 00000000-0000-7000-8000-000000000006: 40 lines | Chapter Two19 comrade and … to lift them: the
-  34 [20] 00000000-0000-7000-8000-000000000006: 40 lines | 20Gulliver’s Travels other cell … curious to see, and
-  35 [21] 00000000-0000-7000-8000-000000000006: 23 lines | Chapter Two21 commanded two … feet and a half.
+  27 [13] 00000000-0000-7000-8000-000000000006: 29 lines | Chapter Two The emperor … and a half. 13
+  28 [14] 00000000-0000-7000-8000-000000000006: 40 lines | 14Gulliver’s Travels to perform … him, I lay on
+  29 [15] 00000000-0000-7000-8000-000000000006: 39 lines | Chapter Two15 my side, … people were highly delighted
+  30 [16] 00000000-0000-7000-8000-000000000006: 40 lines | 16Gulliver’s Travels at this … hundred yards round the
+  31 [17] 00000000-0000-7000-8000-000000000006: 40 lines | Chapter Two17 city, to … hands; that whatever they
+  32 [18] 00000000-0000-7000-8000-000000000006: 40 lines | 18Gulliver’s Travels took from … side, were several round
+  33 [19] 00000000-0000-7000-8000-000000000006: 40 lines | Chapter Two19 flat pieces … of these cells were
+  34 [20] 00000000-0000-7000-8000-000000000006: 40 lines | 20Gulliver’s Travels several globes, … with the smallest spark,
+  35 [21] 00000000-0000-7000-8000-000000000006: 23 lines | Chapter Two21 and blow … out of my possession.
   36 [22] 00000000-0000-7000-8000-000000000006: blank
   37 [23] 00000000-0000-7000-8000-000000000007: 28 lines | Chapter Three The author … majesty and the 23
   38 [24] 00000000-0000-7000-8000-000000000007: 40 lines | 24Gulliver’s Travels court with … most agility, and holds
@@ -59,13 +59,13 @@ gutter 0.625 in
   56 [42] 00000000-0000-7000-8000-000000000009: 35 lines | 42Gulliver’s Travels already applied … not forbear vowing revenge.”
   57 [43] 00000000-0000-7000-8000-00000000000a: 28 lines | Chapter Six Of the … left, like the 43
   58 [44] 00000000-0000-7000-8000-00000000000a: 40 lines | 44Gulliver’s Travels Arabians, nor … the common answer, that
-  59 [45] 00000000-0000-7000-8000-00000000000a: 40 lines | Chapter Six45 different nations … and defend his corruptions.
-  60 [46] 00000000-0000-7000-8000-00000000000a: 40 lines | 46Gulliver’s Travels In like … kinds, suited to different
-  61 [47] 00000000-0000-7000-8000-00000000000a: 40 lines | Chapter Six47 qualities, and … a professor or deputy,
-  62 [48] 00000000-0000-7000-8000-00000000000a: 40 lines | 48Gulliver’s Travels till they … unknown in this empire.
-  63 [49] 00000000-0000-7000-8000-00000000000a: 40 lines | Chapter Six49 And here … a reasonable draught. Their
-  64 [50] 00000000-0000-7000-8000-00000000000a: 40 lines | 50Gulliver’s Travels mutton yields … daughter, and some particular
-  65 [51] 00000000-0000-7000-8000-00000000000a: 35 lines | Chapter Six51 acquaintance; but … have been made capital.
+  59 [45] 00000000-0000-7000-8000-00000000000a: 41 lines | Chapter Six45 different nations … have been made capital.
+  60 [46] 00000000-0000-7000-8000-00000000000a: 40 lines | 46Gulliver’s Travels inclinations led … age of twenty moons,
+  61 [47] 00000000-0000-7000-8000-00000000000a: 39 lines | Chapter Six47 at which … the last three years.
+  62 [48] 00000000-0000-7000-8000-00000000000a: 40 lines | 48Gulliver’s Travels In the … the earth, and therefore
+  63 [49] 00000000-0000-7000-8000-00000000000a: 40 lines | Chapter Six49 their education … up, as I wanted,
+  64 [50] 00000000-0000-7000-8000-00000000000a: 40 lines | 50Gulliver’s Travels in a … with all innocent marks
+  65 [51] 00000000-0000-7000-8000-00000000000a: 35 lines | Chapter Six51 of freedom … governed by that favourite.
   66 [52] 00000000-0000-7000-8000-00000000000a: blank
   67 [53] 00000000-0000-7000-8000-00000000000b: 28 lines | Chapter Seven The author, … he left me:— 53
   68 [54] 00000000-0000-7000-8000-00000000000b: 40 lines | 54Gulliver’s Travels “You are … destroy and put to
@@ -195,11 +195,11 @@ gutter 0.625 in
  192 [178] 00000000-0000-7000-8000-00000000001d: 40 lines | 178Gulliver’s Travels kinds of … the said minister a
  193 [179] 00000000-0000-7000-8000-00000000001d: 40 lines | Chapter Twenty-Two179 tweak by … was upon men who
  194 [180] 00000000-0000-7000-8000-00000000001d: 40 lines | 180Gulliver’s Travels are the … curious and useful for
- 195 [181] 00000000-0000-7000-8000-00000000001d: 43 lines | Chapter Twenty-Two181 politicians; but, … a letter to a
- 196 [182] 00000000-0000-7000-8000-00000000001d: 18 lines | 182Gulliver’s Travels friend, ‘Our … signification do not occur.
- 197 [183] 00000000-0000-7000-8000-00000000001e: 26 lines | Chapter Twenty- Three The … hospitably received. A 183
- 198 [184] 00000000-0000-7000-8000-00000000001e: 40 lines | 184Gulliver’s Travels gentleman of … instant, like visions in
- 199 [185] 00000000-0000-7000-8000-00000000001e: 39 lines | Chapter Twenty-Three185 a dream … little of my own.
+ 195 [181] 00000000-0000-7000-8000-00000000001d: 46 lines | Chapter Twenty-Two181 politicians; but, … signification do not occur.
+ 196 [182] 00000000-0000-7000-8000-00000000001d: 17 lines | 182Gulliver’s Travels “When this … returning home to England.
+ 197 [183] 00000000-0000-7000-8000-00000000001e: 25 lines | Chapter Twenty- Three The … Portsmouth. I soon 183
+ 198 [184] 00000000-0000-7000-8000-00000000001e: 40 lines | 184Gulliver’s Travels fell into … finger; at which, to
+ 199 [185] 00000000-0000-7000-8000-00000000001e: 40 lines | Chapter Twenty-Three185 my great … little of my own.
  200 [186] 00000000-0000-7000-8000-00000000001e: 34 lines | 186Gulliver’s Travels He assured … entertainment to the reader.
  201 [187] 00000000-0000-7000-8000-00000000001f: 25 lines | Chapter Twenty- Four A … they wanted a 187
  202 [188] 00000000-0000-7000-8000-00000000001f: 40 lines | 188Gulliver’s Travels genius to … distinguished, up to their
@@ -299,12 +299,12 @@ gutter 0.625 in
  296 [282] 00000000-0000-7000-8000-00000000002e: 40 lines | 282Gulliver’s Travels my complexion … of my own canoe;
  297 [283] 00000000-0000-7000-8000-00000000002e: 40 lines | Chapter Thirty-Eight283 but he … him, at his earnest
  298 [284] 00000000-0000-7000-8000-00000000002e: 40 lines | 284Gulliver’s Travels request, and … me, “there was an
- 299 [285] 00000000-0000-7000-8000-00000000002e: 41 lines | Chapter Thirty-Eight285 English ship … the groom is my
- 300 [286] 00000000-0000-7000-8000-00000000002e: 9 lines | 286Gulliver’s Travels greatest favourite, … Gulliver’s home in England.
- 301 [287] 00000000-0000-7000-8000-00000000002f: 26 lines | Chapter Thirty- Nine The … should be obliged 287
- 302 [288] 00000000-0000-7000-8000-00000000002f: 40 lines | 288Gulliver’s Travels to make … to observe. But I
- 303 [289] 00000000-0000-7000-8000-00000000002f: 40 lines | Chapter Thirty-Nine289 forbear descanting … ranks, overturning the carriages,
- 304 [290] 00000000-0000-7000-8000-00000000002f: 40 lines | 290Gulliver’s Travels battering the … of the greatest abilities,
- 305 [291] 00000000-0000-7000-8000-00000000002f: 40 lines | Chapter Thirty-Nine291 utter strangers … (but with the utmost
- 306 [292] 00000000-0000-7000-8000-00000000002f: 35 lines | 292Gulliver’s Travels brevity) the … in my sight. FOOTNOTES:
+ 299 [285] 00000000-0000-7000-8000-00000000002e: 42 lines | Chapter Thirty-Eight285 English ship … Gulliver’s home in England.
+ 300 [286] 00000000-0000-7000-8000-00000000002e: 8 lines | 286Gulliver’s Travels The first … friendship to each other.
+ 301 [287] 00000000-0000-7000-8000-00000000002f: 24 lines | Chapter Thirty- Nine The … concerning foreign places. 287
+ 302 [288] 00000000-0000-7000-8000-00000000002f: 40 lines | 288Gulliver’s Travels I could … among which the least
+ 303 [289] 00000000-0000-7000-8000-00000000002f: 40 lines | Chapter Thirty-Nine289 corrupted are … in the military art.
+ 304 [290] 00000000-0000-7000-8000-00000000002f: 40 lines | 290Gulliver’s Travels Imagine twenty … their strict regard to
+ 305 [291] 00000000-0000-7000-8000-00000000002f: 40 lines | Chapter Thirty-Nine291 the distribution … intellectuals came to degenerate.
+ 306 [292] 00000000-0000-7000-8000-00000000002f: 37 lines | 292Gulliver’s Travels I began … in my sight. FOOTNOTES:
  307 [293] 00000000-0000-7000-8000-000000000030: 2 lines | ABOUT THE AUTHOR Jonathan … satirist and a dean.

@@ -25,16 +25,16 @@ gutter 0.625 in
   22 [10] 00000000-0000-7000-8000-000000000004: 36 lines | JONATHAN SWIFT afterwards assured; … hundred of the 10
   23 [11] 00000000-0000-7000-8000-000000000004: 36 lines | GULLIVER'S TRAVELS strongest men … fourscore and eleven 11
   24 [12] 00000000-0000-7000-8000-000000000004: 21 lines | JONATHAN SWIFT chains, like … in the temple. 12
-  25 [13] 00000000-0000-7000-8000-000000000005: 25 lines | CHAPTER II. ☙ ❧ … will give some 13
-  26 [14] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT allowance, after … his complexion olive, 14
-  27 [15] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS his countenance … The poor man 15
-  28 [16] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT squalled terribly, … hands with poisoned 16
-  29 [17] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS arrows, which … kindness. And he 17
-  30 [18] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT advised me … cable, and marked 18
-  31 [19] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS with black … which made an 19
-  32 [20] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT incessant noise, … gave a shout 20
-  33 [21] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS between terror … sometimes use for 21
-  34 [22] 00000000-0000-7000-8000-000000000005: 8 lines | JONATHAN SWIFT the weakness … and a half. 22
+  25 [13] 00000000-0000-7000-8000-000000000005: 25 lines | CHAPTER II. ☙ ❧ … and a half. 13
+  26 [14] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT uneasy load. … which alone is 14
+  27 [15] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS enough to … took them all 15
+  28 [16] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT in my … would be very 16
+  29 [17] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS expensive, and … I must lumos 17
+  30 [18] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT kelmin pesso … we found a 18
+  31 [19] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS prodigious bundle … circularly drawn, and 19
+  32 [20] 00000000-0000-7000-8000-000000000005: 36 lines | JONATHAN SWIFT thought we … my scimitar, which, 20
+  33 [21] 00000000-0000-7000-8000-000000000005: 36 lines | GULLIVER'S TRAVELS although it … were returned me. 21
+  34 [22] 00000000-0000-7000-8000-000000000005: 8 lines | JONATHAN SWIFT I had … of my possession. 22
   35 [23] 00000000-0000-7000-8000-000000000006: 24 lines | CHAPTER III. ☙ ❧ … are trained in 23
   36 [24] 00000000-0000-7000-8000-000000000006: 36 lines | JONATHAN SWIFT this art … one by one, 24
   37 [25] 00000000-0000-7000-8000-000000000006: 36 lines | GULLIVER'S TRAVELS sometimes leap … beheld. The parallel 25
@@ -59,14 +59,14 @@ gutter 0.625 in
   56 [44] 00000000-0000-7000-8000-000000000008: blank
   57 [45] 00000000-0000-7000-8000-000000000009: 24 lines | CHAPTER VI. ☙ ❧ … the reader’s imagination. 45
   58 [46] 00000000-0000-7000-8000-000000000009: 36 lines | JONATHAN SWIFT I shall … it, the honest 46
-  59 [47] 00000000-0000-7000-8000-000000000009: 37 lines | GULLIVER'S TRAVELS dealer is … for the service 47
-  60 [48] 00000000-0000-7000-8000-000000000009: 36 lines | JONATHAN SWIFT of his … their young proceeds 48
-  61 [49] 00000000-0000-7000-8000-000000000009: 35 lines | GULLIVER'S TRAVELS from the … those occasions, will 49
-  62 [50] 00000000-0000-7000-8000-000000000009: 35 lines | JONATHAN SWIFT not suffer … and their several 50
+  59 [47] 00000000-0000-7000-8000-000000000009: 38 lines | GULLIVER'S TRAVELS dealer is … been made capital. 47
+  60 [48] 00000000-0000-7000-8000-000000000009: 36 lines | JONATHAN SWIFT to be … that men and 48
+  61 [49] 00000000-0000-7000-8000-000000000009: 36 lines | GULLIVER'S TRAVELS women are … at meeting and 49
+  62 [50] 00000000-0000-7000-8000-000000000009: 36 lines | JONATHAN SWIFT parting; but … and their several 50
   63 [51] 00000000-0000-7000-8000-000000000009: 36 lines | GULLIVER'S TRAVELS degrees: those … the waist, and 51
   64 [52] 00000000-0000-7000-8000-000000000009: 36 lines | JONATHAN SWIFT by the … ate more than 52
   65 [53] 00000000-0000-7000-8000-000000000009: 36 lines | GULLIVER'S TRAVELS usual, in … my table. I 53
-  66 [54] 00000000-0000-7000-8000-000000000009: 22 lines | JONATHAN SWIFT have passed … been made capital. 54
+  66 [54] 00000000-0000-7000-8000-000000000009: 19 lines | JONATHAN SWIFT have passed … by that favourite. 54
   67 [55] 00000000-0000-7000-8000-00000000000a: 24 lines | CHAPTER VII. ☙ ❧ … observing his lordship’s 55
   68 [56] 00000000-0000-7000-8000-00000000000a: 35 lines | JONATHAN SWIFT countenance full … and being within 56
   69 [57] 00000000-0000-7000-8000-00000000000a: 36 lines | GULLIVER'S TRAVELS the precincts … extenuate your crimes. 57
@@ -309,8 +309,8 @@ gutter 0.625 in
  306 [294] 00000000-0000-7000-8000-00000000002c: 36 lines | JONATHAN SWIFT native of … the captain’s cabin. 294
  307 [295] 00000000-0000-7000-8000-00000000002c: 36 lines | GULLIVER'S TRAVELS His name … opinion of my 295
  308 [296] 00000000-0000-7000-8000-00000000002c: 36 lines | JONATHAN SWIFT veracity. But … I really began 296
- 309 [297] 00000000-0000-7000-8000-00000000002c: 37 lines | GULLIVER'S TRAVELS to tolerate … Yahoo species I 297
- 310 [298] 00000000-0000-7000-8000-00000000002c: 22 lines | JONATHAN SWIFT had become … home in England. 298
+ 309 [297] 00000000-0000-7000-8000-00000000002c: 38 lines | GULLIVER'S TRAVELS to tolerate … home in England. 297
+ 310 [298] 00000000-0000-7000-8000-00000000002c: 21 lines | JONATHAN SWIFT with the … to each other. 298
  311 [299] 00000000-0000-7000-8000-00000000002d: 23 lines | CHAPTER XII. ☙ ❧ … concerning foreign places. 299
  312 [300] 00000000-0000-7000-8000-00000000002d: 36 lines | JONATHAN SWIFT I could … the reasoning, governing 300
  313 [301] 00000000-0000-7000-8000-00000000002d: 36 lines | GULLIVER'S TRAVELS animal of … strangers, and especially 301

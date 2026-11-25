@@ -306,6 +306,11 @@ break, hyphenation by the book's language, running heads off on openings and bla
     minimum with bleed. A full-page picture fills its page to the edge when the edition bleeds,
     cropped to the page's shape, and the text block otherwise; nothing else prints on its page.
     [Designed]
+14. **Notes in print** (TXT-3, from 0.2): by the edition's note setting: footnotes (the default)
+    at the foot of the page that calls them, under a short rule, numbered per chapter, a long one
+    continued on the next page; or a list at each chapter's end; or a Notes section at the end of
+    the book under each chapter's name. Every letter of the text and of the footnotes is checked
+    against the book. [Designed]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 
@@ -345,6 +350,11 @@ break, hyphenation by the book's language, running heads off on openings and bla
     e-ink reader and tablet sizes with text size and dark-page toggles, and labels it a preview.
     "Open in a reading app" hands the exported EPUB to the reading app the user installed.
     [Designed]
+12. **Notes in the ebook** (TXT-3, EBK-7, from 0.2): pop-up footnotes (the default: each note an
+    `aside` with `epub:type="footnote"` after its section's text, which reading systems show over
+    the page), endnotes at each chapter's end, or one Notes document at the end of the book;
+    references and notes link both ways, across documents too. [Verified: EPUB 3 Structural
+    Semantics]
 
 ## 7. Preview (PRV-1)
 

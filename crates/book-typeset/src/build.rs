@@ -15,6 +15,8 @@ use crate::{Block, Case, Error, FirstLine, Heads, INCH, ImageFit, Kind, Look, Pa
 pub const SOURCE: ExtKey<bool> = ExtKey::new("book.source");
 /// On a run: the book's own words inside an author's paragraph (a note's number).
 pub const GENERATED: ExtKey<bool> = ExtKey::new("book.generated");
+/// On a note number in the text: the note's number in its section (keeps adjacent numbers apart).
+pub const NOTE_MARK: ExtKey<u32> = ExtKey::new("book.note_mark");
 /// On the document: the indexes of its sections that are front matter (roman folios).
 pub const FRONT: ExtKey<Vec<usize>> = ExtKey::new("book.front_sections");
 
@@ -29,6 +31,9 @@ struct Builder<'a> {
     media: BTreeMap<String, Arc<Vec<u8>>>,
     /// Paragraphs (by index) that are full-page pictures: what follows starts a new page.
     alone: Vec<usize>,
+    /// Footnotes to place once the document exists: (paragraph index, offset, the note's
+    /// paragraphs, its number).
+    footnotes: Vec<(usize, usize, Vec<Paragraph>, String)>,
     text_width: f32,
     text_height: f32,
 }
@@ -98,6 +103,9 @@ impl Builder<'_> {
             if s.superscript {
                 c.vert_align = Some(VertAlign::Superscript);
                 let _ = GENERATED.set(&mut c, &true);
+                if let Ok(n) = s.text.parse::<u32>() {
+                    let _ = NOTE_MARK.set(&mut c, &n);
+                }
             }
             let at = p.text.len();
             let text = s.text.replace(OBJ, "");
@@ -225,6 +233,45 @@ impl Builder<'_> {
         }
     }
 
+    /// Turn the note numbers printed in this section's paragraphs into footnote references:
+    /// each number is taken out and its note waits to be placed at the foot of its page.
+    fn footnotes_from(&mut self, s: &Section, start: usize, source: bool) {
+        let small = self.chars(&self.look.body_font, self.look.body_size * 0.85);
+        for i in start..self.body.len() {
+            let found: Vec<(usize, usize, usize)> = self.body[i]
+                .run_ranges()
+                .filter(|(_, c)| c.vert_align == Some(VertAlign::Superscript))
+                .filter_map(|(r, c)| {
+                    let n = usize::try_from(NOTE_MARK.get_or_none(c)?).ok()?;
+                    (n >= 1 && n <= s.notes.len()).then_some((r.start, r.end, n))
+                })
+                .collect();
+            // Where each reference goes once the numbers before it are taken out.
+            let mut removed = 0;
+            let mut at = Vec::with_capacity(found.len());
+            for (a, b, n) in &found {
+                at.push((*a, *b, *n, a - removed));
+                removed += b - a;
+            }
+            for (a, b, n, place) in at.into_iter().rev() {
+                if self.body[i].delete(a, b).is_err() {
+                    continue;
+                }
+                let mut spans = vec![Span { text: format!("{n}"), superscript: true, ..Span::default() }, Span::plain(" ")];
+                spans.extend(s.notes[n - 1].iter().cloned());
+                let mut props = self.body_props(false);
+                props.line_spacing = Some(LineSpacing::Exactly(self.line() * 0.82));
+                props.space_after = Some(0.0);
+                let mut p = self.para(&spans, props, &small, source);
+                // The number is the book's own; the note's words are the author's.
+                if let Some(r) = p.runs.first_mut() {
+                    let _ = GENERATED.set(&mut r.props, &true);
+                }
+                self.footnotes.push((i, place, vec![p], n.to_string()));
+            }
+        }
+    }
+
     fn image(&mut self, bytes: &[u8], pixels: (u32, u32), alt: &str, fit: ImageFit, source: bool) {
         let key = format!("image-{}.{}", self.media.len() + 1, if bytes.starts_with(b"\x89PNG") { "png" } else { "jpg" });
         self.media.insert(key.clone(), Arc::new(bytes.to_vec()));
@@ -288,6 +335,7 @@ impl Builder<'_> {
     fn blocks(&mut self, s: &Section) {
         let look = self.look;
         let source = !s.generated;
+        let section_start = self.body.len();
         let mut after_break = true;
         let mut first = s.kind == Kind::Chapter;
         let mut lead = false;
@@ -390,7 +438,9 @@ impl Builder<'_> {
                 }
             }
         }
-        if !s.notes.is_empty() {
+        if !s.notes.is_empty() && look.notes == crate::NotePlace::Footnotes {
+            self.footnotes_from(s, section_start, source);
+        } else if !s.notes.is_empty() {
             let mut c = self.body_chars();
             c.small_caps = Some(true);
             let mut props = self.centered(self.line() * 1.5, self.line() * 0.5);
@@ -530,6 +580,7 @@ pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Doc
         body: Vec::new(),
         media: BTreeMap::new(),
         alone: Vec::new(),
+        footnotes: Vec::new(),
         text_width,
         text_height,
     };
@@ -588,6 +639,19 @@ pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Doc
     }
     doc.last_section = last;
     let _ = FRONT.set(&mut doc, &front_sections);
+    // Footnotes: each note becomes a part of the document, referenced where its number was
+    // (latest offsets first, so earlier ones stay where they are).
+    let mut notes = std::mem::take(&mut b.footnotes);
+    notes.sort_by_key(|x| (x.0, std::cmp::Reverse(x.1)));
+    for (i, at, paras, mark) in notes {
+        let id = doc.add_part(PartKind::Footnote, paras.into_iter().map(|p| Arc::new(DocBlock::Para(p))).collect());
+        if let Some(p) = b.body.get_mut(i) {
+            let mut c = p.props_at(at).clone();
+            c.vert_align = Some(VertAlign::Superscript);
+            let _ = GENERATED.set(&mut c, &true);
+            let _ = p.insert_object(at, InlineObject::NoteRef { kind: jcj_doc::para::NoteKind::Footnote, id, custom: mark }, &c);
+        }
+    }
     for i in std::mem::take(&mut b.alone) {
         if let Some(next) = b.body.get_mut(i + 1) {
             next.props.page_break_before = Some(true);

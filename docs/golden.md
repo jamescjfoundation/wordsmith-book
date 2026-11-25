@@ -60,3 +60,6 @@ EPUBs' structure (and the standard EPUB validator where set up) and that every f
 same twice. It takes about two minutes.
 
 **State:** written 2026-11-25 from the builds of M9.4; **awaiting a person's look**.
+
+**R2.4:** every golden file above was written again when printed notes became footnotes and the
+ebook's notes pop-up footnotes (the editions' default); they await a person's look again.

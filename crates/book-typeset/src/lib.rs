@@ -186,6 +186,18 @@ pub struct PrintBook {
     pub sections: Vec<Section>,
 }
 
+/// Where a printed book's notes go (TXT-3).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum NotePlace {
+    /// At the foot of the page that calls them, continued on the next page when long.
+    Footnotes,
+    /// At the end of each chapter.
+    #[default]
+    ChapterEnd,
+    /// In a Notes section at the end of the book, under each chapter's name.
+    BookEnd,
+}
+
 /// The first line of a chapter.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum FirstLine {
@@ -282,6 +294,8 @@ pub struct Look {
     /// Bleed past the trim on the outside, top and bottom, inches (0: none). The page is that
     /// much larger; the PDF says where the trim is.
     pub bleed: f32,
+    /// Where the notes go.
+    pub notes: NotePlace,
 }
 
 impl Default for Look {
@@ -315,6 +329,7 @@ impl Default for Look {
             head_small_caps: true,
             folios: true,
             bleed: 0.0,
+            notes: NotePlace::ChapterEnd,
         }
     }
 }
@@ -361,6 +376,60 @@ pub struct Typeset {
     /// The trim (inches) and bleed (inches), for the trim box.
     trim: (f32, f32),
     bleed: f32,
+}
+
+/// A paragraph's text as printed: objects left out, but a footnote reference shows its number.
+fn shown_text(p: &jcj_doc::Paragraph) -> String {
+    let marks: std::collections::BTreeMap<usize, String> = p
+        .objects_with_offsets()
+        .filter_map(|(at, o)| match o {
+            jcj_doc::para::InlineObject::NoteRef { custom, .. } => Some((at, custom.clone())),
+            _ => None,
+        })
+        .collect();
+    let mut out = String::with_capacity(p.text.len());
+    for (i, c) in p.text.char_indices() {
+        if c == jcj_doc::para::OBJ {
+            if let Some(m) = marks.get(&i) {
+                out.push_str(m);
+            }
+        } else {
+            out.push(c);
+        }
+    }
+    out
+}
+
+/// The book with every chapter's notes gathered into a Notes section at its end, under each
+/// chapter's name, numbered as in the text.
+pub fn notes_at_end(book: &PrintBook) -> PrintBook {
+    let mut out = book.clone();
+    let mut blocks = Vec::new();
+    for s in &mut out.sections {
+        if s.notes.is_empty() {
+            continue;
+        }
+        let name = [s.label.clone().unwrap_or_default(), s.title.clone()].into_iter().filter(|x| !x.is_empty()).collect::<Vec<_>>().join(": ");
+        blocks.push(Block::Heading(vec![Span::plain(if name.is_empty() { s.head.clone() } else { name })]));
+        for (i, n) in std::mem::take(&mut s.notes).into_iter().enumerate() {
+            let mut spans = vec![Span::plain(format!("{}. ", i + 1))];
+            spans.extend(n);
+            blocks.push(Block::Para(spans));
+        }
+    }
+    if !blocks.is_empty() {
+        out.sections.push(Section {
+            id: "element:notes-at-end".into(),
+            kind: Kind::Matter,
+            recto: true,
+            title: "Notes".into(),
+            head: "Notes".into(),
+            generated_title: true,
+            blocks,
+            ..Section::default()
+        });
+    }
+    out
 }
 
 /// `n` in lower-case roman numerals (front matter folios).
@@ -423,6 +492,13 @@ pub fn estimate_pages(book: &PrintBook, look: &Look) -> usize {
 /// must open on a right-hand page get a blank page before them, the contents get the folios
 /// their sections landed on, and the gutter follows the page count.
 pub fn typeset(book: &PrintBook, look: &Look, date: &str) -> Result<Typeset, Error> {
+    let gathered;
+    let book = if look.notes == NotePlace::BookEnd {
+        gathered = notes_at_end(book);
+        &gathered
+    } else {
+        book
+    };
     let mut pass = Pass { gutter: look.gutter_for(estimate_pages(book, look)), ..Pass::default() };
     let mut n = 0;
     loop {
@@ -585,6 +661,41 @@ impl Typeset {
             .ok_or_else(|| Error::Page(format!("there is no page {}", index + 1)))
     }
 
+    /// Where page `index`'s footnotes begin, in points from the top, if it has any.
+    pub fn notes_top(&self, index: usize) -> Option<f32> {
+        let page = self.layout.pages.get(index)?;
+        page.items
+            .iter()
+            .filter_map(|it| match it {
+                jcj_layout::Placed::Lines { story: jcj_doc::StoryRef::Part(id), y, .. }
+                    if self.doc.parts.get(id).is_some_and(|p| p.kind == jcj_doc::PartKind::Footnote) =>
+                {
+                    Some(*y)
+                }
+                _ => None,
+            })
+            .reduce(f32::min)
+    }
+
+    /// The footnotes' text, in the order the book calls them.
+    pub fn printed_notes(&self) -> Vec<String> {
+        let mut out = Vec::new();
+        for (_, p) in jcj_doc::walk::body_paragraphs(&self.doc) {
+            for (_, obj) in p.objects_with_offsets() {
+                if let jcj_doc::para::InlineObject::NoteRef { kind: jcj_doc::para::NoteKind::Footnote, id, .. } = obj
+                    && let Some(part) = self.doc.parts.get(id)
+                {
+                    for b in &part.blocks {
+                        if let jcj_doc::Block::Para(np) = b.as_ref() {
+                            out.push(np.text.replace(jcj_doc::para::OBJ, ""));
+                        }
+                    }
+                }
+            }
+        }
+        out
+    }
+
     /// The smallest type the book's text is set in (points), with some of the text in it: every
     /// run of the body that prints letters, and the running heads and folios. Superscript note
     /// numbers are left out (print services measure the text, not its marks).
@@ -616,9 +727,6 @@ impl Typeset {
     /// The text the book's body area prints, paragraph by paragraph: (the paragraph's text,
     /// whether it is the author's words).
     pub fn printed_paragraphs(&self) -> Vec<(String, bool)> {
-        jcj_doc::walk::body_paragraphs(&self.doc)
-            .into_iter()
-            .map(|(_, p)| (p.text.replace(jcj_doc::para::OBJ, ""), SOURCE.get_or_none(p).unwrap_or(false)))
-            .collect()
+        jcj_doc::walk::body_paragraphs(&self.doc).into_iter().map(|(_, p)| (shown_text(p), SOURCE.get_or_none(p).unwrap_or(false))).collect()
     }
 }

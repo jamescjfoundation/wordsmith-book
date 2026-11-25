@@ -276,13 +276,13 @@ fn ebook_bytes(b: &Book) -> Vec<u8> {
 #[test]
 fn ebook_rules_find_their_broken_ebooks() {
     let good = ebook_bytes(&gulliver());
-    let f = preflight::ebook_findings(&good, &gulliver(), &[], true);
+    let f = preflight::ebook_findings(&good, &gulliver(), &[], true, false);
     assert!(f.is_empty(), "{f:?}");
     // A file missing from the package: an EPUB finding linked to the file.
     let mut files = wordsmith_book_check::epub::unzip(&good).unwrap();
     files.retain(|f| f.0 != "EPUB/text/s006.xhtml");
     let broken = rezip(&files);
-    let f = preflight::ebook_findings(&broken, &gulliver(), &[], true);
+    let f = preflight::ebook_findings(&broken, &gulliver(), &[], true, false);
     let e = rules(&f, "epub");
     assert!(!e.is_empty() && e.iter().all(|x| x.severity == Severity::Blocks));
     assert_eq!(e[0].link, Link::File("EPUB/package.opf".into()));
@@ -300,9 +300,9 @@ fn ebook_rules_find_their_broken_ebooks() {
     {
         *text = format!("Brobdingnagian {text}");
     }
-    assert!(rules(&preflight::ebook_findings(&good, &changed, &[], true), "words").len() == 1);
+    assert!(rules(&preflight::ebook_findings(&good, &changed, &[], true, false), "words").len() == 1);
     // No cover, or a poor one: warnings.
-    let f = preflight::ebook_findings(&good, &gulliver(), &["the cover is 500 × 800 pixels".into()], false);
+    let f = preflight::ebook_findings(&good, &gulliver(), &["the cover is 500 × 800 pixels".into()], false, false);
     assert_eq!(rules(&f, "cover").len(), 2);
     assert!(rules(&f, "cover").iter().all(|x| x.severity == Severity::Warning));
 }

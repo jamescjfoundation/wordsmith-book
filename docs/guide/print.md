@@ -23,6 +23,9 @@ annotations, links or bookmarks. The same project gives the same PDF every time.
 are 0.125 in larger outside, top and bottom, with trim and bleed boxes for the printer;
 full-page pictures then fill their page to the edge. Without bleed they fill the text block.
 
+**Notes (TXT-3):** footnotes at the foot of the page that calls them (a long one continues on
+the next page), or, per edition, a list at each chapter's end or a Notes section at the book's end.
+
 **Hardcover (PRT-8):** a hardcover edition uses the `pod-hardcover` profile: case-laminate sizes,
 wider margins and gutter for the hinge, and 75 to 550 pages.
 

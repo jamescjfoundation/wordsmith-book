@@ -42,7 +42,7 @@ pub fn device(id: &str) -> Option<Device> {
 /// The look of a design's ebook mapping on a device at a text size (points).
 pub fn ebook_look(design: &Design, device: &Device, text: f32) -> Result<Look, Error> {
     let m = device.margin;
-    let geometry = Geometry { trim: device.size, margins: (m, m, m, m * 1.2), gutter: Vec::new(), bleed: 0.0 };
+    let geometry = Geometry { trim: device.size, margins: (m, m, m, m * 1.2), gutter: Vec::new(), bleed: 0.0, notes: crate::NotePlace::ChapterEnd };
     let mut l = look(design, &geometry)?;
     let e = &design.ebook;
     let scale = text / l.body_size.max(1.0);

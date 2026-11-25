@@ -31,17 +31,17 @@ gutter 0.000 in
   28 [12] 00000000-0000-7000-8000-000000000005: 33 lines | JONATHAN SWIFT These people … I was asleep; 12
   29 [13] 00000000-0000-7000-8000-000000000005: 33 lines | GULLIVER’S TRAVELS they climbed … was told, for 13
   30 [14] 00000000-0000-7000-8000-000000000005: 16 lines | JONATHAN SWIFT I could … in the temple. 14
-  31 [15] 00000000-0000-7000-8000-000000000006: 22 lines | CHAPTER TWO ❦ he … of, was to 15
-  32 [16] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT creep into … of the former 16
-  33 [17] 00000000-0000-7000-8000-000000000006: 33 lines | GULLIVER’S TRAVELS afforded me … several of his 17
-  34 [18] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT priests and … breadth and length; 18
-  35 [19] 00000000-0000-7000-8000-000000000006: 33 lines | GULLIVER’S TRAVELS and these … villages, nine hundred 19
-  36 [20] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT yards round … I might carry 20
-  37 [21] 00000000-0000-7000-8000-000000000006: 33 lines | GULLIVER’S TRAVELS about me … for several times 21
-  38 [22] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT together. In … two pockets which 22
-  39 [23] 00000000-0000-7000-8000-000000000006: 33 lines | GULLIVER’S TRAVELS we could … of our hands. 23
-  40 [24] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT “This is … emperor, although he 24
-  41 [25] 00000000-0000-7000-8000-000000000006: 31 lines | GULLIVER’S TRAVELS stood his … and a half. 25
+  31 [15] 00000000-0000-7000-8000-000000000006: 23 lines | CHAPTER TWO ❦ he … and a half. 15
+  32 [16] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT urgency and … twenty of them 16
+  33 [17] 00000000-0000-7000-8000-000000000006: 33 lines | GULLIVER’S TRAVELS were filled … returned answers: but 17
+  34 [18] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT neither of … a hundred and 18
+  35 [19] 00000000-0000-7000-8000-000000000006: 33 lines | GULLIVER’S TRAVELS fifty of … that an imperial 19
+  36 [20] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT commission was … gave orders to 20
+  37 [21] 00000000-0000-7000-8000-000000000006: 33 lines | GULLIVER’S TRAVELS certain proper … some part whereof 21
+  38 [22] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT flying up … one of these, 22
+  39 [23] 00000000-0000-7000-8000-000000000006: 32 lines | GULLIVER’S TRAVELS and cut … of no great 23
+  40 [24] 00000000-0000-7000-8000-000000000006: 33 lines | JONATHAN SWIFT bulk or … here was much 24
+  41 [25] 00000000-0000-7000-8000-000000000006: 31 lines | GULLIVER’S TRAVELS greater than … of my possession. 25
   42 [26] 00000000-0000-7000-8000-000000000006: blank
   43 [27] 00000000-0000-7000-8000-000000000007: 21 lines | CHAPTER THREE ❦ he … and twelve inches 27
   44 [28] 00000000-0000-7000-8000-000000000007: 32 lines | JONATHAN SWIFT from the … of his fall. 28
@@ -69,26 +69,26 @@ gutter 0.000 in
   66 [50] 00000000-0000-7000-8000-000000000009: 16 lines | JONATHAN SWIFT It was … forbear vowing revenge.” 50
   67 [51] 00000000-0000-7000-8000-00000000000a: 21 lines | CHAPTER SIX ❦ f … large as a 51
   68 [52] 00000000-0000-7000-8000-00000000000a: 33 lines | JONATHAN SWIFT common fly; … largely supplied by 52
-  69 [53] 00000000-0000-7000-8000-00000000000a: 34 lines | GULLIVER’S TRAVELS the crown. … laws were enforced 53
-  70 [54] 00000000-0000-7000-8000-00000000000a: 33 lines | JONATHAN SWIFT only by … which he acts. 54
-  71 [55] 00000000-0000-7000-8000-00000000000a: 33 lines | GULLIVER’S TRAVELS In relating … parents, except cottagers 55
-  72 [56] 00000000-0000-7000-8000-00000000000a: 32 lines | JONATHAN SWIFT and labourers, … and the like. 56
-  73 [57] 00000000-0000-7000-8000-00000000000a: 32 lines | GULLIVER’S TRAVELS The pension … of gratitude to 57
-  74 [58] 00000000-0000-7000-8000-00000000000a: 33 lines | JONATHAN SWIFT the professors, … in several folds, 58
-  75 [59] 00000000-0000-7000-8000-00000000000a: 33 lines | GULLIVER’S TRAVELS for the … have had a 59
-  76 [60] 00000000-0000-7000-8000-00000000000a: 33 lines | JONATHAN SWIFT sirloin so … the malice of 60
-  77 [61] 00000000-0000-7000-8000-00000000000a: 33 lines | GULLIVER’S TRAVELS some evil … not; for all 61
-  78 [62] 00000000-0000-7000-8000-00000000000a: 14 lines | JONATHAN SWIFT the world … been made capital. 62
-  79 [63] 00000000-0000-7000-8000-00000000000b: 22 lines | CHAPTER SEVEN ❦ he … giving orders to 63
-  80 [64] 00000000-0000-7000-8000-00000000000b: 33 lines | JONATHAN SWIFT a trusty … Man-Mountain.) Article I. 64
-  81 [65] 00000000-0000-7000-8000-00000000000b: 33 lines | GULLIVER’S TRAVELS “‘Whereas, by … his said majesty. 65
-  82 [66] 00000000-0000-7000-8000-00000000000b: 33 lines | JONATHAN SWIFT Article IV. … a prince, and 66
-  83 [67] 00000000-0000-7000-8000-00000000000b: 33 lines | GULLIVER’S TRAVELS for which … begins in the 67
-  84 [68] 00000000-0000-7000-8000-00000000000b: 32 lines | JONATHAN SWIFT heart, before … in distant parts, 68
-  85 [69] 00000000-0000-7000-8000-00000000000b: 33 lines | GULLIVER’S TRAVELS to prevent … qualities known and 69
-  86 [70] 00000000-0000-7000-8000-00000000000b: 33 lines | JONATHAN SWIFT confessed by … with great alacrity 70
-  87 [71] 00000000-0000-7000-8000-00000000000b: 33 lines | GULLIVER’S TRAVELS and readiness, … while I was 71
-  88 [72] 00000000-0000-7000-8000-00000000000b: 9 lines | JONATHAN SWIFT out of … in my coverlet. 72
+  69 [53] 00000000-0000-7000-8000-00000000000a: 35 lines | GULLIVER’S TRAVELS the crown. … been made capital. 53
+  70 [54] 00000000-0000-7000-8000-00000000000a: 33 lines | JONATHAN SWIFT to his … Providence, the Lilliputians 54
+  71 [55] 00000000-0000-7000-8000-00000000000a: 33 lines | GULLIVER’S TRAVELS think nothing … be trusted with 55
+  72 [56] 00000000-0000-7000-8000-00000000000a: 32 lines | JONATHAN SWIFT the education … occasions, will not 56
+  73 [57] 00000000-0000-7000-8000-00000000000a: 33 lines | GULLIVER’S TRAVELS suffer them … their parents or 57
+  74 [58] 00000000-0000-7000-8000-00000000000a: 33 lines | JONATHAN SWIFT guardians take … they could get; 58
+  75 [59] 00000000-0000-7000-8000-00000000000a: 33 lines | GULLIVER’S TRAVELS which, however, … reasonable draught. Their 59
+  76 [60] 00000000-0000-7000-8000-00000000000a: 33 lines | JONATHAN SWIFT mutton yields … my account. The 60
+  77 [61] 00000000-0000-7000-8000-00000000000a: 33 lines | GULLIVER’S TRAVELS treasurer took … then had the 61
+  78 [62] 00000000-0000-7000-8000-00000000000a: 12 lines | JONATHAN SWIFT honour to … by that favourite. 62
+  79 [63] 00000000-0000-7000-8000-00000000000b: 21 lines | CHAPTER SEVEN ❦ he … put the chair, 63
+  80 [64] 00000000-0000-7000-8000-00000000000b: 33 lines | JONATHAN SWIFT with his … FLESTRIN, (the Man-Mountain.) 64
+  81 [65] 00000000-0000-7000-8000-00000000000b: 32 lines | GULLIVER’S TRAVELS Article I. … servants to a 65
+  82 [66] 00000000-0000-7000-8000-00000000000b: 33 lines | JONATHAN SWIFT prince who … thoughts you have 66
+  83 [67] 00000000-0000-7000-8000-00000000000b: 33 lines | GULLIVER’S TRAVELS of him. … upon the first 67
+  84 [68] 00000000-0000-7000-8000-00000000000b: 33 lines | JONATHAN SWIFT discontent, to … your flesh from 68
+  85 [69] 00000000-0000-7000-8000-00000000000b: 33 lines | GULLIVER’S TRAVELS your bones, … his whole council, 69
+  86 [70] 00000000-0000-7000-8000-00000000000b: 33 lines | JONATHAN SWIFT expressing his … methods of treating 70
+  87 [71] 00000000-0000-7000-8000-00000000000b: 33 lines | GULLIVER’S TRAVELS criminals less … could I reasonably 71
+  88 [72] 00000000-0000-7000-8000-00000000000b: 10 lines | JONATHAN SWIFT conceive that … in my coverlet. 72
   89 [73] 00000000-0000-7000-8000-00000000000c: 21 lines | CHAPTER EIGHT ❦ he … I stripped myself, 73
   90 [74] 00000000-0000-7000-8000-00000000000c: 33 lines | JONATHAN SWIFT and waded … the court of 74
   91 [75] 00000000-0000-7000-8000-00000000000c: 33 lines | GULLIVER’S TRAVELS Blefuscu. But … confidence) his gracious 75
@@ -234,8 +234,8 @@ gutter 0.000 in
  231 [215] 00000000-0000-7000-8000-00000000001d: 33 lines | GULLIVER’S TRAVELS medicines should … head of his 215
  232 [216] 00000000-0000-7000-8000-00000000001d: 32 lines | JONATHAN SWIFT opposite party-man. … qualifications of so 216
  233 [217] 00000000-0000-7000-8000-00000000001d: 32 lines | GULLIVER’S TRAVELS singular a … burning the metropolis. 217
- 234 [218] 00000000-0000-7000-8000-00000000001d: 35 lines | JONATHAN SWIFT The whole … bottomless pit, a 218
- 235 [219] 00000000-0000-7000-8000-00000000001d: 31 lines | GULLIVER’S TRAVELS treasury; a … do not occur. 219
+ 234 [218] 00000000-0000-7000-8000-00000000001d: 37 lines | JONATHAN SWIFT The whole … London.—Sir W. Scott. 218
+ 235 [219] 00000000-0000-7000-8000-00000000001d: 31 lines | GULLIVER’S TRAVELS committee of … do not occur. 219
  236 [220] 00000000-0000-7000-8000-00000000001d: blank
  237 [221] 00000000-0000-7000-8000-00000000001e: 21 lines | CHAPTER TWENTY-THREE ❦ he … at my departure. 221
  238 [222] 00000000-0000-7000-8000-00000000001e: 33 lines | JONATHAN SWIFT My journey … his highness. This 222
@@ -323,15 +323,15 @@ gutter 0.000 in
  320 [304] 00000000-0000-7000-8000-000000000029: 32 lines | JONATHAN SWIFT whole world. … of the nation. 304
  321 [305] 00000000-0000-7000-8000-000000000029: 33 lines | GULLIVER’S TRAVELS “The palace … but assured him 305
  322 [306] 00000000-0000-7000-8000-000000000029: 29 lines | JONATHAN SWIFT at the … the original editions. 306
- 323 [307] 00000000-0000-7000-8000-00000000002a: 22 lines | CHAPTER THIRTY-FOUR ❦ he … all falsehood or 307
- 324 [308] 00000000-0000-7000-8000-00000000002a: 33 lines | JONATHAN SWIFT disguise; and … had not given 308
- 325 [309] 00000000-0000-7000-8000-00000000002a: 33 lines | GULLIVER’S TRAVELS us; that … cover our bodies, 309
- 326 [310] 00000000-0000-7000-8000-00000000002a: 33 lines | JONATHAN SWIFT and by … he believed it 310
- 327 [311] 00000000-0000-7000-8000-00000000002a: 33 lines | GULLIVER’S TRAVELS might proceed … flesh of animals, 311
- 328 [312] 00000000-0000-7000-8000-00000000002a: 33 lines | JONATHAN SWIFT or all … us there is 312
- 329 [313] 00000000-0000-7000-8000-00000000002a: 33 lines | GULLIVER’S TRAVELS generally some … without any reply, 313
- 330 [314] 00000000-0000-7000-8000-00000000002a: 33 lines | JONATHAN SWIFT because I … would follow her. 314
- 331 [315] 00000000-0000-7000-8000-00000000002a: 17 lines | GULLIVER’S TRAVELS “At other … of the globe. 315
+ 323 [307] 00000000-0000-7000-8000-00000000002a: 21 lines | CHAPTER THIRTY-FOUR ❦ he … I had likewise 307
+ 324 [308] 00000000-0000-7000-8000-00000000002a: 33 lines | JONATHAN SWIFT learned, from … aggravate our natural 308
+ 325 [309] 00000000-0000-7000-8000-00000000002a: 33 lines | GULLIVER’S TRAVELS corruptions, and … themselves. He had 309
+ 326 [310] 00000000-0000-7000-8000-00000000002a: 33 lines | JONATHAN SWIFT therefore begun … appetite, or how 310
+ 327 [311] 00000000-0000-7000-8000-00000000002a: 33 lines | GULLIVER’S TRAVELS these stones … came in their 311
+ 328 [312] 00000000-0000-7000-8000-00000000002a: 33 lines | JONATHAN SWIFT way, whether … that in most 312
+ 329 [313] 00000000-0000-7000-8000-00000000002a: 33 lines | GULLIVER’S TRAVELS herds there … to the two 313
+ 330 [314] 00000000-0000-7000-8000-00000000002a: 32 lines | JONATHAN SWIFT former accusations, … counterfeit show of 314
+ 331 [315] 00000000-0000-7000-8000-00000000002a: 19 lines | GULLIVER’S TRAVELS fear, run … of the globe. 315
  332 [316] 00000000-0000-7000-8000-00000000002a: blank
  333 [317] 00000000-0000-7000-8000-00000000002b: 21 lines | CHAPTER THIRTY-FIVE ❦ he … any distance without 317
  334 [318] 00000000-0000-7000-8000-00000000002b: 33 lines | JONATHAN SWIFT my hanger. … by consequence, insolent, 318
@@ -367,14 +367,14 @@ gutter 0.000 in
  364 [348] 00000000-0000-7000-8000-00000000002e: 33 lines | JONATHAN SWIFT canoe; but … I professed so 348
  365 [349] 00000000-0000-7000-8000-00000000002e: 32 lines | GULLIVER’S TRAVELS inviolable an … well enough. He 349
  366 [350] 00000000-0000-7000-8000-00000000002e: 33 lines | JONATHAN SWIFT accoutred me … the Downs, about 350
- 367 [351] 00000000-0000-7000-8000-00000000002e: 33 lines | GULLIVER’S TRAVELS nine in … to each other. 351
- 368 [352] 00000000-0000-7000-8000-00000000002e: 5 lines | JONATHAN SWIFT NOTES 1. … home in England. 352
- 369 [353] 00000000-0000-7000-8000-00000000002f: 22 lines | CHAPTER THIRTY-NINE ❦ he … and land. Whereas 353
- 370 [354] 00000000-0000-7000-8000-00000000002f: 33 lines | JONATHAN SWIFT a traveller’s … probable, that such 354
- 371 [355] 00000000-0000-7000-8000-00000000002f: 33 lines | GULLIVER’S TRAVELS travellers, who … myself an author 355
- 372 [356] 00000000-0000-7000-8000-00000000002f: 33 lines | JONATHAN SWIFT perfectly blameless; … are to be 356
- 373 [357] 00000000-0000-7000-8000-00000000002f: 33 lines | GULLIVER’S TRAVELS met with … by sending the 357
- 374 [358] 00000000-0000-7000-8000-00000000002f: 33 lines | JONATHAN SWIFT most vigilant … creature; to lament 358
- 375 [359] 00000000-0000-7000-8000-00000000002f: 33 lines | GULLIVER’S TRAVELS the brutality … as it shows 359
- 376 [360] 00000000-0000-7000-8000-00000000002f: 15 lines | JONATHAN SWIFT itself in … my sight. FOOTNOTES: 360
+ 367 [351] 00000000-0000-7000-8000-00000000002e: 34 lines | GULLIVER’S TRAVELS nine in … home in England. 351
+ 368 [352] 00000000-0000-7000-8000-00000000002e: 4 lines | JONATHAN SWIFT strangers to … to each other. 352
+ 369 [353] 00000000-0000-7000-8000-00000000002f: 21 lines | CHAPTER THIRTY-NINE ❦ he … Europeans, to form 353
+ 370 [354] 00000000-0000-7000-8000-00000000002f: 33 lines | JONATHAN SWIFT descriptions of … come last, and 354
+ 371 [355] 00000000-0000-7000-8000-00000000002f: 33 lines | GULLIVER’S TRAVELS therefore lie … take it. So 355
+ 372 [356] 00000000-0000-7000-8000-00000000002f: 33 lines | JONATHAN SWIFT that I … of all which 356
+ 373 [357] 00000000-0000-7000-8000-00000000002f: 33 lines | GULLIVER’S TRAVELS virtues are … the greatest abilities, 357
+ 374 [358] 00000000-0000-7000-8000-00000000002f: 33 lines | JONATHAN SWIFT utter strangers … if possible, habituate 358
+ 375 [359] 00000000-0000-7000-8000-00000000002f: 33 lines | GULLIVER’S TRAVELS myself by … of pride, for 359
+ 376 [360] 00000000-0000-7000-8000-00000000002f: 16 lines | JONATHAN SWIFT want of … my sight. FOOTNOTES: 360
  377 [361] 00000000-0000-7000-8000-000000000030: 2 lines | About the Author Jonathan … satirist and a dean.

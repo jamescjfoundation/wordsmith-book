@@ -7,7 +7,7 @@ gutter 0.750 in
    4 [iv] element:copyright: 2 lines | Copyright © Walter Scott … Walter Scott Published by
    5 [v] element:contents: 26 lines | Contents VOLUME I.1 … … AND ITS CONSEQUENCES101 …
    6 [vi] element:contents: 33 lines | Chapter Sixteen: CHAPTER XVI. … AN EXAMINATION237 … vi
-   7 [vii] element:contents: 33 lines | Chapter Thirty-Two: CHAPTER III. … AND POLITICS371 … vii
+   7 [vii] element:contents: 33 lines | Chapter Thirty-Two: CHAPTER III. … AND POLITICS373 … vii
    8 [viii] element:contents: 31 lines | Chapter Fifty-Two: CHAPTER XXIII. … A PREFACE527 … viii
    9 [ix] element:contents: blank
   10 [x] element:contents: blank
@@ -19,12 +19,12 @@ gutter 0.750 in
   16 [6] 00000000-0000-7000-8000-000000000002: 29 lines | WALTER SCOTT of manners … colour he pleases.] 6
   17 [7] 00000000-0000-7000-8000-000000000003: 24 lines | CHAPTER TWO CHAPTER II. … the old song, 7
   18 [8] 00000000-0000-7000-8000-000000000003: 39 lines | WALTER SCOTT Passive obedience … learned from the 8
-  19 [9] 00000000-0000-7000-8000-000000000003: 40 lines | WAVERLEY public News-Letter, first … if it had, 9
-  20 [10] 00000000-0000-7000-8000-000000000003: 38 lines | WALTER SCOTT the marriage … rather perish,” exclaimed 10
-  21 [11] 00000000-0000-7000-8000-000000000003: 39 lines | WAVERLEY Sir Everard, “than … What arguments he 11
-  22 [12] 00000000-0000-7000-8000-000000000003: 39 lines | WALTER SCOTT used on … which at length 12
-  23 [13] 00000000-0000-7000-8000-000000000003: 39 lines | WAVERLEY occasioned a renewal … in the growing 13
-  24 [14] 00000000-0000-7000-8000-000000000003: 21 lines | WALTER SCOTT attachment between … of fashionable resort. 14
+  19 [9] 00000000-0000-7000-8000-000000000003: 41 lines | WAVERLEY public News-Letter, first … of fashionable resort. 9
+  20 [10] 00000000-0000-7000-8000-000000000003: 39 lines | WALTER SCOTT on the … of the gloomy 10
+  21 [11] 00000000-0000-7000-8000-000000000003: 39 lines | WAVERLEY cabinet in which … her father’s indignation. 11
+  22 [12] 00000000-0000-7000-8000-000000000003: 39 lines | WALTER SCOTT Honour and … measures prejudicial to 12
+  23 [13] 00000000-0000-7000-8000-000000000003: 39 lines | WAVERLEY Richard’s interest, in … yet it was 13
+  24 [14] 00000000-0000-7000-8000-000000000003: 19 lines | WALTER SCOTT sufficient to … a subsequent chapter. 14
   25 [15] 00000000-0000-7000-8000-000000000004: 25 lines | CHAPTER THREE CHAPTER III. … modern languages. He 15
   26 [16] 00000000-0000-7000-8000-000000000004: 38 lines | WALTER SCOTT was, however, … object of study. 16
   27 [17] 00000000-0000-7000-8000-000000000004: 39 lines | WAVERLEY I am aware … ease, though they 17
@@ -33,10 +33,10 @@ gutter 0.750 in
   30 [20] 00000000-0000-7000-8000-000000000004: blank
   31 [21] 00000000-0000-7000-8000-000000000005: 24 lines | CHAPTER FOUR CHAPTER IV. … inhabited, and the 21
   32 [22] 00000000-0000-7000-8000-000000000005: 39 lines | WALTER SCOTT home-bred young … with which the 22
-  33 [23] 00000000-0000-7000-8000-000000000005: 40 lines | WAVERLEY worthy Sir Everard … when she found 23
-  34 [24] 00000000-0000-7000-8000-000000000005: 39 lines | WALTER SCOTT herself sinking, … forest ground, and 24
-  35 [25] 00000000-0000-7000-8000-000000000005: 37 lines | WAVERLEY still, though broken … the intercourse infrequent, 25
-  36 [26] 00000000-0000-7000-8000-000000000005: 4 lines | WALTER SCOTT false reports … credited at home. 26
+  33 [23] 00000000-0000-7000-8000-000000000005: 41 lines | WAVERLEY worthy Sir Everard … credited at home. 23
+  34 [24] 00000000-0000-7000-8000-000000000005: 39 lines | WALTER SCOTT desperate defence … shouts of men, 24
+  35 [25] 00000000-0000-7000-8000-000000000005: 38 lines | WAVERLEY with straggling pistol-shots … the next chapter. 25
+  36 [26] 00000000-0000-7000-8000-000000000005: blank
   37 [27] 00000000-0000-7000-8000-000000000006: 24 lines | CHAPTER FIVE CHAPTER V. … hesitated to prefer 27
   38 [28] 00000000-0000-7000-8000-000000000006: 39 lines | WALTER SCOTT the former … learning, and, no 28
   39 [29] 00000000-0000-7000-8000-000000000006: 39 lines | WAVERLEY doubt, when his … the fact, and 29
@@ -47,17 +47,17 @@ gutter 0.750 in
   44 [34] 00000000-0000-7000-8000-000000000006: 33 lines | WALTER SCOTT in the … retrench or cancel.] 34
   45 [35] 00000000-0000-7000-8000-000000000007: 24 lines | CHAPTER SIX CHAPTER VI. … dear boy, remember 35
   46 [36] 00000000-0000-7000-8000-000000000007: 39 lines | WALTER SCOTT also that … principal mansion of 36
-  47 [37] 00000000-0000-7000-8000-000000000007: 40 lines | WAVERLEY Tully-Veolan, in Perthshire, … difference of their 37
-  48 [38] 00000000-0000-7000-8000-000000000007: 39 lines | WALTER SCOTT habits and … pickled salmon, and 38
-  49 [39] 00000000-0000-7000-8000-000000000007: 39 lines | WAVERLEY usquebaugh; all which … impossible place of 39
-  50 [40] 00000000-0000-7000-8000-000000000007: 39 lines | WALTER SCOTT concealment, he … uncivil the last 40
-  51 [41] 00000000-0000-7000-8000-000000000007: 39 lines | WAVERLEY time I mounted … the young officer, 41
-  52 [42] 00000000-0000-7000-8000-000000000007: 26 lines | WALTER SCOTT as a … Reviewed, p. 42). 42
+  47 [37] 00000000-0000-7000-8000-000000000007: 41 lines | WAVERLEY Tully-Veolan, in Perthshire, … condemned and executed. 37
+  48 [38] 00000000-0000-7000-8000-000000000007: 39 lines | WALTER SCOTT The Baron … the payment was 38
+  49 [39] 00000000-0000-7000-8000-000000000007: 39 lines | WAVERLEY an international concern, … a bookseller in 39
+  50 [40] 00000000-0000-7000-8000-000000000007: 39 lines | WALTER SCOTT Little Britain, … Lawton, and poor 40
+  51 [41] 00000000-0000-7000-8000-000000000007: 42 lines | WAVERLEY 2 Amhurst. Ah, … Reviewed, p. 42). 41
+  52 [42] 00000000-0000-7000-8000-000000000007: 21 lines | WALTER SCOTT is no … been of late. 42
   53 [43] 00000000-0000-7000-8000-000000000008: 24 lines | CHAPTER SEVEN CHAPTER VII. … he had been 43
-  54 [44] 00000000-0000-7000-8000-000000000008: 40 lines | WALTER SCOTT what is … made an indifferent 44
-  55 [45] 00000000-0000-7000-8000-000000000008: 39 lines | WAVERLEY subaltern. The truth … a religious book, 45
-  56 [46] 00000000-0000-7000-8000-000000000008: 43 lines | WALTER SCOTT which his … opened in the 46
-  57 [47] 00000000-0000-7000-8000-000000000008: 28 lines | WAVERLEY Scottish metropolis. As … play amang them.” 47
+  54 [44] 00000000-0000-7000-8000-000000000008: 46 lines | WALTER SCOTT what is … the most important 44
+  55 [45] 00000000-0000-7000-8000-000000000008: 39 lines | WAVERLEY by so respectable … 1824, p. 190.) 45
+  56 [46] 00000000-0000-7000-8000-000000000008: 44 lines | WALTER SCOTT and abstracted, … of the same 46
+  57 [47] 00000000-0000-7000-8000-000000000008: 20 lines | WAVERLEY Edward gradually approached … play amang them.” 47
   58 [48] 00000000-0000-7000-8000-000000000008: blank
   59 [49] 00000000-0000-7000-8000-000000000009: 23 lines | CHAPTER EIGHT CHAPTER VIII. … barking, howling, and 49
   60 [50] 00000000-0000-7000-8000-000000000009: 39 lines | WALTER SCOTT snapping at … indifference of stupidity; 50
@@ -80,13 +80,13 @@ gutter 0.750 in
   77 [67] 00000000-0000-7000-8000-00000000000c: 25 lines | CHAPTER ELEVEN CHAPTER XI. … its hind legs. 67
   78 [68] 00000000-0000-7000-8000-00000000000c: 39 lines | WALTER SCOTT The nonjuring … hold this most 68
   79 [69] 00000000-0000-7000-8000-00000000000c: 39 lines | WAVERLEY honourable achievement by … before the genial 69
-  80 [70] 00000000-0000-7000-8000-00000000000c: 40 lines | WALTER SCOTT blessings of … of a tavern. 70
-  81 [71] 00000000-0000-7000-8000-00000000000c: 39 lines | WAVERLEY Accordingly, in full … Lon, Lon, Laridon. 71
-  82 [72] 00000000-0000-7000-8000-00000000000c: 39 lines | WALTER SCOTT “Qui port … by her, the 72
-  83 [73] 00000000-0000-7000-8000-00000000000c: 39 lines | WAVERLEY Laird of Balmawhapple, … of good manners.” 73
-  84 [74] 00000000-0000-7000-8000-00000000000c: 38 lines | WALTER SCOTT “And I … evening, of which, 74
-  85 [75] 00000000-0000-7000-8000-00000000000c: 39 lines | WAVERLEY however, there was … this admission, solemnly 75
-  86 [76] 00000000-0000-7000-8000-00000000000c: 4 lines | WALTER SCOTT adjudged the … hospitality of Scotland. 76
+  80 [70] 00000000-0000-7000-8000-00000000000c: 44 lines | WALTER SCOTT blessings of … she found her 70
+  81 [71] 00000000-0000-7000-8000-00000000000c: 40 lines | WAVERLEY It must be … hospitality of Scotland. 71
+  82 [72] 00000000-0000-7000-8000-00000000000c: 38 lines | WALTER SCOTT floor; and … Lon, Lon, Laridon.” 72
+  83 [73] 00000000-0000-7000-8000-00000000000c: 38 lines | WAVERLEY [* This has … who did such 73
+  84 [74] 00000000-0000-7000-8000-00000000000c: 38 lines | WALTER SCOTT service in … be a crop- 74
+  85 [75] 00000000-0000-7000-8000-00000000000c: 37 lines | WAVERLEY eared English Whig … and the Lapithæ. 75
+  86 [76] 00000000-0000-7000-8000-00000000000c: blank
   87 [77] 00000000-0000-7000-8000-00000000000d: 24 lines | CHAPTER TWELVE CHAPTER XII. … message to the 77
   88 [78] 00000000-0000-7000-8000-00000000000d: 38 lines | WALTER SCOTT Laird of … the following oration: 78
   89 [79] 00000000-0000-7000-8000-00000000000d: 39 lines | WAVERLEY “Captain Waverley—my young … an explanation, did 79
@@ -103,14 +103,14 @@ gutter 0.750 in
  100 [90] 00000000-0000-7000-8000-00000000000e: 37 lines | WALTER SCOTT Veolan, into … her promise plight. 90
  101 [91] 00000000-0000-7000-8000-00000000000e: 39 lines | WAVERLEY He that dare … mind was brought 91
  102 [92] 00000000-0000-7000-8000-00000000000e: 37 lines | WALTER SCOTT forth to … in Scottish story. 92
- 103 [93] 00000000-0000-7000-8000-00000000000f: 23 lines | CHAPTER FOURTEEN CHAPTER XIV. … little bird sing?); 93
- 104 [94] 00000000-0000-7000-8000-00000000000f: 39 lines | WALTER SCOTT But the … had occurred in 94
- 105 [95] 00000000-0000-7000-8000-00000000000f: 40 lines | WAVERLEY the house of … his beloved wife, 95
- 106 [96] 00000000-0000-7000-8000-00000000000f: 39 lines | WALTER SCOTT her unfeigned … my own family.” 96
- 107 [97] 00000000-0000-7000-8000-00000000000f: 39 lines | WAVERLEY The Bailie, as … of passion which 97
- 108 [98] 00000000-0000-7000-8000-00000000000f: 39 lines | WALTER SCOTT might obfuscate … precaution would have 98
- 109 [99] 00000000-0000-7000-8000-00000000000f: 39 lines | WAVERLEY been unnecessary, for … house of Tully-Veolan. 99
- 110 [100] 00000000-0000-7000-8000-00000000000f: 13 lines | WALTER SCOTT NOTES 1. … through with it. 100
+ 103 [93] 00000000-0000-7000-8000-00000000000f: 21 lines | CHAPTER FOURTEEN CHAPTER XIV. … under his wing). 93
+ 104 [94] 00000000-0000-7000-8000-00000000000f: 39 lines | WALTER SCOTT “The young … read in Archibald 94
+ 105 [95] 00000000-0000-7000-8000-00000000000f: 41 lines | WAVERLEY Simson, pastor of … through with it. 95
+ 106 [96] 00000000-0000-7000-8000-00000000000f: 39 lines | WALTER SCOTT Bradwardine, who … nor keep his 96
+ 107 [97] 00000000-0000-7000-8000-00000000000f: 39 lines | WAVERLEY counsel, owing to … and the wild 97
+ 108 [98] 00000000-0000-7000-8000-00000000000f: 39 lines | WALTER SCOTT romance of … whose affection may 98
+ 109 [99] 00000000-0000-7000-8000-00000000000f: 39 lines | WAVERLEY dignify him in … delicacy, in never 99
+ 110 [100] 00000000-0000-7000-8000-00000000000f: 13 lines | WALTER SCOTT entering upon … house of Tully-Veolan. 100
  111 [101] 00000000-0000-7000-8000-000000000010: 24 lines | CHAPTER FIFTEEN CHAPTER XV. … close conference. Davie 101
  112 [102] 00000000-0000-7000-8000-000000000010: 39 lines | WALTER SCOTT Gellatley was … any gentleman in 102
  113 [103] 00000000-0000-7000-8000-000000000010: 39 lines | WAVERLEY such a light, … and he recommended 103
@@ -118,49 +118,49 @@ gutter 0.750 in
  115 [105] 00000000-0000-7000-8000-000000000010: 38 lines | WAVERLEY from habitual deference … against a grey 105
  116 [106] 00000000-0000-7000-8000-000000000010: 39 lines | WALTER SCOTT head that … used to conjure 106
  117 [107] 00000000-0000-7000-8000-000000000010: 38 lines | WAVERLEY up in his … like as aforesaid.” 107
- 118 [108] 00000000-0000-7000-8000-000000000010: 24 lines | WALTER SCOTT It seemed … of the Synod. 108
+ 118 [108] 00000000-0000-7000-8000-000000000010: 23 lines | WALTER SCOTT It seemed … of the Synod. 108
  119 [109] 00000000-0000-7000-8000-000000000011: 24 lines | CHAPTER SIXTEEN CHAPTER XVI. … interested, and he 109
  120 [110] 00000000-0000-7000-8000-000000000011: 39 lines | WALTER SCOTT inquired whether … and a knife 110
  121 [111] 00000000-0000-7000-8000-000000000011: 39 lines | WAVERLEY for a sword. … inquiries, and his 111
- 122 [112] 00000000-0000-7000-8000-000000000011: 40 lines | WALTER SCOTT curiosity about … to lead his 112
- 123 [113] 00000000-0000-7000-8000-000000000011: 39 lines | WAVERLEY horse by the … from the lodgings 113
- 124 [114] 00000000-0000-7000-8000-000000000011: 39 lines | WALTER SCOTT which they … upon their journey. 114
- 125 [115] 00000000-0000-7000-8000-000000000011: 39 lines | WAVERLEY After crossing this … rise, showed obscurely 115
- 126 [116] 00000000-0000-7000-8000-000000000011: 36 lines | WALTER SCOTT the expanse … with great rapidity. 116
- 127 [117] 00000000-0000-7000-8000-000000000011: 9 lines | WAVERLEY NOTES 1. The … countries from Scandinavia. 117
+ 122 [112] 00000000-0000-7000-8000-000000000011: 41 lines | WALTER SCOTT curiosity about … countries from Scandinavia. 112
+ 123 [113] 00000000-0000-7000-8000-000000000011: 38 lines | WAVERLEY chief’s retinue; “there … as that in 113
+ 124 [114] 00000000-0000-7000-8000-000000000011: 39 lines | WALTER SCOTT England. He … and not dark; 114
+ 125 [115] 00000000-0000-7000-8000-000000000011: 38 lines | WAVERLEY and Waverley, calling … send ta curragh.” 115
+ 126 [116] 00000000-0000-7000-8000-000000000011: 39 lines | WALTER SCOTT This conveyed … them with his 116
+ 127 [117] 00000000-0000-7000-8000-000000000011: 6 lines | WAVERLEY attendant, was immediately … with great rapidity. 117
  128 [118] 00000000-0000-7000-8000-000000000011: blank
  129 [119] 00000000-0000-7000-8000-000000000012: 24 lines | CHAPTER SEVENTEEN CHAPTER XVII. … lake seemed to 119
- 130 [120] 00000000-0000-7000-8000-000000000012: 40 lines | WALTER SCOTT advance; and … active, he appeared, 120
- 131 [121] 00000000-0000-7000-8000-000000000012: 39 lines | WAVERLEY on the whole, … you must follow. 121
- 132 [122] 00000000-0000-7000-8000-000000000012: 39 lines | WALTER SCOTT [* This … in despite of 122
- 133 [123] 00000000-0000-7000-8000-000000000012: 38 lines | WAVERLEY his attempts to … was dismissed in 123
- 134 [124] 00000000-0000-7000-8000-000000000012: 11 lines | WALTER SCOTT perfect safety, … concerned in it. 124
+ 130 [120] 00000000-0000-7000-8000-000000000012: 41 lines | WALTER SCOTT advance; and … off by the 120
+ 131 [121] 00000000-0000-7000-8000-000000000012: 40 lines | WAVERLEY Donald Bean Lean … concerned in it. 121
+ 132 [122] 00000000-0000-7000-8000-000000000012: 39 lines | WALTER SCOTT abundance, and … joined Waverley’s troop 122
+ 133 [123] 00000000-0000-7000-8000-000000000012: 39 lines | WAVERLEY from his uncle’s … brain or constitution. 123
+ 134 [124] 00000000-0000-7000-8000-000000000012: 7 lines | WALTER SCOTT At length … was proudly denominated. 124
  135 [125] 00000000-0000-7000-8000-000000000013: 24 lines | CHAPTER EIGHTEEN CHAPTER XVIII. … around the projecting 125
  136 [126] 00000000-0000-7000-8000-000000000013: 39 lines | WALTER SCOTT shoulder of … be omitted that, 126
  137 [127] 00000000-0000-7000-8000-000000000013: 39 lines | WAVERLEY although Alice had … Waverley, had said 127
  138 [128] 00000000-0000-7000-8000-000000000013: 39 lines | WALTER SCOTT something in … and dismal life. 128
- 139 [129] 00000000-0000-7000-8000-000000000013: 38 lines | WAVERLEY “Oich! for that,” … ask?” said Waverley. 129
- 140 [130] 00000000-0000-7000-8000-000000000013: 38 lines | WALTER SCOTT “Where would … Donald do, then?” 130
- 141 [131] 00000000-0000-7000-8000-000000000013: 40 lines | WAVERLEY “He behoved to … and the like. 131
- 142 [132] 00000000-0000-7000-8000-000000000013: 39 lines | WALTER SCOTT Now, Donald … the amusement of 132
- 143 [133] 00000000-0000-7000-8000-000000000013: 39 lines | WAVERLEY Waverley than that … Above the middle 133
- 144 [134] 00000000-0000-7000-8000-000000000013: 39 lines | WALTER SCOTT size and … did not introduce 134
- 145 [135] 00000000-0000-7000-8000-000000000013: 32 lines | WAVERLEY it, our hero … of his malady. 135
+ 139 [129] 00000000-0000-7000-8000-000000000013: 41 lines | WAVERLEY “Oich! for that,” … a natural destiny. 129
+ 140 [130] 00000000-0000-7000-8000-000000000013: 38 lines | WALTER SCOTT and they’ll … other pretty man.” 130
+ 141 [131] 00000000-0000-7000-8000-000000000013: 39 lines | WAVERLEY “But suppose a … of Bally-Brough. And 131
+ 142 [132] 00000000-0000-7000-8000-000000000013: 42 lines | WALTER SCOTT 2 ance … of his malady. 132
+ 143 [133] 00000000-0000-7000-8000-000000000013: 39 lines | WAVERLEY that, between the … ses gens” had 133
+ 144 [134] 00000000-0000-7000-8000-000000000013: 39 lines | WALTER SCOTT no idea … frank, and unconstrained, 134
+ 145 [135] 00000000-0000-7000-8000-000000000013: 26 lines | WAVERLEY seemed to indicate … a new chapter. 135
  146 [136] 00000000-0000-7000-8000-000000000013: blank
  147 [137] 00000000-0000-7000-8000-000000000014: 24 lines | CHAPTER NINETEEN CHAPTER XIX. … numerous and powerful 137
- 148 [138] 00000000-0000-7000-8000-000000000014: 40 lines | WALTER SCOTT clan to … Years later, his 138
- 149 [139] 00000000-0000-7000-8000-000000000014: 39 lines | WAVERLEY ambition and love … would meet with 139
- 150 [140] 00000000-0000-7000-8000-000000000014: 40 lines | WALTER SCOTT some notable … behalf the House 140
- 151 [141] 00000000-0000-7000-8000-000000000014: 39 lines | WAVERLEY of Stuart repaid … At a little 141
- 152 [142] 00000000-0000-7000-8000-000000000014: 40 lines | WALTER SCOTT distance up … claymores. But you 142
- 153 [143] 00000000-0000-7000-8000-000000000014: 39 lines | WAVERLEY are aware, Captain … when danger was 143
- 154 [144] 00000000-0000-7000-8000-000000000014: 12 lines | WALTER SCOTT apprehended; one … in their youth. 144
+ 148 [138] 00000000-0000-7000-8000-000000000014: 41 lines | WALTER SCOTT clan to … of such property. 138
+ 149 [139] 00000000-0000-7000-8000-000000000014: 39 lines | WAVERLEY perceived that he … lenity to those 139
+ 150 [140] 00000000-0000-7000-8000-000000000014: 40 lines | WALTER SCOTT freebooters who … half-a-guinea the morn.” 140
+ 151 [141] 00000000-0000-7000-8000-000000000014: 39 lines | WAVERLEY himself to the … the Vich Ian 141
+ 152 [142] 00000000-0000-7000-8000-000000000014: 39 lines | WALTER SCOTT Vohr of … the broadsword exercise; 142
+ 153 [143] 00000000-0000-7000-8000-000000000014: 42 lines | WAVERLEY and, having manifested … in their youth. 143
+ 154 [144] 00000000-0000-7000-8000-000000000014: 9 lines | WALTER SCOTT “But, with … my rude mansion.” 144
  155 [145] 00000000-0000-7000-8000-000000000015: 24 lines | CHAPTER TWENTY CHAPTER XX. … or three Highland 145
- 156 [146] 00000000-0000-7000-8000-000000000015: 40 lines | WALTER SCOTT visitors of … offence. Every one 146
- 157 [147] 00000000-0000-7000-8000-000000000015: 40 lines | WAVERLEY present understood that … hand of Bradwardine.” 147
- 158 [148] 00000000-0000-7000-8000-000000000015: 39 lines | WALTER SCOTT “Ah! Ballenkeiroch,” … high tone of 148
- 159 [149] 00000000-0000-7000-8000-000000000015: 37 lines | WAVERLEY enthusiasm, filled with … Jamie carried this 149
- 160 [150] 00000000-0000-7000-8000-000000000015: 28 lines | WALTER SCOTT prejudice to … on the table. 150
+ 156 [146] 00000000-0000-7000-8000-000000000015: 41 lines | WALTER SCOTT visitors of … tobacco for digestion. 146
+ 157 [147] 00000000-0000-7000-8000-000000000015: 43 lines | WAVERLEY and the fragments … on the table. 147
+ 158 [148] 00000000-0000-7000-8000-000000000015: 39 lines | WALTER SCOTT and I … hitherto-untasted cup and 148
+ 159 [149] 00000000-0000-7000-8000-000000000015: 38 lines | WAVERLEY courteously drank to … approbation. Many approved 149
+ 160 [150] 00000000-0000-7000-8000-000000000015: 23 lines | WALTER SCOTT Gaelic toasts … to his service. 150
  161 [151] 00000000-0000-7000-8000-000000000016: 24 lines | CHAPTER TWENTY-ONE CHAPTER XXI. … the same dark 151
  162 [152] 00000000-0000-7000-8000-000000000016: 38 lines | WALTER SCOTT eyes, eye-lashes, … a powerful degree. 152
  163 [153] 00000000-0000-7000-8000-000000000016: 39 lines | WAVERLEY In Flora’s bosom, … and extending their 153
@@ -168,14 +168,14 @@ gutter 0.750 in
  165 [155] 00000000-0000-7000-8000-000000000016: 19 lines | WAVERLEY It was generally … forms of politeness. 155
  166 [156] 00000000-0000-7000-8000-000000000016: blank
  167 [157] 00000000-0000-7000-8000-000000000017: 24 lines | CHAPTER TWENTY-TWO CHAPTER XXII. … next time I 157
- 168 [158] 00000000-0000-7000-8000-000000000017: 40 lines | WALTER SCOTT hold cour … to depreciate it.[*] 158
- 169 [159] 00000000-0000-7000-8000-000000000017: 39 lines | WAVERLEY [* The Highland … applause of his 159
- 170 [160] 00000000-0000-7000-8000-000000000017: 39 lines | WALTER SCOTT guests. Having … by way of 160
- 171 [161] 00000000-0000-7000-8000-000000000017: 40 lines | WAVERLEY signal. He was … rich and varied 161
- 172 [162] 00000000-0000-7000-8000-000000000017: 39 lines | WALTER SCOTT tinge to … from her instrument 162
- 173 [163] 00000000-0000-7000-8000-000000000017: 38 lines | WAVERLEY amounted almost to … to the knell! 163
- 174 [164] 00000000-0000-7000-8000-000000000017: 39 lines | WALTER SCOTT Stern son … raven, and whose 164
- 175 [165] 00000000-0000-7000-8000-000000000017: 38 lines | WAVERLEY neigh is like … a considerable object. 165
+ 168 [158] 00000000-0000-7000-8000-000000000017: 42 lines | WALTER SCOTT hold cour … to the devil.” 158
+ 169 [159] 00000000-0000-7000-8000-000000000017: 39 lines | WAVERLEY the chieftains of … will endeavour to 159
+ 170 [160] 00000000-0000-7000-8000-000000000017: 39 lines | WALTER SCOTT engraft the … turf, formed a 160
+ 171 [161] 00000000-0000-7000-8000-000000000017: 40 lines | WAVERLEY rustic bridge at … from that of 161
+ 172 [162] 00000000-0000-7000-8000-000000000017: 39 lines | WALTER SCOTT beauty; but … a considerable object. 162
+ 173 [163] 00000000-0000-7000-8000-000000000017: 37 lines | WAVERLEY accompany than interrupt … heath-cock or deer. 163
+ 174 [164] 00000000-0000-7000-8000-000000000017: 38 lines | WALTER SCOTT The deeds … late Doctor Gregory.] 164
+ 175 [165] 00000000-0000-7000-8000-000000000017: 37 lines | WAVERLEY [** The Marquis … it no more! 165
  176 [166] 00000000-0000-7000-8000-000000000017: blank
  177 [167] 00000000-0000-7000-8000-000000000018: 23 lines | CHAPTER TWENTY-THREE CHAPTER XXIII. … cette heureuse fontaine, 167
  178 [168] 00000000-0000-7000-8000-000000000018: 39 lines | WALTER SCOTT Où on … were too strongly 168
@@ -188,13 +188,13 @@ gutter 0.750 in
  185 [175] 00000000-0000-7000-8000-000000000019: 39 lines | WAVERLEY country as to … ridge of the 175
  186 [176] 00000000-0000-7000-8000-000000000019: 39 lines | WALTER SCOTT steep pass, … from east to 176
  187 [177] 00000000-0000-7000-8000-000000000019: 39 lines | WAVERLEY west, according to … belief, or more 177
- 188 [178] 00000000-0000-7000-8000-000000000019: 40 lines | WALTER SCOTT probably because, … express their anxious 178
- 189 [179] 00000000-0000-7000-8000-000000000019: 39 lines | WAVERLEY hope they might … is still, the 179
- 190 [180] 00000000-0000-7000-8000-000000000019: 38 lines | WALTER SCOTT shower falls … many a glen, 180
- 191 [181] 00000000-0000-7000-8000-000000000019: 37 lines | WAVERLEY Fergus, all the … Rebellion of 1715; 181
- 192 [182] 00000000-0000-7000-8000-000000000019: 43 lines | WALTER SCOTT and most … servant, an attendant. 182
- 193 [183] 00000000-0000-7000-8000-000000000019: 43 lines | WAVERLEY GILLIE-WET-FOOT, a barefooted … jug, a pitcher. 183
- 194 [184] 00000000-0000-7000-8000-000000000019: 11 lines | WALTER SCOTT STOUTHREEF, robbery. … WISKE, whisk, brandish. 184
+ 188 [178] 00000000-0000-7000-8000-000000000019: 42 lines | WALTER SCOTT probably because, … BEES, in the, 178
+ 189 [179] 00000000-0000-7000-8000-000000000019: 46 lines | WAVERLEY [* On the … with. KEN, know. 179
+ 190 [180] 00000000-0000-7000-8000-000000000019: 45 lines | WALTER SCOTT Chevy Chase.] … WISKE, whisk, brandish. 180
+ 191 [181] 00000000-0000-7000-8000-000000000019: 39 lines | WAVERLEY led to the … other bold and 181
+ 192 [182] 00000000-0000-7000-8000-000000000019: 39 lines | WALTER SCOTT enterprising Chieftains, … towards recovery, and 182
+ 193 [183] 00000000-0000-7000-8000-000000000019: 35 lines | WAVERLEY finding he was … very deep interest. 183
+ 194 [184] 00000000-0000-7000-8000-000000000019: blank
  195 [185] 00000000-0000-7000-8000-00000000001a: 24 lines | CHAPTER TWENTY-FIVE CHAPTER XXV. … and a special 185
  196 [186] 00000000-0000-7000-8000-00000000001a: 39 lines | WALTER SCOTT inquiry after … of office, which 186
  197 [187] 00000000-0000-7000-8000-00000000001a: 39 lines | WAVERLEY prevented the inanity … resentment was wrought 187
@@ -293,162 +293,162 @@ gutter 0.750 in
  290 [280] 00000000-0000-7000-8000-000000000027: blank
  291 [281] 00000000-0000-7000-8000-000000000028: 24 lines | CHAPTER THIRTY-EIGHT CHAPTER IX. … their ineffectual precautions. 281
  292 [282] 00000000-0000-7000-8000-000000000028: 38 lines | WALTER SCOTT When these … the sheep-fold indeed 282
- 293 [283] 00000000-0000-7000-8000-000000000028: 40 lines | WAVERLEY concealed them as … these hostile sounds 283
- 294 [284] 00000000-0000-7000-8000-000000000028: 40 lines | WALTER SCOTT were now … a sentinel watched, 284
- 295 [285] 00000000-0000-7000-8000-000000000028: 36 lines | WAVERLEY whose bonnet and … minutes fast asleep. 285
- 296 [286] 00000000-0000-7000-8000-000000000028: 38 lines | WALTER SCOTT NOTES 1. … of the fugitives. 286
+ 293 [283] 00000000-0000-7000-8000-000000000028: 41 lines | WAVERLEY concealed them as … for little gain. 283
+ 294 [284] 00000000-0000-7000-8000-000000000028: 38 lines | WALTER SCOTT the best … once fertile and 284
+ 295 [285] 00000000-0000-7000-8000-000000000028: 44 lines | WAVERLEY romantic. Steep banks … of the fugitives. 285
+ 296 [286] 00000000-0000-7000-8000-000000000028: 32 lines | WALTER SCOTT Passing hastily … minutes fast asleep. 286
  297 [287] 00000000-0000-7000-8000-000000000029: 23 lines | CHAPTER THIRTY-NINE CHAPTER X. … his clothes, when 287
  298 [288] 00000000-0000-7000-8000-000000000029: 39 lines | WALTER SCOTT the servant … and red, an 288
  299 [289] 00000000-0000-7000-8000-000000000029: 39 lines | WAVERLEY affected imitation of … way with talk. 289
- 300 [290] 00000000-0000-7000-8000-000000000029: 40 lines | WALTER SCOTT “A fine … a spanker that 290
- 301 [291] 00000000-0000-7000-8000-000000000029: 39 lines | WAVERLEY would lead the … and palace, where 291
- 302 [292] 00000000-0000-7000-8000-000000000029: 39 lines | WALTER SCOTT valour received … resolute men might 292
- 303 [293] 00000000-0000-7000-8000-000000000029: 39 lines | WAVERLEY easily have cut … his recollection the 293
- 304 [294] 00000000-0000-7000-8000-000000000029: 33 lines | WALTER SCOTT unfriendly greeting … on friendly terms. 294
- 305 [295] 00000000-0000-7000-8000-00000000002a: 24 lines | CHAPTER FORTY CHAPTER XI. … at royal state. 295
- 306 [296] 00000000-0000-7000-8000-00000000002a: 39 lines | WALTER SCOTT A young … who throws himself 296
- 307 [297] 00000000-0000-7000-8000-00000000002a: 40 lines | WAVERLEY upon the affections … who had joined 297
- 308 [298] 00000000-0000-7000-8000-00000000002a: 39 lines | WALTER SCOTT it, nothing … of Aberdeen, he 298
- 309 [299] 00000000-0000-7000-8000-00000000002a: 39 lines | WAVERLEY has taken shipping … “if I decline 299
- 310 [300] 00000000-0000-7000-8000-00000000002a: 32 lines | WALTER SCOTT accepting any … advance into England. 300
- 311 [301] 00000000-0000-7000-8000-00000000002b: 25 lines | CHAPTER FORTY-ONE CHAPTER XII. … bring one hundred 301
- 312 [302] 00000000-0000-7000-8000-00000000002b: 39 lines | WALTER SCOTT and fifty … has given Mr. 302
- 313 [303] 00000000-0000-7000-8000-00000000002b: 39 lines | WAVERLEY Waverley broadsword and … rather that I 303
- 314 [304] 00000000-0000-7000-8000-00000000002b: 39 lines | WALTER SCOTT daresay his … distinctly audible. He 304
- 315 [305] 00000000-0000-7000-8000-00000000002b: 39 lines | WAVERLEY had disappeared before … ye might have 305
- 316 [306] 00000000-0000-7000-8000-00000000002b: 38 lines | WALTER SCOTT inquired what … a single troop 306
- 317 [307] 00000000-0000-7000-8000-00000000002b: 31 lines | WAVERLEY of Schmirschitz’s Pandours, … to its overthrow. 307
- 318 [308] 00000000-0000-7000-8000-00000000002b: blank
- 319 [309] 00000000-0000-7000-8000-00000000002c: 24 lines | CHAPTER FORTY-TWO CHAPTER XIII. … periwig, notwithstanding the 309
- 320 [310] 00000000-0000-7000-8000-00000000002c: 39 lines | WALTER SCOTT universal fashion … dorlach, and Mr. 310
- 321 [311] 00000000-0000-7000-8000-00000000002c: 39 lines | WAVERLEY Waverley’s wearied wi’ … the same request. 311
- 322 [312] 00000000-0000-7000-8000-00000000002c: 39 lines | WALTER SCOTT “I thank … obliged to resume. 312
- 323 [313] 00000000-0000-7000-8000-00000000002c: 39 lines | WAVERLEY “Well, then,” said … parish of Bradwardine 313
- 324 [314] 00000000-0000-7000-8000-00000000002c: 38 lines | WALTER SCOTT and the … of Haddo’s Hole.” 314
- 325 [315] 00000000-0000-7000-8000-00000000002c: 8 lines | WAVERLEY “Lord forgie you, … of the campaign. 315
- 326 [316] 00000000-0000-7000-8000-00000000002c: blank
- 327 [317] 00000000-0000-7000-8000-00000000002d: 25 lines | CHAPTER FORTY-THREE CHAPTER XIV. … an English lady; 317
- 328 [318] 00000000-0000-7000-8000-00000000002d: 39 lines | WALTER SCOTT But she’s … seemed a little—a 318
- 329 [319] 00000000-0000-7000-8000-00000000002d: 39 lines | WAVERLEY very little—affected and … interested in the 319
- 330 [320] 00000000-0000-7000-8000-00000000002d: 39 lines | WALTER SCOTT affair. But, … a capricious beauty? 320
- 331 [321] 00000000-0000-7000-8000-00000000002d: 39 lines | WAVERLEY O nymph, unrelenting … time; and even 321
- 332 [322] 00000000-0000-7000-8000-00000000002d: 39 lines | WALTER SCOTT those of … though perhaps somewhat 322
- 333 [323] 00000000-0000-7000-8000-00000000002d: 38 lines | WAVERLEY romantic, one of … my friend Bangour:— 323
- 334 [324] 00000000-0000-7000-8000-00000000002d: 4 lines | WALTER SCOTT Ae half … down the wind.” 324
- 335 [325] 00000000-0000-7000-8000-00000000002e: 25 lines | CHAPTER FORTY-FOUR CHAPTER XV. … also, “tat his 325
- 336 [326] 00000000-0000-7000-8000-00000000002e: 39 lines | WALTER SCOTT leather dorlach … formed the background 326
- 337 [327] 00000000-0000-7000-8000-00000000002e: 39 lines | WAVERLEY of the scene, … forward as the 327
- 338 [328] 00000000-0000-7000-8000-00000000002e: 38 lines | WALTER SCOTT press would … opportunity of success. 328
- 339 [329] 00000000-0000-7000-8000-00000000002e: 39 lines | WAVERLEY But, in a … to the South-Country 329
- 340 [330] 00000000-0000-7000-8000-00000000002e: 40 lines | WALTER SCOTT Lowlanders as … line of march. 330
- 341 [331] 00000000-0000-7000-8000-00000000002e: 24 lines | WAVERLEY NOTES 1. This … to this disquisition. 331
- 342 [332] 00000000-0000-7000-8000-00000000002e: blank
- 343 [333] 00000000-0000-7000-8000-00000000002f: 23 lines | CHAPTER FORTY-FIVE CHAPTER XVI. … apologize for the 333
- 344 [334] 00000000-0000-7000-8000-00000000002f: 38 lines | WALTER SCOTT diminished numbers … had had a 334
- 345 [335] 00000000-0000-7000-8000-00000000002f: 39 lines | WAVERLEY skirmish with some … to the ranks.” 335
- 346 [336] 00000000-0000-7000-8000-00000000002f: 39 lines | WALTER SCOTT “Do not … young Highlander performed, 336
- 347 [337] 00000000-0000-7000-8000-00000000002f: 34 lines | WAVERLEY not without examining … prepare the way!” 337
- 348 [338] 00000000-0000-7000-8000-00000000002f: blank
- 349 [339] 00000000-0000-7000-8000-000000000030: 24 lines | CHAPTER FORTY-SIX CHAPTER XVII. … the purpose of 339
- 350 [340] 00000000-0000-7000-8000-000000000030: 38 lines | WALTER SCOTT occupying the … the descent to 340
- 351 [341] 00000000-0000-7000-8000-000000000030: 39 lines | WAVERLEY skirmish with the … respect. It was 341
- 352 [342] 00000000-0000-7000-8000-000000000030: 38 lines | WALTER SCOTT at that … of the line.” 342
- 353 [343] 00000000-0000-7000-8000-000000000030: 38 lines | WAVERLEY When they approached … setting their watch.” 343
- 354 [344] 00000000-0000-7000-8000-000000000030: 31 lines | WALTER SCOTT The roll … them to sleep. 344
- 355 [345] 00000000-0000-7000-8000-000000000031: 25 lines | CHAPTER FORTY-SEVEN CHAPTER XVIII. … But this was 345
- 356 [346] 00000000-0000-7000-8000-000000000031: 39 lines | WALTER SCOTT lost as … a sort of 346
- 357 [347] 00000000-0000-7000-8000-000000000031: 38 lines | WAVERLEY separate phalanx, narrow … against the infantry. 347
- 358 [348] 00000000-0000-7000-8000-000000000031: 39 lines | WALTER SCOTT It was … by the blow 348
- 359 [349] 00000000-0000-7000-8000-000000000031: 38 lines | WAVERLEY of a scythe, … Laird of Balmawhapple. 349
- 360 [350] 00000000-0000-7000-8000-000000000031: 42 lines | WALTER SCOTT NOTES 1. … to him, and 350
- 361 [351] 00000000-0000-7000-8000-000000000031: 43 lines | WAVERLEY to which so … hand and waved 351
- 362 [352] 00000000-0000-7000-8000-000000000031: 25 lines | WALTER SCOTT it as … unfortunate gentleman’s waistcoat. 352
- 363 [353] 00000000-0000-7000-8000-000000000032: 23 lines | CHAPTER FORTY-EIGHT CHAPTER XIX. … his grooms. “I 353
- 364 [354] 00000000-0000-7000-8000-000000000032: 39 lines | WALTER SCOTT seldom ban, … at Martinmas ere 354
- 365 [355] 00000000-0000-7000-8000-000000000032: 39 lines | WAVERLEY Cosmo Comyne Bradwardine … hath his boots 355
- 366 [356] 00000000-0000-7000-8000-000000000032: 39 lines | WALTER SCOTT taken off … in Dirleton’s Doubts 356
- 367 [357] 00000000-0000-7000-8000-000000000032: 39 lines | WAVERLEY and Queries, Grippit … some point of 357
- 368 [358] 00000000-0000-7000-8000-000000000032: 8 lines | WALTER SCOTT etiquette not … my dear Waverley.” 358
- 369 [359] 00000000-0000-7000-8000-000000000033: 23 lines | CHAPTER FORTY-NINE CHAPTER XX. … wi’ her Lochaber-axe.” 359
- 370 [360] 00000000-0000-7000-8000-000000000033: 39 lines | WALTER SCOTT Waverley assured … come along, Waverley.” 360
- 371 [361] 00000000-0000-7000-8000-000000000033: 39 lines | WAVERLEY “Waverley!” said the … he addressed Edward. 361
- 372 [362] 00000000-0000-7000-8000-000000000033: 38 lines | WALTER SCOTT “Mr. Waverley, … at least peremptory.” 362
- 373 [363] 00000000-0000-7000-8000-000000000033: 38 lines | WAVERLEY “On my return … towards the Colonel. 363
- 374 [364] 00000000-0000-7000-8000-000000000033: 26 lines | WALTER SCOTT “We shall … adjoining to Musselburgh.] 364
- 375 [365] 00000000-0000-7000-8000-000000000034: 23 lines | CHAPTER FIFTY CHAPTER XXI. … as a funeral!” 365
- 376 [366] 00000000-0000-7000-8000-000000000034: 40 lines | WALTER SCOTT “I am … connected with our 366
- 377 [367] 00000000-0000-7000-8000-000000000034: 39 lines | WAVERLEY worthy and excellent … ties which united 367
- 378 [368] 00000000-0000-7000-8000-000000000034: 38 lines | WALTER SCOTT to the … and draw off.’” 368
- 379 [369] 00000000-0000-7000-8000-000000000034: 39 lines | WAVERLEY “Were it not … metal, or the 369
- 380 [370] 00000000-0000-7000-8000-000000000034: 23 lines | WALTER SCOTT Castle sink … on the blades. 370
- 381 [371] 00000000-0000-7000-8000-000000000035: 24 lines | CHAPTER FIFTY-ONE CHAPTER XXII. … Talbot to Edinburgh. 371
- 382 [372] 00000000-0000-7000-8000-000000000035: 39 lines | WALTER SCOTT They performed … gentle remonstrance for 372
- 383 [373] 00000000-0000-7000-8000-000000000035: 39 lines | WAVERLEY neglect of the … although it was 373
- 384 [374] 00000000-0000-7000-8000-000000000035: 39 lines | WALTER SCOTT so gross … called Ruthven, Rufnn, 374
- 385 [375] 00000000-0000-7000-8000-000000000035: 39 lines | WAVERLEY or Rivane, known … shortly these. Of 375
- 386 [376] 00000000-0000-7000-8000-000000000035: 39 lines | WALTER SCOTT an active … embarked in it. 376
- 387 [377] 00000000-0000-7000-8000-000000000035: 25 lines | WAVERLEY Waverley therefore wrote … done on purpose.” 377
- 388 [378] 00000000-0000-7000-8000-000000000035: blank
- 389 [379] 00000000-0000-7000-8000-000000000036: 24 lines | CHAPTER FIFTY-TWO CHAPTER XXIII. … or in applying 379
- 390 [380] 00000000-0000-7000-8000-000000000036: 39 lines | WALTER SCOTT his science … he paid them 380
- 391 [381] 00000000-0000-7000-8000-000000000036: 38 lines | WAVERLEY almost daily visits, … alarm her by 381
- 392 [382] 00000000-0000-7000-8000-000000000036: 38 lines | WALTER SCOTT remonstrance, because … him out as 382
- 393 [383] 00000000-0000-7000-8000-000000000036: 38 lines | WAVERLEY the person formed … with so much.” 383
- 394 [384] 00000000-0000-7000-8000-000000000036: 27 lines | WALTER SCOTT “Colonel Talbot? … dropped the conversation. 384
- 395 [385] 00000000-0000-7000-8000-000000000037: 24 lines | CHAPTER FIFTY-THREE CHAPTER XXIV. … Fergus to Waverley 385
- 396 [386] 00000000-0000-7000-8000-000000000037: 38 lines | WALTER SCOTT overnight, “and … no tak something?” 386
- 397 [387] 00000000-0000-7000-8000-000000000037: 39 lines | WAVERLEY “He usually lets … know would be 387
- 398 [388] 00000000-0000-7000-8000-000000000037: 39 lines | WALTER SCOTT impossible in … of my patent 388
- 399 [389] 00000000-0000-7000-8000-000000000037: 38 lines | WAVERLEY as prior to … Bisogna coprirsi, Signor.” 389
- 400 [390] 00000000-0000-7000-8000-000000000037: 7 lines | WALTER SCOTT After some … his own bosom. 390
- 401 [391] 00000000-0000-7000-8000-000000000038: 23 lines | CHAPTER FIFTY-FOUR CHAPTER XXV. … she amuses herself. 391
- 402 [392] 00000000-0000-7000-8000-000000000038: 39 lines | WALTER SCOTT And then … Now Flora, who 392
- 403 [393] 00000000-0000-7000-8000-000000000038: 39 lines | WAVERLEY seemed to impose … the poet has, 393
- 404 [394] 00000000-0000-7000-8000-000000000038: 33 lines | WALTER SCOTT with great … himself to repose. 394
- 405 [395] 00000000-0000-7000-8000-000000000039: 24 lines | CHAPTER FIFTY-FIVE CHAPTER XXVI. … trouble the reader. 395
- 406 [396] 00000000-0000-7000-8000-000000000039: 39 lines | WALTER SCOTT But he … administer no consolation. 396
- 407 [397] 00000000-0000-7000-8000-000000000039: 38 lines | WAVERLEY But you have … his mental agony. 397
- 408 [398] 00000000-0000-7000-8000-000000000039: 39 lines | WALTER SCOTT “She is … with a reply. 398
- 409 [399] 00000000-0000-7000-8000-00000000003a: 24 lines | CHAPTER FIFTY-SIX CHAPTER XXVII. … begin to pack.” 399
- 410 [400] 00000000-0000-7000-8000-00000000003a: 39 lines | WALTER SCOTT “Before I … Deity as himself, 400
- 411 [401] 00000000-0000-7000-8000-00000000003a: 38 lines | WAVERLEY if you were … of the Highlanders.” 401
- 412 [402] 00000000-0000-7000-8000-00000000003a: 39 lines | WALTER SCOTT “Not a … once more adieu.” 402
- 413 [403] 00000000-0000-7000-8000-00000000003a: 8 lines | WAVERLEY “And adieu, my … returning to Edinburgh. 403
- 414 [404] 00000000-0000-7000-8000-00000000003a: blank
- 415 [405] 00000000-0000-7000-8000-00000000003b: 25 lines | CHAPTER FIFTY-SEVEN CHAPTER XXVIII. … the future monarch, 405
- 416 [406] 00000000-0000-7000-8000-00000000003b: 39 lines | WALTER SCOTT who, he … a mere park.” 406
- 417 [407] 00000000-0000-7000-8000-00000000003b: 39 lines | WAVERLEY “Flora will be … more effectual protection.” 407
- 418 [408] 00000000-0000-7000-8000-00000000003b: 38 lines | WALTER SCOTT The brow … to us both.” 408
- 419 [409] 00000000-0000-7000-8000-00000000003b: 38 lines | WAVERLEY “O, very well, … Grand Seignior—the Great 409
- 420 [410] 00000000-0000-7000-8000-00000000003b: 32 lines | WALTER SCOTT Mogul! I … the Prince’s service. 410
- 421 [411] 00000000-0000-7000-8000-00000000003c: 23 lines | CHAPTER FIFTY-EIGHT CHAPTER XXIX. … thae Highland rinthereouts.” 411
- 422 [412] 00000000-0000-7000-8000-00000000003c: 38 lines | WALTER SCOTT “What do … from a lurking-place.” 412
- 423 [413] 00000000-0000-7000-8000-00000000003c: 39 lines | WAVERLEY “As that,” answered … you, unless she 413
- 424 [414] 00000000-0000-7000-8000-00000000003c: 39 lines | WALTER SCOTT brought an … confusion was privately 414
- 425 [415] 00000000-0000-7000-8000-00000000003c: 39 lines | WAVERLEY fostered by old … beaucoup de peine.” 415
- 426 [416] 00000000-0000-7000-8000-00000000003c: 39 lines | WALTER SCOTT “Ah! pas … in his own 416
- 427 [417] 00000000-0000-7000-8000-00000000003c: 39 lines | WAVERLEY presence, the thoughts … is too justly 417
- 428 [418] 00000000-0000-7000-8000-00000000003c: 40 lines | WALTER SCOTT slight to … Duke of Berwick. 418
- 429 [419] 00000000-0000-7000-8000-00000000003c: 40 lines | WAVERLEY “Ah, Beaujeu, mon … of Culloden without 419
- 430 [420] 00000000-0000-7000-8000-00000000003c: 43 lines | WALTER SCOTT doing the … your enemies at 420
- 431 [421] 00000000-0000-7000-8000-00000000003c: 43 lines | WAVERLEY your feet.” The … kindly, but not 421
- 432 [422] 00000000-0000-7000-8000-00000000003c: 9 lines | WALTER SCOTT without a … which follows it. 422
- 433 [423] 00000000-0000-7000-8000-00000000003d: 25 lines | CHAPTER FIFTY-NINE CHAPTER XXX. … of this unexpected 423
- 434 [424] 00000000-0000-7000-8000-00000000003d: 38 lines | WALTER SCOTT visit; nor … and leave her.” 424
- 435 [425] 00000000-0000-7000-8000-00000000003d: 39 lines | WAVERLEY “Why, what will … However, let us 425
- 436 [426] 00000000-0000-7000-8000-00000000003d: 39 lines | WALTER SCOTT sit down … I was then 426
- 437 [427] 00000000-0000-7000-8000-00000000003d: 38 lines | WAVERLEY convinced it was … as active as 427
- 438 [428] 00000000-0000-7000-8000-00000000003d: 39 lines | WALTER SCOTT ever, pale … companions, the Highlanders 428
- 439 [429] 00000000-0000-7000-8000-00000000003d: 40 lines | WAVERLEY endeavoured to recover … parties. “Towards the 429
- 440 [430] 00000000-0000-7000-8000-00000000003d: 43 lines | WALTER SCOTT evening of … had taken their 430
- 441 [431] 00000000-0000-7000-8000-00000000003d: 32 lines | WAVERLEY station, in the … surrounded by enemies.” 431
- 442 [432] 00000000-0000-7000-8000-00000000003d: blank
- 443 [433] 00000000-0000-7000-8000-00000000003e: 24 lines | CHAPTER SIXTY CHAPTER XXXI. … English oath or 433
- 444 [434] 00000000-0000-7000-8000-00000000003e: 39 lines | WALTER SCOTT two, and … unfortunate English gentleman.” 434
- 445 [435] 00000000-0000-7000-8000-00000000003e: 38 lines | WAVERLEY “Be ho Scot … with kind wishes. 435
- 446 [436] 00000000-0000-7000-8000-00000000003e: 39 lines | WALTER SCOTT In the … Bodach Glas might 436
- 447 [437] 00000000-0000-7000-8000-00000000003e: 39 lines | WAVERLEY have proved the … of Flora, and, 437
- 448 [438] 00000000-0000-7000-8000-00000000003e: 12 lines | WALTER SCOTT with yet … reason and philosophy. 438
+ 300 [290] 00000000-0000-7000-8000-000000000029: 30 lines | WALTER SCOTT “A fine … to gae out 290
+ 301 [291] 00000000-0000-7000-8000-000000000029: 41 lines | WAVERLEY 1 mysell; and … on friendly terms. 291
+ 302 [292] 00000000-0000-7000-8000-000000000029: 39 lines | WALTER SCOTT would only … the part of 292
+ 303 [293] 00000000-0000-7000-8000-000000000029: 38 lines | WAVERLEY Stirling Castle. I … an advanced party 293
+ 304 [294] 00000000-0000-7000-8000-000000000029: 39 lines | WALTER SCOTT in front … unnoticed by any 294
+ 305 [295] 00000000-0000-7000-8000-000000000029: 4 lines | WAVERLEY one, in anxious … now rapidly approaching. 295
+ 306 [296] 00000000-0000-7000-8000-000000000029: blank
+ 307 [297] 00000000-0000-7000-8000-00000000002a: 24 lines | CHAPTER FORTY CHAPTER XI. … at royal state. 297
+ 308 [298] 00000000-0000-7000-8000-00000000002a: 39 lines | WALTER SCOTT A young … who throws himself 298
+ 309 [299] 00000000-0000-7000-8000-00000000002a: 40 lines | WAVERLEY upon the affections … others had come 299
+ 310 [300] 00000000-0000-7000-8000-00000000002a: 39 lines | WALTER SCOTT adherents of … advance into England. 300
+ 311 [301] 00000000-0000-7000-8000-00000000002a: 39 lines | WAVERLEY he fairly gave … equal spirit and 301
+ 312 [302] 00000000-0000-7000-8000-00000000002a: 32 lines | WALTER SCOTT readiness, that … left the presence-chamber. 302
+ 313 [303] 00000000-0000-7000-8000-00000000002b: 27 lines | CHAPTER FORTY-ONE CHAPTER XII. … to its overthrow. 303
+ 314 [304] 00000000-0000-7000-8000-00000000002b: 39 lines | WALTER SCOTT jealousy, forsooth, … of the leg—” 304
+ 315 [305] 00000000-0000-7000-8000-00000000002b: 39 lines | WAVERLEY “Eleven from haunch … here as a 305
+ 316 [306] 00000000-0000-7000-8000-00000000002b: 39 lines | WALTER SCOTT prisoner, because … you, my worthy 306
+ 317 [307] 00000000-0000-7000-8000-00000000002b: 39 lines | WAVERLEY friend,” said the … hard as that 307
+ 318 [308] 00000000-0000-7000-8000-00000000002b: 38 lines | WALTER SCOTT of colliers, … said Mac-Ivor, laughing. 308
+ 319 [309] 00000000-0000-7000-8000-00000000002b: 28 lines | WAVERLEY “Craving your pardon, … been assigned him. 309
+ 320 [310] 00000000-0000-7000-8000-00000000002b: blank
+ 321 [311] 00000000-0000-7000-8000-00000000002c: 24 lines | CHAPTER FORTY-TWO CHAPTER XIII. … periwig, notwithstanding the 311
+ 322 [312] 00000000-0000-7000-8000-00000000002c: 39 lines | WALTER SCOTT universal fashion … dorlach, and Mr. 312
+ 323 [313] 00000000-0000-7000-8000-00000000002c: 39 lines | WAVERLEY Waverley’s wearied wi’ … the same request. 313
+ 324 [314] 00000000-0000-7000-8000-00000000002c: 39 lines | WALTER SCOTT “I thank … obliged to resume. 314
+ 325 [315] 00000000-0000-7000-8000-00000000002c: 39 lines | WAVERLEY “Well, then,” said … parish of Bradwardine 315
+ 326 [316] 00000000-0000-7000-8000-00000000002c: 38 lines | WALTER SCOTT and the … of Haddo’s Hole.” 316
+ 327 [317] 00000000-0000-7000-8000-00000000002c: 8 lines | WAVERLEY “Lord forgie you, … of the campaign. 317
+ 328 [318] 00000000-0000-7000-8000-00000000002c: blank
+ 329 [319] 00000000-0000-7000-8000-00000000002d: 25 lines | CHAPTER FORTY-THREE CHAPTER XIV. … an English lady; 319
+ 330 [320] 00000000-0000-7000-8000-00000000002d: 39 lines | WALTER SCOTT But she’s … seemed a little—a 320
+ 331 [321] 00000000-0000-7000-8000-00000000002d: 39 lines | WAVERLEY very little—affected and … interested in the 321
+ 332 [322] 00000000-0000-7000-8000-00000000002d: 39 lines | WALTER SCOTT affair. But, … a capricious beauty? 322
+ 333 [323] 00000000-0000-7000-8000-00000000002d: 39 lines | WAVERLEY O nymph, unrelenting … time; and even 323
+ 334 [324] 00000000-0000-7000-8000-00000000002d: 39 lines | WALTER SCOTT those of … though perhaps somewhat 324
+ 335 [325] 00000000-0000-7000-8000-00000000002d: 38 lines | WAVERLEY romantic, one of … my friend Bangour:— 325
+ 336 [326] 00000000-0000-7000-8000-00000000002d: 4 lines | WALTER SCOTT Ae half … down the wind.” 326
+ 337 [327] 00000000-0000-7000-8000-00000000002e: 25 lines | CHAPTER FORTY-FOUR CHAPTER XV. … also, “tat his 327
+ 338 [328] 00000000-0000-7000-8000-00000000002e: 39 lines | WALTER SCOTT leather dorlach … formed the background 328
+ 339 [329] 00000000-0000-7000-8000-00000000002e: 39 lines | WAVERLEY of the scene, … forward as the 329
+ 340 [330] 00000000-0000-7000-8000-00000000002e: 38 lines | WALTER SCOTT press would … opportunity of success. 330
+ 341 [331] 00000000-0000-7000-8000-00000000002e: 39 lines | WAVERLEY But, in a … to the South-Country 331
+ 342 [332] 00000000-0000-7000-8000-00000000002e: 43 lines | WALTER SCOTT Lowlanders as … their forefathers, and 332
+ 343 [333] 00000000-0000-7000-8000-00000000002e: 20 lines | WAVERLEY No sooner was … to this disquisition. 333
+ 344 [334] 00000000-0000-7000-8000-00000000002e: blank
+ 345 [335] 00000000-0000-7000-8000-00000000002f: 23 lines | CHAPTER FORTY-FIVE CHAPTER XVI. … apologize for the 335
+ 346 [336] 00000000-0000-7000-8000-00000000002f: 38 lines | WALTER SCOTT diminished numbers … had had a 336
+ 347 [337] 00000000-0000-7000-8000-00000000002f: 39 lines | WAVERLEY skirmish with some … to the ranks.” 337
+ 348 [338] 00000000-0000-7000-8000-00000000002f: 39 lines | WALTER SCOTT “Do not … young Highlander performed, 338
+ 349 [339] 00000000-0000-7000-8000-00000000002f: 34 lines | WAVERLEY not without examining … prepare the way!” 339
+ 350 [340] 00000000-0000-7000-8000-00000000002f: blank
+ 351 [341] 00000000-0000-7000-8000-000000000030: 24 lines | CHAPTER FORTY-SIX CHAPTER XVII. … the purpose of 341
+ 352 [342] 00000000-0000-7000-8000-000000000030: 38 lines | WALTER SCOTT occupying the … the descent to 342
+ 353 [343] 00000000-0000-7000-8000-000000000030: 39 lines | WAVERLEY skirmish with the … respect. It was 343
+ 354 [344] 00000000-0000-7000-8000-000000000030: 38 lines | WALTER SCOTT at that … of the line.” 344
+ 355 [345] 00000000-0000-7000-8000-000000000030: 38 lines | WAVERLEY When they approached … setting their watch.” 345
+ 356 [346] 00000000-0000-7000-8000-000000000030: 31 lines | WALTER SCOTT The roll … them to sleep. 346
+ 357 [347] 00000000-0000-7000-8000-000000000031: 28 lines | CHAPTER FORTY-SEVEN CHAPTER XVIII. … of bringing an 347
+ 358 [348] 00000000-0000-7000-8000-000000000031: 40 lines | WALTER SCOTT has offered … in the action. 348
+ 359 [349] 00000000-0000-7000-8000-000000000031: 39 lines | WAVERLEY “Hush!” cried Fergus, … and began to 349
+ 360 [350] 00000000-0000-7000-8000-000000000031: 39 lines | WALTER SCOTT move forward, … fragment of his 350
+ 361 [351] 00000000-0000-7000-8000-000000000031: 41 lines | WAVERLEY sword, and was … he called his 351
+ 362 [352] 00000000-0000-7000-8000-000000000031: 46 lines | WALTER SCOTT Loud shouts … or a Lochaber- 352
+ 363 [353] 00000000-0000-7000-8000-000000000031: 43 lines | WAVERLEY was fought and … the fortunes of 353
+ 364 [354] 00000000-0000-7000-8000-000000000031: 9 lines | Charles Edward, pursued the … the unfortunate gentleman’s waistcoat.
+ 365 [355] 00000000-0000-7000-8000-000000000032: 23 lines | CHAPTER FORTY-EIGHT CHAPTER XIX. … his grooms. “I 355
+ 366 [356] 00000000-0000-7000-8000-000000000032: 39 lines | WALTER SCOTT seldom ban, … at Martinmas ere 356
+ 367 [357] 00000000-0000-7000-8000-000000000032: 39 lines | WAVERLEY Cosmo Comyne Bradwardine … hath his boots 357
+ 368 [358] 00000000-0000-7000-8000-000000000032: 39 lines | WALTER SCOTT taken off … in Dirleton’s Doubts 358
+ 369 [359] 00000000-0000-7000-8000-000000000032: 39 lines | WAVERLEY and Queries, Grippit … some point of 359
+ 370 [360] 00000000-0000-7000-8000-000000000032: 8 lines | WALTER SCOTT etiquette not … my dear Waverley.” 360
+ 371 [361] 00000000-0000-7000-8000-000000000033: 23 lines | CHAPTER FORTY-NINE CHAPTER XX. … wi’ her Lochaber-axe.” 361
+ 372 [362] 00000000-0000-7000-8000-000000000033: 39 lines | WALTER SCOTT Waverley assured … come along, Waverley.” 362
+ 373 [363] 00000000-0000-7000-8000-000000000033: 39 lines | WAVERLEY “Waverley!” said the … he addressed Edward. 363
+ 374 [364] 00000000-0000-7000-8000-000000000033: 38 lines | WALTER SCOTT “Mr. Waverley, … at least peremptory.” 364
+ 375 [365] 00000000-0000-7000-8000-000000000033: 38 lines | WAVERLEY “On my return … towards the Colonel. 365
+ 376 [366] 00000000-0000-7000-8000-000000000033: 26 lines | WALTER SCOTT “We shall … adjoining to Musselburgh.] 366
+ 377 [367] 00000000-0000-7000-8000-000000000034: 23 lines | CHAPTER FIFTY CHAPTER XXI. … as a funeral!” 367
+ 378 [368] 00000000-0000-7000-8000-000000000034: 42 lines | WALTER SCOTT “I am … on the blades. 368
+ 379 [369] 00000000-0000-7000-8000-000000000034: 39 lines | WAVERLEY some favourite plan … next day a 369
+ 380 [370] 00000000-0000-7000-8000-000000000034: 39 lines | WALTER SCOTT formal “Gazette” … We understand that 370
+ 381 [371] 00000000-0000-7000-8000-000000000034: 39 lines | WAVERLEY it is in … his crusade southward?” 371
+ 382 [372] 00000000-0000-7000-8000-000000000034: 19 lines | WALTER SCOTT [* The … somewhat better acquainted.” 372
+ 383 [373] 00000000-0000-7000-8000-000000000035: 27 lines | CHAPTER FIFTY-ONE CHAPTER XXII. … done on purpose.” 373
+ 384 [374] 00000000-0000-7000-8000-000000000035: 39 lines | WALTER SCOTT sake, do … a handsome lodging, 374
+ 385 [375] 00000000-0000-7000-8000-000000000035: 39 lines | WAVERLEY where there was … neglect of this 375
+ 386 [376] 00000000-0000-7000-8000-000000000035: 38 lines | WALTER SCOTT last command, … on his name.” 376
+ 387 [377] 00000000-0000-7000-8000-000000000035: 38 lines | WAVERLEY The other letters … anything dishonourable, no 377
+ 388 [378] 00000000-0000-7000-8000-000000000035: 39 lines | WALTER SCOTT more didn’t … is already acquainted, 378
+ 389 [379] 00000000-0000-7000-8000-000000000035: 24 lines | WAVERLEY and which form … of the Fusileers. 379
+ 390 [380] 00000000-0000-7000-8000-000000000035: blank
+ 391 [381] 00000000-0000-7000-8000-000000000036: 24 lines | CHAPTER FIFTY-TWO CHAPTER XXIII. … or in applying 381
+ 392 [382] 00000000-0000-7000-8000-000000000036: 39 lines | WALTER SCOTT his science … he paid them 382
+ 393 [383] 00000000-0000-7000-8000-000000000036: 38 lines | WAVERLEY almost daily visits, … alarm her by 383
+ 394 [384] 00000000-0000-7000-8000-000000000036: 38 lines | WALTER SCOTT remonstrance, because … him out as 384
+ 395 [385] 00000000-0000-7000-8000-000000000036: 38 lines | WAVERLEY the person formed … with so much.” 385
+ 396 [386] 00000000-0000-7000-8000-000000000036: 27 lines | WALTER SCOTT “Colonel Talbot? … dropped the conversation. 386
+ 397 [387] 00000000-0000-7000-8000-000000000037: 24 lines | CHAPTER FIFTY-THREE CHAPTER XXIV. … Fergus to Waverley 387
+ 398 [388] 00000000-0000-7000-8000-000000000037: 38 lines | WALTER SCOTT overnight, “and … no tak something?” 388
+ 399 [389] 00000000-0000-7000-8000-000000000037: 39 lines | WAVERLEY “He usually lets … know would be 389
+ 400 [390] 00000000-0000-7000-8000-000000000037: 39 lines | WALTER SCOTT impossible in … of my patent 390
+ 401 [391] 00000000-0000-7000-8000-000000000037: 38 lines | WAVERLEY as prior to … Bisogna coprirsi, Signor.” 391
+ 402 [392] 00000000-0000-7000-8000-000000000037: 7 lines | WALTER SCOTT After some … his own bosom. 392
+ 403 [393] 00000000-0000-7000-8000-000000000038: 23 lines | CHAPTER FIFTY-FOUR CHAPTER XXV. … she amuses herself. 393
+ 404 [394] 00000000-0000-7000-8000-000000000038: 39 lines | WALTER SCOTT And then … Now Flora, who 394
+ 405 [395] 00000000-0000-7000-8000-000000000038: 39 lines | WAVERLEY seemed to impose … the poet has, 395
+ 406 [396] 00000000-0000-7000-8000-000000000038: 33 lines | WALTER SCOTT with great … himself to repose. 396
+ 407 [397] 00000000-0000-7000-8000-000000000039: 24 lines | CHAPTER FIFTY-FIVE CHAPTER XXVI. … trouble the reader. 397
+ 408 [398] 00000000-0000-7000-8000-000000000039: 39 lines | WALTER SCOTT But he … administer no consolation. 398
+ 409 [399] 00000000-0000-7000-8000-000000000039: 38 lines | WAVERLEY But you have … his mental agony. 399
+ 410 [400] 00000000-0000-7000-8000-000000000039: 39 lines | WALTER SCOTT “She is … with a reply. 400
+ 411 [401] 00000000-0000-7000-8000-00000000003a: 24 lines | CHAPTER FIFTY-SIX CHAPTER XXVII. … begin to pack.” 401
+ 412 [402] 00000000-0000-7000-8000-00000000003a: 39 lines | WALTER SCOTT “Before I … Deity as himself, 402
+ 413 [403] 00000000-0000-7000-8000-00000000003a: 38 lines | WAVERLEY if you were … of the Highlanders.” 403
+ 414 [404] 00000000-0000-7000-8000-00000000003a: 39 lines | WALTER SCOTT “Not a … once more adieu.” 404
+ 415 [405] 00000000-0000-7000-8000-00000000003a: 8 lines | WAVERLEY “And adieu, my … returning to Edinburgh. 405
+ 416 [406] 00000000-0000-7000-8000-00000000003a: blank
+ 417 [407] 00000000-0000-7000-8000-00000000003b: 25 lines | CHAPTER FIFTY-SEVEN CHAPTER XXVIII. … the future monarch, 407
+ 418 [408] 00000000-0000-7000-8000-00000000003b: 39 lines | WALTER SCOTT who, he … a mere park.” 408
+ 419 [409] 00000000-0000-7000-8000-00000000003b: 39 lines | WAVERLEY “Flora will be … more effectual protection.” 409
+ 420 [410] 00000000-0000-7000-8000-00000000003b: 38 lines | WALTER SCOTT The brow … to us both.” 410
+ 421 [411] 00000000-0000-7000-8000-00000000003b: 38 lines | WAVERLEY “O, very well, … Grand Seignior—the Great 411
+ 422 [412] 00000000-0000-7000-8000-00000000003b: 32 lines | WALTER SCOTT Mogul! I … the Prince’s service. 412
+ 423 [413] 00000000-0000-7000-8000-00000000003c: 23 lines | CHAPTER FIFTY-EIGHT CHAPTER XXIX. … thae Highland rinthereouts.” 413
+ 424 [414] 00000000-0000-7000-8000-00000000003c: 38 lines | WALTER SCOTT “What do … from a lurking-place.” 414
+ 425 [415] 00000000-0000-7000-8000-00000000003c: 39 lines | WAVERLEY “As that,” answered … you, unless she 415
+ 426 [416] 00000000-0000-7000-8000-00000000003c: 39 lines | WALTER SCOTT brought an … confusion was privately 416
+ 427 [417] 00000000-0000-7000-8000-00000000003c: 39 lines | WAVERLEY fostered by old … beaucoup de peine.” 417
+ 428 [418] 00000000-0000-7000-8000-00000000003c: 39 lines | WALTER SCOTT “Ah! pas … in his own 418
+ 429 [419] 00000000-0000-7000-8000-00000000003c: 39 lines | WAVERLEY presence, the thoughts … is too justly 419
+ 430 [420] 00000000-0000-7000-8000-00000000003c: 27 lines | WALTER SCOTT slight to … of the Chevalier. 420
+ 431 [421] 00000000-0000-7000-8000-00000000003c: 48 lines | WAVERLEY 1 Charles Edward … left a strong 421
+ 432 [422] 00000000-0000-7000-8000-00000000003c: 46 lines | WALTER SCOTT himself from … as a resolution 422
+ 433 [423] 00000000-0000-7000-8000-00000000003c: 43 lines | WAVERLEY and marched about … which follows it. 423
+ 434 [424] 00000000-0000-7000-8000-00000000003c: 7 lines | WALTER SCOTT Bradwardine, and … jeu, après tout.” 424
+ 435 [425] 00000000-0000-7000-8000-00000000003d: 25 lines | CHAPTER FIFTY-NINE CHAPTER XXX. … of this unexpected 425
+ 436 [426] 00000000-0000-7000-8000-00000000003d: 38 lines | WALTER SCOTT visit; nor … and leave her.” 426
+ 437 [427] 00000000-0000-7000-8000-00000000003d: 39 lines | WAVERLEY “Why, what will … However, let us 427
+ 438 [428] 00000000-0000-7000-8000-00000000003d: 39 lines | WALTER SCOTT sit down … I was then 428
+ 439 [429] 00000000-0000-7000-8000-00000000003d: 38 lines | WAVERLEY convinced it was … as active as 429
+ 440 [430] 00000000-0000-7000-8000-00000000003d: 39 lines | WALTER SCOTT ever, pale … companions, the Highlanders 430
+ 441 [431] 00000000-0000-7000-8000-00000000003d: 44 lines | WAVERLEY endeavoured to recover … in order to 431
+ 442 [432] 00000000-0000-7000-8000-00000000003d: 45 lines | refresh his armie, and … or number the 432
+ 443 [433] 00000000-0000-7000-8000-00000000003e: 37 lines | WAVERLEY CHAPTER SIXTY CHAPTER … surrounded by enemies.” 433
+ 444 [434] 00000000-0000-7000-8000-00000000003e: 38 lines | WALTER SCOTT inconveniences were … of the plaid-men.” 434
+ 445 [435] 00000000-0000-7000-8000-00000000003e: 39 lines | WAVERLEY “And what was … of his situation, 435
+ 446 [436] 00000000-0000-7000-8000-00000000003e: 39 lines | WALTER SCOTT among this … strong ground. He 436
+ 447 [437] 00000000-0000-7000-8000-00000000003e: 39 lines | WAVERLEY could not find … In this lonely 437
+ 448 [438] 00000000-0000-7000-8000-00000000003e: 20 lines | WALTER SCOTT and secluded … reason and philosophy. 438
  449 [439] 00000000-0000-7000-8000-00000000003f: 24 lines | CHAPTER SIXTY-ONE CHAPTER XXXII. … to hear and 439
  450 [440] 00000000-0000-7000-8000-00000000003f: 39 lines | WALTER SCOTT communicate the … news in the 440
  451 [441] 00000000-0000-7000-8000-00000000003f: 38 lines | WAVERLEY papers, interfered so … whole army-list by 441
@@ -458,15 +458,15 @@ gutter 0.750 in
  455 [445] 00000000-0000-7000-8000-000000000040: 24 lines | CHAPTER SIXTY-TWO CHAPTER XXXIII. … bad for your 445
  456 [446] 00000000-0000-7000-8000-000000000040: 38 lines | WALTER SCOTT complaints. You … you come here?” 446
  457 [447] 00000000-0000-7000-8000-000000000040: 39 lines | WAVERLEY Edward told his … or other—” “Killancureit?” 447
- 458 [448] 00000000-0000-7000-8000-000000000040: 40 lines | WALTER SCOTT “The same. … from mistaken virtue, 448
- 459 [449] 00000000-0000-7000-8000-000000000040: 39 lines | WAVERLEY and therefore cannot … on a more 449
- 460 [450] 00000000-0000-7000-8000-000000000040: 39 lines | WALTER SCOTT general view, … as to the 450
- 461 [451] 00000000-0000-7000-8000-000000000040: 39 lines | WAVERLEY daughter, though I … go in my 451
- 462 [452] 00000000-0000-7000-8000-000000000040: 39 lines | WALTER SCOTT stead. As … be accused of 452
- 463 [453] 00000000-0000-7000-8000-000000000040: 40 lines | WAVERLEY furthering machinations against … ARRAY, annoy, trouble. 453
- 464 [454] 00000000-0000-7000-8000-000000000040: 43 lines | WALTER SCOTT ASSOILZIED, absolved, … a pig. GRIPPLE, 454
- 465 [455] 00000000-0000-7000-8000-000000000040: 43 lines | WAVERLEY griping, niggardly. GUDE, … SWAIR, swore. SYNE, 455
- 466 [456] 00000000-0000-7000-8000-000000000040: 18 lines | WALTER SCOTT before, now, … whisk. YATE, gate. 456
+ 458 [448] 00000000-0000-7000-8000-000000000040: 25 lines | WALTER SCOTT “The same. … yet, in the 448
+ 459 [449] 00000000-0000-7000-8000-000000000040: 48 lines | WAVERLEY 1 present case … carrier. CAILLIACHS, old 449
+ 460 [450] 00000000-0000-7000-8000-000000000040: 46 lines | WALTER SCOTT which, it … in me. OLD 450
+ 461 [451] 00000000-0000-7000-8000-000000000040: 43 lines | WAVERLEY “And what is … whisk. YATE, gate. 451
+ 462 [452] 00000000-0000-7000-8000-000000000040: 39 lines | WALTER SCOTT “His confession, … I am would 452
+ 463 [453] 00000000-0000-7000-8000-000000000040: 39 lines | WAVERLEY rather be burdensome … I hope.” “No.” 453
+ 464 [454] 00000000-0000-7000-8000-000000000040: 39 lines | WALTER SCOTT “Ah, pass … shall then attend 454
+ 465 [455] 00000000-0000-7000-8000-000000000040: 39 lines | WAVERLEY him; and they … out as the 455
+ 466 [456] 00000000-0000-7000-8000-000000000040: 17 lines | WALTER SCOTT rattle-pated trick … in enforcing it. 456
  467 [457] 00000000-0000-7000-8000-000000000041: 24 lines | CHAPTER SIXTY-THREE CHAPTER XXXIV. … precipitated his journey. 457
  468 [458] 00000000-0000-7000-8000-000000000041: 38 lines | WALTER SCOTT When he … where is he?” 458
  469 [459] 00000000-0000-7000-8000-000000000041: 39 lines | WAVERLEY “Eh, Lord’s sake! … instantly to Tully-Veolan, 459

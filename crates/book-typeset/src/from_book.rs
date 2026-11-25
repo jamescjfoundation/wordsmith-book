@@ -27,6 +27,8 @@ pub struct Geometry {
     pub gutter: Vec<(usize, f32)>,
     /// Bleed on the outside, top and bottom, inches (0: none).
     pub bleed: f32,
+    /// Where the notes go.
+    pub notes: crate::NotePlace,
 }
 
 impl Default for Geometry {
@@ -36,6 +38,7 @@ impl Default for Geometry {
             margins: (0.5, 0.6, 0.75, 0.75),
             gutter: vec![(150, 0.375), (300, 0.5), (500, 0.625), (700, 0.75), (usize::MAX, 0.875)],
             bleed: 0.0,
+            notes: crate::NotePlace::ChapterEnd,
         }
     }
 }
@@ -100,6 +103,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         head_small_caps: d.heads.small_caps,
         folios: true,
         bleed: geometry.bleed,
+        notes: geometry.notes,
     })
 }
 

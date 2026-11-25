@@ -29,17 +29,17 @@ gutter 0.000 in
   26 [12] 00000000-0000-7000-8000-000000000005: 36 lines | 12Gulliver’s Travels other great … me sneeze violently; whereupon
   27 [13] 00000000-0000-7000-8000-000000000005: 36 lines | Chapter One13 they stole … of ladders. But a
   28 [14] 00000000-0000-7000-8000-000000000005: 12 lines | 14Gulliver’s Travels proclamation was … length in the temple.
-  29 [15] 00000000-0000-7000-8000-000000000006: 25 lines | Chapter Two The emperor … chain would suffer, 15
-  30 [16] 00000000-0000-7000-8000-000000000006: 36 lines | 16Gulliver’s Travels and discharged … vials, into one vehicle,
-  31 [17] 00000000-0000-7000-8000-000000000006: 36 lines | Chapter Two17 drinking it … to me; and I
-  32 [18] 00000000-0000-7000-8000-000000000006: 36 lines | 18Gulliver’s Travels spoke to … kept me but very
-  33 [19] 00000000-0000-7000-8000-000000000006: 36 lines | Chapter Two19 indifferently from … yards round the city,
-  34 [20] 00000000-0000-7000-8000-000000000006: 36 lines | 20Gulliver’s Travels to deliver … search me; for probably
-  35 [21] 00000000-0000-7000-8000-000000000006: 36 lines | Chapter Two21 I might … his right waistcoat-pocket we
-  36 [22] 00000000-0000-7000-8000-000000000006: 36 lines | 22Gulliver’s Travels found a … two large slits cut
-  37 [23] 00000000-0000-7000-8000-000000000006: 36 lines | Chapter Two23 into the … us with great civility,
-  38 [24] 00000000-0000-7000-8000-000000000006: 36 lines | 24Gulliver’s Travels and due … scimitar, and then my
-  39 [25] 00000000-0000-7000-8000-000000000006: 31 lines | Chapter Two25 pouch of … feet and a half.
+  29 [15] 00000000-0000-7000-8000-000000000006: 26 lines | Chapter Two The emperor … and a half. 15
+  30 [16] 00000000-0000-7000-8000-000000000006: 36 lines | 16Gulliver’s Travels me, I … liquor of ten vessels,
+  31 [17] 00000000-0000-7000-8000-000000000006: 36 lines | Chapter Two17 which was … by their habits), who
+  32 [18] 00000000-0000-7000-8000-000000000006: 36 lines | 18Gulliver’s Travels were commanded … length; and these were
+  33 [19] 00000000-0000-7000-8000-000000000006: 36 lines | Chapter Two19 four double: … commission was issued out,
+  34 [20] 00000000-0000-7000-8000-000000000006: 36 lines | 20Gulliver’s Travels obliging all … ill, if he gave
+  35 [21] 00000000-0000-7000-8000-000000000006: 36 lines | Chapter Two21 orders to … both a sneezing for
+  36 [22] 00000000-0000-7000-8000-000000000006: 36 lines | 22Gulliver’s Travels several times … which we could not
+  37 [23] 00000000-0000-7000-8000-000000000006: 35 lines | Chapter Two23 enter: these … palms of our hands.
+  38 [24] 00000000-0000-7000-8000-000000000006: 36 lines | 24Gulliver’s Travels “This is … ground, could not recover
+  39 [25] 00000000-0000-7000-8000-000000000006: 31 lines | Chapter Two25 himself for … out of my possession.
   40 [26] 00000000-0000-7000-8000-000000000006: blank
   41 [27] 00000000-0000-7000-8000-000000000007: 24 lines | Chapter Three The author … enlarge a little. 27
   42 [28] 00000000-0000-7000-8000-000000000007: 36 lines | 28Gulliver’s Travels This diversion … is blue, the other
@@ -67,18 +67,18 @@ gutter 0.000 in
   64 [50] 00000000-0000-7000-8000-000000000009: 17 lines | 50Gulliver’s Travels It was … not forbear vowing revenge.”
   65 [51] 00000000-0000-7000-8000-00000000000a: 24 lines | Chapter Six Of the … trees are about 51
   66 [52] 00000000-0000-7000-8000-00000000000a: 35 lines | 52Gulliver’s Travels seven feet … public mark of his
-  67 [53] 00000000-0000-7000-8000-00000000000a: 37 lines | Chapter Six53 favour, and … account that the image
-  68 [54] 00000000-0000-7000-8000-00000000000a: 36 lines | 54Gulliver’s Travels of Justice, … institutions, and not the
-  69 [55] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six55 most scandalous … be reared and educated,
-  70 [56] 00000000-0000-7000-8000-00000000000a: 36 lines | 56Gulliver’s Travels when they … by the emperor’s officers.
-  71 [57] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six57 The nurseries … of works proper for
-  72 [58] 00000000-0000-7000-8000-00000000000a: 36 lines | 58Gulliver’s Travels their sex, … my measure as I
-  73 [59] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six59 lay on … do the leg of
-  74 [60] 00000000-0000-7000-8000-00000000000a: 36 lines | 60Gulliver’s Travels a lark. … falsehood, without any grounds,
-  75 [61] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six61 further than … proper to mention, made
-  76 [62] 00000000-0000-7000-8000-00000000000a: 10 lines | 62Gulliver’s Travels the treasurer … have been made capital.
-  77 [63] 00000000-0000-7000-8000-00000000000b: 25 lines | Chapter Seven The author, … to sleep, I 63
-  78 [64] 00000000-0000-7000-8000-00000000000b: 35 lines | 64Gulliver’s Travels fastened the … (the Man-Mountain.) Article I.
+  67 [53] 00000000-0000-7000-8000-00000000000a: 37 lines | Chapter Six53 favour, and … have been made capital.
+  68 [54] 00000000-0000-7000-8000-00000000000a: 35 lines | 54Gulliver’s Travels prodigious defect … nothing can be more
+  69 [55] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six55 absurd than … all others to be
+  70 [56] 00000000-0000-7000-8000-00000000000a: 35 lines | 56Gulliver’s Travels trusted with … or use any fondling
+  71 [57] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six57 expressions, or … marriageable age, their parents
+  72 [58] 00000000-0000-7000-8000-00000000000a: 36 lines | 58Gulliver’s Travels or guardians … linen for my bed
+  73 [59] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six59 and table, … a good mouthful, and
+  74 [60] 00000000-0000-7000-8000-00000000000a: 36 lines | 60Gulliver’s Travels a barrel … be jealous of his
+  75 [61] 00000000-0000-7000-8000-00000000000a: 36 lines | Chapter Six61 wife, from … the treasurer himself is
+  76 [62] 00000000-0000-7000-8000-00000000000a: 12 lines | 62Gulliver’s Travels not; for … governed by that favourite.
+  77 [63] 00000000-0000-7000-8000-00000000000b: 24 lines | Chapter Seven The author, … to a trusty 63
+  78 [64] 00000000-0000-7000-8000-00000000000b: 36 lines | 64Gulliver’s Travels servant, to … (the Man-Mountain.) Article I.
   79 [65] 00000000-0000-7000-8000-00000000000b: 36 lines | Chapter Seven65 “‘Whereas, by … said majesty. Article IV.
   80 [66] 00000000-0000-7000-8000-00000000000b: 36 lines | 66Gulliver’s Travels “‘That the … most honourable board might
   81 [67] 00000000-0000-7000-8000-00000000000b: 36 lines | Chapter Seven67 think him … be put to death.
@@ -232,8 +232,8 @@ gutter 0.000 in
  229 [215] 00000000-0000-7000-8000-00000000001d: 36 lines | Chapter Twenty-Two215 apophlegmatics, acoustics, … head of his opposite
  230 [216] 00000000-0000-7000-8000-00000000001d: 36 lines | 216Gulliver’s Travels party-man. It … value them in himself.
  231 [217] 00000000-0000-7000-8000-00000000001d: 36 lines | Chapter Twenty-Two217 The women … conceived, not altogether complete.
- 232 [218] 00000000-0000-7000-8000-00000000001d: 39 lines | 218Gulliver’s Travels This I … running sore, the administration.
- 233 [219] 00000000-0000-7000-8000-00000000001d: 29 lines | Chapter Twenty-Two219 “When this … signification do not occur.
+ 232 [218] 00000000-0000-7000-8000-00000000001d: 39 lines | 218Gulliver’s Travels This I … 2 London.—Sir W. Scott.
+ 233 [219] 00000000-0000-7000-8000-00000000001d: 31 lines | Chapter Twenty-Two219 a bottomless … signification do not occur.
  234 [220] 00000000-0000-7000-8000-00000000001d: blank
  235 [221] 00000000-0000-7000-8000-00000000001e: 21 lines | Chapter Twenty-Three The author … I took leave 221
  236 [222] 00000000-0000-7000-8000-00000000001e: 36 lines | 222Gulliver’s Travels of my … desired admittance for a
@@ -364,9 +364,9 @@ gutter 0.000 in
  361 [347] 00000000-0000-7000-8000-00000000002e: 36 lines | Chapter Thirty-Eight347 they would … to bed in a
  362 [348] 00000000-0000-7000-8000-00000000002e: 36 lines | 348Gulliver’s Travels very clean … him company in this
  363 [349] 00000000-0000-7000-8000-00000000002e: 36 lines | Chapter Thirty-Eight349 voyage, without … I would use them.
- 364 [350] 00000000-0000-7000-8000-00000000002e: 36 lines | 350Gulliver’s Travels The captain … my house at Rotherhith.
- 365 [351] 00000000-0000-7000-8000-00000000002e: 32 lines | Chapter Thirty-Eight351 My wife … friendship to each other.
- 366 [352] 00000000-0000-7000-8000-00000000002e: 5 lines | 352Gulliver’s Travels NOTES 1. … Gulliver’s home in England.
+ 364 [350] 00000000-0000-7000-8000-00000000002e: 33 lines | 350Gulliver’s Travels The captain … cast anchor in the
+ 365 [351] 00000000-0000-7000-8000-00000000002e: 37 lines | Chapter Thirty-Eight351 Downs, about … Gulliver’s home in England.
+ 366 [352] 00000000-0000-7000-8000-00000000002e: 3 lines | 352Gulliver’s Travels They are … friendship to each other.
  367 [353] 00000000-0000-7000-8000-00000000002f: 22 lines | Chapter Thirty-Nine The author’s … other Europeans, to 353
  368 [354] 00000000-0000-7000-8000-00000000002f: 36 lines | 354Gulliver’s Travels form descriptions … last, and therefore lie
  369 [355] 00000000-0000-7000-8000-00000000002f: 36 lines | Chapter Thirty-Nine355 uppermost. And … I hope I may

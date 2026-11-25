@@ -50,6 +50,7 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
 | 2026-11-25 | R2.1 r2/trims | PRT-1: eighteen trims in both print profiles (the common sizes from 4.25 × 6.87 in mass market to 8.5 × 11 in, and the metric A5, Demy, Royal, B5 and A4), each with default margins within the profile's minimums; an edition's trim must be one its profile has (refused with the list otherwise); every trim laid out at its size with its margins and the gutter its page count calls for; SPEC 5.1 and the guide updated | 185 |
 | 2026-11-25 | R2.2 r2/hardcover | PRT-8, PRE-4: the `pod-hardcover` profile (case-laminate sizes, every margin and the gutter wider than the paperback's, 75 to 550 pages) used by hardcover editions unless they name another (`Format::default_profile`, `Edition::hardcover`, `Edition::profile_id`); adding a hardcover edition makes one; tests: margins and limits per profile, the test book as a hardcover passing preflight, a short book blocked as a hardcover and not as a paperback; the M7.1 frame test now holds the median frame under 16 ms and no frame over 100 ms (one frame crossed 16 ms on a loaded machine) | 187 |
 | 2026-11-25 | R2.3 r2/bleed | PRT-7, TXT-4: core v0.1.11 (`jcj_output::set_page_boxes`, trim and bleed boxes on an exported PDF as an incremental update; #25) and Book moved to it; an edition set to bleed has pages larger by the profile's bleed outside, top and bottom, margins kept from the trim, and a trim box and bleed box on every page; preflight checks the boxes, the sheet size and margins from the trim; full-page pictures fill their page to the edge with bleed (cropped to the page's shape) and the text block without, alone on their page; the preview draws the trim inside a page that bleeds; tests: page boxes with bleed, a PDF without its boxes caught, picture placement both ways | 189 |
+| 2026-11-25 | R2.4 r2/notes | TXT-3, EBK-7: notes per edition: in print, footnotes (the default) at the foot of the page that calls them, numbered per chapter, a long one continued on the next page, or a list at each chapter's end, or a Notes section at the book's end; in the ebook, pop-up footnotes (asides), chapter-end endnotes or a Notes document at the end, linked both ways across documents; the letter check reads the text and the footnotes apart, the word checks follow each style; tests: footnotes on a page of the calling paragraph, a long note split, each style through preflight in print and ebook, links both ways; golden files written again (awaiting a look); one footnote-filled page in Waverley keeps a single line (the core layout's choice, recorded) | 193 |
 
 ## Waiting on a person
 
@@ -66,6 +67,11 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
 
 - **Golden files:** a look at the print PDFs and EPUBs the golden files in `tests/golden/` stand for
   (`docs/golden.md`, M5.4, M6.3 and M9.4).
+
+- **Layout (R2.4):** on a page that a long footnote mostly fills, the core's layout (WordCraft's)
+  can leave a single line of text, because it keeps a note with its reference before widow and
+  orphan control; it happens once in Waverley (page 189 in the Classic design). Book cannot change
+  the upstream layout; a person may raise it with the core.
 
 - **Release (M9.4):** making the v0.1.0 release is a person's decision: create the repository's
   `release` environment with required reviewers (the publish job waits on it), set the date in

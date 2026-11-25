@@ -300,6 +300,8 @@ figure img { max-width: 100%; height: auto; }
 figure.page img { max-height: 95vh; }
 a.noteref { vertical-align: super; font-size: 0.75em; line-height: 0; text-decoration: none; }
 section.notes { margin-top: 2em; font-size: 0.9em; }
+aside.footnote { font-size: 0.9em; margin: 1em 0 0 0; }
+aside.footnote p { text-indent: 0; }
 section.notes h2 { font-size: 1.1em; }
 section.notes li p { text-indent: 0; }
 nav ol { list-style: none; padding-left: 0; }

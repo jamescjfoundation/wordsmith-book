@@ -27,15 +27,15 @@ gutter 0.500 in
   24 [10] 00000000-0000-7000-8000-000000000004: 40 lines | 10Gulliver's Travels about seven … use, and all the
   25 [11] 00000000-0000-7000-8000-000000000004: 26 lines | CHAPTER I.11 ornaments and … length in the temple.
   26 [12] 00000000-0000-7000-8000-000000000004: blank
-  27 [13] 00000000-0000-7000-8000-000000000005: 31 lines | CHAPTER II. The emperor … long upon a 13
-  28 [14] 00000000-0000-7000-8000-000000000005: 40 lines | 14Gulliver's Travels circumstance that, … helmet of gold, adorned
-  29 [15] 00000000-0000-7000-8000-000000000005: 40 lines | CHAPTER II.15 with jewels, … and fifty of their
-  30 [16] 00000000-0000-7000-8000-000000000005: 40 lines | 16Gulliver's Travels beds, sewn … board-wages allowed for their
-  31 [17] 00000000-0000-7000-8000-000000000005: 40 lines | CHAPTER II.17 maintenance, and … when they had done,
-  32 [18] 00000000-0000-7000-8000-000000000005: 40 lines | 18Gulliver's Travels desired I … and told us, that
-  33 [19] 00000000-0000-7000-8000-000000000005: 40 lines | CHAPTER II.19 in his … scabbard and all. In
-  34 [20] 00000000-0000-7000-8000-000000000005: 40 lines | 20Gulliver's Travels the mean … goods were returned me.
-  35 [21] 00000000-0000-7000-8000-000000000005: 10 lines | CHAPTER II.21 I had … feet and a half.
+  27 [13] 00000000-0000-7000-8000-000000000005: 32 lines | CHAPTER II. The emperor … and a half. 13
+  28 [14] 00000000-0000-7000-8000-000000000005: 40 lines | 14Gulliver's Travels appointed for … the Asiatic and the
+  29 [15] 00000000-0000-7000-8000-000000000005: 40 lines | CHAPTER II.15 European; but … measure were brought in
+  30 [16] 00000000-0000-7000-8000-000000000005: 40 lines | 16Gulliver's Travels carriages, and … six hundred persons to
+  31 [17] 00000000-0000-7000-8000-000000000005: 40 lines | CHAPTER II.17 be my … about them, made an
+  32 [18] 00000000-0000-7000-8000-000000000005: 40 lines | 18Gulliver's Travels exact inventory … apprehended they might be
+  33 [19] 00000000-0000-7000-8000-000000000005: 40 lines | CHAPTER II.19 dangerous engines. … up the several particulars.
+  34 [20] 00000000-0000-7000-8000-000000000005: 39 lines | 20Gulliver's Travels He first … my handkerchief and journal-book.
+  35 [21] 00000000-0000-7000-8000-000000000005: 10 lines | CHAPTER II.21 My scimitar, … out of my possession.
   36 [22] 00000000-0000-7000-8000-000000000005: blank
   37 [23] 00000000-0000-7000-8000-000000000006: 30 lines | CHAPTER III. The author … the chief ministers 23
   38 [24] 00000000-0000-7000-8000-000000000006: 40 lines | 24Gulliver's Travels themselves are … you see few great
@@ -58,14 +58,14 @@ gutter 0.500 in
   55 [41] 00000000-0000-7000-8000-000000000008: 40 lines | CHAPTER V.41 the Lilliputian … ground, if, by a
   56 [42] 00000000-0000-7000-8000-000000000008: 26 lines | 42Gulliver's Travels presence of … not forbear vowing revenge.”
   57 [43] 00000000-0000-7000-8000-000000000009: 30 lines | CHAPTER VI. Of the … ladies in England. 43
-  58 [44] 00000000-0000-7000-8000-000000000009: 41 lines | 44Gulliver's Travels They bury … could never observe this
-  59 [45] 00000000-0000-7000-8000-000000000009: 39 lines | CHAPTER VI.45 maxim to … under which he acts.
-  60 [46] 00000000-0000-7000-8000-000000000009: 40 lines | 46Gulliver's Travels In relating … their several deputies. The
-  61 [47] 00000000-0000-7000-8000-000000000009: 40 lines | CHAPTER VI.47 clothes and … their difference of sex,
-  62 [48] 00000000-0000-7000-8000-000000000009: 40 lines | 48Gulliver's Travels only that … is usually three inches
-  63 [49] 00000000-0000-7000-8000-000000000009: 40 lines | CHAPTER VI.49 wide, and … just over against me,
-  64 [50] 00000000-0000-7000-8000-000000000009: 40 lines | 50Gulliver's Travels with their … set, the coachmen would
-  65 [51] 00000000-0000-7000-8000-000000000009: 23 lines | CHAPTER VI.51 gently drive … have been made capital.
+  58 [44] 00000000-0000-7000-8000-000000000009: 42 lines | 44Gulliver's Travels They bury … have been made capital.
+  59 [45] 00000000-0000-7000-8000-000000000009: 39 lines | CHAPTER VI.45 Although we … Providence, the Lilliputians think
+  60 [46] 00000000-0000-7000-8000-000000000009: 40 lines | 46Gulliver's Travels nothing can … then of the female.
+  61 [47] 00000000-0000-7000-8000-000000000009: 40 lines | CHAPTER VI.47 The nurseries … and despise all personal
+  62 [48] 00000000-0000-7000-8000-000000000009: 40 lines | 48Gulliver's Travels ornaments, beyond … get; which, however, they
+  63 [49] 00000000-0000-7000-8000-000000000009: 40 lines | CHAPTER VI.49 were forced … happiness,” as he was
+  64 [50] 00000000-0000-7000-8000-000000000009: 40 lines | 50Gulliver's Travels pleased to … once on my table,
+  65 [51] 00000000-0000-7000-8000-000000000009: 22 lines | CHAPTER VI.51 full of … governed by that favourite.
   66 [52] 00000000-0000-7000-8000-000000000009: blank
   67 [53] 00000000-0000-7000-8000-00000000000a: 30 lines | CHAPTER VII. The author, … a full resolution. 53
   68 [54] 00000000-0000-7000-8000-00000000000a: 40 lines | 54Gulliver's Travels “You are … from the said service,
@@ -193,8 +193,8 @@ gutter 0.500 in
  190 [176] 00000000-0000-7000-8000-00000000001b: 40 lines | 176Gulliver's Travels same prescriptions? … directly contrary; because if
  191 [177] 00000000-0000-7000-8000-00000000001b: 40 lines | CHAPTER VI.177 that were … value them in himself.
  192 [178] 00000000-0000-7000-8000-00000000001b: 40 lines | 178Gulliver's Travels The women … several subservient and subaltern
- 193 [179] 00000000-0000-7000-8000-00000000001b: 38 lines | CHAPTER VI.179 instruments, all … returning home to England.
- 194 [180] 00000000-0000-7000-8000-00000000001b: 7 lines | 180Gulliver's Travels NOTES 1. … signification do not occur.
+ 193 [179] 00000000-0000-7000-8000-00000000001b: 42 lines | CHAPTER VI.179 instruments, all … signification do not occur.
+ 194 [180] 00000000-0000-7000-8000-00000000001b: 3 lines | 180Gulliver's Travels I saw … returning home to England.
  195 [181] 00000000-0000-7000-8000-00000000001c: 30 lines | CHAPTER VII. The author … for the voyage. 181
  196 [182] 00000000-0000-7000-8000-00000000001c: 40 lines | 182Gulliver's Travels Glubbdubdrib, as … dine with the governor,
  197 [183] 00000000-0000-7000-8000-00000000001c: 39 lines | CHAPTER VII.183 where a … counterview, in another. The
@@ -259,13 +259,13 @@ gutter 0.500 in
  256 [242] 00000000-0000-7000-8000-000000000027: 40 lines | 242Gulliver's Travels poisonous additions, … intent that you should
  257 [243] 00000000-0000-7000-8000-000000000027: 40 lines | CHAPTER VI.243 take it … but likewise with some
  258 [244] 00000000-0000-7000-8000-000000000027: 38 lines | 244Gulliver's Travels rudiments of … in the original editions.
- 259 [245] 00000000-0000-7000-8000-000000000028: 31 lines | CHAPTER VII. The author’s … by fortune, my 245
- 260 [246] 00000000-0000-7000-8000-000000000028: 40 lines | 246Gulliver's Travels perpetual enemy, … my body with other
- 261 [247] 00000000-0000-7000-8000-000000000028: 40 lines | CHAPTER VII.247 Yahoos, except … stones could be of
- 262 [248] 00000000-0000-7000-8000-000000000028: 40 lines | 248Gulliver's Travels any use … sought for with much
- 263 [249] 00000000-0000-7000-8000-000000000028: 40 lines | CHAPTER VII.249 eagerness, and … sagacity of a common
- 264 [250] 00000000-0000-7000-8000-000000000028: 40 lines | 250Gulliver's Travels hound, who … many antic gestures and
- 265 [251] 00000000-0000-7000-8000-000000000028: 20 lines | CHAPTER VII.251 grimaces, at … side of the globe.
+ 259 [245] 00000000-0000-7000-8000-000000000028: 30 lines | CHAPTER VII. The author’s … I could have 245
+ 260 [246] 00000000-0000-7000-8000-000000000028: 39 lines | 246Gulliver's Travels no example … thing which was not.
+ 261 [247] 00000000-0000-7000-8000-000000000028: 40 lines | CHAPTER VII.247 “He was … their comrades should find
+ 262 [248] 00000000-0000-7000-8000-000000000028: 40 lines | 248Gulliver's Travels out their … them a general evacuation.
+ 263 [249] 00000000-0000-7000-8000-000000000028: 40 lines | CHAPTER VII.249 “There was … I could best determine.”
+ 264 [250] 00000000-0000-7000-8000-000000000028: 39 lines | 250Gulliver's Travels I durst … undertake for the cure.
+ 265 [251] 00000000-0000-7000-8000-000000000028: 23 lines | CHAPTER VII.251 His honour … side of the globe.
  266 [252] 00000000-0000-7000-8000-000000000028: blank
  267 [253] 00000000-0000-7000-8000-000000000029: 30 lines | CHAPTER VIII. The author … endeavoured, by all 253
  268 [254] 00000000-0000-7000-8000-000000000029: 40 lines | 254Gulliver's Travels marks of … It happened that a

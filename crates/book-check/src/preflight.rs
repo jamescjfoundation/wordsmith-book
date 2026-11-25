@@ -86,27 +86,37 @@ impl Report {
 const LIMITS: jcj_output::ReadLimits = jcj_output::ReadLimits { max_input_bytes: 512 << 20, max_pages: 10_000, max_glyphs_per_page: 50_000 };
 
 /// The letters a PDF prints in each page's body area, in order (running heads and folios left
-/// out).
-pub fn pdf_body_text(t: &Typeset, pdf: &[u8]) -> Result<String, String> {
+/// out), with the footnotes' letters apart.
+pub fn pdf_text(t: &Typeset, pdf: &[u8]) -> Result<(String, String), String> {
     let pages = jcj_output::read_pages(pdf, &LIMITS).map_err(|e| e.to_string())?;
     if pages.len() != t.page_count() {
         return Err(format!("the PDF has {} pages; the layout has {}", pages.len(), t.page_count()));
     }
-    let mut out = String::new();
+    let (mut body, mut notes) = (String::new(), String::new());
     for (i, p) in pages.iter().enumerate() {
         let (_, h) = t.page_size(i).unwrap_or((0.0, 0.0));
         let Some((_, y, _, bh)) = t.body_area(i) else { continue };
+        let notes_top = t.notes_top(i).map(|n| f64::from(n) - 2.0);
         for g in &p.glyphs {
             let from_top = f64::from(h) - g.y;
             if from_top >= f64::from(y) - 3.0
                 && from_top <= f64::from(y + bh) + 3.0
                 && let Some(text) = &g.text
             {
-                out.push_str(text);
+                if notes_top.is_some_and(|n| from_top >= n) {
+                    notes.push_str(text);
+                } else {
+                    body.push_str(text);
+                }
             }
         }
     }
-    Ok(out)
+    Ok((body, notes))
+}
+
+/// The letters a PDF prints in each page's body area, footnotes left out.
+pub fn pdf_body_text(t: &Typeset, pdf: &[u8]) -> Result<String, String> {
+    pdf_text(t, pdf).map(|(b, _)| b)
 }
 
 fn letters(s: &str) -> String {
@@ -295,14 +305,16 @@ pub fn page_count(print: &Print, paper: wordsmith_book_model::Paper) -> Vec<Find
 pub fn print_words(print: &Print, pdf: &[u8], source: &Book) -> Vec<Finding> {
     let mut out = Vec::new();
     let printed: String = print.typeset.printed_paragraphs().iter().map(|p| p.0.as_str()).collect::<Vec<_>>().join(" ");
-    match pdf_body_text(&print.typeset, pdf) {
+    let notes: String = print.typeset.printed_notes().join(" ");
+    match pdf_text(&print.typeset, pdf) {
         Err(e) => out.push(finding("words", Severity::Blocks, format!("The PDF's text could not be read back: {e}."), Link::None)),
-        Ok(text) => {
-            let (want, got) = (letters(&printed), letters(&text));
-            if want != got {
-                let at = want.chars().zip(got.chars()).position(|(a, b)| a != b).unwrap_or(want.len().min(got.len()));
-                let around: String = want.chars().skip(at.saturating_sub(20)).take(40).collect();
-                out.push(finding("words", Severity::Blocks, format!("The PDF's letters differ from the book's near “{around}”."), Link::None));
+        Ok((text, note_text)) => {
+            for (what, want, got) in [("text", letters(&printed), letters(&text)), ("footnotes", letters(&notes), letters(&note_text))] {
+                if want != got {
+                    let at = want.chars().zip(got.chars()).position(|(a, b)| a != b).unwrap_or(want.len().min(got.len()));
+                    let around: String = want.chars().skip(at.saturating_sub(20)).take(40).collect();
+                    out.push(finding("words", Severity::Blocks, format!("The PDF's {what} differs from the book's near “{around}”."), Link::None));
+                }
             }
         }
     }
@@ -411,7 +423,7 @@ pub fn accessibility(bytes: &[u8]) -> Vec<Finding> {
 }
 
 /// Every ebook finding for a built EPUB.
-pub fn ebook_findings(bytes: &[u8], source: &Book, cover_problems: &[String], has_cover: bool) -> Vec<Finding> {
+pub fn ebook_findings(bytes: &[u8], source: &Book, cover_problems: &[String], has_cover: bool, notes_last: bool) -> Vec<Finding> {
     let mut out: Vec<Finding> = epub::check(bytes)
         .into_iter()
         .take(50)
@@ -423,7 +435,8 @@ pub fn ebook_findings(bytes: &[u8], source: &Book, cover_problems: &[String], ha
     out.extend(accessibility(bytes));
     match epub::words(bytes, true) {
         Ok(words) => {
-            if let Err(d) = verify::compare(&verify::book_words(source, true), &words) {
+            let want = if notes_last { verify::book_words_notes_last(source) } else { verify::book_words(source, true) };
+            if let Err(d) = verify::compare(&want, &words) {
                 out.push(finding("words", Severity::Blocks, format!("The ebook's words differ from the source's: {d}"), Link::None));
             }
         }
@@ -505,7 +518,13 @@ pub fn preflight(
         if alt.is_empty() {
             match build::ebook(project, designs, &book, edition, images) {
                 Ok((_, e)) => {
-                    report.findings.extend(ebook_findings(&e.bytes, &book, &e.cover_problems, !edition.cover.is_empty()));
+                    report.findings.extend(ebook_findings(
+                        &e.bytes,
+                        &book,
+                        &e.cover_problems,
+                        !edition.cover.is_empty(),
+                        edition.notes == wordsmith_book_model::NoteStyle::BookEnd,
+                    ));
                     for f in &e.fonts_refused {
                         report.findings.push(finding(
                             "fonts",

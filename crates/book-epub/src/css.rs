@@ -56,7 +56,7 @@ pub fn stylesheet(d: &Design, fonts: &Fonts) -> String {
     };
     s += ".sc { font-variant: small-caps; }\n.strike { text-decoration: line-through; }\n";
     s += "figure { margin: 1em 0; text-align: center; }\nfigure img { max-width: 100%; height: auto; }\nfigure.page img { max-height: 95vh; }\n";
-    s += "a.noteref { vertical-align: super; font-size: 0.75em; line-height: 0; text-decoration: none; }\nsection.notes { margin-top: 2em; font-size: 0.9em; }\nsection.notes h2 { font-size: 1.1em; }\nsection.notes li p { text-indent: 0; }\n";
+    s += "a.noteref { vertical-align: super; font-size: 0.75em; line-height: 0; text-decoration: none; }\nsection.notes { margin-top: 2em; font-size: 0.9em; }\naside.footnote { font-size: 0.9em; margin: 1em 0 0 0; }\naside.footnote p { text-indent: 0; }\nsection.notes h2 { font-size: 1.1em; }\nsection.notes li p { text-indent: 0; }\n";
     s += "nav ol { list-style: none; padding-left: 0; }\nnav ol ol { padding-left: 1.5em; }\nnav li { margin: 0.3em 0; }\n";
     s
 }

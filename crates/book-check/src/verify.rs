@@ -30,6 +30,26 @@ pub fn book_words(b: &Book, notes: bool) -> Vec<String> {
     out
 }
 
+/// The words of a book view with every note after all the text, in order (an edition whose
+/// notes are gathered at the book's end).
+pub fn book_words_notes_last(b: &Book) -> Vec<String> {
+    fn notes(s: &Section, out: &mut Vec<String>) {
+        for n in &s.notes {
+            for p in &n.paras {
+                out.extend(verify::words(&wordsmith_manuscript_model::text::plain(p)));
+            }
+        }
+        for c in &s.children {
+            notes(c, out);
+        }
+    }
+    let mut out = book_words(b, false);
+    for s in b.front.iter().chain(&b.body).chain(&b.back) {
+        notes(s, &mut out);
+    }
+    out
+}
+
 /// The words of a text's paragraphs (blocks, then notes).
 pub fn text_words(t: &Text) -> Vec<String> {
     t.plain_paragraphs().iter().flat_map(|p| verify::words(p)).collect()

@@ -19,3 +19,7 @@ heading font when the design uses one, go into the ebook, only when their licenc
 **Cover (EBK-5):** the ebook edition names its cover image (a PNG or JPEG in the project). Book
 declares it, shows it first, and warns when its long side is under 1,600 pixels, it is over 4 MB,
 or it is not about 1.6 times as tall as it is wide.
+
+**Notes (EBK-7):** pop-up footnotes where reading systems show them (the default), endnotes at
+each chapter's end, or a Notes document at the end of the book, per edition; each note links back
+to where it was called.

@@ -97,7 +97,7 @@ price_notes = "List at the usual trade price."
 id = "ebook"
 name = "Ebook"
 format = "ebook"
-notes = "chapter-end"    # popup (default), chapter-end, book-end
+notes = "chapter-end"    # popup (default: footnotes in print, pop-up notes in ebooks), chapter-end, book-end
 embed_fonts = false      # default true
 cover = "assets/cover.jpg"   # the ebook cover, a PNG or JPEG in the project (EBK-5)
 
