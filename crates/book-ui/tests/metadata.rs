@@ -87,3 +87,16 @@ fn needs_list_the_sources_missing_metadata_and_books_own() {
     assert!(blocks.iter().any(|n| n.contains("same ISBN")), "{blocks:?}");
     assert!(blocks.iter().any(|n| n.contains("no trim size")), "{blocks:?}");
 }
+
+#[test]
+fn a_printed_editions_trim_must_be_in_its_profile() {
+    let (mut app, _) = linked("trims");
+    let pb = app.book.as_ref().unwrap().files.project.editions.iter().find(|e| e.format.is_print()).unwrap().id.clone();
+    for t in ["a5", "royal", "8.5x11", "4.25x6.87"] {
+        app.command(commands::EDITION_SET, &json!({ "id": pb, "trim": t })).unwrap();
+    }
+    let err = app.command(commands::EDITION_SET, &json!({ "id": pb, "trim": "9x99" })).unwrap_err();
+    assert!(err.contains("no “9x99” trim") && err.contains("a5"), "{err}");
+    let e = app.book.as_ref().unwrap().files.project.editions.iter().find(|e| e.id == pb).unwrap().clone();
+    assert_eq!(e.trim, "4.25x6.87", "a refused change leaves the edition as it was");
+}

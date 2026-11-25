@@ -264,7 +264,12 @@ break, hyphenation by the book's language, running heads off on openings and bla
 
 ## 5. Print rules and profiles (PRT-1 to PRT-6, PRE-4)
 
-1. **Trims at 0.1**: 5 × 8 in, 5.25 × 8 in, 5.5 × 8.5 in, 6 × 9 in. [Verified]
+1. **Trims**: at 0.1, 5 × 8 in, 5.25 × 8 in, 5.5 × 8.5 in, 6 × 9 in; from 0.2 the common list:
+   4.25 × 6.87 (mass market), 5 × 8, 5.06 × 7.81, 5.25 × 8, 5.5 × 8.5, 6 × 9, 6.14 × 9.21,
+   6.69 × 9.61, 7 × 10, 7.44 × 9.69, 7.5 × 9.25, 8 × 10 and 8.5 × 11 in, and the metric sizes A5
+   (148 × 210 mm), Demy (138 × 216 mm), Royal (156 × 234 mm), B5 (176 × 250 mm) and A4
+   (210 × 297 mm), each with its default margins, as data in both profiles. An edition's trim
+   must be one its profile has. [Verified]
 2. **Gutter (inside margin)** by page count, from a print-on-demand service's public file guide:
    up to 150 pages 0.375 in; 151–300: 0.5 in; 301–500: 0.625 in; 501–700: 0.75 in; over 700:
    0.875 in. Outside margins at least 0.25 in without bleed and 0.375 in with bleed. The table is

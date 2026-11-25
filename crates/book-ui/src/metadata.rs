@@ -137,6 +137,15 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
         if paper.is_some() {
             e.paper = paper;
         }
+        // A printed edition's trim must be one its profile has (an empty one is a need).
+        if e.format.is_print() && !e.trim.is_empty() {
+            let pid = if e.profile.is_empty() { "pod-paperback" } else { e.profile.as_str() };
+            let prof = wordsmith_book_check::profile::get(pid).ok_or_else(|| format!("there is no print profile “{pid}”"))?;
+            if prof.trim(&e.trim).is_none() {
+                let ids: Vec<&str> = prof.trims.iter().map(|t| t.id.as_str()).collect();
+                return Err(format!("the {} profile has no “{}” trim; it has {}", prof.name.to_lowercase(), e.trim, ids.join(", ")));
+            }
+        }
         Ok(())
     })
 }

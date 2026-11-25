@@ -1,6 +1,7 @@
 # Print
 
-**Trims (PRT-1):** 5 × 8 in, 5.25 × 8 in, 5.5 × 8.5 in and 6 × 9 in, from the print profile.
+**Trims (PRT-1):** eighteen sizes from the print profile: the common paperback sizes from
+4.25 × 6.87 in (mass market) to 8.5 × 11 in, and the metric A5, Demy, Royal, B5 and A4.
 
 **Margins (PRT-2):** mirrored, with an inside margin (gutter) that grows with the page count, as
 a print-on-demand service's file guide asks: up to 150 pages 0.375 in, then 0.5, 0.625, 0.75

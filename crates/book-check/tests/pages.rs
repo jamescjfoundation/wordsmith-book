@@ -52,8 +52,10 @@ fn bands(t: &wordsmith_book_typeset::Typeset) -> Vec<(String, String, usize)> {
 #[test]
 fn every_trim_gives_its_page_size() {
     let prof = profile::get("pod-paperback").unwrap();
-    assert_eq!(prof.trims.iter().map(|t| t.id.as_str()).collect::<Vec<_>>(), ["5x8", "5.25x8", "5.5x8.5", "6x9"]);
-    for t in &prof.trims {
+    // The four trims of 0.1 stay (R2.1 adds the rest, tested in trims.rs).
+    let first = ["5x8", "5.25x8", "5.5x8.5", "6x9"];
+    assert!(first.iter().all(|id| prof.trim(id).is_some()));
+    for t in prof.trims.iter().filter(|t| first.contains(&t.id.as_str())) {
         let pr = gulliver_print("classic", &t.id);
         let n = pr.typeset.page_count();
         for i in [0, n / 2, n - 1] {
