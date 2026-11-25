@@ -2,6 +2,34 @@
 
 Each release says what changed for people who make books with Wordsmith Book.
 
+## 0.3.0 (unreleased)
+
+Designs, series and standards: thirteen designs, large print from any of them, box sets, EPUB
+import, PDF/A and PDF/UA, and proofs.
+
+### Added
+
+- **Designs.** Seven more: Memoir, Historical, Young Adult, Horror, Cozy, Poetry and Large Print
+  (thirteen in all), each with its genres and moods for the chooser.
+- **Large print.** A large-print edition sets the book in the large-print variant of whatever
+  design it has: all text 16 pt and up, ragged right, no hyphenation, headings grown to match;
+  preflight holds it to that.
+- **Box sets.** Several books in one, each a part with its own front and back matter, under one
+  main contents; every word of every book checked in every edition.
+- **EPUB import.** An EPUB imports with its parts, chapters, front and back matter and notes
+  taken from its own structure; the ebook's own contents page is left out (Book makes the
+  contents again). An EPUB Book exported imports back word for word.
+- **PDF/A-2b and PDF/UA-1.** A print edition can declare both on its PDF (archival and
+  accessible); preflight checks the declarations and runs a PDF validator you installed. The
+  test book's PDF passes the standard validator for both (core 0.1.15).
+- **Proofs.** A print edition's proof: PROOF across every page and every line numbered, for
+  reading and marking; written only when asked for, never as part of an export.
+
+### Changed
+
+- Front and back matter inside the body (a box set's book keeps its own) is set as matter, as
+  at a book's front or back.
+
 ## 0.2.0 (unreleased)
 
 Parity for most novels: every common trim, hardcovers, bleed, notes, asides, more front and back
