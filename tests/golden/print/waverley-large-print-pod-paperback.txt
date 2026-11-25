@@ -1,0 +1,1320 @@
+pages 1317
+size 432.00 x 648.00 pt
+gutter 0.875 in
+   1 [i] element:half-title: 1 lines | Waverley … Waverley
+   2 [ii] element:half-title: blank
+   3 [iii] element:title-page: 2 lines | Waverley Walter Scott … Waverley Walter Scott
+   4 [iv] element:copyright: 2 lines | Copyright © Walter Scott … Walter Scott Published by
+   5 [v] element:contents: 16 lines | Contents VOLUME I.1 … … QUARTER IN SCOTLAND107 …
+   6 [vi] element:contents: 22 lines | Chapter Eight: CHAPTER VIII. … AND ITS CONSEQUENCES257. vi
+   7 [vii] element:contents: 23 lines | Chapter Sixteen: CHAPTER XVI. … CONSEQUENCES 429 … vii
+   8 [viii] element:contents: 21 lines | Chapter Twenty-Five: CHAPTER XXV. … AN EXAMINATION583 … viii
+   9 [ix] element:contents: 20 lines | Chapter Thirty-Two: CHAPTER III. … NEW ACQUAINTANCE727 … ix
+  10 [x] element:contents: 21 lines | Chapter Forty-One: CHAPTER XII. … ENGLISH PRISONER881 … x
+  11 [xi] element:contents: 22 lines | Chapter Fifty: CHAPTER XXI. … A SKIRMISH1047 … xi
+  12 [xii] element:contents: 20 lines | Chapter Sixty: CHAPTER XXXI. … CHAPTER XLII1271 … xii
+  13 [xiii] element:contents: 4 lines | Chapter Seventy-Two: CHAPTER XLIII. … A PREFACE1295 … xiii
+  14 [xiv] element:contents: blank
+  15 [1] 00000000-0000-7000-8000-000000000001: 1 lines | Volume I. … Volume I.
+  16 [2] 00000000-0000-7000-8000-000000000001: blank
+  17 [3] 00000000-0000-7000-8000-000000000002: 18 lines | Chapter One CHAPTER I. … expected from the 3
+  18 [4] 00000000-0000-7000-8000-000000000002: 26 lines | Waverley chivalrous epithets of … in my frontispiece, 4
+  19 [5] 00000000-0000-7000-8000-000000000002: 26 lines | CHAPTER I. INTRODUCTORY “Waverley, … a profligate abbot, 5
+  20 [6] 00000000-0000-7000-8000-000000000002: 26 lines | Waverley an oppressive duke, … the fashionable world, 6
+  21 [7] 00000000-0000-7000-8000-000000000002: 26 lines | CHAPTER I. INTRODUCTORY a … would have my 7
+  22 [8] 00000000-0000-7000-8000-000000000002: 26 lines | Waverley readers understand, that … of our modern 8
+  23 [9] 00000000-0000-7000-8000-000000000002: 26 lines | CHAPTER I. INTRODUCTORY beaux, … antique or of 9
+  24 [10] 00000000-0000-7000-8000-000000000002: 26 lines | Waverley fashionable manners gains … wrath of our 10
+  25 [11] 00000000-0000-7000-8000-000000000002: 26 lines | CHAPTER I. INTRODUCTORY ancestors, … contrast have been 11
+  26 [12] 00000000-0000-7000-8000-000000000002: 22 lines | Waverley afforded me by … colour he pleases.] 12
+  27 [13] 00000000-0000-7000-8000-000000000003: 18 lines | Chapter Two CHAPTER II. … Richard Waverley, the 13
+  28 [14] 00000000-0000-7000-8000-000000000003: 24 lines | Waverley father of our … history and sound 14
+  29 [15] 00000000-0000-7000-8000-000000000003: 25 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … where it lay. 15
+  30 [16] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley But this was … to diminish the 16
+  31 [17] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … and the first 17
+  32 [18] 00000000-0000-7000-8000-000000000003: 24 lines | Waverley admittance to the … place of residence.] 18
+  33 [19] 00000000-0000-7000-8000-000000000003: 29 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … of fashionable resort. 19
+  34 [20] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley days, to Waverley-Honour, … the mildest of 20
+  35 [21] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … the only representatives, 21
+  36 [22] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley were, as this … settlement of the 22
+  37 [23] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … central scutcheon, inpressed 23
+  38 [24] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley with the same … augured yet worse 24
+  39 [25] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … young lady testified 25
+  40 [26] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley at the advances … had even, before 26
+  41 [27] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … just escaped the 27
+  42 [28] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley risk of marrying … indolent, a beacon 28
+  43 [29] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … precipitate advances on 29
+  44 [30] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley his part, he … a little distance 30
+  45 [31] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … his family, affection, 31
+  46 [32] 00000000-0000-7000-8000-000000000003: 25 lines | Waverley and patronage, by … his kind and 32
+  47 [33] 00000000-0000-7000-8000-000000000003: 26 lines | CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT … a subsequent chapter. 33
+  48 [34] 00000000-0000-7000-8000-000000000003: blank
+  49 [35] 00000000-0000-7000-8000-000000000004: 19 lines | Chapter Three CHAPTER III. … father placed him 35
+  50 [36] 00000000-0000-7000-8000-000000000004: 26 lines | Waverley under the superintendence … modern languages. He 36
+  51 [37] 00000000-0000-7000-8000-000000000004: 26 lines | CHAPTER III. EDUCATION was, … chief care of 37
+  52 [38] 00000000-0000-7000-8000-000000000004: 26 lines | Waverley his preceptor was … philology, upon the 38
+  53 [39] 00000000-0000-7000-8000-000000000004: 26 lines | CHAPTER III. EDUCATION difference … age in which 39
+  54 [40] 00000000-0000-7000-8000-000000000004: 26 lines | Waverley children are taught … brought to reject 40
+  55 [41] 00000000-0000-7000-8000-000000000004: 26 lines | CHAPTER III. EDUCATION that … and a gallery, 41
+  56 [42] 00000000-0000-7000-8000-000000000004: 26 lines | Waverley contained such a … that idleness is 42
+  57 [43] 00000000-0000-7000-8000-000000000004: 26 lines | CHAPTER III. EDUCATION incompatible … on the contrary, 43
+  58 [44] 00000000-0000-7000-8000-000000000004: 26 lines | Waverley like the epicure … themes the most 44
+  59 [45] 00000000-0000-7000-8000-000000000004: 26 lines | CHAPTER III. EDUCATION fascinating … war and of 45
+  60 [46] 00000000-0000-7000-8000-000000000004: 26 lines | Waverley tournaments, were among … such a desultory 46
+  61 [47] 00000000-0000-7000-8000-000000000004: 15 lines | CHAPTER III. EDUCATION course … very different conclusion. 47
+  62 [48] 00000000-0000-7000-8000-000000000004: blank
+  63 [49] 00000000-0000-7000-8000-000000000005: 18 lines | Chapter Four CHAPTER IV. … been the chief 49
+  64 [50] 00000000-0000-7000-8000-000000000005: 26 lines | Waverley pleasure of his … practice of those 50
+  65 [51] 00000000-0000-7000-8000-000000000005: 26 lines | CHAPTER IV. CASTLE-BUILDING pastimes … real or imaginary, 51
+  66 [52] 00000000-0000-7000-8000-000000000005: 26 lines | Waverley was agony to … which, itself a 52
+  67 [53] 00000000-0000-7000-8000-000000000005: 26 lines | CHAPTER IV. CASTLE-BUILDING valuable … the jargon of 53
+  68 [54] 00000000-0000-7000-8000-000000000005: 28 lines | Waverley heraldry, its griffins, … many such incidents 54
+  69 [55] 00000000-0000-7000-8000-000000000005: 26 lines | CHAPTER IV. CASTLE-BUILDING these … credited at home. 55
+  70 [56] 00000000-0000-7000-8000-000000000005: 26 lines | Waverley help her,” would … married, and died 56
+  71 [57] 00000000-0000-7000-8000-000000000005: 26 lines | CHAPTER IV. CASTLE-BUILDING in—I … hours that internal 57
+  72 [58] 00000000-0000-7000-8000-000000000005: 26 lines | Waverley sorcery by which … bower, her ear 58
+  73 [59] 00000000-0000-7000-8000-000000000005: 26 lines | CHAPTER IV. CASTLE-BUILDING strained … ground, and still, 59
+  74 [60] 00000000-0000-7000-8000-000000000005: 26 lines | Waverley though broken by … the cliffy and 60
+  75 [61] 00000000-0000-7000-8000-000000000005: 26 lines | CHAPTER IV. CASTLE-BUILDING woody … splendid yet useless 61
+  76 [62] 00000000-0000-7000-8000-000000000005: 9 lines | Waverley imagery and emblems … the next chapter. 62
+  77 [63] 00000000-0000-7000-8000-000000000006: 18 lines | Chapter Five CHAPTER V. … aberration from sound 63
+  78 [64] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley judgment, which apprehends … doubly precious as 64
+  79 [65] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … accost her on 65
+  80 [66] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley these occasions; but … (God bless them!) 66
+  81 [67] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … not spent some 67
+  82 [68] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley time in study … from the Baronet’s 68
+  83 [69] 00000000-0000-7000-8000-000000000006: 25 lines | CHAPTER V. CHOICE OF … of the dragoon 69
+  84 [70] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley regiments lately returned … even humble in 70
+  85 [71] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … overleapt with great 71
+  86 [72] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley agility) Captain Waverley, … night-gown. But there 72
+  87 [73] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … rebellion, he either 73
+  88 [74] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley would not have … were placed to 74
+  89 [75] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … in complete uniform. 75
+  90 [76] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley Edward Waverley himself … cookery and medicine, 76
+  91 [77] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … trouble, toil, and 77
+  92 [78] 00000000-0000-7000-8000-000000000006: 25 lines | Waverley care, A world … scene no more. 78
+  93 [79] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … in full uniform. 79
+  94 [80] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley There is no … on little western 80
+  95 [81] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … None seemed more 81
+  96 [82] 00000000-0000-7000-8000-000000000006: 26 lines | Waverley gratified than Aunt … not invite my 82
+  97 [83] 00000000-0000-7000-8000-000000000006: 26 lines | CHAPTER V. CHOICE OF … censured as tedious 83
+  98 [84] 00000000-0000-7000-8000-000000000006: 6 lines | Waverley and unnecessary. Yet … retrench or cancel.] 84
+  99 [85] 00000000-0000-7000-8000-000000000007: 18 lines | Chapter Six CHAPTER VI. … concealed by the 85
+ 100 [86] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley voluminous robes of … revival depends upon 86
+ 101 [87] 00000000-0000-7000-8000-000000000007: 26 lines | CHAPTER VI. THE ADIEUS … colour), superb chargers 87
+ 102 [88] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley both; the other … disposition of the 88
+ 103 [89] 00000000-0000-7000-8000-000000000007: 26 lines | CHAPTER VI. THE ADIEUS … was addressed, of 89
+ 104 [90] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley whom we shall … intended to do 90
+ 105 [91] 00000000-0000-7000-8000-000000000007: 29 lines | CHAPTER VI. THE ADIEUS … condemned and executed. 91
+ 106 [92] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley such extravagant lengths, … opinions, cemented his 92
+ 107 [93] 00000000-0000-7000-8000-000000000007: 26 lines | CHAPTER VI. THE ADIEUS … utterly by becoming 93
+ 108 [94] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley the unhappy instrument … of his own 94
+ 109 [95] 00000000-0000-7000-8000-000000000007: 26 lines | CHAPTER VI. THE ADIEUS … amity between two 95
+ 110 [96] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley important houses. It … been in some 96
+ 111 [97] 00000000-0000-7000-8000-000000000007: 26 lines | CHAPTER VI. THE ADIEUS … and zeal more 97
+ 112 [98] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley absurdly wasted. He … King of France?—Or 98
+ 113 [99] 00000000-0000-7000-8000-000000000007: 26 lines | CHAPTER VI. THE ADIEUS … soundest Controversial Divines.” 99
+ 114 [100] 00000000-0000-7000-8000-000000000007: 24 lines | Waverley To this work … Drake and Charlwood 100
+ 115 [101] 00000000-0000-7000-8000-000000000007: 31 lines | CHAPTER VI. THE ADIEUS … Reviewed, p. 42). 101
+ 116 [102] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley Well, but I … his treatise in 102
+ 117 [103] 00000000-0000-7000-8000-000000000007: 26 lines | CHAPTER VI. THE ADIEUS … author and a 103
+ 118 [104] 00000000-0000-7000-8000-000000000007: 26 lines | Waverley politician, his darling … regard, a valuable 104
+ 119 [105] 00000000-0000-7000-8000-000000000007: 7 lines | CHAPTER VI. THE ADIEUS … been of late. 105
+ 120 [106] 00000000-0000-7000-8000-000000000007: blank
+ 121 [107] 00000000-0000-7000-8000-000000000008: 18 lines | Chapter Seven CHAPTER VII. … soldiers, save to 107
+ 122 [108] 00000000-0000-7000-8000-000000000008: 25 lines | Waverley attend his honour, … very gay young 108
+ 123 [109] 00000000-0000-7000-8000-000000000008: 29 lines | CHAPTER VII. A HORSE-QUARTER … attend exactly at 109
+ 124 [110] 00000000-0000-7000-8000-000000000008: 29 lines | Waverley imagined that the … extreme amazement that 110
+ 125 [111] 00000000-0000-7000-8000-000000000008: 30 lines | CHAPTER VII. A HORSE-QUARTER … with the Christian 111
+ 126 [112] 00000000-0000-7000-8000-000000000008: 26 lines | Waverley composed a society … 1824, p. 190.) 112
+ 127 [113] 00000000-0000-7000-8000-000000000008: 26 lines | CHAPTER VII. A HORSE-QUARTER … profession. He asked 113
+ 128 [114] 00000000-0000-7000-8000-000000000008: 25 lines | Waverley himself in vain, … which is most 114
+ 129 [115] 00000000-0000-7000-8000-000000000008: 26 lines | CHAPTER VII. A HORSE-QUARTER … landlord, who called 115
+ 130 [116] 00000000-0000-7000-8000-000000000008: 30 lines | Waverley himself a gentleman, … taken fire, the 116
+ 131 [117] 00000000-0000-7000-8000-000000000008: 30 lines | CHAPTER VII. A HORSE-QUARTER … the pulpit. After 117
+ 132 [118] 00000000-0000-7000-8000-000000000008: 27 lines | Waverley gradually approached the … play amang them.” 118
+ 133 [119] 00000000-0000-7000-8000-000000000008: 7 lines | CHAPTER VII. A HORSE-QUARTER … gracious King Duncan. 119
+ 134 [120] 00000000-0000-7000-8000-000000000008: blank
+ 135 [121] 00000000-0000-7000-8000-000000000009: 17 lines | Chapter Eight CHAPTER VIII. … where children, almost 121
+ 136 [122] 00000000-0000-7000-8000-000000000009: 25 lines | Waverley in a primitive … so common in 122
+ 137 [123] 00000000-0000-7000-8000-000000000009: 26 lines | CHAPTER VIII. A SCOTTISH … his neighbours, in 123
+ 138 [124] 00000000-0000-7000-8000-000000000009: 25 lines | Waverley a little group … dress considerably improved 124
+ 139 [125] 00000000-0000-7000-8000-000000000009: 26 lines | CHAPTER VIII. A SCOTTISH … and from among 125
+ 140 [126] 00000000-0000-7000-8000-000000000009: 25 lines | Waverley the young women … cottages being irregularly 126
+ 141 [127] 00000000-0000-7000-8000-000000000009: 26 lines | CHAPTER VIII. A SCOTTISH … barley, and pease, 127
+ 142 [128] 00000000-0000-7000-8000-000000000009: 25 lines | Waverley each of such … top, and adorned 128
+ 143 [129] 00000000-0000-7000-8000-000000000009: 26 lines | CHAPTER VIII. A SCOTTISH … clothed with grass 129
+ 144 [130] 00000000-0000-7000-8000-000000000009: 25 lines | Waverley of a deep … broad green alley. 130
+ 145 [131] 00000000-0000-7000-8000-000000000009: 26 lines | CHAPTER VIII. A SCOTTISH … the roof had 131
+ 146 [132] 00000000-0000-7000-8000-000000000009: 25 lines | Waverley some nondescript kind … heavy masonry. Two 132
+ 147 [133] 00000000-0000-7000-8000-000000000009: 26 lines | CHAPTER VIII. A SCOTTISH … bear, carved in 133
+ 148 [134] 00000000-0000-7000-8000-000000000009: 23 lines | Waverley stone, predominated over … had conjured up. 134
+ 149 [135] 00000000-0000-7000-8000-000000000009: 21 lines | CHAPTER VIII. A SCOTTISH … of the above. 135
+ 150 [136] 00000000-0000-7000-8000-000000000009: blank
+ 151 [137] 00000000-0000-7000-8000-00000000000a: 18 lines | Chapter Nine CHAPTER IX. … to sleep upon 137
+ 152 [138] 00000000-0000-7000-8000-00000000000a: 25 lines | Waverley their respective dunghills. … the garden, which 138
+ 153 [139] 00000000-0000-7000-8000-00000000000a: 26 lines | CHAPTER IX. MORE OF … of large circumference, 139
+ 154 [140] 00000000-0000-7000-8000-00000000000a: 25 lines | Waverley inscribed with more … over a strong 140
+ 155 [141] 00000000-0000-7000-8000-00000000000a: 26 lines | CHAPTER IX. MORE OF … in a spacious 141
+ 156 [142] 00000000-0000-7000-8000-00000000000a: 25 lines | Waverley tub, performed with … Edward descended the 142
+ 157 [143] 00000000-0000-7000-8000-00000000000a: 26 lines | CHAPTER IX. MORE OF … and extravagant. It 143
+ 158 [144] 00000000-0000-7000-8000-00000000000a: 25 lines | Waverley consisted in a … play’d me this 144
+ 159 [145] 00000000-0000-7000-8000-00000000000a: 26 lines | CHAPTER IX. MORE OF … speech was song,”— 145
+ 160 [146] 00000000-0000-7000-8000-00000000000a: 25 lines | Waverley The Knight’s to … wiser men have 146
+ 161 [147] 00000000-0000-7000-8000-00000000000a: 26 lines | CHAPTER IX. MORE OF … excited by his 147
+ 162 [148] 00000000-0000-7000-8000-00000000000a: 24 lines | Waverley having introduced a … orders, if need 148
+ 163 [149] 00000000-0000-7000-8000-00000000000a: 26 lines | CHAPTER IX. MORE OF … way, into the 149
+ 164 [150] 00000000-0000-7000-8000-00000000000a: 25 lines | Waverley resemblance of the … I take burden 150
+ 165 [151] 00000000-0000-7000-8000-00000000000a: 30 lines | CHAPTER IX. MORE OF … and publishing the 151
+ 166 [152] 00000000-0000-7000-8000-00000000000a: 2 lines | bans betwixt her and … in the public church.
+ 167 [153] 00000000-0000-7000-8000-00000000000b: 18 lines | Chapter Ten CHAPTER X. … members of that 153
+ 168 [154] 00000000-0000-7000-8000-00000000000b: 25 lines | Waverley respectable society, whose … snow of her 154
+ 169 [155] 00000000-0000-7000-8000-00000000000b: 26 lines | CHAPTER X. ROSE BRADWARDINE … She offered, with 155
+ 170 [156] 00000000-0000-7000-8000-00000000000b: 25 lines | Waverley diffident civility, to … or manner, of 156
+ 171 [157] 00000000-0000-7000-8000-00000000000b: 26 lines | CHAPTER X. ROSE BRADWARDINE … bar-gown of our 157
+ 172 [158] 00000000-0000-7000-8000-00000000000b: 25 lines | Waverley pleaders was often … vassals at his 158
+ 173 [159] 00000000-0000-7000-8000-00000000000b: 26 lines | CHAPTER X. ROSE BRADWARDINE … for the tears 159
+ 174 [160] 00000000-0000-7000-8000-00000000000b: 25 lines | Waverley stood in the … have wished the 160
+ 175 [161] 00000000-0000-7000-8000-00000000000b: 26 lines | CHAPTER X. ROSE BRADWARDINE … for which the 161
+ 176 [162] 00000000-0000-7000-8000-00000000000b: 25 lines | Waverley approaching dinner-hour left … Alexander Saunderson, the 162
+ 177 [163] 00000000-0000-7000-8000-00000000000b: 25 lines | CHAPTER X. ROSE BRADWARDINE … repairing to his 163
+ 178 [164] 00000000-0000-7000-8000-00000000000b: 25 lines | Waverley post, announced the … bailiff, or ground- 164
+ 179 [165] 00000000-0000-7000-8000-00000000000b: 26 lines | CHAPTER X. ROSE BRADWARDINE … the mother and 165
+ 180 [166] 00000000-0000-7000-8000-00000000000b: 25 lines | Waverley grandmother, who were … three bottles of 166
+ 181 [167] 00000000-0000-7000-8000-00000000000b: 27 lines | CHAPTER X. ROSE BRADWARDINE … in the text. 167
+ 182 [168] 00000000-0000-7000-8000-00000000000b: blank
+ 183 [169] 00000000-0000-7000-8000-00000000000c: 18 lines | Chapter Eleven CHAPTER XI. … of his chair, 169
+ 184 [170] 00000000-0000-7000-8000-00000000000c: 25 lines | Waverley placed at three … his old grey 170
+ 185 [171] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … consciences of his 171
+ 186 [172] 00000000-0000-7000-8000-00000000000c: 26 lines | Waverley guests to drink … key, unlocked the 172
+ 187 [173] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … achievement by the 173
+ 188 [174] 00000000-0000-7000-8000-00000000000c: 26 lines | Waverley wappen-brief, or concession … a mystical and 174
+ 189 [175] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … “Beware the Bear”; 175
+ 190 [176] 00000000-0000-7000-8000-00000000000c: 26 lines | Waverley but, at the … When a few 176
+ 191 [177] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … what they technically 177
+ 192 [178] 00000000-0000-7000-8000-00000000000c: 32 lines | Waverley called deoch an … cup of the 178
+ 193 [179] 00000000-0000-7000-8000-00000000000c: 30 lines | CHAPTER XI. THE BANQUET … case patiently; and 179
+ 194 [180] 00000000-0000-7000-8000-00000000000c: 27 lines | Waverley knowing by experience … hospitality of Scotland. 180
+ 195 [181] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … fortnight, tempered her 181
+ 196 [182] 00000000-0000-7000-8000-00000000000c: 26 lines | Waverley turf-fire to such … from the cask. 182
+ 197 [183] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … far prevailed that 183
+ 198 [184] 00000000-0000-7000-8000-00000000000c: 25 lines | Waverley for a moment … Sixty Years Since.] 184
+ 199 [185] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … slug in his 185
+ 200 [186] 00000000-0000-7000-8000-00000000000c: 26 lines | Waverley wing, And strap … of Balmawhapple, now 186
+ 201 [187] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … matters, I shall 187
+ 202 [188] 00000000-0000-7000-8000-00000000000c: 26 lines | Waverley not tamely endure … stranger and an 188
+ 203 [189] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … sportsman in huge 189
+ 204 [190] 00000000-0000-7000-8000-00000000000c: 26 lines | Waverley disdain, “that I’ll … about to insconce 190
+ 205 [191] 00000000-0000-7000-8000-00000000000c: 26 lines | CHAPTER XI. THE BANQUET … by this time 191
+ 206 [192] 00000000-0000-7000-8000-00000000000c: 21 lines | Waverley rushed in, and … and the Lapithæ. 192
+ 207 [193] 00000000-0000-7000-8000-00000000000d: 18 lines | Chapter Twelve CHAPTER XII. … the laws of 193
+ 208 [194] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley Heaven as well … to demand. He 194
+ 209 [195] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … He answered at 195
+ 210 [196] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley random one or … sunk into silence. 196
+ 211 [197] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … one not wholly 197
+ 212 [198] 00000000-0000-7000-8000-00000000000d: 24 lines | Waverley unskilled in the … out of mind, 198
+ 213 [199] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … not find this 199
+ 214 [200] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley exculpation relevant in … account for the 200
+ 215 [201] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … to remove the 201
+ 216 [202] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley grounds upon which … a modest hilarity.” 202
+ 217 [203] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … objurgation of the 203
+ 218 [204] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley younger Plinius, in … also never out 204
+ 219 [205] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … the Baron, “by 205
+ 220 [206] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley saving Rose from … usage which he 206
+ 221 [207] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … hypothesis was entirely 207
+ 222 [208] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley imaginary; David Gellatley … the black-cock sweetest 208
+ 223 [209] 00000000-0000-7000-8000-00000000000d: 26 lines | CHAPTER XII. REPENTANCE AND … compassionate to his 209
+ 224 [210] 00000000-0000-7000-8000-00000000000d: 25 lines | Waverley brother, who followed … the ample stair- 210
+ 225 [211] 00000000-0000-7000-8000-00000000000d: 10 lines | CHAPTER XII. REPENTANCE AND … Vite! vite debout!” 211
+ 226 [212] 00000000-0000-7000-8000-00000000000d: blank
+ 227 [213] 00000000-0000-7000-8000-00000000000e: 17 lines | Chapter Thirteen CHAPTER XIII. … armed with holster-pistols. 213
+ 228 [214] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley In this guise … then in existence. 214
+ 229 [215] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … and almost always 215
+ 230 [216] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley curious, if not … of old Hardyknute— 216
+ 231 [217] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … which, he said, 217
+ 232 [218] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley “the only one … opposite, they contributed 218
+ 233 [219] 00000000-0000-7000-8000-00000000000e: 25 lines | CHAPTER XIII. A MORE … he had witnessed. 219
+ 234 [220] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley Both parties returned … a visit to 220
+ 235 [221] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … one of her 221
+ 236 [222] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley mother, in the … at the special 222
+ 237 [223] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … showed a natural 223
+ 238 [224] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley taste, which required … It was perhaps 224
+ 239 [225] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … river was sometimes 225
+ 240 [226] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley visible, sometimes hidden … had ordered coffee. 226
+ 241 [227] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … destitute of these 227
+ 242 [228] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley advantages, although I … foot traced the 228
+ 243 [229] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … the ghastly Form! 229
+ 244 [230] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley “I am sorry … once stood firm 230
+ 245 [231] 00000000-0000-7000-8000-00000000000e: 26 lines | CHAPTER XIII. A MORE … to make open 231
+ 246 [232] 00000000-0000-7000-8000-00000000000e: 25 lines | Waverley confession of her … were next the 232
+ 247 [233] 00000000-0000-7000-8000-00000000000e: 28 lines | CHAPTER XIII. A MORE … in Scottish story. 233
+ 248 [234] 00000000-0000-7000-8000-00000000000e: 11 lines | Waverley All those idle … house of Tully-Veolan. 234
+ 249 [235] 00000000-0000-7000-8000-00000000000f: 17 lines | Chapter Fourteen CHAPTER XIV. … an old ballad:— 235
+ 250 [236] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley “Young men will … lines. He therefore 236
+ 251 [237] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … pillow, in which 237
+ 252 [238] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley the younger combatant … of the sword 238
+ 253 [239] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … mine own unfortunate 239
+ 254 [240] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley dissension with my … upon playing upon 240
+ 255 [241] 00000000-0000-7000-8000-00000000000f: 30 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … through with it. 241
+ 256 [242] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley more than that … prescribed by her 242
+ 257 [243] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … most efficiently displayed, 243
+ 258 [244] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley in labouring, namely, … while consulting him 244
+ 259 [245] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … female, and that 245
+ 260 [246] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley female a Bradwardine, … on all suitable 246
+ 261 [247] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … all the simplicity 247
+ 262 [248] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley and curiosity of … too young and 248
+ 263 [249] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … other feelings, and 249
+ 264 [250] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley amenable to other … at least, to 250
+ 265 [251] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … some object whose 251
+ 266 [252] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley affection may dignify … he would as 252
+ 267 [253] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … a government which 253
+ 268 [254] 00000000-0000-7000-8000-00000000000f: 24 lines | Waverley they declined to … of his commanding 254
+ 269 [255] 00000000-0000-7000-8000-00000000000f: 26 lines | CHAPTER XIV. A DISCOVERY—WAVERLEY … and continued an 255
+ 270 [256] 00000000-0000-7000-8000-00000000000f: 4 lines | Waverley honoured guest and … house of Tully-Veolan. 256
+ 271 [257] 00000000-0000-7000-8000-000000000010: 18 lines | Chapter Fifteen CHAPTER XV. … got from this 257
+ 272 [258] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley distracted chorus, excepting … His spirits always 258
+ 273 [259] 00000000-0000-7000-8000-000000000010: 26 lines | CHAPTER XV. A CREAGH, … he found his 259
+ 274 [260] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley young friend Rose, … try to recover 260
+ 275 [261] 00000000-0000-7000-8000-000000000010: 26 lines | CHAPTER XV. A CREAGH, … from seeing her 261
+ 276 [262] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley father’s estate exposed … and then remained 262
+ 277 [263] 00000000-0000-7000-8000-000000000010: 26 lines | CHAPTER XV. A CREAGH, … had the temerity 263
+ 278 [264] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley to descend to … soldiers and a 264
+ 279 [265] 00000000-0000-7000-8000-000000000010: 25 lines | CHAPTER XV. A CREAGH, … of Malcolm Canmore.” 265
+ 280 [266] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley In fact his … those pathless deserts, 266
+ 281 [267] 00000000-0000-7000-8000-000000000010: 25 lines | CHAPTER XV. A CREAGH, … with the unpronounceable 267
+ 282 [268] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley name, was the … Vich Ian Vohr.” 268
+ 283 [269] 00000000-0000-7000-8000-000000000010: 26 lines | CHAPTER XV. A CREAGH, … that he was 269
+ 284 [270] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley under his banner, … the Highlanders call 270
+ 285 [271] 00000000-0000-7000-8000-000000000010: 26 lines | CHAPTER XV. A CREAGH, … father and his 271
+ 286 [272] 00000000-0000-7000-8000-000000000010: 24 lines | Waverley servants behind the … in any strength?” 272
+ 287 [273] 00000000-0000-7000-8000-000000000010: 26 lines | CHAPTER XV. A CREAGH, … had indeed often 273
+ 288 [274] 00000000-0000-7000-8000-000000000010: 25 lines | Waverley heard of Highland … limmers, and broken 274
+ 289 [275] 00000000-0000-7000-8000-000000000010: 26 lines | CHAPTER XV. A CREAGH, … murther, raptus mulierum, 275
+ 290 [276] 00000000-0000-7000-8000-000000000010: 29 lines | Waverley or forcible abduction … state of the 276
+ 291 [277] 00000000-0000-7000-8000-000000000011: 20 lines | Chapter Sixteen CHAPTER XVI. … of the Synod. 277
+ 292 [278] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley his composure and … to undervalue those 278
+ 293 [279] 00000000-0000-7000-8000-000000000011: 25 lines | CHAPTER XVI. AN UNEXPECTED … courtesy and hospitality. 279
+ 294 [280] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley While they were … dirk and steel-wrought 280
+ 295 [281] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … kept you from 281
+ 296 [282] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley seeing and considering … a cloud between 282
+ 297 [283] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … discontinuance of the 283
+ 298 [284] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley subsidy, and apparently … collecting information, and 284
+ 299 [285] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … he had to 285
+ 300 [286] 00000000-0000-7000-8000-000000000011: 23 lines | Waverley apprehend was a … hatchet at the 286
+ 301 [287] 00000000-0000-7000-8000-000000000011: 28 lines | CHAPTER XVI. AN UNEXPECTED … countries from Scandinavia. 287
+ 302 [288] 00000000-0000-7000-8000-000000000011: 24 lines | Waverley “With his tail … business, but are 288
+ 303 [289] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … appeared to have 289
+ 304 [290] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley worn for itself … if your eyes 290
+ 305 [291] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … dexterity, covered his 291
+ 306 [292] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley confusion by whistling … black bog, of 292
+ 307 [293] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … totally at the 293
+ 308 [294] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley bottom of a … of the three 294
+ 309 [295] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … himself to a 295
+ 310 [296] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley very round pace, … might be a 296
+ 311 [297] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … the Highlands, but 297
+ 312 [298] 00000000-0000-7000-8000-000000000011: 25 lines | Waverley the woolly-leaved Lowland … his companion gently 298
+ 313 [299] 00000000-0000-7000-8000-000000000011: 26 lines | CHAPTER XVI. AN UNEXPECTED … they resumed their 299
+ 314 [300] 00000000-0000-7000-8000-000000000011: 4 lines | Waverley oars, and began … with great rapidity. 300
+ 315 [301] 00000000-0000-7000-8000-000000000012: 18 lines | Chapter Seventeen CHAPTER XVII. … the very surface 301
+ 316 [302] 00000000-0000-7000-8000-000000000012: 25 lines | Waverley of the lake … was indeed true, 302
+ 317 [303] 00000000-0000-7000-8000-000000000012: 26 lines | CHAPTER XVII. THE HOLD … paces in darkness, 303
+ 318 [304] 00000000-0000-7000-8000-000000000012: 25 lines | Waverley guided in this … principal inhabitant of 304
+ 319 [305] 00000000-0000-7000-8000-000000000012: 29 lines | CHAPTER XVII. THE HOLD … was obliged, after 305
+ 320 [306] 00000000-0000-7000-8000-000000000012: 28 lines | Waverley Donald Bean Lean … concerned in it. 306
+ 321 [307] 00000000-0000-7000-8000-000000000012: 26 lines | CHAPTER XVII. THE HOLD … French politeness and 307
+ 322 [308] 00000000-0000-7000-8000-000000000012: 25 lines | Waverley Scottish hospitality, seemed … promptitude that seemed 308
+ 323 [309] 00000000-0000-7000-8000-000000000012: 26 lines | CHAPTER XVII. THE HOLD … him. But no 309
+ 324 [310] 00000000-0000-7000-8000-000000000012: 25 lines | Waverley gentleman could do … Beg, the blind 310
+ 325 [311] 00000000-0000-7000-8000-000000000012: 26 lines | CHAPTER XVII. THE HOLD … review of the 311
+ 326 [312] 00000000-0000-7000-8000-000000000012: 25 lines | Waverley regiment, which satisfied … this outlawed and 312
+ 327 [313] 00000000-0000-7000-8000-000000000012: 26 lines | CHAPTER XVII. THE HOLD … suspended, they proceeded 313
+ 328 [314] 00000000-0000-7000-8000-000000000012: 24 lines | Waverley to broil and … was proudly denominated. 314
+ 329 [315] 00000000-0000-7000-8000-000000000013: 18 lines | Chapter Eighteen CHAPTER XVIII. … the entrance of 315
+ 330 [316] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley the cave, he … on which the 316
+ 331 [317] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … retreat had been 317
+ 332 [318] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley sought for with … a glittering birch-tree, 318
+ 333 [319] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … although Alice had 319
+ 334 [320] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley occupied a part … battle or storm. 320
+ 335 [321] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … by the meal 321
+ 336 [322] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley which she had … up to her 322
+ 337 [323] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … it off with 323
+ 338 [324] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley great gusto. Evan … her solitary journey. 324
+ 339 [325] 00000000-0000-7000-8000-000000000013: 25 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … that she need 325
+ 340 [326] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley want, if she … done before him.” 326
+ 341 [327] 00000000-0000-7000-8000-000000000013: 29 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … a natural destiny. 327
+ 342 [328] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley straw in yon … ask?” said Waverley. 328
+ 343 [329] 00000000-0000-7000-8000-000000000013: 25 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … pursued their walk 329
+ 344 [330] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley a short distance, … I fancy Donald 330
+ 345 [331] 00000000-0000-7000-8000-000000000013: 25 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … him to Rannoch?” 331
+ 346 [332] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley “That,” quoth Evan, … it is. At 332
+ 347 [333] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … Donald played a 333
+ 348 [334] 00000000-0000-7000-8000-000000000013: 30 lines | Waverley 2 pretty sport. … of his malady. 334
+ 349 [335] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … Watch; and the 335
+ 350 [336] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley governor said it … and a bed 336
+ 351 [337] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … illustrating the existing 337
+ 352 [338] 00000000-0000-7000-8000-000000000013: 24 lines | Waverley state of the … only twenty pence.] 338
+ 353 [339] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … occasion. He was 339
+ 354 [340] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley well aware that … the Chieftain’s figure. 340
+ 355 [341] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … pronounced in any 341
+ 356 [342] 00000000-0000-7000-8000-000000000013: 25 lines | Waverley country extremely handsome. … lour of the 342
+ 357 [343] 00000000-0000-7000-8000-000000000013: 26 lines | CHAPTER XVIII. WAVERLEY PROCEEDS … habits, or the 343
+ 358 [344] 00000000-0000-7000-8000-000000000013: 22 lines | Waverley immediate occasion of … a new chapter. 344
+ 359 [345] 00000000-0000-7000-8000-000000000014: 18 lines | Chapter Nineteen CHAPTER XIX. … of course, “to 345
+ 360 [346] 00000000-0000-7000-8000-000000000014: 25 lines | Waverley one thing constant … which it is 346
+ 361 [347] 00000000-0000-7000-8000-000000000014: 26 lines | CHAPTER XIX. THE CHIEF … fortalice, so much 347
+ 362 [348] 00000000-0000-7000-8000-000000000014: 25 lines | Waverley admired by his … married a lady 348
+ 363 [349] 00000000-0000-7000-8000-000000000014: 29 lines | CHAPTER XIX. THE CHIEF … of such property. 349
+ 364 [350] 00000000-0000-7000-8000-000000000014: 25 lines | Waverley acquainted with the … indeed stretched his 350
+ 365 [351] 00000000-0000-7000-8000-000000000014: 26 lines | CHAPTER XIX. THE CHIEF … having obtained command 351
+ 366 [352] 00000000-0000-7000-8000-000000000014: 25 lines | Waverley of one of … justice all such 352
+ 367 [353] 00000000-0000-7000-8000-000000000014: 28 lines | CHAPTER XIX. THE CHIEF … captain of an 353
+ 368 [354] 00000000-0000-7000-8000-000000000014: 26 lines | Waverley Whatever Fergus Mac-Ivor … guinea the morn.” 354
+ 369 [355] 00000000-0000-7000-8000-000000000014: 26 lines | CHAPTER XIX. THE CHIEF … to be prepared 355
+ 370 [356] 00000000-0000-7000-8000-000000000014: 25 lines | Waverley for the first … huge waxen seal 356
+ 371 [357] 00000000-0000-7000-8000-000000000014: 26 lines | CHAPTER XIX. THE CHIEF … the house of 357
+ 372 [358] 00000000-0000-7000-8000-000000000014: 25 lines | Waverley Glennaquoich, which consisted … gentleman’s habitation. An 358
+ 373 [359] 00000000-0000-7000-8000-000000000014: 26 lines | CHAPTER XIX. THE CHIEF … nan Chaistel would 359
+ 374 [360] 00000000-0000-7000-8000-000000000014: 24 lines | Waverley have changed the … of their exercise.” 360
+ 375 [361] 00000000-0000-7000-8000-000000000014: 26 lines | CHAPTER XIX. THE CHIEF … other sports, in 361
+ 376 [362] 00000000-0000-7000-8000-000000000014: 29 lines | Waverley which this feudal … plaid was universally 362
+ 377 [363] 00000000-0000-7000-8000-000000000014: 27 lines | CHAPTER XIX. THE CHIEF … in their youth. 363
+ 378 [364] 00000000-0000-7000-8000-000000000014: 22 lines | Waverley former times; and … my rude mansion.” 364
+ 379 [365] 00000000-0000-7000-8000-000000000015: 17 lines | Chapter Twenty CHAPTER XX. … the fragrant oil, 365
+ 380 [366] 00000000-0000-7000-8000-000000000015: 26 lines | Waverley but by a … own tribe, wadsetters 366
+ 381 [367] 00000000-0000-7000-8000-000000000015: 26 lines | CHAPTER XX. A HIGHLAND … of the piece. 367
+ 382 [368] 00000000-0000-7000-8000-000000000015: 29 lines | Waverley This hospitality, apparently … tobacco for digestion. 368
+ 383 [369] 00000000-0000-7000-8000-000000000015: 26 lines | CHAPTER XX. A HIGHLAND … plain or diluted, 369
+ 384 [370] 00000000-0000-7000-8000-000000000015: 30 lines | Waverley and strong beer … was served, the 370
+ 385 [371] 00000000-0000-7000-8000-000000000015: 29 lines | CHAPTER XX. A HIGHLAND … on the table. 371
+ 386 [372] 00000000-0000-7000-8000-000000000015: 26 lines | Waverley noises that Waverley … on the head, 372
+ 387 [373] 00000000-0000-7000-8000-000000000015: 25 lines | CHAPTER XX. A HIGHLAND … with blood on 373
+ 388 [374] 00000000-0000-7000-8000-000000000015: 26 lines | Waverley his hand, unless … or alliance with 374
+ 389 [375] 00000000-0000-7000-8000-000000000015: 26 lines | CHAPTER XX. A HIGHLAND … who attended to 375
+ 390 [376] 00000000-0000-7000-8000-000000000015: 26 lines | Waverley him with much … to watch the 376
+ 391 [377] 00000000-0000-7000-8000-000000000015: 25 lines | CHAPTER XX. A HIGHLAND … of some of 377
+ 392 [378] 00000000-0000-7000-8000-000000000015: 26 lines | Waverley which the Chieftain … to exceed in 378
+ 393 [379] 00000000-0000-7000-8000-000000000015: 14 lines | CHAPTER XX. A HIGHLAND … to his service. 379
+ 394 [380] 00000000-0000-7000-8000-000000000015: blank
+ 395 [381] 00000000-0000-7000-8000-000000000016: 18 lines | Chapter Twenty-One CHAPTER XXI. … partly of the 381
+ 396 [382] 00000000-0000-7000-8000-000000000016: 26 lines | Waverley Parisian fashion and … exercise and Flora’s 382
+ 397 [383] 00000000-0000-7000-8000-000000000016: 26 lines | CHAPTER XXI. THE CHIEFTAIN’S … had in his 383
+ 398 [384] 00000000-0000-7000-8000-000000000016: 26 lines | Waverley sister acquired a … petty intrigue, and 384
+ 399 [385] 00000000-0000-7000-8000-000000000016: 26 lines | CHAPTER XXI. THE CHIEFTAIN’S … race of Stuart, 385
+ 400 [386] 00000000-0000-7000-8000-000000000016: 26 lines | Waverley of which many … slightly. She was 386
+ 401 [387] 00000000-0000-7000-8000-000000000016: 25 lines | CHAPTER XXI. THE CHIEFTAIN’S … resorted for information. 387
+ 402 [388] 00000000-0000-7000-8000-000000000016: 26 lines | Waverley Her love of … their absolute necessities 388
+ 403 [389] 00000000-0000-7000-8000-000000000016: 26 lines | CHAPTER XXI. THE CHIEFTAIN’S … intimate friend had 389
+ 404 [390] 00000000-0000-7000-8000-000000000016: 26 lines | Waverley been Rose Bradwardine, … opinion of the 390
+ 405 [391] 00000000-0000-7000-8000-000000000016: 26 lines | CHAPTER XXI. THE CHIEFTAIN’S … weapon, which Fergus 391
+ 406 [392] 00000000-0000-7000-8000-000000000016: 12 lines | Waverley almost condescended to … forms of politeness. 392
+ 407 [393] 00000000-0000-7000-8000-000000000017: 18 lines | Chapter Twenty-Two CHAPTER XXII. … you have the 393
+ 408 [394] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley goodness to read … frozen in the 394
+ 409 [395] 00000000-0000-7000-8000-000000000017: 28 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … possessing them, many 395
+ 410 [396] 00000000-0000-7000-8000-000000000017: 28 lines | Waverley do you two … to the devil.” 396
+ 411 [397] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … of the poet.” 397
+ 412 [398] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley “And your bard, … which he recited?” 398
+ 413 [399] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … few lines in 399
+ 414 [400] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley Gaelic. Flora seemed … guests. Having gained 400
+ 415 [401] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … issuing from between 401
+ 416 [402] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley precipices, like a … another spot the 402
+ 417 [403] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … the fair apparition 403
+ 418 [404] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley passed on from … for the beautiful 404
+ 419 [405] 00000000-0000-7000-8000-000000000017: 28 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … the most exquisite 405
+ 420 [406] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley romantic reservoir corresponded … a considerable object. 406
+ 421 [407] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … own power, and 407
+ 422 [408] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley pleased with its … thought the scenery 408
+ 423 [409] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … drew from her 409
+ 424 [410] 00000000-0000-7000-8000-000000000017: 26 lines | Waverley instrument amounted almost … Gael. A stranger 410
+ 425 [411] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … fly, Like the 411
+ 426 [412] 00000000-0000-7000-8000-000000000017: 25 lines | Waverley sun’s latest flash … fearless and free, 412
+ 427 [413] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … of Glenfinnan, mustering 413
+ 428 [414] 00000000-0000-7000-8000-000000000017: 24 lines | Waverley around it the … English poets calls 414
+ 429 [415] 00000000-0000-7000-8000-000000000017: 26 lines | CHAPTER XXII. HIGHLAND MINSTRELSY … but, since your 415
+ 430 [416] 00000000-0000-7000-8000-000000000017: 25 lines | Waverley curiosity is not … it no more! 416
+ 431 [417] 00000000-0000-7000-8000-000000000018: 18 lines | Chapter Twenty-Three CHAPTER XXIII. … value of its 417
+ 432 [418] 00000000-0000-7000-8000-000000000018: 25 lines | Waverley influence: he has … Lindor upon us.” 418
+ 433 [419] 00000000-0000-7000-8000-000000000018: 25 lines | CHAPTER XXIII. WAVERLEY CONTINUES … to the Cean-kinné.” 419
+ 434 [420] 00000000-0000-7000-8000-000000000018: 25 lines | Waverley Cathleen sung with … hunting party, in 420
+ 435 [421] 00000000-0000-7000-8000-000000000018: 26 lines | CHAPTER XXIII. WAVERLEY CONTINUES … never lost sight 421
+ 436 [422] 00000000-0000-7000-8000-000000000018: 25 lines | Waverley of till now. … produced, but in 422
+ 437 [423] 00000000-0000-7000-8000-000000000018: 26 lines | CHAPTER XXIII. WAVERLEY CONTINUES … survive his unkindness. 423
+ 438 [424] 00000000-0000-7000-8000-000000000018: 25 lines | Waverley And, alas! how … poor Rose’s heart.” 424
+ 439 [425] 00000000-0000-7000-8000-000000000018: 26 lines | CHAPTER XXIII. WAVERLEY CONTINUES … persuade you, Captain 425
+ 440 [426] 00000000-0000-7000-8000-000000000018: 24 lines | Waverley Waverley, that I … once? No cause 426
+ 441 [427] 00000000-0000-7000-8000-000000000018: 26 lines | CHAPTER XXIII. WAVERLEY CONTINUES … dubious argument. But 427
+ 442 [428] 00000000-0000-7000-8000-000000000018: 22 lines | Waverley hear ye not … of Flora Mac-Ivor. 428
+ 443 [429] 00000000-0000-7000-8000-000000000019: 18 lines | Chapter Twenty-Four CHAPTER XXIV. … to read my 429
+ 444 [430] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley narrative. Let me … the particulars which 430
+ 445 [431] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … extent of my 431
+ 446 [432] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley own reading, I … to her eminent 432
+ 447 [433] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … country as to 433
+ 448 [434] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley adopt the trews … bivouacked among the 434
+ 449 [435] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … each other, and 435
+ 450 [436] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley compelled the astonished … appeared at a 436
+ 451 [437] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … which it was 437
+ 452 [438] 00000000-0000-7000-8000-000000000019: 24 lines | Waverley communicated. Fergus, observing … bier, But barber’s 438
+ 453 [439] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … assuage it until 439
+ 454 [440] 00000000-0000-7000-8000-000000000019: 24 lines | Waverley he had perambulated … direction, or wither-shins 440
+ 455 [441] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … operation had been 441
+ 456 [442] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley accompanied. Edward was … belief, or more 442
+ 457 [443] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … but yet a 443
+ 458 [444] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley feverish sleep, which … the romantic effect 444
+ 459 [445] 00000000-0000-7000-8000-000000000019: 32 lines | CHAPTER XXIV. A STAG-HUNT … BLYTHE, gay, glad. 445
+ 460 [446] 00000000-0000-7000-8000-000000000019: 29 lines | Waverley [* On the … CORONACH, a dirge. 446
+ 461 [447] 00000000-0000-7000-8000-000000000019: 30 lines | CHAPTER XXIV. A STAG-HUNT … very. GEAR, goods, 447
+ 462 [448] 00000000-0000-7000-8000-000000000019: 29 lines | Waverley Chase.] property. GILLFLIRT, … theft. LIMMER, a 448
+ 463 [449] 00000000-0000-7000-8000-000000000019: 30 lines | CHAPTER XXIV. A STAG-HUNT … running. SEANNACHIE, a 449
+ 464 [450] 00000000-0000-7000-8000-000000000019: 29 lines | Waverley the pibroch of … told. TILL, to. 450
+ 465 [451] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … WISKE, whisk, brandish. 451
+ 466 [452] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley his own men … and Evan Dhu 452
+ 467 [453] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … spun by his 453
+ 468 [454] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley daughters and maidservants, … peasant, since his 454
+ 469 [455] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … old man looked 455
+ 470 [456] 00000000-0000-7000-8000-000000000019: 25 lines | Waverley fixedly at him, … was able to 456
+ 471 [457] 00000000-0000-7000-8000-000000000019: 26 lines | CHAPTER XXIV. A STAG-HUNT … to exclaim, “Open 457
+ 472 [458] 00000000-0000-7000-8000-000000000019: 24 lines | Waverley your gates, incomparable … Chieftain, who, indeed, 458
+ 473 [459] 00000000-0000-7000-8000-000000000019: 25 lines | CHAPTER XXIV. A STAG-HUNT … very deep interest. 459
+ 474 [460] 00000000-0000-7000-8000-000000000019: blank
+ 475 [461] 00000000-0000-7000-8000-00000000001a: 18 lines | Chapter Twenty-Five CHAPTER XXV. … at Tully-Veolan and 461
+ 476 [462] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley Glennaquoich, dispensed with … preceded him from 462
+ 477 [463] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … interesting pamphlets, lately 463
+ 478 [464] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley published by his … to be divided 464
+ 479 [465] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … tropes of rhetoric 465
+ 480 [466] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley and flashes of … principal object of 466
+ 481 [467] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … himself could not 467
+ 482 [468] 00000000-0000-7000-8000-00000000001a: 25 lines | Waverley have made out … in due course. 468
+ 483 [469] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … the cause of 469
+ 484 [470] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley his regret should … as the just 470
+ 485 [471] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … whether Mr. Bradwardine 471
+ 486 [472] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley took as much … of the relations 472
+ 487 [473] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … date of this 473
+ 488 [474] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley letter. If you … that should have 474
+ 489 [475] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … (Edward) conceived to 475
+ 490 [476] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley be his duty … the habit of 476
+ 491 [477] 00000000-0000-7000-8000-00000000001a: 25 lines | CHAPTER XXV. NEWS FROM … of this day.” 477
+ 492 [478] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley With hurried and … either received his 478
+ 493 [479] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … character, should have 479
+ 494 [480] 00000000-0000-7000-8000-00000000001a: 26 lines | Waverley proceeded in so … his courage is 480
+ 495 [481] 00000000-0000-7000-8000-00000000001a: 26 lines | CHAPTER XXV. NEWS FROM … than he would 481
+ 496 [482] 00000000-0000-7000-8000-00000000001a: 25 lines | Waverley have taken wages … of misgovernment brought 482
+ 497 [483] 00000000-0000-7000-8000-00000000001a: 25 lines | CHAPTER XXV. NEWS FROM … for his injustice.” 483
+ 498 [484] 00000000-0000-7000-8000-00000000001a: 8 lines | Waverley The letter was … in the Lowlands. 484
+ 499 [485] 00000000-0000-7000-8000-00000000001b: 18 lines | Chapter Twenty-Six CHAPTER XXVI. … match would be 485
+ 500 [486] 00000000-0000-7000-8000-00000000001b: 26 lines | Waverley most eligible. The … from his sister, 486
+ 501 [487] 00000000-0000-7000-8000-00000000001b: 25 lines | CHAPTER XXVI. AN ECLAIRCISSEMENT … be his bride’s-man.” 487
+ 502 [488] 00000000-0000-7000-8000-00000000001b: 25 lines | Waverley “That is a … and ill-omened emblem.” 488
+ 503 [489] 00000000-0000-7000-8000-00000000001b: 25 lines | CHAPTER XXVI. AN ECLAIRCISSEMENT … resolution of consequence.” 489
+ 504 [490] 00000000-0000-7000-8000-00000000001b: 26 lines | Waverley Waverley felt half … you,—in a moment, 490
+ 505 [491] 00000000-0000-7000-8000-00000000001b: 26 lines | CHAPTER XXVI. AN ECLAIRCISSEMENT … necessary to the 491
+ 506 [492] 00000000-0000-7000-8000-00000000001b: 26 lines | Waverley present undertaking, beyond … than reason. Durst 492
+ 507 [493] 00000000-0000-7000-8000-00000000001b: 25 lines | CHAPTER XXVI. AN ECLAIRCISSEMENT … yet saw the 493
+ 508 [494] 00000000-0000-7000-8000-00000000001b: 26 lines | Waverley person on whom … as may be 494
+ 509 [495] 00000000-0000-7000-8000-00000000001b: 25 lines | CHAPTER XXVI. AN ECLAIRCISSEMENT … business of life.” 495
+ 510 [496] 00000000-0000-7000-8000-00000000001b: 17 lines | Waverley “Indeed, my good … his military preparations. 496
+ 511 [497] 00000000-0000-7000-8000-00000000001c: 17 lines | Chapter Twenty-Seven CHAPTER XXVII. … know all; but 497
+ 512 [498] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley otherwise, the knowledge … of the government.” 498
+ 513 [499] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … Mac-Ivor shall make 499
+ 514 [500] 00000000-0000-7000-8000-00000000001c: 25 lines | Waverley to what I … connection. And where 500
+ 515 [501] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … her own, by 501
+ 516 [502] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley which, in this … with you, while 502
+ 517 [503] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … Should Flora even 503
+ 518 [504] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley listen to his … of in the 504
+ 519 [505] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … agitated, “unless they 505
+ 520 [506] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley are such as … fortune is favourable, 506
+ 521 [507] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … administer consolation. For 507
+ 522 [508] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley myself, from my … disposition, Flora Mac- 508
+ 523 [509] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … its due return.” 509
+ 524 [510] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley “In other words, … that every keener 510
+ 525 [511] 00000000-0000-7000-8000-00000000001c: 25 lines | CHAPTER XXVII. UPON THE … when they shall 511
+ 526 [512] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley appear on the … although wildly enthusiastic, 512
+ 527 [513] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … effect, and stand 513
+ 528 [514] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley forth, as your … did not find 514
+ 529 [515] 00000000-0000-7000-8000-00000000001c: 26 lines | CHAPTER XXVII. UPON THE … sum up the 515
+ 530 [516] 00000000-0000-7000-8000-00000000001c: 26 lines | Waverley business of the … had ever passed. 516
+ 531 [517] 00000000-0000-7000-8000-00000000001d: 18 lines | Chapter Twenty-Eight CHAPTER XXVIII. … Edward awoke in 517
+ 532 [518] 00000000-0000-7000-8000-00000000001d: 25 lines | Waverley earnest. The illusion, … leeks, And lang-leggit 518
+ 533 [519] 00000000-0000-7000-8000-00000000001d: 26 lines | CHAPTER XXVIII. A LETTER … Young and old 519
+ 534 [520] 00000000-0000-7000-8000-00000000001d: 25 lines | Waverley then mingled in … be tired out. 520
+ 535 [521] 00000000-0000-7000-8000-00000000001d: 26 lines | CHAPTER XXVIII. A LETTER … several gentlemen in 521
+ 536 [522] 00000000-0000-7000-8000-00000000001d: 25 lines | Waverley these parts, and, … the arms except 522
+ 537 [523] 00000000-0000-7000-8000-00000000001d: 26 lines | CHAPTER XXVIII. A LETTER … will get safe 523
+ 538 [524] 00000000-0000-7000-8000-00000000001d: 25 lines | Waverley home to England, … Tully-Veolan just now, 524
+ 539 [525] 00000000-0000-7000-8000-00000000001d: 26 lines | CHAPTER XXVIII. A LETTER … of government, in 525
+ 540 [526] 00000000-0000-7000-8000-00000000001d: 25 lines | Waverley consequence of the … hostile attempts against 526
+ 541 [527] 00000000-0000-7000-8000-00000000001d: 26 lines | CHAPTER XXVIII. A LETTER … at home. Reason 527
+ 542 [528] 00000000-0000-7000-8000-00000000001d: 25 lines | Waverley asked, was it … instantly wrote to 528
+ 543 [529] 00000000-0000-7000-8000-00000000001d: 26 lines | CHAPTER XXVIII. A LETTER … go to Edinburgh, 529
+ 544 [530] 00000000-0000-7000-8000-00000000001d: 25 lines | Waverley and put into … crows, in the 530
+ 545 [531] 00000000-0000-7000-8000-00000000001d: 26 lines | CHAPTER XXVIII. A LETTER … scene in Plautus, 531
+ 546 [532] 00000000-0000-7000-8000-00000000001d: 24 lines | Waverley was not started … have brown Dermid.” 532
+ 547 [533] 00000000-0000-7000-8000-00000000001d: 25 lines | CHAPTER XXVIII. A LETTER … out. Mr. Waverley 533
+ 548 [534] 00000000-0000-7000-8000-00000000001d: 22 lines | Waverley rides Dermid.” Then … health and happiness. 534
+ 549 [535] 00000000-0000-7000-8000-00000000001e: 17 lines | Chapter Twenty-Nine CHAPTER XXIX. … I will not 535
+ 550 [536] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley betray it, providing … point to point 536
+ 551 [537] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … too in the 537
+ 552 [538] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley mental as well … all she had 538
+ 553 [539] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … as the Highlanders[*]—the 539
+ 554 [540] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley Highland civility of … and as he 540
+ 555 [541] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … Callum to assure 541
+ 556 [542] 00000000-0000-7000-8000-00000000001e: 23 lines | Waverley his temporary master … into his dwelling. 542
+ 557 [543] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … broken, and buried.” 543
+ 558 [544] 00000000-0000-7000-8000-00000000001e: 23 lines | Waverley “My good friend,” … cannot, get me 544
+ 559 [545] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … that,” answered Callum. 545
+ 560 [546] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley “And ye’ll hae … impenetrable Callum Beg. 546
+ 561 [547] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … was contented to 547
+ 562 [548] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley lay a tax … last words were 548
+ 563 [549] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … lining of his 549
+ 564 [550] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley jacket. Waverley thought … of great indifference. 550
+ 565 [551] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … marches conducted with 551
+ 566 [552] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley such skill, dexterity, … a grudge for 552
+ 567 [553] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … AN OAK TREE 553
+ 568 [554] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley In the Churchyard … on Albyn’s hill, 554
+ 569 [555] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … poetry, the enthusiasm 555
+ 570 [556] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley which it intimated … same stuff, which, 556
+ 571 [557] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … at the man’s 557
+ 572 [558] 00000000-0000-7000-8000-00000000001e: 24 lines | Waverley impudence, but, as … at imagining the 558
+ 573 [559] 00000000-0000-7000-8000-00000000001e: 26 lines | CHAPTER XXIX. WAVERLEY’S RECEPTION … of hearing of 559
+ 574 [560] 00000000-0000-7000-8000-00000000001e: 11 lines | Waverley the shouts of … SIXTY YEARS SINCE 560
+ 575 [561] 00000000-0000-7000-8000-00000000001f: 1 lines | VOLUME II. … VOLUME II.
+ 576 [562] 00000000-0000-7000-8000-00000000001f: blank
+ 577 [563] 00000000-0000-7000-8000-000000000020: 17 lines | Chapter Thirty CHAPTER I. … The travellers journeyed, 563
+ 578 [564] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley therefore, in silence, … we find one?” 564
+ 579 [565] 00000000-0000-7000-8000-000000000020: 26 lines | CHAPTER I. SHOWS THAT … Cairnvreckan, they speedily 565
+ 580 [566] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley distinguished the smith’s … went as if 566
+ 581 [567] 00000000-0000-7000-8000-000000000020: 26 lines | CHAPTER I. SHOWS THAT … even for casual 567
+ 582 [568] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley information, without previously … on with a 568
+ 583 [569] 00000000-0000-7000-8000-000000000020: 26 lines | CHAPTER I. SHOWS THAT … with a grim 569
+ 584 [570] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley and ire-foreboding countenance, … an honester woman’s 570
+ 585 [571] 00000000-0000-7000-8000-000000000020: 25 lines | CHAPTER I. SHOWS THAT … nane of your 571
+ 586 [572] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley whingeing King George … an old farmer, 572
+ 587 [573] 00000000-0000-7000-8000-000000000020: 26 lines | CHAPTER I. SHOWS THAT … stop ony gentleman 573
+ 588 [574] 00000000-0000-7000-8000-000000000020: 23 lines | Waverley that’s the Prince’s … a ranting Highlandman 574
+ 589 [575] 00000000-0000-7000-8000-000000000020: 26 lines | CHAPTER I. SHOWS THAT … Waverley for his 575
+ 590 [576] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley horse. “Na, na! … but one of 576
+ 591 [577] 00000000-0000-7000-8000-000000000020: 26 lines | CHAPTER I. SHOWS THAT … threw themselves upon 577
+ 592 [578] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley him, disarmed him, … “in good Mr. 578
+ 593 [579] 00000000-0000-7000-8000-000000000020: 25 lines | CHAPTER I. SHOWS THAT … the same cure] 579
+ 594 [580] 00000000-0000-7000-8000-000000000020: 24 lines | Waverley Mr. Morton had … with difficulty acquiesced 580
+ 595 [581] 00000000-0000-7000-8000-000000000020: 24 lines | CHAPTER I. SHOWS THAT … a mile distant. 581
+ 596 [582] 00000000-0000-7000-8000-000000000020: blank
+ 597 [583] 00000000-0000-7000-8000-000000000021: 18 lines | Chapter Thirty-One CHAPTER II. … self-defence, the Major 583
+ 598 [584] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley conceived he might … been the means, 584
+ 599 [585] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … to decide singly 585
+ 600 [586] 00000000-0000-7000-8000-000000000021: 25 lines | Waverley upon the conduct … name. “Edward Waverley.” 586
+ 601 [587] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … capacity you are 587
+ 602 [588] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley charged with spreading … this communication was 588
+ 603 [589] 00000000-0000-7000-8000-000000000021: 25 lines | CHAPTER II. AN EXAMINATION … with no reservation,” 589
+ 604 [590] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley “You shall see … answers to the 590
+ 605 [591] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … a regiment chiefly 591
+ 606 [592] 00000000-0000-7000-8000-000000000021: 25 lines | Waverley composed of Scotch … for some books?” 592
+ 607 [593] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … “was a Mr. 593
+ 608 [594] 00000000-0000-7000-8000-000000000021: 25 lines | Waverley Pembroke, a nonjuring … the Young Pretender?” 594
+ 609 [595] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … between the house 595
+ 610 [596] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley of this Highland … discipline and arm 596
+ 611 [597] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … Waverley, of Sir 597
+ 612 [598] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley Everard, and of … I own, I 598
+ 613 [599] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … cannot be charged 599
+ 614 [600] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley against you in … queries to him. 600
+ 615 [601] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … The inexperience of 601
+ 616 [602] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley youth, Mr. Waverley, … only ill consequence 602
+ 617 [603] 00000000-0000-7000-8000-000000000021: 26 lines | CHAPTER II. AN EXAMINATION … information on subjects 603
+ 618 [604] 00000000-0000-7000-8000-000000000021: 26 lines | Waverley which I could … room, where, declining 604
+ 619 [605] 00000000-0000-7000-8000-000000000021: 13 lines | CHAPTER II. AN EXAMINATION … to awaken them. 605
+ 620 [606] 00000000-0000-7000-8000-000000000021: blank
+ 621 [607] 00000000-0000-7000-8000-000000000022: 18 lines | Chapter Thirty-Two CHAPTER III. … it was his 607
+ 622 [608] 00000000-0000-7000-8000-000000000022: 25 lines | Waverley business to place … ready and acute 608
+ 623 [609] 00000000-0000-7000-8000-000000000022: 26 lines | CHAPTER III. A CONFERENCE … opportunities of witnessing 609
+ 624 [610] 00000000-0000-7000-8000-000000000022: 25 lines | Waverley evil were few, … amiable young woman 610
+ 625 [611] 00000000-0000-7000-8000-000000000022: 25 lines | CHAPTER III. A CONFERENCE … think even your 611
+ 626 [612] 00000000-0000-7000-8000-000000000022: 25 lines | Waverley merciful logic will … arms against the 612
+ 627 [613] 00000000-0000-7000-8000-000000000022: 26 lines | CHAPTER III. A CONFERENCE … said the clergyman. 613
+ 628 [614] 00000000-0000-7000-8000-000000000022: 25 lines | Waverley “Because your good-nature … hold an unusually 614
+ 629 [615] 00000000-0000-7000-8000-000000000022: 26 lines | CHAPTER III. A CONFERENCE … disgraced the commission 615
+ 630 [616] 00000000-0000-7000-8000-000000000022: 25 lines | Waverley he bore; Colonel … least as far 616
+ 631 [617] 00000000-0000-7000-8000-000000000022: 25 lines | CHAPTER III. A CONFERENCE … tutor Mr. Pembroke.” 617
+ 632 [618] 00000000-0000-7000-8000-000000000022: 25 lines | Waverley “He says he … insurgents, when in 618
+ 633 [619] 00000000-0000-7000-8000-000000000022: 24 lines | CHAPTER III. A CONFERENCE … of the prisoner? 619
+ 634 [620] 00000000-0000-7000-8000-000000000022: 24 lines | Waverley “It is a … the Highland army.” 620
+ 635 [621] 00000000-0000-7000-8000-000000000022: 26 lines | CHAPTER III. A CONFERENCE … You saw him, 621
+ 636 [622] 00000000-0000-7000-8000-000000000022: 25 lines | Waverley and said he … make the request?” 622
+ 637 [623] 00000000-0000-7000-8000-000000000022: 12 lines | CHAPTER III. A CONFERENCE … of the country. 623
+ 638 [624] 00000000-0000-7000-8000-000000000022: blank
+ 639 [625] 00000000-0000-7000-8000-000000000023: 18 lines | Chapter Thirty-Three CHAPTER IV. … England, and had 625
+ 640 [626] 00000000-0000-7000-8000-000000000023: 26 lines | Waverley been taught to … of Stuart. From 626
+ 641 [627] 00000000-0000-7000-8000-000000000023: 25 lines | CHAPTER IV. A CONFIDANT … how speedy, how 627
+ 642 [628] 00000000-0000-7000-8000-000000000023: 26 lines | Waverley very speedy, has … worth; but such 628
+ 643 [629] 00000000-0000-7000-8000-000000000023: 26 lines | CHAPTER IV. A CONFIDANT … particulars which could 629
+ 644 [630] 00000000-0000-7000-8000-000000000023: 26 lines | Waverley lead to your … carefully as possible 630
+ 645 [631] 00000000-0000-7000-8000-000000000023: 26 lines | CHAPTER IV. A CONFIDANT … arms against the 631
+ 646 [632] 00000000-0000-7000-8000-000000000023: 26 lines | Waverley government, and that … charms for me. 632
+ 647 [633] 00000000-0000-7000-8000-000000000023: 25 lines | CHAPTER IV. A CONFIDANT … he had communicated. 633
+ 648 [634] 00000000-0000-7000-8000-000000000023: 24 lines | Waverley The interest which … his young friend. 634
+ 649 [635] 00000000-0000-7000-8000-000000000023: 26 lines | CHAPTER IV. A CONFIDANT … patience; tell me 635
+ 650 [636] 00000000-0000-7000-8000-000000000023: 26 lines | Waverley rather who is … of what they 636
+ 651 [637] 00000000-0000-7000-8000-000000000023: 26 lines | CHAPTER IV. A CONFIDANT … Stirling, under whose 637
+ 652 [638] 00000000-0000-7000-8000-000000000023: 15 lines | Waverley escort Major Melville … of the day.” 638
+ 653 [639] 00000000-0000-7000-8000-000000000024: 18 lines | Chapter Thirty-Four CHAPTER V. … the unfortunate state 639
+ 654 [640] 00000000-0000-7000-8000-000000000024: 26 lines | Waverley of the country … upon that occasion. 640
+ 655 [641] 00000000-0000-7000-8000-000000000024: 26 lines | CHAPTER V. THINGS MEND … interpreted into a 641
+ 656 [642] 00000000-0000-7000-8000-000000000024: 26 lines | Waverley consciousness that it … gave ready way 642
+ 657 [643] 00000000-0000-7000-8000-000000000024: 26 lines | CHAPTER V. THINGS MEND … rose and went 643
+ 658 [644] 00000000-0000-7000-8000-000000000024: 26 lines | Waverley towards the window, … the inoffensive row-de- 644
+ 659 [645] 00000000-0000-7000-8000-000000000024: 12 lines | CHAPTER V. THINGS MEND … with due respect. 645
+ 660 [646] 00000000-0000-7000-8000-000000000024: blank
+ 661 [647] 00000000-0000-7000-8000-000000000025: 18 lines | Chapter Thirty-Five CHAPTER VI. … words, COVENANT, KIRK, 647
+ 662 [648] 00000000-0000-7000-8000-000000000025: 25 lines | Waverley KING, KINGDOMS. The … the affected precision 648
+ 663 [649] 00000000-0000-7000-8000-000000000025: 26 lines | CHAPTER VI. A VOLUNTEER … the idea that 649
+ 664 [650] 00000000-0000-7000-8000-000000000025: 25 lines | Waverley he beheld a … straggled from their 650
+ 665 [651] 00000000-0000-7000-8000-000000000025: 25 lines | CHAPTER VI. A VOLUNTEER … by the way, 651
+ 666 [652] 00000000-0000-7000-8000-000000000025: 25 lines | Waverley and tarried until … world wiser in 652
+ 667 [653] 00000000-0000-7000-8000-000000000025: 26 lines | CHAPTER VI. A VOLUNTEER … a better judge, 653
+ 668 [654] 00000000-0000-7000-8000-000000000025: 25 lines | Waverley unquestionably, than I … ten thousand pardons 654
+ 669 [655] 00000000-0000-7000-8000-000000000025: 26 lines | CHAPTER VI. A VOLUNTEER … Waverley, having mounted 655
+ 670 [656] 00000000-0000-7000-8000-000000000025: 12 lines | Waverley his horse, with … Mucklewrath, the smith!” 656
+ 671 [657] 00000000-0000-7000-8000-000000000026: 18 lines | Chapter Thirty-Six CHAPTER VII. … resist the temptation, 657
+ 672 [658] 00000000-0000-7000-8000-000000000026: 26 lines | Waverley he slackened his … structure of the 658
+ 673 [659] 00000000-0000-7000-8000-000000000026: 26 lines | CHAPTER VII. AN INCIDENT … saint-killing times? I 659
+ 674 [660] 00000000-0000-7000-8000-000000000026: 26 lines | Waverley trow, gin ye … of his ending 660
+ 675 [661] 00000000-0000-7000-8000-000000000026: 26 lines | CHAPTER VII. AN INCIDENT … their bonnets to 661
+ 676 [662] 00000000-0000-7000-8000-000000000026: 25 lines | Waverley me as they … land in Scotland.” 662
+ 677 [663] 00000000-0000-7000-8000-000000000026: 26 lines | CHAPTER VII. AN INCIDENT … would grieve your 663
+ 678 [664] 00000000-0000-7000-8000-000000000026: 26 lines | Waverley honour’s soul to … he was labouring 664
+ 679 [665] 00000000-0000-7000-8000-000000000026: 26 lines | CHAPTER VII. AN INCIDENT … who were Waverley’s 665
+ 680 [666] 00000000-0000-7000-8000-000000000026: 26 lines | Waverley more immediate guard, … or a papist 666
+ 681 [667] 00000000-0000-7000-8000-000000000026: 26 lines | CHAPTER VII. AN INCIDENT … he was forthwith 667
+ 682 [668] 00000000-0000-7000-8000-000000000026: 26 lines | Waverley levelled to the … shots were exchanged 668
+ 683 [669] 00000000-0000-7000-8000-000000000026: 10 lines | CHAPTER VII. AN INCIDENT … captain and comrades. 669
+ 684 [670] 00000000-0000-7000-8000-000000000026: blank
+ 685 [671] 00000000-0000-7000-8000-000000000027: 18 lines | Chapter Thirty-Seven CHAPTER VIII. … They spoke little, 671
+ 686 [672] 00000000-0000-7000-8000-000000000027: 25 lines | Waverley and that in … of trees and 672
+ 687 [673] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … and exterior foreboded. 673
+ 688 [674] 00000000-0000-7000-8000-000000000027: 24 lines | Waverley There was no … of their lineage 674
+ 689 [675] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … these symptoms; and 675
+ 690 [676] 00000000-0000-7000-8000-000000000027: 25 lines | Waverley in the morning … So behold our 676
+ 691 [677] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … put an end 677
+ 692 [678] 00000000-0000-7000-8000-000000000027: 25 lines | Waverley to the contest … turned to Flora 678
+ 693 [679] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … employed himself in 679
+ 694 [680] 00000000-0000-7000-8000-000000000027: 25 lines | Waverley contriving some plan … his purpose, and 680
+ 695 [681] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … to take his 681
+ 696 [682] 00000000-0000-7000-8000-000000000027: 25 lines | Waverley departure in spite … he might incur 682
+ 697 [683] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … executed. But his 683
+ 698 [684] 00000000-0000-7000-8000-000000000027: 25 lines | Waverley fortune had settled … for the wonderful, 684
+ 699 [685] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … hasty meal, and 685
+ 700 [686] 00000000-0000-7000-8000-000000000027: 25 lines | Waverley the others assumed … in the portmanteau. 686
+ 701 [687] 00000000-0000-7000-8000-000000000027: 26 lines | CHAPTER VIII. WAVERLEY IS … Waverley a parting 687
+ 702 [688] 00000000-0000-7000-8000-000000000027: 22 lines | Waverley smile and nod … asking any explanation. 688
+ 703 [689] 00000000-0000-7000-8000-000000000028: 18 lines | Chapter Thirty-Eight CHAPTER IX. … their passage. He 689
+ 704 [690] 00000000-0000-7000-8000-000000000028: 26 lines | Waverley then placed himself … night, the Highlanders 690
+ 705 [691] 00000000-0000-7000-8000-000000000028: 26 lines | CHAPTER IX. A NOCTURNAL … knees and shins, 691
+ 706 [692] 00000000-0000-7000-8000-000000000028: 26 lines | Waverley Waverley perceived the … from which the 692
+ 707 [693] 00000000-0000-7000-8000-000000000028: 26 lines | CHAPTER IX. A NOCTURNAL … the unseasonable splendour 693
+ 708 [694] 00000000-0000-7000-8000-000000000028: 29 lines | Waverley 1 of MacFarlane’s … for little gain. 694
+ 709 [695] 00000000-0000-7000-8000-000000000028: 26 lines | CHAPTER IX. A NOCTURNAL … alarm, advanced alertly 695
+ 710 [696] 00000000-0000-7000-8000-000000000028: 26 lines | Waverley towards the spot … now far in 696
+ 711 [697] 00000000-0000-7000-8000-000000000028: 26 lines | CHAPTER IX. A NOCTURNAL … who was perfectly 697
+ 712 [698] 00000000-0000-7000-8000-000000000028: 26 lines | Waverley acquainted with the … the dawn of 698
+ 713 [699] 00000000-0000-7000-8000-000000000028: 29 lines | CHAPTER IX. A NOCTURNAL … present. It was 699
+ 714 [700] 00000000-0000-7000-8000-000000000028: 30 lines | Waverley size sufficient to … breaking his fall. 700
+ 715 [701] 00000000-0000-7000-8000-000000000028: 27 lines | CHAPTER IX. A NOCTURNAL … of the fugitives. 701
+ 716 [702] 00000000-0000-7000-8000-000000000028: 26 lines | Waverley the harvest began … a small camp-bed, 702
+ 717 [703] 00000000-0000-7000-8000-000000000028: 25 lines | CHAPTER IX. A NOCTURNAL … himself upon the 703
+ 718 [704] 00000000-0000-7000-8000-000000000028: 4 lines | Waverley bed, and was … minutes fast asleep. 704
+ 719 [705] 00000000-0000-7000-8000-000000000029: 18 lines | Chapter Thirty-Nine CHAPTER X. … Waverley’s further inquiries, 705
+ 720 [706] 00000000-0000-7000-8000-000000000029: 25 lines | Waverley the servant opposed … linen, my friend?” 706
+ 721 [707] 00000000-0000-7000-8000-000000000029: 26 lines | CHAPTER X. THE JOURNEY … The offer was 707
+ 722 [708] 00000000-0000-7000-8000-000000000029: 25 lines | Waverley accepted, for a … A servant acquainted 708
+ 723 [709] 00000000-0000-7000-8000-000000000029: 26 lines | CHAPTER X. THE JOURNEY … or grooms rather 709
+ 724 [710] 00000000-0000-7000-8000-000000000029: 26 lines | Waverley than of troopers. … been so long 710
+ 725 [711] 00000000-0000-7000-8000-000000000029: 26 lines | CHAPTER X. THE JOURNEY … Dumblain,” under the 711
+ 726 [712] 00000000-0000-7000-8000-000000000029: 26 lines | Waverley influence of half … horses till keep.” 712
+ 727 [713] 00000000-0000-7000-8000-000000000029: 26 lines | CHAPTER X. THE JOURNEY … of the time. 713
+ 728 [714] 00000000-0000-7000-8000-000000000029: 30 lines | Waverley But then he … on friendly terms. 714
+ 729 [715] 00000000-0000-7000-8000-000000000029: 26 lines | CHAPTER X. THE JOURNEY … her till him. 715
+ 730 [716] 00000000-0000-7000-8000-000000000029: 26 lines | Waverley She was bred … to the field 716
+ 731 [717] 00000000-0000-7000-8000-000000000029: 25 lines | CHAPTER X. THE JOURNEY … fortress is situated. 717
+ 732 [718] 00000000-0000-7000-8000-000000000029: 26 lines | Waverley With a mind … as he wheeled 718
+ 733 [719] 00000000-0000-7000-8000-000000000029: 26 lines | CHAPTER X. THE JOURNEY … lieutenant afterwards observed, 719
+ 734 [720] 00000000-0000-7000-8000-000000000029: 26 lines | Waverley until an intervening … scene of military 720
+ 735 [721] 00000000-0000-7000-8000-000000000029: 26 lines | CHAPTER X. THE JOURNEY … sleepless debauchery. They 721
+ 736 [722] 00000000-0000-7000-8000-000000000029: 25 lines | Waverley halted at Linlithgow, … moving steadily forward. 722
+ 737 [723] 00000000-0000-7000-8000-000000000029: 25 lines | CHAPTER X. THE JOURNEY … which it was 723
+ 738 [724] 00000000-0000-7000-8000-000000000029: 26 lines | Waverley produced, and that … who, if they 724
+ 739 [725] 00000000-0000-7000-8000-000000000029: 21 lines | CHAPTER X. THE JOURNEY … now rapidly approaching. 725
+ 740 [726] 00000000-0000-7000-8000-000000000029: blank
+ 741 [727] 00000000-0000-7000-8000-00000000002a: 18 lines | Chapter Forty CHAPTER XI. … fall into the 727
+ 742 [728] 00000000-0000-7000-8000-00000000002a: 25 lines | Waverley hands of the … expression of his 728
+ 743 [729] 00000000-0000-7000-8000-00000000002a: 26 lines | CHAPTER XI. AN OLD … desired it, have 729
+ 744 [730] 00000000-0000-7000-8000-00000000002a: 25 lines | Waverley avoided rendering him … Mr. Waverley among 730
+ 745 [731] 00000000-0000-7000-8000-00000000002a: 26 lines | CHAPTER XI. AN OLD … will find worthy 731
+ 746 [732] 00000000-0000-7000-8000-00000000002a: 25 lines | Waverley associates in a … in his own 732
+ 747 [733] 00000000-0000-7000-8000-00000000002a: 26 lines | CHAPTER XI. AN OLD … be genuine. He 733
+ 748 [734] 00000000-0000-7000-8000-00000000002a: 29 lines | Waverley also thanked Fergus … mountaineers, speaking an 734
+ 749 [735] 00000000-0000-7000-8000-00000000002a: 26 lines | CHAPTER XI. AN OLD … advance into England. 735
+ 750 [736] 00000000-0000-7000-8000-00000000002a: 25 lines | Waverley effectually engaged in … only seven attendants, 736
+ 751 [737] 00000000-0000-7000-8000-00000000002a: 26 lines | CHAPTER XI. AN OLD … among the magistracy 737
+ 752 [738] 00000000-0000-7000-8000-00000000002a: 25 lines | Waverley and citizens of … to fall back 738
+ 753 [739] 00000000-0000-7000-8000-00000000002a: 26 lines | CHAPTER XI. AN OLD … will as surely 739
+ 754 [740] 00000000-0000-7000-8000-00000000002a: 25 lines | Waverley follow them; in … with the advantage 740
+ 755 [741] 00000000-0000-7000-8000-00000000002a: 26 lines | CHAPTER XI. AN OLD … curiously inlaid. “The 741
+ 756 [742] 00000000-0000-7000-8000-00000000002a: 19 lines | Waverley blade,” said the … left the presence-chamber. 742
+ 757 [743] 00000000-0000-7000-8000-00000000002b: 20 lines | Chapter Forty-One CHAPTER XII. … only amongst the 743
+ 758 [744] 00000000-0000-7000-8000-00000000002b: 27 lines | Waverley about him, are … to its overthrow. 744
+ 759 [745] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … shooting jacket has 745
+ 760 [746] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley seen service since … at the house 746
+ 761 [747] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … of the trews). 747
+ 762 [748] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley “Get a plaid … piece of service, 748
+ 763 [749] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … passes my judgment.” 749
+ 764 [750] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley “When and how … with what he 750
+ 765 [751] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … man must use 751
+ 766 [752] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley every fair means … were to be 752
+ 767 [753] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … a public prison.” 753
+ 768 [754] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley The growling voice … had the least 754
+ 769 [755] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … and that whether 755
+ 770 [756] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley it was taken … of the Prince, 756
+ 771 [757] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … or two large 757
+ 772 [758] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley villages which, from … army, to see 758
+ 773 [759] 00000000-0000-7000-8000-00000000002b: 26 lines | CHAPTER XII. THE MYSTERY … of the mirror 759
+ 774 [760] 00000000-0000-7000-8000-00000000002b: 25 lines | Waverley and all the … tarry so long.” 760
+ 775 [761] 00000000-0000-7000-8000-00000000002b: 6 lines | CHAPTER XII. THE MYSTERY … been assigned him. 761
+ 776 [762] 00000000-0000-7000-8000-00000000002b: blank
+ 777 [763] 00000000-0000-7000-8000-00000000002c: 18 lines | Chapter Forty-Two CHAPTER XIII. … the tartan like 763
+ 778 [764] 00000000-0000-7000-8000-00000000002c: 26 lines | Waverley lightning; and as … tartan added an 764
+ 779 [765] 00000000-0000-7000-8000-00000000002c: 26 lines | CHAPTER XIII. A SOLDIER’S … hae played wi’ 765
+ 780 [766] 00000000-0000-7000-8000-00000000002c: 25 lines | Waverley him mysell at … the bagganets himsell?” 766
+ 781 [767] 00000000-0000-7000-8000-00000000002c: 26 lines | CHAPTER XIII. A SOLDIER’S … Vich Ian Vohr 767
+ 782 [768] 00000000-0000-7000-8000-00000000002c: 26 lines | Waverley winna sit down … all his prospects 768
+ 783 [769] 00000000-0000-7000-8000-00000000002c: 26 lines | CHAPTER XIII. A SOLDIER’S … share what is 769
+ 784 [770] 00000000-0000-7000-8000-00000000002c: 26 lines | Waverley left of my … if his honour 770
+ 785 [771] 00000000-0000-7000-8000-00000000002c: 26 lines | CHAPTER XIII. A SOLDIER’S … to make our 771
+ 786 [772] 00000000-0000-7000-8000-00000000002c: 25 lines | Waverley landlady our banker. … obliged to resume. 772
+ 787 [773] 00000000-0000-7000-8000-00000000002c: 26 lines | CHAPTER XIII. A SOLDIER’S … may even be 773
+ 788 [774] 00000000-0000-7000-8000-00000000002c: 26 lines | Waverley some who would … it was to 774
+ 789 [775] 00000000-0000-7000-8000-00000000002c: 25 lines | CHAPTER XIII. A SOLDIER’S … managed by his 775
+ 790 [776] 00000000-0000-7000-8000-00000000002c: 26 lines | Waverley doer, Jamie Howie, … we will soon 776
+ 791 [777] 00000000-0000-7000-8000-00000000002c: 26 lines | CHAPTER XIII. A SOLDIER’S … bringing Mrs. Flockhart 777
+ 792 [778] 00000000-0000-7000-8000-00000000002c: 19 lines | Waverley into the bosom … of the campaign. 778
+ 793 [779] 00000000-0000-7000-8000-00000000002d: 19 lines | Chapter Forty-Three CHAPTER XIV. … words of Virgilius:— 779
+ 794 [780] 00000000-0000-7000-8000-00000000002d: 25 lines | Waverley Nunc insanus amor … entered the apartments. 780
+ 795 [781] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … be called brilliant. 781
+ 796 [782] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley It was not … particulars of a 782
+ 797 [783] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … and, combined with 783
+ 798 [784] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley her whole tone … indispensable, Waverley recovered 784
+ 799 [785] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … that Waverley was 785
+ 800 [786] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley a character of … Making, therefore, an 786
+ 801 [787] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … being warm in 787
+ 802 [788] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley the harness, as … probably, in mental 788
+ 803 [789] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … There was a 789
+ 804 [790] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley mystic tone of … times by a 790
+ 805 [791] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … who felt the 791
+ 806 [792] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley same impulse of … having taken so 792
+ 807 [793] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … too early and 793
+ 808 [794] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley too fondly. Without … sometimes be as 794
+ 809 [795] 00000000-0000-7000-8000-00000000002d: 26 lines | CHAPTER XIV. THE BALL … with your company.” 795
+ 810 [796] 00000000-0000-7000-8000-00000000002d: 26 lines | Waverley He led the … adieu of the 796
+ 811 [797] 00000000-0000-7000-8000-00000000002d: 13 lines | CHAPTER XIV. THE BALL … down the wind.” 797
+ 812 [798] 00000000-0000-7000-8000-00000000002d: blank
+ 813 [799] 00000000-0000-7000-8000-00000000002e: 19 lines | Chapter Forty-Four CHAPTER XV. … Of course it 799
+ 814 [800] 00000000-0000-7000-8000-00000000002e: 26 lines | Waverley soon became too … Ian Vohr’s walise.” 800
+ 815 [801] 00000000-0000-7000-8000-00000000002e: 26 lines | CHAPTER XV. THE MARCH … e’en be neighbour-like.” 801
+ 816 [802] 00000000-0000-7000-8000-00000000002e: 26 lines | Waverley “And so I … called St. Leonard’s 802
+ 817 [803] 00000000-0000-7000-8000-00000000002e: 26 lines | CHAPTER XV. THE MARCH … alarmed and arming 803
+ 818 [804] 00000000-0000-7000-8000-00000000002e: 26 lines | Waverley in their hives, … displaying the proud 804
+ 819 [805] 00000000-0000-7000-8000-00000000002e: 26 lines | CHAPTER XV. THE MARCH … waving upon the 805
+ 820 [806] 00000000-0000-7000-8000-00000000002e: 26 lines | Waverley extreme verge of … at some distance 806
+ 821 [807] 00000000-0000-7000-8000-00000000002e: 26 lines | CHAPTER XV. THE MARCH … of march which 807
+ 822 [808] 00000000-0000-7000-8000-00000000002e: 26 lines | Waverley was still distant, … peculiar mode of 808
+ 823 [809] 00000000-0000-7000-8000-00000000002e: 26 lines | CHAPTER XV. THE MARCH … Gibeonites, or hereditary 809
+ 824 [810] 00000000-0000-7000-8000-00000000002e: 26 lines | Waverley servants to the … which they collected 810
+ 825 [811] 00000000-0000-7000-8000-00000000002e: 26 lines | CHAPTER XV. THE MARCH … their population, while 811
+ 826 [812] 00000000-0000-7000-8000-00000000002e: 26 lines | Waverley thus sallying forth … had expressed a 812
+ 827 [813] 00000000-0000-7000-8000-00000000002e: 28 lines | CHAPTER XV. THE MARCH … which they called 813
+ 828 [814] 00000000-0000-7000-8000-00000000002e: 30 lines | Waverley No sooner was … the common people 814
+ 829 [815] 00000000-0000-7000-8000-00000000002e: 26 lines | CHAPTER XV. THE MARCH … to this disquisition. 815
+ 830 [816] 00000000-0000-7000-8000-00000000002e: 6 lines | Waverley more to the … line of march. 816
+ 831 [817] 00000000-0000-7000-8000-00000000002f: 16 lines | Chapter Forty-Five CHAPTER XVI. … neighbouring clan to 817
+ 832 [818] 00000000-0000-7000-8000-00000000002f: 24 lines | Waverley Evan Dhu, “as … out upon parties. 818
+ 833 [819] 00000000-0000-7000-8000-00000000002f: 26 lines | CHAPTER XVI. AN INCIDENT … acted as his 819
+ 834 [820] 00000000-0000-7000-8000-00000000002f: 25 lines | Waverley major; and, with … before to the 820
+ 835 [821] 00000000-0000-7000-8000-00000000002f: 26 lines | CHAPTER XVI. AN INCIDENT … curiosity, and soon 821
+ 836 [822] 00000000-0000-7000-8000-00000000002f: 25 lines | Waverley observed five or … he was enveloped. 822
+ 837 [823] 00000000-0000-7000-8000-00000000002f: 25 lines | CHAPTER XVI. AN INCIDENT … this be you?” 823
+ 838 [824] 00000000-0000-7000-8000-00000000002f: 25 lines | Waverley “I never thought … meet him. “Brave 824
+ 839 [825] 00000000-0000-7000-8000-00000000002f: 25 lines | CHAPTER XVI. AN INCIDENT … of my uncle’s.” 825
+ 840 [826] 00000000-0000-7000-8000-00000000002f: 25 lines | Waverley “O, if he’s … praying his young 826
+ 841 [827] 00000000-0000-7000-8000-00000000002f: 25 lines | CHAPTER XVI. AN INCIDENT … auld mother Elspat. 827
+ 842 [828] 00000000-0000-7000-8000-00000000002f: 25 lines | Waverley It was by … carrying on an 828
+ 843 [829] 00000000-0000-7000-8000-00000000002f: 26 lines | CHAPTER XVI. AN INCIDENT … vices—to how much 829
+ 844 [830] 00000000-0000-7000-8000-00000000002f: 4 lines | Waverley exquisite misery and … prepare the way!” 830
+ 845 [831] 00000000-0000-7000-8000-000000000030: 18 lines | Chapter Forty-Six CHAPTER XVII. … Preston again entering 831
+ 846 [832] 00000000-0000-7000-8000-000000000030: 26 lines | Waverley the denies of … mile in breadth. 832
+ 847 [833] 00000000-0000-7000-8000-000000000030: 26 lines | CHAPTER XVII. THE EVE … evolutions, the Highlanders 833
+ 848 [834] 00000000-0000-7000-8000-000000000030: 26 lines | Waverley showed equal promptitude … great extent, was 834
+ 849 [835] 00000000-0000-7000-8000-000000000030: 26 lines | CHAPTER XVII. THE EVE … in the arena, 835
+ 850 [836] 00000000-0000-7000-8000-000000000030: 26 lines | Waverley each meditating upon … if watching the 836
+ 851 [837] 00000000-0000-7000-8000-000000000030: 26 lines | CHAPTER XVII. THE EVE … plainly recognise the 837
+ 852 [838] 00000000-0000-7000-8000-000000000030: 25 lines | Waverley standard of the … my native England!” 838
+ 853 [839] 00000000-0000-7000-8000-000000000030: 26 lines | CHAPTER XVII. THE EVE … his piece. Colonel 839
+ 854 [840] 00000000-0000-7000-8000-000000000030: 26 lines | Waverley Gardiner, unconscious of … plaids, let us 840
+ 855 [841] 00000000-0000-7000-8000-000000000030: 25 lines | CHAPTER XVII. THE EVE … Catholic as to 841
+ 856 [842] 00000000-0000-7000-8000-000000000030: 26 lines | Waverley refuse to join … good-night. One thing 842
+ 857 [843] 00000000-0000-7000-8000-000000000030: 26 lines | CHAPTER XVII. THE EVE … kettle-drums of the 843
+ 858 [844] 00000000-0000-7000-8000-000000000030: 26 lines | Waverley cavalry were next … buried (excepting their 844
+ 859 [845] 00000000-0000-7000-8000-000000000030: 26 lines | CHAPTER XVII. THE EVE … them to sleep. 845
+ 860 [846] 00000000-0000-7000-8000-000000000030: blank
+ 861 [847] 00000000-0000-7000-8000-000000000031: 18 lines | Chapter Forty-Seven CHAPTER XVIII. … head of his 847
+ 862 [848] 00000000-0000-7000-8000-000000000031: 32 lines | Waverley 1 command; a … consistent with the 848
+ 863 [849] 00000000-0000-7000-8000-000000000031: 29 lines | CHAPTER XVIII. THE CONFLICT … in the action. 849
+ 864 [850] 00000000-0000-7000-8000-000000000031: 26 lines | Waverley which the enemy … broken, and marshy 850
+ 865 [851] 00000000-0000-7000-8000-000000000031: 26 lines | CHAPTER XVIII. THE CONFLICT … give the alarm.” 851
+ 866 [852] 00000000-0000-7000-8000-000000000031: 26 lines | Waverley The clan of … between the two 852
+ 867 [853] 00000000-0000-7000-8000-000000000031: 26 lines | CHAPTER XVIII. THE CONFLICT … off his own; 853
+ 868 [854] 00000000-0000-7000-8000-000000000031: 25 lines | Waverley “we’ll win silks … sounds of the 854
+ 869 [855] 00000000-0000-7000-8000-000000000031: 26 lines | CHAPTER XVIII. THE CONFLICT … from the field. 855
+ 870 [856] 00000000-0000-7000-8000-000000000031: 26 lines | Waverley The artillery men, … At the same 856
+ 871 [857] 00000000-0000-7000-8000-000000000031: 26 lines | CHAPTER XVIII. THE CONFLICT … a decided superiority 857
+ 872 [858] 00000000-0000-7000-8000-000000000031: 26 lines | Waverley over those who … he saw his 858
+ 873 [859] 00000000-0000-7000-8000-000000000031: 28 lines | CHAPTER XVIII. THE CONFLICT … “He continued all 859
+ 874 [860] 00000000-0000-7000-8000-000000000031: 30 lines | Waverley Loud shouts of … his left breast, 860
+ 875 [861] 00000000-0000-7000-8000-000000000031: 30 lines | CHAPTER XVIII. THE CONFLICT … deliberate what duty 861
+ 876 [862] 00000000-0000-7000-8000-000000000031: 30 lines | Waverley fought and won, … was one Mac-Naught, 862
+ 877 [863] 00000000-0000-7000-8000-000000000031: 29 lines | CHAPTER XVIII. THE CONFLICT … do their duty. 863
+ 878 [864] 00000000-0000-7000-8000-000000000031: 26 lines | Waverley complete. Scarce any … to exculpate his 864
+ 879 [865] 00000000-0000-7000-8000-000000000031: 29 lines | CHAPTER XVIII. THE CONFLICT … Wells, where the 865
+ 880 [866] 00000000-0000-7000-8000-000000000031: 15 lines | efforts of some of … unfortunate gentleman’s waistcoat. 866
+ 881 [867] 00000000-0000-7000-8000-000000000032: 22 lines | CHAPTER XIX. AN UNEXPECTED … belonged to some 867
+ 882 [868] 00000000-0000-7000-8000-000000000032: 25 lines | Waverley unfortunate English officer. … him through the 868
+ 883 [869] 00000000-0000-7000-8000-000000000032: 26 lines | CHAPTER XIX. AN UNEXPECTED … weight, and which 869
+ 884 [870] 00000000-0000-7000-8000-000000000032: 24 lines | Waverley deeply affects the … Bradwardine’s or mine.” 870
+ 885 [871] 00000000-0000-7000-8000-000000000032: 26 lines | CHAPTER XIX. AN UNEXPECTED … house; and it 871
+ 886 [872] 00000000-0000-7000-8000-000000000032: 25 lines | Waverley is on that … to which his 872
+ 887 [873] 00000000-0000-7000-8000-000000000032: 26 lines | CHAPTER XIX. AN UNEXPECTED … usages of the 873
+ 888 [874] 00000000-0000-7000-8000-000000000032: 24 lines | Waverley court of France; … the same predicament.” 874
+ 889 [875] 00000000-0000-7000-8000-000000000032: 26 lines | CHAPTER XIX. AN UNEXPECTED … denominated from the 875
+ 890 [876] 00000000-0000-7000-8000-000000000032: 24 lines | Waverley ligatures wherewith they … but immediately resumed 876
+ 891 [877] 00000000-0000-7000-8000-000000000032: 26 lines | CHAPTER XIX. AN UNEXPECTED … that if it 877
+ 892 [878] 00000000-0000-7000-8000-000000000032: 25 lines | Waverley shall be his … upon his visage. 878
+ 893 [879] 00000000-0000-7000-8000-000000000032: 26 lines | CHAPTER XIX. AN UNEXPECTED … divert him from 879
+ 894 [880] 00000000-0000-7000-8000-000000000032: 18 lines | Waverley exposing himself he … my dear Waverley.” 880
+ 895 [881] 00000000-0000-7000-8000-000000000033: 18 lines | Chapter Forty-Nine CHAPTER XX. … the moment of 881
+ 896 [882] 00000000-0000-7000-8000-000000000033: 25 lines | Waverley his captivity as … might contribute to 882
+ 897 [883] 00000000-0000-7000-8000-000000000033: 25 lines | CHAPTER XX. THE ENGLISH … into the press. 883
+ 898 [884] 00000000-0000-7000-8000-000000000033: 25 lines | Waverley “Come, Edward, come … family is interested.” 884
+ 899 [885] 00000000-0000-7000-8000-000000000033: 25 lines | CHAPTER XX. THE ENGLISH … met with you.” 885
+ 900 [886] 00000000-0000-7000-8000-000000000033: 25 lines | Waverley “I am ignorant, … such a cause!” 886
+ 901 [887] 00000000-0000-7000-8000-000000000033: 26 lines | CHAPTER XX. THE ENGLISH … a large garden 887
+ 902 [888] 00000000-0000-7000-8000-000000000033: 26 lines | Waverley belonging to his … the infinite distress, 888
+ 903 [889] 00000000-0000-7000-8000-000000000033: 25 lines | CHAPTER XX. THE ENGLISH … on my account.” 889
+ 904 [890] 00000000-0000-7000-8000-000000000033: 26 lines | Waverley “Mr. Waverley,” answered … long absence, I 890
+ 905 [891] 00000000-0000-7000-8000-000000000033: 26 lines | CHAPTER XX. THE ENGLISH … to render this 891
+ 906 [892] 00000000-0000-7000-8000-000000000033: 26 lines | Waverley insurrection for ever … manly sorrow, and 892
+ 907 [893] 00000000-0000-7000-8000-000000000033: 26 lines | CHAPTER XX. THE ENGLISH … exchange places with 893
+ 908 [894] 00000000-0000-7000-8000-000000000033: 26 lines | Waverley one of those … held towards him. 894
+ 909 [895] 00000000-0000-7000-8000-000000000033: 12 lines | CHAPTER XX. THE ENGLISH … adjoining to Musselburgh.] 895
+ 910 [896] 00000000-0000-7000-8000-000000000033: blank
+ 911 [897] 00000000-0000-7000-8000-000000000034: 18 lines | Chapter Fifty CHAPTER XXI. … of St. James’s 897
+ 912 [898] 00000000-0000-7000-8000-000000000034: 26 lines | Waverley ring? Not “turn … to-morrow; and what 898
+ 913 [899] 00000000-0000-7000-8000-000000000034: 30 lines | CHAPTER XXI. RATHER UNIMPORTANT … never saw any 899
+ 914 [900] 00000000-0000-7000-8000-000000000034: 26 lines | Waverley should like to … on the blades. 900
+ 915 [901] 00000000-0000-7000-8000-000000000034: 26 lines | CHAPTER XXI. RATHER UNIMPORTANT … inquiries concerning Colonel 901
+ 916 [902] 00000000-0000-7000-8000-000000000034: 26 lines | Waverley Talbot, and when … you will find 902
+ 917 [903] 00000000-0000-7000-8000-000000000034: 26 lines | CHAPTER XXI. RATHER UNIMPORTANT … to Edinburgh tomorrow.” 903
+ 918 [904] 00000000-0000-7000-8000-000000000034: 26 lines | Waverley Being thus remanded … history, with the 904
+ 919 [905] 00000000-0000-7000-8000-000000000034: 26 lines | CHAPTER XXI. RATHER UNIMPORTANT … the barony of 905
+ 920 [906] 00000000-0000-7000-8000-000000000034: 26 lines | Waverley Bradwardine and lands … et peracta; and 906
+ 921 [907] 00000000-0000-7000-8000-000000000034: 26 lines | CHAPTER XXI. RATHER UNIMPORTANT … and how little 907
+ 922 [908] 00000000-0000-7000-8000-000000000034: 26 lines | Waverley should I have … or who opposed 908
+ 923 [909] 00000000-0000-7000-8000-000000000034: 26 lines | CHAPTER XXI. RATHER UNIMPORTANT … cannon of the 909
+ 924 [910] 00000000-0000-7000-8000-000000000034: 26 lines | Waverley Castle, he preached … you will excuse 910
+ 925 [911] 00000000-0000-7000-8000-000000000034: 4 lines | CHAPTER XXI. RATHER UNIMPORTANT … somewhat better acquainted.” 911
+ 926 [912] 00000000-0000-7000-8000-000000000034: blank
+ 927 [913] 00000000-0000-7000-8000-000000000035: 18 lines | Chapter Fifty-One CHAPTER XXII. … temple as she 913
+ 928 [914] 00000000-0000-7000-8000-000000000035: 28 lines | Waverley waved her handkerchief … done on purpose.” 914
+ 929 [915] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … confide to him. 915
+ 930 [916] 00000000-0000-7000-8000-000000000035: 24 lines | Waverley “And so,” said … think I can 916
+ 931 [917] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … tumbled the expected 917
+ 932 [918] 00000000-0000-7000-8000-000000000035: 25 lines | Waverley packet. Waverley opened … the more necessary 918
+ 933 [919] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … to redeem his 919
+ 934 [920] 00000000-0000-7000-8000-000000000035: 25 lines | Waverley error by immediately … letter he unfolded 920
+ 935 [921] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … own honour, equally 921
+ 936 [922] 00000000-0000-7000-8000-000000000035: 25 lines | Waverley with that of … Sur, “H. H. 922
+ 937 [923] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … service. From this 923
+ 938 [924] 00000000-0000-7000-8000-000000000035: 25 lines | Waverley fellow they learned … to hold such 924
+ 939 [925] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … much penitence, being 925
+ 940 [926] 00000000-0000-7000-8000-000000000035: 25 lines | Waverley convinced, from the … expressed to Talbot. 926
+ 941 [927] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … Stuart interest, which 927
+ 942 [928] 00000000-0000-7000-8000-000000000035: 25 lines | Waverley seemed confirmed by … to be used 928
+ 943 [929] 00000000-0000-7000-8000-000000000035: 26 lines | CHAPTER XXII. INTRIGUES OF … that, whatever should 929
+ 944 [930] 00000000-0000-7000-8000-000000000035: 25 lines | Waverley happen, his evidence … a servant a 930
+ 945 [931] 00000000-0000-7000-8000-000000000035: 8 lines | CHAPTER XXII. INTRIGUES OF … of the Fusileers. 931
+ 946 [932] 00000000-0000-7000-8000-000000000035: blank
+ 947 [933] 00000000-0000-7000-8000-000000000036: 18 lines | Chapter Fifty-Two CHAPTER XXIII. … polish which they 933
+ 948 [934] 00000000-0000-7000-8000-000000000036: 25 lines | Waverley had received from … to his own 934
+ 949 [935] 00000000-0000-7000-8000-000000000036: 26 lines | CHAPTER XXIII. INTRIGUES OF … misfortune to meet 935
+ 950 [936] 00000000-0000-7000-8000-000000000036: 25 lines | Waverley with, and the … court of St. 936
+ 951 [937] 00000000-0000-7000-8000-000000000036: 26 lines | CHAPTER XXIII. INTRIGUES OF … observed with regret 937
+ 952 [938] 00000000-0000-7000-8000-000000000036: 25 lines | Waverley that his suit … and expression which 938
+ 953 [939] 00000000-0000-7000-8000-000000000036: 26 lines | CHAPTER XXIII. INTRIGUES OF … was felt, the 939
+ 954 [940] 00000000-0000-7000-8000-000000000036: 24 lines | Waverley cause could hardly … the most probable 940
+ 955 [941] 00000000-0000-7000-8000-000000000036: 26 lines | CHAPTER XXIII. INTRIGUES OF … transferring his estate 941
+ 956 [942] 00000000-0000-7000-8000-000000000036: 25 lines | Waverley to the distant … the ties which 942
+ 957 [943] 00000000-0000-7000-8000-000000000036: 25 lines | CHAPTER XXIII. INTRIGUES OF … with his own. 943
+ 958 [944] 00000000-0000-7000-8000-000000000036: 25 lines | Waverley She remarked this … his voice in 944
+ 959 [945] 00000000-0000-7000-8000-000000000036: 25 lines | CHAPTER XXIII. INTRIGUES OF … life every day 945
+ 960 [946] 00000000-0000-7000-8000-000000000036: 25 lines | Waverley in the world, … so well informed—” 946
+ 961 [947] 00000000-0000-7000-8000-000000000036: 26 lines | CHAPTER XXIII. INTRIGUES OF … library in the 947
+ 962 [948] 00000000-0000-7000-8000-000000000036: 18 lines | Waverley most exquisite Gothic … dropped the conversation. 948
+ 963 [949] 00000000-0000-7000-8000-000000000037: 18 lines | Chapter Fifty-Three CHAPTER XXIV. … discontent, although the 949
+ 964 [950] 00000000-0000-7000-8000-000000000037: 25 lines | Waverley most legitimate was … Waverley overnight, “and 950
+ 965 [951] 00000000-0000-7000-8000-000000000037: 26 lines | CHAPTER XXIV. FERGUS A … of passion, and 951
+ 966 [952] 00000000-0000-7000-8000-000000000037: 26 lines | Waverley resulted from an … have come to 952
+ 967 [953] 00000000-0000-7000-8000-000000000037: 26 lines | CHAPTER XXIV. FERGUS A … with us; nay, 953
+ 968 [954] 00000000-0000-7000-8000-000000000037: 26 lines | Waverley never deny it, … the least, by 954
+ 969 [955] 00000000-0000-7000-8000-000000000037: 26 lines | CHAPTER XXIV. FERGUS A … some such trash. 955
+ 970 [956] 00000000-0000-7000-8000-000000000037: 26 lines | Waverley Well, sir, as … the mother of 956
+ 971 [957] 00000000-0000-7000-8000-000000000037: 26 lines | CHAPTER XXIV. FERGUS A … bear and bootjack 957
+ 972 [958] 00000000-0000-7000-8000-000000000037: 26 lines | Waverley party per pale, … of C—— and 958
+ 973 [959] 00000000-0000-7000-8000-000000000037: 25 lines | CHAPTER XXIV. FERGUS A … my just and 959
+ 974 [960] 00000000-0000-7000-8000-000000000037: 26 lines | Waverley reasonable request at … prince, that Miss 960
+ 975 [961] 00000000-0000-7000-8000-000000000037: 26 lines | CHAPTER XXIV. FERGUS A … of vengeance, and 961
+ 976 [962] 00000000-0000-7000-8000-000000000037: 6 lines | Waverley returned home, scarce … his own bosom. 962
+ 977 [963] 00000000-0000-7000-8000-000000000038: 18 lines | Chapter Fifty-Four CHAPTER XXV. … arise from the 963
+ 978 [964] 00000000-0000-7000-8000-000000000038: 25 lines | Waverley dead. The Baron … look as hollow 964
+ 979 [965] 00000000-0000-7000-8000-000000000038: 26 lines | CHAPTER XXV. “TO ONE … conversation in which 965
+ 980 [966] 00000000-0000-7000-8000-000000000038: 25 lines | Waverley she was engaged. … ear than Flora, 966
+ 981 [967] 00000000-0000-7000-8000-000000000038: 26 lines | CHAPTER XXV. “TO ONE … taste, Miss Mac- 967
+ 982 [968] 00000000-0000-7000-8000-000000000038: 24 lines | Waverley Ivor,” thought Edward, … have been a 968
+ 983 [969] 00000000-0000-7000-8000-000000000038: 26 lines | CHAPTER XXV. “TO ONE … softer passions; his 969
+ 984 [970] 00000000-0000-7000-8000-000000000038: 24 lines | Waverley love is at … upon the scene 970
+ 985 [971] 00000000-0000-7000-8000-000000000038: 25 lines | CHAPTER XXV. “TO ONE … faith you value. 971
+ 986 [972] 00000000-0000-7000-8000-000000000038: 25 lines | Waverley Love will subsist … being guided by 972
+ 987 [973] 00000000-0000-7000-8000-000000000038: 5 lines | CHAPTER XXV. “TO ONE … himself to repose. 973
+ 988 [974] 00000000-0000-7000-8000-000000000038: blank
+ 989 [975] 00000000-0000-7000-8000-000000000039: 18 lines | Chapter Fifty-Five CHAPTER XXVI. … on the probable 975
+ 990 [976] 00000000-0000-7000-8000-000000000039: 26 lines | Waverley state of matters … assembling very rapidly 976
+ 991 [977] 00000000-0000-7000-8000-000000000039: 26 lines | CHAPTER XXVI. A BRAVE … very gently, and 977
+ 992 [978] 00000000-0000-7000-8000-000000000039: 24 lines | Waverley perceived the Colonel, … can be done?” 978
+ 993 [979] 00000000-0000-7000-8000-000000000039: 26 lines | CHAPTER XXVI. A BRAVE … us, with the 979
+ 994 [980] 00000000-0000-7000-8000-000000000039: 26 lines | Waverley dreadful addition that … for some time, 980
+ 995 [981] 00000000-0000-7000-8000-000000000039: 25 lines | CHAPTER XXVI. A BRAVE … of the threatened 981
+ 996 [982] 00000000-0000-7000-8000-000000000039: 25 lines | Waverley evil; and Edward, … answer for you.” 982
+ 997 [983] 00000000-0000-7000-8000-000000000039: 26 lines | CHAPTER XXVI. A BRAVE … alone can foresee 983
+ 998 [984] 00000000-0000-7000-8000-000000000039: 25 lines | Waverley the dependence of … forget it for 984
+ 999 [985] 00000000-0000-7000-8000-000000000039: 6 lines | CHAPTER XXVI. A BRAVE … with a reply. 985
+1000 [986] 00000000-0000-7000-8000-000000000039: blank
+1001 [987] 00000000-0000-7000-8000-00000000003a: 17 lines | Chapter Fifty-Six CHAPTER XXVII. … haste, make haste.” 987
+1002 [988] 00000000-0000-7000-8000-00000000003a: 26 lines | Waverley The Colonel examined … I will go 988
+1003 [989] 00000000-0000-7000-8000-00000000003a: 26 lines | CHAPTER XXVII. EXERTION on. … in Colonel Talbot’s 989
+1004 [990] 00000000-0000-7000-8000-00000000003a: 25 lines | Waverley family; nor will … name, and which 990
+1005 [991] 00000000-0000-7000-8000-00000000003a: 26 lines | CHAPTER XXVII. EXERTION we … I cannot hesitate 991
+1006 [992] 00000000-0000-7000-8000-00000000003a: 26 lines | Waverley on giving my … his own, with 992
+1007 [993] 00000000-0000-7000-8000-00000000003a: 26 lines | CHAPTER XXVII. EXERTION the … to be employed. 993
+1008 [994] 00000000-0000-7000-8000-00000000003a: 26 lines | Waverley “I assure you, … century old in 994
+1009 [995] 00000000-0000-7000-8000-00000000003a: 26 lines | CHAPTER XXVII. EXERTION mischief … at the seaport. 995
+1010 [996] 00000000-0000-7000-8000-00000000003a: 25 lines | Waverley The boat rocked … dans cette galère?” 996
+1011 [997] 00000000-0000-7000-8000-00000000003a: 5 lines | CHAPTER XXVII. EXERTION And … returning to Edinburgh. 997
+1012 [998] 00000000-0000-7000-8000-00000000003a: blank
+1013 [999] 00000000-0000-7000-8000-00000000003b: 18 lines | Chapter Fifty-Seven CHAPTER XXVIII. … in reality gave 999
+1014 [1000] 00000000-0000-7000-8000-00000000003b: 26 lines | Waverley these active mountaineers … he always considered 1000
+1015 [1001] 00000000-0000-7000-8000-00000000003b: 26 lines | CHAPTER XXVIII. THE MARCH … themselves to the 1001
+1016 [1002] 00000000-0000-7000-8000-00000000003b: 26 lines | Waverley government as suspected … distress, and every 1002
+1017 [1003] 00000000-0000-7000-8000-00000000003b: 25 lines | CHAPTER XXVIII. THE MARCH … unconnected with Waverley-Honour.” 1003
+1018 [1004] 00000000-0000-7000-8000-00000000003b: 26 lines | Waverley “I hope so … the matter over 1004
+1019 [1005] 00000000-0000-7000-8000-00000000003b: 26 lines | CHAPTER XXVIII. THE MARCH … squire. But, sir,” 1005
+1020 [1006] 00000000-0000-7000-8000-00000000003b: 26 lines | Waverley changing his tone, … the same direction, 1006
+1021 [1007] 00000000-0000-7000-8000-00000000003b: 26 lines | CHAPTER XXVIII. THE MARCH … wherefore, might well 1007
+1022 [1008] 00000000-0000-7000-8000-00000000003b: 26 lines | Waverley provoke calmer blood … and must have 1008
+1023 [1009] 00000000-0000-7000-8000-00000000003b: 26 lines | CHAPTER XXVIII. THE MARCH … mine. I only 1009
+1024 [1010] 00000000-0000-7000-8000-00000000003b: 26 lines | Waverley mention this to … motion he promised 1010
+1025 [1011] 00000000-0000-7000-8000-00000000003b: 26 lines | CHAPTER XXVIII. THE MARCH … Were Flora an 1011
+1026 [1012] 00000000-0000-7000-8000-00000000003b: 26 lines | Waverley angel, she would … unreasonableness of his 1012
+1027 [1013] 00000000-0000-7000-8000-00000000003b: 26 lines | CHAPTER XXVIII. THE MARCH … or other had 1013
+1028 [1014] 00000000-0000-7000-8000-00000000003b: 7 lines | Waverley quarrels with the … the Prince’s service. 1014
+1029 [1015] 00000000-0000-7000-8000-00000000003c: 18 lines | Chapter Fifty-Eight CHAPTER XXIX. … to the Highlands. 1015
+1030 [1016] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley He seemed to … ye; and ye 1016
+1031 [1017] 00000000-0000-7000-8000-00000000003c: 25 lines | CHAPTER XXIX. THE CONFUSION … ball whistled past 1017
+1032 [1018] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley him, and the … was in the 1018
+1033 [1019] 00000000-0000-7000-8000-00000000003c: 25 lines | CHAPTER XXIX. THE CONFUSION … at Mr. Waverley?” 1019
+1034 [1020] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley “No,” answered the … was down, the 1020
+1035 [1021] 00000000-0000-7000-8000-00000000003c: 26 lines | CHAPTER XXIX. THE CONFUSION … Fergus, confronting him 1021
+1036 [1022] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley when they were … of his estate 1022
+1037 [1023] 00000000-0000-7000-8000-00000000003c: 26 lines | CHAPTER XXIX. THE CONFUSION … drew his sword. 1023
+1038 [1024] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley At this moment … old Ballenkeiroch, who 1024
+1039 [1025] 00000000-0000-7000-8000-00000000003c: 26 lines | CHAPTER XXIX. THE CONFUSION … promised his punishment 1025
+1040 [1026] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley should be exemplary. … spirits of the 1026
+1041 [1027] 00000000-0000-7000-8000-00000000003c: 26 lines | CHAPTER XXIX. THE CONFUSION … prancing highly-managed charger. 1027
+1042 [1028] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley Accordingly he piaffed … la marche. Marchez 1028
+1043 [1029] 00000000-0000-7000-8000-00000000003c: 26 lines | CHAPTER XXIX. THE CONFUSION … of the spectators. 1029
+1044 [1030] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley “Eh bien, Messieurs, … less to your 1030
+1045 [1031] 00000000-0000-7000-8000-00000000003c: 26 lines | CHAPTER XXIX. THE CONFUSION … accuses me, most 1031
+1046 [1032] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley unjustly, of having … you might not 1032
+1047 [1033] 00000000-0000-7000-8000-00000000003c: 26 lines | CHAPTER XXIX. THE CONFUSION … Charles Stuart, a 1033
+1048 [1034] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley brother adventurer with … matter properly to 1034
+1049 [1035] 00000000-0000-7000-8000-00000000003c: 14 lines | CHAPTER XXIX. THE CONFUSION … of the Chevalier. 1035
+1050 [1036] 00000000-0000-7000-8000-00000000003c: 31 lines | Waverley 1 Charles Edward … others of his 1036
+1051 [1037] 00000000-0000-7000-8000-00000000003c: 30 lines | CHAPTER XXIX. THE CONFUSION … carrying the rising 1037
+1052 [1038] 00000000-0000-7000-8000-00000000003c: 29 lines | Waverley horse, begged a … surrounded Charles’s person 1038
+1053 [1039] 00000000-0000-7000-8000-00000000003c: 30 lines | CHAPTER XXIX. THE CONFUSION … his portrait. The 1039
+1054 [1040] 00000000-0000-7000-8000-00000000003c: 29 lines | Waverley about half a … the Prince was 1040
+1055 [1041] 00000000-0000-7000-8000-00000000003c: 30 lines | CHAPTER XXIX. THE CONFUSION … the prisoners to 1041
+1056 [1042] 00000000-0000-7000-8000-00000000003c: 29 lines | Waverley connections of Sliochd … below him, he 1042
+1057 [1043] 00000000-0000-7000-8000-00000000003c: 30 lines | CHAPTER XXIX. THE CONFUSION … not without a 1043
+1058 [1044] 00000000-0000-7000-8000-00000000003c: 25 lines | Waverley possessed, and affecting … which follows it. 1044
+1059 [1045] 00000000-0000-7000-8000-00000000003c: 11 lines | CHAPTER XXIX. THE CONFUSION … jeu, après tout.” 1045
+1060 [1046] 00000000-0000-7000-8000-00000000003c: blank
+1061 [1047] 00000000-0000-7000-8000-00000000003d: 18 lines | Chapter Fifty-Nine CHAPTER XXX. … body of cavalry. 1047
+1062 [1048] 00000000-0000-7000-8000-00000000003d: 26 lines | Waverley This retreat was … unexpected visit; nor 1048
+1063 [1049] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … In a letter 1049
+1064 [1050] 00000000-0000-7000-8000-00000000003d: 26 lines | Waverley written after our … friends will easily 1050
+1065 [1051] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … occasions, the heading, 1051
+1066 [1052] 00000000-0000-7000-8000-00000000003d: 25 lines | Waverley hanging, and forfeiting … I warrant them.” 1052
+1067 [1053] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … Glas.” “Bodach Glas?” 1053
+1068 [1054] 00000000-0000-7000-8000-00000000003d: 26 lines | Waverley “Yes; have you … through the Cheviots 1054
+1069 [1055] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … subject. Since this 1055
+1070 [1056] 00000000-0000-7000-8000-00000000003d: 26 lines | Waverley unhappy retreat commenced … to him, but 1056
+1071 [1057] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … that made my 1057
+1072 [1058] 00000000-0000-7000-8000-00000000003d: 26 lines | Waverley very blood curdle, … knew he could 1058
+1073 [1059] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … running about as 1059
+1074 [1060] 00000000-0000-7000-8000-00000000003d: 26 lines | Waverley active as ever, … Spirit. “The ides 1060
+1075 [1061] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … checked their progress. 1061
+1076 [1062] 00000000-0000-7000-8000-00000000003d: 26 lines | Waverley Unsatisfied with the … Fergus, from whom, 1062
+1077 [1063] 00000000-0000-7000-8000-00000000003d: 26 lines | CHAPTER XXX. A SKIRMISH … Bodach Glas recurred 1063
+1078 [1064] 00000000-0000-7000-8000-00000000003d: 32 lines | Waverley to Edward’s recollection, … Prince’s army, in 1064
+1079 [1065] 00000000-0000-7000-8000-00000000003d: 27 lines | the depth of winter, … of My Lord Elchoe,
+1080 [1066] 00000000-0000-7000-8000-00000000003d: 29 lines | now Comte de Weems, … to cover in 1066
+1081 [1067] 00000000-0000-7000-8000-00000000003e: 30 lines | CHAPTER XXXI. CHAPTER OF … montagnard, as all 1067
+1082 [1068] 00000000-0000-7000-8000-00000000003e: 30 lines | Waverley CHAPTER XXXI. CHAPTER … twelve men, of 1068
+1083 [1069] 00000000-0000-7000-8000-00000000003e: 27 lines | CHAPTER XXXI. CHAPTER OF … surrounded by enemies.” 1069
+1084 [1070] 00000000-0000-7000-8000-00000000003e: 26 lines | Waverley Edward was in … in his bosom. 1070
+1085 [1071] 00000000-0000-7000-8000-00000000003e: 26 lines | CHAPTER XXXI. CHAPTER OF … voice at the 1071
+1086 [1072] 00000000-0000-7000-8000-00000000003e: 26 lines | Waverley same time uttered, … boots pulled on 1072
+1087 [1073] 00000000-0000-7000-8000-00000000003e: 26 lines | CHAPTER XXXI. CHAPTER OF … can assist me, 1073
+1088 [1074] 00000000-0000-7000-8000-00000000003e: 26 lines | Waverley I will reward … A clean, though 1074
+1089 [1075] 00000000-0000-7000-8000-00000000003e: 26 lines | CHAPTER XXXI. CHAPTER OF … have ceased to 1075
+1090 [1076] 00000000-0000-7000-8000-00000000003e: 26 lines | Waverley render his departure … had been the 1076
+1091 [1077] 00000000-0000-7000-8000-00000000003e: 26 lines | CHAPTER XXXI. CHAPTER OF … and unbending, was 1077
+1092 [1078] 00000000-0000-7000-8000-00000000003e: 26 lines | Waverley even more exalted … the Highlanders, not 1078
+1093 [1079] 00000000-0000-7000-8000-00000000003e: 26 lines | CHAPTER XXXI. CHAPTER OF … Edward to rejoin 1079
+1094 [1080] 00000000-0000-7000-8000-00000000003e: 26 lines | Waverley his guide, who … of the retreat 1080
+1095 [1081] 00000000-0000-7000-8000-00000000003e: 26 lines | CHAPTER XXXI. CHAPTER OF … situation, without the 1081
+1096 [1082] 00000000-0000-7000-8000-00000000003e: 26 lines | Waverley advantage of company … spirit tamed by 1082
+1097 [1083] 00000000-0000-7000-8000-00000000003e: 10 lines | CHAPTER XXXI. CHAPTER OF … reason and philosophy. 1083
+1098 [1084] 00000000-0000-7000-8000-00000000003e: blank
+1099 [1085] 00000000-0000-7000-8000-00000000003f: 18 lines | Chapter Sixty-One CHAPTER XXXII. … but not surprise. 1085
+1100 [1086] 00000000-0000-7000-8000-00000000003f: 26 lines | Waverley In the end … newspapers, in one 1086
+1101 [1087] 00000000-0000-7000-8000-00000000003f: 26 lines | CHAPTER XXXII. A JOURNEY … unless Edward Waverley, 1087
+1102 [1088] 00000000-0000-7000-8000-00000000003f: 26 lines | Waverley son of the … who has ever 1088
+1103 [1089] 00000000-0000-7000-8000-00000000003f: 26 lines | CHAPTER XXXII. A JOURNEY … delay as possible. 1089
+1104 [1090] 00000000-0000-7000-8000-00000000003f: 26 lines | Waverley One cause of … forget, and tacitly 1090
+1105 [1091] 00000000-0000-7000-8000-00000000003f: 26 lines | CHAPTER XXXII. A JOURNEY … dear little regiment 1091
+1106 [1092] 00000000-0000-7000-8000-00000000003f: 25 lines | Waverley suffered something, as … I believe, sir 1092
+1107 [1093] 00000000-0000-7000-8000-00000000003f: 25 lines | CHAPTER XXXII. A JOURNEY … fellow-officer than run 1093
+1108 [1094] 00000000-0000-7000-8000-00000000003f: 25 lines | Waverley the risk of … if not an 1094
+1109 [1095] 00000000-0000-7000-8000-00000000003f: 26 lines | CHAPTER XXXII. A JOURNEY … plague to the 1095
+1110 [1096] 00000000-0000-7000-8000-00000000003f: 25 lines | Waverley regiment than prévôt-marshal, … than when the 1096
+1111 [1097] 00000000-0000-7000-8000-00000000003f: 4 lines | CHAPTER XXXII. A JOURNEY … of Madam Nosebag. 1097
+1112 [1098] 00000000-0000-7000-8000-00000000003f: blank
+1113 [1099] 00000000-0000-7000-8000-000000000040: 17 lines | Chapter Sixty-Two CHAPTER XXXIII. … called great style. 1099
+1114 [1100] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley When Waverley knocked … You should not 1100
+1115 [1101] 00000000-0000-7000-8000-000000000040: 24 lines | CHAPTER XXXIII. WHAT’S TO … be so rash?” 1101
+1116 [1102] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley “My father—my uncle—this … told me, with 1102
+1117 [1103] 00000000-0000-7000-8000-000000000040: 26 lines | CHAPTER XXXIII. WHAT’S TO … advantage to the 1103
+1118 [1104] 00000000-0000-7000-8000-000000000040: 24 lines | Waverley Colonel’s national prejudice … “of my fellow-traveller?” 1104
+1119 [1105] 00000000-0000-7000-8000-000000000040: 26 lines | CHAPTER XXXIII. WHAT’S TO … have some good 1105
+1120 [1106] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley news for you. … Donald ran his 1106
+1121 [1107] 00000000-0000-7000-8000-000000000040: 26 lines | CHAPTER XXXIII. WHAT’S TO … hands of the 1107
+1122 [1108] 00000000-0000-7000-8000-000000000040: 17 lines | Waverley volunteer officer, and … the edge of 1108
+1123 [1109] 00000000-0000-7000-8000-000000000040: 32 lines | CHAPTER XXXIII. WHAT’S TO … respect, and which, 1109
+1124 [1110] 00000000-0000-7000-8000-000000000040: 29 lines | Waverley his opinion, an … absolved, acquitted. ASSYTHMENT, 1110
+1125 [1111] 00000000-0000-7000-8000-000000000040: 30 lines | CHAPTER XXXIII. WHAT’S TO … awaiting. CA’, call. 1111
+1126 [1112] 00000000-0000-7000-8000-000000000040: 29 lines | Waverley “Oh, he was … having the faculties 1112
+1127 [1113] 00000000-0000-7000-8000-000000000040: 30 lines | CHAPTER XXXIII. WHAT’S TO … horse-cowper, a horse-dealer. 1113
+1128 [1114] 00000000-0000-7000-8000-000000000040: 29 lines | Waverley lieutenant and four … over. PAITRICK, a 1114
+1129 [1115] 00000000-0000-7000-8000-000000000040: 30 lines | CHAPTER XXXIII. WHAT’S TO … seeds of oatmeal 1115
+1130 [1116] 00000000-0000-7000-8000-000000000040: 29 lines | Waverley lofty than his … saddlebags. WAN, won. 1116
+1131 [1117] 00000000-0000-7000-8000-000000000040: 26 lines | CHAPTER XXXIII. WHAT’S TO … whisk. YATE, gate. 1117
+1132 [1118] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley virtue, and therefore … By his regimental 1118
+1133 [1119] 00000000-0000-7000-8000-000000000040: 25 lines | CHAPTER XXXIII. WHAT’S TO … Scotland,” said Waverley. 1119
+1134 [1120] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley “To Scotland?” said … am, as Fletcher’s 1120
+1135 [1121] 00000000-0000-7000-8000-000000000040: 25 lines | CHAPTER XXXIII. WHAT’S TO … my vocation, Hal.” 1121
+1136 [1122] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley “It is not … two pretty Scotchwomen, 1122
+1137 [1123] 00000000-0000-7000-8000-000000000040: 26 lines | CHAPTER XXXIII. WHAT’S TO … three ermines passant, 1123
+1138 [1124] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley which may otherwise … room, Lady Emily’s 1124
+1139 [1125] 00000000-0000-7000-8000-000000000040: 26 lines | CHAPTER XXXIII. WHAT’S TO … as far as 1125
+1140 [1126] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley Huntingdon; and the … own. Your father, 1126
+1141 [1127] 00000000-0000-7000-8000-000000000040: 26 lines | CHAPTER XXXIII. WHAT’S TO … to find some 1127
+1142 [1128] 00000000-0000-7000-8000-000000000040: 25 lines | Waverley suitable token of … encountered at every 1128
+1143 [1129] 00000000-0000-7000-8000-000000000040: 24 lines | CHAPTER XXXIII. WHAT’S TO … in enforcing it. 1129
+1144 [1130] 00000000-0000-7000-8000-000000000040: blank
+1145 [1131] 00000000-0000-7000-8000-000000000041: 18 lines | Chapter Sixty-Three CHAPTER XXXIV. … The generous, the 1131
+1146 [1132] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley courteous, the noble-minded … precipitated his journey. 1132
+1147 [1133] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION When … for me. I 1133
+1148 [1134] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley wad betray nae … see Fergus’s bonnet, 1134
+1149 [1135] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION with … in the head— 1135
+1150 [1136] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley ye’ll mind Dugald, … be near him.” 1136
+1151 [1137] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION “And,” … Miss Bradwardine’s father?” 1137
+1152 [1138] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley “The auld laird? … make the rest 1138
+1153 [1139] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION of … on their faces. 1139
+1154 [1140] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley It was evening … that they seemed 1140
+1155 [1141] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION stationary … of the villagers, 1141
+1156 [1142] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley and the more … attached so much 1142
+1157 [1143] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION importance … with weeds, and 1143
+1158 [1144] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley the fruit-trees cut … MacDonald of Glengarry.] 1144
+1159 [1145] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION Amid … of the building 1145
+1160 [1146] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley singing, in well-remembered … but at first 1146
+1161 [1147] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION sight … the remnants of 1147
+1162 [1148] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley tapestried hangings, window-curtains, … peeps dim through 1148
+1163 [1149] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION the … the stream, and, 1149
+1164 [1150] 00000000-0000-7000-8000-000000000041: 26 lines | Waverley followed by Waverley, … by which he 1150
+1165 [1151] 00000000-0000-7000-8000-000000000041: 26 lines | CHAPTER XXXIV. DESOLATION had … beard of three 1151
+1166 [1152] 00000000-0000-7000-8000-000000000041: 7 lines | Waverley weeks’ growth. It … a hearty embrace. 1152
+1167 [1153] 00000000-0000-7000-8000-000000000042: 18 lines | Chapter Sixty-Four CHAPTER XXXV. … his property, for 1153
+1168 [1154] 00000000-0000-7000-8000-000000000042: 25 lines | Waverley clemency was not … the Baron had 1154
+1169 [1155] 00000000-0000-7000-8000-000000000042: 26 lines | CHAPTER XXXV. COMPARING OF … I were to 1155
+1170 [1156] 00000000-0000-7000-8000-000000000042: 26 lines | Waverley lament about sic … heard you at 1156
+1171 [1157] 00000000-0000-7000-8000-000000000042: 26 lines | CHAPTER XXXV. COMPARING OF … poured out upon 1157
+1172 [1158] 00000000-0000-7000-8000-000000000042: 26 lines | Waverley Him whom she … o’ mischief—and they 1158
+1173 [1159] 00000000-0000-7000-8000-000000000042: 26 lines | CHAPTER XXXV. COMPARING OF … when we and 1159
+1174 [1160] 00000000-0000-7000-8000-000000000042: 25 lines | Waverley ours have lived … I shall never 1160
+1175 [1161] 00000000-0000-7000-8000-000000000042: 26 lines | CHAPTER XXXV. COMPARING OF … he still conceived 1161
+1176 [1162] 00000000-0000-7000-8000-000000000042: 25 lines | Waverley himself capable. He … old man’s sympathy. 1162
+1177 [1163] 00000000-0000-7000-8000-000000000042: 25 lines | CHAPTER XXXV. COMPARING OF … and went to 1163
+1178 [1164] 00000000-0000-7000-8000-000000000042: 4 lines | Waverley sleep as comfortably … bed of down. 1164
+1179 [1165] 00000000-0000-7000-8000-000000000043: 18 lines | Chapter Sixty-Five CHAPTER XXXVI. … and even in 1165
+1180 [1166] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley being seen walking … bits of things 1166
+1181 [1167] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … as ye may 1167
+1182 [1168] 00000000-0000-7000-8000-000000000043: 25 lines | Waverley read in Colonel … auld stiff limbs.” 1168
+1183 [1169] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … low in the 1169
+1184 [1170] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley roof to admit … safety was concerned. 1170
+1185 [1171] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … that to keep 1171
+1186 [1172] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley the secret now … sweeter to an 1172
+1187 [1173] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … bring Rose to 1173
+1188 [1174] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley Glennaquoich. But just … and to harass 1174
+1189 [1175] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … to his own 1175
+1190 [1176] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley advantage. Meanwhile he … all the while 1176
+1191 [1177] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … secrecy upon his 1177
+1192 [1178] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley drawn dirk. He … leaving the glen. 1178
+1193 [1179] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … place the very 1179
+1194 [1180] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley existence of which … Donald might be 1180
+1195 [1181] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … he caused the 1181
+1196 [1182] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley most positive orders … the advice of 1182
+1197 [1183] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … and he concluded 1183
+1198 [1184] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley that the Baron’s … sought any explanation 1184
+1199 [1185] 00000000-0000-7000-8000-000000000043: 26 lines | CHAPTER XXXVI. MORE EXPLANATION … to explain such 1185
+1200 [1186] 00000000-0000-7000-8000-000000000043: 26 lines | Waverley points of our … match. His absurdities, 1186
+1201 [1187] 00000000-0000-7000-8000-000000000043: 12 lines | CHAPTER XXXVI. MORE EXPLANATION … Mr. Duncan Macwheeble. 1187
+1202 [1188] 00000000-0000-7000-8000-000000000043: blank
+1203 [1189] 00000000-0000-7000-8000-000000000044: 19 lines | CHAPTER XXXVII Now is … mouth. A pot- 1189
+1204 [1190] 00000000-0000-7000-8000-000000000044: 26 lines | Waverley bellied Dutch bottle … likely to need 1190
+1205 [1191] 00000000-0000-7000-8000-000000000044: 26 lines | CHAPTER XXXVII assistance than … he would choose 1191
+1206 [1192] 00000000-0000-7000-8000-000000000044: 26 lines | Waverley for breakfast. His … from his three-footed 1192
+1207 [1193] 00000000-0000-7000-8000-000000000044: 26 lines | CHAPTER XXXVII stool like … “Institutions,” Dirleton’s “Doubts,” 1193
+1208 [1194] 00000000-0000-7000-8000-000000000044: 26 lines | Waverley Balfour’s “Practiques,” and … a man and 1194
+1209 [1195] 00000000-0000-7000-8000-000000000044: 26 lines | CHAPTER XXXVII horse to——, … gude unto me!” 1195
+1210 [1196] 00000000-0000-7000-8000-000000000044: 26 lines | Waverley “But you forget, … causing, sending, and 1196
+1211 [1197] 00000000-0000-7000-8000-000000000044: 26 lines | CHAPTER XXXVII hounding out; … poultry-yard had been 1197
+1212 [1198] 00000000-0000-7000-8000-000000000044: 26 lines | Waverley laid under requisition, … forfeited for his 1198
+1213 [1199] 00000000-0000-7000-8000-000000000044: 26 lines | CHAPTER XXXVII accession to … pardon for that 1199
+1214 [1200] 00000000-0000-7000-8000-000000000044: 26 lines | Waverley stubborn old rebel … in his Royal 1200
+1215 [1201] 00000000-0000-7000-8000-000000000044: 26 lines | CHAPTER XXXVII Highness’s having … beg leave to 1201
+1216 [1202] 00000000-0000-7000-8000-000000000044: 26 lines | Waverley deposit, with all … possession), which I 1202
+1217 [1203] 00000000-0000-7000-8000-000000000044: 26 lines | CHAPTER XXXVII send to … of your time, 1203
+1218 [1204] 00000000-0000-7000-8000-000000000044: 7 lines | Waverley for, when your … truly, “PHILIP TALBOT.” 1204
+1219 [1205] 00000000-0000-7000-8000-000000000045: 19 lines | CHAPTER XXXVIII Happy’s the … the Baron up 1205
+1220 [1206] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley under cloud of … Laird he’ll no 1206
+1221 [1207] 00000000-0000-7000-8000-000000000045: 26 lines | CHAPTER XXXVIII believe thae … unfit object, for 1207
+1222 [1208] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley the foundation of … her nerves been 1208
+1223 [1209] 00000000-0000-7000-8000-000000000045: 26 lines | CHAPTER XXXVIII on the … like an old 1209
+1224 [1210] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley badger with his … friends the happiest 1210
+1225 [1211] 00000000-0000-7000-8000-000000000045: 26 lines | CHAPTER XXXVIII man in … and for a 1211
+1226 [1212] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley little while they … Everard,” he said, 1212
+1227 [1213] 00000000-0000-7000-8000-000000000045: 26 lines | CHAPTER XXXVIII “always despised … together by the 1213
+1228 [1214] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley ears.” He then, … of the Scottish 1214
+1229 [1215] 00000000-0000-7000-8000-000000000045: 26 lines | CHAPTER XXXVIII friends of … curiosity respecting the 1215
+1230 [1216] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley particular cause of … of conveying it. 1216
+1231 [1217] 00000000-0000-7000-8000-000000000045: 26 lines | CHAPTER XXXVIII Waverley was … too broadly, the 1217
+1232 [1218] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley maidservants giggled mayhap … journey to visit 1218
+1233 [1219] 00000000-0000-7000-8000-000000000045: 26 lines | CHAPTER XXXVIII Colonel Talbot; … to whom easy 1219
+1234 [1220] 00000000-0000-7000-8000-000000000045: 26 lines | Waverley travelling and goat’s … subject. His father’s 1220
+1235 [1221] 00000000-0000-7000-8000-000000000045: 25 lines | CHAPTER XXXVIII fate could … with justice to 1221
+1236 [1222] 00000000-0000-7000-8000-000000000045: 11 lines | Waverley the country, to … Sixty Years Since. 1222
+1237 [1223] 00000000-0000-7000-8000-000000000046: 19 lines | CHAPTER XXXIX Tomorrow? O … but it was 1223
+1238 [1224] 00000000-0000-7000-8000-000000000046: 26 lines | Waverley upon the same … side was Evan 1224
+1239 [1225] 00000000-0000-7000-8000-000000000046: 26 lines | CHAPTER XXXIX Maccombich. Edward … hear, for my 1225
+1240 [1226] 00000000-0000-7000-8000-000000000046: 26 lines | Waverley defence would be … to say, my 1226
+1241 [1227] 00000000-0000-7000-8000-000000000046: 26 lines | CHAPTER XXXIX lord,” said … be very right; 1227
+1242 [1228] 00000000-0000-7000-8000-000000000046: 26 lines | Waverley but if they … “For you, poor 1228
+1243 [1229] 00000000-0000-7000-8000-000000000046: 26 lines | CHAPTER XXXIX ignorant man,” … of the crowd 1229
+1244 [1230] 00000000-0000-7000-8000-000000000046: 26 lines | Waverley had conveyed him … moments of these 1230
+1245 [1231] 00000000-0000-7000-8000-000000000046: 26 lines | CHAPTER XXXIX persons, as … was the spectre 1231
+1246 [1232] 00000000-0000-7000-8000-000000000046: 26 lines | Waverley that boded such … garment of white 1232
+1247 [1233] 00000000-0000-7000-8000-000000000046: 24 lines | CHAPTER XXXIX flannel. At … been refused admittance.” 1233
+1248 [1234] 00000000-0000-7000-8000-000000000046: 25 lines | Waverley “It accords with … of this hour!” 1234
+1249 [1235] 00000000-0000-7000-8000-000000000046: 26 lines | CHAPTER XXXIX “Dear Flora, … but once said, 1235
+1250 [1236] 00000000-0000-7000-8000-000000000046: 26 lines | Waverley ‘Remain at home; … your counsels only 1236
+1251 [1237] 00000000-0000-7000-8000-000000000046: 25 lines | CHAPTER XXXIX served to … not the house. 1237
+1252 [1238] 00000000-0000-7000-8000-000000000046: 26 lines | Waverley When he was … retreat in the 1238
+1253 [1239] 00000000-0000-7000-8000-000000000046: 23 lines | CHAPTER XXXIX convent of … the fatal procession. 1239
+1254 [1240] 00000000-0000-7000-8000-000000000046: blank
+1255 [1241] 00000000-0000-7000-8000-000000000047: 19 lines | CHAPTER XL A darker … of great antiquity, 1241
+1256 [1242] 00000000-0000-7000-8000-000000000047: 26 lines | Waverley and surrounded by … on the 16th 1242
+1257 [1243] 00000000-0000-7000-8000-000000000047: 26 lines | CHAPTER XL of November … dispersed and returned 1243
+1258 [1244] 00000000-0000-7000-8000-000000000047: 26 lines | Waverley home after the … Sons of Ivor. 1244
+1259 [1245] 00000000-0000-7000-8000-000000000047: 26 lines | CHAPTER XL “Would to … still that, in 1245
+1260 [1246] 00000000-0000-7000-8000-000000000047: 26 lines | Waverley the obscurity of … that the church 1246
+1261 [1247] 00000000-0000-7000-8000-000000000047: 26 lines | CHAPTER XL allowed that … castle by storm!” 1247
+1262 [1248] 00000000-0000-7000-8000-000000000047: 26 lines | Waverley Edward afterwards learned … upon. This same 1248
+1263 [1249] 00000000-0000-7000-8000-000000000047: 26 lines | CHAPTER XL law of … in the court- 1249
+1264 [1250] 00000000-0000-7000-8000-000000000047: 25 lines | Waverley yard of the … Fergus as of 1250
+1265 [1251] 00000000-0000-7000-8000-000000000047: 26 lines | CHAPTER XL the heroes … squadron of dragoons 1251
+1266 [1252] 00000000-0000-7000-8000-000000000047: 26 lines | Waverley and a battalion … Gladsmuir, before we 1252
+1267 [1253] 00000000-0000-7000-8000-000000000047: 26 lines | CHAPTER XL could kill … replied,” God save 1253
+1268 [1254] 00000000-0000-7000-8000-000000000047: 26 lines | Waverley King James! “These … misery which his 1254
+1269 [1255] 00000000-0000-7000-8000-000000000047: 26 lines | CHAPTER XL countenance expressed, … did so by 1255
+1270 [1256] 00000000-0000-7000-8000-000000000047: 26 lines | Waverley directions of his … enter its walls. 1256
+1271 [1257] 00000000-0000-7000-8000-000000000047: 19 lines | CHAPTER XL He dared … o’ his tirrivies.” 1257
+1272 [1258] 00000000-0000-7000-8000-000000000047: blank
+1273 [1259] 00000000-0000-7000-8000-000000000048: 18 lines | Chapter Seventy CHAPTER XLI. … and happiness which 1259
+1274 [1260] 00000000-0000-7000-8000-000000000048: 25 lines | Waverley lay before them. … the venerable relations 1260
+1275 [1261] 00000000-0000-7000-8000-000000000048: 25 lines | CHAPTER XLI. DULCE DOMUM … exploits of Edward 1261
+1276 [1262] 00000000-0000-7000-8000-000000000048: 26 lines | Waverley with those of … hero, the butler 1262
+1277 [1263] 00000000-0000-7000-8000-000000000048: 26 lines | CHAPTER XLI. DULCE DOMUM … which they themselves 1263
+1278 [1264] 00000000-0000-7000-8000-000000000048: 26 lines | Waverley had more than … moves at first 1264
+1279 [1265] 00000000-0000-7000-8000-000000000048: 25 lines | CHAPTER XLI. DULCE DOMUM … relate at length. 1265
+1280 [1266] 00000000-0000-7000-8000-000000000048: 26 lines | Waverley We are, therefore, … dame were suitably 1266
+1281 [1267] 00000000-0000-7000-8000-000000000048: 26 lines | CHAPTER XLI. DULCE DOMUM … of the Laird 1267
+1282 [1268] 00000000-0000-7000-8000-000000000048: 26 lines | Waverley of Duchran to … to collect together 1268
+1283 [1269] 00000000-0000-7000-8000-000000000048: 26 lines | CHAPTER XLI. DULCE DOMUM … his lady, who, 1269
+1284 [1270] 00000000-0000-7000-8000-000000000048: 9 lines | Waverley with the Baron, … for some time. 1270
+1285 [1271] 00000000-0000-7000-8000-000000000049: 19 lines | CHAPTER XLII This is … and he would 1271
+1286 [1272] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley certainly ride by … of his idolatry, 1272
+1287 [1273] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII had resumed … gate, and he 1273
+1288 [1274] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley would be happy … the Baron and 1274
+1289 [1275] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII then to … Emily, she apologised 1275
+1290 [1276] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley for having used … the other bears 1276
+1291 [1277] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII whatsoever, were … strong,—a sturdy tyke.’ 1277
+1292 [1278] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley At least such … birth and honour 1278
+1293 [1279] 00000000-0000-7000-8000-000000000049: 25 lines | CHAPTER XLII in your … Mr. Bradwardine, indeed.” 1279
+1294 [1280] 00000000-0000-7000-8000-000000000049: 25 lines | Waverley “And yet, sir, … miles of Waverley-Honour.” 1280
+1295 [1281] 00000000-0000-7000-8000-000000000049: 25 lines | CHAPTER XLII “And who, … and barony of 1281
+1296 [1282] 00000000-0000-7000-8000-000000000049: 25 lines | Waverley Bradwardine, Tully-Veolan, and … cried the Bailie, 1282
+1297 [1283] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII rubbing his … possible even the 1283
+1298 [1284] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley appearance of laying … yet, till they 1284
+1299 [1285] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII durstna on … fragments of their 1285
+1300 [1286] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley conversation reached the … to do the 1286
+1301 [1287] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII honours of … Mrs. Edward Waverley 1287
+1302 [1288] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley in many respects, … character with the 1288
+1303 [1289] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII old furniture. … borne in the 1289
+1304 [1290] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley unfortunate civil war. … affair of Culloden. 1290
+1305 [1291] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII The cellars … his major-domo, and, 1291
+1306 [1292] 00000000-0000-7000-8000-000000000049: 26 lines | Waverley turning round, he … who, like a 1292
+1307 [1293] 00000000-0000-7000-8000-000000000049: 26 lines | CHAPTER XLII true old … uttered with more 1293
+1308 [1294] 00000000-0000-7000-8000-000000000049: 6 lines | Waverley affectionate sincerity, there … more happily fulfilled. 1294
+1309 [1295] 00000000-0000-7000-8000-00000000004a: 16 lines | Chapter Seventy-Two CHAPTER XLIII. … shut the volume 1295
+1310 [1296] 00000000-0000-7000-8000-00000000004a: 25 lines | Waverley of the one … and barons,—the total 1296
+1311 [1297] 00000000-0000-7000-8000-00000000004a: 26 lines | CHAPTER XLIII. A POSTSCRIPT … been drifted. Such 1297
+1312 [1298] 00000000-0000-7000-8000-00000000004a: 25 lines | Waverley of the present … and youth among 1298
+1313 [1299] 00000000-0000-7000-8000-00000000004a: 26 lines | CHAPTER XLIII. A POSTSCRIPT … a tale of 1299
+1314 [1300] 00000000-0000-7000-8000-00000000004a: 25 lines | Waverley strange concealments and … habits, manners, and 1300
+1315 [1301] 00000000-0000-7000-8000-00000000004a: 26 lines | CHAPTER XLIII. A POSTSCRIPT … and the late 1301
+1316 [1302] 00000000-0000-7000-8000-00000000004a: 25 lines | Waverley account of “Highland … distinguished in elegant 1302
+1317 [1303] 00000000-0000-7000-8000-00000000004a: 22 lines | CHAPTER XLIII. A POSTSCRIPT … OF HIS GENIUS. 1303

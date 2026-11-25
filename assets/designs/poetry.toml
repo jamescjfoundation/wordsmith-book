@@ -1,0 +1,40 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "poetry"
+name = "Poetry"
+about = "Ragged right without hyphens or indents, titles set small and left: for poems, verse novels and short prose."
+genres = ["poetry", "literary"]
+moods = ["quiet", "modern"]
+
+[body]
+font = "reading-serif"
+size = 11.0
+leading = 1.45
+indent = 0.0
+justify = false
+hyphenation = "off"
+
+[chapter]
+font = "reading-serif"
+start = "any"
+sink = 0.15
+number_size = 10.0
+number_case = "small-caps"
+title_size = 15.0
+align = "left"
+first_line = "none"
+
+[scene_break]
+style = "space"
+mark = "*"
+
+[heads]
+style = "title-chapter"
+folio = "foot"
+size = 8.5
+small_caps = false
+
+[ebook]
+justify = false
+indent = 0.0
+first_line = "none"

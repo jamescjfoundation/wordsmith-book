@@ -23,11 +23,12 @@ to the media box, every font embedded, no annotations, links or bookmarks (read 
 
 | Book | Profile | Trim | Designs |
 | --- | --- | --- | --- |
-| Gulliver's Travels (the Manuscript fixture) | `pod-paperback` | 5.5 × 8.5 in | all six |
-| Waverley (imported from its DOCX) | `pod-paperback` | 6 × 9 in | all six |
-| Gulliver's Travels | `generic-pdf` | 5 × 8 in | all six |
+| Gulliver's Travels (the Manuscript fixture) | `pod-paperback` | 5.5 × 8.5 in | all thirteen |
+| Waverley (imported from its DOCX) | `pod-paperback` | 6 × 9 in | all thirteen |
+| Gulliver's Travels | `generic-pdf` | 5 × 8 in | all thirteen |
 
-**State:** written 2026-11-24 from the builds of M5.4; **awaiting a person's look** at the PDFs
+**State:** written 2026-11-24 from the builds of M5.4 (the seven designs of R3.1 added
+2026-11-25); **awaiting a person's look** at the PDFs
 they summarise (build one with `cargo test -p wordsmith-book-check --test pages_for_review --
 --ignored`, or from the app once export lands in M8).
 
@@ -37,8 +38,8 @@ they summarise (build one with `cargo test -p wordsmith-book-check --test pages_
 Each file is the structure of one EPUB, read back from it: the package metadata (the
 identifier's kind only), the manifest, the reading order, every navigation entry and landmark,
 the whole stylesheet, and for each document its kind, heading, paragraph count and word count.
-Gulliver's Travels (the Manuscript fixture) and Waverley (imported from its DOCX) in all six
-designs.
+Gulliver's Travels (the Manuscript fixture) and Waverley (imported from its DOCX) in all thirteen
+designs (the seven added in R3.1 written 2026-11-25).
 
 The same test file checks every one of those EPUBs with Book's own checks (`book-check::epub`),
 reads it back through the core's reader word for word against Book's reader, and checks that

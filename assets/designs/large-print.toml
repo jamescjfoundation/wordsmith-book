@@ -1,0 +1,37 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "large-print"
+name = "Large Print"
+about = "Sixteen-point type on open leading, ragged right without hyphens, and plain bold-sized openings: for readers who need larger type."
+genres = ["literary", "classic", "mystery", "romance", "non-fiction"]
+moods = ["quiet", "traditional"]
+
+[body]
+font = "reading-serif"
+size = 16.0
+leading = 1.4
+indent = 1.0
+justify = false
+hyphenation = "off"
+
+[chapter]
+font = "sans"
+sink = 0.15
+number_size = 18.0
+number_case = "as-written"
+title_size = 26.0
+align = "left"
+first_line = "none"
+
+[scene_break]
+mark = "* * *"
+
+[heads]
+style = "title-chapter"
+folio = "foot"
+size = 14.0
+small_caps = false
+
+[ebook]
+justify = false
+first_line = "none"

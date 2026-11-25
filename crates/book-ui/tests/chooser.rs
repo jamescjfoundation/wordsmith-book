@@ -17,10 +17,11 @@ use wordsmith_book_ui::{BookApp, NAME, brand, commands, shell_options};
 fn filters_by_genre_and_mood() {
     let all = builtin::all();
     let ids = |v: Vec<&wordsmith_book_design::Design>| v.iter().map(|d| d.id.clone()).collect::<Vec<_>>();
-    assert_eq!(filter(&all, None, None).len(), 6);
-    assert_eq!(ids(filter(&all, Some("fantasy"), None)), ["fantasy"]);
-    assert_eq!(ids(filter(&all, Some("historical"), None)), ["classic", "romance", "fantasy"]);
-    assert_eq!(ids(filter(&all, Some("historical"), Some("epic"))), ["fantasy"]);
+    assert_eq!(filter(&all, None, None).len(), all.len());
+    assert_eq!(ids(filter(&all, Some("fantasy"), None)), ["fantasy", "young-adult"]);
+    assert_eq!(ids(filter(&all, Some("historical"), None)), ["classic", "romance", "fantasy", "historical"]);
+    assert_eq!(ids(filter(&all, Some("historical"), Some("epic"))), ["fantasy", "historical"]);
+    assert_eq!(ids(filter(&all, Some("horror"), None)), ["horror"]);
     assert!(filter(&all, Some("cookbook"), None).is_empty());
     let (genres, moods) = tags(&all);
     assert!(genres.contains(&"thriller".to_owned()) && moods.contains(&"tense".to_owned()));
@@ -51,11 +52,12 @@ fn the_chooser_previews_the_book_and_chooses_in_one_undo_step() {
             h.run();
         }
     }
-    // Filter to fantasy: only its card shows.
+    // Filter to fantasy: only its cards show (Fantasy and Young Adult).
     h.get_by_label("fantasy").click();
     h.run();
     assert!(h.query_by_label("Choose Literary").is_none());
-    assert!(h.query_by_label_contains("The lamp burned low").is_some(), "the preview shows the book's own first chapter");
+    assert!(h.query_by_label("Choose Young Adult").is_some());
+    assert_eq!(h.query_all_by_label_contains("The lamp burned low").count(), 2, "each preview shows the book's own first chapter");
     h.get_by_label("Choose Fantasy").click();
     h.run();
     assert_eq!(h.state().app.book.as_ref().unwrap().files.project.design.id, "fantasy");

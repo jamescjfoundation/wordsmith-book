@@ -2,13 +2,17 @@
 //! The test of v0.1 (plan section 10, M9.4), end to end: two public-domain novels, Waverley
 //! (about 210,000 words) from its DOCX and Gulliver's Travels (parts, notes and verse) from its DOCX
 //! and from the Manuscript project fixture, go to a 6 × 9 in paperback PDF and an EPUB in each of
-//! the six designs. Every word of both outputs matches the source; the PDFs pass preflight for
+//! the six designs of 0.1 (later designs have their golden files in the print and EPUB golden
+//! tests). Every word of both outputs matches the source; the PDFs pass preflight for
 //! `pod-paperback` and match their golden files (`tests/golden/v0.1/`, docs/golden.md); the
 //! EPUBs pass Book's structural checks (and the standard EPUB validator where it is set up,
 //! `BOOK_EPUB_VALIDATOR`); building twice gives the same bytes. `BOOK_BLESS=1` writes the golden
 //! files again.
 
 mod common;
+
+/// The designs 0.1 shipped: the test of v0.1 stays the test of what 0.1 made.
+const V0_1_DESIGNS: [&str; 6] = ["classic", "literary", "romance", "thriller", "fantasy", "non-fiction"];
 
 use std::path::{Path, PathBuf};
 
@@ -76,7 +80,7 @@ fn the_test_of_v0_1() {
     }
     let mut failures = Vec::new();
     for (name, src) in &sources {
-        for d in builtin::all() {
+        for d in builtin::all().into_iter().filter(|d| V0_1_DESIGNS.contains(&d.id.as_str())) {
             let label = format!("{name}-{}", d.id);
             let mut p = project();
             p.design.id = d.id.clone();

@@ -295,8 +295,9 @@ dedication, epigraph, contents, then the body. [Verified] An ebook puts the copy
 11. **The chooser** (DSN-5) filters by genre (literary, romance, thriller, fantasy, non-fiction,
     classic) and mood, and previews the book's own first chapter. [Designed]
 12. **Built-in designs at 0.1**: literary, romance, thriller, fantasy, non-fiction, classic,
-    each following the rules of this section; their own choices are listed in section 4.1.
-    [Designed]
+    each following the rules of this section; their own choices are listed in section 4.1. From
+    0.3 (DSN-6), thirteen: memoir, historical, young adult, horror, cozy, poetry and large print
+    as well. [Designed]
 
 ### 4.1 The built-in designs (DSN-2)
 
@@ -314,6 +315,18 @@ break, hyphenation by the book's language, running heads off on openings and bla
 | Thriller | Reading serif 10.5/13.7 pt, indent 1 em | Right-hand page, sunk a fifth, set left; 40 pt sans-serif number, title in capitals | Three asterisks | Title and chapter; folio in the head |
 | Fantasy | Classic serif 11.5/15.5 pt | Right-hand page; display capitals for the title, ornaments, three-line drop cap; part titles 30 pt | Three ornaments | Author and title in small capitals; folio at the foot |
 | Non-fiction | Reading serif 10.5/14.7 pt, indent 1 em | Any page, sunk a little, set left; sans-serif number and title 22 pt | Three asterisks | Title and chapter; folio in the head |
+
+From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
+
+| Design | Body | Openings | Scene breaks | Heads and folios |
+| --- | --- | --- | --- | --- |
+| Memoir | Reading serif 11/15.6 pt, indent 1 em, strict hyphenation | Right-hand page, sunk 0.3, set left; number in small capitals, title 19 pt; small-capital lead-in | A blank line (a centred dot at a page edge) | Author and title in small capitals; folio at the foot |
+| Historical | Classic serif 11/14.9 pt, indent 1.3 em | Right-hand page, sunk 0.3; number in capitals, title 21 pt, a fleuron; three-line drop cap; part titles 28 pt | A fleuron | Author and title in small capitals; folio at the foot |
+| Young Adult | Reading serif 11/16 pt, indent 1 em | Right-hand page, set left; 34 pt sans-serif number, title 16 pt | Three bullets | Title and chapter; folio in the head |
+| Horror | Classic serif 11/14.6 pt | Right-hand page, sunk 0.42; inscriptional capitals for number and title (24 pt); small-capital lead-in | A dagger | Title and chapter in small capitals; folio at the foot |
+| Cozy | Classic serif 11/15.2 pt | Right-hand page; display small capitals for the title (20 pt), a fleuron; small-capital lead-in | Swung dashes around a fleuron | Author and title in small capitals; folio at the foot |
+| Poetry | Reading serif 11/16 pt, no indent, ragged right, no hyphenation | Any page, sunk a little, set left; small title 15 pt | A blank line | Title and chapter; folio at the foot |
+| Large Print | Reading serif 16/22.4 pt, indent 1 em, ragged right, no hyphenation | Right-hand page, set left; sans-serif number 18 pt and title 26 pt | Three asterisks | Title and chapter at 14 pt; folio at the foot |
 
 ## 5. Print rules and profiles (PRT-1 to PRT-6, PRE-4)
 

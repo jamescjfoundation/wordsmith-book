@@ -19,7 +19,8 @@ fn app(name: &str) -> (BookApp, PathBuf) {
 #[test]
 fn choose_mix_save_export_and_import() {
     let (mut a, dir) = app("all");
-    assert_eq!(a.command(commands::DESIGNS, &json!({})).unwrap().as_array().unwrap().len(), 6);
+    let built_in = wordsmith_book_design::builtin::FILES.len();
+    assert_eq!(a.command(commands::DESIGNS, &json!({})).unwrap().as_array().unwrap().len(), built_in);
     a.command(commands::DESIGN_CHOOSE, &json!({ "id": "literary" })).unwrap();
     a.command(commands::DESIGN_MIX, &json!({ "part": "chapter-opening", "from": "fantasy" })).unwrap();
     let d = designs::current(a.book.as_ref().unwrap()).unwrap();
@@ -31,7 +32,7 @@ fn choose_mix_save_export_and_import() {
     let id = a.command(commands::DESIGN_SAVE_AS, &json!({ "name": "Story Time" })).unwrap()["id"].as_str().unwrap().to_owned();
     assert_eq!(id, "story-time");
     assert_eq!(designs::current(a.book.as_ref().unwrap()).unwrap().chapter.font, "inscription");
-    assert_eq!(a.command(commands::DESIGNS, &json!({})).unwrap().as_array().unwrap().len(), 7);
+    assert_eq!(a.command(commands::DESIGNS, &json!({})).unwrap().as_array().unwrap().len(), built_in + 1);
     // Export, then import into another book: the same design.
     let file = dir.join("story-time.toml");
     a.command(commands::DESIGN_EXPORT, &json!({ "path": file.display().to_string() })).unwrap();

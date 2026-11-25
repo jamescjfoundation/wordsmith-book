@@ -1,0 +1,979 @@
+# package
+identifier = urn:uuid:…
+title = Gulliver’s Travels
+language = en
+creator = Jonathan Swift
+publisher = Fixture Press
+rights = This text is in the public domain.
+source = the paperback edition
+source-of = pagination
+dcterms:modified = 2026-11-24T00:00:00Z
+schema:accessMode = textual
+schema:accessModeSufficient = textual
+schema:accessibilityFeature = structuralNavigation
+schema:accessibilityFeature = tableOfContents
+schema:accessibilityFeature = readingOrder
+schema:accessibilityFeature = pageNavigation
+schema:accessibilityHazard = none
+schema:accessibilitySummary = This ebook has a table of contents, landmarks and headings for its structure, and its reading order follows the book. Text can be resized and restyled by the reading system.
+dcterms:conformsTo = EPUB Accessibility 1.1 - WCAG 2.2 Level AA
+a11y:certifiedBy = Fixture Press
+# manifest
+nav.xhtml application/xhtml+xml nav
+toc.ncx application/x-dtbncx+xml
+css/book.css text/css
+text/s001.xhtml application/xhtml+xml
+text/s002.xhtml application/xhtml+xml
+text/s003.xhtml application/xhtml+xml
+text/s004.xhtml application/xhtml+xml
+text/s005.xhtml application/xhtml+xml
+text/s006.xhtml application/xhtml+xml
+text/s007.xhtml application/xhtml+xml
+text/s008.xhtml application/xhtml+xml
+text/s009.xhtml application/xhtml+xml
+text/s010.xhtml application/xhtml+xml
+text/s011.xhtml application/xhtml+xml
+text/s012.xhtml application/xhtml+xml
+text/s013.xhtml application/xhtml+xml
+text/s014.xhtml application/xhtml+xml
+text/s015.xhtml application/xhtml+xml
+text/s016.xhtml application/xhtml+xml
+text/s017.xhtml application/xhtml+xml
+text/s018.xhtml application/xhtml+xml
+text/s019.xhtml application/xhtml+xml
+text/s020.xhtml application/xhtml+xml
+text/s021.xhtml application/xhtml+xml
+text/s022.xhtml application/xhtml+xml
+text/s023.xhtml application/xhtml+xml
+text/s024.xhtml application/xhtml+xml
+text/s025.xhtml application/xhtml+xml
+text/s026.xhtml application/xhtml+xml
+text/s027.xhtml application/xhtml+xml
+text/s028.xhtml application/xhtml+xml
+text/s029.xhtml application/xhtml+xml
+text/s030.xhtml application/xhtml+xml
+text/s031.xhtml application/xhtml+xml
+text/s032.xhtml application/xhtml+xml
+text/s033.xhtml application/xhtml+xml
+text/s034.xhtml application/xhtml+xml
+text/s035.xhtml application/xhtml+xml
+text/s036.xhtml application/xhtml+xml
+text/s037.xhtml application/xhtml+xml
+text/s038.xhtml application/xhtml+xml
+text/s039.xhtml application/xhtml+xml
+text/s040.xhtml application/xhtml+xml
+text/s041.xhtml application/xhtml+xml
+text/s042.xhtml application/xhtml+xml
+text/s043.xhtml application/xhtml+xml
+text/s044.xhtml application/xhtml+xml
+text/s045.xhtml application/xhtml+xml
+text/s046.xhtml application/xhtml+xml
+text/s047.xhtml application/xhtml+xml
+text/s048.xhtml application/xhtml+xml
+fonts/reading-serif-regular.ttf font/ttf
+fonts/reading-serif-italic.ttf font/ttf
+fonts/reading-serif-bold.ttf font/ttf
+fonts/reading-serif-bold-italic.ttf font/ttf
+fonts/sans-regular.ttf font/ttf
+fonts/sans-italic.ttf font/ttf
+fonts/sans-bold.ttf font/ttf
+fonts/sans-bold-italic.ttf font/ttf
+# spine
+s001
+s002
+nav
+s003
+s004
+s005
+s006
+s007
+s008
+s009
+s010
+s011
+s012
+s013
+s014
+s015
+s016
+s017
+s018
+s019
+s020
+s021
+s022
+s023
+s024
+s025
+s026
+s027
+s028
+s029
+s030
+s031
+s032
+s033
+s034
+s035
+s036
+s037
+s038
+s039
+s040
+s041
+s042
+s043
+s044
+s045
+s046
+s047
+s048
+# navigation
+Title Page -> text/s001.xhtml#s001
+THE PUBLISHER TO THE READER -> text/s003.xhtml#s003
+A LETTER FROM CAPTAIN GULLIVER TO HIS COUSIN SYMPSON -> text/s004.xhtml#s004
+Part One: A VOYAGE TO LILLIPUT -> text/s005.xhtml#s005
+  Chapter One -> text/s006.xhtml#s006
+  Chapter Two -> text/s007.xhtml#s007
+  Chapter Three -> text/s008.xhtml#s008
+  Chapter Four -> text/s009.xhtml#s009
+  Chapter Five -> text/s010.xhtml#s010
+  Chapter Six -> text/s011.xhtml#s011
+  Chapter Seven -> text/s012.xhtml#s012
+  Chapter Eight -> text/s013.xhtml#s013
+Part Two: A VOYAGE TO BROBDINGNAG -> text/s014.xhtml#s014
+  Chapter Nine -> text/s015.xhtml#s015
+  Chapter Ten -> text/s016.xhtml#s016
+  Chapter Eleven -> text/s017.xhtml#s017
+  Chapter Twelve -> text/s018.xhtml#s018
+  Chapter Thirteen -> text/s019.xhtml#s019
+  Chapter Fourteen -> text/s020.xhtml#s020
+  Chapter Fifteen -> text/s021.xhtml#s021
+  Chapter Sixteen -> text/s022.xhtml#s022
+Part Three: A VOYAGE TO LAPUTA, BALNIBARBI, GLUBBDUBDRIB, LUGGNAGG AND -> text/s023.xhtml#s023
+  Chapter Seventeen -> text/s024.xhtml#s024
+  Chapter Eighteen -> text/s025.xhtml#s025
+  Chapter Nineteen -> text/s026.xhtml#s026
+  Chapter Twenty -> text/s027.xhtml#s027
+  Chapter Twenty-One -> text/s028.xhtml#s028
+  Chapter Twenty-Two -> text/s029.xhtml#s029
+  Chapter Twenty-Three -> text/s030.xhtml#s030
+  Chapter Twenty-Four -> text/s031.xhtml#s031
+  Chapter Twenty-Five -> text/s032.xhtml#s032
+  Chapter Twenty-Six -> text/s033.xhtml#s033
+  Chapter Twenty-Seven -> text/s034.xhtml#s034
+Part Four: A VOYAGE TO THE COUNTRY OF THE HOUYHNHNMS -> text/s035.xhtml#s035
+  Chapter Twenty-Eight -> text/s036.xhtml#s036
+  Chapter Twenty-Nine -> text/s037.xhtml#s037
+  Chapter Thirty -> text/s038.xhtml#s038
+  Chapter Thirty-One -> text/s039.xhtml#s039
+  Chapter Thirty-Two -> text/s040.xhtml#s040
+  Chapter Thirty-Three -> text/s041.xhtml#s041
+  Chapter Thirty-Four -> text/s042.xhtml#s042
+  Chapter Thirty-Five -> text/s043.xhtml#s043
+  Chapter Thirty-Six -> text/s044.xhtml#s044
+  Chapter Thirty-Seven -> text/s045.xhtml#s045
+  Chapter Thirty-Eight -> text/s046.xhtml#s046
+  Chapter Thirty-Nine -> text/s047.xhtml#s047
+About the Author -> text/s048.xhtml#s048
+[titlepage] Title page -> text/s001.xhtml#s001
+[copyright-page] Copyright -> text/s002.xhtml#s002
+[toc] Contents -> nav.xhtml
+[bodymatter] Start of the book -> text/s005.xhtml#s005
+[backmatter] Back matter -> text/s048.xhtml#s048
+i -> text/s001.xhtml#page-1
+ii -> text/s001.xhtml#page-2
+iii -> text/s001.xhtml#page-3
+iv -> text/s002.xhtml#page-4
+v -> text/s003.xhtml#page-5
+vi -> text/s003.xhtml#page-6
+vii -> text/s003.xhtml#page-7
+viii -> text/s003.xhtml#page-8
+ix -> text/s003.xhtml#page-9
+x -> text/s003.xhtml#page-10
+xi -> text/s003.xhtml#page-11
+xii -> text/s003.xhtml#page-12
+xiii -> text/s004.xhtml#page-13
+xiv -> text/s004.xhtml#page-14
+xv -> text/s004.xhtml#page-15
+xvi -> text/s004.xhtml#page-16
+xvii -> text/s004.xhtml#page-17
+xviii -> text/s004.xhtml#page-18
+xix -> text/s004.xhtml#page-19
+xx -> text/s004.xhtml#page-20
+xxi -> text/s004.xhtml#page-21
+xxii -> text/s004.xhtml#page-22
+1 -> text/s005.xhtml#page-23
+2 -> text/s005.xhtml#page-24
+3 -> text/s006.xhtml#page-25
+4 -> text/s006.xhtml#page-26
+5 -> text/s006.xhtml#page-27
+6 -> text/s006.xhtml#page-28
+7 -> text/s006.xhtml#page-29
+8 -> text/s006.xhtml#page-30
+9 -> text/s006.xhtml#page-31
+10 -> text/s006.xhtml#page-32
+11 -> text/s006.xhtml#page-33
+12 -> text/s006.xhtml#page-34
+13 -> text/s006.xhtml#page-35
+14 -> text/s006.xhtml#page-36
+15 -> text/s006.xhtml#page-37
+16 -> text/s006.xhtml#page-38
+17 -> text/s006.xhtml#page-39
+18 -> text/s006.xhtml#page-40
+19 -> text/s006.xhtml#page-41
+20 -> text/s006.xhtml#page-42
+21 -> text/s006.xhtml#page-43
+22 -> text/s006.xhtml#page-44
+23 -> text/s006.xhtml#page-45
+24 -> text/s006.xhtml#page-46
+25 -> text/s006.xhtml#page-47
+26 -> text/s006.xhtml#page-48
+27 -> text/s007.xhtml#page-49
+28 -> text/s007.xhtml#page-50
+29 -> text/s007.xhtml#page-51
+30 -> text/s007.xhtml#page-52
+31 -> text/s007.xhtml#page-53
+32 -> text/s007.xhtml#page-54
+33 -> text/s007.xhtml#page-55
+34 -> text/s007.xhtml#page-56
+35 -> text/s007.xhtml#page-57
+36 -> text/s007.xhtml#page-58
+37 -> text/s007.xhtml#page-59
+38 -> text/s007.xhtml#page-60
+39 -> text/s007.xhtml#page-61
+40 -> text/s007.xhtml#page-62
+41 -> text/s007.xhtml#page-63
+42 -> text/s007.xhtml#page-64
+43 -> text/s007.xhtml#page-65
+44 -> text/s007.xhtml#page-66
+45 -> text/s007.xhtml#page-67
+46 -> text/s007.xhtml#page-68
+47 -> text/s007.xhtml#page-69
+48 -> text/s007.xhtml#page-70
+49 -> text/s007.xhtml#page-71
+50 -> text/s007.xhtml#page-72
+51 -> text/s008.xhtml#page-73
+52 -> text/s008.xhtml#page-74
+53 -> text/s008.xhtml#page-75
+54 -> text/s008.xhtml#page-76
+55 -> text/s008.xhtml#page-77
+56 -> text/s008.xhtml#page-78
+57 -> text/s008.xhtml#page-79
+58 -> text/s008.xhtml#page-80
+59 -> text/s008.xhtml#page-81
+60 -> text/s008.xhtml#page-82
+61 -> text/s008.xhtml#page-83
+62 -> text/s008.xhtml#page-84
+63 -> text/s008.xhtml#page-85
+64 -> text/s008.xhtml#page-86
+65 -> text/s008.xhtml#page-87
+66 -> text/s008.xhtml#page-88
+67 -> text/s008.xhtml#page-89
+68 -> text/s008.xhtml#page-90
+69 -> text/s009.xhtml#page-91
+70 -> text/s009.xhtml#page-92
+71 -> text/s009.xhtml#page-93
+72 -> text/s009.xhtml#page-94
+73 -> text/s009.xhtml#page-95
+74 -> text/s009.xhtml#page-96
+75 -> text/s009.xhtml#page-97
+76 -> text/s009.xhtml#page-98
+77 -> text/s009.xhtml#page-99
+78 -> text/s009.xhtml#page-100
+79 -> text/s009.xhtml#page-101
+80 -> text/s009.xhtml#page-102
+81 -> text/s010.xhtml#page-103
+82 -> text/s010.xhtml#page-104
+83 -> text/s010.xhtml#page-105
+84 -> text/s010.xhtml#page-106
+85 -> text/s010.xhtml#page-107
+86 -> text/s010.xhtml#page-108
+87 -> text/s010.xhtml#page-109
+88 -> text/s010.xhtml#page-110
+89 -> text/s010.xhtml#page-111
+90 -> text/s010.xhtml#page-112
+91 -> text/s010.xhtml#page-113
+92 -> text/s010.xhtml#page-114
+93 -> text/s010.xhtml#page-115
+94 -> text/s010.xhtml#page-116
+95 -> text/s010.xhtml#page-117
+96 -> text/s010.xhtml#page-118
+97 -> text/s011.xhtml#page-119
+98 -> text/s011.xhtml#page-120
+99 -> text/s011.xhtml#page-121
+100 -> text/s011.xhtml#page-122
+101 -> text/s011.xhtml#page-123
+102 -> text/s011.xhtml#page-124
+103 -> text/s011.xhtml#page-125
+104 -> text/s011.xhtml#page-126
+105 -> text/s011.xhtml#page-127
+106 -> text/s011.xhtml#page-128
+107 -> text/s011.xhtml#page-129
+108 -> text/s011.xhtml#page-130
+109 -> text/s011.xhtml#page-131
+110 -> text/s011.xhtml#page-132
+111 -> text/s011.xhtml#page-133
+112 -> text/s011.xhtml#page-134
+113 -> text/s011.xhtml#page-135
+114 -> text/s011.xhtml#page-136
+115 -> text/s011.xhtml#page-137
+116 -> text/s011.xhtml#page-138
+117 -> text/s011.xhtml#page-139
+118 -> text/s011.xhtml#page-140
+119 -> text/s011.xhtml#page-141
+120 -> text/s011.xhtml#page-142
+121 -> text/s012.xhtml#page-143
+122 -> text/s012.xhtml#page-144
+123 -> text/s012.xhtml#page-145
+124 -> text/s012.xhtml#page-146
+125 -> text/s012.xhtml#page-147
+126 -> text/s012.xhtml#page-148
+127 -> text/s012.xhtml#page-149
+128 -> text/s012.xhtml#page-150
+129 -> text/s012.xhtml#page-151
+130 -> text/s012.xhtml#page-152
+131 -> text/s012.xhtml#page-153
+132 -> text/s012.xhtml#page-154
+133 -> text/s012.xhtml#page-155
+134 -> text/s012.xhtml#page-156
+135 -> text/s012.xhtml#page-157
+136 -> text/s012.xhtml#page-158
+137 -> text/s012.xhtml#page-159
+138 -> text/s012.xhtml#page-160
+139 -> text/s012.xhtml#page-161
+140 -> text/s012.xhtml#page-162
+141 -> text/s013.xhtml#page-163
+142 -> text/s013.xhtml#page-164
+143 -> text/s013.xhtml#page-165
+144 -> text/s013.xhtml#page-166
+145 -> text/s013.xhtml#page-167
+146 -> text/s013.xhtml#page-168
+147 -> text/s013.xhtml#page-169
+148 -> text/s013.xhtml#page-170
+149 -> text/s013.xhtml#page-171
+150 -> text/s013.xhtml#page-172
+151 -> text/s013.xhtml#page-173
+152 -> text/s013.xhtml#page-174
+153 -> text/s013.xhtml#page-175
+154 -> text/s013.xhtml#page-176
+155 -> text/s014.xhtml#page-177
+156 -> text/s014.xhtml#page-178
+157 -> text/s015.xhtml#page-179
+158 -> text/s015.xhtml#page-180
+159 -> text/s015.xhtml#page-181
+160 -> text/s015.xhtml#page-182
+161 -> text/s015.xhtml#page-183
+162 -> text/s015.xhtml#page-184
+163 -> text/s015.xhtml#page-185
+164 -> text/s015.xhtml#page-186
+165 -> text/s015.xhtml#page-187
+166 -> text/s015.xhtml#page-188
+167 -> text/s015.xhtml#page-189
+168 -> text/s015.xhtml#page-190
+169 -> text/s015.xhtml#page-191
+170 -> text/s015.xhtml#page-192
+171 -> text/s015.xhtml#page-193
+172 -> text/s015.xhtml#page-194
+173 -> text/s015.xhtml#page-195
+174 -> text/s015.xhtml#page-196
+175 -> text/s015.xhtml#page-197
+176 -> text/s015.xhtml#page-198
+177 -> text/s015.xhtml#page-199
+178 -> text/s015.xhtml#page-200
+179 -> text/s015.xhtml#page-201
+180 -> text/s015.xhtml#page-202
+181 -> text/s015.xhtml#page-203
+182 -> text/s015.xhtml#page-204
+183 -> text/s015.xhtml#page-205
+184 -> text/s015.xhtml#page-206
+185 -> text/s016.xhtml#page-207
+186 -> text/s016.xhtml#page-208
+187 -> text/s016.xhtml#page-209
+188 -> text/s016.xhtml#page-210
+189 -> text/s016.xhtml#page-211
+190 -> text/s016.xhtml#page-212
+191 -> text/s016.xhtml#page-213
+192 -> text/s016.xhtml#page-214
+193 -> text/s016.xhtml#page-215
+194 -> text/s016.xhtml#page-216
+195 -> text/s016.xhtml#page-217
+196 -> text/s016.xhtml#page-218
+197 -> text/s016.xhtml#page-219
+198 -> text/s016.xhtml#page-220
+199 -> text/s017.xhtml#page-221
+200 -> text/s017.xhtml#page-222
+201 -> text/s017.xhtml#page-223
+202 -> text/s017.xhtml#page-224
+203 -> text/s017.xhtml#page-225
+204 -> text/s017.xhtml#page-226
+205 -> text/s017.xhtml#page-227
+206 -> text/s017.xhtml#page-228
+207 -> text/s017.xhtml#page-229
+208 -> text/s017.xhtml#page-230
+209 -> text/s017.xhtml#page-231
+210 -> text/s017.xhtml#page-232
+211 -> text/s017.xhtml#page-233
+212 -> text/s017.xhtml#page-234
+213 -> text/s017.xhtml#page-235
+214 -> text/s017.xhtml#page-236
+215 -> text/s017.xhtml#page-237
+216 -> text/s017.xhtml#page-238
+217 -> text/s017.xhtml#page-239
+218 -> text/s017.xhtml#page-240
+219 -> text/s017.xhtml#page-241
+220 -> text/s017.xhtml#page-242
+221 -> text/s017.xhtml#page-243
+222 -> text/s017.xhtml#page-244
+223 -> text/s018.xhtml#page-245
+224 -> text/s018.xhtml#page-246
+225 -> text/s018.xhtml#page-247
+226 -> text/s018.xhtml#page-248
+227 -> text/s018.xhtml#page-249
+228 -> text/s018.xhtml#page-250
+229 -> text/s018.xhtml#page-251
+230 -> text/s018.xhtml#page-252
+231 -> text/s018.xhtml#page-253
+232 -> text/s018.xhtml#page-254
+233 -> text/s018.xhtml#page-255
+234 -> text/s018.xhtml#page-256
+235 -> text/s019.xhtml#page-257
+236 -> text/s019.xhtml#page-258
+237 -> text/s019.xhtml#page-259
+238 -> text/s019.xhtml#page-260
+239 -> text/s019.xhtml#page-261
+240 -> text/s019.xhtml#page-262
+241 -> text/s019.xhtml#page-263
+242 -> text/s019.xhtml#page-264
+243 -> text/s019.xhtml#page-265
+244 -> text/s019.xhtml#page-266
+245 -> text/s019.xhtml#page-267
+246 -> text/s019.xhtml#page-268
+247 -> text/s019.xhtml#page-269
+248 -> text/s019.xhtml#page-270
+249 -> text/s019.xhtml#page-271
+250 -> text/s019.xhtml#page-272
+251 -> text/s019.xhtml#page-273
+252 -> text/s019.xhtml#page-274
+253 -> text/s019.xhtml#page-275
+254 -> text/s019.xhtml#page-276
+255 -> text/s019.xhtml#page-277
+256 -> text/s019.xhtml#page-278
+257 -> text/s020.xhtml#page-279
+258 -> text/s020.xhtml#page-280
+259 -> text/s020.xhtml#page-281
+260 -> text/s020.xhtml#page-282
+261 -> text/s020.xhtml#page-283
+262 -> text/s020.xhtml#page-284
+263 -> text/s020.xhtml#page-285
+264 -> text/s020.xhtml#page-286
+265 -> text/s020.xhtml#page-287
+266 -> text/s020.xhtml#page-288
+267 -> text/s020.xhtml#page-289
+268 -> text/s020.xhtml#page-290
+269 -> text/s020.xhtml#page-291
+270 -> text/s020.xhtml#page-292
+271 -> text/s020.xhtml#page-293
+272 -> text/s020.xhtml#page-294
+273 -> text/s020.xhtml#page-295
+274 -> text/s020.xhtml#page-296
+275 -> text/s020.xhtml#page-297
+276 -> text/s020.xhtml#page-298
+277 -> text/s021.xhtml#page-299
+278 -> text/s021.xhtml#page-300
+279 -> text/s021.xhtml#page-301
+280 -> text/s021.xhtml#page-302
+281 -> text/s021.xhtml#page-303
+282 -> text/s021.xhtml#page-304
+283 -> text/s021.xhtml#page-305
+284 -> text/s021.xhtml#page-306
+285 -> text/s021.xhtml#page-307
+286 -> text/s021.xhtml#page-308
+287 -> text/s021.xhtml#page-309
+288 -> text/s021.xhtml#page-310
+289 -> text/s021.xhtml#page-311
+290 -> text/s021.xhtml#page-312
+291 -> text/s021.xhtml#page-313
+292 -> text/s021.xhtml#page-314
+293 -> text/s022.xhtml#page-315
+294 -> text/s022.xhtml#page-316
+295 -> text/s022.xhtml#page-317
+296 -> text/s022.xhtml#page-318
+297 -> text/s022.xhtml#page-319
+298 -> text/s022.xhtml#page-320
+299 -> text/s022.xhtml#page-321
+300 -> text/s022.xhtml#page-322
+301 -> text/s022.xhtml#page-323
+302 -> text/s022.xhtml#page-324
+303 -> text/s022.xhtml#page-325
+304 -> text/s022.xhtml#page-326
+305 -> text/s022.xhtml#page-327
+306 -> text/s022.xhtml#page-328
+307 -> text/s022.xhtml#page-329
+308 -> text/s022.xhtml#page-330
+309 -> text/s022.xhtml#page-331
+310 -> text/s022.xhtml#page-332
+311 -> text/s022.xhtml#page-333
+312 -> text/s022.xhtml#page-334
+313 -> text/s022.xhtml#page-335
+314 -> text/s022.xhtml#page-336
+315 -> text/s022.xhtml#page-337
+316 -> text/s022.xhtml#page-338
+317 -> text/s022.xhtml#page-339
+318 -> text/s022.xhtml#page-340
+319 -> text/s022.xhtml#page-341
+320 -> text/s022.xhtml#page-342
+321 -> text/s023.xhtml#page-343
+322 -> text/s023.xhtml#page-344
+323 -> text/s024.xhtml#page-345
+324 -> text/s024.xhtml#page-346
+325 -> text/s024.xhtml#page-347
+326 -> text/s024.xhtml#page-348
+327 -> text/s024.xhtml#page-349
+328 -> text/s024.xhtml#page-350
+329 -> text/s024.xhtml#page-351
+330 -> text/s024.xhtml#page-352
+331 -> text/s024.xhtml#page-353
+332 -> text/s024.xhtml#page-354
+333 -> text/s024.xhtml#page-355
+334 -> text/s024.xhtml#page-356
+335 -> text/s024.xhtml#page-357
+336 -> text/s024.xhtml#page-358
+337 -> text/s025.xhtml#page-359
+338 -> text/s025.xhtml#page-360
+339 -> text/s025.xhtml#page-361
+340 -> text/s025.xhtml#page-362
+341 -> text/s025.xhtml#page-363
+342 -> text/s025.xhtml#page-364
+343 -> text/s025.xhtml#page-365
+344 -> text/s025.xhtml#page-366
+345 -> text/s025.xhtml#page-367
+346 -> text/s025.xhtml#page-368
+347 -> text/s025.xhtml#page-369
+348 -> text/s025.xhtml#page-370
+349 -> text/s025.xhtml#page-371
+350 -> text/s025.xhtml#page-372
+351 -> text/s025.xhtml#page-373
+352 -> text/s025.xhtml#page-374
+353 -> text/s025.xhtml#page-375
+354 -> text/s025.xhtml#page-376
+355 -> text/s025.xhtml#page-377
+356 -> text/s025.xhtml#page-378
+357 -> text/s026.xhtml#page-379
+358 -> text/s026.xhtml#page-380
+359 -> text/s026.xhtml#page-381
+360 -> text/s026.xhtml#page-382
+361 -> text/s026.xhtml#page-383
+362 -> text/s026.xhtml#page-384
+363 -> text/s026.xhtml#page-385
+364 -> text/s026.xhtml#page-386
+365 -> text/s026.xhtml#page-387
+366 -> text/s026.xhtml#page-388
+367 -> text/s026.xhtml#page-389
+368 -> text/s026.xhtml#page-390
+369 -> text/s026.xhtml#page-391
+370 -> text/s026.xhtml#page-392
+371 -> text/s026.xhtml#page-393
+372 -> text/s026.xhtml#page-394
+373 -> text/s027.xhtml#page-395
+374 -> text/s027.xhtml#page-396
+375 -> text/s027.xhtml#page-397
+376 -> text/s027.xhtml#page-398
+377 -> text/s027.xhtml#page-399
+378 -> text/s027.xhtml#page-400
+379 -> text/s027.xhtml#page-401
+380 -> text/s027.xhtml#page-402
+381 -> text/s027.xhtml#page-403
+382 -> text/s027.xhtml#page-404
+383 -> text/s027.xhtml#page-405
+384 -> text/s027.xhtml#page-406
+385 -> text/s027.xhtml#page-407
+386 -> text/s027.xhtml#page-408
+387 -> text/s028.xhtml#page-409
+388 -> text/s028.xhtml#page-410
+389 -> text/s028.xhtml#page-411
+390 -> text/s028.xhtml#page-412
+391 -> text/s028.xhtml#page-413
+392 -> text/s028.xhtml#page-414
+393 -> text/s028.xhtml#page-415
+394 -> text/s028.xhtml#page-416
+395 -> text/s028.xhtml#page-417
+396 -> text/s028.xhtml#page-418
+397 -> text/s028.xhtml#page-419
+398 -> text/s028.xhtml#page-420
+399 -> text/s028.xhtml#page-421
+400 -> text/s028.xhtml#page-422
+401 -> text/s028.xhtml#page-423
+402 -> text/s028.xhtml#page-424
+403 -> text/s028.xhtml#page-425
+404 -> text/s028.xhtml#page-426
+405 -> text/s029.xhtml#page-427
+406 -> text/s029.xhtml#page-428
+407 -> text/s029.xhtml#page-429
+408 -> text/s029.xhtml#page-430
+409 -> text/s029.xhtml#page-431
+410 -> text/s029.xhtml#page-432
+411 -> text/s029.xhtml#page-433
+412 -> text/s029.xhtml#page-434
+413 -> text/s029.xhtml#page-435
+414 -> text/s029.xhtml#page-436
+415 -> text/s029.xhtml#page-437
+416 -> text/s029.xhtml#page-438
+417 -> text/s029.xhtml#page-439
+418 -> text/s029.xhtml#page-440
+419 -> text/s030.xhtml#page-441
+420 -> text/s030.xhtml#page-442
+421 -> text/s030.xhtml#page-443
+422 -> text/s030.xhtml#page-444
+423 -> text/s030.xhtml#page-445
+424 -> text/s030.xhtml#page-446
+425 -> text/s030.xhtml#page-447
+426 -> text/s030.xhtml#page-448
+427 -> text/s030.xhtml#page-449
+428 -> text/s030.xhtml#page-450
+429 -> text/s031.xhtml#page-451
+430 -> text/s031.xhtml#page-452
+431 -> text/s031.xhtml#page-453
+432 -> text/s031.xhtml#page-454
+433 -> text/s031.xhtml#page-455
+434 -> text/s031.xhtml#page-456
+435 -> text/s031.xhtml#page-457
+436 -> text/s031.xhtml#page-458
+437 -> text/s031.xhtml#page-459
+438 -> text/s031.xhtml#page-460
+439 -> text/s031.xhtml#page-461
+440 -> text/s031.xhtml#page-462
+441 -> text/s031.xhtml#page-463
+442 -> text/s031.xhtml#page-464
+443 -> text/s032.xhtml#page-465
+444 -> text/s032.xhtml#page-466
+445 -> text/s032.xhtml#page-467
+446 -> text/s032.xhtml#page-468
+447 -> text/s032.xhtml#page-469
+448 -> text/s032.xhtml#page-470
+449 -> text/s032.xhtml#page-471
+450 -> text/s032.xhtml#page-472
+451 -> text/s032.xhtml#page-473
+452 -> text/s032.xhtml#page-474
+453 -> text/s033.xhtml#page-475
+454 -> text/s033.xhtml#page-476
+455 -> text/s033.xhtml#page-477
+456 -> text/s033.xhtml#page-478
+457 -> text/s033.xhtml#page-479
+458 -> text/s033.xhtml#page-480
+459 -> text/s033.xhtml#page-481
+460 -> text/s033.xhtml#page-482
+461 -> text/s033.xhtml#page-483
+462 -> text/s033.xhtml#page-484
+463 -> text/s033.xhtml#page-485
+464 -> text/s033.xhtml#page-486
+465 -> text/s033.xhtml#page-487
+466 -> text/s033.xhtml#page-488
+467 -> text/s033.xhtml#page-489
+468 -> text/s033.xhtml#page-490
+469 -> text/s033.xhtml#page-491
+470 -> text/s033.xhtml#page-492
+471 -> text/s033.xhtml#page-493
+472 -> text/s033.xhtml#page-494
+473 -> text/s034.xhtml#page-495
+474 -> text/s034.xhtml#page-496
+475 -> text/s034.xhtml#page-497
+476 -> text/s034.xhtml#page-498
+477 -> text/s034.xhtml#page-499
+478 -> text/s034.xhtml#page-500
+479 -> text/s034.xhtml#page-501
+480 -> text/s034.xhtml#page-502
+481 -> text/s035.xhtml#page-503
+482 -> text/s035.xhtml#page-504
+483 -> text/s036.xhtml#page-505
+484 -> text/s036.xhtml#page-506
+485 -> text/s036.xhtml#page-507
+486 -> text/s036.xhtml#page-508
+487 -> text/s036.xhtml#page-509
+488 -> text/s036.xhtml#page-510
+489 -> text/s036.xhtml#page-511
+490 -> text/s036.xhtml#page-512
+491 -> text/s036.xhtml#page-513
+492 -> text/s036.xhtml#page-514
+493 -> text/s036.xhtml#page-515
+494 -> text/s036.xhtml#page-516
+495 -> text/s036.xhtml#page-517
+496 -> text/s036.xhtml#page-518
+497 -> text/s036.xhtml#page-519
+498 -> text/s036.xhtml#page-520
+499 -> text/s037.xhtml#page-521
+500 -> text/s037.xhtml#page-522
+501 -> text/s037.xhtml#page-523
+502 -> text/s037.xhtml#page-524
+503 -> text/s037.xhtml#page-525
+504 -> text/s037.xhtml#page-526
+505 -> text/s037.xhtml#page-527
+506 -> text/s037.xhtml#page-528
+507 -> text/s037.xhtml#page-529
+508 -> text/s037.xhtml#page-530
+509 -> text/s037.xhtml#page-531
+510 -> text/s037.xhtml#page-532
+511 -> text/s037.xhtml#page-533
+512 -> text/s037.xhtml#page-534
+513 -> text/s038.xhtml#page-535
+514 -> text/s038.xhtml#page-536
+515 -> text/s038.xhtml#page-537
+516 -> text/s038.xhtml#page-538
+517 -> text/s038.xhtml#page-539
+518 -> text/s038.xhtml#page-540
+519 -> text/s038.xhtml#page-541
+520 -> text/s038.xhtml#page-542
+521 -> text/s038.xhtml#page-543
+522 -> text/s038.xhtml#page-544
+523 -> text/s038.xhtml#page-545
+524 -> text/s038.xhtml#page-546
+525 -> text/s038.xhtml#page-547
+526 -> text/s038.xhtml#page-548
+527 -> text/s039.xhtml#page-549
+528 -> text/s039.xhtml#page-550
+529 -> text/s039.xhtml#page-551
+530 -> text/s039.xhtml#page-552
+531 -> text/s039.xhtml#page-553
+532 -> text/s039.xhtml#page-554
+533 -> text/s039.xhtml#page-555
+534 -> text/s039.xhtml#page-556
+535 -> text/s039.xhtml#page-557
+536 -> text/s039.xhtml#page-558
+537 -> text/s039.xhtml#page-559
+538 -> text/s039.xhtml#page-560
+539 -> text/s039.xhtml#page-561
+540 -> text/s039.xhtml#page-562
+541 -> text/s040.xhtml#page-563
+542 -> text/s040.xhtml#page-564
+543 -> text/s040.xhtml#page-565
+544 -> text/s040.xhtml#page-566
+545 -> text/s040.xhtml#page-567
+546 -> text/s040.xhtml#page-568
+547 -> text/s040.xhtml#page-569
+548 -> text/s040.xhtml#page-570
+549 -> text/s040.xhtml#page-571
+550 -> text/s040.xhtml#page-572
+551 -> text/s040.xhtml#page-573
+552 -> text/s040.xhtml#page-574
+553 -> text/s040.xhtml#page-575
+554 -> text/s040.xhtml#page-576
+555 -> text/s040.xhtml#page-577
+556 -> text/s040.xhtml#page-578
+557 -> text/s041.xhtml#page-579
+558 -> text/s041.xhtml#page-580
+559 -> text/s041.xhtml#page-581
+560 -> text/s041.xhtml#page-582
+561 -> text/s041.xhtml#page-583
+562 -> text/s041.xhtml#page-584
+563 -> text/s041.xhtml#page-585
+564 -> text/s041.xhtml#page-586
+565 -> text/s041.xhtml#page-587
+566 -> text/s041.xhtml#page-588
+567 -> text/s041.xhtml#page-589
+568 -> text/s041.xhtml#page-590
+569 -> text/s041.xhtml#page-591
+570 -> text/s041.xhtml#page-592
+571 -> text/s041.xhtml#page-593
+572 -> text/s041.xhtml#page-594
+573 -> text/s042.xhtml#page-595
+574 -> text/s042.xhtml#page-596
+575 -> text/s042.xhtml#page-597
+576 -> text/s042.xhtml#page-598
+577 -> text/s042.xhtml#page-599
+578 -> text/s042.xhtml#page-600
+579 -> text/s042.xhtml#page-601
+580 -> text/s042.xhtml#page-602
+581 -> text/s042.xhtml#page-603
+582 -> text/s042.xhtml#page-604
+583 -> text/s042.xhtml#page-605
+584 -> text/s042.xhtml#page-606
+585 -> text/s042.xhtml#page-607
+586 -> text/s042.xhtml#page-608
+587 -> text/s042.xhtml#page-609
+588 -> text/s042.xhtml#page-610
+589 -> text/s042.xhtml#page-611
+590 -> text/s042.xhtml#page-612
+591 -> text/s043.xhtml#page-613
+592 -> text/s043.xhtml#page-614
+593 -> text/s043.xhtml#page-615
+594 -> text/s043.xhtml#page-616
+595 -> text/s043.xhtml#page-617
+596 -> text/s043.xhtml#page-618
+597 -> text/s043.xhtml#page-619
+598 -> text/s043.xhtml#page-620
+599 -> text/s043.xhtml#page-621
+600 -> text/s043.xhtml#page-622
+601 -> text/s043.xhtml#page-623
+602 -> text/s043.xhtml#page-624
+603 -> text/s043.xhtml#page-625
+604 -> text/s043.xhtml#page-626
+605 -> text/s044.xhtml#page-627
+606 -> text/s044.xhtml#page-628
+607 -> text/s044.xhtml#page-629
+608 -> text/s044.xhtml#page-630
+609 -> text/s044.xhtml#page-631
+610 -> text/s044.xhtml#page-632
+611 -> text/s044.xhtml#page-633
+612 -> text/s044.xhtml#page-634
+613 -> text/s044.xhtml#page-635
+614 -> text/s044.xhtml#page-636
+615 -> text/s044.xhtml#page-637
+616 -> text/s044.xhtml#page-638
+617 -> text/s044.xhtml#page-639
+618 -> text/s044.xhtml#page-640
+619 -> text/s045.xhtml#page-641
+620 -> text/s045.xhtml#page-642
+621 -> text/s045.xhtml#page-643
+622 -> text/s045.xhtml#page-644
+623 -> text/s045.xhtml#page-645
+624 -> text/s045.xhtml#page-646
+625 -> text/s045.xhtml#page-647
+626 -> text/s045.xhtml#page-648
+627 -> text/s045.xhtml#page-649
+628 -> text/s045.xhtml#page-650
+629 -> text/s045.xhtml#page-651
+630 -> text/s045.xhtml#page-652
+631 -> text/s045.xhtml#page-653
+632 -> text/s045.xhtml#page-654
+633 -> text/s045.xhtml#page-655
+634 -> text/s045.xhtml#page-656
+635 -> text/s045.xhtml#page-657
+636 -> text/s045.xhtml#page-658
+637 -> text/s046.xhtml#page-659
+638 -> text/s046.xhtml#page-660
+639 -> text/s046.xhtml#page-661
+640 -> text/s046.xhtml#page-662
+641 -> text/s046.xhtml#page-663
+642 -> text/s046.xhtml#page-664
+643 -> text/s046.xhtml#page-665
+644 -> text/s046.xhtml#page-666
+645 -> text/s046.xhtml#page-667
+646 -> text/s046.xhtml#page-668
+647 -> text/s046.xhtml#page-669
+648 -> text/s046.xhtml#page-670
+649 -> text/s046.xhtml#page-671
+650 -> text/s046.xhtml#page-672
+651 -> text/s046.xhtml#page-673
+652 -> text/s046.xhtml#page-674
+653 -> text/s046.xhtml#page-675
+654 -> text/s046.xhtml#page-676
+655 -> text/s047.xhtml#page-677
+656 -> text/s047.xhtml#page-678
+657 -> text/s047.xhtml#page-679
+658 -> text/s047.xhtml#page-680
+659 -> text/s047.xhtml#page-681
+660 -> text/s047.xhtml#page-682
+661 -> text/s047.xhtml#page-683
+662 -> text/s047.xhtml#page-684
+663 -> text/s047.xhtml#page-685
+664 -> text/s047.xhtml#page-686
+665 -> text/s047.xhtml#page-687
+666 -> text/s047.xhtml#page-688
+667 -> text/s047.xhtml#page-689
+668 -> text/s047.xhtml#page-690
+669 -> text/s047.xhtml#page-691
+670 -> text/s048.xhtml#page-692
+# stylesheet
+/* Made from the book's design; sizes in em so reading settings apply. */
+@font-face { font-family: "book-reading-serif"; font-weight: 400; font-style: normal; src: url("../fonts/reading-serif-regular.ttf"); }
+@font-face { font-family: "book-reading-serif"; font-weight: 400; font-style: italic; src: url("../fonts/reading-serif-italic.ttf"); }
+@font-face { font-family: "book-reading-serif"; font-weight: 700; font-style: normal; src: url("../fonts/reading-serif-bold.ttf"); }
+@font-face { font-family: "book-reading-serif"; font-weight: 700; font-style: italic; src: url("../fonts/reading-serif-bold-italic.ttf"); }
+@font-face { font-family: "book-sans"; font-weight: 400; font-style: normal; src: url("../fonts/sans-regular.ttf"); }
+@font-face { font-family: "book-sans"; font-weight: 400; font-style: italic; src: url("../fonts/sans-italic.ttf"); }
+@font-face { font-family: "book-sans"; font-weight: 700; font-style: normal; src: url("../fonts/sans-bold.ttf"); }
+@font-face { font-family: "book-sans"; font-weight: 700; font-style: italic; src: url("../fonts/sans-bold-italic.ttf"); }
+body { margin: 0 5%; font-family: "book-reading-serif", serif; }
+p { margin: 0; text-indent: 1.20em; text-align: left; hyphens: auto; -webkit-hyphens: auto; }
+h1 + p, h2 + p, h3 + p, h4 + p, header + p, hr + p, blockquote + p, .verse + p, figure + p, p.first, p.centered, .opening p:first-of-type { text-indent: 0; }
+header { text-align: left; margin: 3em 0 2em 0; font-family: "book-sans", sans-serif; }
+header .label { margin: 0; text-indent: 0; text-align: left; font-size: 0.9em; }
+h1 { font-size: 1.6em; font-weight: normal; margin: 0.3em 0 0 0; }
+header .subtitle { margin: 0.5em 0 0 0; text-indent: 0; text-align: inherit; font-style: italic; }
+h2 { font-size: 1.25em; font-weight: normal; margin: 1.5em 0 0.5em 0; }
+h3, h4 { font-size: 1.1em; font-weight: normal; font-style: italic; margin: 1.2em 0 0.4em 0; }
+.part header { margin-top: 30%; }
+.part h1 { font-size: 2em; }
+.epigraph { margin: 0 10% 2em 10%; font-style: italic; }
+.epigraph p { text-indent: 0; text-align: left; }
+.epigraph .attribution { text-align: right; font-style: normal; }
+p.centered { text-align: center; }
+.matter-plain { margin-top: 20%; text-align: center; }
+.matter-plain p { text-indent: 0; text-align: center; margin: 0.5em 0; }
+blockquote { margin: 1em 2em; }
+blockquote p { text-indent: 0; }
+.verse { margin: 1em 2em; }
+.verse p { text-indent: -1em; padding-left: 1em; text-align: left; }
+hr.break { border: none; margin: 1em 0; height: 1.5em; text-align: center; }
+hr.break::after { content: attr(data-mark); }
+p.break { text-align: center; text-indent: 0; margin: 0.75em 0; }
+aside.aside { margin: 1em 2em; }
+aside.aside p { text-indent: 0; }
+aside.aside-italic { font-style: italic; }
+aside.aside-framed { border-top: 1px solid; border-bottom: 1px solid; padding: 0.5em 0; margin: 1em 1.5em; }
+aside.aside-centered { text-align: center; }
+aside.aside-centered p { text-align: center; }
+aside.aside-sans { font-family: sans-serif; }
+.sc { font-variant: small-caps; }
+.strike { text-decoration: line-through; }
+figure { margin: 1em 0; text-align: center; }
+figure img { max-width: 100%; height: auto; }
+figure.page img { max-height: 95vh; }
+a.noteref { vertical-align: super; font-size: 0.75em; line-height: 0; text-decoration: none; }
+section.notes { margin-top: 2em; font-size: 0.9em; }
+aside.footnote { font-size: 0.9em; margin: 1em 0 0 0; }
+aside.footnote p { text-indent: 0; }
+section.notes h2 { font-size: 1.1em; }
+section.notes li p { text-indent: 0; }
+nav ol { list-style: none; padding-left: 0; }
+nav ol ol { padding-left: 1.5em; }
+nav li { margin: 0.3em 0; }
+# documents
+text/s001.xhtml titlepage “”: 2 paragraphs, 8 words
+text/s002.xhtml copyright-page “”: 3 paragraphs, 27 words
+text/s003.xhtml - “THE PUBLISHER TO THE READER”: 8 paragraphs, 888 words
+text/s004.xhtml - “A LETTER FROM CAPTAIN GULLIVER TO HIS COUSIN SYMPSON”: 11 paragraphs, 1856 words
+text/s005.xhtml part “A VOYAGE TO LILLIPUT”: 1 paragraphs, 3 words
+text/s006.xhtml chapter “Chapter One”: 11 paragraphs, 5097 words
+text/s007.xhtml chapter “Chapter Two”: 14 paragraphs, 4387 words
+text/s008.xhtml chapter “Chapter Three”: 21 paragraphs, 4102 words
+text/s009.xhtml chapter “Chapter Four”: 6 paragraphs, 2388 words
+text/s010.xhtml chapter “Chapter Five”: 11 paragraphs, 3239 words
+text/s011.xhtml chapter “Chapter Six”: 24 paragraphs, 5327 words
+text/s012.xhtml chapter “Chapter Seven”: 30 paragraphs, 4414 words
+text/s013.xhtml chapter “Chapter Eight”: 13 paragraphs, 3326 words
+text/s014.xhtml part “A VOYAGE TO BROBDINGNAG”: 1 paragraphs, 3 words
+text/s015.xhtml chapter “Chapter Nine”: 17 paragraphs, 6276 words
+text/s016.xhtml chapter “Chapter Ten”: 9 paragraphs, 2646 words
+text/s017.xhtml chapter “Chapter Eleven”: 16 paragraphs, 5478 words
+text/s018.xhtml chapter “Chapter Twelve”: 10 paragraphs, 2546 words
+text/s019.xhtml chapter “Chapter Thirteen”: 17 paragraphs, 5288 words
+text/s020.xhtml chapter “Chapter Fourteen”: 19 paragraphs, 4672 words
+text/s021.xhtml chapter “Chapter Fifteen”: 13 paragraphs, 3363 words
+text/s022.xhtml chapter “Chapter Sixteen”: 18 paragraphs, 6488 words
+text/s023.xhtml part “A VOYAGE TO LAPUTA, BALNIBARBI, GLUBBDUBDRIB, LUGGNAGG AND”: 1 paragraphs, 3 words
+text/s024.xhtml chapter “Chapter Seventeen”: 14 paragraphs, 2954 words
+text/s025.xhtml chapter “Chapter Eighteen”: 18 paragraphs, 4347 words
+text/s026.xhtml chapter “Chapter Nineteen”: 20 paragraphs, 3508 words
+text/s027.xhtml chapter “Chapter Twenty”: 16 paragraphs, 3194 words
+text/s028.xhtml chapter “Chapter Twenty-One”: 26 paragraphs, 3751 words
+text/s029.xhtml chapter “Chapter Twenty-Two”: 19 paragraphs, 3020 words
+text/s030.xhtml chapter “Chapter Twenty-Three”: 12 paragraphs, 2327 words
+text/s031.xhtml chapter “Chapter Twenty-Four”: 13 paragraphs, 2899 words
+text/s032.xhtml chapter “Chapter Twenty-Five”: 8 paragraphs, 1728 words
+text/s033.xhtml chapter “Chapter Twenty-Six”: 23 paragraphs, 4310 words
+text/s034.xhtml chapter “Chapter Twenty-Seven”: 8 paragraphs, 1765 words
+text/s035.xhtml part “A VOYAGE TO THE COUNTRY OF THE HOUYHNHNMS”: 1 paragraphs, 3 words
+text/s036.xhtml chapter “Chapter Twenty-Eight”: 11 paragraphs, 3449 words
+text/s037.xhtml chapter “Chapter Twenty-Nine”: 11 paragraphs, 2755 words
+text/s038.xhtml chapter “Chapter Thirty”: 15 paragraphs, 2786 words
+text/s039.xhtml chapter “Chapter Thirty-One”: 8 paragraphs, 2312 words
+text/s040.xhtml chapter “Chapter Thirty-Two”: 17 paragraphs, 3443 words
+text/s041.xhtml chapter “Chapter Thirty-Three”: 21 paragraphs, 3522 words
+text/s042.xhtml chapter “Chapter Thirty-Four”: 22 paragraphs, 3457 words
+text/s043.xhtml chapter “Chapter Thirty-Five”: 18 paragraphs, 2845 words
+text/s044.xhtml chapter “Chapter Thirty-Six”: 13 paragraphs, 2472 words
+text/s045.xhtml chapter “Chapter Thirty-Seven”: 16 paragraphs, 3494 words
+text/s046.xhtml chapter “Chapter Thirty-Eight”: 20 paragraphs, 4395 words
+text/s047.xhtml chapter “Chapter Thirty-Nine”: 18 paragraphs, 3239 words
+text/s048.xhtml contributors “About the Author”: 1 paragraphs, 15 words

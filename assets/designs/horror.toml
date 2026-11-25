@@ -1,0 +1,31 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "horror"
+name = "Horror"
+about = "Openings sunk deep, inscriptional capitals for titles and a lone dagger between scenes."
+genres = ["horror", "thriller", "gothic"]
+moods = ["dark", "tense"]
+
+[body]
+font = "classic-serif"
+size = 11.0
+leading = 1.33
+indent = 1.2
+
+[chapter]
+font = "inscription"
+sink = 0.42
+number_size = 13.0
+number_case = "capitals"
+title_size = 24.0
+title_case = "capitals"
+first_line = "small-caps"
+
+[scene_break]
+mark = "†"
+
+[heads]
+style = "title-chapter"
+folio = "foot"
+size = 8.5
+small_caps = true

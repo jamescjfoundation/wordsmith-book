@@ -1,0 +1,37 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "historical"
+name = "Historical"
+about = "An old-style serif with a three-line drop cap and capital chapter numbers: a period novel's look."
+genres = ["historical", "classic", "romance"]
+moods = ["traditional", "epic"]
+
+[body]
+font = "classic-serif"
+size = 11.0
+leading = 1.35
+indent = 1.3
+
+[chapter]
+font = "classic-serif"
+sink = 0.3
+number_size = 12.0
+number_case = "capitals"
+title_size = 21.0
+ornament = "❦"
+first_line = "drop-cap"
+drop_lines = 3
+
+[scene_break]
+mark = "❧"
+
+[heads]
+style = "author-title"
+folio = "foot"
+size = 9.0
+small_caps = true
+
+[part]
+number_size = 15.0
+title_size = 28.0
+sink = 0.33

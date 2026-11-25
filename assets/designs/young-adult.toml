@@ -1,0 +1,34 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "young-adult"
+name = "Young Adult"
+about = "Open leading, big sans-serif chapter numbers and short ragged headings: bright and quick to read."
+genres = ["young-adult", "contemporary", "fantasy", "science-fiction"]
+moods = ["light", "modern"]
+
+[body]
+font = "reading-serif"
+size = 11.0
+leading = 1.45
+indent = 1.0
+
+[chapter]
+font = "sans"
+sink = 0.22
+number_size = 34.0
+number_case = "as-written"
+title_size = 16.0
+align = "left"
+first_line = "none"
+
+[scene_break]
+mark = "• • •"
+
+[heads]
+style = "title-chapter"
+folio = "head"
+size = 8.5
+small_caps = false
+
+[ebook]
+first_line = "none"

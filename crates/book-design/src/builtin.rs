@@ -5,13 +5,20 @@
 use crate::design::{self, Design};
 
 /// The built-in design files, by id.
-pub const FILES: [(&str, &str); 6] = [
+pub const FILES: [(&str, &str); 13] = [
     ("classic", include_str!("../../../assets/designs/classic.toml")),
     ("literary", include_str!("../../../assets/designs/literary.toml")),
     ("romance", include_str!("../../../assets/designs/romance.toml")),
     ("thriller", include_str!("../../../assets/designs/thriller.toml")),
     ("fantasy", include_str!("../../../assets/designs/fantasy.toml")),
     ("non-fiction", include_str!("../../../assets/designs/non-fiction.toml")),
+    ("memoir", include_str!("../../../assets/designs/memoir.toml")),
+    ("historical", include_str!("../../../assets/designs/historical.toml")),
+    ("young-adult", include_str!("../../../assets/designs/young-adult.toml")),
+    ("horror", include_str!("../../../assets/designs/horror.toml")),
+    ("cozy", include_str!("../../../assets/designs/cozy.toml")),
+    ("poetry", include_str!("../../../assets/designs/poetry.toml")),
+    ("large-print", include_str!("../../../assets/designs/large-print.toml")),
 ];
 
 /// Every built-in design that reads (a test guards that all do).

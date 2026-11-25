@@ -60,6 +60,13 @@ fn the_test_books_pass_preflight_for_the_paperback_and_the_ebook_in_every_design
             for e in [paperback(), Edition::ebook()] {
                 let (r, bytes) = preflight::preflight(&p, &Default::default(), &src, &e, &|_| None);
                 assert!(bytes.is_some(), "{name}, {}, {}", d.id, e.id);
+                // Waverley (about 210,000 words) set large runs past the paper's page limit:
+                // that, and only that, blocks it (a long novel in large print takes volumes).
+                if name == "Waverley" && d.id == "large-print" && e.format.is_print() {
+                    let blocks: Vec<_> = r.of(Severity::Blocks).iter().map(|f| f.rule).collect();
+                    assert_eq!(blocks, ["page-count"], "{}", show(&r));
+                    continue;
+                }
                 assert!(!r.blocked(), "{name}, {}, {}:\n{}", d.id, e.id, show(&r));
                 // Nothing but the book's own missing details and the absent cover is worth a
                 // warning.

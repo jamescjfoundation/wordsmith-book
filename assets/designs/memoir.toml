@@ -1,0 +1,36 @@
+# A Wordsmith Book design (docs/design-format.md).
+schema = 1
+id = "memoir"
+name = "Memoir"
+about = "A plain reading serif, chapter titles set left with a small-capital first line: a personal, unhurried voice."
+genres = ["memoir", "biography", "non-fiction", "literary"]
+moods = ["quiet", "warm"]
+
+[body]
+font = "reading-serif"
+size = 11.0
+leading = 1.42
+indent = 1.0
+hyphenation = "strict"
+
+[chapter]
+font = "reading-serif"
+sink = 0.3
+number_size = 10.5
+number_case = "small-caps"
+title_size = 19.0
+align = "left"
+first_line = "small-caps"
+
+[scene_break]
+style = "space"
+mark = "·"
+
+[heads]
+style = "author-title"
+folio = "foot"
+size = 8.5
+small_caps = true
+
+[ebook]
+first_line = "small-caps"

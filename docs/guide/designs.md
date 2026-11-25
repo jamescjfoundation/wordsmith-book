@@ -5,8 +5,9 @@ chapter opening (sink, number and title, ornament, first line), scene breaks, pa
 heads and folios, and the ebook's choices. Fonts are chosen by role: classic serif, reading serif,
 display, display capitals and sans serif.
 
-**Six built-in designs (DSN-2):** Classic, Literary, Romance, Thriller, Fantasy and Non-fiction,
-each tagged with the genres and moods it suits.
+**Thirteen built-in designs (DSN-2, DSN-6):** Classic, Literary, Romance, Thriller, Fantasy,
+Non-fiction, Memoir, Historical, Young Adult, Horror, Cozy, Poetry and Large Print (16-point type,
+ragged right), each tagged with the genres and moods it suits.
 
 **Mix and match (DSN-3).** Take one part of another design, such as Fantasy's chapter openings
 with Literary's scene breaks, without making a design of your own.

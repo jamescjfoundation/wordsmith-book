@@ -27,7 +27,8 @@ fn every_pair_of_built_in_designs_mixes_into_a_valid_design() {
             assert_eq!(m.id, a.id);
         }
     }
-    assert_eq!(n, 6 * 6 * 4);
+    assert_eq!(n, all.len() * all.len() * DesignPart::ALL.len());
+    assert!(all.len() >= 12);
 }
 
 #[test]
