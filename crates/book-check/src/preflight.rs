@@ -14,7 +14,7 @@ use std::collections::BTreeMap;
 use wordsmith_book_design::fonts::{self, Embedding};
 use wordsmith_book_format::source::Opened;
 use wordsmith_book_model::{BookProject, Edition, Severity};
-use wordsmith_book_typeset::Typeset;
+use wordsmith_book_typeset::{Look, Typeset};
 use wordsmith_manuscript_format::book::Book;
 
 use crate::build::{self, Print};
@@ -383,6 +383,20 @@ pub fn print_findings(print: &Print, pdf: &[u8], source: &Book, edition: &Editio
             format!("Some text is set at {size:.1} pt (“{text}”); nothing may print under {:.1} pt.", print.profile.min_type),
             Link::None,
         ));
+    }
+    // Large print (PRT-11): the book's text, running heads apart, at the large-print size and up.
+    if print.look.min_size > 0.0 {
+        let text_only = Look { heads: wordsmith_book_typeset::Heads::None, folios: false, ..print.look.clone() };
+        if let Some((size, text)) = print.typeset.smallest_type(&text_only)
+            && size + 0.01 < print.look.min_size
+        {
+            out.push(finding(
+                "type-size",
+                Severity::Blocks,
+                format!("Some text is set at {size:.1} pt (“{text}”); large print sets all text at {:.0} pt or more.", print.look.min_size),
+                Link::None,
+            ));
+        }
     }
     if let Ok(pages) = jcj_output::read_pages(pdf, &LIMITS) {
         let blank: Vec<bool> = pages.iter().map(|p| !p.glyphs.iter().any(|g| g.text.as_deref().is_some_and(|t| !t.trim().is_empty()))).collect();

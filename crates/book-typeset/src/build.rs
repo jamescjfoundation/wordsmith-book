@@ -198,7 +198,7 @@ impl Builder<'_> {
             self.body.push(self.para(&[Span::plain(&look.ornament)], self.centered(b, self.line() * 0.4), &c, false));
         }
         if let Some((text, by)) = &s.epigraph {
-            let mut c = self.chars(&look.body_font, look.body_size * 0.92);
+            let mut c = self.chars(&look.body_font, (look.body_size * 0.92).max(look.min_size));
             c.italic = Some(true);
             let indent = look.body_size * 3.0;
             let props = |this: &Self, before: f32| ParaProps {
@@ -287,7 +287,7 @@ impl Builder<'_> {
     /// Turn the note numbers printed in this section's paragraphs into footnote references:
     /// each number is taken out and its note waits to be placed at the foot of its page.
     fn footnotes_from(&mut self, s: &Section, start: usize, source: bool) {
-        let small = self.chars(&self.look.body_font, self.look.body_size * 0.85);
+        let small = self.chars(&self.look.body_font, (self.look.body_size * 0.85).max(self.look.min_size));
         for i in start..self.body.len() {
             let found: Vec<(usize, usize, usize)> = self.body[i]
                 .run_ranges()
@@ -472,7 +472,7 @@ impl Builder<'_> {
                     after_break = true;
                 }
                 Block::Centered(spans, scale) => {
-                    let c = self.chars(&look.heading_font, look.body_size * f32::from(*scale) / 100.0);
+                    let c = self.chars(&look.heading_font, (look.body_size * f32::from(*scale) / 100.0).max(look.min_size));
                     let mut props = self.centered(0.0, self.line() * 0.6);
                     props.align = Some(Align::Center);
                     props.keep_next = None;
@@ -514,7 +514,7 @@ impl Builder<'_> {
             let mut props = self.centered(self.line() * 1.5, self.line() * 0.5);
             props.align = Some(Align::Center);
             self.body.push(self.para(&[Span::plain("Notes")], props, &c, false));
-            let small = self.chars(&look.body_font, look.body_size * 0.88);
+            let small = self.chars(&look.body_font, (look.body_size * 0.88).max(look.min_size));
             for (i, n) in s.notes.iter().enumerate() {
                 let mut spans = vec![Span { text: format!("{}.", i + 1), superscript: false, ..Span::default() }, Span::plain(" ")];
                 spans.extend(n.iter().cloned());

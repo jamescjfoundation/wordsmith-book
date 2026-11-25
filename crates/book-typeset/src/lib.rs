@@ -306,6 +306,9 @@ pub struct Look {
     /// Keep at least two lines of a paragraph at a page's foot and head (off only when the
     /// design allows single lines).
     pub widow_control: bool,
+    /// The smallest size any of the book's text is set in, points (large print, PRT-11; 0: no
+    /// floor, notes and epigraphs a little smaller than the body).
+    pub min_size: f32,
 }
 
 impl Default for Look {
@@ -342,6 +345,7 @@ impl Default for Look {
             notes: NotePlace::ChapterEnd,
             asides: wordsmith_book_design::design::Asides::default(),
             widow_control: true,
+            min_size: 0.0,
         }
     }
 }

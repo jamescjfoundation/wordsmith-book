@@ -218,6 +218,13 @@ impl Panel {
             if ui.button(tr("Add Hardcover")).clicked() {
                 run = Some((crate::commands::EDITION_ADD, json!({ "format": "hardcover" })));
             }
+            if ui
+                .button(tr("Add Large Print"))
+                .on_hover_text(tr("A paperback in the large-print variant of the book's design: all text 16 pt and up"))
+                .clicked()
+            {
+                run = Some((crate::commands::EDITION_ADD, json!({ "format": "large-print" })));
+            }
             if ui.button(tr("Add Ebook")).clicked() {
                 run = Some((crate::commands::EDITION_ADD, json!({ "format": "ebook" })));
             }

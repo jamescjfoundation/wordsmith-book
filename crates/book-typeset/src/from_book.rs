@@ -29,6 +29,8 @@ pub struct Geometry {
     pub bleed: f32,
     /// Where the notes go.
     pub notes: crate::NotePlace,
+    /// The smallest size of any text, points (large print; 0: none).
+    pub min_size: f32,
 }
 
 impl Default for Geometry {
@@ -39,6 +41,7 @@ impl Default for Geometry {
             gutter: vec![(150, 0.375), (300, 0.5), (500, 0.625), (700, 0.75), (usize::MAX, 0.875)],
             bleed: 0.0,
             notes: crate::NotePlace::ChapterEnd,
+            min_size: 0.0,
         }
     }
 }
@@ -106,6 +109,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         notes: geometry.notes,
         asides: d.asides.clone(),
         widow_control: d.body.orphans >= 2 || d.body.widows >= 2,
+        min_size: geometry.min_size,
     })
 }
 

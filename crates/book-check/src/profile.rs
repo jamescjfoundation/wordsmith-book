@@ -160,6 +160,11 @@ impl Profile {
                 wordsmith_book_model::NoteStyle::ChapterEnd => wordsmith_book_typeset::NotePlace::ChapterEnd,
                 wordsmith_book_model::NoteStyle::BookEnd => wordsmith_book_typeset::NotePlace::BookEnd,
             },
+            min_size: if edition.format == wordsmith_book_model::Format::LargePrint {
+                wordsmith_book_design::large_print::LARGE_PRINT_SIZE
+            } else {
+                0.0
+            },
         })
     }
 

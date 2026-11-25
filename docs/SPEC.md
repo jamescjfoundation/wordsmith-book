@@ -390,6 +390,14 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
 17. **Cover check** (PRT-10, from 0.2): a supplied cover PDF must be one page of exactly that
     size, fonts embedded, no annotations, pictures at 300 pixels per inch or more; a PNG or JPEG
     must have the cover's shape and at least 300 pixels per inch. [Designed]
+18. **Large print** (PRT-11, from 0.3): a large-print edition sets the book in the large-print
+    variant of whatever design it has (one click: Add Large Print): body at 16 pt or more on
+    leading of 1.4 at least, ragged right, no hyphenation; chapter and part sizes grown in the
+    same proportion (16 to 72 pt), running heads 12 to 14 pt, asides no smaller than the body, a
+    drop cap become a plain first line; notes, epigraphs and the title and copyright pages at
+    16 pt at least. Preflight blocks a large-print edition with any text (running heads apart)
+    under 16 pt. The `pod-paperback` profile's page limits still hold: a long novel may need
+    volumes. [Designed]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 

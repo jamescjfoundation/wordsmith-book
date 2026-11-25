@@ -4,6 +4,7 @@
 
 use std::collections::BTreeMap;
 
+use wordsmith_book_design::design::Design;
 use wordsmith_book_design::mix;
 use wordsmith_book_format::assemble::{Assembled, assemble};
 use wordsmith_book_model::{BookProject, Edition};
@@ -44,12 +45,19 @@ pub fn print(
     let profile_id = edition.profile_id();
     let profile = profile::get(profile_id).ok_or_else(|| format!("there is no print profile “{profile_id}”"))?;
     let geometry = profile.geometry(edition)?;
-    let design = mix::resolve(&project.design, designs).map_err(|e| e.to_string())?;
+    let design = print_design(project, designs, edition)?;
     let assembled = assemble(project, book, Some(edition));
     let lang = if book.metadata.info.language.is_empty() { "en".to_owned() } else { book.metadata.info.language.clone() };
     let (pbook, look, left) = print_book(&assembled, &design, &geometry, &lang, images).map_err(|e| e.to_string())?;
     let typeset = typeset(&pbook, &look, if project.date.is_empty() { "2000-01-01" } else { &project.date }).map_err(|e| e.to_string())?;
     Ok(Print { assembled, book: pbook, look, typeset, profile, left })
+}
+
+/// The design a print edition is set in: the book's, or its large-print variant for a large-print
+/// edition (PRT-11).
+pub fn print_design(project: &BookProject, designs: &BTreeMap<String, String>, edition: &Edition) -> Result<Design, String> {
+    let design = mix::resolve(&project.design, designs).map_err(|e| e.to_string())?;
+    Ok(if edition.format == wordsmith_book_model::Format::LargePrint { wordsmith_book_design::large_print::variant(&design) } else { design })
 }
 
 /// Build only the opening of print `edition`: the front matter and the first chapter (or part
@@ -68,7 +76,7 @@ pub fn print_opening(
     let profile_id = edition.profile_id();
     let profile = profile::get(profile_id).ok_or_else(|| format!("there is no print profile “{profile_id}”"))?;
     let geometry = profile.geometry(edition)?;
-    let design = mix::resolve(&project.design, designs).map_err(|e| e.to_string())?;
+    let design = print_design(project, designs, edition)?;
     let assembled = assemble(project, book, Some(edition));
     let lang = if book.metadata.info.language.is_empty() { "en".to_owned() } else { book.metadata.info.language.clone() };
     let (mut pbook, look, left) = print_book(&assembled, &design, &geometry, &lang, images).map_err(|e| e.to_string())?;

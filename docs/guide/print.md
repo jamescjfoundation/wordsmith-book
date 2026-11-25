@@ -43,3 +43,8 @@ data files that say when they were last checked.
 PNG) from the page count and paper: the back, spine and front with bleed, safe areas, whether the
 spine is wide enough for text, and the barcode area. Check a finished cover (PDF, PNG or JPEG)
 against it before sending it to the printer.
+
+**Large print (PRT-11):** in Details, choose Add Large Print. That edition is set in the
+large-print variant of your book's design: 16-point type and up, ragged right, no hyphenation,
+headings grown to match. Preflight checks that nothing in it is smaller. A long novel in large
+print can run past the printer's page limit; preflight says so.
