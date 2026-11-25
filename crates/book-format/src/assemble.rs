@@ -189,6 +189,9 @@ fn body(project: &BookProject, sections: &[Section], out: &mut Vec<Piece>) {
             Role::Chapter => out.push(piece(project, s, What::Chapter)),
             // A plain folder holding chapters is not a page of its own.
             _ if s.children.iter().any(|c| matches!(c.role, Role::Chapter | Role::Part)) => body(project, &s.children, out),
+            // Front or back matter inside the body (a box set's book keeps its own) is matter,
+            // as it is at the book's front or back.
+            Role::FrontMatter | Role::BackMatter => out.push(piece(project, s, What::Matter(s.kind))),
             _ => out.push(piece(project, s, What::Other)),
         }
     }

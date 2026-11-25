@@ -125,6 +125,11 @@ pub const COVER_CHECK: &str = "book.cover.check";
 /// replaces the book's own source, Book's settings kept (IMP-8).
 pub const REIMPORT: &str = "book.reimport";
 
+/// Make the book a box set (STR-11): `{"books": [{"title", "manuscript": path | "owned": folder
+/// name}, ...]}`, in order (two or more; an empty list makes it one book again, its first book's
+/// source kept); gives the set's parts.
+pub const BOX_SET: &str = "book.boxSet.set";
+
 /// The book's line-break hints (TXT-5): `{}`; gives `{"keep": [...], "hyphenate": [...]}`.
 pub const HINTS: &str = "book.hints";
 /// Set the book's line-break hints (TXT-5): `{"keep": [words and phrases never broken across
@@ -189,6 +194,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(COVER_CHECK, tl("Check a Cover"), "")),
         p(CommandInfo::new(REIMPORT, tl("Import a New Version"), "")),
         CommandInfo::new(HINTS, tl("Line-Break Hints"), ""),
+        p(CommandInfo::new(BOX_SET, tl("Make a Box Set"), "")),
         p(CommandInfo::new(HINTS_SET, tl("Set Line-Break Hints"), "")),
     ]
 }
@@ -337,6 +343,7 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             Ok(json!({ "keep": h.keep, "hyphenate": h.hyphenate }))
         }
         HINTS_SET => hints_set(app.open_book()?, params),
+        BOX_SET => box_set(app.open_book()?, params),
         EXPORT => {
             let validator = app.prefs.validator_settings();
             let b = app.open_book()?;
@@ -646,6 +653,50 @@ fn open_with_system(path: &std::path::Path) -> Result<(), String> {
 }
 
 /// Set or clear a paragraph's only-in rule (STR-9).
+fn box_set(b: &mut OpenBook, params: &Value) -> Result<Value, String> {
+    use wordsmith_book_model::{BoxBook, Source};
+    let list = params.get("books").and_then(Value::as_array).ok_or("give `books`: a list of {title, manuscript | owned}")?;
+    if list.len() == 1 {
+        return Err("a box set has two books or more".into());
+    }
+    if list.len() > wordsmith_book_format::boxset::MAX_BOOKS {
+        return Err(format!("a box set has at most {} books", wordsmith_book_format::boxset::MAX_BOOKS));
+    }
+    let mut books = Vec::new();
+    for v in list {
+        let title = v.get("title").and_then(Value::as_str).unwrap_or("").trim().to_owned();
+        let source = match (v.get("manuscript").and_then(Value::as_str), v.get("owned").and_then(Value::as_str)) {
+            (Some(m), None) => Source::Manuscript(m.to_owned()),
+            (None, Some(o)) => Source::Owned(o.to_owned()),
+            _ => return Err("each book is {title, manuscript: path} or {title, owned: folder name}".into()),
+        };
+        wordsmith_book_format::check_source(&source).map_err(|e| e.to_string())?;
+        if books.iter().any(|x: &BoxBook| x.source == source) {
+            return Err("a book is in the set twice".into());
+        }
+        books.push(BoxBook { title, source });
+    }
+    // Every book must open before the set is made.
+    let mut trial = b.files.project.clone();
+    if let Some(first) = books.first() {
+        trial.source = first.source.clone();
+    }
+    trial.box_set = books.clone();
+    wordsmith_book_format::source::open_project(&b.root, &trial).map_err(|e| e.to_string())?;
+    b.edit(|f| {
+        if let Some(first) = books.first() {
+            f.project.source = first.source.clone();
+        }
+        f.project.box_set = books;
+        Ok(())
+    })?;
+    b.reopen_source();
+    let src = b.source.as_ref().map_err(Clone::clone)?;
+    Ok(
+        json!({ "parts": src.book.body.iter().filter(|s| wordsmith_book_format::boxset::is_book_part(s.id, b.files.project.box_set.len())).map(|s| json!({ "id": s.id.as_text(), "title": s.title })).collect::<Vec<_>>() }),
+    )
+}
+
 fn hints_set(b: &mut OpenBook, params: &Value) -> Result<Value, String> {
     let list = |key: &str| -> Result<Option<Vec<String>>, String> {
         match params.get(key) {

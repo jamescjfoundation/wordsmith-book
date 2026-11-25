@@ -68,7 +68,7 @@ impl OpenBook {
     pub fn open(path: &Path) -> Result<OpenBook, String> {
         let root = project_folder(path)?;
         let (folder, files) = Folder::open(&root).map_err(err)?;
-        let source = source::open(&root, &files.project.source).map_err(err);
+        let source = source::open_project(&root, &files.project).map_err(err);
         let mut b = OpenBook {
             root,
             folder,
@@ -142,11 +142,25 @@ impl OpenBook {
         !self.redo.is_empty()
     }
 
+    /// Open the sources again (the project's source or box set changed).
+    pub fn reopen_source(&mut self) {
+        self.source = source::open_project(&self.root, &self.files.project).map_err(err);
+        self.revision += 1;
+    }
+
+    fn reopen_if_sources_changed(&mut self, was: &wordsmith_book_model::BookProject) {
+        if was.source != self.files.project.source || was.box_set != self.files.project.box_set {
+            self.reopen_source();
+        }
+    }
+
     /// Undo the last change.
     pub fn undo(&mut self) -> bool {
         match self.undo.pop() {
             Some(prev) => {
-                self.redo.push(std::mem::replace(&mut self.files, prev));
+                let was = std::mem::replace(&mut self.files, prev);
+                self.reopen_if_sources_changed(&was.project);
+                self.redo.push(was);
                 self.revision += 1;
                 true
             }
@@ -158,7 +172,9 @@ impl OpenBook {
     pub fn redo(&mut self) -> bool {
         match self.redo.pop() {
             Some(next) => {
-                self.undo.push(std::mem::replace(&mut self.files, next));
+                let was = std::mem::replace(&mut self.files, next);
+                self.reopen_if_sources_changed(&was.project);
+                self.undo.push(was);
                 self.revision += 1;
                 true
             }
@@ -214,7 +230,7 @@ impl OpenBook {
         let Source::Owned(name) = self.files.project.source.clone() else { return Err("no owned source".into()) };
         source::write_owned(&self.root, &name, project).map_err(err)?;
         self.source_undo.push(old);
-        self.source = source::open(&self.root, &self.files.project.source).map_err(err);
+        self.source = source::open_project(&self.root, &self.files.project).map_err(err);
         self.revision += 1;
         Ok(())
     }
@@ -272,7 +288,7 @@ impl OpenBook {
         let Some(old) = self.source_undo.pop() else { return Ok(false) };
         let Source::Owned(name) = self.files.project.source.clone() else { return Ok(false) };
         source::write_owned(&self.root, &name, &old).map_err(err)?;
-        self.source = source::open(&self.root, &self.files.project.source).map_err(err);
+        self.source = source::open_project(&self.root, &self.files.project).map_err(err);
         self.revision += 1;
         Ok(true)
     }
@@ -287,7 +303,7 @@ impl OpenBook {
             return false;
         }
         let old = self.source.as_ref().ok().map(|s| source::checksums(&s.book));
-        self.source = source::open(&self.root, &self.files.project.source).map_err(err);
+        self.source = source::open_project(&self.root, &self.files.project).map_err(err);
         match (&self.source, old) {
             (Ok(s), Some(old)) => {
                 let n = source::changed_sections(&old, &source::checksums(&s.book)).len();

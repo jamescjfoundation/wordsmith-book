@@ -738,6 +738,20 @@ pub struct BookProject {
     /// No-break text and hyphenation hints (TXT-5).
     #[serde(default, skip_serializing_if = "is_default")]
     pub hints: Hints,
+    /// A box set's books, in order (STR-11; none: one book, its source `source`). The first
+    /// book's source is also `source`.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub box_set: Vec<BoxBook>,
+}
+
+/// One book of a box set.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub struct BoxBook {
+    /// Its title in the set (empty: the book's own).
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub title: String,
+    /// Its source.
+    pub source: Source,
 }
 
 /// Most entries kept in each list of hints.
@@ -818,6 +832,9 @@ impl BookProject {
     /// Problems that make the project unusable: duplicate ids, an empty id or edition name.
     pub fn problems(&self) -> Vec<String> {
         let mut out = Vec::new();
+        if self.box_set.first().is_some_and(|b| b.source != self.source) {
+            out.push("The box set's first book is not the project's source.".to_owned());
+        }
         let mut seen = std::collections::BTreeSet::new();
         for e in &self.editions {
             if e.id.trim().is_empty() || !seen.insert(e.id.as_str()) {

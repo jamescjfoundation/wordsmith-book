@@ -229,6 +229,21 @@ dedication, epigraph, contents, then the body. [Verified] An ebook puts the copy
    “term — definition”, the term in small capitals); questions are numbered. When an edition's
    notes go at the book's end, a Notes element holds them where it stands. [Designed]
 
+### 2.7 Box sets (STR-11, from 0.3)
+
+1. A book may be a box set of two to 24 books (`box_set` in `book.toml`: each book's title and
+   source, a linked Manuscript project or a source of the project's own; the first book's source
+   is also `source`). Each book's source is opened as on its own and becomes a part titled with
+   the book's title: its own front matter (its own contents apart), its body and its back
+   matter, in order. The set's half title, title page, copyright page and one main contents (the
+   books and their chapters) are Book's elements as for any book. [Designed]
+2. Chapters keep their numbers as in each book; every book keeps its section ids, so Book's
+   settings, fixes and word checks work on the set; front and back matter inside a book's part
+   is matter, as at a book's front or back. Pictures come from each book's source; a change to
+   any book's source is read again (FIL-2). [Designed]
+3. Every edition's words are each book's words, book by book, in order; the paper's page limit
+   still holds (a long set may need volumes). [Designed]
+
 ## 3. Text elements (TXT-1)
 
 1. **Body paragraphs** are justified with a first-line indent of about 1–1.5 em; paragraphs are

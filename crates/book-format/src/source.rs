@@ -49,6 +49,8 @@ pub struct Opened {
     /// Where it is on disk.
     pub path: PathBuf,
     watch: Watch,
+    /// A box set's other books, opened (their pictures and changes are the set's too).
+    others: Vec<Opened>,
 }
 
 /// Where `source` is, for the project folder at `project_root`.
@@ -90,7 +92,7 @@ pub fn open(project_root: &Path, source: &Source) -> Result<Opened, Error> {
         let b = book::from_project(&project);
         check_version(&b)?;
         let kind = if owned { Kind::Owned } else { Kind::LinkedFolder };
-        return Ok(Opened { book: b, project, kind, path, watch: Watch::Folder(folder) });
+        return Ok(Opened { book: b, project, kind, path, watch: Watch::Folder(folder), others: Vec::new() });
     }
     if owned {
         return Err(Error::Source(format!("the owned source `{}` is missing from the project", path.display())));
@@ -104,7 +106,29 @@ pub fn open(project_root: &Path, source: &Source) -> Result<Opened, Error> {
     let project = wordsmith_manuscript_format::pack::read_packed(&bytes).map_err(source_err)?;
     let b = book::from_project(&project);
     check_version(&b)?;
-    Ok(Opened { book: b, project, kind: Kind::LinkedPacked, path, watch: Watch::Packed(digest(&bytes)) })
+    Ok(Opened { book: b, project, kind: Kind::LinkedPacked, path, watch: Watch::Packed(digest(&bytes)), others: Vec::new() })
+}
+
+/// Open a project's source: its one book, or every book of its box set (STR-11) as one book
+/// view ([`crate::boxset::combine`]), the first book's source as the set's.
+pub fn open_project(project_root: &Path, project: &wordsmith_book_model::BookProject) -> Result<Opened, Error> {
+    let books = crate::boxset::books(project);
+    if books.is_empty() {
+        return open(project_root, &project.source);
+    }
+    let mut opened = Vec::with_capacity(books.len());
+    for (title, source) in &books {
+        let o = open(project_root, source)
+            .map_err(|e| Error::Source(format!("the box set's book “{}”: {e}", if title.is_empty() { "untitled" } else { title })))?;
+        opened.push((title.clone(), o));
+    }
+    let views: Vec<(String, Book)> = opened.iter().map(|(t, o)| (t.clone(), o.book.clone())).collect();
+    let combined = crate::boxset::combine(&views).ok_or_else(|| Error::Source("the box set has no books".into()))?;
+    let mut it = opened.into_iter().map(|(_, o)| o);
+    let mut first = it.next().ok_or_else(|| Error::Source("the box set has no books".into()))?;
+    first.book = combined;
+    first.others = it.collect();
+    Ok(first)
 }
 
 /// Largest picture read from a source, in bytes.
@@ -122,6 +146,13 @@ impl Opened {
         if !picture_path_ok(src) {
             return None;
         }
+        if let Some(p) = self.own_picture(src) {
+            return Some(p);
+        }
+        self.others.iter().find_map(|o| o.own_picture(src))
+    }
+
+    fn own_picture(&self, src: &str) -> Option<Vec<u8>> {
         if self.path.is_dir() {
             return jcj_project::files::read_bounded(&self.path.join(src), MAX_PICTURE).ok();
         }
@@ -132,6 +163,11 @@ impl Opened {
 
     /// Whether the source changed on disk since it was opened (FIL-2).
     pub fn changed_on_disk(&self) -> Result<bool, Error> {
+        for o in &self.others {
+            if o.changed_on_disk()? {
+                return Ok(true);
+            }
+        }
         match &self.watch {
             Watch::Folder(f) => Ok(!f.outside_changes().map_err(source_err)?.is_empty()),
             Watch::Packed(h) => {

@@ -40,3 +40,9 @@ counted in the build report.
 a paragraph and edit it. The fix is offered to the writer in Manuscript; until the writer
 accepts it, Book's builds use it and preflight notes it. In a book's own source the fix is made
 in the text.
+
+**Box sets (STR-11).** Several books in one: give the set's books, in order, with the command
+`book.boxSet.set` (from the command palette or an agent): each a linked Manuscript project or a
+source of the book's own. Each book becomes a part with its own title page and front and back
+matter; the set gets one contents listing every book. Every word of every book is checked as
+for a single book.
