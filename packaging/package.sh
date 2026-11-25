@@ -7,7 +7,8 @@ stem="wordsmith-book-${version}-${os}-${arch}"
 out=dist
 work="$out/$stem"
 rm -rf "$work" && mkdir -p "$work"
-icon=assets/brand/book/icon-256.png
+icon=assets/brand/icon-256.png
+mac_icon=assets/brand/icon-macos-1024.png
 case "$os" in
   linux)
     cp target/release/wordsmith-book target/release/book-cli "$work/"
@@ -23,7 +24,10 @@ case "$os" in
     cp target/release/wordsmith-book target/release/book-cli "$app/MacOS/"
     sed "s/@VERSION@/$version/g" packaging/macos/Info.plist > "$app/Info.plist"
     iconset="$work/book.iconset" && mkdir -p "$iconset"
-    for s in 16 32 128 256; do sips -z $s $s "$icon" --out "$iconset/icon_${s}x${s}.png" >/dev/null; done
+    for s in 16 32 128 256 512; do
+      sips -z $s $s "$mac_icon" --out "$iconset/icon_${s}x${s}.png" >/dev/null
+      sips -z $((s * 2)) $((s * 2)) "$mac_icon" --out "$iconset/icon_${s}x${s}@2x.png" >/dev/null
+    done
     iconutil -c icns "$iconset" -o "$app/Resources/book.icns" && rm -rf "$iconset"
     cp LICENSE-MIT LICENSE-APACHE NOTICE ATTRIBUTION.md "$work/"
     hdiutil create -volname "Wordsmith Book" -srcfolder "$work" -ov -format UDZO "$out/$stem.dmg" >/dev/null

@@ -242,9 +242,9 @@ mod tests {
 
     #[test]
     fn assets_listed_by_path_or_folder() {
-        let text = "| `assets/fonts/` | x |\n| `assets/brand/book/tokens.json` | y |";
+        let text = "| `assets/fonts/` | x |\n| `assets/brand/tokens.json` | y |";
         assert!(listed(text, "assets/fonts/serif/a.otf"));
-        assert!(listed(text, "assets/brand/book/tokens.json"));
-        assert!(!listed(text, "assets/brand/book/mark.svg"));
+        assert!(listed(text, "assets/brand/tokens.json"));
+        assert!(!listed(text, "assets/brand/mark.svg"));
     }
 }

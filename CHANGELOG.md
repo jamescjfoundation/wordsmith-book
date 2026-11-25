@@ -25,6 +25,10 @@ record distributors read.
 
 ### Changed
 
+- **The Wordsmith Book brand.** The app icon, the mark (the letter B and a ribbon cursor) and
+  the window's colors come from the Wordsmith brand kit: Iron Gall Ink on Page White, Margin Blue
+  for links and focus, Ribbon Green as the one accent, and Night for the dark themes. The Windows
+  program carries the icon, so its file types show it.
 - Print follows the newest core release's layout (core 0.1.15); no core move changed the
   golden files, and a test keeps the golden folders exactly what the tests compare.
 - Book's own pages (the title page) can carry a picture: the imprint's logo.

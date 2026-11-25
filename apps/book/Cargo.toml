@@ -17,6 +17,10 @@ jcj-shell = { workspace = true }
 eframe = { workspace = true }
 image = { workspace = true }
 
+# Embeds the Windows icon (build.rs); the build script does nothing for other targets.
+[build-dependencies]
+winresource = { workspace = true }
+
 [[bin]]
 name = "wordsmith-book"
 path = "src/main.rs"

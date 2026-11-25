@@ -62,6 +62,22 @@ jobs:
         run: cargo test --locked --release -p wordsmith-book-check --test v0_1
       - name: Build
         run: cargo build --locked --release -p wordsmith-book -p wordsmith-book-cli
+      - name: The icon is in the program
+        if: runner.os == 'Windows'
+        shell: bash
+        # Every image of assets/brand/icon.ico must appear, byte for byte, in the executable's
+        # resources (apps/book/build.rs embeds it).
+        run: |
+          python3 - <<'PY'
+          import struct
+          ico = open('assets/brand/icon.ico', 'rb').read()
+          exe = open('target/release/wordsmith-book.exe', 'rb').read()
+          count = struct.unpack('<H', ico[4:6])[0]
+          for i in range(count):
+              w, _, _, _, _, _, size, offset = struct.unpack('<BBBBHHII', ico[6 + 16 * i:22 + 16 * i])
+              assert ico[offset:offset + size] in exe, f'the {w or 256} px icon is not in the program'
+          print(f'all {count} icon images are embedded')
+          PY
       - name: Package
         id: pkg
         run: |

@@ -1,4 +1,4 @@
-<img src="assets/brand/book/icon-256.png" width="96" height="96" alt="">
+<img src="assets/brand/icon-256.png" width="96" height="96" alt="">
 
 # Wordsmith Book
 

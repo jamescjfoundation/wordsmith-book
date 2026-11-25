@@ -204,7 +204,7 @@ crates/
   book-ui/               views: outline, text, design chooser, settings, previews, preflight,
                          export, ribbon tabs, panels, agent tools
 assets/
-  brand/book/            tokens.json, mark, icons (the brand lives here, never in the core)
+  brand/                 the brand kit's logos and icons, tokens.json (the brand lives here, never in the core)
   fonts/                 bundled open-licensed fonts (named only in ATTRIBUTION.md)
   designs/               the built-in designs (TOML)
   print/                 print profiles: trims, margins, paper, limits (TOML data)
@@ -249,7 +249,7 @@ builds books with no window.
 | Atomic saves, backups, recovery, auto-save timing | `jcj-project` | Book project files |
 | Comparison | `jcj-features` | Re-import and offer differences (with the word-level diff of C2) |
 | Window, ribbon, panels, File page, start window, preferences, keys, updates | `jcj-shell` | Book implements `App` and supplies tabs, panels, File page sections, templates and About |
-| Theme | `jcj-theme` | `assets/brand/book/tokens.json` |
+| Theme | `jcj-theme` | `assets/brand/tokens.json` |
 | Agent control | `jcj-agents` | Every Book command as a tool |
 
 ### 5.4 What Manuscript gives Book
@@ -699,8 +699,8 @@ profiles, ebook rules, preview, preflight, export, metadata and editions, linked
 offers. Done when: every 0.1 feature id has a spec section, no company or product is named, and
 it is marked as awaiting a person's review.
 
-**M0.4 `m0/brand`**: `assets/brand/book/tokens.json` (light, dark, extra-dark), the mark and app
-icons in the suite's style drawn by a script in `tools/`; interface fonts from the core's bundled
+**M0.4 `m0/brand`**: `assets/brand/tokens.json` (light, dark, extra-dark), the mark and app
+icons (from the Wordsmith brand kit since decision 0004; a placeholder drawn by a script in `tools/` before); interface fonts from the core's bundled
 OFL faces. Done when: the window uses the tokens and icons and `cargo xtask assets` passes.
 
 **M0.5 `m0/fixtures`**: `tests/fixtures/` and `docs/fixtures.md`, made by `tools/make-fixtures.py`
