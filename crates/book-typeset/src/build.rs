@@ -27,6 +27,8 @@ struct Builder<'a> {
     pass: &'a Pass,
     body: Vec<Paragraph>,
     media: BTreeMap<String, Arc<Vec<u8>>>,
+    /// Paragraphs (by index) that are full-page pictures: what follows starts a new page.
+    alone: Vec<usize>,
     text_width: f32,
     text_height: f32,
 }
@@ -239,28 +241,46 @@ impl Builder<'_> {
                 (pw * scale, ph * scale)
             }
         };
-        let obj = InlineObject::Image {
-            media: key,
-            w,
-            h,
-            alt: alt.to_owned(),
-            float: Default::default(),
-            crop: [0.0; 4],
-            fx: Default::default(),
-            ole: None,
+        // With bleed, a full-page picture fills the whole page to the cut and past it: anchored to
+        // the page behind the text, cropped to the page's shape.
+        let bleeds = fit == ImageFit::Page && self.look.bleed > 0.0;
+        let (w, h, float, crop) = if bleeds {
+            let (pw_pt, ph_pt) = ((self.look.trim.0 + self.look.bleed) * INCH, (self.look.trim.1 + 2.0 * self.look.bleed) * INCH);
+            let (page_aspect, image_aspect) = (pw_pt / ph_pt, pw / ph);
+            let crop = if image_aspect > page_aspect {
+                let side = (1.0 - page_aspect / image_aspect) / 2.0;
+                [side, 0.0, side, 0.0]
+            } else {
+                let side = (1.0 - image_aspect / page_aspect) / 2.0;
+                [0.0, side, 0.0, side]
+            };
+            let float = jcj_doc::para::Float {
+                wrap: jcj_doc::para::Wrap::BehindText,
+                h_rel: jcj_doc::para::Anchor::Page,
+                v_rel: jcj_doc::para::Anchor::Page,
+                ..Default::default()
+            };
+            (pw_pt, ph_pt, float, crop)
+        } else {
+            (w, h, jcj_doc::para::Float::default(), [0.0; 4])
         };
+        let obj = InlineObject::Image { media: key, w, h, alt: alt.to_owned(), float, crop, fx: Default::default(), ole: None };
         let mut p = Paragraph::new();
         p.props = ParaProps {
             align: Some(Align::Center),
             space_before: Some(self.line() * 0.5),
-            space_after: Some(self.line() * 0.5),
             page_break_before: Some(fit == ImageFit::Page),
+            space_after: Some(self.line() * 0.5),
             line_spacing: Some(LineSpacing::Multiple(1.0)),
             ..ParaProps::default()
         };
         let _ = p.insert_object(0, obj, &self.body_chars());
         if source {
             let _ = SOURCE.set(&mut p, &true);
+        }
+        if fit == ImageFit::Page {
+            // A full-page picture's page holds nothing else.
+            self.alone.push(self.body.len());
         }
         self.body.push(p);
     }
@@ -472,12 +492,19 @@ impl Bands {
 /// The print document for `book` with `look` and the choices of this layout `pass`, and each
 /// section's first body block (its page-map anchor).
 pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Document, Vec<(String, usize)>), Error> {
-    let (w, h) = look.trim;
+    let (tw, th) = look.trim;
     let (inside, outside, top, bottom) = look.margins;
     let inside = inside + pass.gutter;
-    if !(w > 1.0 && h > 1.0 && inside + outside < w - 1.0 && top + bottom < h - 1.0) {
-        return Err(Error::Setup(format!("a {w} × {h} in page cannot hold these margins")));
+    if !(tw > 1.0 && th > 1.0 && inside + outside < tw - 1.0 && top + bottom < th - 1.0) {
+        return Err(Error::Setup(format!("a {tw} × {th} in page cannot hold these margins")));
     }
+    if !(0.0..=0.5).contains(&look.bleed) {
+        return Err(Error::Setup(format!("a bleed of {} in is not one a printer takes", look.bleed)));
+    }
+    // With bleed the page is larger on the outside, top and bottom; the margins are kept from
+    // the trim.
+    let b = look.bleed;
+    let (w, h, outside, top, bottom) = (tw + b, th + 2.0 * b, outside + b, top + b, bottom + b);
     if look.body_font.is_empty() || look.heading_font.is_empty() {
         return Err(Error::Setup("the design names no font".into()));
     }
@@ -502,6 +529,7 @@ pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Doc
         pass,
         body: Vec::new(),
         media: BTreeMap::new(),
+        alone: Vec::new(),
         text_width,
         text_height,
     };
@@ -560,6 +588,11 @@ pub fn print_document(book: &PrintBook, look: &Look, pass: &Pass) -> Result<(Doc
     }
     doc.last_section = last;
     let _ = FRONT.set(&mut doc, &front_sections);
+    for i in std::mem::take(&mut b.alone) {
+        if let Some(next) = b.body.get_mut(i + 1) {
+            next.props.page_break_before = Some(true);
+        }
+    }
     doc.media = b.media;
     doc.body = b.body.into_iter().map(|p| Arc::new(DocBlock::Para(p))).collect();
     if doc.body.is_empty() {
@@ -590,8 +623,8 @@ fn section_props(
         margin_right: outside * INCH,
         margin_top: top * INCH,
         margin_bottom: bottom * INCH,
-        header: (top * INCH * 0.45).max(18.0),
-        footer: (bottom * INCH * 0.45).max(18.0),
+        header: ((top - look.bleed) * INCH * 0.45).max(18.0) + look.bleed * INCH,
+        footer: ((bottom - look.bleed) * INCH * 0.45).max(18.0) + look.bleed * INCH,
         title_page: true,
         ..SectionProps::default()
     };

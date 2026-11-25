@@ -154,6 +154,7 @@ impl Profile {
             trim: (t.width, t.height),
             margins: (t.margins[0], t.margins[1], t.margins[2], t.margins[3]),
             gutter: self.gutter.iter().map(|g| (g.pages, g.inches)).collect(),
+            bleed: if edition.bleed { self.bleed } else { 0.0 },
         })
     }
 

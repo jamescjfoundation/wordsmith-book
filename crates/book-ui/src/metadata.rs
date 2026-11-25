@@ -104,7 +104,7 @@ pub fn add_edition(b: &mut OpenBook, format: &str) -> Result<String, String> {
     Ok(id)
 }
 
-/// Change an edition: `{"id", "name", "isbn", "trim", "paper", "profile", "price_notes", "store"}`.
+/// Change an edition: `{"id", "name", "isbn", "trim", "paper", "profile", "bleed", "price_notes", "store"}`.
 /// An ISBN is checked before it is kept.
 pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
     let id = params.get("id").and_then(Value::as_str).ok_or("`id` is needed")?.to_owned();
@@ -118,6 +118,7 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
     let paper: Option<Paper> =
         params.get("paper").map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not white, cream or color"))).transpose()?;
     let (name, trim, profile, price, store) = (text("name"), text("trim"), text("profile"), text("price_notes"), text("store"));
+    let bleed = params.get("bleed").and_then(Value::as_bool);
     b.edit(|f| {
         let e = f.project.editions.iter_mut().find(|e| e.id == id).ok_or_else(|| format!("there is no edition `{id}`"))?;
         if let Some(v) = name {
@@ -140,6 +141,9 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
         }
         if paper.is_some() {
             e.paper = paper;
+        }
+        if let Some(v) = bleed {
+            e.bleed = v;
         }
         // A printed edition's trim must be one its profile has (an empty one is a need).
         if e.format.is_print() && !e.trim.is_empty() {

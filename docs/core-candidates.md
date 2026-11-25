@@ -21,3 +21,4 @@ core), **app-first** (built here, marked `// core-candidate:`, waiting for a sec
 | C11 | A sortable, editable table widget | – | [#7](https://github.com/jamescjfoundation/open-source-core/issues/7) | open (R4, if needed) |
 | C12 | The PDF names the app that made it | – | [#5](https://github.com/jamescjfoundation/open-source-core/issues/5) | not needed by Book (its engine sets the producer) |
 | – | `jcj-doc`: section settings and note kinds reachable | – | [#24](https://github.com/jamescjfoundation/open-source-core/issues/24) | released in core v0.1.7 |
+| – | Trim and bleed boxes on exported PDFs (`jcj_output::set_page_boxes`) | – | [#25](https://github.com/jamescjfoundation/open-source-core/issues/25) | released in core v0.1.11 |

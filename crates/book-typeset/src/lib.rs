@@ -279,6 +279,9 @@ pub struct Look {
     pub head_small_caps: bool,
     /// Folios on the pages (off for screens).
     pub folios: bool,
+    /// Bleed past the trim on the outside, top and bottom, inches (0: none). The page is that
+    /// much larger; the PDF says where the trim is.
+    pub bleed: f32,
 }
 
 impl Default for Look {
@@ -311,6 +314,7 @@ impl Default for Look {
             head_size: 9.0,
             head_small_caps: true,
             folios: true,
+            bleed: 0.0,
         }
     }
 }
@@ -354,6 +358,9 @@ pub struct Typeset {
     date: String,
     passes: usize,
     gutter: f32,
+    /// The trim (inches) and bleed (inches), for the trim box.
+    trim: (f32, f32),
+    bleed: f32,
 }
 
 /// `n` in lower-case roman numerals (front matter folios).
@@ -432,6 +439,8 @@ pub fn typeset(book: &PrintBook, look: &Look, date: &str) -> Result<Typeset, Err
             date: date.to_owned(),
             passes: n,
             gutter: pass.gutter,
+            trim: look.trim,
+            bleed: look.bleed,
         };
         let map = t.page_map();
         let mut next = Pass { gutter: look.gutter_for(t.page_count()), ..Pass::default() };
@@ -520,7 +529,23 @@ impl Typeset {
         self.page_map().into_iter().rev().find(|s| s.page <= index + 1).map(|s| s.id)
     }
 
-    /// The PDF: every font embedded, tagged, no links, the project's date, naming the book.
+    /// The bleed, inches (0: none).
+    pub fn bleed(&self) -> f32 {
+        self.bleed
+    }
+
+    /// Page `index`'s trim box in points from the page's bottom left: the whole page without
+    /// bleed; with bleed, the page less the bleed on the outside (right on right-hand pages, left
+    /// on left-hand ones), top and bottom.
+    pub fn trim_box(&self, index: usize) -> (f32, f32, f32, f32) {
+        let b = self.bleed * INCH;
+        let (w, h) = (self.trim.0 * INCH, self.trim.1 * INCH);
+        let x0 = if index.is_multiple_of(2) { 0.0 } else { b };
+        (x0, b, x0 + w, b + h)
+    }
+
+    /// The PDF: every font embedded, tagged, no links, the project's date, naming the book; with
+    /// bleed, each page's trim and bleed boxes.
     pub fn pdf(&self) -> Result<Vec<u8>, Error> {
         let settings = jcj_output::PdfSettings {
             title: Some(self.title.clone()),
@@ -531,7 +556,21 @@ impl Typeset {
             links: false,
             ..jcj_output::PdfSettings::default()
         };
-        jcj_output::export_pdf(&self.doc, &self.layout, &settings).map_err(|e| Error::Pdf(format!("{e:?}")))
+        let pdf = jcj_output::export_pdf(&self.doc, &self.layout, &settings).map_err(|e| Error::Pdf(format!("{e:?}")))?;
+        if self.bleed <= 0.0 {
+            return Ok(pdf);
+        }
+        let boxes: Vec<jcj_output::Boxes> = (0..self.page_count())
+            .map(|i| {
+                let (x0, y0, x1, y1) = self.trim_box(i);
+                let (w, h) = self.page_size(i).unwrap_or((0.0, 0.0));
+                let pb =
+                    |a: f32, b: f32, c: f32, d: f32| jcj_output::PageBox { x0: f64::from(a), y0: f64::from(b), x1: f64::from(c), y1: f64::from(d) };
+                jcj_output::Boxes { trim: pb(x0, y0, x1, y1), bleed: Some(pb(0.0, 0.0, w, h)) }
+            })
+            .collect();
+        let limits = jcj_output::ReadLimits { max_input_bytes: 1 << 30, max_pages: 100_000, max_glyphs_per_page: 1 };
+        jcj_output::set_page_boxes(&pdf, &boxes, &limits).map_err(|e| Error::Pdf(e.to_string()))
     }
 
     /// Page `index` (from 0) as a PNG at `ppi` pixels per inch, with its pixel size.

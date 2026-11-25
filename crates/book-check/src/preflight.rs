@@ -120,15 +120,17 @@ pub fn margins(print: &Print) -> Vec<Finding> {
     let pages = t.page_count();
     let p = &print.profile;
     let gutter = p.gutter_for(pages);
-    // Book's pages do not bleed at 0.1, so the outside minimum is the one without bleed.
-    let outside_min = p.minimum.outside;
+    // Margins are measured from the trim; a page that bleeds needs more room outside.
+    let b = t.bleed() * 72.0;
+    let outside_min = if b > 0.0 { p.minimum.outside_bleed } else { p.minimum.outside };
     let mut out = Vec::new();
     for i in 0..pages {
         let (Some((w, h)), Some((x, y, bw, bh))) = (t.page_size(i), t.body_area(i)) else { continue };
         let inch = |v: f32| v / 72.0;
-        let (left, right, top, bottom) = (inch(x), inch(w - x - bw), inch(y), inch(h - y - bh));
-        // Right-hand pages (odd numbers) have the inside on the left.
+        // Right-hand pages (odd numbers) have the inside on the left; the bleed is outside.
         let recto = i % 2 == 0;
+        let (bl, br) = if recto { (0.0, b) } else { (b, 0.0) };
+        let (left, right, top, bottom) = (inch(x - bl), inch(w - x - bw - br), inch(y - b), inch(h - y - bh - b));
         let (inside, outside) = if recto { (left, right) } else { (right, left) };
         let mut problems = Vec::new();
         if inside + 0.001 < gutter {
@@ -171,12 +173,27 @@ pub fn pdf_facts(print: &Print, pdf: &[u8]) -> Vec<Finding> {
     };
     let mut out = Vec::new();
     let (tw, th) = print.look.trim;
+    let bleed = f64::from(print.look.bleed) * 72.0;
     for (i, p) in facts.pages.iter().enumerate() {
-        if (p.media.width() - f64::from(tw) * 72.0).abs() > 0.5 || (p.media.height() - f64::from(th) * 72.0).abs() > 0.5 {
+        // The trim box (or, without bleed, the page) is the trim size; with bleed the page is
+        // larger by the bleed outside, top and bottom.
+        let cut = if bleed > 0.0 { p.trim.unwrap_or(p.media) } else { p.media };
+        let sheet_ok =
+            (p.media.width() - (f64::from(tw) * 72.0 + bleed)).abs() <= 0.5 && (p.media.height() - (f64::from(th) * 72.0 + 2.0 * bleed)).abs() <= 0.5;
+        if bleed > 0.0 && (p.trim.is_none() || p.bleed.is_none() || !sheet_ok) {
             out.push(finding(
                 "page-size",
                 Severity::Blocks,
-                format!("Page {} is {:.2} × {:.2} in, not the trim size {tw} × {th} in.", i + 1, p.media.width() / 72.0, p.media.height() / 72.0),
+                format!("Page {} does not carry its trim and bleed: it is set to bleed.", i + 1),
+                Link::Page(i + 1),
+            ));
+            break;
+        }
+        if (cut.width() - f64::from(tw) * 72.0).abs() > 0.5 || (cut.height() - f64::from(th) * 72.0).abs() > 0.5 {
+            out.push(finding(
+                "page-size",
+                Severity::Blocks,
+                format!("Page {} is {:.2} × {:.2} in, not the trim size {tw} × {th} in.", i + 1, cut.width() / 72.0, cut.height() / 72.0),
                 Link::Page(i + 1),
             ));
             break;

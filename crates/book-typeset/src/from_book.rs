@@ -25,6 +25,8 @@ pub struct Geometry {
     pub margins: (f32, f32, f32, f32),
     /// The gutter by page count: (pages up to, inches).
     pub gutter: Vec<(usize, f32)>,
+    /// Bleed on the outside, top and bottom, inches (0: none).
+    pub bleed: f32,
 }
 
 impl Default for Geometry {
@@ -33,6 +35,7 @@ impl Default for Geometry {
             trim: (6.0, 9.0),
             margins: (0.5, 0.6, 0.75, 0.75),
             gutter: vec![(150, 0.375), (300, 0.5), (500, 0.625), (700, 0.75), (usize::MAX, 0.875)],
+            bleed: 0.0,
         }
     }
 }
@@ -96,6 +99,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         head_size: d.heads.size,
         head_small_caps: d.heads.small_caps,
         folios: true,
+        bleed: geometry.bleed,
     })
 }
 

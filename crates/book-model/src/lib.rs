@@ -53,6 +53,10 @@ fn is_default<T: Default + PartialEq>(v: &T) -> bool {
     *v == T::default()
 }
 
+fn is_false(b: &bool) -> bool {
+    !*b
+}
+
 fn is_true(b: &bool) -> bool {
     *b
 }
@@ -335,6 +339,10 @@ pub struct Edition {
     /// For store editions (STR-10): the store's name as the user gave it.
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub store: String,
+    /// For print: the pages bleed (PRT-7): printing runs past the cut on the outside, top and
+    /// bottom by the profile's bleed, and full-page pictures fill the page to the edge.
+    #[serde(default, skip_serializing_if = "is_false")]
+    pub bleed: bool,
     /// For ebooks: the cover image, by its path in the project (`assets/cover.jpg`) (EBK-5).
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub cover: String,

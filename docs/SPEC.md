@@ -299,6 +299,13 @@ break, hyphenation by the book's language, running heads off on openings and bla
     8.5 × 11 in), every margin wider than the paperback's at the same size, a wider gutter at
     every page count (0.5 in up to 150 pages, then 0.625, 0.75 and 1 in), 75 to 550 pages
     (480 on colour paper). [Sourced; to be rechecked]
+13. **Bleed** (PRT-7, TXT-4, from 0.2): an edition set to bleed has pages larger than the trim by
+    the profile's bleed (0.125 in) on the outside, top and bottom; margins are kept from the trim,
+    so the text sits where it would without bleed; every page carries a trim box (the cut) and a
+    bleed box (the whole page); margins are checked from the trim against the profile's outside
+    minimum with bleed. A full-page picture fills its page to the edge when the edition bleeds,
+    cropped to the page's shape, and the text block otherwise; nothing else prints on its page.
+    [Designed]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 

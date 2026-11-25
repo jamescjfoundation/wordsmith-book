@@ -379,7 +379,15 @@ impl PrintPreview {
                             }
                         }
                         if self.guides {
-                            guides(&painter, rect, zoom, bleed, t.body_area(i));
+                            // A page that bleeds is drawn whole; its trim is inside it.
+                            let trim = (t.bleed() > 0.0).then(|| {
+                                let (x0, y0, x1, y1) = t.trim_box(i);
+                                egui::Rect::from_min_max(
+                                    rect.min + egui::vec2(x0 * zoom, (ph - y1) * zoom),
+                                    rect.min + egui::vec2(x1 * zoom, (ph - y0) * zoom),
+                                )
+                            });
+                            guides(&painter, rect, trim, zoom, bleed, t.body_area(i));
                         }
                         let folio = t.folio(i);
                         resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, format!("Page {}", i + 1)));
@@ -403,16 +411,25 @@ impl PrintPreview {
 }
 
 /// Trim (the page's edge), margin (the body area) and bleed guides.
-fn guides(painter: &egui::Painter, page: egui::Rect, zoom: f32, bleed: f32, body: Option<(f32, f32, f32, f32)>) {
+fn guides(painter: &egui::Painter, page: egui::Rect, trim_rect: Option<egui::Rect>, zoom: f32, bleed: f32, body: Option<(f32, f32, f32, f32)>) {
     let trim = egui::Stroke::new(1.0, egui::Color32::from_rgb(40, 40, 40));
     let margin = egui::Stroke::new(1.0, egui::Color32::from_rgba_unmultiplied(40, 110, 200, 140));
     let bleed_stroke = egui::Stroke::new(1.0, egui::Color32::from_rgba_unmultiplied(200, 40, 40, 160));
-    painter.rect_stroke(page, 0.0, trim, egui::StrokeKind::Inside);
+    match trim_rect {
+        // The page bleeds: its edge is the bleed, the trim is inside.
+        Some(t) => {
+            painter.rect_stroke(page, 0.0, bleed_stroke, egui::StrokeKind::Inside);
+            painter.rect_stroke(t, 0.0, trim, egui::StrokeKind::Middle);
+        }
+        None => {
+            painter.rect_stroke(page, 0.0, trim, egui::StrokeKind::Inside);
+        }
+    }
     if let Some((x, y, w, h)) = body {
         let r = egui::Rect::from_min_size(page.min + egui::vec2(x * zoom, y * zoom), egui::vec2(w * zoom, h * zoom));
         painter.rect_stroke(r, 0.0, margin, egui::StrokeKind::Middle);
     }
-    if bleed > 0.0 {
+    if bleed > 0.0 && trim_rect.is_none() {
         painter.rect_stroke(page.expand(bleed * zoom), 0.0, bleed_stroke, egui::StrokeKind::Middle);
     }
 }

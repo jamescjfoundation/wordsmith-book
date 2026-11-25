@@ -87,6 +87,7 @@ isbn = "978-0-306-40615-7"
 trim = "6x9"
 paper = "cream"          # white, cream, color
 profile = "pod-paperback"
+bleed = true             # pages bleed (default false): full-page pictures run to the edge
 price_notes = "List at the usual trade price."
 
 [editions.overrides]

@@ -19,6 +19,10 @@ or running head; runs of blank pages stay within the profile.
 **The print PDF (PRT-6):** single pages at trim size, every font embedded, no crop marks,
 annotations, links or bookmarks. The same project gives the same PDF every time.
 
+**Bleed (PRT-7) and full-page pictures (TXT-4):** turn on bleed for an edition and its pages
+are 0.125 in larger outside, top and bottom, with trim and bleed boxes for the printer;
+full-page pictures then fill their page to the edge. Without bleed they fill the text block.
+
 **Hardcover (PRT-8):** a hardcover edition uses the `pod-hardcover` profile: case-laminate sizes,
 wider margins and gutter for the hinge, and 75 to 550 pages.
 
