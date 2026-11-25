@@ -506,7 +506,7 @@ break, hyphenation by the book's language, running heads off on openings and bla
 3. Each build records a checksum of the words of each section, so "changed since last export" is
    shown section by section and word by word. [Designed]
 
-## 12. Automation and access (AUT-1, AUT-2, ACC-1, FIL-1)
+## 12. Automation and access (AUT-1, AUT-2, ACC-1 to ACC-3, FIL-1)
 
 1. Every command has an id, a label and, where useful, a key; every command is an agent tool
    (AUT-2). [Designed]
@@ -515,7 +515,13 @@ break, hyphenation by the book's language, running heads off on openings and bla
    written. [Designed]
 3. Light and dark themes and every command by keyboard come from the shell (ACC-1). [Designed]
 4. Auto-save, backups and recovery follow the core's timing (FIL-1). [Designed]
-5. **Interface languages** (ACC-3, from 0.2), through the core's translation catalogs (C4,
+5. **Screen readers** (ACC-2, from 0.2): every control Book and the shell draw (buttons, check
+   boxes, text and number fields, links, tabs, pictures) has a name in the accessibility tree
+   (AccessKit, what screen readers read): its text, the label beside it (`labelled_by`), or a
+   name of its own (the print preview's pages are "Page n"). A test walks every panel, the File
+   page's pages, the dialogs, the text view and the import review and finds none unnamed.
+   [Designed]
+6. **Interface languages** (ACC-3, from 0.2), through the core's translation catalogs (C4,
    `jcj-i18n`, core v0.1.13): English and Spanish. Book's texts come from
    `assets/i18n/<language>.toml`, keyed by their English; the shell's from the shell's catalog; a
    text a catalog lacks shows in English. The language is a preference (Preferences, Language),

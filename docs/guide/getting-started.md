@@ -26,3 +26,6 @@ command palette (Mod+Shift+P), key tips (F10) and every command on a key or in t
 **Language.** Book's interface comes in English and Spanish. Choose one in Preferences, under
 Language; by default Book follows your computer's language. Preflight findings and messages
 from building the book are in English.
+
+**Screen readers.** Every button, field and page in Book has a name a screen reader reads out,
+and every command is in the command palette (Mod+Shift+P) and can be given a key.
