@@ -41,7 +41,8 @@ pub fn piece_of_key(key: &Key) -> Option<String> {
 /// What the outline says about a source's section that cannot be moved here.
 pub const READ_ONLY: &str = tl("The manuscript's order is the writer's: change this in Manuscript.");
 
-fn number_label(s: &Section) -> String {
+/// A section's label: "Chapter 3", "Part 1: Title", its title, or "Untitled".
+pub fn number_label(s: &Section) -> String {
     match (s.role, s.number) {
         (Role::Part, Some(n)) if s.title.trim().is_empty() => tr_with("Part {n}", &[("n", &n.to_string())]),
         (Role::Part, Some(n)) => tr_with("Part {n}: {title}", &[("n", &n.to_string()), ("title", &s.title)]),

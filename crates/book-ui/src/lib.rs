@@ -551,7 +551,7 @@ pub mod views {
             (Some(Key::Section(id)), Some(book)) => {
                 let all: Vec<_> = book.front.iter().chain(&book.body).chain(&book.back).cloned().collect();
                 if let Some(s) = find(&all, *id) {
-                    ui.heading(if s.title.is_empty() { tr("Untitled") } else { s.title.clone() });
+                    ui.heading(crate::outline::number_label(s));
                     let mut n = 0usize;
                     for blk in &s.content {
                         match blk {

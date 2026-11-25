@@ -66,10 +66,13 @@ fn main() -> ExitCode {
         "third-party-licenses" => licenses::task(&root, SHIPPED, PRODUCT, rest.first().map(String::as_str)),
         "privacy" => privacy::task(&root, rest),
         "fixtures" => book::fixtures(&root),
+        "screenshots" => screenshots(&root),
         name => match TASKS.iter().find(|(n, _)| *n == name) {
             Some((n, _)) => run_task(n, &root, &Affected::All),
             None => {
-                println!("usage: cargo xtask <ci [--changed] [--base <ref>] | dev-link <core> | dev-unlink | sync [--check] | deny | install-hooks>");
+                println!(
+                    "usage: cargo xtask <ci [--changed] [--base <ref>] | dev-link <core> | dev-unlink | sync [--check] | deny | install-hooks | screenshots>"
+                );
                 for (name, about) in TASKS {
                     println!("  {name:<12} {about}");
                 }
@@ -84,6 +87,14 @@ fn main() -> ExitCode {
             ExitCode::FAILURE
         }
     }
+}
+
+/// The README's pictures in `docs/images/`, drawn by the app itself offscreen from a public-domain
+/// sample (`crates/book-ui/examples/screenshots.rs`). Not part of `ci`.
+fn screenshots(root: &Path) -> TaskResult {
+    let out = root.join("docs/images");
+    let out = out.to_str().ok_or_else(|| format!("{} is not UTF-8", out.display()))?;
+    cargo(root, &["run", "--release", "--locked", "-p", "wordsmith-book-ui", "--example", "screenshots", "--", out])
 }
 
 fn workspace_root() -> PathBuf {
