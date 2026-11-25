@@ -169,6 +169,9 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
 #[derive(Default)]
 pub struct Panel {
     isbn: std::collections::BTreeMap<String, String>,
+    /// The line-break hints being edited, one per line (kept together, then hyphenation), and
+    /// the project's hints they started from.
+    hints: Option<(String, String, wordsmith_book_model::Hints)>,
 }
 
 impl Panel {
@@ -218,6 +221,23 @@ impl Panel {
                 run = Some((crate::commands::EDITION_ADD, json!({ "format": "ebook" })));
             }
         });
+        // Line-break hints (TXT-5), one per line.
+        ui.separator();
+        ui.strong("Line breaks");
+        let h = &b.files.project.hints;
+        // The project's hints changed elsewhere (an undo, an agent): start again from them.
+        if self.hints.as_ref().is_some_and(|x| &x.2 != h) {
+            self.hints = None;
+        }
+        let (keep, hyphenate, _) = self.hints.get_or_insert_with(|| (h.keep.join("\n"), h.hyphenate.join("\n"), h.clone()));
+        let label = ui.label("Never break across lines (one word or phrase a line)");
+        let r1 = ui.add(egui::TextEdit::multiline(keep).desired_rows(2).hint_text("Mr. Smith")).labelled_by(label.id);
+        let label = ui.label("Hyphenate only here (one word a line, a hyphen where it may break; none: never)");
+        let r2 = ui.add(egui::TextEdit::multiline(hyphenate).desired_rows(2).hint_text("man-u-script")).labelled_by(label.id);
+        let lines = |t: &str| t.lines().map(str::trim).filter(|l| !l.is_empty()).map(str::to_owned).collect::<Vec<_>>();
+        if (r1.lost_focus() || r2.lost_focus()) && (lines(keep) != h.keep || lines(hyphenate) != h.hyphenate) {
+            run = Some((crate::commands::HINTS_SET, json!({ "keep": lines(keep), "hyphenate": lines(hyphenate) })));
+        }
         run
     }
 }

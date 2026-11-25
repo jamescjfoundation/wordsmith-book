@@ -745,6 +745,29 @@ impl Typeset {
             .collect()
     }
 
+    /// The lines the author's paragraphs are set in, in order: each line's text (as in the
+    /// paragraph, soft hyphens included) and whether it ends in a hyphen the layout added.
+    pub fn author_lines(&self) -> Vec<(String, bool)> {
+        let body: Vec<&jcj_doc::Paragraph> = jcj_doc::walk::body_paragraphs(&self.doc).into_iter().map(|(_, p)| p).collect();
+        let mut out = Vec::new();
+        for page in &self.layout.pages {
+            for it in &page.items {
+                let jcj_layout::Placed::Lines { story: jcj_doc::StoryRef::Body, path, para, l0, l1, .. } = it else { continue };
+                let Some(p) = path.0.first().and_then(|b| body.get(*b as usize)) else { continue };
+                if SOURCE.get_or_none(*p) != Some(true) {
+                    continue;
+                }
+                for line in para.lines.iter().take(*l1).skip(*l0) {
+                    let (Some(a), Some(b)) = (para.clusters.get(line.c0), line.c1.checked_sub(1).and_then(|c| para.clusters.get(c))) else {
+                        continue;
+                    };
+                    out.push((p.text.get(a.start..b.end).unwrap_or_default().to_owned(), line.hyphen.is_some()));
+                }
+            }
+        }
+        out
+    }
+
     /// Typographic problems by page (PRE-3): single lines of a paragraph at a page's foot
     /// (orphans) or head (widows), more hyphenated lines in a row than `hyphen_limit`, loose
     /// justified lines (a word space wider than `loose_em` of the type size), and rivers (word

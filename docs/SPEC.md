@@ -252,6 +252,19 @@ dedication, epigraph, contents, then the body. [Verified] An ebook puts the copy
     for small caps. [Designed]
 11. Typographic characters: curly quotes, em and en dashes, the ellipsis character, non-breaking
     spaces where the language requires them. [Verified]
+12. **No-break text and hyphenation hints** (TXT-5, from 0.2), per word, kept in the project
+    (`[hints]` in `book.toml`: `keep` and `hyphenate`, at most 2000 of each, each at most 200
+    characters), never in the source: a word or phrase in `keep` ("Mr. Smith", "10 kg") is
+    never broken across lines (its spaces become no-break spaces, its words are not
+    hyphenated); a word in `hyphenate` is written with a hyphen at each place it may break
+    ("man-u-script") and breaks only there (soft hyphens at those places replace any the text
+    had), and a word written without one is never hyphenated in print (a reading system may
+    still hyphenate it in the ebook). Matching is by whole words,
+    ignoring case, within one run of equally styled text, in titles, text and notes. Print
+    honours them; the ebook keeps them in its text (reading systems that hyphenate on their own
+    use a word's soft hyphens first, CSS Text 3). Soft hyphens are never part of a word for the
+    word checks. A hint that is not one word with single hyphens inside it, or is empty, is
+    refused. [Designed]
 
 ## 4. Designs and chapter openings (DSN-1 to DSN-5)
 

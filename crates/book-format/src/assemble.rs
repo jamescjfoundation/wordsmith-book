@@ -7,7 +7,7 @@
 use wordsmith_book_model::matter::{self, Meta};
 use wordsmith_book_model::{BookProject, Edition, ElementKind, Only, Placement, SectionId};
 use wordsmith_manuscript_format::book::{Book, FrontKind, Section};
-use wordsmith_manuscript_model::{Block, Note, Role};
+use wordsmith_manuscript_model::{Block, Note, Role, Text};
 
 /// What a piece of the book is.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -259,6 +259,17 @@ pub fn assemble(project: &BookProject, book: &Book, edition: Option<&Edition>) -
     body(project, &book.body, &mut a.body);
     for p in &mut a.body {
         p.label = number_line(project, p);
+    }
+    // No-break text and hyphenation hints (TXT-5), in titles and text alike.
+    let hints = crate::hints::prepare(&project.hints);
+    if !hints.is_empty() {
+        for p in a.front.iter_mut().chain(a.body.iter_mut()).chain(a.back.iter_mut()) {
+            p.title = crate::hints::apply_str(&hints, &p.title);
+            p.subtitle = crate::hints::apply_str(&hints, &p.subtitle);
+            let mut t = Text { blocks: std::mem::take(&mut p.blocks), notes: std::mem::take(&mut p.notes) };
+            crate::hints::apply(&hints, &mut t);
+            (p.blocks, p.notes) = (t.blocks, t.notes);
+        }
     }
     a
 }

@@ -417,5 +417,7 @@ pub fn source_words(book: &PrintBook) -> Vec<String> {
 
 /// Whitespace-separated words holding a letter or digit (the core's word rule).
 fn jcj_features_words(text: &str) -> Vec<String> {
+    // Soft hyphens (hyphenation hints, TXT-5) are never part of a word.
+    let text = text.replace('\u{AD}', "");
     text.split(char::is_whitespace).filter(|w| w.chars().any(char::is_alphanumeric)).map(str::to_owned).collect()
 }

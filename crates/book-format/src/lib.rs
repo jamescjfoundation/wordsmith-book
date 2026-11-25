@@ -11,6 +11,7 @@
 pub mod assemble;
 pub mod fixes;
 pub mod folder;
+pub mod hints;
 pub mod limits;
 pub mod needs;
 pub mod pack;

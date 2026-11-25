@@ -729,6 +729,62 @@ pub struct BookProject {
     /// and are hidden from assistive technology (SPEC 6.6).
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub decorative: Vec<String>,
+    /// No-break text and hyphenation hints (TXT-5).
+    #[serde(default, skip_serializing_if = "is_default")]
+    pub hints: Hints,
+}
+
+/// Most entries kept in each list of hints.
+pub const MAX_HINTS: usize = 2000;
+/// The longest hint, in characters.
+pub const MAX_HINT_LEN: usize = 200;
+
+/// How lines may break inside some words (TXT-5), for print and ebook alike.
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct Hints {
+    /// Words and phrases never broken across lines ("Mr. Smith", "10 kg"): their spaces become
+    /// no-break spaces and their words are not hyphenated.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub keep: Vec<String>,
+    /// Words with the places they may break marked by hyphens ("man-u-script"); a word written
+    /// without one is never hyphenated.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub hyphenate: Vec<String>,
+}
+
+impl Hints {
+    /// What is wrong with the hints, one line each.
+    pub fn problems(&self) -> Vec<String> {
+        let mut out = Vec::new();
+        for (what, list) in [("kept together", &self.keep), ("hyphenation", &self.hyphenate)] {
+            if list.len() > MAX_HINTS {
+                out.push(format!("There are more than {MAX_HINTS} {what} hints."));
+            }
+            for e in list {
+                if e.trim().is_empty() {
+                    out.push(format!("A {what} hint is empty."));
+                } else if e.chars().count() > MAX_HINT_LEN {
+                    out.push(format!("A {what} hint is longer than {MAX_HINT_LEN} characters."));
+                }
+            }
+        }
+        for e in &self.hyphenate {
+            let t = e.trim();
+            if t.chars().any(char::is_whitespace) {
+                out.push(format!("“{t}” is more than one word; a hyphenation hint is one word."));
+            } else if t.starts_with('-') || t.ends_with('-') || t.contains("--") {
+                out.push(format!("“{t}” has a hyphen at an end or two together; mark each place a word may break with one hyphen."));
+            } else if !t.is_empty() && !t.chars().all(|c| c.is_alphanumeric() || c == '-' || c == '\'' || c == '\u{2019}') {
+                out.push(format!("“{t}” has a character that is not a letter or digit."));
+            }
+        }
+        for e in &self.keep {
+            if !e.trim().is_empty() && !e.trim().chars().any(char::is_whitespace) && !e.chars().any(char::is_alphanumeric) {
+                out.push(format!("“{}” has no word to keep together.", e.trim()));
+            }
+        }
+        out
+    }
 }
 
 impl BookProject {

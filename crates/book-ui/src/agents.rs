@@ -20,8 +20,8 @@ use crate::BookApp;
 use crate::commands::{
     ADD_ELEMENT, BACKUP, BLOCK_ONLY, CLEANUP_APPLY, CLEANUP_KEEP, CLEANUP_LIST, CLEANUP_UNDO, CLOSE, CONTRIBUTOR_ADD, COVER_CHECK, COVER_TEMPLATE,
     DESIGN_CHOOSE, DESIGN_EXPORT, DESIGN_IMPORT, DESIGN_MIX, DESIGN_SAVE_AS, DESIGNS, EBOOK_OPEN, EDITION_ADD, EDITION_REMOVE, EDITION_SET, EXPORT,
-    FIX_ADD, FIX_EDIT, FIX_LIST, IMPORT, IMPORT_CONFIRM, IMPORT_REVIEW, METADATA, METADATA_SET, MOVE_ELEMENT, NEW, NUMBERING, OUTLINE, PREFLIGHT,
-    PREVIEW_PAGE, PREVIEW_SHOW, REIMPORT, RELOAD_SOURCE, REMOVE_ELEMENT, SAVE_AS_ONE_FILE, SECTION, SET_ELEMENT, list,
+    FIX_ADD, FIX_EDIT, FIX_LIST, HINTS, HINTS_SET, IMPORT, IMPORT_CONFIRM, IMPORT_REVIEW, METADATA, METADATA_SET, MOVE_ELEMENT, NEW, NUMBERING,
+    OUTLINE, PREFLIGHT, PREVIEW_PAGE, PREVIEW_SHOW, REIMPORT, RELOAD_SOURCE, REMOVE_ELEMENT, SAVE_AS_ONE_FILE, SECTION, SET_ELEMENT, list,
 };
 
 thread_local! {
@@ -85,13 +85,16 @@ fn params(id: &str) -> &'static str {
         COVER_TEMPLATE => r#"{"edition": a print edition, "folder"}"#,
         COVER_CHECK => r#"{"edition": a print edition, "file": a cover PDF, PNG or JPEG}"#,
         REIMPORT => r#"{"file": the new version, "apply": true to take it}"#,
+        HINTS_SET => {
+            r#"{"keep": [words and phrases never broken across lines], "hyphenate": ["man-u-script": hyphens where a word may break; none: never]}"#
+        }
         _ => "{}",
     }
 }
 
 /// Commands that only read.
 fn reads_only(id: &str) -> bool {
-    matches!(id, CLEANUP_LIST | METADATA | FIX_LIST | DESIGNS | OUTLINE | PREVIEW_SHOW | PREVIEW_PAGE | PREFLIGHT | IMPORT_REVIEW)
+    matches!(id, CLEANUP_LIST | METADATA | FIX_LIST | DESIGNS | OUTLINE | PREVIEW_SHOW | PREVIEW_PAGE | PREFLIGHT | IMPORT_REVIEW | HINTS)
 }
 
 fn spec(id: &'static str, run: fn(&mut Session, &Value) -> CmdResult) -> CommandSpec {
@@ -154,6 +157,8 @@ pub fn command_specs() -> Vec<CommandSpec> {
         COVER_TEMPLATE,
         COVER_CHECK,
         REIMPORT,
+        HINTS,
+        HINTS_SET,
         "book.save",
         "book.undo",
         "book.redo",

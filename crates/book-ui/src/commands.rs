@@ -124,6 +124,13 @@ pub const COVER_CHECK: &str = "book.cover.check";
 /// replaces the book's own source, Book's settings kept (IMP-8).
 pub const REIMPORT: &str = "book.reimport";
 
+/// The book's line-break hints (TXT-5): `{}`; gives `{"keep": [...], "hyphenate": [...]}`.
+pub const HINTS: &str = "book.hints";
+/// Set the book's line-break hints (TXT-5): `{"keep": [words and phrases never broken across
+/// lines], "hyphenate": [words with hyphens where they may break; none: never]}`; a list left out
+/// is kept as it is. Refused when a hint cannot be used.
+pub const HINTS_SET: &str = "book.hints.set";
+
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
     let p = |mut c: CommandInfo| {
@@ -180,6 +187,8 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(COVER_TEMPLATE, "Cover Template", "")),
         p(CommandInfo::new(COVER_CHECK, "Check a Cover", "")),
         p(CommandInfo::new(REIMPORT, "Import a New Version", "")),
+        CommandInfo::new(HINTS, "Line-Break Hints", ""),
+        p(CommandInfo::new(HINTS_SET, "Set Line-Break Hints", "")),
     ]
 }
 
@@ -322,6 +331,11 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         BLOCK_ONLY => block_only(app.open_book()?, params),
         COVER_TEMPLATE | COVER_CHECK => cover_command(app.open_book()?, id, params),
         REIMPORT => reimport(app.open_book()?, params),
+        HINTS => {
+            let h = &app.open_book()?.files.project.hints;
+            Ok(json!({ "keep": h.keep, "hyphenate": h.hyphenate }))
+        }
+        HINTS_SET => hints_set(app.open_book()?, params),
         EXPORT => {
             let validator = app.prefs.validator_settings();
             let b = app.open_book()?;
@@ -631,6 +645,37 @@ fn open_with_system(path: &std::path::Path) -> Result<(), String> {
 }
 
 /// Set or clear a paragraph's only-in rule (STR-9).
+fn hints_set(b: &mut OpenBook, params: &Value) -> Result<Value, String> {
+    let list = |key: &str| -> Result<Option<Vec<String>>, String> {
+        match params.get(key) {
+            None | Some(Value::Null) => Ok(None),
+            Some(Value::Array(a)) => a
+                .iter()
+                .map(|v| v.as_str().map(|s| s.trim().to_owned()).ok_or_else(|| format!("`{key}` is a list of words")))
+                .filter(|r| r.as_ref().map_or(true, |s| !s.is_empty()))
+                .collect::<Result<Vec<_>, _>>()
+                .map(Some),
+            Some(_) => Err(format!("`{key}` is a list of words")),
+        }
+    };
+    let mut h = b.files.project.hints.clone();
+    if let Some(k) = list("keep")? {
+        h.keep = k;
+    }
+    if let Some(k) = list("hyphenate")? {
+        h.hyphenate = k;
+    }
+    if let Some(p) = h.problems().into_iter().next() {
+        return Err(p);
+    }
+    let out = json!({ "keep": h.keep, "hyphenate": h.hyphenate });
+    b.edit(|f| {
+        f.project.hints = h;
+        Ok(())
+    })?;
+    Ok(out)
+}
+
 fn block_only(b: &mut OpenBook, params: &Value) -> Result<Value, String> {
     let section: SectionId = s(params, "section")?.parse().map_err(|e: wordsmith_manuscript_model::BadId| e.to_string())?;
     let starts = s(params, "starts")?.to_owned();

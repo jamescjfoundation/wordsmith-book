@@ -26,6 +26,12 @@ full-page pictures then fill their page to the edge. Without bleed they fill the
 **Notes (TXT-3):** footnotes at the foot of the page that calls them (a long one continues on
 the next page), or, per edition, a list at each chapter's end or a Notes section at the book's end.
 
+**Line breaks (TXT-5):** in Details, under *Line breaks*, list the words and phrases that must
+never be split across two lines (a name with its title, a number with its unit), one a line, and
+the words you want hyphenated only at certain places, with a hyphen at each (`man-u-script`); a
+word listed without a hyphen is never hyphenated. Book applies them when it builds the book, in
+print and in the ebook, without changing your manuscript.
+
 **Hardcover (PRT-8):** a hardcover edition uses the `pod-hardcover` profile: case-laminate sizes,
 wider margins and gutter for the hinge, and 75 to 550 pages.
 
