@@ -9,6 +9,7 @@
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
 pub mod document;
+pub mod house;
 pub mod isbn;
 pub mod matter;
 pub mod numbers;
@@ -55,7 +56,7 @@ pub const fn tl(english: &'static str) -> &'static str {
     english
 }
 
-fn is_default<T: Default + PartialEq>(v: &T) -> bool {
+pub(crate) fn is_default<T: Default + PartialEq>(v: &T) -> bool {
     *v == T::default()
 }
 
@@ -745,6 +746,9 @@ pub struct BookProject {
     /// book's source is also `source`.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub box_set: Vec<BoxBook>,
+    /// Its place in a publishing house: imprint, series and the house design it keeps (DSN-7).
+    #[serde(default, skip_serializing_if = "is_default")]
+    pub house: house::HouseLink,
 }
 
 /// One book of a box set.
@@ -835,6 +839,11 @@ impl BookProject {
     /// Problems that make the project unusable: duplicate ids, an empty id or edition name.
     pub fn problems(&self) -> Vec<String> {
         let mut out = Vec::new();
+        if let Some(lock) = &self.house.lock
+            && self.design != lock.design
+        {
+            out.push(format!("The design is kept by {} (its house design); leave the imprint or series to change it.", lock.by));
+        }
         if self.box_set.first().is_some_and(|b| b.source != self.source) {
             out.push("The box set's first book is not the project's source.".to_owned());
         }

@@ -18,6 +18,7 @@ pub mod designs;
 pub mod doc;
 pub mod ebook_preview;
 pub mod export;
+pub mod house;
 pub mod import_review;
 pub mod languages;
 pub mod metadata;

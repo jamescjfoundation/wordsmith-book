@@ -130,6 +130,13 @@ pub const REIMPORT: &str = "book.reimport";
 /// source kept); gives the set's parts.
 pub const BOX_SET: &str = "book.boxSet.set";
 
+/// Join an imprint and/or series of the publishing house (DSN-7): `{"house": its file (the
+/// preferences' when left out), "imprint": id, "series": id, "number": n}`; the house design
+/// comes with them, kept when they lock it. Gives what the book is in.
+pub const HOUSE_JOIN: &str = "book.house.join";
+/// Leave the house's imprint and series: `{}`; the design stays, free to change.
+pub const HOUSE_LEAVE: &str = "book.house.leave";
+
 /// Write a proof of a print edition (PRT-13): `{"edition", "folder"}` (folder: the export folder
 /// when left out); gives the file. Never part of an export.
 pub const PROOF: &str = "book.proof";
@@ -200,6 +207,8 @@ pub fn list() -> Vec<CommandInfo> {
         CommandInfo::new(HINTS, tl("Line-Break Hints"), ""),
         p(CommandInfo::new(BOX_SET, tl("Make a Box Set"), "")),
         p(CommandInfo::new(PROOF, tl("Write a Proof"), "")),
+        p(CommandInfo::new(HOUSE_JOIN, tl("Join an Imprint or Series"), "")),
+        CommandInfo::new(HOUSE_LEAVE, tl("Leave the Imprint and Series"), ""),
         p(CommandInfo::new(HINTS_SET, tl("Set Line-Break Hints"), "")),
     ]
 }
@@ -349,6 +358,19 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         }
         HINTS_SET => hints_set(app.open_book()?, params),
         BOX_SET => box_set(app.open_book()?, params),
+        HOUSE_JOIN => {
+            let file = crate::house::file(params.get("house").and_then(Value::as_str), &app.prefs.house_file)?;
+            let number = params.get("number").and_then(Value::as_u64).and_then(|n| u32::try_from(n).ok());
+            let link = crate::house::join(
+                app.open_book()?,
+                &file,
+                params.get("imprint").and_then(Value::as_str),
+                params.get("series").and_then(Value::as_str),
+                number,
+            )?;
+            Ok(serde_json::to_value(link).unwrap_or(Value::Null))
+        }
+        HOUSE_LEAVE => crate::house::leave(app.open_book()?).map(|()| Value::Null),
         PROOF => {
             let b = app.open_book()?;
             let edition = s(params, "edition")?.to_owned();

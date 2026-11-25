@@ -593,3 +593,23 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
    by default the computer's. Every interface text Book draws is in every catalog and no catalog
    keeps unused texts (a test). Command replies (also what agents read), preflight findings and
    build messages stay English at 0.2. [Designed]
+
+## 13. Publishing house (DSN-7, META-3 to META-6, from 1.0)
+
+### 13.1 The house file and house styles (DSN-7)
+
+1. A publishing house's shared details live in one `house.toml` the user keeps where they like
+   (its path in Preferences; commands may name another): its imprints, its series and the
+   ISBNs it owns (`docs/format.md`). Ids are lowercase letters, digits and hyphens; two imprints
+   or series never share one; a series names an imprint the house has. A house file with
+   problems, or a newer version, is refused. [Designed]
+2. A book joins an imprint, a series (its imprint with it), or both (`book.house.join`). The
+   house design comes with them, the series' over the imprint's: a built-in design, or a
+   design file in the house folder's `designs/`, which the book then keeps among its own
+   designs. [Designed]
+3. When the imprint or series that gives the design locks it, the book keeps that design: any
+   change to it (choosing, mixing, saving as one's own) is refused, by every command and agent
+   tool, with the lock recorded in the book itself (`[house]` in `book.toml`), so it holds
+   without the house file. Leaving the imprint and series (`book.house.leave`) frees it.
+   Joining and leaving are each one undo step. [Designed]
+

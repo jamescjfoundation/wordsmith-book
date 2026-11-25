@@ -208,6 +208,43 @@ say what changed since the last export.
 Pictures (PNG, JPEG) and fonts the user added (TTF, OTF), each font with its license file beside
 it (`assets/fonts/<name>.ttf` and `assets/fonts/<name>.txt`). Names follow the rules above.
 
+## `house.toml` (a publishing house's file, not part of a project)
+
+Version 1. Shared by the books of a house (DSN-7, META-3 to META-5); a book records what it took
+from it under `[house]` in its own `book.toml` (`imprint`, `series`, `series_number`, and the
+design `lock`: who locks it and the design), so it builds the same without the house file.
+
+```toml
+schema = 1
+name = "Lantern House"
+
+[[imprints]]
+id = "lantern"                 # lowercase letters, digits, hyphens
+name = "Lantern Press"
+address = ["1 Harbour Street", "Port Town"]
+website = "lantern.example"
+logo = "logos/lantern.png"     # beside the house file
+copyright = "Copyright © {year} {holder}\nPublished by {imprint}"  # empty: Book's wording
+design = "classic"             # a built-in design, or designs/<id>.toml beside the house file
+lock_design = true             # its books keep that design
+
+[[series]]
+id = "voyages"
+name = "Voyages"
+imprint = "lantern"
+design = ""                    # overrides the imprint's when set
+lock_design = false
+books = [{ number = 1, title = "The First Voyage", project = "books/first.wsbk" }]
+
+[[isbns]]
+isbn = "978-0-306-40615-7"
+book = "The First Voyage"      # empty: free
+edition = "Paperback"
+```
+
+At most 10,000 imprints, series and ISBNs each; the file at most 4 MB, each file beside it at
+most 16 MB, by paths that stay beside it.
+
 ## Packed projects (`.wsbkz`)
 
 One file holding a whole project, for sending, backups and recovery (core decision 0009): a zip

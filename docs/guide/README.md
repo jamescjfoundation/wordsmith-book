@@ -16,6 +16,7 @@ guide covers version 0.3; its interface is in English and Spanish.
 10. [Working with Wordsmith Manuscript](manuscript.md)
 11. [Command line and agents](command-line-and-agents.md)
 12. [Keys](keys.md)
+13. [A publishing house](house.md)
 
 Feature ids in brackets (such as IMP-1) match the plan's feature list, so each feature can be
 found here.

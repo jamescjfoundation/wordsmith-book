@@ -13,6 +13,7 @@ pub mod boxset;
 pub mod fixes;
 pub mod folder;
 pub mod hints;
+pub mod house;
 pub mod limits;
 pub mod needs;
 pub mod pack;

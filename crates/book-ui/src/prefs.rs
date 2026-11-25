@@ -24,6 +24,8 @@ pub struct BookPrefs {
     pub language: String,
     /// The PDF validator: a program (empty: not set up; PRT-12).
     pub pdf_validator: String,
+    /// The publishing house's file, `house.toml` (empty: none; DSN-7, META-3 to META-5).
+    pub house_file: String,
 }
 
 impl BookPrefs {
@@ -70,6 +72,9 @@ pub fn ui(ui: &mut egui::Ui, p: &mut BookPrefs) {
     field(ui, tl("Java runtime"), &mut p.java, tl("leave empty to use java"));
     field(ui, tl("Accessibility checker"), &mut p.access_checker, tl("its program"));
     field(ui, tl("PDF validator"), &mut p.pdf_validator, tl("its program, for PDF/A and PDF/UA"));
+    ui.separator();
+    ui.heading(tr("Publishing house"));
+    field(ui, tl("House file"), &mut p.house_file, tl("its house.toml: imprints, series and ISBNs"));
     ui.horizontal(|ui| {
         let label = ui.label(tr("Time limit (seconds)"));
         ui.add(egui::DragValue::new(&mut p.validator_seconds).range(0..=3600)).labelled_by(label.id);
