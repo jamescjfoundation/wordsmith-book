@@ -3,6 +3,8 @@ identifier = urn:uuid:…
 title = Waverley
 language = en
 creator = Walter Scott
+source = the paperback edition
+source-of = pagination
 dcterms:modified = 2026-11-24T00:00:00Z
 schema:accessMode = textual
 schema:accessModeSufficient = textual
@@ -14,7 +16,6 @@ schema:accessibilityHazard = none
 schema:accessibilitySummary = This ebook has a table of contents, landmarks and headings for its structure, and its reading order follows the book. Text can be resized and restyled by the reading system.
 dcterms:conformsTo = EPUB Accessibility 1.1 - WCAG 2.2 Level AA
 a11y:certifiedBy = Walter Scott
-a11y:pageBreakSource = the paperback edition
 # manifest
 nav.xhtml application/xhtml+xml nav
 toc.ncx application/x-dtbncx+xml

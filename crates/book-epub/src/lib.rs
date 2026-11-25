@@ -846,6 +846,12 @@ fn finish(a: &Assembled, design: &Design, edition: &Edition, settings: &Settings
     if !meta.year.is_empty() {
         dc.push(("date".to_owned(), meta.year.clone()));
     }
+    // Where the page marks come from: `dc:source`, refined as the source of the pagination (the
+    // form the standard EPUB validator and accessibility checkers both read; the newer
+    // `pageBreakSource` property is not yet in the validator's vocabulary).
+    if !w.page_list.is_empty() && !settings.page_source.is_empty() {
+        dc.push(("source".to_owned(), settings.page_source.clone()));
+    }
     let date = if settings.date.len() >= 10 { &settings.date[..10] } else { "2000-01-01" };
     let certifier = if meta.imprint.is_empty() { meta.byline.as_str() } else { meta.imprint.as_str() };
     let package = Package {
@@ -856,13 +862,7 @@ fn finish(a: &Assembled, design: &Design, edition: &Edition, settings: &Settings
             creators: if meta.byline.is_empty() { Vec::new() } else { vec![meta.byline.clone()] },
             modified: format!("{date}T00:00:00Z"),
             dc,
-            meta: {
-                let mut m = access::metadata(access::Content { pictures: w.meaningful > 0, page_list: !w.page_list.is_empty() }, certifier);
-                if !w.page_list.is_empty() && !settings.page_source.is_empty() {
-                    m.push(("a11y:pageBreakSource".into(), settings.page_source.clone()));
-                }
-                m
-            },
+            meta: { access::metadata(access::Content { pictures: w.meaningful > 0, page_list: !w.page_list.is_empty() }, certifier) },
             links: Vec::new(),
         },
         items: manifest,

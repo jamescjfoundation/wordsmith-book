@@ -66,7 +66,8 @@ fn every_print_page_has_its_marker_in_reading_order() {
     // The metadata.
     let meta = &e.package.metadata.meta;
     assert!(meta.iter().any(|(k, v)| k == "schema:accessibilityFeature" && v == "pageNavigation"));
-    assert!(meta.iter().any(|(k, _)| k == "a11y:pageBreakSource"));
+    assert!(e.package.metadata.dc.iter().any(|(k, _)| k == "source"));
+    assert!(get("package.opf").contains("<meta refines=\"#pagesource\" property=\"source-of\">pagination</meta>"));
     // Where pages start in the author's text, the marker is at the page's first word.
     let pieces = jcj_layout::pages::body_pieces(pr.typeset.layout());
     let body: Vec<&jcj_doc::Paragraph> = jcj_doc::walk::body_paragraphs(pr.typeset.document()).into_iter().map(|(_, p)| p).collect();

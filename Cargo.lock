@@ -5457,6 +5457,7 @@ dependencies = [
  "jcj-project 0.1.12",
  "roxmltree",
  "serde",
+ "serde_json",
  "toml",
  "wordsmith-book-design",
  "wordsmith-book-epub",

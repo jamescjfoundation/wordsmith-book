@@ -24,6 +24,7 @@ jcj-features = { workspace = true }
 jcj-interchange = { workspace = true }
 jcj-output = { workspace = true }
 jcj-project = { workspace = true }
+serde_json = { workspace = true }
 image = { workspace = true }
 roxmltree = { workspace = true }
 zip = { workspace = true }

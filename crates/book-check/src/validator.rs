@@ -28,8 +28,64 @@ pub struct Settings {
     pub program: String,
     /// The Java runtime for a `.jar` (empty: `java` on the path).
     pub java: String,
-    /// The time limit, in seconds (0: two minutes).
+    /// The time limit, in seconds (0: two minutes), for each program.
     pub seconds: u32,
+    /// The accessibility checker (see [`crate::access_check`]). Empty when not set up.
+    pub access: String,
+}
+
+impl Settings {
+    /// The time limit.
+    pub fn limit(&self) -> Duration {
+        Duration::from_secs(if self.seconds == 0 { 120 } else { u64::from(self.seconds.min(3600)) })
+    }
+}
+
+/// Why a program gave no report.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum Stopped {
+    /// It ran past the time limit and was stopped.
+    TimedOut(Duration),
+    /// It could not be started or waited for.
+    Failed(String),
+}
+
+/// A number for a temporary folder, different on every call.
+pub fn next_id() -> u64 {
+    static NEXT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+    NEXT.fetch_add(1, std::sync::atomic::Ordering::Relaxed)
+}
+
+/// Run a program with a time limit, its output (standard output, then errors) read on threads
+/// so a long report cannot fill a pipe and stall it, each bounded.
+pub fn run_limited(mut cmd: Command, limit: Duration) -> Result<(String, String), Stopped> {
+    cmd.stdin(Stdio::null()).stdout(Stdio::piped()).stderr(Stdio::piped());
+    let mut child = cmd.spawn().map_err(|e| Stopped::Failed(e.to_string()))?;
+    let read = |pipe: Option<Box<dyn std::io::Read + Send>>| {
+        std::thread::spawn(move || {
+            let mut out = Vec::new();
+            if let Some(p) = pipe {
+                let _ = p.take(MAX_REPORT).read_to_end(&mut out);
+            }
+            String::from_utf8_lossy(&out).into_owned()
+        })
+    };
+    let out = read(child.stdout.take().map(|p| Box::new(p) as Box<dyn std::io::Read + Send>));
+    let err = read(child.stderr.take().map(|p| Box::new(p) as Box<dyn std::io::Read + Send>));
+    let start = Instant::now();
+    loop {
+        match child.try_wait() {
+            Ok(Some(_)) => break,
+            Ok(None) if start.elapsed() >= limit => {
+                let _ = child.kill();
+                let _ = child.wait();
+                return Err(Stopped::TimedOut(limit));
+            }
+            Ok(None) => std::thread::sleep(Duration::from_millis(20)),
+            Err(e) => return Err(Stopped::Failed(e.to_string())),
+        }
+    }
+    Ok((out.join().unwrap_or_default(), err.join().unwrap_or_default()))
 }
 
 /// What running the validator gave.
@@ -96,45 +152,18 @@ fn command(s: &Settings, epub: &Path) -> Option<Command> {
     } else {
         Command::new(&program)
     };
-    c.arg(epub).stdin(Stdio::null()).stdout(Stdio::piped()).stderr(Stdio::piped());
+    c.arg(epub);
     Some(c)
 }
 
 /// Run the validator on an EPUB file.
 pub fn run(s: &Settings, epub: &Path) -> Outcome {
-    let Some(mut cmd) = command(s, epub) else { return Outcome::NotSetUp };
-    let limit = Duration::from_secs(if s.seconds == 0 { 120 } else { u64::from(s.seconds.min(3600)) });
-    let mut child = match cmd.spawn() {
-        Ok(c) => c,
-        Err(e) => return Outcome::Failed(format!("the validator could not be started: {e}")),
-    };
-    // Read its output on threads so a long report cannot fill the pipe and stall it.
-    let read = |pipe: Option<Box<dyn std::io::Read + Send>>| {
-        std::thread::spawn(move || {
-            let mut out = Vec::new();
-            if let Some(p) = pipe {
-                let _ = p.take(MAX_REPORT).read_to_end(&mut out);
-            }
-            String::from_utf8_lossy(&out).into_owned()
-        })
-    };
-    let out = read(child.stdout.take().map(|p| Box::new(p) as Box<dyn std::io::Read + Send>));
-    let err = read(child.stderr.take().map(|p| Box::new(p) as Box<dyn std::io::Read + Send>));
-    let start = Instant::now();
-    loop {
-        match child.try_wait() {
-            Ok(Some(_)) => break,
-            Ok(None) if start.elapsed() >= limit => {
-                let _ = child.kill();
-                let _ = child.wait();
-                return Outcome::TimedOut(limit);
-            }
-            Ok(None) => std::thread::sleep(Duration::from_millis(20)),
-            Err(e) => return Outcome::Failed(e.to_string()),
-        }
+    let Some(cmd) = command(s, epub) else { return Outcome::NotSetUp };
+    match run_limited(cmd, s.limit()) {
+        Ok((out, err)) => Outcome::Ran(parse(&(out + &err))),
+        Err(Stopped::TimedOut(d)) => Outcome::TimedOut(d),
+        Err(Stopped::Failed(m)) => Outcome::Failed(format!("the validator could not be started: {m}")),
     }
-    let report = out.join().unwrap_or_default() + &err.join().unwrap_or_default();
-    Outcome::Ran(parse(&report))
 }
 
 /// The findings an outcome adds to preflight.
@@ -158,7 +187,7 @@ pub fn check(s: &Settings, epub: &[u8]) -> Vec<Finding> {
     if command(s, Path::new("x.epub")).is_none() {
         return findings(&Outcome::NotSetUp);
     }
-    let dir = std::env::temp_dir().join(format!("wordsmith-book-validate-{}", std::process::id()));
+    let dir = std::env::temp_dir().join(format!("wordsmith-book-validate-{}-{}", std::process::id(), next_id()));
     if std::fs::create_dir_all(&dir).is_err() {
         return findings(&Outcome::Failed("no temporary folder".into()));
     }

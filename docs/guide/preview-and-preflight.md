@@ -22,8 +22,10 @@ its page, section or edition.
 
 **External validators (PRE-2).** If you have installed the standard EPUB validator, set its path
 (and a Java runtime, for its `.jar`) in Preferences; preflight runs it on the ebook with a time
-limit and lists what it reports. If it is not set up, preflight says so in a note and runs Book's
-own checks.
+limit and lists what it reports. An EPUB accessibility checker works the same way: set its
+program in Preferences and preflight lists the problems it finds in the ebook, each with its file;
+critical ones block export, serious ones are warnings. If either is not set up, preflight says so
+in a note and runs Book's own checks.
 
 **Typographic warnings (PRE-3).** Preflight also flags, page by page, widows and orphans, runs of
 hyphenated lines, loose justified lines and rivers, so you can look at those pages before printing.

@@ -108,6 +108,9 @@ fn an_ebook_preflight_runs_the_validator_from_the_preferences() {
     let notes: Vec<_> = v["findings"].as_array().unwrap().iter().filter(|f| f["rule"] == "validator").cloned().collect();
     assert_eq!(notes.len(), 1, "{v}");
     assert_eq!(notes[0]["severity"], "Note");
+    let access: Vec<_> = v["findings"].as_array().unwrap().iter().filter(|f| f["rule"] == "access-check").cloned().collect();
+    assert_eq!(access.len(), 1, "not set up is one note: {v}");
+    assert_eq!(access[0]["severity"], "Note");
     // Preferences keep the validator's place; a missing key takes its default.
     let p: jcj_shell::prefs::Prefs<wordsmith_book_ui::prefs::BookPrefs> = serde_json::from_str(r#"{"app": {"validator": "/x/v.jar"}}"#).unwrap();
     assert_eq!(p.app.validator, "/x/v.jar");
@@ -126,5 +129,19 @@ fn an_ebook_preflight_runs_the_validator_from_the_preferences() {
         assert_eq!(found[0]["severity"], "Blocks export");
         assert_eq!(found[0]["link"]["file"], "EPUB/text/s006.xhtml");
         assert_eq!(v["blocked"], true);
+        // The accessibility checker, from the preferences too.
+        let checker = dir.join("checker");
+        std::fs::write(
+            &checker,
+            "#!/bin/sh\nmkdir -p \"$4\" && printf '%s' '{\"assertions\": [{\"earl:testSubject\": {\"url\": \"EPUB/text/s002.xhtml\"}, \"assertions\": [{\"earl:result\": {\"earl:outcome\": \"fail\", \"dct:description\": \"written for the test\"}, \"earl:test\": {\"earl:impact\": \"serious\", \"dct:title\": \"a-rule\"}}]}]}' > \"$4/report.json\"\n",
+        )
+        .unwrap();
+        std::fs::set_permissions(&checker, std::fs::Permissions::from_mode(0o755)).unwrap();
+        app.prefs.access_checker = checker.display().to_string();
+        let v = app.command(commands::PREFLIGHT, &json!({ "edition": ebook })).unwrap();
+        let found: Vec<_> = v["findings"].as_array().unwrap().iter().filter(|f| f["rule"] == "access-check").cloned().collect();
+        assert_eq!(found.len(), 1, "{v}");
+        assert_eq!(found[0]["severity"], "Warning");
+        assert_eq!(found[0]["link"]["file"], "EPUB/text/s002.xhtml");
     }
 }

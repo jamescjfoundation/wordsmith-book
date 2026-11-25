@@ -203,6 +203,12 @@ pub fn opf(p: &Package) -> String {
         s += &format!("    <dc:creator id=\"creator{}\">{}</dc:creator>\n", i + 1, escape(c));
     }
     for (el, v) in &m.dc {
+        if el == "source" {
+            // The print edition the page list follows (`source-of` says so).
+            s += &format!("    <dc:source id=\"pagesource\">{}</dc:source>\n", escape(v));
+            s += "    <meta refines=\"#pagesource\" property=\"source-of\">pagination</meta>\n";
+            continue;
+        }
         s += &format!("    <dc:{el}>{}</dc:{el}>\n", escape(v));
     }
     s += &format!("    <meta property=\"dcterms:modified\">{}</meta>\n", escape(&m.modified));

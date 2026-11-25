@@ -45,6 +45,10 @@ reads it back through the core's reader word for word against Book's reader, and
 the author's words in it are exactly the source's. When `BOOK_EPUB_VALIDATOR` names the standard EPUB
 validator's jar (and `BOOK_JAVA` a Java runtime), the validator runs on all twelve and any
 error or warning fails the test.
+When `BOOK_ACCESS_CHECKER` names an installed EPUB accessibility checker,
+`crates/book-check/tests/access_check.rs` runs it on a book's ebook and anything above a note fails
+the test. Rewritten in R2.14: the page list's source is now `dc:source` refined as the source of
+the pagination (the earlier `a11y:pageBreakSource` was not in the validator's vocabulary).
 
 **State:** written 2026-11-24 from the builds of M6.3; **awaiting a person's look** at the EPUBs
 in a reading app (`cargo test -p wordsmith-book-check --test epub -- --ignored` writes them to
