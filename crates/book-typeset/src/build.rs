@@ -233,6 +233,55 @@ impl Builder<'_> {
         }
     }
 
+    /// An aside, set as the design says for its kind.
+    fn aside(&mut self, kind: &str, paras: &[Vec<Span>], source: bool) {
+        use wordsmith_book_design::design::AsideStyle;
+        let look = self.look.asides.of(kind).clone();
+        let font =
+            wordsmith_book_design::fonts::Role::from_key(&look.font).and_then(crate::fonts::family).unwrap_or_else(|| self.look.body_font.clone());
+        let size = self.look.body_size * look.size;
+        let mut c = self.chars(&font, size);
+        if look.small_caps {
+            c.small_caps = Some(true);
+        }
+        if look.style == AsideStyle::Italic {
+            c.italic = Some(true);
+        }
+        let em = self.look.body_size;
+        let rule = jcj_doc::props::Border { style: jcj_doc::props::BorderStyle::Single, width: 0.6, color: None, space: self.line() * 0.3 };
+        for (i, p) in paras.iter().enumerate() {
+            let (first, last) = (i == 0, i + 1 == paras.len());
+            let mut props = self.body_props(i > 0 && look.style != AsideStyle::Centered);
+            props.line_spacing = Some(LineSpacing::Exactly(size * self.look.leading));
+            match look.style {
+                AsideStyle::Inset | AsideStyle::Italic => {
+                    props.indent_left = Some(2.0 * em);
+                    props.indent_right = Some(2.0 * em);
+                }
+                AsideStyle::Framed => {
+                    props.indent_left = Some(1.5 * em);
+                    props.indent_right = Some(1.5 * em);
+                    props.borders = Some(jcj_doc::props::Borders {
+                        top: first.then_some(rule),
+                        bottom: last.then_some(rule),
+                        ..jcj_doc::props::Borders::default()
+                    });
+                }
+                AsideStyle::Centered => {
+                    props.align = Some(Align::Center);
+                    props.indent_first = Some(0.0);
+                }
+            }
+            if first {
+                props.space_before = Some(self.line() * 0.6);
+            }
+            if last {
+                props.space_after = Some(self.line() * 0.6);
+            }
+            self.body.push(self.para(p, props, &c, source));
+        }
+    }
+
     /// Turn the note numbers printed in this section's paragraphs into footnote references:
     /// each number is taken out and its note waits to be placed at the foot of its page.
     fn footnotes_from(&mut self, s: &Section, start: usize, source: bool) {
@@ -402,6 +451,11 @@ impl Builder<'_> {
                         }
                         self.body.push(self.para(p, props, &self.body_chars(), source));
                     }
+                    after_break = true;
+                    first = false;
+                }
+                Block::Aside(kind, paras) => {
+                    self.aside(kind, paras, source);
                     after_break = true;
                     first = false;
                 }

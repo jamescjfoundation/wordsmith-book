@@ -311,6 +311,10 @@ break, hyphenation by the book's language, running heads off on openings and bla
     continued on the next page; or a list at each chapter's end; or a Notes section at the end of
     the book under each chapter's name. Every letter of the text and of the footnotes is checked
     against the book. [Designed]
+15. **Asides** (TXT-2, from 0.2): a Manuscript aside of a kind (letter, note, sign, message, or any
+    other) is set as the design says for that kind: inset, italic, framed with rules above and
+    below, or centered, in a font role and size of its own, small capitals if asked; the ebook
+    marks it with its style and kind and its stylesheet sets them. [Designed]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 

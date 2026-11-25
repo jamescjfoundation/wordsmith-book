@@ -109,6 +109,9 @@ pub enum Block {
     Verse(Vec<Vec<Span>>),
     /// A block quote (or an aside) of paragraphs.
     Quote(Vec<Vec<Span>>),
+    /// An aside of a kind (`letter`, `sign`, ...; empty for none): its paragraphs, set as the
+    /// design says for that kind.
+    Aside(String, Vec<Vec<Span>>),
     /// A subheading.
     Heading(Vec<Span>),
     /// A centered line of a front matter page, at `scale` times the body size (in hundredths).
@@ -296,6 +299,8 @@ pub struct Look {
     pub bleed: f32,
     /// Where the notes go.
     pub notes: NotePlace,
+    /// How asides look, by kind.
+    pub asides: wordsmith_book_design::design::Asides,
 }
 
 impl Default for Look {
@@ -330,6 +335,7 @@ impl Default for Look {
             folios: true,
             bleed: 0.0,
             notes: NotePlace::ChapterEnd,
+            asides: wordsmith_book_design::design::Asides::default(),
         }
     }
 }
@@ -472,7 +478,9 @@ pub fn estimate_pages(book: &PrintBook, look: &Look) -> usize {
             Block::Para(sp) | Block::Heading(sp) | Block::Centered(sp, _) | Block::Entry(sp, _) => {
                 sp.iter().map(|s| s.text.chars().count()).sum::<usize>() + 40
             }
-            Block::Verse(l) | Block::Quote(l) => l.iter().flatten().map(|s| s.text.chars().count()).sum::<usize>() + 80 * l.len(),
+            Block::Verse(l) | Block::Quote(l) | Block::Aside(_, l) => {
+                l.iter().flatten().map(|s| s.text.chars().count()).sum::<usize>() + 80 * l.len()
+            }
             Block::Break => 120,
             Block::Image { .. } => 1500,
         })

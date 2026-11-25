@@ -16,3 +16,7 @@ file and import it into another book. Book checks a design file before using it.
 
 **The chooser (DSN-5)** filters designs by genre and mood and previews each with your own first
 chapter. Choosing one is one step to undo.
+
+**Asides (TXT-2).** Letters, notes, signs and messages in the manuscript are set as the design
+says for each kind: a letter in italic, a sign centered in small capitals, a message framed in
+the sans serif, and so on; a design of your own can change each.

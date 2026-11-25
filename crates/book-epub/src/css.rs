@@ -54,6 +54,7 @@ pub fn stylesheet(d: &Design, fonts: &Fonts) -> String {
             ".drop { float: left; font-size: 3.2em; line-height: 0.85; margin: 0.05em 0.08em 0 0; }\n.lead { font-variant: small-caps; }\n"
         }
     };
+    s += "aside.aside { margin: 1em 2em; }\naside.aside p { text-indent: 0; }\naside.aside-italic { font-style: italic; }\naside.aside-framed { border-top: 1px solid; border-bottom: 1px solid; padding: 0.5em 0; margin: 1em 1.5em; }\naside.aside-centered { text-align: center; }\naside.aside-centered p { text-align: center; }\naside.aside-sans { font-family: sans-serif; }\n";
     s += ".sc { font-variant: small-caps; }\n.strike { text-decoration: line-through; }\n";
     s += "figure { margin: 1em 0; text-align: center; }\nfigure img { max-width: 100%; height: auto; }\nfigure.page img { max-height: 95vh; }\n";
     s += "a.noteref { vertical-align: super; font-size: 0.75em; line-height: 0; text-decoration: none; }\nsection.notes { margin-top: 2em; font-size: 0.9em; }\naside.footnote { font-size: 0.9em; margin: 1em 0 0 0; }\naside.footnote p { text-indent: 0; }\nsection.notes h2 { font-size: 1.1em; }\nsection.notes li p { text-indent: 0; }\n";

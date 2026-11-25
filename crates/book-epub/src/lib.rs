@@ -300,8 +300,29 @@ impl Writer<'_> {
                     }
                     out.push_str("</blockquote>\n");
                 }
-                Block::Fenced { kind: Fence::Aside(_), paras } => {
-                    out.push_str("<aside>\n");
+                Block::Fenced { kind: Fence::Aside(kind), paras } => {
+                    // Set as the design says for this kind of aside.
+                    let kind = kind.clone().unwrap_or_default();
+                    let look = self.design.asides.of(&kind);
+                    let style = match look.style {
+                        wordsmith_book_design::design::AsideStyle::Inset => "inset",
+                        wordsmith_book_design::design::AsideStyle::Italic => "italic",
+                        wordsmith_book_design::design::AsideStyle::Framed => "framed",
+                        wordsmith_book_design::design::AsideStyle::Centered => "centered",
+                    };
+                    let mut classes = format!("aside aside-{style}");
+                    if look.small_caps {
+                        classes.push_str(" sc");
+                    }
+                    if look.font == "sans" {
+                        classes.push_str(" aside-sans");
+                    }
+                    let slug: String = kind.to_lowercase().chars().filter(char::is_ascii_alphanumeric).collect();
+                    if !slug.is_empty() {
+                        classes.push_str(&format!(" aside-kind-{slug}"));
+                    }
+                    let size = if (look.size - 1.0).abs() > 0.001 { format!(" style=\"font-size: {:.2}em\"", look.size) } else { String::new() };
+                    out.push_str(&format!("<aside class=\"{classes}\"{size}>\n"));
                     for p in paras {
                         out.push_str(&format!("<p>{}</p>\n", self.inlines(p, notes)));
                     }

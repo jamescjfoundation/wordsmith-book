@@ -294,6 +294,13 @@ hr.break { border: none; margin: 1em 0; height: 1.5em; text-align: center; }
 hr.break::after { content: attr(data-mark); }
 p.break { text-align: center; text-indent: 0; margin: 0.75em 0; }
 .lead { font-variant: small-caps; letter-spacing: 0.05em; }
+aside.aside { margin: 1em 2em; }
+aside.aside p { text-indent: 0; }
+aside.aside-italic { font-style: italic; }
+aside.aside-framed { border-top: 1px solid; border-bottom: 1px solid; padding: 0.5em 0; margin: 1em 1.5em; }
+aside.aside-centered { text-align: center; }
+aside.aside-centered p { text-align: center; }
+aside.aside-sans { font-family: sans-serif; }
 .sc { font-variant: small-caps; }
 .strike { text-decoration: line-through; }
 figure { margin: 1em 0; text-align: center; }

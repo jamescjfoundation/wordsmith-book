@@ -69,6 +69,35 @@ justify = true
 indent = 1.2
 first_line = "small-caps" # a drop cap shows as small capitals in an ebook
 heading_font = true
+
+# Asides by kind (TXT-2): letters, notes, signs, messages, and `default` for any other kind.
+# style: inset, italic, framed (rules above and below), centered; font: a role, or "" for the
+# body font; size: 0.7 to 1.3 times the body size.
+[asides.default]
+style = "inset"
+size = 0.95
+small_caps = false
+
+[asides.letter]
+style = "italic"
+size = 1.0
+small_caps = false
+
+[asides.note]
+style = "inset"
+size = 0.95
+small_caps = false
+
+[asides.sign]
+style = "centered"
+size = 1.0
+small_caps = true
+
+[asides.message]
+style = "framed"
+font = "sans"
+size = 0.9
+small_caps = false
 ```
 
 ## The smallest design

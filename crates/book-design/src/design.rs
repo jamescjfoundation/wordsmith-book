@@ -196,6 +196,89 @@ impl Default for Chapter {
     }
 }
 
+/// How an aside is set (TXT-2).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum AsideStyle {
+    /// Indented on both sides, a little smaller.
+    #[default]
+    Inset,
+    /// Indented and in italic (a letter).
+    Italic,
+    /// Indented with a rule above and below (a message, a document).
+    Framed,
+    /// Centered line by line (a sign, a notice).
+    Centered,
+}
+
+/// The look of one kind of aside.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default, deny_unknown_fields)]
+pub struct AsideLook {
+    /// How it is set.
+    pub style: AsideStyle,
+    /// A font role; empty for the body font.
+    #[serde(skip_serializing_if = "String::is_empty")]
+    pub font: String,
+    /// Its size, times the body size.
+    pub size: f32,
+    /// In small capitals.
+    pub small_caps: bool,
+}
+
+impl Default for AsideLook {
+    fn default() -> Self {
+        AsideLook { style: AsideStyle::Inset, font: String::new(), size: 0.95, small_caps: false }
+    }
+}
+
+/// Asides by kind: letters, notes, signs, messages, and every other kind.
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default, deny_unknown_fields)]
+pub struct Asides {
+    /// Any kind not named below.
+    pub default: AsideLook,
+    /// A letter.
+    pub letter: AsideLook,
+    /// A note (a written note in the story, not a footnote).
+    pub note: AsideLook,
+    /// A sign or notice.
+    pub sign: AsideLook,
+    /// A message (a text, an email, a telegram).
+    pub message: AsideLook,
+}
+
+impl Default for Asides {
+    fn default() -> Self {
+        let look = |style, font: &str, size, small_caps| AsideLook { style, font: font.into(), size, small_caps };
+        Asides {
+            default: look(AsideStyle::Inset, "", 0.95, false),
+            letter: look(AsideStyle::Italic, "", 1.0, false),
+            note: look(AsideStyle::Inset, "", 0.95, false),
+            sign: look(AsideStyle::Centered, "", 1.0, true),
+            message: look(AsideStyle::Framed, "sans", 0.9, false),
+        }
+    }
+}
+
+impl Asides {
+    /// The look of an aside of `kind` (any case; an unknown or empty kind takes the default).
+    pub fn of(&self, kind: &str) -> &AsideLook {
+        match kind.trim().to_lowercase().as_str() {
+            "letter" => &self.letter,
+            "note" => &self.note,
+            "sign" | "notice" => &self.sign,
+            "message" | "text" | "email" | "telegram" => &self.message,
+            _ => &self.default,
+        }
+    }
+
+    /// Every look with its key.
+    pub fn all(&self) -> [(&'static str, &AsideLook); 5] {
+        [("default", &self.default), ("letter", &self.letter), ("note", &self.note), ("sign", &self.sign), ("message", &self.message)]
+    }
+}
+
 /// Scene breaks.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(default, deny_unknown_fields)]
@@ -308,6 +391,9 @@ pub struct Design {
     /// The ebook.
     #[serde(default, skip_serializing_if = "is_default")]
     pub ebook: Ebook,
+    /// Asides by kind (TXT-2).
+    #[serde(default, skip_serializing_if = "is_default")]
+    pub asides: Asides,
 }
 
 impl Default for Design {
@@ -325,6 +411,7 @@ impl Default for Design {
             part: Part::default(),
             heads: RunningHeads::default(),
             ebook: Ebook::default(),
+            asides: Asides::default(),
         }
     }
 }
@@ -377,6 +464,12 @@ pub fn problems(d: &Design, known_role: &dyn Fn(&str) -> bool) -> Vec<String> {
         if !known_role(role) {
             out.push(format!("The {what} “{role}” is not one of Book's font roles."));
         }
+    }
+    for (kind, look) in d.asides.all() {
+        if !look.font.is_empty() && !known_role(&look.font) {
+            out.push(format!("The {kind} aside's font “{}” is not one of Book's font roles.", look.font));
+        }
+        range(&mut out, &format!("{kind} aside size"), look.size, 0.7, 1.3, " times the body size");
     }
     range(&mut out, "body size", d.body.size, 7.0, 24.0, " points");
     range(&mut out, "leading", d.body.leading, 1.0, 2.0, " times the size");

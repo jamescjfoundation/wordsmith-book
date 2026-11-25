@@ -104,6 +104,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         folios: true,
         bleed: geometry.bleed,
         notes: geometry.notes,
+        asides: d.asides.clone(),
     })
 }
 
@@ -156,8 +157,9 @@ impl Convert<'_> {
                 MBlock::Para(c) => out.push(Block::Para(self.spans(c, labels))),
                 MBlock::Heading { content, .. } => out.push(Block::Heading(self.spans(content, labels))),
                 MBlock::SceneBreak => out.push(Block::Break),
-                MBlock::Quote(ps) | MBlock::Fenced { kind: Fence::Aside(_), paras: ps } => {
-                    out.push(Block::Quote(ps.iter().map(|p| self.spans(p, labels)).collect()))
+                MBlock::Quote(ps) => out.push(Block::Quote(ps.iter().map(|p| self.spans(p, labels)).collect())),
+                MBlock::Fenced { kind: Fence::Aside(kind), paras: ps } => {
+                    out.push(Block::Aside(kind.clone().unwrap_or_default(), ps.iter().map(|p| self.spans(p, labels)).collect()))
                 }
                 MBlock::Fenced { kind: Fence::Verse, paras } => {
                     for stanza in paras {
@@ -384,7 +386,7 @@ pub fn source_words(book: &PrintBook) -> Vec<String> {
                         .collect();
                     words(&t, &mut out);
                 }
-                Block::Quote(ps) => ps.iter().for_each(|p| words(p, &mut out)),
+                Block::Quote(ps) | Block::Aside(_, ps) => ps.iter().for_each(|p| words(p, &mut out)),
                 Block::Break | Block::Image { .. } => {}
             }
         }
