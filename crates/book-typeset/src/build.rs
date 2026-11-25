@@ -64,7 +64,7 @@ impl Builder<'_> {
             line_spacing: Some(LineSpacing::Exactly(self.line())),
             space_before: Some(0.0),
             space_after: Some(0.0),
-            widow_control: Some(true),
+            widow_control: Some(self.look.widow_control),
             ..ParaProps::default()
         }
     }

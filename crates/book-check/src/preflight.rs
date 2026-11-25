@@ -338,6 +338,29 @@ pub fn print_words(print: &Print, pdf: &[u8], source: &Book) -> Vec<Finding> {
     out
 }
 
+/// Typographic problems by page (PRE-3): widows, orphans and stacked hyphens are warnings; loose
+/// lines and rivers are notes, for a person to look at.
+pub fn typography(print: &Print) -> Vec<Finding> {
+    use wordsmith_book_typeset::TypoKind;
+    let limit = if print.look.strict_hyphens { 1 } else { 2 };
+    print
+        .typeset
+        .typography(limit, 0.6)
+        .into_iter()
+        .map(|t| {
+            let (severity, what) = match t.kind {
+                TypoKind::Orphan => (Severity::Warning, "a paragraph's first line is alone at the foot".to_owned()),
+                TypoKind::Widow => (Severity::Warning, "a paragraph's last line is alone at the head".to_owned()),
+                TypoKind::StackedHyphens => (Severity::Warning, format!("more than {limit} hyphenated lines in a row")),
+                TypoKind::LooseLine => (Severity::Note, "a justified line has very wide word spaces".to_owned()),
+                TypoKind::River => (Severity::Note, "word spaces line up down the page (a river)".to_owned()),
+            };
+            let at = if t.text.is_empty() { String::new() } else { format!(" (“{}…”)", t.text) };
+            finding("typography", severity, format!("Page {}: {what}{at}.", t.page), Link::Page(t.page))
+        })
+        .collect()
+}
+
 /// Every print finding for a built print edition and its PDF.
 pub fn print_findings(print: &Print, pdf: &[u8], source: &Book, edition: &Edition) -> Vec<Finding> {
     let mut out = margins(print);
@@ -366,6 +389,7 @@ pub fn print_findings(print: &Print, pdf: &[u8], source: &Book, edition: &Editio
         out.extend(blank_runs(&blank, print.profile.blank_run_inside, print.profile.blank_run_end));
     }
     out.extend(page_count(print, edition.paper.unwrap_or_default()));
+    out.extend(typography(print));
     out.extend(print_words(print, pdf, source));
     out
 }

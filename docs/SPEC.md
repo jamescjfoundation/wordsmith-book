@@ -448,6 +448,12 @@ break, hyphenation by the book's language, running heads off on openings and bla
 7. **External validators** (PRE-2): the standard EPUB validator, when the user has installed it
    and set its path in the preferences, runs as a separate program with a time limit; its errors
    become findings. "Not installed" is a note, never a failure. [Designed]
+8. **Typographic warnings** (PRE-3, from 0.2), by page: a paragraph's first line alone at a
+   page's foot (orphan) or last line alone at its head (widow), and more hyphenated lines in a row
+   than the design allows (two, or one with strict hyphenation), are warnings; a justified line
+   with a word space wider than 0.6 em and word spaces lined up within 1.5 pt down four lines or
+   more (a river) are notes. Widow and orphan control is on unless the design allows single
+   lines (`orphans` and `widows` of 1). [Designed]
 
 ## 9. Export (EXP-1, EXP-2)
 

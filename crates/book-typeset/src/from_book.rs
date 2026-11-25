@@ -105,6 +105,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         bleed: geometry.bleed,
         notes: geometry.notes,
         asides: d.asides.clone(),
+        widow_control: d.body.orphans >= 2 || d.body.widows >= 2,
     })
 }
 

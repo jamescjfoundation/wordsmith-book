@@ -303,6 +303,9 @@ pub struct Look {
     pub notes: NotePlace,
     /// How asides look, by kind.
     pub asides: wordsmith_book_design::design::Asides,
+    /// Keep at least two lines of a paragraph at a page's foot and head (off only when the
+    /// design allows single lines).
+    pub widow_control: bool,
 }
 
 impl Default for Look {
@@ -338,6 +341,7 @@ impl Default for Look {
             bleed: 0.0,
             notes: NotePlace::ChapterEnd,
             asides: wordsmith_book_design::design::Asides::default(),
+            widow_control: true,
         }
     }
 }
@@ -440,6 +444,32 @@ pub fn notes_at_end(book: &PrintBook) -> PrintBook {
         });
     }
     out
+}
+
+/// A typographic problem on a page (PRE-3).
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct TypoIssue {
+    /// The page, from 1.
+    pub page: usize,
+    /// What it is.
+    pub kind: TypoKind,
+    /// The words where it is (empty for a river).
+    pub text: String,
+}
+
+/// The kinds of typographic problem.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum TypoKind {
+    /// A paragraph's first line alone at a page's foot.
+    Orphan,
+    /// A paragraph's last line alone at a page's head.
+    Widow,
+    /// More hyphenated lines in a row than the design allows.
+    StackedHyphens,
+    /// A justified line with very wide word spaces.
+    LooseLine,
+    /// Word spaces lined up down the page.
+    River,
 }
 
 /// Where a printed page starts, for an ebook's page list.
@@ -713,6 +743,89 @@ impl Typeset {
                 start
             })
             .collect()
+    }
+
+    /// Typographic problems by page (PRE-3): single lines of a paragraph at a page's foot
+    /// (orphans) or head (widows), more hyphenated lines in a row than `hyphen_limit`, loose
+    /// justified lines (a word space wider than `loose_em` of the type size), and rivers (word
+    /// spaces lined up down four lines or more).
+    pub fn typography(&self, hyphen_limit: usize, loose_em: f32) -> Vec<TypoIssue> {
+        let mut out = Vec::new();
+        let body: Vec<&jcj_doc::Paragraph> = jcj_doc::walk::body_paragraphs(&self.doc).into_iter().map(|(_, p)| p).collect();
+        let pieces = jcj_layout::pages::body_pieces(&self.layout);
+        let sample = |p: &jcj_doc::Paragraph, from: usize| -> String {
+            let mut at = from.min(p.text.len());
+            while !p.text.is_char_boundary(at) {
+                at -= 1;
+            }
+            p.text[at..].replace(jcj_doc::para::OBJ, "").split_whitespace().take(6).collect::<Vec<_>>().join(" ")
+        };
+        for (i, ps) in pieces.iter().enumerate() {
+            for piece in ps {
+                let (Some(lines), Some(p)) = (&piece.lines, body.get(piece.block)) else { continue };
+                if lines.end - lines.start != 1 || SOURCE.get_or_none(*p) != Some(true) {
+                    continue;
+                }
+                let from = piece.bytes.as_ref().map_or(0, |b| b.start);
+                if piece.continues {
+                    out.push(TypoIssue { page: i + 1, kind: TypoKind::Orphan, text: sample(p, from) });
+                }
+                if piece.continued {
+                    out.push(TypoIssue { page: i + 1, kind: TypoKind::Widow, text: sample(p, from) });
+                }
+            }
+        }
+        for (i, page) in self.layout.pages.iter().enumerate() {
+            // Word spaces of each line on the page, as x positions on the page, for rivers.
+            let mut rows: Vec<(f32, Vec<f32>)> = Vec::new();
+            for it in &page.items {
+                let jcj_layout::Placed::Lines { story: jcj_doc::StoryRef::Body, path, para, l0, l1, x, y, .. } = it else { continue };
+                let Some(p) = path.0.first().and_then(|b| body.get(*b as usize)) else { continue };
+                if SOURCE.get_or_none(*p) != Some(true) {
+                    continue;
+                }
+                let size = p.runs.first().and_then(|r| r.props.size).unwrap_or(11.0);
+                let mut run = 0;
+                let last = para.lines.len().saturating_sub(1);
+                for (n, line) in para.lines.iter().enumerate().take(*l1).skip(*l0) {
+                    run = if line.hyphen.is_some() { run + 1 } else { 0 };
+                    if run == hyphen_limit + 1 {
+                        out.push(TypoIssue { page: i + 1, kind: TypoKind::StackedHyphens, text: sample(p, line.start) });
+                    }
+                    let mut spaces = Vec::new();
+                    for c in line.c0..line.c1 {
+                        let Some(cl) = para.clusters.get(c) else { continue };
+                        if p.text.get(cl.start..cl.end) != Some(" ") {
+                            continue;
+                        }
+                        let k = c - line.c0;
+                        let (Some(a), Some(b)) = (line.xs.get(k), line.xs.get(k + 1)) else { continue };
+                        spaces.push((x + (a + b) / 2.0, b - a));
+                    }
+                    // A justified line's widest space (the last line of a paragraph is not
+                    // stretched).
+                    if n != last && spaces.iter().any(|s| s.1 > loose_em * size) {
+                        out.push(TypoIssue { page: i + 1, kind: TypoKind::LooseLine, text: sample(p, line.start) });
+                    }
+                    rows.push((y + line.top, spaces.iter().map(|s| s.0).collect()));
+                }
+            }
+            rows.sort_by(|a, b| a.0.total_cmp(&b.0));
+            // A river: a space within a point and a half of one on the line above, four lines on.
+            let mut chains: Vec<(f32, usize)> = Vec::new();
+            let mut reported = false;
+            for (_, xs) in &rows {
+                let next: Vec<(f32, usize)> =
+                    xs.iter().map(|x| (*x, chains.iter().filter(|(c, _)| (c - x).abs() <= 1.5).map(|(_, n)| n + 1).max().unwrap_or(1))).collect();
+                if !reported && next.iter().any(|(_, n)| *n >= 4) {
+                    out.push(TypoIssue { page: i + 1, kind: TypoKind::River, text: String::new() });
+                    reported = true;
+                }
+                chains = next;
+            }
+        }
+        out.sort_by_key(|t| t.page);
+        out
     }
 
     /// Where page `index`'s footnotes begin, in points from the top, if it has any.

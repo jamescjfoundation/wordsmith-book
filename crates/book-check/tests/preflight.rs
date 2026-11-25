@@ -64,7 +64,7 @@ fn the_test_books_pass_preflight_for_the_paperback_and_the_ebook_in_every_design
                 // Nothing but the book's own missing details and the absent cover is worth a
                 // warning.
                 for w in r.of(Severity::Warning) {
-                    assert!(matches!(w.rule, "metadata" | "cover"), "{name}, {}, {}: {}", d.id, e.id, show(&r));
+                    assert!(matches!(w.rule, "metadata" | "cover" | "typography"), "{name}, {}, {}: {}", d.id, e.id, show(&r));
                 }
             }
         }
