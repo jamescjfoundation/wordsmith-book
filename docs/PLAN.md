@@ -654,7 +654,7 @@ Section 5.8.
 | M9 Release | 0.1 | CLI, agent tools, guide, packaging, the v0.1 test | done (the release itself waits for a person) |
 | R2 | 0.2 | Parity for most novels | done (the release itself waits for a person) |
 | R3 | 0.3 | Designs, series and standards | done (the release itself waits for a person) |
-| R4 | 1.0 | Publishing house | |
+| R4 | 1.0 | Publishing house | done (the release itself waits for a person) |
 
 **The test of v0.1**: two public-domain novels (one of at least 150,000 words, one with parts,
 notes and verse) go from a DOCX file and from a Manuscript project fixture to a 6 × 9 in

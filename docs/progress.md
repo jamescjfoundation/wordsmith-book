@@ -78,6 +78,55 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
 | 2026-11-25 | R4.4 r4/isbns | META-5: the house file's ISBN list is checked when read (each ISBN's check digit, each owned once, no edition of a book given two; a list that breaks these is refused whole); `book.isbn.assign` (and *Take an ISBN from the House* beside an edition in Details) gives an edition without an ISBN the house's next free one, as the house file writes it, and records the book and edition in the house file (if that cannot be written the book does not keep it; an undone ISBN stays recorded, never handed out twice); `book.isbn.list` lists them; the C11 table widget was not needed (index updated); tests: two editions take free ISBNs in order, an edition with one is refused, the uses are recorded and another book finds none free; lists with a bad check digit, a repeated ISBN or an edition given two are refused. The Details panel's per-edition row moved to a line of its own; its line-break test now focuses the boxes (a simulated pointer click no longer does: recorded for a person to check by hand). Tests: 248 in the full run and the one panel test, fixed and rerun | 249 |
 | 2026-11-25 | R4.5 r4/onix | META-6: `book-check::onix` writes an ONIX for Books 3.0 message (reference tags) with one product per edition in the published schema's element order and code lists: record reference, ISBN-13 (else the edition's own identifier), form (BC, BB, ED with E101), series as a collection with its number, title and subtitle, contributors with roles, language (ISO 639-2/B), the print page count as laid out, keywords, description, imprint, publisher (the imprint, else the author), status and date; `book.onix` and *Write the ONIX Record* on the export page write `<title> ONIX.xml`; tests validate the records against the published reference schema with its code lists (a validator kept under the tools cache, `BOOK_ONIX_VALIDATOR`; it caught a record without a publisher, now always written), check each product's fields, escaping and the same bytes twice. Tests: 251 in the full run and the command test, fixed and rerun | 252 |
 | 2026-11-25 | R4.6 r4/engine | Print on the newest core release's layout (decision 0003's path): Book pins core v0.1.15, the newest; every golden file compared by the print, EPUB and v0.1 tests in this run and at each core move since M5.4 (v0.1.11 to v0.1.15): no core move changed one; the changes since they were written are Book's own, each reviewed and recorded in its step (R2.4, R2.6, R2.10, R2.14, R3.1); recorded in `docs/golden.md` and decision 0003's addendum; a new test keeps each golden folder exactly the files its test compares (none missing, none stale) | 253 |
+| 2026-11-25 | R4.7 r4/close | R4 closed: CHANGELOG 1.0.0 (unreleased; the release waits for a person after v0.3.0), the guide complete for 1.0 (every feature through R4 in its page), plan section 10's R4 row marked done; the full `cargo xtask ci` (every check, every test with the installed EPUB validator, accessibility checker, PDF validator and ONIX schema validator) and the v0.1 test pass; the final report below | 253 |
+
+## Final report
+
+Written 2026-11-25 at the end of the run (M0 to M9, R2, R3, R4, all on `main`, each step
+committed and pushed through the pre-push gate).
+
+**Built.** M0 to M9 (0.1): sources (linked Manuscript projects, owned imports of DOCX, ODT, RTF,
+Markdown and text with review, cleanup and a word check), structure and front and back matter,
+six designs with mixing and a chooser, print on the core's layout (decision 0003) with print
+profiles, EPUB 3.3 with accessibility metadata, previews, preflight, checked and reproducible
+export, the CLI and agent tools, the guide, packaging and the v0.1 test. R2 (0.2): every common
+trim, hardcover, bleed and full-page pictures, footnotes and ebook notes, asides, more front and
+back matter, print-only and ebook-only, store editions, the page list, cover template and check,
+re-import, typographic warnings, the accessibility checker, line-break hints, a Spanish interface
+and screen-reader names throughout. R3 (0.3): thirteen designs, large print from any design, box
+sets, EPUB import word for word, PDF/A-2b and PDF/UA-1, proofs. R4 (1.0): the house file, house
+styles, imprint profiles, series, the ISBN list and ONIX for Books 3.0. 253 tests at the end.
+
+**Core changes and releases tagged** (each additive, tested in the core and `core-testbed`, issue
+closed): v0.1.5 (Manuscript's address in `deny.toml`, #15), v0.1.6 (`xtask sync` with two core
+releases in the graph, #16), v0.1.7 (section settings and note kinds reachable, #24), v0.1.8 (the
+tree widget, C3, #6), v0.1.9 (word verification and comparison, C1 and C2, #10 and #17),
+v0.1.10 (PDF facts, C9, #23), v0.1.11 (trim and bleed boxes, #25), v0.1.12 (the EPUB writer keeps
+notes, C7, #21), v0.1.13 (translation catalogs and the shell's texts through them, C4, #18),
+v0.1.14 (the shell's auto-save fields named for screen readers, #26), v0.1.15 (PDF/A-2b and
+PDF/UA-1 declarations, #27). Book pins v0.1.15, the newest.
+
+**Core-candidates remaining** (`docs/core-candidates.md`): C5 book typesetting (#19), C6 the
+EPUB 3 package layer (#20), C8 structure detection for imports (#22), all app-first, waiting for a
+second app. C11 (the table widget, #7) was not needed.
+
+**Differences from the plan.** Plan commits: M0.2 (the `.wsbk` and `.wsbkz` extensions, decision
+0002), M0.7 (print on the core's layout, decision 0003), M3.4 (fixes in a paragraph editor), M5.2
+(the layout settles within four passes), M5.3 (the pipeline's wording). Without plan text
+changes: command replies, preflight findings and build messages stay English (R2.16); the v0.1
+test stays on 0.1's six designs (R3.1); the workspace version stays 0.1.0 until a person releases
+v0.1.0 (R2.18); R4.6 is the comparison at the newest core release, as decision 0003 leaves no
+engine move to make; the house file is Book's design for imprints, series and ISBNs (R4.1).
+
+**Waiting on a person:** every item in the next section: requests to Manuscript, the print
+engine, fixtures, the golden files' look, the layout's single-line footnote page, automatic
+hyphenation, the four releases (v0.1.0, v0.2.0, v0.3.0, v1.0.0: environment, dates, tags,
+signing, the untested macOS and Windows packages), the Details panel click check, reviews, the
+names recheck, moving Script and Manuscript to core v0.1.15, and a native speaker's review of the
+Spanish catalogs.
+
+**Disk.** At the end: 70 GB free; Book's `target/` is 25 GB (cleaned once mid-run at the
+coordinator's request); the core's `target/` is cleaned; no other repository keeps one.
 
 ## Waiting on a person
 
@@ -93,7 +142,8 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
   online word processor (`docs/fixtures.md`).
 
 - **Golden files:** a look at the print PDFs and EPUBs the golden files in `tests/golden/` stand for
-  (`docs/golden.md`, M5.4, M6.3 and M9.4; rewritten since in R2.4, R2.6, R2.10 and R2.14).
+  (`docs/golden.md`, M5.4, M6.3 and M9.4; rewritten since in R2.4, R2.6, R2.10 and R2.14; the
+  seven designs of R3.1 added).
 
 - **Layout (R2.4):** on a page that a long footnote mostly fills, the core's layout (WordCraft's)
   can leave a single line of text, because it keeps a note with its reference before widow and
@@ -114,6 +164,8 @@ One line per finished step on `main`, newest last. Feature ids are the plan's (s
   `CHANGELOG.md`, move the workspace version to 0.2.0 (it stays 0.1.0 until v0.1.0 is out) and
   push the tag `v0.2.0`.
 - **Release (R3.7):** v0.3.0 is ready the same way, after v0.2.0.
+
+- **Release (R4.7):** v1.0.0 is ready the same way, after v0.3.0.
 
 - **Details panel (R4.4):** check by hand that a mouse click into the *Line breaks* boxes puts
   the cursor there. Since the per-edition row (*Take an ISBN from the House*, *PDF/A and PDF/UA*)

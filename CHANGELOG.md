@@ -2,6 +2,35 @@
 
 Each release says what changed for people who make books with Wordsmith Book.
 
+## 1.0.0 (unreleased)
+
+A publishing house: shared imprints, series and ISBNs, house designs that stay put, and the
+record distributors read.
+
+### Added
+
+- **The house file.** A press keeps its imprints, series and the ISBNs it owns in one
+  `house.toml` (its path in Preferences). A book joins an imprint, a series, or both, and keeps a
+  copy of what it takes, so it builds the same anywhere.
+- **House styles.** An imprint or series can lock its house design: its books keep it until they
+  leave, whatever command or agent asks.
+- **Imprint profiles.** The imprint's name, address, website, logo and copyright wording on the
+  title and copyright pages, in print and in the ebook.
+- **Series.** The copyright page's series line, "Also by" built from the series, and a series
+  view that names any book off the series' design.
+- **ISBN list.** Each of the house's ISBNs checked and used once; an edition takes the next free
+  one and the house file records who has it.
+- **ONIX for Books 3.0.** One record for each edition, validated against the published schema
+  and its code lists.
+
+### Changed
+
+- Print follows the newest core release's layout (core 0.1.15); no core move changed the
+  golden files, and a test keeps the golden folders exactly what the tests compare.
+- Book's own pages (the title page) can carry a picture: the imprint's logo.
+- In Details, each edition's other settings (*Take an ISBN from the House*, *PDF/A and PDF/UA*)
+  are on a line of their own.
+
 ## 0.3.0 (unreleased)
 
 Designs, series and standards: thirteen designs, large print from any of them, box sets, EPUB
