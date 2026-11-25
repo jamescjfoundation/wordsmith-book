@@ -127,6 +127,17 @@ Sources used:
 2. An import whose words differ is refused, showing the first difference with ten words of
    context on each side. [Designed]
 
+### 1.8 Re-import (IMP-8, from 0.2)
+
+1. A book imported into a source of its own can take a new version of its file. The new version
+   is imported with the book's import rules and its own word check, then compared with the book's
+   source: sections matched by role and title in order, paragraphs compared word by word; every
+   difference is listed (added and removed words, sections added and removed) before anything
+   changes. [Designed]
+2. Taking it replaces the source (undoable) and keeps Book's layer: the design, metadata, front
+   and back matter, editions, and each section's settings and fixes, which follow their sections
+   to the new version. A linked manuscript changes in Manuscript and is not re-imported. [Designed]
+
 ## 2. Structure and front and back matter (STR-1 to STR-7)
 
 ### 2.1 Outline (STR-1)

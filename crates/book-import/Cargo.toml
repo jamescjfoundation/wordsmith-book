@@ -17,7 +17,5 @@ wordsmith-manuscript-model = { workspace = true }
 jcj-doc = { workspace = true }
 jcj-interchange = { workspace = true }
 jcj-features = { workspace = true }
-serde = { workspace = true }
-
-[dev-dependencies]
 wordsmith-manuscript-format = { workspace = true }
+serde = { workspace = true }

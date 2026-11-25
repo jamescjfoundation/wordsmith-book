@@ -119,6 +119,11 @@ pub const COVER_TEMPLATE: &str = "book.cover.template";
 /// wrong (PRT-10).
 pub const COVER_CHECK: &str = "book.cover.check";
 
+/// Re-import a new version of the file the book was imported from: `{"file", "apply": bool}`;
+/// gives every difference, section by section and word by word; with `apply` the new text
+/// replaces the book's own source, Book's settings kept (IMP-8).
+pub const REIMPORT: &str = "book.reimport";
+
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
     let p = |mut c: CommandInfo| {
@@ -174,6 +179,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(BLOCK_ONLY, "Show a Paragraph in Print or Ebook Only", "")),
         p(CommandInfo::new(COVER_TEMPLATE, "Cover Template", "")),
         p(CommandInfo::new(COVER_CHECK, "Check a Cover", "")),
+        p(CommandInfo::new(REIMPORT, "Import a New Version", "")),
     ]
 }
 
@@ -315,6 +321,7 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
         BLOCK_ONLY => block_only(app.open_book()?, params),
         COVER_TEMPLATE | COVER_CHECK => cover_command(app.open_book()?, id, params),
+        REIMPORT => reimport(app.open_book()?, params),
         EXPORT => {
             let validator = app.prefs.validator_settings();
             let b = app.open_book()?;
@@ -701,4 +708,48 @@ fn jcj_project_read(path: &std::path::Path) -> Result<Vec<u8>, String> {
         return Err(format!("{} is larger than 512 MB", path.display()));
     }
     std::fs::read(path).map_err(|e| format!("{}: {e}", path.display()))
+}
+
+/// Compare a new version of the book's file with its own source and, when asked, take it.
+fn reimport(b: &mut OpenBook, params: &Value) -> Result<Value, String> {
+    let file = PathBuf::from(s(params, "file")?);
+    let apply = params.get("apply").and_then(Value::as_bool).unwrap_or(false);
+    let old_project = b
+        .owned_project()
+        .map_err(|_| "only a book imported into a source of its own can take a new version; a linked manuscript changes in Manuscript".to_owned())?
+        .clone();
+    let format = crate::import_review::format_of(&file)?;
+    let bytes = jcj_project_read(&file)?;
+    let title = old_project.settings.book.title.clone();
+    let imported = wordsmith_book_import::import(format, &bytes, &b.files.project.cleanup.rules, &title).map_err(|e| e.to_string())?;
+    if !imported.report.passed() {
+        return Err("the new version's own word check failed, so it was not taken".into());
+    }
+    let mut new_project = imported.project;
+    // The book's details in the source stay as they were set.
+    new_project.settings.book = old_project.settings.book.clone();
+    let old = wordsmith_manuscript_format::book::from_project(&old_project);
+    let new = wordsmith_manuscript_format::book::from_project(&new_project);
+    let c = wordsmith_book_import::reimport::compare(&old, &new);
+    let report = json!({
+        "same": c.is_same(),
+        "added": c.added,
+        "removed": c.removed,
+        "sections": c.changes.iter().map(|x| json!({ "title": x.title, "status": x.status(), "changes": wordsmith_book_import::reimport::lines(x) })).collect::<Vec<_>>(),
+        "applied": apply,
+    });
+    if apply {
+        // Book's settings follow their sections to the new version.
+        let matched = c.matched.clone();
+        b.edit(|f| {
+            let old = std::mem::take(&mut f.project.sections);
+            f.project.sections = old.into_iter().filter_map(|(id, s)| matched.get(&id).map(|n| (*n, s))).collect();
+            for fix in &mut f.project.fixes {
+                fix.section = fix.section.and_then(|id| matched.get(&id).copied());
+            }
+            Ok(())
+        })?;
+        b.write_owned(&new_project)?;
+    }
+    Ok(report)
 }

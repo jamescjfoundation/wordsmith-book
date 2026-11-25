@@ -22,3 +22,7 @@ Manuscript project is never cleaned up.
 **Word-for-word check (IMP-7).** Every import is checked word for word against the file it came
 from. If a word was lost or changed, Book says which, with the words around it, and nothing is
 made.
+
+**A new version (IMP-8).** When the writer sends a revised file, *Import a New Version* compares it
+with the book word by word and lists every difference first; taking it keeps the design, the
+book's details, front and back matter and each chapter's settings. It can be undone.
