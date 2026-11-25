@@ -85,7 +85,9 @@ fn accessibility_metadata_follows_what_the_ebook_holds() {
     for f in ["structuralNavigation", "tableOfContents", "readingOrder"] {
         assert!(features.iter().any(|x| x == f), "{f}");
     }
-    assert!(!features.iter().any(|x| x == "alternativeText" || x == "pageNavigation"));
+    assert!(!features.iter().any(|x| x == "alternativeText"));
+    // A new ebook edition carries the print edition's pages (R2.10).
+    assert!(features.iter().any(|x| x == "pageNavigation"));
     assert_eq!(meta(&plain, "schema:accessibilityHazard"), vec!["none"]);
     assert_eq!(meta(&plain, "dcterms:conformsTo"), vec!["EPUB Accessibility 1.1 - WCAG 2.2 Level AA"]);
     assert_eq!(meta(&plain, "schema:accessibilitySummary").len(), 1);

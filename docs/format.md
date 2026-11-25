@@ -99,6 +99,7 @@ name = "Ebook"
 format = "ebook"
 notes = "chapter-end"    # popup (default: footnotes in print, pop-up notes in ebooks), chapter-end, book-end
 embed_fonts = false      # default true
+page_list = true         # the print edition's page numbers in the ebook (EBK-6)
 cover = "assets/cover.jpg"   # the ebook cover, a PNG or JPEG in the project (EBK-5)
 
 [[elements]]

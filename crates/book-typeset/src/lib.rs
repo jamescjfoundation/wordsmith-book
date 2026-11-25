@@ -25,7 +25,7 @@ use std::collections::BTreeSet;
 use jcj_doc::Document;
 use jcj_layout::{DocLayout, LayoutCache};
 
-pub use build::{SOURCE, print_document};
+pub use build::{SOURCE, UNIT, print_document};
 
 /// Points per inch.
 pub const INCH: f32 = 72.0;
@@ -442,6 +442,21 @@ pub fn notes_at_end(book: &PrintBook) -> PrintBook {
     out
 }
 
+/// Where a printed page starts, for an ebook's page list.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct PageStart {
+    /// The page's number, from 1.
+    pub number: usize,
+    /// Its folio as printed.
+    pub label: String,
+    /// The section (piece) it belongs to.
+    pub section: String,
+    /// The author's paragraph it starts in (its place in the section), when it starts in one.
+    pub unit: Option<u32>,
+    /// The byte in that paragraph's printed text where the page's first word starts.
+    pub offset: usize,
+}
+
 /// `n` in lower-case roman numerals (front matter folios).
 pub fn roman_lower(n: u32) -> String {
     const TABLE: [(u32, &str); 13] = [
@@ -671,6 +686,33 @@ impl Typeset {
     pub fn page_image(&self, index: usize, ppi: f32) -> Result<jcj_output::PageImage, Error> {
         jcj_output::render_page(&self.doc, &self.layout, index, ppi / INCH, &jcj_output::RenderSettings::default())
             .ok_or_else(|| Error::Page(format!("there is no page {}", index + 1)))
+    }
+
+    /// Where each page starts, in reading order: its section, and when it starts in the author's
+    /// text, the paragraph (its place in the section) and the byte where the page's first word is.
+    pub fn page_starts(&self) -> Vec<PageStart> {
+        let pieces = jcj_layout::pages::body_pieces(&self.layout);
+        let body: Vec<&jcj_doc::Paragraph> = jcj_doc::walk::body_paragraphs(&self.doc).into_iter().map(|(_, p)| p).collect();
+        (0..self.page_count())
+            .map(|i| {
+                let mut start =
+                    PageStart { number: i + 1, label: self.folio(i), section: self.section_of_page(i).unwrap_or_default(), unit: None, offset: 0 };
+                for piece in pieces.get(i).into_iter().flatten() {
+                    let Some(p) = body.get(piece.block) else { continue };
+                    let Some(unit) = UNIT.get_or_none(*p) else { continue };
+                    let mut at = if piece.continued { piece.bytes.as_ref().map_or(0, |b| b.start) } else { 0 };
+                    // The start of the word the page starts in.
+                    while at > 0 && !p.text.is_char_boundary(at) {
+                        at -= 1;
+                    }
+                    at = p.text[..at].rfind(char::is_whitespace).map_or(0, |w| w + 1);
+                    start.unit = Some(unit);
+                    start.offset = at;
+                    break;
+                }
+                start
+            })
+            .collect()
     }
 
     /// Where page `index`'s footnotes begin, in points from the top, if it has any.

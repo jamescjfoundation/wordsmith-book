@@ -22,6 +22,9 @@ use wordsmith_book_design::design::{BreakStyle, Design, FirstLine};
 use wordsmith_book_format::assemble::{Assembled, Piece, What};
 use wordsmith_book_model::{Edition, ElementKind, NoteStyle, Only};
 
+/// Where a page-break marker goes while a paragraph's text is written.
+const MARK: char = '\u{E000}';
+
 /// The file of an edition's notes gathered at the book's end.
 pub const NOTES_FILE: &str = "notes.xhtml";
 use wordsmith_manuscript_format::book::FrontKind;
@@ -42,6 +45,28 @@ pub struct Settings {
     pub seed: String,
     /// Pictures marked decorative, by their path in the source (no alternative text needed).
     pub decorative: Vec<String>,
+    /// Where the print edition's pages start, for the page list (EBK-6); empty for none.
+    pub page_marks: Vec<PageMark>,
+    /// The print edition the page numbers come from (its ISBN, else its name).
+    pub page_source: String,
+}
+
+/// Where a print page starts, in the ebook's terms (EBK-6).
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
+pub struct PageMark {
+    /// The page's number in print, from 1.
+    pub number: usize,
+    /// Its folio as printed.
+    pub label: String,
+    /// The piece of the book it starts in.
+    pub piece: String,
+    /// The author's paragraph it starts in (its place in the piece), or none for the piece's start.
+    pub unit: Option<u32>,
+    /// The byte in that paragraph's text where the page starts.
+    pub offset: usize,
+    /// The page starts after the piece's text (a page that ends its section with no text of the
+    /// author's at its top).
+    pub at_end: bool,
 }
 
 /// What the ebook left out, for the build report.
@@ -218,6 +243,15 @@ struct Writer<'a> {
     gathered: String,
     /// Web addresses become links (Book's own pages: a store's page, a newsletter).
     links: bool,
+    /// The print pages to mark.
+    page_marks: &'a [PageMark],
+    /// The piece being written and its file.
+    piece: String,
+    href: String,
+    /// The author's paragraphs written so far in this piece.
+    unit: u32,
+    /// The page list, as written.
+    page_list: Vec<NavPoint>,
 }
 
 /// Text with its web addresses (`http://`, `https://`) made links, escaped.
@@ -240,24 +274,49 @@ pub fn linked(text: &str) -> String {
 
 impl Writer<'_> {
     fn inlines(&self, c: &Inlines, notes: &NoteRefs) -> String {
+        self.inlines_marked(c, notes, &[])
+    }
+
+    /// Inlines with page-break markers at byte offsets of their text (`marks`: offset, marker).
+    fn inlines_marked(&self, c: &Inlines, notes: &NoteRefs, marks: &[(usize, String)]) -> String {
         let mut s = String::new();
+        let mut pos = 0;
+        let mut pending: Vec<&(usize, String)> = marks.iter().collect();
+        let mut placed: Vec<String> = Vec::new();
         for i in c {
             match i {
-                Inline::Span { text, marks } => {
+                Inline::Span { text, marks: style } => {
+                    // Markers that fall within this span go in at their place.
+                    let mut shown = String::new();
+                    let mut from = 0;
+                    while let Some(m) = pending.first().filter(|m| m.0 < pos + text.len()) {
+                        let mut at = m.0.saturating_sub(pos).max(from);
+                        while at < text.len() && !text.is_char_boundary(at) {
+                            at += 1;
+                        }
+                        shown.push_str(&text[from..at]);
+                        shown.push(MARK);
+                        placed.push(m.1.clone());
+                        from = at;
+                        pending.remove(0);
+                    }
+                    shown.push_str(&text[from..]);
+                    pos += text.len();
+                    let text = &shown;
                     let mut t = if self.links { linked(text) } else { escape(text) }.replace('\n', "<br/>");
-                    if marks.small_caps {
+                    if style.small_caps {
                         t = format!("<span class=\"sc\">{t}</span>");
                     }
-                    if marks.strike {
+                    if style.strike {
                         t = format!("<span class=\"strike\">{t}</span>");
                     }
-                    if marks.bold {
+                    if style.bold {
                         t = format!("<b>{t}</b>");
                     }
-                    if marks.italic {
+                    if style.italic {
                         t = format!("<i>{t}</i>");
                     }
-                    if let Some(l) = marks.lang.as_ref().filter(|l| l.as_str() != self.lang) {
+                    if let Some(l) = style.lang.as_ref().filter(|l| l.as_str() != self.lang) {
                         let l = escape(l);
                         t = format!("<span lang=\"{l}\" xml:lang=\"{l}\">{t}</span>");
                     }
@@ -273,6 +332,13 @@ impl Writer<'_> {
                     }
                 }
             }
+        }
+        // Each placeholder becomes its marker; markers past the text go at its end.
+        for m in placed {
+            s = s.replacen(MARK, &m, 1);
+        }
+        for m in pending {
+            s.push_str(&m.1);
         }
         s
     }
@@ -293,7 +359,9 @@ impl Writer<'_> {
         for b in blocks {
             match b {
                 Block::Para(c) => {
-                    let inner = self.inlines(c, notes);
+                    let (before, within) = self.unit_marks();
+                    out.push_str(&before);
+                    let inner = self.inlines_marked(c, notes, &within);
                     if first && !inner.is_empty() {
                         out.push_str(&format!("<p class=\"first\">{}</p>\n", self.opening(&inner)));
                         first = false;
@@ -303,7 +371,9 @@ impl Writer<'_> {
                 }
                 Block::Heading { level, content } => {
                     let h = (*level).clamp(1, 3) + 1;
-                    out.push_str(&format!("<h{h}>{}</h{h}>\n", self.inlines(content, notes)));
+                    let (before, within) = self.unit_marks();
+                    out.push_str(&before);
+                    out.push_str(&format!("<h{h}>{}</h{h}>\n", self.inlines_marked(content, notes, &within)));
                 }
                 Block::SceneBreak => {
                     let mark = &self.design.scene_break.mark;
@@ -316,7 +386,9 @@ impl Writer<'_> {
                 Block::Quote(ps) => {
                     out.push_str("<blockquote>\n");
                     for p in ps {
-                        out.push_str(&format!("<p>{}</p>\n", self.inlines(p, notes)));
+                        let (before, within) = self.unit_marks();
+                        out.push_str(&before);
+                        out.push_str(&format!("<p>{}</p>\n", self.inlines_marked(p, notes, &within)));
                     }
                     out.push_str("</blockquote>\n");
                 }
@@ -344,14 +416,18 @@ impl Writer<'_> {
                     let size = if (look.size - 1.0).abs() > 0.001 { format!(" style=\"font-size: {:.2}em\"", look.size) } else { String::new() };
                     out.push_str(&format!("<aside class=\"{classes}\"{size}>\n"));
                     for p in paras {
-                        out.push_str(&format!("<p>{}</p>\n", self.inlines(p, notes)));
+                        let (before, within) = self.unit_marks();
+                        out.push_str(&before);
+                        out.push_str(&format!("<p>{}</p>\n", self.inlines_marked(p, notes, &within)));
                     }
                     out.push_str("</aside>\n");
                 }
                 Block::Fenced { kind: Fence::Verse, paras } => {
                     out.push_str("<div class=\"verse\">\n");
                     for stanza in paras {
-                        out.push_str(&format!("<p>{}</p>\n", self.inlines(stanza, notes)));
+                        let (before, within) = self.unit_marks();
+                        out.push_str(&before);
+                        out.push_str(&format!("<p>{}</p>\n", self.inlines_marked(stanza, notes, &within)));
                     }
                     out.push_str("</div>\n");
                 }
@@ -403,6 +479,11 @@ impl Writer<'_> {
         let heading = !plain(p) && (!p.title.is_empty() || p.label.is_some());
         let labelled = if heading { format!(" aria-labelledby=\"{id}-h\"") } else { String::new() };
         body += &format!("<section id=\"{id}\"{type_attr}{role_attr}{class}{labelled}>\n");
+        // Print pages that start with this piece.
+        self.piece = p.id.clone();
+        self.href = format!("text/{id}.xhtml");
+        self.unit = 0;
+        body += &self.piece_marks();
         if heading {
             body += "<header>\n";
             match (&p.label, p.title.is_empty()) {
@@ -426,6 +507,10 @@ impl Writer<'_> {
         self.blocks(&p.blocks_for(false), refs, opening, &mut body);
         let name = label_and_title(p);
         self.notes(&p.notes, refs, &name, &mut body);
+        let ending: Vec<PageMark> = self.page_marks.iter().filter(|m| m.piece == self.piece && m.at_end).cloned().collect();
+        for m in &ending {
+            body += &self.marker(m);
+        }
         body += "</section>\n";
         (body, heading)
     }
@@ -454,6 +539,37 @@ impl Writer<'_> {
                 format!("<span class=\"lead\">{lead}</span>{rest}")
             }
         }
+    }
+
+    /// The marker for a print page.
+    fn marker(&mut self, m: &PageMark) -> String {
+        self.page_list.push(NavPoint { label: m.label.clone(), href: format!("{}#page-{}", self.href, m.number), children: Vec::new() });
+        format!("<span id=\"page-{}\" epub:type=\"pagebreak\" role=\"doc-pagebreak\" aria-label=\"{}\"></span>", m.number, escape(&m.label))
+    }
+
+    /// The markers of pages that start this piece (before its text).
+    fn piece_marks(&mut self) -> String {
+        let marks: Vec<PageMark> = self.page_marks.iter().filter(|m| m.piece == self.piece && m.unit.is_none() && !m.at_end).cloned().collect();
+        marks.iter().map(|m| self.marker(m)).collect()
+    }
+
+    /// The next author's paragraph: markers for pages starting at its start (to go before it) and
+    /// within it (offset, marker).
+    fn unit_marks(&mut self) -> (String, Vec<(usize, String)>) {
+        let unit = self.unit;
+        self.unit += 1;
+        let marks: Vec<PageMark> = self.page_marks.iter().filter(|m| m.piece == self.piece && m.unit == Some(unit)).cloned().collect();
+        let mut before = String::new();
+        let mut within = Vec::new();
+        for m in &marks {
+            let html = self.marker(m);
+            if m.offset == 0 {
+                before.push_str(&html);
+            } else {
+                within.push((m.offset, html));
+            }
+        }
+        (before, within)
     }
 
     /// A note's paragraphs, the last with its link back to the text.
@@ -559,6 +675,11 @@ pub fn ebook(
         style: edition.notes,
         gathered: String::new(),
         links: false,
+        page_marks: &settings.page_marks,
+        piece: String::new(),
+        href: String::new(),
+        unit: 0,
+        page_list: Vec::new(),
     };
     let mut items = Vec::new();
     let mut spine = Vec::new();
@@ -735,7 +856,13 @@ fn finish(a: &Assembled, design: &Design, edition: &Edition, settings: &Settings
             creators: if meta.byline.is_empty() { Vec::new() } else { vec![meta.byline.clone()] },
             modified: format!("{date}T00:00:00Z"),
             dc,
-            meta: access::metadata(access::Content { pictures: w.meaningful > 0, page_list: false }, certifier),
+            meta: {
+                let mut m = access::metadata(access::Content { pictures: w.meaningful > 0, page_list: !w.page_list.is_empty() }, certifier);
+                if !w.page_list.is_empty() && !settings.page_source.is_empty() {
+                    m.push(("a11y:pageBreakSource".into(), settings.page_source.clone()));
+                }
+                m
+            },
             links: Vec::new(),
         },
         items: manifest,
@@ -745,6 +872,7 @@ fn finish(a: &Assembled, design: &Design, edition: &Edition, settings: &Settings
         nav_css: Some("css/book.css".into()),
         toc: nav.toc,
         landmarks: nav.landmarks,
+        page_list: w.page_list,
     };
     let bytes = package::write(&package).map_err(Error::Package)?;
     Ok(Ebook { bytes, package, left: w.left, cover_problems, fonts_refused })

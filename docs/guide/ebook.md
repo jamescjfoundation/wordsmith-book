@@ -23,3 +23,6 @@ or it is not about 1.6 times as tall as it is wide.
 **Notes (EBK-7):** pop-up footnotes where reading systems show them (the default), endnotes at
 each chapter's end, or a Notes document at the end of the book, per edition; each note links back
 to where it was called.
+
+**Page list (EBK-6):** an ebook edition can carry the paperback's page numbers (on by default),
+so a reader can follow a page reference or a class reading the print edition.

@@ -388,6 +388,13 @@ break, hyphenation by the book's language, running heads off on openings and bla
     the page), endnotes at each chapter's end, or one Notes document at the end of the book;
     references and notes link both ways, across documents too. [Verified: EPUB 3 Structural
     Semantics]
+13. **Page list** (EBK-6, from 0.2): an ebook edition with a page list (the default for a new
+    ebook edition) carries the first print edition's page numbers: a page-break marker where each
+    print page starts (at its first word when it starts in the author's text, else at the start of
+    its section, or at the next of the section's paragraphs to start a page, or after the
+    section's text), every page once and in reading order; a `page-list` navigation; the
+    `pageNavigation` feature and the page-break source (the print ISBN, else the edition's name).
+    [Verified: EPUB Accessibility 1.1 §5.4]
 
 ## 7. Preview (PRV-1)
 

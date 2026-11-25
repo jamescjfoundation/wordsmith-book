@@ -9,10 +9,12 @@ schema:accessModeSufficient = textual
 schema:accessibilityFeature = structuralNavigation
 schema:accessibilityFeature = tableOfContents
 schema:accessibilityFeature = readingOrder
+schema:accessibilityFeature = pageNavigation
 schema:accessibilityHazard = none
 schema:accessibilitySummary = This ebook has a table of contents, landmarks and headings for its structure, and its reading order follows the book. Text can be resized and restyled by the reading system.
 dcterms:conformsTo = EPUB Accessibility 1.1 - WCAG 2.2 Level AA
 a11y:certifiedBy = Walter Scott
+a11y:pageBreakSource = the paperback edition
 # manifest
 nav.xhtml application/xhtml+xml nav
 toc.ncx application/x-dtbncx+xml
@@ -259,6 +261,563 @@ VOLUME II. -> text/s033.xhtml#s033
 [copyright-page] Copyright -> text/s002.xhtml#s002
 [toc] Contents -> nav.xhtml
 [bodymatter] Start of the book -> text/s003.xhtml#s003
+i -> text/s001.xhtml#page-1
+ii -> text/s001.xhtml#page-2
+iii -> text/s001.xhtml#page-3
+iv -> text/s002.xhtml#page-4
+v -> text/s003.xhtml#page-5
+vi -> text/s003.xhtml#page-6
+vii -> text/s003.xhtml#page-7
+viii -> text/s003.xhtml#page-8
+ix -> text/s003.xhtml#page-9
+x -> text/s003.xhtml#page-10
+1 -> text/s003.xhtml#page-11
+2 -> text/s003.xhtml#page-12
+3 -> text/s004.xhtml#page-13
+4 -> text/s004.xhtml#page-14
+5 -> text/s004.xhtml#page-15
+6 -> text/s004.xhtml#page-16
+7 -> text/s005.xhtml#page-17
+8 -> text/s005.xhtml#page-18
+9 -> text/s005.xhtml#page-19
+10 -> text/s005.xhtml#page-20
+11 -> text/s005.xhtml#page-21
+12 -> text/s005.xhtml#page-22
+13 -> text/s005.xhtml#page-23
+14 -> text/s005.xhtml#page-24
+15 -> text/s006.xhtml#page-25
+16 -> text/s006.xhtml#page-26
+17 -> text/s006.xhtml#page-27
+18 -> text/s006.xhtml#page-28
+19 -> text/s006.xhtml#page-29
+20 -> text/s006.xhtml#page-30
+21 -> text/s007.xhtml#page-31
+22 -> text/s007.xhtml#page-32
+23 -> text/s007.xhtml#page-33
+24 -> text/s007.xhtml#page-34
+25 -> text/s007.xhtml#page-35
+26 -> text/s007.xhtml#page-36
+27 -> text/s008.xhtml#page-37
+28 -> text/s008.xhtml#page-38
+29 -> text/s008.xhtml#page-39
+30 -> text/s008.xhtml#page-40
+31 -> text/s008.xhtml#page-41
+32 -> text/s008.xhtml#page-42
+33 -> text/s008.xhtml#page-43
+34 -> text/s008.xhtml#page-44
+35 -> text/s008.xhtml#page-45
+36 -> text/s008.xhtml#page-46
+37 -> text/s009.xhtml#page-47
+38 -> text/s009.xhtml#page-48
+39 -> text/s009.xhtml#page-49
+40 -> text/s009.xhtml#page-50
+41 -> text/s009.xhtml#page-51
+42 -> text/s009.xhtml#page-52
+43 -> text/s009.xhtml#page-53
+44 -> text/s009.xhtml#page-54
+45 -> text/s010.xhtml#page-55
+46 -> text/s010.xhtml#page-56
+47 -> text/s010.xhtml#page-57
+48 -> text/s010.xhtml#page-58
+49 -> text/s010.xhtml#page-59
+50 -> text/s010.xhtml#page-60
+51 -> text/s011.xhtml#page-61
+52 -> text/s011.xhtml#page-62
+53 -> text/s011.xhtml#page-63
+54 -> text/s011.xhtml#page-64
+55 -> text/s011.xhtml#page-65
+56 -> text/s011.xhtml#page-66
+57 -> text/s012.xhtml#page-67
+58 -> text/s012.xhtml#page-68
+59 -> text/s012.xhtml#page-69
+60 -> text/s012.xhtml#page-70
+61 -> text/s012.xhtml#page-71
+62 -> text/s012.xhtml#page-72
+63 -> text/s013.xhtml#page-73
+64 -> text/s013.xhtml#page-74
+65 -> text/s013.xhtml#page-75
+66 -> text/s013.xhtml#page-76
+67 -> text/s013.xhtml#page-77
+68 -> text/s013.xhtml#page-78
+69 -> text/s014.xhtml#page-79
+70 -> text/s014.xhtml#page-80
+71 -> text/s014.xhtml#page-81
+72 -> text/s014.xhtml#page-82
+73 -> text/s014.xhtml#page-83
+74 -> text/s014.xhtml#page-84
+75 -> text/s014.xhtml#page-85
+76 -> text/s014.xhtml#page-86
+77 -> text/s014.xhtml#page-87
+78 -> text/s014.xhtml#page-88
+79 -> text/s015.xhtml#page-89
+80 -> text/s015.xhtml#page-90
+81 -> text/s015.xhtml#page-91
+82 -> text/s015.xhtml#page-92
+83 -> text/s015.xhtml#page-93
+84 -> text/s015.xhtml#page-94
+85 -> text/s015.xhtml#page-95
+86 -> text/s015.xhtml#page-96
+87 -> text/s016.xhtml#page-97
+88 -> text/s016.xhtml#page-98
+89 -> text/s016.xhtml#page-99
+90 -> text/s016.xhtml#page-100
+91 -> text/s016.xhtml#page-101
+92 -> text/s016.xhtml#page-102
+93 -> text/s016.xhtml#page-103
+94 -> text/s016.xhtml#page-104
+95 -> text/s016.xhtml#page-105
+96 -> text/s016.xhtml#page-106
+97 -> text/s017.xhtml#page-107
+98 -> text/s017.xhtml#page-108
+99 -> text/s017.xhtml#page-109
+100 -> text/s017.xhtml#page-110
+101 -> text/s017.xhtml#page-111
+102 -> text/s017.xhtml#page-112
+103 -> text/s017.xhtml#page-113
+104 -> text/s017.xhtml#page-114
+105 -> text/s018.xhtml#page-115
+106 -> text/s018.xhtml#page-116
+107 -> text/s018.xhtml#page-117
+108 -> text/s018.xhtml#page-118
+109 -> text/s018.xhtml#page-119
+110 -> text/s018.xhtml#page-120
+111 -> text/s018.xhtml#page-121
+112 -> text/s018.xhtml#page-122
+113 -> text/s019.xhtml#page-123
+114 -> text/s019.xhtml#page-124
+115 -> text/s019.xhtml#page-125
+116 -> text/s019.xhtml#page-126
+117 -> text/s019.xhtml#page-127
+118 -> text/s019.xhtml#page-128
+119 -> text/s019.xhtml#page-129
+120 -> text/s019.xhtml#page-130
+121 -> text/s019.xhtml#page-131
+122 -> text/s019.xhtml#page-132
+123 -> text/s020.xhtml#page-133
+124 -> text/s020.xhtml#page-134
+125 -> text/s020.xhtml#page-135
+126 -> text/s020.xhtml#page-136
+127 -> text/s020.xhtml#page-137
+128 -> text/s020.xhtml#page-138
+129 -> text/s021.xhtml#page-139
+130 -> text/s021.xhtml#page-140
+131 -> text/s021.xhtml#page-141
+132 -> text/s021.xhtml#page-142
+133 -> text/s021.xhtml#page-143
+134 -> text/s021.xhtml#page-144
+135 -> text/s021.xhtml#page-145
+136 -> text/s021.xhtml#page-146
+137 -> text/s021.xhtml#page-147
+138 -> text/s021.xhtml#page-148
+139 -> text/s021.xhtml#page-149
+140 -> text/s021.xhtml#page-150
+141 -> text/s022.xhtml#page-151
+142 -> text/s022.xhtml#page-152
+143 -> text/s022.xhtml#page-153
+144 -> text/s022.xhtml#page-154
+145 -> text/s022.xhtml#page-155
+146 -> text/s022.xhtml#page-156
+147 -> text/s022.xhtml#page-157
+148 -> text/s022.xhtml#page-158
+149 -> text/s023.xhtml#page-159
+150 -> text/s023.xhtml#page-160
+151 -> text/s023.xhtml#page-161
+152 -> text/s023.xhtml#page-162
+153 -> text/s023.xhtml#page-163
+154 -> text/s023.xhtml#page-164
+155 -> text/s024.xhtml#page-165
+156 -> text/s024.xhtml#page-166
+157 -> text/s024.xhtml#page-167
+158 -> text/s024.xhtml#page-168
+159 -> text/s024.xhtml#page-169
+160 -> text/s024.xhtml#page-170
+161 -> text/s025.xhtml#page-171
+162 -> text/s025.xhtml#page-172
+163 -> text/s025.xhtml#page-173
+164 -> text/s025.xhtml#page-174
+165 -> text/s025.xhtml#page-175
+166 -> text/s025.xhtml#page-176
+167 -> text/s025.xhtml#page-177
+168 -> text/s025.xhtml#page-178
+169 -> text/s025.xhtml#page-179
+170 -> text/s025.xhtml#page-180
+171 -> text/s026.xhtml#page-181
+172 -> text/s026.xhtml#page-182
+173 -> text/s026.xhtml#page-183
+174 -> text/s026.xhtml#page-184
+175 -> text/s026.xhtml#page-185
+176 -> text/s026.xhtml#page-186
+177 -> text/s027.xhtml#page-187
+178 -> text/s027.xhtml#page-188
+179 -> text/s027.xhtml#page-189
+180 -> text/s027.xhtml#page-190
+181 -> text/s027.xhtml#page-191
+182 -> text/s027.xhtml#page-192
+183 -> text/s027.xhtml#page-193
+184 -> text/s027.xhtml#page-194
+185 -> text/s027.xhtml#page-195
+186 -> text/s027.xhtml#page-196
+187 -> text/s027.xhtml#page-197
+188 -> text/s027.xhtml#page-198
+189 -> text/s028.xhtml#page-199
+190 -> text/s028.xhtml#page-200
+191 -> text/s028.xhtml#page-201
+192 -> text/s028.xhtml#page-202
+193 -> text/s028.xhtml#page-203
+194 -> text/s028.xhtml#page-204
+195 -> text/s028.xhtml#page-205
+196 -> text/s028.xhtml#page-206
+197 -> text/s028.xhtml#page-207
+198 -> text/s028.xhtml#page-208
+199 -> text/s029.xhtml#page-209
+200 -> text/s029.xhtml#page-210
+201 -> text/s029.xhtml#page-211
+202 -> text/s029.xhtml#page-212
+203 -> text/s029.xhtml#page-213
+204 -> text/s029.xhtml#page-214
+205 -> text/s030.xhtml#page-215
+206 -> text/s030.xhtml#page-216
+207 -> text/s030.xhtml#page-217
+208 -> text/s030.xhtml#page-218
+209 -> text/s030.xhtml#page-219
+210 -> text/s030.xhtml#page-220
+211 -> text/s030.xhtml#page-221
+212 -> text/s030.xhtml#page-222
+213 -> text/s031.xhtml#page-223
+214 -> text/s031.xhtml#page-224
+215 -> text/s031.xhtml#page-225
+216 -> text/s031.xhtml#page-226
+217 -> text/s031.xhtml#page-227
+218 -> text/s031.xhtml#page-228
+219 -> text/s031.xhtml#page-229
+220 -> text/s031.xhtml#page-230
+221 -> text/s032.xhtml#page-231
+222 -> text/s032.xhtml#page-232
+223 -> text/s032.xhtml#page-233
+224 -> text/s032.xhtml#page-234
+225 -> text/s032.xhtml#page-235
+226 -> text/s032.xhtml#page-236
+227 -> text/s032.xhtml#page-237
+228 -> text/s032.xhtml#page-238
+229 -> text/s032.xhtml#page-239
+230 -> text/s032.xhtml#page-240
+231 -> text/s033.xhtml#page-241
+232 -> text/s033.xhtml#page-242
+233 -> text/s034.xhtml#page-243
+234 -> text/s034.xhtml#page-244
+235 -> text/s034.xhtml#page-245
+236 -> text/s034.xhtml#page-246
+237 -> text/s034.xhtml#page-247
+238 -> text/s034.xhtml#page-248
+239 -> text/s034.xhtml#page-249
+240 -> text/s034.xhtml#page-250
+241 -> text/s035.xhtml#page-251
+242 -> text/s035.xhtml#page-252
+243 -> text/s035.xhtml#page-253
+244 -> text/s035.xhtml#page-254
+245 -> text/s035.xhtml#page-255
+246 -> text/s035.xhtml#page-256
+247 -> text/s035.xhtml#page-257
+248 -> text/s035.xhtml#page-258
+249 -> text/s035.xhtml#page-259
+250 -> text/s035.xhtml#page-260
+251 -> text/s036.xhtml#page-261
+252 -> text/s036.xhtml#page-262
+253 -> text/s036.xhtml#page-263
+254 -> text/s036.xhtml#page-264
+255 -> text/s036.xhtml#page-265
+256 -> text/s036.xhtml#page-266
+257 -> text/s036.xhtml#page-267
+258 -> text/s036.xhtml#page-268
+259 -> text/s037.xhtml#page-269
+260 -> text/s037.xhtml#page-270
+261 -> text/s037.xhtml#page-271
+262 -> text/s037.xhtml#page-272
+263 -> text/s037.xhtml#page-273
+264 -> text/s037.xhtml#page-274
+265 -> text/s038.xhtml#page-275
+266 -> text/s038.xhtml#page-276
+267 -> text/s038.xhtml#page-277
+268 -> text/s038.xhtml#page-278
+269 -> text/s039.xhtml#page-279
+270 -> text/s039.xhtml#page-280
+271 -> text/s039.xhtml#page-281
+272 -> text/s039.xhtml#page-282
+273 -> text/s040.xhtml#page-283
+274 -> text/s040.xhtml#page-284
+275 -> text/s040.xhtml#page-285
+276 -> text/s040.xhtml#page-286
+277 -> text/s040.xhtml#page-287
+278 -> text/s040.xhtml#page-288
+279 -> text/s041.xhtml#page-289
+280 -> text/s041.xhtml#page-290
+281 -> text/s041.xhtml#page-291
+282 -> text/s041.xhtml#page-292
+283 -> text/s041.xhtml#page-293
+284 -> text/s041.xhtml#page-294
+285 -> text/s041.xhtml#page-295
+286 -> text/s041.xhtml#page-296
+287 -> text/s042.xhtml#page-297
+288 -> text/s042.xhtml#page-298
+289 -> text/s042.xhtml#page-299
+290 -> text/s042.xhtml#page-300
+291 -> text/s042.xhtml#page-301
+292 -> text/s042.xhtml#page-302
+293 -> text/s043.xhtml#page-303
+294 -> text/s043.xhtml#page-304
+295 -> text/s043.xhtml#page-305
+296 -> text/s043.xhtml#page-306
+297 -> text/s043.xhtml#page-307
+298 -> text/s043.xhtml#page-308
+299 -> text/s043.xhtml#page-309
+300 -> text/s043.xhtml#page-310
+301 -> text/s043.xhtml#page-311
+302 -> text/s043.xhtml#page-312
+303 -> text/s044.xhtml#page-313
+304 -> text/s044.xhtml#page-314
+305 -> text/s044.xhtml#page-315
+306 -> text/s044.xhtml#page-316
+307 -> text/s044.xhtml#page-317
+308 -> text/s044.xhtml#page-318
+309 -> text/s044.xhtml#page-319
+310 -> text/s044.xhtml#page-320
+311 -> text/s045.xhtml#page-321
+312 -> text/s045.xhtml#page-322
+313 -> text/s045.xhtml#page-323
+314 -> text/s045.xhtml#page-324
+315 -> text/s045.xhtml#page-325
+316 -> text/s045.xhtml#page-326
+317 -> text/s045.xhtml#page-327
+318 -> text/s045.xhtml#page-328
+319 -> text/s046.xhtml#page-329
+320 -> text/s046.xhtml#page-330
+321 -> text/s046.xhtml#page-331
+322 -> text/s046.xhtml#page-332
+323 -> text/s046.xhtml#page-333
+324 -> text/s046.xhtml#page-334
+325 -> text/s046.xhtml#page-335
+326 -> text/s046.xhtml#page-336
+327 -> text/s047.xhtml#page-337
+328 -> text/s047.xhtml#page-338
+329 -> text/s047.xhtml#page-339
+330 -> text/s047.xhtml#page-340
+331 -> text/s047.xhtml#page-341
+332 -> text/s047.xhtml#page-342
+333 -> text/s047.xhtml#page-343
+334 -> text/s047.xhtml#page-344
+335 -> text/s048.xhtml#page-345
+336 -> text/s048.xhtml#page-346
+337 -> text/s048.xhtml#page-347
+338 -> text/s048.xhtml#page-348
+339 -> text/s048.xhtml#page-349
+340 -> text/s048.xhtml#page-350
+341 -> text/s048.xhtml#page-351
+342 -> text/s048.xhtml#page-352
+343 -> text/s049.xhtml#page-353
+344 -> text/s049.xhtml#page-354
+345 -> text/s049.xhtml#page-355
+346 -> text/s049.xhtml#page-356
+347 -> text/s049.xhtml#page-357
+348 -> text/s049.xhtml#page-358
+349 -> text/s050.xhtml#page-359
+350 -> text/s050.xhtml#page-360
+351 -> text/s050.xhtml#page-361
+352 -> text/s050.xhtml#page-362
+353 -> text/s050.xhtml#page-363
+354 -> text/s050.xhtml#page-364
+355 -> text/s050.xhtml#page-365
+356 -> text/s050.xhtml#page-366
+357 -> text/s051.xhtml#page-367
+358 -> text/s051.xhtml#page-368
+359 -> text/s051.xhtml#page-369
+360 -> text/s051.xhtml#page-370
+361 -> text/s051.xhtml#page-371
+362 -> text/s051.xhtml#page-372
+363 -> text/s051.xhtml#page-373
+364 -> text/s051.xhtml#page-374
+365 -> text/s052.xhtml#page-375
+366 -> text/s052.xhtml#page-376
+367 -> text/s052.xhtml#page-377
+368 -> text/s052.xhtml#page-378
+369 -> text/s052.xhtml#page-379
+370 -> text/s052.xhtml#page-380
+371 -> text/s053.xhtml#page-381
+372 -> text/s053.xhtml#page-382
+373 -> text/s053.xhtml#page-383
+374 -> text/s053.xhtml#page-384
+375 -> text/s053.xhtml#page-385
+376 -> text/s053.xhtml#page-386
+377 -> text/s054.xhtml#page-387
+378 -> text/s054.xhtml#page-388
+379 -> text/s054.xhtml#page-389
+380 -> text/s054.xhtml#page-390
+381 -> text/s054.xhtml#page-391
+382 -> text/s054.xhtml#page-392
+383 -> text/s055.xhtml#page-393
+384 -> text/s055.xhtml#page-394
+385 -> text/s055.xhtml#page-395
+386 -> text/s055.xhtml#page-396
+387 -> text/s055.xhtml#page-397
+388 -> text/s055.xhtml#page-398
+389 -> text/s055.xhtml#page-399
+390 -> text/s055.xhtml#page-400
+391 -> text/s056.xhtml#page-401
+392 -> text/s056.xhtml#page-402
+393 -> text/s056.xhtml#page-403
+394 -> text/s056.xhtml#page-404
+395 -> text/s056.xhtml#page-405
+396 -> text/s056.xhtml#page-406
+397 -> text/s057.xhtml#page-407
+398 -> text/s057.xhtml#page-408
+399 -> text/s057.xhtml#page-409
+400 -> text/s057.xhtml#page-410
+401 -> text/s057.xhtml#page-411
+402 -> text/s057.xhtml#page-412
+403 -> text/s058.xhtml#page-413
+404 -> text/s058.xhtml#page-414
+405 -> text/s058.xhtml#page-415
+406 -> text/s058.xhtml#page-416
+407 -> text/s059.xhtml#page-417
+408 -> text/s059.xhtml#page-418
+409 -> text/s059.xhtml#page-419
+410 -> text/s059.xhtml#page-420
+411 -> text/s059.xhtml#page-421
+412 -> text/s059.xhtml#page-422
+413 -> text/s060.xhtml#page-423
+414 -> text/s060.xhtml#page-424
+415 -> text/s060.xhtml#page-425
+416 -> text/s060.xhtml#page-426
+417 -> text/s060.xhtml#page-427
+418 -> text/s060.xhtml#page-428
+419 -> text/s061.xhtml#page-429
+420 -> text/s061.xhtml#page-430
+421 -> text/s061.xhtml#page-431
+422 -> text/s061.xhtml#page-432
+423 -> text/s061.xhtml#page-433
+424 -> text/s061.xhtml#page-434
+425 -> text/s061.xhtml#page-435
+426 -> text/s061.xhtml#page-436
+427 -> text/s062.xhtml#page-437
+428 -> text/s062.xhtml#page-438
+429 -> text/s062.xhtml#page-439
+430 -> text/s062.xhtml#page-440
+431 -> text/s062.xhtml#page-441
+432 -> text/s062.xhtml#page-442
+433 -> text/s062.xhtml#page-443
+434 -> text/s062.xhtml#page-444
+435 -> text/s062.xhtml#page-445
+436 -> text/s062.xhtml#page-446
+437 -> text/s062.xhtml#page-447
+438 -> text/s062.xhtml#page-448
+439 -> text/s063.xhtml#page-449
+440 -> text/s063.xhtml#page-450
+441 -> text/s063.xhtml#page-451
+442 -> text/s063.xhtml#page-452
+443 -> text/s063.xhtml#page-453
+444 -> text/s063.xhtml#page-454
+445 -> text/s063.xhtml#page-455
+446 -> text/s063.xhtml#page-456
+447 -> text/s063.xhtml#page-457
+448 -> text/s064.xhtml#page-458
+449 -> text/s064.xhtml#page-459
+450 -> text/s064.xhtml#page-460
+451 -> text/s064.xhtml#page-461
+452 -> text/s064.xhtml#page-462
+453 -> text/s064.xhtml#page-463
+454 -> text/s065.xhtml#page-464
+455 -> text/s065.xhtml#page-465
+456 -> text/s065.xhtml#page-466
+457 -> text/s065.xhtml#page-467
+458 -> text/s065.xhtml#page-468
+459 -> text/s065.xhtml#page-469
+460 -> text/s066.xhtml#page-470
+461 -> text/s066.xhtml#page-471
+462 -> text/s066.xhtml#page-472
+463 -> text/s066.xhtml#page-473
+464 -> text/s066.xhtml#page-474
+465 -> text/s066.xhtml#page-475
+466 -> text/s066.xhtml#page-476
+467 -> text/s066.xhtml#page-477
+468 -> text/s066.xhtml#page-478
+469 -> text/s066.xhtml#page-479
+470 -> text/s066.xhtml#page-480
+471 -> text/s066.xhtml#page-481
+472 -> text/s067.xhtml#page-482
+473 -> text/s067.xhtml#page-483
+474 -> text/s067.xhtml#page-484
+475 -> text/s067.xhtml#page-485
+476 -> text/s067.xhtml#page-486
+477 -> text/s067.xhtml#page-487
+478 -> text/s067.xhtml#page-488
+479 -> text/s067.xhtml#page-489
+480 -> text/s067.xhtml#page-490
+481 -> text/s067.xhtml#page-491
+482 -> text/s068.xhtml#page-492
+483 -> text/s068.xhtml#page-493
+484 -> text/s068.xhtml#page-494
+485 -> text/s068.xhtml#page-495
+486 -> text/s068.xhtml#page-496
+487 -> text/s068.xhtml#page-497
+488 -> text/s069.xhtml#page-498
+489 -> text/s069.xhtml#page-499
+490 -> text/s069.xhtml#page-500
+491 -> text/s069.xhtml#page-501
+492 -> text/s069.xhtml#page-502
+493 -> text/s069.xhtml#page-503
+494 -> text/s069.xhtml#page-504
+495 -> text/s069.xhtml#page-505
+496 -> text/s069.xhtml#page-506
+497 -> text/s069.xhtml#page-507
+498 -> text/s070.xhtml#page-508
+499 -> text/s070.xhtml#page-509
+500 -> text/s070.xhtml#page-510
+501 -> text/s070.xhtml#page-511
+502 -> text/s070.xhtml#page-512
+503 -> text/s070.xhtml#page-513
+504 -> text/s071.xhtml#page-514
+505 -> text/s071.xhtml#page-515
+506 -> text/s071.xhtml#page-516
+507 -> text/s071.xhtml#page-517
+508 -> text/s071.xhtml#page-518
+509 -> text/s071.xhtml#page-519
+510 -> text/s071.xhtml#page-520
+511 -> text/s071.xhtml#page-521
+512 -> text/s072.xhtml#page-522
+513 -> text/s072.xhtml#page-523
+514 -> text/s072.xhtml#page-524
+515 -> text/s072.xhtml#page-525
+516 -> text/s072.xhtml#page-526
+517 -> text/s072.xhtml#page-527
+518 -> text/s072.xhtml#page-528
+519 -> text/s072.xhtml#page-529
+520 -> text/s073.xhtml#page-530
+521 -> text/s073.xhtml#page-531
+522 -> text/s073.xhtml#page-532
+523 -> text/s073.xhtml#page-533
+524 -> text/s073.xhtml#page-534
+525 -> text/s073.xhtml#page-535
+526 -> text/s073.xhtml#page-536
+527 -> text/s073.xhtml#page-537
+528 -> text/s074.xhtml#page-538
+529 -> text/s074.xhtml#page-539
+530 -> text/s074.xhtml#page-540
+531 -> text/s074.xhtml#page-541
+532 -> text/s074.xhtml#page-542
+533 -> text/s074.xhtml#page-543
+534 -> text/s075.xhtml#page-544
+535 -> text/s075.xhtml#page-545
+536 -> text/s075.xhtml#page-546
+537 -> text/s075.xhtml#page-547
+538 -> text/s075.xhtml#page-548
+539 -> text/s075.xhtml#page-549
+540 -> text/s075.xhtml#page-550
+541 -> text/s075.xhtml#page-551
+542 -> text/s075.xhtml#page-552
+543 -> text/s075.xhtml#page-553
+544 -> text/s076.xhtml#page-554
+545 -> text/s076.xhtml#page-555
+546 -> text/s076.xhtml#page-556
+547 -> text/s076.xhtml#page-557
 # stylesheet
 /* Made from the book's design; sizes in em so reading settings apply. */
 @font-face { font-family: "book-reading-serif"; font-weight: 400; font-style: normal; src: url("../fonts/reading-serif-regular.ttf"); }
@@ -318,76 +877,76 @@ nav li { margin: 0.3em 0; }
 text/s001.xhtml titlepage “”: 0 paragraphs, 0 words
 text/s002.xhtml copyright-page “”: 2 paragraphs, 10 words
 text/s003.xhtml part “Volume I.”: 0 paragraphs, 0 words
-text/s004.xhtml chapter “CHAPTER I. INTRODUCTORY”: 5 paragraphs, 2301 words
-text/s005.xhtml chapter “CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT”: 25 paragraphs, 5483 words
-text/s006.xhtml chapter “CHAPTER III. EDUCATION”: 6 paragraphs, 3409 words
-text/s007.xhtml chapter “CHAPTER IV. CASTLE-BUILDING”: 10 paragraphs, 3490 words
-text/s008.xhtml chapter “CHAPTER V. CHOICE OF A PROFESSION”: 23 paragraphs, 5846 words
-text/s009.xhtml chapter “CHAPTER VI. THE ADIEUS OF WAVERLEY”: 18 paragraphs, 5302 words
-text/s010.xhtml chapter “CHAPTER VII. A HORSE-QUARTER IN SCOTLAND”: 10 paragraphs, 3927 words
-text/s011.xhtml chapter “CHAPTER VIII. A SCOTTISH MANOR-HOUSE SIXTY YEARS SINCE”: 10 paragraphs, 3564 words
-text/s012.xhtml chapter “CHAPTER IX. MORE OF THE MANOR-HOUSE AND ITS ENVIRONS”: 26 paragraphs, 4054 words
-text/s013.xhtml chapter “CHAPTER X. ROSE BRADWARDINE AND HER FATHER”: 15 paragraphs, 2866 words
-text/s014.xhtml chapter “CHAPTER XI. THE BANQUET”: 37 paragraphs, 5749 words
-text/s015.xhtml chapter “CHAPTER XII. REPENTANCE AND A RECONCILIATION”: 24 paragraphs, 4223 words
-text/s016.xhtml chapter “CHAPTER XIII. A MORE RATIONAL DAY THAN THE LAST”: 40 paragraphs, 5322 words
-text/s017.xhtml chapter “CHAPTER XIV. A DISCOVERY—WAVERLEY BECOMES DOMESTICATED AT TULLY-VEOLAN”: 17 paragraphs, 5015 words
-text/s018.xhtml chapter “CHAPTER XV. A CREAGH, AND ITS CONSEQUENCES”: 36 paragraphs, 5534 words
-text/s019.xhtml chapter “CHAPTER XVI. AN UNEXPECTED ALLY APPEARS”: 29 paragraphs, 5917 words
-text/s020.xhtml chapter “CHAPTER XVII. THE HOLD OF A HIGHLAND ROBBER”: 15 paragraphs, 3843 words
-text/s021.xhtml chapter “CHAPTER XVIII. WAVERLEY PROCEEDS ON HIS JOURNEY”: 65 paragraphs, 8199 words
-text/s022.xhtml chapter “CHAPTER XIX. THE CHIEF AND HIS MANSION”: 23 paragraphs, 5651 words
-text/s023.xhtml chapter “CHAPTER XX. A HIGHLAND FEAST”: 26 paragraphs, 3929 words
-text/s024.xhtml chapter “CHAPTER XXI. THE CHIEFTAIN’S SISTER”: 11 paragraphs, 3305 words
-text/s025.xhtml chapter “CHAPTER XXII. HIGHLAND MINSTRELSY”: 50 paragraphs, 6992 words
-text/s026.xhtml chapter “CHAPTER XXIII. WAVERLEY CONTINUES AT GLENNAQUOICH”: 35 paragraphs, 2965 words
-text/s027.xhtml chapter “CHAPTER XXIV. A STAG-HUNT AND ITS CONSEQUENCES”: 270 paragraphs, 8710 words
-text/s028.xhtml chapter “CHAPTER XXV. NEWS FROM ENGLAND”: 31 paragraphs, 6454 words
-text/s029.xhtml chapter “CHAPTER XXVI. AN ECLAIRCISSEMENT”: 37 paragraphs, 3180 words
-text/s030.xhtml chapter “CHAPTER XXVII. UPON THE SAME SUBJECT”: 46 paragraphs, 5597 words
-text/s031.xhtml chapter “CHAPTER XXVIII. A LETTER FROM TULLY-VEOLAN”: 36 paragraphs, 4679 words
-text/s032.xhtml chapter “CHAPTER XXIX. WAVERLEY’S RECEPTION IN THE LOWLANDS AFTER HIS HIGHLAND TOUR”: 78 paragraphs, 6184 words
+text/s004.xhtml chapter “CHAPTER I. INTRODUCTORY”: 5 paragraphs, 2095 words
+text/s005.xhtml chapter “CHAPTER II. WAVERLEY-HONOUR—A RETROSPECT”: 25 paragraphs, 5213 words
+text/s006.xhtml chapter “CHAPTER III. EDUCATION”: 6 paragraphs, 2616 words
+text/s007.xhtml chapter “CHAPTER IV. CASTLE-BUILDING”: 10 paragraphs, 3254 words
+text/s008.xhtml chapter “CHAPTER V. CHOICE OF A PROFESSION”: 23 paragraphs, 5321 words
+text/s009.xhtml chapter “CHAPTER VI. THE ADIEUS OF WAVERLEY”: 18 paragraphs, 5099 words
+text/s010.xhtml chapter “CHAPTER VII. A HORSE-QUARTER IN SCOTLAND”: 10 paragraphs, 3639 words
+text/s011.xhtml chapter “CHAPTER VIII. A SCOTTISH MANOR-HOUSE SIXTY YEARS SINCE”: 10 paragraphs, 3185 words
+text/s012.xhtml chapter “CHAPTER IX. MORE OF THE MANOR-HOUSE AND ITS ENVIRONS”: 26 paragraphs, 3750 words
+text/s013.xhtml chapter “CHAPTER X. ROSE BRADWARDINE AND HER FATHER”: 15 paragraphs, 2779 words
+text/s014.xhtml chapter “CHAPTER XI. THE BANQUET”: 37 paragraphs, 5510 words
+text/s015.xhtml chapter “CHAPTER XII. REPENTANCE AND A RECONCILIATION”: 24 paragraphs, 4061 words
+text/s016.xhtml chapter “CHAPTER XIII. A MORE RATIONAL DAY THAN THE LAST”: 40 paragraphs, 5057 words
+text/s017.xhtml chapter “CHAPTER XIV. A DISCOVERY—WAVERLEY BECOMES DOMESTICATED AT TULLY-VEOLAN”: 17 paragraphs, 4288 words
+text/s018.xhtml chapter “CHAPTER XV. A CREAGH, AND ITS CONSEQUENCES”: 36 paragraphs, 5249 words
+text/s019.xhtml chapter “CHAPTER XVI. AN UNEXPECTED ALLY APPEARS”: 29 paragraphs, 5491 words
+text/s020.xhtml chapter “CHAPTER XVII. THE HOLD OF A HIGHLAND ROBBER”: 15 paragraphs, 3465 words
+text/s021.xhtml chapter “CHAPTER XVIII. WAVERLEY PROCEEDS ON HIS JOURNEY”: 65 paragraphs, 7566 words
+text/s022.xhtml chapter “CHAPTER XIX. THE CHIEF AND HIS MANSION”: 23 paragraphs, 5273 words
+text/s023.xhtml chapter “CHAPTER XX. A HIGHLAND FEAST”: 26 paragraphs, 3717 words
+text/s024.xhtml chapter “CHAPTER XXI. THE CHIEFTAIN’S SISTER”: 11 paragraphs, 2919 words
+text/s025.xhtml chapter “CHAPTER XXII. HIGHLAND MINSTRELSY”: 50 paragraphs, 6554 words
+text/s026.xhtml chapter “CHAPTER XXIII. WAVERLEY CONTINUES AT GLENNAQUOICH”: 35 paragraphs, 2871 words
+text/s027.xhtml chapter “CHAPTER XXIV. A STAG-HUNT AND ITS CONSEQUENCES”: 270 paragraphs, 7979 words
+text/s028.xhtml chapter “CHAPTER XXV. NEWS FROM ENGLAND”: 31 paragraphs, 5930 words
+text/s029.xhtml chapter “CHAPTER XXVI. AN ECLAIRCISSEMENT”: 37 paragraphs, 3134 words
+text/s030.xhtml chapter “CHAPTER XXVII. UPON THE SAME SUBJECT”: 46 paragraphs, 5414 words
+text/s031.xhtml chapter “CHAPTER XXVIII. A LETTER FROM TULLY-VEOLAN”: 36 paragraphs, 4422 words
+text/s032.xhtml chapter “CHAPTER XXIX. WAVERLEY’S RECEPTION IN THE LOWLANDS AFTER HIS HIGHLAND TOUR”: 78 paragraphs, 6070 words
 text/s033.xhtml part “VOLUME II.”: 0 paragraphs, 0 words
-text/s034.xhtml chapter “CHAPTER I. SHOWS THAT THE LOSS OF A HORSE’S SHOE MAY BE A SERIOUS INCONVENIENCE”: 32 paragraphs, 4528 words
-text/s035.xhtml chapter “CHAPTER II. AN EXAMINATION”: 69 paragraphs, 6209 words
-text/s036.xhtml chapter “CHAPTER III. A CONFERENCE AND THE CONSEQUENCE”: 38 paragraphs, 4291 words
-text/s037.xhtml chapter “CHAPTER IV. A CONFIDANT”: 24 paragraphs, 3852 words
-text/s038.xhtml chapter “CHAPTER V. THINGS MEND A LITTLE”: 5 paragraphs, 1761 words
-text/s039.xhtml chapter “CHAPTER VI. A VOLUNTEER SIXTY YEARS SINCE”: 15 paragraphs, 2530 words
-text/s040.xhtml chapter “CHAPTER VII. AN INCIDENT”: 22 paragraphs, 3501 words
-text/s041.xhtml chapter “CHAPTER VIII. WAVERLEY IS STILL IN DISTRESS”: 17 paragraphs, 5017 words
-text/s042.xhtml chapter “CHAPTER IX. A NOCTURNAL ADVENTURE”: 24 paragraphs, 4379 words
-text/s043.xhtml chapter “CHAPTER X. THE JOURNEY IS CONTINUED”: 36 paragraphs, 5876 words
-text/s044.xhtml chapter “CHAPTER XI. AN OLD AND A NEW ACQUAINTANCE”: 23 paragraphs, 4272 words
-text/s045.xhtml chapter “CHAPTER XII. THE MYSTERY BEGINS TO BE CLEARED UP”: 29 paragraphs, 4758 words
-text/s046.xhtml chapter “CHAPTER XIII. A SOLDIER’S DINNER”: 47 paragraphs, 3971 words
-text/s047.xhtml chapter “CHAPTER XIV. THE BALL”: 37 paragraphs, 5177 words
-text/s048.xhtml chapter “CHAPTER XV. THE MARCH”: 26 paragraphs, 5059 words
-text/s049.xhtml chapter “CHAPTER XVI. AN INCIDENT GIVES RISE TO UNAVAILING REFLECTIONS”: 30 paragraphs, 3403 words
-text/s050.xhtml chapter “CHAPTER XVII. THE EVE OF BATTLE”: 24 paragraphs, 4244 words
-text/s051.xhtml chapter “CHAPTER XVIII. THE CONFLICT”: 25 paragraphs, 6589 words
-text/s052.xhtml chapter “CHAPTER XIX. AN UNEXPECTED EMBARRASSMENT”: 25 paragraphs, 3046 words
-text/s053.xhtml chapter “CHAPTER XX. THE ENGLISH PRISONER”: 39 paragraphs, 3882 words
-text/s054.xhtml chapter “CHAPTER XXI. RATHER UNIMPORTANT”: 26 paragraphs, 4012 words
-text/s055.xhtml chapter “CHAPTER XXII. INTRIGUES OF LOVE AND POLITICS”: 30 paragraphs, 4750 words
-text/s056.xhtml chapter “CHAPTER XXIII. INTRIGUES OF SOCIETY AND LOVE”: 20 paragraphs, 4322 words
-text/s057.xhtml chapter “CHAPTER XXIV. FERGUS A SUITOR”: 27 paragraphs, 3596 words
-text/s058.xhtml chapter “CHAPTER XXV. “TO ONE THING CONSTANT NEVER””: 20 paragraphs, 2574 words
-text/s059.xhtml chapter “CHAPTER XXVI. A BRAVE MAN IN SORROW”: 26 paragraphs, 2865 words
-text/s060.xhtml chapter “CHAPTER XXVII. EXERTION”: 31 paragraphs, 2982 words
-text/s061.xhtml chapter “CHAPTER XXVIII. THE MARCH”: 33 paragraphs, 4341 words
-text/s062.xhtml chapter “CHAPTER XXIX. THE CONFUSION OF KING AGRAMANT’S CAMP”: 66 paragraphs, 9139 words
-text/s063.xhtml chapter “CHAPTER XXX. A SKIRMISH”: 43 paragraphs, 7488 words
-text/s064.xhtml chapter “CHAPTER XXXI. CHAPTER OF ACCIDENTS”: 20 paragraphs, 3942 words
-text/s065.xhtml chapter “CHAPTER XXXII. A JOURNEY TO LONDON”: 22 paragraphs, 3294 words
-text/s066.xhtml chapter “CHAPTER XXXIII. WHAT’S TO BE DONE NEXT?”: 340 paragraphs, 8757 words
-text/s067.xhtml chapter “CHAPTER XXXIV. DESOLATION”: 39 paragraphs, 6128 words
-text/s068.xhtml chapter “CHAPTER XXXV. COMPARING OF NOTES”: 16 paragraphs, 3218 words
-text/s069.xhtml chapter “CHAPTER XXXVI. MORE EXPLANATION”: 24 paragraphs, 6639 words
-text/s070.xhtml chapter “CHAPTER XXXVII”: 18 paragraphs, 4614 words
-text/s071.xhtml chapter “CHAPTER XXXVIII”: 24 paragraphs, 5131 words
-text/s072.xhtml chapter “CHAPTER XXXIX”: 35 paragraphs, 4981 words
-text/s073.xhtml chapter “CHAPTER XL”: 36 paragraphs, 5073 words
-text/s074.xhtml chapter “CHAPTER XLI. DULCE DOMUM”: 12 paragraphs, 3184 words
-text/s075.xhtml chapter “CHAPTER XLII”: 49 paragraphs, 6411 words
-text/s076.xhtml chapter “CHAPTER XLIII. A POSTSCRIPT WHICH SHOULD HAVE BEEN A PREFACE”: 11 paragraphs, 2335 words
+text/s034.xhtml chapter “CHAPTER I. SHOWS THAT THE LOSS OF A HORSE’S SHOE MAY BE A SERIOUS INCONVENIENCE”: 32 paragraphs, 4251 words
+text/s035.xhtml chapter “CHAPTER II. AN EXAMINATION”: 69 paragraphs, 6094 words
+text/s036.xhtml chapter “CHAPTER III. A CONFERENCE AND THE CONSEQUENCE”: 38 paragraphs, 4104 words
+text/s037.xhtml chapter “CHAPTER IV. A CONFIDANT”: 24 paragraphs, 3514 words
+text/s038.xhtml chapter “CHAPTER V. THINGS MEND A LITTLE”: 5 paragraphs, 1647 words
+text/s039.xhtml chapter “CHAPTER VI. A VOLUNTEER SIXTY YEARS SINCE”: 15 paragraphs, 2392 words
+text/s040.xhtml chapter “CHAPTER VII. AN INCIDENT”: 22 paragraphs, 3452 words
+text/s041.xhtml chapter “CHAPTER VIII. WAVERLEY IS STILL IN DISTRESS”: 17 paragraphs, 4520 words
+text/s042.xhtml chapter “CHAPTER IX. A NOCTURNAL ADVENTURE”: 24 paragraphs, 4239 words
+text/s043.xhtml chapter “CHAPTER X. THE JOURNEY IS CONTINUED”: 36 paragraphs, 5477 words
+text/s044.xhtml chapter “CHAPTER XI. AN OLD AND A NEW ACQUAINTANCE”: 23 paragraphs, 3704 words
+text/s045.xhtml chapter “CHAPTER XII. THE MYSTERY BEGINS TO BE CLEARED UP”: 29 paragraphs, 4605 words
+text/s046.xhtml chapter “CHAPTER XIII. A SOLDIER’S DINNER”: 47 paragraphs, 3797 words
+text/s047.xhtml chapter “CHAPTER XIV. THE BALL”: 37 paragraphs, 4711 words
+text/s048.xhtml chapter “CHAPTER XV. THE MARCH”: 26 paragraphs, 4565 words
+text/s049.xhtml chapter “CHAPTER XVI. AN INCIDENT GIVES RISE TO UNAVAILING REFLECTIONS”: 30 paragraphs, 3365 words
+text/s050.xhtml chapter “CHAPTER XVII. THE EVE OF BATTLE”: 24 paragraphs, 3914 words
+text/s051.xhtml chapter “CHAPTER XVIII. THE CONFLICT”: 25 paragraphs, 6351 words
+text/s052.xhtml chapter “CHAPTER XIX. AN UNEXPECTED EMBARRASSMENT”: 25 paragraphs, 2783 words
+text/s053.xhtml chapter “CHAPTER XX. THE ENGLISH PRISONER”: 39 paragraphs, 3834 words
+text/s054.xhtml chapter “CHAPTER XXI. RATHER UNIMPORTANT”: 26 paragraphs, 3840 words
+text/s055.xhtml chapter “CHAPTER XXII. INTRIGUES OF LOVE AND POLITICS”: 30 paragraphs, 4270 words
+text/s056.xhtml chapter “CHAPTER XXIII. INTRIGUES OF SOCIETY AND LOVE”: 20 paragraphs, 4131 words
+text/s057.xhtml chapter “CHAPTER XXIV. FERGUS A SUITOR”: 27 paragraphs, 3271 words
+text/s058.xhtml chapter “CHAPTER XXV. “TO ONE THING CONSTANT NEVER””: 20 paragraphs, 2480 words
+text/s059.xhtml chapter “CHAPTER XXVI. A BRAVE MAN IN SORROW”: 26 paragraphs, 2717 words
+text/s060.xhtml chapter “CHAPTER XXVII. EXERTION”: 31 paragraphs, 2958 words
+text/s061.xhtml chapter “CHAPTER XXVIII. THE MARCH”: 33 paragraphs, 4082 words
+text/s062.xhtml chapter “CHAPTER XXIX. THE CONFUSION OF KING AGRAMANT’S CAMP”: 66 paragraphs, 9039 words
+text/s063.xhtml chapter “CHAPTER XXX. A SKIRMISH”: 43 paragraphs, 7340 words
+text/s064.xhtml chapter “CHAPTER XXXI. CHAPTER OF ACCIDENTS”: 20 paragraphs, 3401 words
+text/s065.xhtml chapter “CHAPTER XXXII. A JOURNEY TO LONDON”: 22 paragraphs, 3110 words
+text/s066.xhtml chapter “CHAPTER XXXIII. WHAT’S TO BE DONE NEXT?”: 340 paragraphs, 8559 words
+text/s067.xhtml chapter “CHAPTER XXXIV. DESOLATION”: 39 paragraphs, 5722 words
+text/s068.xhtml chapter “CHAPTER XXXV. COMPARING OF NOTES”: 16 paragraphs, 3125 words
+text/s069.xhtml chapter “CHAPTER XXXVI. MORE EXPLANATION”: 24 paragraphs, 5684 words
+text/s070.xhtml chapter “CHAPTER XXXVII”: 18 paragraphs, 4047 words
+text/s071.xhtml chapter “CHAPTER XXXVIII”: 24 paragraphs, 4683 words
+text/s072.xhtml chapter “CHAPTER XXXIX”: 35 paragraphs, 4675 words
+text/s073.xhtml chapter “CHAPTER XL”: 36 paragraphs, 4825 words
+text/s074.xhtml chapter “CHAPTER XLI. DULCE DOMUM”: 12 paragraphs, 2939 words
+text/s075.xhtml chapter “CHAPTER XLII”: 49 paragraphs, 6263 words
+text/s076.xhtml chapter “CHAPTER XLIII. A POSTSCRIPT WHICH SHOULD HAVE BEEN A PREFACE”: 11 paragraphs, 1942 words

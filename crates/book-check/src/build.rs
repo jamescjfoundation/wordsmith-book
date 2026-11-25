@@ -78,6 +78,14 @@ pub fn print_opening(
     Ok(Print { assembled, book: pbook, look, typeset, profile, left })
 }
 
+fn is_contents_piece(p: &wordsmith_book_format::assemble::Piece) -> bool {
+    matches!(
+        p.what,
+        wordsmith_book_format::assemble::What::Element(wordsmith_book_model::ElementKind::Contents)
+            | wordsmith_book_format::assemble::What::Matter(wordsmith_manuscript_format::book::FrontKind::Contents)
+    )
+}
+
 /// Build ebook `edition` of the project from `book`, the project's own designs and `images`, as
 /// [`print`] does for print.
 pub fn ebook(
@@ -97,7 +105,55 @@ pub fn ebook(
         date: if project.date.is_empty() { "2000-01-01".to_owned() } else { project.date.clone() },
         seed: project.date.clone(),
         decorative: project.decorative.clone(),
+        page_marks: Vec::new(),
+        page_source: String::new(),
     };
+    let mut settings = settings;
+    // The page list: where the first print edition's pages start, in the ebook's terms.
+    if edition.page_list
+        && let Some(paper) = project.editions.iter().find(|e| e.format.is_print())
+        && let Ok(pr) = print(project, designs, book, paper, images)
+    {
+        let shown: Vec<String> =
+            assembled.pieces().filter(|p| wordsmith_book_epub::in_ebook(p) && !is_contents_piece(p)).map(|p| p.id.clone()).collect();
+        let order: Vec<String> = pr.assembled.pieces().map(|p| p.id.clone()).collect();
+        let starts = pr.typeset.page_starts();
+        for (i, s) in starts.iter().enumerate() {
+            let mut mark = wordsmith_book_epub::PageMark {
+                number: s.number,
+                label: s.label.clone(),
+                piece: s.section.clone(),
+                unit: s.unit,
+                offset: s.offset,
+                at_end: false,
+            };
+            // A page inside its section with none of the author's text at its top (a blank page, a
+            // picture) is marked at the next of the section's paragraphs to start a page, or after
+            // the section's text.
+            let first_of_section = i == 0 || starts[i - 1].section != s.section;
+            if s.unit.is_none() && !first_of_section {
+                match starts[i + 1..].iter().take_while(|n| n.section == s.section).find_map(|n| n.unit) {
+                    Some(u) => mark.unit = Some(u),
+                    None => mark.at_end = true,
+                }
+            }
+            // A page of a piece the ebook does not show (the half title, the contents, a print-only
+            // chapter) is marked where the next piece it shows starts.
+            if !shown.contains(&s.section) {
+                mark.at_end = false;
+                let from = order.iter().position(|id| *id == s.section).unwrap_or(0);
+                mark.piece = order[from..].iter().find(|id| shown.contains(id)).or(shown.last()).cloned().unwrap_or_default();
+                mark.unit = None;
+                mark.offset = 0;
+            }
+            settings.page_marks.push(mark);
+        }
+        settings.page_source = if paper.isbn.is_empty() {
+            format!("the {} edition", paper.name.to_lowercase())
+        } else {
+            format!("urn:isbn:{}", paper.isbn.replace('-', ""))
+        };
+    }
     let ebook = wordsmith_book_epub::ebook(&assembled, &design, edition, &settings, images).map_err(|e| e.to_string())?;
     Ok((assembled, ebook))
 }

@@ -96,6 +96,8 @@ pub struct Package {
     pub toc: Vec<NavPoint>,
     /// The landmarks.
     pub landmarks: Vec<Landmark>,
+    /// The page list: each print page and where it starts (empty for none).
+    pub page_list: Vec<NavPoint>,
 }
 
 /// The navigation document's and NCX's manifest ids and paths.
@@ -264,6 +266,13 @@ pub fn nav(p: &Package) -> String {
         s += "    <nav epub:type=\"landmarks\" id=\"landmarks\" hidden=\"hidden\">\n      <h2>Landmarks</h2>\n      <ol>\n";
         for l in &p.landmarks {
             s += &format!("        <li><a epub:type=\"{}\" href=\"{}\">{}</a></li>\n", escape(&l.kind), escape(&l.href), escape(&l.label));
+        }
+        s += "      </ol>\n    </nav>\n";
+    }
+    if !p.page_list.is_empty() {
+        s += "    <nav epub:type=\"page-list\" id=\"page-list\" hidden=\"hidden\">\n      <h2>Pages</h2>\n      <ol>\n";
+        for pg in &p.page_list {
+            s += &format!("        <li><a href=\"{}\">{}</a></li>\n", escape(&pg.href), escape(&pg.label));
         }
         s += "      </ol>\n    </nav>\n";
     }

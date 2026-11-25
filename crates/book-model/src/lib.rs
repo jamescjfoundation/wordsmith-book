@@ -343,6 +343,9 @@ pub struct Edition {
     /// bottom by the profile's bleed, and full-page pictures fill the page to the edge.
     #[serde(default, skip_serializing_if = "is_false")]
     pub bleed: bool,
+    /// For ebooks: a page list giving the print edition's page numbers (EBK-6).
+    #[serde(default, skip_serializing_if = "is_false")]
+    pub page_list: bool,
     /// For ebooks: the cover image, by its path in the project (`assets/cover.jpg`) (EBK-5).
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub cover: String,
@@ -382,7 +385,7 @@ impl Edition {
 
     /// The default ebook.
     pub fn ebook() -> Edition {
-        Edition { id: "ebook".into(), name: "Ebook".into(), format: Format::Ebook, embed_fonts: true, ..Edition::default() }
+        Edition { id: "ebook".into(), name: "Ebook".into(), format: Format::Ebook, embed_fonts: true, page_list: true, ..Edition::default() }
     }
 }
 

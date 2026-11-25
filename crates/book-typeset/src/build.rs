@@ -15,6 +15,8 @@ use crate::{Block, Case, Error, FirstLine, Heads, INCH, ImageFit, Kind, Look, Pa
 pub const SOURCE: ExtKey<bool> = ExtKey::new("book.source");
 /// On a run: the book's own words inside an author's paragraph (a note's number).
 pub const GENERATED: ExtKey<bool> = ExtKey::new("book.generated");
+/// On a paragraph of the author's text: its place among the section's paragraphs, from 0.
+pub const UNIT: ExtKey<u32> = ExtKey::new("book.unit");
 /// On a note number in the text: the note's number in its section (keeps adjacent numbers apart).
 pub const NOTE_MARK: ExtKey<u32> = ExtKey::new("book.note_mark");
 /// On the document: the indexes of its sections that are front matter (roman folios).
@@ -388,7 +390,9 @@ impl Builder<'_> {
         let mut after_break = true;
         let mut first = s.kind == Kind::Chapter;
         let mut lead = false;
+        let mut unit = 0u32;
         for b in &s.blocks {
+            let before = self.body.len();
             match b {
                 Block::Para(spans) => {
                     let mut spans = spans.clone();
@@ -489,6 +493,16 @@ impl Builder<'_> {
                 Block::Image { bytes, pixels, alt, fit } => {
                     self.image(bytes, *pixels, alt, *fit, source);
                     after_break = true;
+                }
+            }
+            // Each of the author's paragraphs from this block is a unit, counted within the section,
+            // as the ebook counts them (for the page list, EBK-6).
+            if !matches!(b, Block::Image { .. } | Block::Break) {
+                for p in &mut self.body[before..] {
+                    if SOURCE.get_or_none(&*p) == Some(true) {
+                        let _ = UNIT.set(p, &unit);
+                        unit += 1;
+                    }
                 }
             }
         }
