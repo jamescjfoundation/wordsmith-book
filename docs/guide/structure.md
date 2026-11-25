@@ -10,6 +10,10 @@ commands, and every change can be undone.
 their own. A chapter can be unnumbered, have a subtitle or an epigraph, or appear only in print
 or only in the ebook (Chapter Settings).
 
+**Print only or ebook only (STR-9).** A chapter, an element or a single paragraph can be set to
+appear only in print or only in the ebook (say, a reading-group note for the ebook); each output's
+word check allows for it.
+
 **Front matter (STR-4) and back matter (STR-5).** Book adds a half title, title page, copyright
 page and contents, filled from the book's details; add a dedication, epigraph, foreword,
 preface, introduction, prologue; and in the back an epilogue, afterword, acknowledgements,

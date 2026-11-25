@@ -189,6 +189,13 @@ dedication, epigraph, contents, then the body. [Verified] An ebook puts the copy
    builds and the user told; waiting → listed by preflight; stale (the words are no longer there
    exactly once) → shown with the new text. Never a silent overwrite. [Designed]
 
+### 2.7 Print-only and ebook-only (STR-9, from 0.2)
+
+1. A section, one of Book's elements, or a single paragraph can be shown in print only or in the
+   ebook only; a paragraph is found by the words it starts with, which must start exactly one
+   paragraph of its section (scenes included). [Designed]
+2. Each output's word check compares it with the book as that output shows it. [Designed]
+
 ### 2.6 More front and back matter (STR-8, from 0.2)
 
 1. A foreword, preface, introduction, prologue, epilogue, afterword, newsletter or website page,

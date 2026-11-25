@@ -18,7 +18,7 @@ use serde_json::Value;
 
 use crate::BookApp;
 use crate::commands::{
-    ADD_ELEMENT, BACKUP, CLEANUP_APPLY, CLEANUP_KEEP, CLEANUP_LIST, CLEANUP_UNDO, CLOSE, CONTRIBUTOR_ADD, DESIGN_CHOOSE, DESIGN_EXPORT,
+    ADD_ELEMENT, BACKUP, BLOCK_ONLY, CLEANUP_APPLY, CLEANUP_KEEP, CLEANUP_LIST, CLEANUP_UNDO, CLOSE, CONTRIBUTOR_ADD, DESIGN_CHOOSE, DESIGN_EXPORT,
     DESIGN_IMPORT, DESIGN_MIX, DESIGN_SAVE_AS, DESIGNS, EBOOK_OPEN, EDITION_ADD, EDITION_REMOVE, EDITION_SET, EXPORT, FIX_ADD, FIX_EDIT, FIX_LIST,
     IMPORT, IMPORT_CONFIRM, IMPORT_REVIEW, METADATA, METADATA_SET, MOVE_ELEMENT, NEW, NUMBERING, OUTLINE, PREFLIGHT, PREVIEW_PAGE, PREVIEW_SHOW,
     RELOAD_SOURCE, REMOVE_ELEMENT, SAVE_AS_ONE_FILE, SECTION, SET_ELEMENT, list,
@@ -81,6 +81,7 @@ fn params(id: &str) -> &'static str {
         EBOOK_OPEN => r#"{"open": false to only write the EPUB}"#,
         PREFLIGHT => r#"{"edition": id}"#,
         EXPORT => r#"{"folder", "editions": [ids], "bundle": bool}"#,
+        BLOCK_ONLY => r#"{"section", "starts": the paragraph's first words, "only": print|ebook|both}"#,
         _ => "{}",
     }
 }
@@ -146,6 +147,7 @@ pub fn command_specs() -> Vec<CommandSpec> {
         EBOOK_OPEN,
         PREFLIGHT,
         EXPORT,
+        BLOCK_ONLY,
         "book.save",
         "book.undo",
         "book.redo",

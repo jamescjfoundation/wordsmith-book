@@ -499,13 +499,15 @@ pub fn preflight(
     images: &dyn Fn(&str) -> Option<Vec<u8>>,
 ) -> (Report, Option<Vec<u8>>) {
     let book = wordsmith_book_format::fixes::book_for_build(&project.fixes, source);
+    // The words each output must hold: the book as that output shows it (STR-9).
+    let shown = wordsmith_book_format::assemble::shown_in(project, &book, edition.format.is_print());
     let mut report = Report { edition: edition.id.clone(), findings: book_findings(project, source) };
     let mut bytes = None;
     if edition.format.is_print() {
         match build::print(project, designs, &book, edition, images) {
             Ok(print) => match print.typeset.pdf() {
                 Ok(pdf) => {
-                    report.findings.extend(print_findings(&print, &pdf, &book, edition));
+                    report.findings.extend(print_findings(&print, &pdf, &shown, edition));
                     bytes = Some(pdf);
                 }
                 Err(e) => report.findings.push(finding("page-size", Severity::Blocks, format!("The PDF could not be written: {e}."), Link::None)),
@@ -520,7 +522,7 @@ pub fn preflight(
                 Ok((_, e)) => {
                     report.findings.extend(ebook_findings(
                         &e.bytes,
-                        &book,
+                        &shown,
                         &e.cover_problems,
                         !edition.cover.is_empty(),
                         edition.notes == wordsmith_book_model::NoteStyle::BookEnd,

@@ -523,6 +523,24 @@ impl ElementKind {
     }
 }
 
+/// A paragraph of a section shown in one kind of output only: found by the words it starts with
+/// (unique within the section, its scenes included).
+#[derive(Clone, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+pub struct BlockOnly {
+    /// The paragraph's first words, exactly as written.
+    pub starts: String,
+    /// Where it shows.
+    pub only: Only,
+}
+
+impl BlockOnly {
+    /// Where a block whose plain text is `text` shows, by these rules (the first that matches).
+    pub fn of(rules: &[BlockOnly], text: &str) -> Only {
+        let t = text.trim_start();
+        rules.iter().find(|r| !r.starts.is_empty() && t.starts_with(r.starts.as_str())).map_or(Only::Both, |r| r.only)
+    }
+}
+
 /// Which outputs a piece of the book appears in (STR-9).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
@@ -575,6 +593,9 @@ pub struct SectionSettings {
     /// Which outputs show the section.
     #[serde(default, skip_serializing_if = "is_default")]
     pub only: Only,
+    /// Paragraphs shown in one kind of output only (STR-9), by the words each starts with.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub blocks_only: Vec<BlockOnly>,
     /// Hide the chapter's number.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub unnumbered: bool,

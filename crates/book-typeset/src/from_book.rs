@@ -341,7 +341,7 @@ pub fn print_book(
                     s.recto = front && kind != FrontKind::Copyright;
                     // The book view's words leave front and back matter titles out.
                     s.generated_title = true;
-                    s.blocks = c.blocks(&p.blocks, &labels);
+                    s.blocks = c.blocks(&p.blocks_for(true), &labels);
                     // A plain page (the writer's title page, copyright, dedication) is centered.
                     if s.kind == Kind::Plain {
                         s.blocks = s
@@ -359,14 +359,14 @@ pub fn print_book(
                 What::Part => {
                     s.kind = Kind::Part;
                     s.recto = true;
-                    s.blocks = c.blocks(&p.blocks, &labels);
+                    s.blocks = c.blocks(&p.blocks_for(true), &labels);
                     s.notes = c.notes(&p.notes);
                 }
                 What::Chapter | What::Other => {
                     s.kind = Kind::Chapter;
                     s.recto = recto_chapters;
                     s.generated_title = p.what == What::Other;
-                    s.blocks = c.blocks(&p.blocks, &labels);
+                    s.blocks = c.blocks(&p.blocks_for(true), &labels);
                     s.notes = c.notes(&p.notes);
                 }
             }

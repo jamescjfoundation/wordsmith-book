@@ -128,6 +128,10 @@ epigraph_source = "A saying of the coast"
 only = "print"
 unnumbered = true
 
+[[sections."01965f2a-7c00-7000-8000-000000000002".blocks_only]]
+starts = "A note for readers of this edition"   # the paragraph's first words, unique in the section
+only = "ebook"                                 # print or ebook (STR-9)
+
 [cleanup]
 keep_exactly = false
 off = ["dashes"]

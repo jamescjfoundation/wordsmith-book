@@ -403,7 +403,7 @@ impl Writer<'_> {
             body += "</blockquote>\n";
         }
         let opening = matches!(p.what, What::Chapter | What::Other);
-        self.blocks(&p.blocks, refs, opening, &mut body);
+        self.blocks(&p.blocks_for(false), refs, opening, &mut body);
         let name = label_and_title(p);
         self.notes(&p.notes, refs, &name, &mut body);
         body += "</section>\n";

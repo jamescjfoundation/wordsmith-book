@@ -84,7 +84,7 @@ pub const ADD_ELEMENT: &str = "book.element.add";
 pub const REMOVE_ELEMENT: &str = "book.element.remove";
 /// Move an element: `{"id", "target": {"element"|"section"|"heading"}, "zone": "before"|"after"|"inside"}`.
 pub const MOVE_ELEMENT: &str = "book.element.move";
-/// Change an element's title or text: `{"id", "title"?, "text"?}`.
+/// Change an element's title, text or outputs: `{"id", "title"?, "text"?, "only"?}`.
 pub const SET_ELEMENT: &str = "book.element.set";
 
 /// Build the print preview and go to a section's first page: `{"section": id}` (a section's id
@@ -105,6 +105,11 @@ pub const PREFLIGHT: &str = "book.preflight";
 /// edition is built, word-checked and preflighted first and nothing is written if anything
 /// blocks; gives the files written.
 pub const EXPORT: &str = "book.export";
+
+/// Show a paragraph in one kind of output only: `{"section", "starts": its first words, "only":
+/// "print" | "ebook" | "both"}` (both removes the rule). The words must start exactly one
+/// paragraph of the section.
+pub const BLOCK_ONLY: &str = "book.block.only";
 
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
@@ -158,6 +163,7 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(EBOOK_OPEN, "Open in a Reading App", "")),
         p(CommandInfo::new(PREFLIGHT, "Preflight", "")),
         p(CommandInfo::new(EXPORT, "Export", "")),
+        p(CommandInfo::new(BLOCK_ONLY, "Show a Paragraph in Print or Ebook Only", "")),
     ]
 }
 
@@ -297,6 +303,7 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             ))
         }
         PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
+        BLOCK_ONLY => block_only(app.open_book()?, params),
         EXPORT => {
             let validator = app.prefs.validator_settings();
             let b = app.open_book()?;
@@ -512,6 +519,10 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             let id = s(params, "id")?.to_owned();
             let title = params.get("title").and_then(Value::as_str).map(str::to_owned);
             let text = params.get("text").and_then(Value::as_str).map(str::to_owned);
+            let only: Option<wordsmith_book_model::Only> = params
+                .get("only")
+                .map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not both, print or ebook")))
+                .transpose()?;
             app.open_book()?.edit(|f| {
                 let e = f.project.elements.iter_mut().find(|e| e.id == id).ok_or_else(|| format!("there is no element `{id}`"))?;
                 if let Some(t) = title {
@@ -519,6 +530,9 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
                 }
                 if let Some(t) = text {
                     e.text = t;
+                }
+                if let Some(o) = only {
+                    e.only = o;
                 }
                 Ok(())
             })?;
@@ -587,4 +601,39 @@ fn open_with_system(path: &std::path::Path) -> Result<(), String> {
     #[cfg(not(any(target_os = "macos", target_os = "windows")))]
     let mut cmd = std::process::Command::new("xdg-open");
     cmd.arg(path).spawn().map(|_| ()).map_err(|e| format!("no reading app could be started: {e}"))
+}
+
+/// Set or clear a paragraph's only-in rule (STR-9).
+fn block_only(b: &mut OpenBook, params: &Value) -> Result<Value, String> {
+    let section: SectionId = s(params, "section")?.parse().map_err(|e: wordsmith_manuscript_model::BadId| e.to_string())?;
+    let starts = s(params, "starts")?.to_owned();
+    let only: wordsmith_book_model::Only =
+        serde_json::from_value(params.get("only").cloned().unwrap_or(Value::Null)).map_err(|_| "`only` is print, ebook or both".to_owned())?;
+    if starts.trim().is_empty() {
+        return Err("give the words the paragraph starts with".into());
+    }
+    let src = b.source.as_ref().map_err(Clone::clone)?;
+    let sec = wordsmith_book_format::fixes::section(&src.book, section).ok_or("there is no such section")?;
+    fn texts(s: &wordsmith_manuscript_format::book::Section, out: &mut Vec<String>) {
+        out.extend(s.content.iter().map(wordsmith_book_format::assemble::block_text));
+        for c in &s.children {
+            texts(c, out);
+        }
+    }
+    let mut all = Vec::new();
+    texts(sec, &mut all);
+    let n = all.iter().filter(|t| t.trim_start().starts_with(starts.as_str())).count();
+    if n != 1 {
+        return Err(format!("“{starts}” starts {n} paragraphs of that section; give words that start exactly one"));
+    }
+    b.edit(|f| {
+        let mut settings = f.project.sections.get(&section).cloned().unwrap_or_default();
+        settings.blocks_only.retain(|r| r.starts != starts);
+        if only != wordsmith_book_model::Only::Both {
+            settings.blocks_only.push(wordsmith_book_model::BlockOnly { starts: starts.clone(), only });
+        }
+        f.project.sections.insert(section, settings);
+        Ok(())
+    })?;
+    Ok(Value::Null)
 }

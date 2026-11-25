@@ -50,6 +50,8 @@ pub struct Piece {
     pub notes: Vec<Note>,
     /// Which outputs show it.
     pub only: Only,
+    /// Which outputs show each of its blocks (as long as `blocks`).
+    pub block_only: Vec<Only>,
     /// Hide its number.
     pub unnumbered: bool,
 }
@@ -108,11 +110,58 @@ fn piece(project: &BookProject, s: &Section, what: What) -> Piece {
         title: s.title.clone(),
         subtitle: settings.subtitle,
         epigraph: (!settings.epigraph.is_empty()).then_some((settings.epigraph, settings.epigraph_source)),
+        block_only: blocks.iter().map(|b| wordsmith_book_model::BlockOnly::of(&settings.blocks_only, &block_text(b))).collect(),
         blocks,
         notes,
         only: settings.only,
         unnumbered: settings.unnumbered,
     }
+}
+
+/// A block's plain text (for finding a paragraph by its first words).
+pub fn block_text(b: &Block) -> String {
+    use wordsmith_manuscript_model::text::plain;
+    match b {
+        Block::Para(c) | Block::Heading { content: c, .. } => plain(c),
+        Block::Quote(ps) | Block::Fenced { paras: ps, .. } => ps.iter().map(|p| plain(p)).collect::<Vec<_>>().join("\n"),
+        _ => String::new(),
+    }
+}
+
+impl Piece {
+    /// Its blocks as one kind of output shows them (print, or the ebook).
+    pub fn blocks_for(&self, print: bool) -> Vec<Block> {
+        let hidden = if print { Only::Ebook } else { Only::Print };
+        self.blocks
+            .iter()
+            .zip(self.block_only.iter().chain(std::iter::repeat(&Only::Both)))
+            .filter(|(_, o)| **o != hidden)
+            .map(|(b, _)| b.clone())
+            .collect()
+    }
+}
+
+/// The book view as one kind of output shows it: sections and paragraphs set to show only in
+/// the other left out (STR-9). The word checks compare each output with this.
+pub fn shown_in(project: &BookProject, book: &Book, print: bool) -> Book {
+    let hidden = if print { Only::Ebook } else { Only::Print };
+    fn walk(project: &BookProject, s: &Section, rules: &[wordsmith_book_model::BlockOnly], hidden: Only) -> Option<Section> {
+        let settings = project.section(s.id);
+        if settings.only == hidden {
+            return None;
+        }
+        let mut rules = rules.to_vec();
+        rules.extend(settings.blocks_only);
+        let mut out = s.clone();
+        out.content.retain(|b| wordsmith_book_model::BlockOnly::of(&rules, &block_text(b)) != hidden);
+        out.children = s.children.iter().filter_map(|c| walk(project, c, &rules, hidden)).collect();
+        Some(out)
+    }
+    let mut out = book.clone();
+    for part in [&mut out.front, &mut out.body, &mut out.back] {
+        *part = part.iter().filter_map(|s| walk(project, s, &[], hidden)).collect();
+    }
+    out
 }
 
 /// The front matter kind an element stands for in the source (the source's own wins).
@@ -188,6 +237,7 @@ pub fn assemble(project: &BookProject, book: &Book, edition: Option<&Edition>) -
                 epigraph: None,
                 blocks: matter::blocks(&lines),
                 notes: Vec::new(),
+                block_only: Vec::new(),
                 only: e.only,
                 unnumbered: true,
             });
