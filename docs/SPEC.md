@@ -344,6 +344,15 @@ break, hyphenation by the book's language, running heads off on openings and bla
     other) is set as the design says for that kind: inset, italic, framed with rules above and
     below, or centered, in a font role and size of its own, small capitals if asked; the ebook
     marks it with its style and kind and its stylesheet sets them. [Designed]
+16. **Cover template** (PRT-9, from 0.2): for a print edition, a full-wrap template, PDF and PNG:
+    width = bleed + back + spine + front + bleed, height = trim + 2 × bleed, the spine from the
+    page count (rounded up to even where the profile asks) and the paper's thickness per page,
+    safe areas 0.125 in inside the trim, spine text only from the profile's page count (kept
+    0.0625 in from the spine's folds), and the profile's barcode area at the back cover's lower
+    right. [Sourced; to be rechecked with the service's guide]
+17. **Cover check** (PRT-10, from 0.2): a supplied cover PDF must be one page of exactly that
+    size, fonts embedded, no annotations, pictures at 300 pixels per inch or more; a PNG or JPEG
+    must have the cover's shape and at least 300 pixels per inch. [Designed]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 

@@ -24,6 +24,7 @@ jcj-features = { workspace = true }
 jcj-interchange = { workspace = true }
 jcj-output = { workspace = true }
 jcj-project = { workspace = true }
+image = { workspace = true }
 roxmltree = { workspace = true }
 zip = { workspace = true }
 
@@ -33,4 +34,3 @@ toml = { workspace = true }
 [dev-dependencies]
 wordsmith-book-import = { workspace = true }
 jcj-layout = { workspace = true }
-image = { workspace = true }

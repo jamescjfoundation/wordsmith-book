@@ -112,6 +112,13 @@ pub const EXPORT: &str = "book.export";
 /// paragraph of the section.
 pub const BLOCK_ONLY: &str = "book.block.only";
 
+/// Write a print edition's full-wrap cover template, PDF and PNG: `{"edition", "folder"}`; gives
+/// the files and the cover's size (PRT-9).
+pub const COVER_TEMPLATE: &str = "book.cover.template";
+/// Check a cover (PDF, PNG or JPEG) for a print edition: `{"edition", "file"}`; gives what is
+/// wrong (PRT-10).
+pub const COVER_CHECK: &str = "book.cover.check";
+
 /// Every command Book has, with its label and key.
 pub fn list() -> Vec<CommandInfo> {
     let p = |mut c: CommandInfo| {
@@ -165,6 +172,8 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(PREFLIGHT, "Preflight", "")),
         p(CommandInfo::new(EXPORT, "Export", "")),
         p(CommandInfo::new(BLOCK_ONLY, "Show a Paragraph in Print or Ebook Only", "")),
+        p(CommandInfo::new(COVER_TEMPLATE, "Cover Template", "")),
+        p(CommandInfo::new(COVER_CHECK, "Check a Cover", "")),
     ]
 }
 
@@ -305,6 +314,7 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
         }
         PREVIEW_SHOW | PREVIEW_PAGE => preview_command(app, id, params),
         BLOCK_ONLY => block_only(app.open_book()?, params),
+        COVER_TEMPLATE | COVER_CHECK => cover_command(app.open_book()?, id, params),
         EXPORT => {
             let validator = app.prefs.validator_settings();
             let b = app.open_book()?;
@@ -646,4 +656,49 @@ fn block_only(b: &mut OpenBook, params: &Value) -> Result<Value, String> {
         Ok(())
     })?;
     Ok(Value::Null)
+}
+
+/// The cover template for a print edition: its page count from a build.
+fn cover_template_of(b: &OpenBook, edition: &str) -> Result<wordsmith_book_check::cover::Template, String> {
+    let e = b.files.project.editions.iter().find(|e| e.id == edition).ok_or_else(|| format!("there is no edition `{edition}`"))?;
+    if !e.format.is_print() {
+        return Err(format!("the {} is not printed", e.name.to_lowercase()));
+    }
+    let src = b.source.as_ref().map_err(Clone::clone)?;
+    let book = wordsmith_book_format::fixes::book_for_build(&b.files.project.fixes, src);
+    let pr = wordsmith_book_check::build::print(&b.files.project, &b.files.designs, &book, e, &|p| b.picture(p))?;
+    let pages = pr.typeset.page_count();
+    // The printer binds an even number of pages.
+    let pages = if pr.profile.even_pages { pages + pages % 2 } else { pages };
+    Ok(wordsmith_book_check::cover::template(&pr.profile, (f64::from(pr.look.trim.0), f64::from(pr.look.trim.1)), pages, e.paper.unwrap_or_default()))
+}
+
+fn cover_command(b: &mut OpenBook, id: &str, params: &Value) -> Result<Value, String> {
+    let edition = s(params, "edition")?.to_owned();
+    let t = cover_template_of(b, &edition)?;
+    if id == COVER_CHECK {
+        let file = PathBuf::from(s(params, "file")?);
+        let bytes = jcj_project_read(&file)?;
+        let found = wordsmith_book_check::cover::check(&bytes, &t);
+        return Ok(json!({ "ok": found.is_empty(), "findings": found.iter().map(crate::preflight::finding_json).collect::<Vec<_>>() }));
+    }
+    let folder = PathBuf::from(s(params, "folder")?);
+    std::fs::create_dir_all(&folder).map_err(|e| e.to_string())?;
+    let name = wordsmith_book_check::export::file_name(&format!("{} {} cover template", b.name(), edition));
+    let (pdf, png) = (folder.join(format!("{name}.pdf")), folder.join(format!("{name}.png")));
+    std::fs::write(&pdf, wordsmith_book_check::cover::template_pdf(&t)).map_err(|e| e.to_string())?;
+    std::fs::write(&png, wordsmith_book_check::cover::template_png(&t, 100.0)).map_err(|e| e.to_string())?;
+    Ok(json!({
+        "files": [pdf.display().to_string(), png.display().to_string()],
+        "width": t.width, "height": t.height, "spine": t.spine, "pages": t.pages, "spine_text": t.spine_safe.is_some(),
+    }))
+}
+
+/// A file Book reads for a check, bounded.
+fn jcj_project_read(path: &std::path::Path) -> Result<Vec<u8>, String> {
+    let meta = std::fs::metadata(path).map_err(|e| format!("{}: {e}", path.display()))?;
+    if meta.len() > 512 << 20 {
+        return Err(format!("{} is larger than 512 MB", path.display()));
+    }
+    std::fs::read(path).map_err(|e| format!("{}: {e}", path.display()))
 }

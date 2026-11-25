@@ -32,3 +32,8 @@ wider margins and gutter for the hinge, and 75 to 550 pages.
 **Print profiles (PRE-4):** `pod-paperback` (a print-on-demand paperback: trims, gutter table,
 margins, page counts, paper) and `generic-pdf` (any trim, fonts embedded, no annotations), as
 data files that say when they were last checked.
+
+**Cover (PRT-9, PRT-10):** Book makes the paperback's or hardcover's full-wrap cover template (PDF and
+PNG) from the page count and paper: the back, spine and front with bleed, safe areas, whether the
+spine is wide enough for text, and the barcode area. Check a finished cover (PDF, PNG or JPEG)
+against it before sending it to the printer.
