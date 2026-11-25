@@ -196,6 +196,15 @@ dedication, epigraph, contents, then the body. [Verified] An ebook puts the copy
    paragraph of its section (scenes included). [Designed]
 2. Each output's word check compares it with the book as that output shows it. [Designed]
 
+### 2.8 Store editions (STR-10, from 0.2)
+
+1. Ebook editions can be named by store (`store` on the edition). One of Book's elements can be
+   limited to some stores (`stores` on the element): it then shows only in editions for one of
+   them, never in print or a plain ebook, so each store's edition carries only its own links and
+   buy pages. [Designed]
+2. In the ebook, web addresses in Book's own pages are live links; the author's text is left as
+   written. [Designed]
+
 ### 2.6 More front and back matter (STR-8, from 0.2)
 
 1. A foreword, preface, introduction, prologue, epilogue, afterword, newsletter or website page,

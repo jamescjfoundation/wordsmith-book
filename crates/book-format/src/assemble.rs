@@ -210,6 +210,10 @@ pub fn assemble(project: &BookProject, book: &Book, edition: Option<&Edition>) -
         let mut pieces = Vec::new();
         for e in project.elements.iter().filter(|e| e.placement == placement) {
             let Some(kind) = e.kind else { continue };
+            // An element for some stores shows only in editions for one of them (STR-10).
+            if !e.stores.is_empty() && !edition.is_some_and(|ed| e.stores.iter().any(|s| s.trim().eq_ignore_ascii_case(ed.store.trim()))) {
+                continue;
+            }
             // The source's own page of this kind goes here instead of Book's.
             if let Some(fk) = source_kind(kind)
                 && let Some(i) = source.iter().position(|s| s.kind == fk)

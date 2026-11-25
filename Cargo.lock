@@ -5571,6 +5571,7 @@ dependencies = [
  "serde_json",
  "wordsmith-book-check",
  "wordsmith-book-design",
+ "wordsmith-book-epub",
  "wordsmith-book-format",
  "wordsmith-book-import",
  "wordsmith-book-model",

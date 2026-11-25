@@ -10,3 +10,7 @@ only. What a store or printer would miss is listed under *Needs*.
 (checked as you type: a mistyped digit is caught), and a paperback its trim, paper and print
 profile; an ebook says whether to embed fonts, how notes show and which cover to use. Design
 values can differ per edition.
+
+**Store editions (STR-10).** Add an ebook edition per store and name its store; a page of Book's
+own (a buy page, a newsletter page) can be limited to some stores, so each store's edition carries
+only its own links. Web addresses on those pages are live links in the ebook.

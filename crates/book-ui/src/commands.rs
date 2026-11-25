@@ -84,7 +84,8 @@ pub const ADD_ELEMENT: &str = "book.element.add";
 pub const REMOVE_ELEMENT: &str = "book.element.remove";
 /// Move an element: `{"id", "target": {"element"|"section"|"heading"}, "zone": "before"|"after"|"inside"}`.
 pub const MOVE_ELEMENT: &str = "book.element.move";
-/// Change an element's title, text or outputs: `{"id", "title"?, "text"?, "only"?}`.
+/// Change an element's title, text or outputs: `{"id", "title"?, "text"?, "only"?, "stores"?:
+/// [store names] (shown only in editions for those stores)}`.
 pub const SET_ELEMENT: &str = "book.element.set";
 
 /// Build the print preview and go to a section's first page: `{"section": id}` (a section's id
@@ -523,6 +524,12 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
                 .get("only")
                 .map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not both, print or ebook")))
                 .transpose()?;
+            let stores: Option<Vec<String>> = params
+                .get("stores")
+                .map(|v| {
+                    v.as_array().map(|a| a.iter().filter_map(Value::as_str).map(str::to_owned).collect()).ok_or("`stores` is a list of store names")
+                })
+                .transpose()?;
             app.open_book()?.edit(|f| {
                 let e = f.project.elements.iter_mut().find(|e| e.id == id).ok_or_else(|| format!("there is no element `{id}`"))?;
                 if let Some(t) = title {
@@ -533,6 +540,9 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
                 }
                 if let Some(o) = only {
                     e.only = o;
+                }
+                if let Some(v) = stores {
+                    e.stores = v;
                 }
                 Ok(())
             })?;

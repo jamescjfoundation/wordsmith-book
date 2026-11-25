@@ -216,6 +216,26 @@ struct Writer<'a> {
     style: NoteStyle,
     /// Notes gathered for the book's end.
     gathered: String,
+    /// Web addresses become links (Book's own pages: a store's page, a newsletter).
+    links: bool,
+}
+
+/// Text with its web addresses (`http://`, `https://`) made links, escaped.
+pub fn linked(text: &str) -> String {
+    let mut out = String::new();
+    let mut rest = text;
+    while let Some(i) = rest.find("https://").into_iter().chain(rest.find("http://")).min() {
+        out.push_str(&escape(&rest[..i]));
+        let tail = &rest[i..];
+        let end = tail.find(char::is_whitespace).unwrap_or(tail.len());
+        // A sentence's closing mark is not part of the address.
+        let url = tail[..end].trim_end_matches(['.', ',', ';', ':', ')', '!', '?']);
+        let shown = escape(url);
+        out.push_str(&format!("<a href=\"{shown}\">{shown}</a>"));
+        rest = &tail[url.len()..];
+    }
+    out.push_str(&escape(rest));
+    out
 }
 
 impl Writer<'_> {
@@ -224,7 +244,7 @@ impl Writer<'_> {
         for i in c {
             match i {
                 Inline::Span { text, marks } => {
-                    let mut t = escape(text).replace('\n', "<br/>");
+                    let mut t = if self.links { linked(text) } else { escape(text) }.replace('\n', "<br/>");
                     if marks.small_caps {
                         t = format!("<span class=\"sc\">{t}</span>");
                     }
@@ -538,6 +558,7 @@ pub fn ebook(
         meaningful: 0,
         style: edition.notes,
         gathered: String::new(),
+        links: false,
     };
     let mut items = Vec::new();
     let mut spine = Vec::new();
@@ -573,6 +594,8 @@ pub fn ebook(
                 target: if at_end { NOTES_FILE.into() } else { String::new() },
                 back: if at_end { format!("{id}.xhtml") } else { String::new() },
             };
+            // Book's own pages carry live links; the author's text is left as written.
+            w.links = matches!(p.what, What::Element(_));
             let (body, heading) = w.section(p, &id, kind, role, &refs);
             let title = if heading { label_and_title(p) } else { a.meta.title.clone() };
             items.push(Item {
