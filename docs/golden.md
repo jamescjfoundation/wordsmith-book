@@ -68,3 +68,25 @@ same twice. It takes about two minutes.
 
 **R2.4:** every golden file above was written again when printed notes became footnotes and the
 ebook's notes pop-up footnotes (the editions' default); they await a person's look again.
+
+## The engine and the core's releases (R4.6)
+
+Print is on the core's layout (decision 0003), at the newest core release: v0.1.15 (2026-11-25).
+Every golden file was compared at each core move, by the print, EPUB and v0.1 tests in the full
+run of that step; `crates/book-check/tests/golden_complete.rs` checks that the folders hold
+exactly the files those tests compare (none missing, none stale).
+
+| Core move | Step | Golden files |
+| --- | --- | --- |
+| v0.1.10 | M5.4 | written then |
+| v0.1.11 | R2.3 | unchanged |
+| v0.1.12 | R2.5 | unchanged |
+| v0.1.13 | R2.16 | unchanged |
+| v0.1.14 | R2.17 | unchanged |
+| v0.1.15 | R3.5 | unchanged |
+
+The changes since they were written are Book's own, each reviewed in its step and recorded
+there: footnotes (R2.4), asides (R2.6), the page list (R2.10), the page list's source (R2.14),
+and the seven designs added in R3.1 (new files only). All still await a person's look (see the
+sections above).
+

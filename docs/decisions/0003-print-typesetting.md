@@ -85,3 +85,10 @@ Print is built on the core, as the plan's fallback says:
 A person moves the core's patch block or craft-libs' copies so that a published release of the
 engine builds against them (or decides to carry a fork); or the core gains a typesetting layer of
 its own (`jcj-typeset`, core decision 0002).
+
+## Addendum (R4.6, 2026-11-25)
+
+Print stays on the core's layout and moved with each core release up to v0.1.15, the newest;
+no core move changed a golden file (`docs/golden.md`). Moving to the embedded engine still needs
+a person (`docs/progress.md`, "Waiting on a person").
+
