@@ -637,3 +637,14 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
    in order with the design each project uses (this book as it stands, the others from their
    `book.toml`) and names any book off the series' design. [Designed]
 
+### 13.4 The ISBN list (META-5)
+
+1. The house file lists the ISBNs the house owns, each with the book and edition that use it
+   (none: free). Each must have a valid check digit and appear once, and no edition of a book
+   has two; a list that breaks these is refused whole. [Designed]
+2. An edition without an ISBN takes the house's next free one (`book.isbn.assign`, or *Take an
+   ISBN from the House* in Details), as the house file writes it; the house file then records
+   the book and edition, so no other edition is given it. The book's change is undoable; the
+   house's record stays (an ISBN once given is not handed out again). If the house file cannot
+   be written, the book does not keep the ISBN. `book.isbn.list` lists them all. [Designed]
+

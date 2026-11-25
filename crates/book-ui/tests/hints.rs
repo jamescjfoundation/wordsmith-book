@@ -79,11 +79,11 @@ fn the_details_panel_edits_the_hints() {
     let keep = h.get_by_label("Never break across lines (one word or phrase a line)");
     assert_eq!(keep.value().as_deref(), Some("Mr. Smith"));
     // Type a word into the hyphenation list, then leave it.
-    h.get_by_label("Hyphenate only here (one word a line, a hyphen where it may break; none: never)").click();
+    h.get_by_label("Hyphenate only here (one word a line, a hyphen where it may break; none: never)").focus();
     h.run_steps(2);
     h.get_by_label("Hyphenate only here (one word a line, a hyphen where it may break; none: never)").type_text("Brob-ding-nag");
     h.run_steps(2);
-    h.get_by_label("Never break across lines (one word or phrase a line)").click();
+    h.get_by_label("Never break across lines (one word or phrase a line)").focus();
     h.run_steps(3);
     let v = h.state_mut().app.command(commands::HINTS, &json!({})).unwrap();
     assert_eq!(v, json!({ "keep": ["Mr. Smith"], "hyphenate": ["Brob-ding-nag"] }));

@@ -217,6 +217,12 @@ impl Panel {
                 {
                     ui.label(m);
                 }
+            });
+            // The edition's other settings, on a line of their own.
+            ui.horizontal_wrapped(|ui| {
+                if e.isbn.trim().is_empty() && ui.small_button(tr("Take an ISBN from the House")).clicked() {
+                    run = Some((crate::commands::ISBN_ASSIGN, json!({ "edition": e.id })));
+                }
                 if e.format.is_print() {
                     let mut on = e.pdf_standards;
                     if ui

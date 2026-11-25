@@ -167,6 +167,22 @@ impl House {
                 out.push(format!("Two imprints or series have the id “{id}”."));
             }
         }
+        // ISBNs (META-5): each valid and owned once; an edition uses one.
+        let mut owned = std::collections::BTreeSet::new();
+        let mut uses = std::collections::BTreeSet::new();
+        for i in &self.isbns {
+            match crate::isbn::check(&i.isbn) {
+                Err(e) => out.push(format!("The house's ISBN list: {e}")),
+                Ok(d) => {
+                    if !owned.insert(d) {
+                        out.push(format!("The house's ISBN list has {} twice.", i.isbn.trim()));
+                    }
+                }
+            }
+            if !i.book.trim().is_empty() && !uses.insert((i.book.trim().to_lowercase(), i.edition.trim().to_lowercase())) {
+                out.push(format!("The house's ISBN list gives “{}” ({}) two ISBNs.", i.book.trim(), i.edition.trim()));
+            }
+        }
         for s in &self.series {
             if !s.imprint.is_empty() && !self.imprints.iter().any(|i| i.id == s.imprint) {
                 out.push(format!("The series “{}” names an imprint the house does not have: “{}”.", s.name, s.imprint));

@@ -19,3 +19,8 @@ same anywhere; join again to take changes from the house file.
 Book 2" and the "Also by" page lists the series' other books in order. *Series View* lists the
 series' books with the design each uses and names any that strays from the series' design.
 
+**ISBNs (META-5).** List the ISBNs the house owns in the house file. *Take an ISBN from the
+House* (in Details, beside an edition without one) gives the edition the next free ISBN and
+writes in the house file which book and edition use it, so it is never given twice. A list with a
+mistyped or repeated ISBN is refused until it is put right.
+

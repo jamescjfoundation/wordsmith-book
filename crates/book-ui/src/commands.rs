@@ -138,6 +138,12 @@ pub const HOUSE_JOIN: &str = "book.house.join";
 /// series' name and its books in order, each with the design its project uses and whether that
 /// is the series' one design.
 pub const SERIES_VIEW: &str = "book.series.view";
+/// The house's ISBNs (META-5): `{"house"}`; each with the book and edition that use it (none:
+/// free).
+pub const ISBN_LIST: &str = "book.isbn.list";
+/// Give an edition the house's next free ISBN (META-5): `{"house", "edition"}`; the house file
+/// records which book and edition use it. Gives the ISBN.
+pub const ISBN_ASSIGN: &str = "book.isbn.assign";
 /// Leave the house's imprint and series: `{}`; the design stays, free to change.
 pub const HOUSE_LEAVE: &str = "book.house.leave";
 
@@ -214,6 +220,8 @@ pub fn list() -> Vec<CommandInfo> {
         p(CommandInfo::new(HOUSE_JOIN, tl("Join an Imprint or Series"), "")),
         CommandInfo::new(HOUSE_LEAVE, tl("Leave the Imprint and Series"), ""),
         CommandInfo::new(SERIES_VIEW, tl("Series View"), ""),
+        p(CommandInfo::new(ISBN_LIST, tl("The House's ISBNs"), "")),
+        p(CommandInfo::new(ISBN_ASSIGN, tl("Take an ISBN from the House"), "")),
         p(CommandInfo::new(HINTS_SET, tl("Set Line-Break Hints"), "")),
     ]
 }
@@ -376,6 +384,15 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             Ok(serde_json::to_value(link).unwrap_or(Value::Null))
         }
         HOUSE_LEAVE => crate::house::leave(app.open_book()?).map(|()| Value::Null),
+        ISBN_LIST => {
+            let file = crate::house::file(params.get("house").and_then(Value::as_str), &app.prefs.house_file)?;
+            Ok(json!({ "isbns": crate::house::isbn_list(&file)? }))
+        }
+        ISBN_ASSIGN => {
+            let file = crate::house::file(params.get("house").and_then(Value::as_str), &app.prefs.house_file)?;
+            let edition = s(params, "edition")?.to_owned();
+            Ok(json!({ "isbn": crate::house::isbn_assign(app.open_book()?, &file, &edition)? }))
+        }
         SERIES_VIEW => {
             let file = crate::house::file(params.get("house").and_then(Value::as_str), &app.prefs.house_file)?;
             let (name, rows) = crate::house::series_view(app.open_book()?, &file)?;

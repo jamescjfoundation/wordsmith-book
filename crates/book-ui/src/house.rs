@@ -204,3 +204,51 @@ pub fn series_view(b: &OpenBook, house_file: &Path) -> Result<(String, Vec<Serie
     }
     Ok((s.name.clone(), rows))
 }
+
+/// One of the house's ISBNs, as the list shows it (META-5).
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
+pub struct IsbnRow {
+    /// The ISBN-13, as the house file writes it.
+    pub isbn: String,
+    /// The book that uses it (empty: free).
+    pub book: String,
+    /// The edition that uses it.
+    pub edition: String,
+}
+
+/// The house's ISBNs (each checked when the house file is read: a valid checksum, used once).
+pub fn isbn_list(house_file: &Path) -> Result<Vec<IsbnRow>, String> {
+    Ok(load(house_file)?.isbns.into_iter().map(|i| IsbnRow { isbn: i.isbn, book: i.book, edition: i.edition }).collect())
+}
+
+/// Give print or ebook edition `edition` the house's next free ISBN, recorded in the house file
+/// as this book's and that edition's; gives the ISBN. Refused when the edition has an ISBN or
+/// the house has none free.
+pub fn isbn_assign(b: &mut OpenBook, house_file: &Path, edition: &str) -> Result<String, String> {
+    let mut house = load(house_file)?;
+    let e = b.files.project.edition(edition).ok_or_else(|| format!("there is no edition `{edition}`"))?.clone();
+    if !e.isbn.trim().is_empty() {
+        return Err(format!("the {} has an ISBN already ({})", e.name.to_lowercase(), e.isbn));
+    }
+    let book = b.files.project.metadata.overrides.get("title").cloned().filter(|t| !t.trim().is_empty()).unwrap_or_else(|| {
+        b.source.as_ref().ok().map(|s| s.book.metadata.info.title.clone()).filter(|t| !t.trim().is_empty()).unwrap_or_else(|| b.name())
+    });
+    let free = house.isbns.iter_mut().find(|i| i.book.trim().is_empty()).ok_or("the house has no free ISBN left")?;
+    wordsmith_book_model::isbn::check(&free.isbn)?;
+    let isbn = free.isbn.trim().to_owned();
+    free.book = book;
+    free.edition = e.name.clone();
+    let id = e.id.clone();
+    let value = isbn.clone();
+    b.edit(|f| {
+        let e = f.project.editions.iter_mut().find(|x| x.id == id).ok_or("the edition went away")?;
+        e.isbn = value;
+        Ok(())
+    })?;
+    // The house file records the use; if it cannot be written, the book does not keep the ISBN.
+    if let Err(e) = wordsmith_book_format::house::write(house_file, &house) {
+        b.undo();
+        return Err(format!("the house file could not be written, so the ISBN was not taken: {e}"));
+    }
+    Ok(isbn)
+}
