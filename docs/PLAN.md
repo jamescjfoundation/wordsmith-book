@@ -652,7 +652,7 @@ Section 5.8.
 | M7 Preview | 0.1 | Print spreads, ebook preview, live updates | done |
 | M8 Preflight and export | 0.1 | Checks, validators, export, bundle | done |
 | M9 Release | 0.1 | CLI, agent tools, guide, packaging, the v0.1 test | done (the release itself waits for a person) |
-| R2 | 0.2 | Parity for most novels | |
+| R2 | 0.2 | Parity for most novels | done (the release itself waits for a person) |
 | R3 | 0.3 | Designs, series and standards | |
 | R4 | 1.0 | Publishing house | |
 

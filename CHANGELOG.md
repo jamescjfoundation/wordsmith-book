@@ -2,6 +2,60 @@
 
 Each release says what changed for people who make books with Wordsmith Book.
 
+## 0.2.0 (unreleased)
+
+Parity for most novels: every common trim, hardcovers, bleed, notes, asides, more front and back
+matter, store editions, covers, re-import, typographic checks, an accessibility checker,
+line-break hints, a Spanish interface and screen-reader names throughout.
+
+### Added
+
+- **Trims.** Eighteen sizes in the print-on-demand and generic profiles, metric ones included,
+  each with its gutter table and page limits.
+- **Hardcover.** A hardcover edition on its own profile (`pod-hardcover`): case-laminate sizes,
+  wider margins for the hinge, its page limits.
+- **Bleed and full-page pictures.** An edition set to bleed gets pages larger than the trim, trim
+  and bleed boxes in the PDF (core 0.1.11), and pictures that fill their page to the edge.
+- **Notes.** Footnotes at the foot of the page that calls them, continued on the next page when
+  long; or notes at each chapter's end or the book's end. In the ebook, pop-up footnotes or
+  endnotes per edition, linked both ways. The core's EPUB writer keeps notes too (core 0.1.12).
+- **Asides.** Letters, notes, signs and messages styled by the design (inset, italic, framed or
+  centred), in print and in the ebook.
+- **More front and back matter.** Foreword, preface, introduction, prologue, epilogue,
+  afterword, a newsletter or website page, an excerpt from the next book, a glossary, endnotes and
+  discussion questions, each placed where convention puts it.
+- **Print-only and ebook-only.** Per chapter, per element and per paragraph.
+- **Store editions.** Ebook editions named for a store, so links and pages meant for one store
+  show only in its edition.
+- **Page list.** An ebook edition carries the print edition's page numbers, so readers and
+  teachers can cite the same page.
+- **Covers.** The full-wrap cover template for a paperback or hardcover (PDF and PNG: trim,
+  spine, bleed, safe areas, the barcode area), and a supplied cover checked against it.
+- **Re-import.** A new version of the file a book was imported from, compared section by section
+  and word by word before it replaces the old text; Book's settings are kept.
+- **Typographic warnings.** Widows, orphans, stacked hyphens, loose lines and rivers, by page, in
+  preflight.
+- **Accessibility checker.** An EPUB accessibility checker you installed runs in preflight beside
+  the standard EPUB validator; its findings link to their files.
+- **Line-break hints.** Words and phrases never split across lines, and words hyphenated only
+  where you say, applied in print and kept in the ebook without changing your manuscript.
+- **Interface languages.** English and Spanish, through the core's translation catalogs (core
+  0.1.13); the language follows your computer unless you choose one in Preferences.
+- **Screen readers.** Every button, field, link, tab and page preview has a name a screen reader
+  reads (the core named its last two unnamed fields in 0.1.14).
+
+### Changed
+
+- The ebook's page list names its source with `dc:source`, refined as the source of the
+  pagination, which both the standard EPUB validator and accessibility checkers read.
+- Book's word checks leave soft hyphens out of words, so hinted words still match the source.
+
+### Known limits
+
+- Command replies (what agents read), preflight findings and build messages are in English.
+- The core's layout does not hyphenate on its own; words break only at soft hyphens (from the
+  manuscript or from Book's hints).
+
 ## 0.1.0 (unreleased)
 
 The first release: a finished manuscript to a print-ready paperback PDF and a valid, accessible

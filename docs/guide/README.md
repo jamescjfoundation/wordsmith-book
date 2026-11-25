@@ -1,7 +1,8 @@
 # Wordsmith Book guide
 
-Wordsmith Book turns a finished manuscript into a print-ready PDF for a paperback and a valid,
-accessible EPUB for ebook stores, and checks every word of both against the source.
+Wordsmith Book turns a finished manuscript into a print-ready PDF for a paperback or hardcover and
+a valid, accessible EPUB for ebook stores, and checks every word of both against the source. This
+guide covers version 0.2; its interface is in English and Spanish.
 
 1. [Getting started](getting-started.md)
 2. [Importing a manuscript](import.md)
