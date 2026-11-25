@@ -78,8 +78,8 @@ pub fn build(
     let edition =
         project.editions.iter().find(|e| e.id == edition_id).ok_or_else(|| Error::Build(edition_id.to_owned(), "there is no such edition".into()))?;
     let (mut report, bytes) = preflight::preflight(project, designs, source, edition, images);
-    if let (Some(v), Some(b), false) = (validator, &bytes, edition.format.is_print()) {
-        preflight::add_validator(&mut report, b, v);
+    if let (Some(v), Some(b)) = (validator, &bytes) {
+        preflight::add_validator(&mut report, b, v, edition);
     }
     if report.blocked() {
         return Err(Error::Blocked(Box::new(report)));

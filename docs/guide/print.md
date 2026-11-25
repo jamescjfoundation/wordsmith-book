@@ -48,3 +48,7 @@ against it before sending it to the printer.
 large-print variant of your book's design: 16-point type and up, ragged right, no hyphenation,
 headings grown to match. Preflight checks that nothing in it is smaller. A long novel in large
 print can run past the printer's page limit; preflight says so.
+
+**PDF/A and PDF/UA (PRT-12):** tick *PDF/A and PDF/UA* on a print edition in Details and its PDF
+declares PDF/A-2b (for archives) and PDF/UA-1 (accessible). If you have installed a PDF
+validator, set its path in Preferences and preflight checks the file against both.

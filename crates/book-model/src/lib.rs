@@ -355,6 +355,9 @@ pub struct Edition {
     /// For ebooks: the cover image, by its path in the project (`assets/cover.jpg`) (EBK-5).
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub cover: String,
+    /// For print editions: declare PDF/A-2b and PDF/UA-1 on the PDF (PRT-12).
+    #[serde(default, skip_serializing_if = "is_false")]
+    pub pdf_standards: bool,
 }
 
 impl Edition {

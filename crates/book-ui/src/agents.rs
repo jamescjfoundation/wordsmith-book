@@ -67,7 +67,9 @@ fn params(id: &str) -> &'static str {
         METADATA_SET => r#"{"field", "value"}"#,
         CONTRIBUTOR_ADD => r#"{"name", "role": author|editor|translator|illustrator|foreword|introduction|cover-designer|narrator}"#,
         EDITION_ADD => r#"{"format": paperback|hardcover|ebook|large-print}"#,
-        EDITION_SET => r#"{"id", "isbn", "trim", "paper", "profile", "embed_fonts", "cover", ...}"#,
+        EDITION_SET => {
+            r#"{"id", "isbn", "trim", "paper", "profile", "embed_fonts", "cover", "pdf_standards": bool (print: PDF/A-2b and PDF/UA-1), ...}"#
+        }
         EDITION_REMOVE | REMOVE_ELEMENT | DESIGN_CHOOSE => r#"{"id"}"#,
         FIX_ADD => r#"{"section", "find", "replace", "note"}"#,
         FIX_EDIT => r#"{"section", "paragraph": n, "text", "note"}"#,

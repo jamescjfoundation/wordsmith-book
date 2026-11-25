@@ -165,6 +165,7 @@ impl Profile {
             } else {
                 0.0
             },
+            pdf_standards: edition.pdf_standards,
         })
     }
 

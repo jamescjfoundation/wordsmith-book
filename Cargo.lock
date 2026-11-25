@@ -2060,11 +2060,11 @@ checksum = "3bd1574e617a9a6c1f8f8181bd7e841e1f20e4277607ef28945765188d6284d4"
 
 [[package]]
 name = "jcj-agents"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "jcj-engine",
- "jcj-upstream 0.1.14",
+ "jcj-upstream 0.1.15",
  "serde_json",
 ]
 
@@ -2080,22 +2080,22 @@ dependencies = [
 
 [[package]]
 name = "jcj-doc"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
- "jcj-upstream 0.1.14",
+ "jcj-upstream 0.1.15",
  "serde",
  "serde_json",
 ]
 
 [[package]]
 name = "jcj-engine"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "jcj-proof",
- "jcj-upstream 0.1.14",
+ "jcj-upstream 0.1.15",
  "serde",
  "serde_json",
 ]
@@ -2110,11 +2110,11 @@ dependencies = [
 
 [[package]]
 name = "jcj-features"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "chrono",
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "jcj-engine",
  "jcj-layout",
  "serde",
@@ -2123,20 +2123,20 @@ dependencies = [
 
 [[package]]
 name = "jcj-i18n"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "toml",
 ]
 
 [[package]]
 name = "jcj-interchange"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "chrono",
- "jcj-doc 0.1.14",
- "jcj-upstream 0.1.14",
+ "jcj-doc 0.1.15",
+ "jcj-upstream 0.1.15",
  "sha2 0.11.1",
  "thiserror 2.0.21",
  "zip 3.0.0",
@@ -2144,23 +2144,23 @@ dependencies = [
 
 [[package]]
 name = "jcj-layout"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
- "jcj-doc 0.1.14",
- "jcj-upstream 0.1.14",
+ "jcj-doc 0.1.15",
+ "jcj-upstream 0.1.15",
  "log",
  "serde_json",
 ]
 
 [[package]]
 name = "jcj-output"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "jcj-layout",
- "jcj-upstream 0.1.14",
+ "jcj-upstream 0.1.15",
  "kurbo",
 ]
 
@@ -2181,12 +2181,12 @@ dependencies = [
 
 [[package]]
 name = "jcj-project"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "chrono",
- "jcj-doc 0.1.14",
- "jcj-upstream 0.1.14",
+ "jcj-doc 0.1.15",
+ "jcj-upstream 0.1.15",
  "serde",
  "serde_json",
  "sha2 0.11.1",
@@ -2196,22 +2196,22 @@ dependencies = [
 
 [[package]]
 name = "jcj-proof"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
- "jcj-upstream 0.1.14",
+ "jcj-upstream 0.1.15",
 ]
 
 [[package]]
 name = "jcj-shell"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "egui",
  "image",
  "jcj-i18n",
  "jcj-theme",
- "jcj-upstream 0.1.14",
+ "jcj-upstream 0.1.15",
  "log",
  "serde",
  "serde_json",
@@ -2219,8 +2219,8 @@ dependencies = [
 
 [[package]]
 name = "jcj-theme"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "egui",
  "jcj-layout",
@@ -2251,8 +2251,8 @@ dependencies = [
 
 [[package]]
 name = "jcj-upstream"
-version = "0.1.14"
-source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.14#0ff13005eb8ad0e371ddcd565d9ade4dde4f90c9"
+version = "0.1.15"
+source = "git+https://github.com/jamescjfoundation/open-source-core?tag=v0.1.15#e2761c0f8dae95ccb7750998456bc714f6d7f757"
 dependencies = [
  "craft-atomic 0.1.0 (git+https://github.com/storytold/craft-libs?rev=6e03f65bf45181db77ba6229716e6624db9eb25b)",
  "craft-dialogs",
@@ -5458,12 +5458,12 @@ name = "wordsmith-book-check"
 version = "0.1.0"
 dependencies = [
  "image",
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "jcj-features",
  "jcj-interchange",
  "jcj-layout",
  "jcj-output",
- "jcj-project 0.1.14",
+ "jcj-project 0.1.15",
  "roxmltree",
  "serde",
  "serde_json",
@@ -5517,7 +5517,7 @@ dependencies = [
 name = "wordsmith-book-format"
 version = "0.1.0"
 dependencies = [
- "jcj-project 0.1.14",
+ "jcj-project 0.1.15",
  "proptest",
  "serde",
  "serde_json",
@@ -5533,7 +5533,7 @@ dependencies = [
 name = "wordsmith-book-import"
 version = "0.1.0"
 dependencies = [
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "jcj-features",
  "jcj-interchange",
  "roxmltree",
@@ -5548,7 +5548,7 @@ dependencies = [
 name = "wordsmith-book-model"
 version = "0.1.0"
 dependencies = [
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "proptest",
  "serde",
  "serde_json",
@@ -5559,7 +5559,7 @@ dependencies = [
 name = "wordsmith-book-typeset"
 version = "0.1.0"
 dependencies = [
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "jcj-layout",
  "jcj-output",
  "wordsmith-book-design",
@@ -5575,7 +5575,7 @@ version = "0.1.0"
 dependencies = [
  "egui_kittest",
  "jcj-agents",
- "jcj-doc 0.1.14",
+ "jcj-doc 0.1.15",
  "jcj-engine",
  "jcj-features",
  "jcj-i18n",

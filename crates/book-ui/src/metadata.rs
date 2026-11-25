@@ -105,7 +105,8 @@ pub fn add_edition(b: &mut OpenBook, format: &str) -> Result<String, String> {
     Ok(id)
 }
 
-/// Change an edition: `{"id", "name", "isbn", "trim", "paper", "profile", "bleed", "notes", "price_notes", "store"}`.
+/// Change an edition: `{"id", "name", "isbn", "trim", "paper", "profile", "bleed", "notes", "price_notes", "store",
+/// "pdf_standards"}`.
 /// An ISBN is checked before it is kept.
 pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
     let id = params.get("id").and_then(Value::as_str).ok_or("`id` is needed")?.to_owned();
@@ -120,6 +121,7 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
         params.get("paper").map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not white, cream or color"))).transpose()?;
     let (name, trim, profile, price, store) = (text("name"), text("trim"), text("profile"), text("price_notes"), text("store"));
     let bleed = params.get("bleed").and_then(Value::as_bool);
+    let standards = params.get("pdf_standards").and_then(Value::as_bool);
     let notes: Option<wordsmith_book_model::NoteStyle> = params
         .get("notes")
         .map(|v| serde_json::from_value(v.clone()).map_err(|_| format!("`{v}` is not popup, chapter-end or book-end")))
@@ -152,6 +154,12 @@ pub fn set_edition(b: &mut OpenBook, params: &Value) -> Result<(), String> {
         }
         if let Some(v) = notes {
             e.notes = v;
+        }
+        if let Some(v) = standards {
+            if v && !e.format.is_print() {
+                return Err("PDF/A and PDF/UA are for print editions' PDFs".into());
+            }
+            e.pdf_standards = v;
         }
         // A printed edition's trim must be one its profile has (an empty one is a need).
         if e.format.is_print() && !e.trim.is_empty() {
@@ -208,6 +216,16 @@ impl Panel {
                     && let Err(m) = isbn::check(v)
                 {
                     ui.label(m);
+                }
+                if e.format.is_print() {
+                    let mut on = e.pdf_standards;
+                    if ui
+                        .checkbox(&mut on, tr("PDF/A and PDF/UA"))
+                        .on_hover_text(tr("Declare PDF/A-2b (archival) and PDF/UA-1 (accessible) on this edition's PDF"))
+                        .changed()
+                    {
+                        run = Some((crate::commands::EDITION_SET, json!({ "id": e.id, "pdf_standards": on })));
+                    }
                 }
             });
         }

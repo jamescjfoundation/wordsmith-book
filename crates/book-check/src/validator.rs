@@ -32,6 +32,8 @@ pub struct Settings {
     pub seconds: u32,
     /// The accessibility checker (see [`crate::access_check`]). Empty when not set up.
     pub access: String,
+    /// The PDF validator (see [`crate::pdf_check`]). Empty when not set up.
+    pub pdf: String,
 }
 
 impl Settings {

@@ -428,6 +428,14 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
     16 pt at least. Preflight blocks a large-print edition with any text (running heads apart)
     under 16 pt. The `pod-paperback` profile's page limits still hold: a long novel may need
     volumes. [Designed]
+19. **PDF/A-2b and PDF/UA-1** (PRT-12, from 0.3): a print edition set to (`pdf_standards`)
+    declares both on its PDF, through the core (`jcj_output::declare`, core v0.1.15): the
+    identifications in the XMP metadata, an sRGB output intent, the document title shown, the
+    book's language and author. The PDF is tagged and embeds its fonts already. Preflight blocks
+    such an edition whose PDF lacks a declaration, and runs a PDF validator the user installed
+    (its program in Preferences) against both standards, each failed rule blocking; not set up
+    is a note. The test book's PDF passes the standard validator for both. [Verified: the
+    standard PDF validator, PDF/A-2b and PDF/UA-1 profiles]
 
 ## 6. Ebook rules (EBK-1 to EBK-5, EBK-8)
 

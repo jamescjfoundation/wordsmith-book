@@ -53,8 +53,8 @@ pub fn run(b: &OpenBook, edition: &str, validator: &wordsmith_book_check::valida
     let src = b.source.as_ref().map_err(Clone::clone)?;
     let e = b.files.project.editions.iter().find(|e| e.id == edition).ok_or_else(|| format!("there is no edition `{edition}`"))?;
     let (mut r, bytes) = wordsmith_book_check::preflight::preflight(&b.files.project, &b.files.designs, src, e, &|p| b.picture(p));
-    if let Some(bytes) = bytes.filter(|_| !e.format.is_print()) {
-        wordsmith_book_check::preflight::add_validator(&mut r, &bytes, validator);
+    if let Some(bytes) = bytes {
+        wordsmith_book_check::preflight::add_validator(&mut r, &bytes, validator, e);
     }
     Ok(r)
 }
@@ -82,8 +82,8 @@ impl Panel {
         let (tx, rx) = channel();
         std::thread::spawn(move || {
             let (mut r, bytes) = wordsmith_book_check::preflight::preflight(&project, &designs, &src, &e, &|p| pictures.get(p).cloned());
-            if let Some(bytes) = bytes.filter(|_| !e.format.is_print()) {
-                wordsmith_book_check::preflight::add_validator(&mut r, &bytes, &validator);
+            if let Some(bytes) = bytes {
+                wordsmith_book_check::preflight::add_validator(&mut r, &bytes, &validator, &e);
             }
             let _ = tx.send(r);
         });

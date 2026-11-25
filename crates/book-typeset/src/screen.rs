@@ -49,6 +49,7 @@ pub fn ebook_look(design: &Design, device: &Device, text: f32) -> Result<Look, E
         bleed: 0.0,
         notes: crate::NotePlace::ChapterEnd,
         min_size: 0.0,
+        pdf_standards: false,
     };
     let mut l = look(design, &geometry)?;
     let e = &design.ebook;

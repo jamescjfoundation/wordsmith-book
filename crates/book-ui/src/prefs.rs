@@ -22,6 +22,8 @@ pub struct BookPrefs {
     pub access_checker: String,
     /// The interface language's code (ACC-3; empty: the computer's).
     pub language: String,
+    /// The PDF validator: a program (empty: not set up; PRT-12).
+    pub pdf_validator: String,
 }
 
 impl BookPrefs {
@@ -32,6 +34,7 @@ impl BookPrefs {
             java: self.java.clone(),
             seconds: self.validator_seconds.min(3600),
             access: self.access_checker.clone(),
+            pdf: self.pdf_validator.clone(),
         }
     }
 }
@@ -66,6 +69,7 @@ pub fn ui(ui: &mut egui::Ui, p: &mut BookPrefs) {
     field(ui, tl("EPUB validator"), &mut p.validator, tl("its .jar file, or a program"));
     field(ui, tl("Java runtime"), &mut p.java, tl("leave empty to use java"));
     field(ui, tl("Accessibility checker"), &mut p.access_checker, tl("its program"));
+    field(ui, tl("PDF validator"), &mut p.pdf_validator, tl("its program, for PDF/A and PDF/UA"));
     ui.horizontal(|ui| {
         let label = ui.label(tr("Time limit (seconds)"));
         ui.add(egui::DragValue::new(&mut p.validator_seconds).range(0..=3600)).labelled_by(label.id);

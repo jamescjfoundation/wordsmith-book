@@ -10,6 +10,7 @@ pub mod build;
 pub mod cover;
 pub mod epub;
 pub mod export;
+pub mod pdf_check;
 pub mod preflight;
 pub mod profile;
 pub mod validator;

@@ -56,6 +56,7 @@ fn the_test_of_v0_1() {
         java: std::env::var("BOOK_JAVA").unwrap_or_default(),
         seconds: 300,
         access: String::new(),
+        pdf: String::new(),
     });
     let sources = [
         ("waverley-docx", from_docx("waverley.docx", "Waverley", "Walter Scott")),

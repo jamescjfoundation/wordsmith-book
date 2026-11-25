@@ -363,7 +363,19 @@ pub fn typography(print: &Print) -> Vec<Finding> {
 
 /// Every print finding for a built print edition and its PDF.
 pub fn print_findings(print: &Print, pdf: &[u8], source: &Book, edition: &Edition) -> Vec<Finding> {
+    let mut declared = Vec::new();
+    if edition.pdf_standards {
+        for standard in crate::pdf_check::declares(pdf) {
+            declared.push(finding(
+                "pdf-standards",
+                Severity::Blocks,
+                format!("The PDF does not declare {standard}, which this edition asks for."),
+                Link::None,
+            ));
+        }
+    }
     let mut out = margins(print);
+    out.extend(declared);
     let faces: Vec<(String, &[u8])> = fonts::bundled()
         .into_iter()
         .filter(|f| {
@@ -585,10 +597,17 @@ pub fn preflight(
     (report, bytes)
 }
 
-/// Add the external EPUB validator's and accessibility checker's findings to an ebook's report
-/// (a note for each that is not set up).
-pub fn add_validator(report: &mut Report, epub: &[u8], settings: &crate::validator::Settings) {
-    report.findings.extend(crate::validator::check(settings, epub));
-    report.findings.extend(crate::access_check::check(settings, epub));
+/// Add the external checkers' findings to an edition's report (a note for each that is not set
+/// up): for an ebook, the EPUB validator's and the accessibility checker's; for a print edition
+/// that declares PDF/A-2b and PDF/UA-1, the PDF validator's; nothing for other print editions.
+pub fn add_validator(report: &mut Report, bytes: &[u8], settings: &crate::validator::Settings, edition: &Edition) {
+    if edition.format.is_print() {
+        if edition.pdf_standards {
+            report.findings.extend(crate::pdf_check::check(settings, bytes));
+        }
+    } else {
+        report.findings.extend(crate::validator::check(settings, bytes));
+        report.findings.extend(crate::access_check::check(settings, bytes));
+    }
     report.sort();
 }

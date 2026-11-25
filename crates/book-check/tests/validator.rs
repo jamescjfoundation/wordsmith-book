@@ -103,6 +103,9 @@ fn the_real_validator_finds_nothing_in_a_book_epub_where_it_is_set_up() {
     project.elements = wordsmith_book_model::matter::default_elements();
     let (_, e) =
         wordsmith_book_check::build::ebook(&project, &Default::default(), &book, &wordsmith_book_model::Edition::ebook(), &|_| None).unwrap();
-    let f = validator::check(&Settings { program: jar.to_string_lossy().into_owned(), java, seconds: 120, access: String::new() }, &e.bytes);
+    let f = validator::check(
+        &Settings { program: jar.to_string_lossy().into_owned(), java, seconds: 120, access: String::new(), pdf: String::new() },
+        &e.bytes,
+    );
     assert!(f.iter().all(|x| x.severity == Severity::Note), "{f:#?}");
 }

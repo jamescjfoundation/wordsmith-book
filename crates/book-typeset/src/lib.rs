@@ -309,6 +309,8 @@ pub struct Look {
     /// The smallest size any of the book's text is set in, points (large print, PRT-11; 0: no
     /// floor, notes and epigraphs a little smaller than the body).
     pub min_size: f32,
+    /// Declare PDF/A-2b and PDF/UA-1 on the PDF (PRT-12).
+    pub pdf_standards: bool,
 }
 
 impl Default for Look {
@@ -346,6 +348,7 @@ impl Default for Look {
             asides: wordsmith_book_design::design::Asides::default(),
             widow_control: true,
             min_size: 0.0,
+            pdf_standards: false,
         }
     }
 }
@@ -392,6 +395,8 @@ pub struct Typeset {
     /// The trim (inches) and bleed (inches), for the trim box.
     trim: (f32, f32),
     bleed: f32,
+    lang: String,
+    standards: bool,
 }
 
 /// A paragraph's text as printed: objects left out, but a footnote reference shows its number.
@@ -578,6 +583,8 @@ pub fn typeset(book: &PrintBook, look: &Look, date: &str) -> Result<Typeset, Err
             gutter: pass.gutter,
             trim: look.trim,
             bleed: look.bleed,
+            lang: book.lang.clone(),
+            standards: look.pdf_standards,
         };
         let map = t.page_map();
         let mut next = Pass { gutter: look.gutter_for(t.page_count()), ..Pass::default() };
@@ -694,9 +701,17 @@ impl Typeset {
             ..jcj_output::PdfSettings::default()
         };
         let pdf = jcj_output::export_pdf(&self.doc, &self.layout, &settings).map_err(|e| Error::Pdf(format!("{e:?}")))?;
-        if self.bleed <= 0.0 {
+        let limits = jcj_output::ReadLimits { max_input_bytes: 1 << 30, max_pages: 100_000, max_glyphs_per_page: 1 };
+        let pdf = if self.bleed <= 0.0 { pdf } else { self.with_boxes(&pdf, &limits)? };
+        if !self.standards {
             return Ok(pdf);
         }
+        let c = jcj_output::Conformance { pdf_a: true, pdf_ua: true, author: self.author.clone(), language: self.lang.clone() };
+        jcj_output::declare(&pdf, &c, &limits).map_err(|e| Error::Pdf(e.to_string()))
+    }
+
+    /// The PDF with each page's trim and bleed boxes.
+    fn with_boxes(&self, pdf: &[u8], limits: &jcj_output::ReadLimits) -> Result<Vec<u8>, Error> {
         let boxes: Vec<jcj_output::Boxes> = (0..self.page_count())
             .map(|i| {
                 let (x0, y0, x1, y1) = self.trim_box(i);
@@ -706,8 +721,7 @@ impl Typeset {
                 jcj_output::Boxes { trim: pb(x0, y0, x1, y1), bleed: Some(pb(0.0, 0.0, w, h)) }
             })
             .collect();
-        let limits = jcj_output::ReadLimits { max_input_bytes: 1 << 30, max_pages: 100_000, max_glyphs_per_page: 1 };
-        jcj_output::set_page_boxes(&pdf, &boxes, &limits).map_err(|e| Error::Pdf(e.to_string()))
+        jcj_output::set_page_boxes(pdf, &boxes, limits).map_err(|e| Error::Pdf(e.to_string()))
     }
 
     /// Page `index` (from 0) as a PNG at `ppi` pixels per inch, with its pixel size.

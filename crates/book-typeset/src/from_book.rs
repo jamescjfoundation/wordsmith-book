@@ -31,6 +31,8 @@ pub struct Geometry {
     pub notes: crate::NotePlace,
     /// The smallest size of any text, points (large print; 0: none).
     pub min_size: f32,
+    /// Declare PDF/A-2b and PDF/UA-1 on the PDF (PRT-12).
+    pub pdf_standards: bool,
 }
 
 impl Default for Geometry {
@@ -42,6 +44,7 @@ impl Default for Geometry {
             bleed: 0.0,
             notes: crate::NotePlace::ChapterEnd,
             min_size: 0.0,
+            pdf_standards: false,
         }
     }
 }
@@ -110,6 +113,7 @@ pub fn look(design: &Design, geometry: &Geometry) -> Result<Look, Error> {
         asides: d.asides.clone(),
         widow_control: d.body.orphans >= 2 || d.body.widows >= 2,
         min_size: geometry.min_size,
+        pdf_standards: geometry.pdf_standards,
     })
 }
 
