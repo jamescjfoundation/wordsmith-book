@@ -546,10 +546,16 @@ pub fn ebook(
     let mut landmarks = Vec::new();
     let mut first_body = true;
     let mut in_part;
+    let mut notes_at: Option<(usize, usize, String)> = None;
     let mut n = 0;
     for (zone, pieces) in [("frontmatter", &a.front), ("bodymatter", &a.body), ("backmatter", &a.back)] {
         in_part = false;
         for p in pieces.iter().filter(|p| in_ebook(p)) {
+            // The book's Notes element: notes gathered at the book's end are read here.
+            if edition.notes == NoteStyle::BookEnd && p.what == What::Element(ElementKind::Endnotes) {
+                notes_at.get_or_insert((spine.len(), toc.len(), if p.title.is_empty() { "Notes".to_owned() } else { p.title.clone() }));
+                continue;
+            }
             if is_contents(p) {
                 // The navigation document is the contents, read where the contents stand.
                 nav_in_spine.get_or_insert(spine.len());
@@ -613,8 +619,10 @@ pub fn ebook(
     }
     // Notes gathered for the book's end: their own document, last in the reading order.
     if !w.gathered.is_empty() {
+        let notes_title = notes_at.as_ref().map_or_else(|| "Notes".to_owned(), |n| n.2.clone());
         let body = format!(
-            "<section id=\"notes\" epub:type=\"endnotes\" role=\"doc-endnotes\" aria-labelledby=\"notes-h\">\n<header>\n<h1 id=\"notes-h\">Notes</h1>\n</header>\n{}</section>\n",
+            "<section id=\"notes\" epub:type=\"endnotes\" role=\"doc-endnotes\" aria-labelledby=\"notes-h\">\n<header>\n<h1 id=\"notes-h\">{}</h1>\n</header>\n{}</section>\n",
+            escape(&notes_title),
             w.gathered
         );
         items.push(Item {
@@ -622,10 +630,19 @@ pub fn ebook(
             href: format!("text/{NOTES_FILE}"),
             media_type: "application/xhtml+xml".into(),
             properties: Vec::new(),
-            bytes: document(lang, "Notes", "backmatter", &body).into_bytes(),
+            bytes: document(lang, &notes_title, "backmatter", &body).into_bytes(),
         });
-        spine.push(("notes".into(), true));
-        toc.push(NavPoint { label: "Notes".into(), href: format!("text/{NOTES_FILE}#notes"), children: Vec::new() });
+        let entry = NavPoint { label: notes_title.clone(), href: format!("text/{NOTES_FILE}#notes"), children: Vec::new() };
+        match notes_at {
+            Some((at, toc_at, _)) => {
+                spine.insert(at, ("notes".into(), true));
+                toc.insert(toc_at, entry);
+            }
+            None => {
+                spine.push(("notes".into(), true));
+                toc.push(entry);
+            }
+        }
     }
     let nav = Nav { items, spine, nav_in_spine, toc, landmarks };
     finish(a, design, edition, settings, lang, w, nav)

@@ -218,8 +218,16 @@ impl Convert<'_> {
 }
 
 fn element_blocks(kind: ElementKind, blocks: &[MBlock]) -> Vec<Block> {
-    let spans =
-        |c: &Inlines| c.iter().filter_map(|i| if let Inline::Span { text, .. } = i { Some(Span::plain(text)) } else { None }).collect::<Vec<_>>();
+    let spans = |c: &Inlines| {
+        c.iter()
+            .filter_map(|i| match i {
+                Inline::Span { text, marks } => {
+                    Some(Span { text: text.clone(), italic: marks.italic, bold: marks.bold, small_caps: marks.small_caps, ..Span::default() })
+                }
+                Inline::NoteRef { .. } => None,
+            })
+            .collect::<Vec<_>>()
+    };
     blocks
         .iter()
         .map(|b| match (kind, b) {
@@ -302,8 +310,17 @@ pub fn print_book(
                     s.generated_title = true;
                     s.blocks = element_blocks(kind, &p.blocks);
                 }
+                // A prologue or epilogue opens like a chapter, without a number.
+                What::Element(kind @ (ElementKind::Prologue | ElementKind::Epilogue)) => {
+                    s.kind = Kind::Chapter;
+                    s.recto = recto_chapters;
+                    s.generated = true;
+                    s.generated_title = true;
+                    s.blocks = element_blocks(kind, &p.blocks);
+                }
                 What::Element(kind) => {
                     s.kind = if matches!(kind, ElementKind::Dedication | ElementKind::Epigraph) { Kind::Plain } else { Kind::Matter };
+                    s.holds_notes = kind == ElementKind::Endnotes;
                     if s.kind == Kind::Plain {
                         s.title.clear();
                     }

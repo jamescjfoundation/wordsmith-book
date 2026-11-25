@@ -17,6 +17,11 @@ about the author, also by, a newsletter invitation, an excerpt, a glossary, note
 group questions. If the source already has one of these (its own title page or copyright page),
 Book uses the source's and leaves its own out.
 
+**Placing them (STR-8).** Each kind goes to its conventional place when you add it (a prologue
+last before the text, notes before a glossary, and so on); a prologue and epilogue open like
+chapters; a glossary's terms are set in small capitals and questions are numbered; a Notes element
+holds the notes when an edition puts them at the end.
+
 **Element templates (STR-6).** Generated pages are templates with placeholders such as
 `{title}`, `{byline}`, `{year}`, `{holder}` and `{isbn_line}`, filled from the metadata; a placeholder Book does
 not know is reported by preflight.

@@ -478,7 +478,16 @@ pub fn run(app: &mut BookApp, id: &str, params: &Value) -> Result<Value, String>
             }
             let e = Element { id: new_id.clone(), kind: Some(kind), placement, ..Element::default() };
             b.edit(|f| {
-                f.project.elements.push(e);
+                // Where its kind goes by convention: after the last element on its side that comes
+                // before it, else first on its side.
+                let rank = kind.rank(placement);
+                let els = &f.project.elements;
+                let after = els.iter().rposition(|x| x.placement == placement && x.kind.is_some_and(|k| k.rank(placement) <= rank));
+                let at = match after {
+                    Some(i) => i + 1,
+                    None => els.iter().position(|x| x.placement == placement).unwrap_or(els.len()),
+                };
+                f.project.elements.insert(at, e);
                 Ok(())
             })?;
             Ok(json!({ "id": new_id }))

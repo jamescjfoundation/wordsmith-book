@@ -473,6 +473,38 @@ impl ElementKind {
         }
     }
 
+    /// Where an element of this kind sits among the others on its side of the book, by
+    /// convention (lower first): the title pages, dedication and epigraph, contents, then the
+    /// foreword, preface and introduction, with a prologue last before the text; after the text,
+    /// an epilogue and afterword, then notes, glossary and questions, an excerpt, and the pages
+    /// about the author.
+    pub fn rank(self, placement: Placement) -> u8 {
+        match (self, placement) {
+            (ElementKind::HalfTitle, _) => 0,
+            (ElementKind::TitlePage, _) => 1,
+            (ElementKind::Copyright, _) => 2,
+            (ElementKind::Dedication, _) => 3,
+            (ElementKind::Epigraph, _) => 4,
+            (ElementKind::Contents, _) => 5,
+            (ElementKind::Foreword, _) => 6,
+            (ElementKind::Preface, _) => 7,
+            (ElementKind::Acknowledgements, Placement::Front) => 8,
+            (ElementKind::Introduction, _) => 9,
+            (ElementKind::Prologue, _) => 10,
+            (ElementKind::Epilogue, _) => 20,
+            (ElementKind::Afterword, _) => 21,
+            (ElementKind::Acknowledgements, Placement::Back) => 22,
+            (ElementKind::Endnotes, _) => 23,
+            (ElementKind::Glossary, _) => 24,
+            (ElementKind::Questions, _) => 25,
+            (ElementKind::Excerpt, _) => 26,
+            (ElementKind::AboutTheAuthor, _) => 27,
+            (ElementKind::AlsoBy, _) => 28,
+            (ElementKind::Newsletter, _) => 29,
+            (ElementKind::Other, _) => 30,
+        }
+    }
+
     /// Where the element goes by default.
     pub fn placement(self) -> Placement {
         match self {

@@ -149,6 +149,12 @@ fn body(project: &BookProject, sections: &[Section], out: &mut Vec<Piece>) {
 pub fn assemble(project: &BookProject, book: &Book, edition: Option<&Edition>) -> Assembled {
     let meta = matter::meta(&book.metadata.info, &book.metadata.byline, &project.metadata, edition);
     let mut a = Assembled { meta, ..Assembled::default() };
+    // A Notes element with no text of its own holds the book's notes when they go at its end.
+    fn any_notes(s: &[Section]) -> bool {
+        s.iter().any(|x| !x.notes.is_empty() || any_notes(&x.children))
+    }
+    let notes_at_end = edition.is_none_or(|e| e.notes == wordsmith_book_model::NoteStyle::BookEnd)
+        && (any_notes(&book.front) || any_notes(&book.body) || any_notes(&book.back));
     for placement in [Placement::Front, Placement::Back] {
         let source: &[Section] = if placement == Placement::Front { &book.front } else { &book.back };
         let mut used = vec![false; source.len()];
@@ -168,7 +174,7 @@ pub fn assemble(project: &BookProject, book: &Book, edition: Option<&Edition>) -
             let (lines, unknown) = matter::lines(kind, &e.text, &a.meta);
             a.unknown.extend(unknown);
             // A generated element with nothing to say (no biography, no other books) is left out.
-            if lines.is_empty() && kind != ElementKind::Contents {
+            if lines.is_empty() && kind != ElementKind::Contents && !(kind == ElementKind::Endnotes && notes_at_end) {
                 continue;
             }
             pieces.push(Piece {

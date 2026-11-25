@@ -174,6 +174,8 @@ pub struct Section {
     pub generated_title: bool,
     /// The section's text is the book's own words (a generated page), not the author's.
     pub generated: bool,
+    /// The book's Notes element: notes gathered at the book's end go here.
+    pub holds_notes: bool,
 }
 
 /// The book to print, in reading order.
@@ -423,7 +425,9 @@ pub fn notes_at_end(book: &PrintBook) -> PrintBook {
             blocks.push(Block::Para(spans));
         }
     }
-    if !blocks.is_empty() {
+    if let Some(host) = out.sections.iter_mut().find(|s| s.holds_notes) {
+        host.blocks.extend(blocks);
+    } else if !blocks.is_empty() {
         out.sections.push(Section {
             id: "element:notes-at-end".into(),
             kind: Kind::Matter,

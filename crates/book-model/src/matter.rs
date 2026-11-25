@@ -108,6 +108,7 @@ pub fn default_template(kind: ElementKind) -> Option<&'static str> {
         ElementKind::TitlePage => Some("{title}\n{subtitle}\n{byline}\n{credits}\n{imprint}"),
         ElementKind::Copyright => Some("Copyright © {year} {holder}\n{rights}\n{isbn_line}\n{series}\nPublished by {imprint}\n{address}\n{website}"),
         ElementKind::AboutTheAuthor => Some("{about}"),
+        ElementKind::Newsletter => Some("To hear about new books first, sign up at {website}."),
         _ => None,
     }
 }
@@ -187,6 +188,8 @@ fn styled(kind: ElementKind, i: usize) -> &'static str {
         (ElementKind::TitlePage, 1) => "subtitle",
         (ElementKind::TitlePage, 2) => "byline",
         (ElementKind::TitlePage, _) | (ElementKind::Copyright, _) => "small",
+        (ElementKind::Glossary, _) => "term",
+        (ElementKind::Questions, _) => "question",
         _ => "body",
     }
 }
@@ -217,16 +220,35 @@ pub fn lines(kind: ElementKind, text: &str, m: &Meta) -> (Vec<Line>, Vec<String>
 }
 
 /// The lines as blocks of semantic text (headings for titles, paragraphs for the rest).
+///
+/// A glossary's lines are terms: “term: definition” or “term — definition”, the term in small
+/// capitals. A list of questions is numbered.
 pub fn blocks(lines: &[Line]) -> Vec<Block> {
+    let mut question = 0;
     lines
         .iter()
         .map(|l| match l.style {
             "title" => Block::Heading { level: 1, content: vec![Inline::plain(&l.text)] },
             "subtitle" | "heading" => Block::Heading { level: 2, content: vec![Inline::plain(&l.text)] },
             "byline" => Block::Heading { level: 3, content: vec![Inline::plain(&l.text)] },
+            "term" => Block::Para(term(&l.text)),
+            "question" => {
+                question += 1;
+                let text = l.text.trim_start_matches(|c: char| c.is_ascii_digit() || c == '.' || c == ')').trim_start();
+                Block::Para(vec![Inline::marked(format!("{question}. {text}"), Marks::default())])
+            }
             _ => Block::Para(vec![Inline::marked(&l.text, Marks::default())]),
         })
         .collect()
+}
+
+/// A glossary line: the term in small capitals, then the rest as written.
+fn term(line: &str) -> Vec<Inline> {
+    let cut = line.find(" — ").or_else(|| line.find(':'));
+    match cut {
+        Some(i) if i > 0 => vec![Inline::marked(&line[..i], Marks { small_caps: true, ..Marks::default() }), Inline::plain(&line[i..])],
+        _ => vec![Inline::plain(line)],
+    }
 }
 
 /// The elements a new book starts with: half title, title page, copyright and contents in front,

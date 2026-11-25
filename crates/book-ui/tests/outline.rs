@@ -91,9 +91,11 @@ fn outline_commands_are_undoable_save_and_never_touch_the_manuscript() {
     app.command(commands::SET_ELEMENT, &json!({ "id": ded, "text": "For the travellers." })).unwrap();
     app.command(commands::MOVE_ELEMENT, &json!({ "id": about, "target": { "heading": "front" }, "zone": "inside" })).unwrap();
     let ids: Vec<_> = app.book.as_ref().unwrap().files.project.elements.iter().map(|e| (e.id.clone(), e.placement)).collect();
-    // The new book's own elements, then the two added; the moved one first of the front matter.
+    // The moved one first of the front matter; the dedication in its conventional place, after
+    // the copyright page and before the contents (plan R2.7).
     assert_eq!(ids.first(), Some(&(about.clone(), Placement::Front)));
-    assert_eq!(ids.last(), Some(&(ded.clone(), Placement::Front)));
+    let at = |id: &str| ids.iter().position(|(x, _)| x == id).unwrap();
+    assert!(at("copyright") < at(&ded) && at(&ded) < at("contents"), "{ids:?}");
     // A source section cannot be moved, and the error says where to change it.
     let first_chapter = app.book.as_ref().unwrap().source.as_ref().unwrap().book.body[0].children[0].id;
     let e =

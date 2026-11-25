@@ -189,6 +189,19 @@ dedication, epigraph, contents, then the body. [Verified] An ebook puts the copy
    builds and the user told; waiting → listed by preflight; stale (the words are no longer there
    exactly once) → shown with the new text. Never a silent overwrite. [Designed]
 
+### 2.6 More front and back matter (STR-8, from 0.2)
+
+1. A foreword, preface, introduction, prologue, epilogue, afterword, newsletter or website page,
+   excerpt from the next book, glossary, notes and discussion questions can be added; each goes
+   to its conventional place on its side of the book (title pages, dedication, epigraph,
+   contents, foreword, preface, introduction, prologue; then epilogue, afterword,
+   acknowledgements, notes, glossary, questions, excerpt, about the author, also by, newsletter)
+   and can be moved. [Designed]
+2. A prologue and an epilogue open like chapters, without numbers. A newsletter page says where
+   to sign up (`{website}`). A glossary's lines are terms (“term: definition” or
+   “term — definition”, the term in small capitals); questions are numbered. When an edition's
+   notes go at the book's end, a Notes element holds them where it stands. [Designed]
+
 ## 3. Text elements (TXT-1)
 
 1. **Body paragraphs** are justified with a first-line indent of about 1–1.5 em; paragraphs are
