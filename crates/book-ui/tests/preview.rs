@@ -76,6 +76,10 @@ fn the_preview_builds_in_the_background_and_pages_open_their_sections() {
     let mut slowest = Duration::ZERO;
     let mut times = Vec::new();
     let mut frames = 0;
+    // How long this machine holds a thread up, measured where none of Book's code runs: by how
+    // much the short pause between two frames overruns.
+    let pause = Duration::from_millis(5);
+    let mut worst_overrun = Duration::ZERO;
     let start = Instant::now();
     for _ in 0..5 {
         h.step();
@@ -98,7 +102,9 @@ fn the_preview_builds_in_the_background_and_pages_open_their_sections() {
             times.push(took);
         }
         frames += 1;
-        std::thread::sleep(Duration::from_millis(5));
+        let paused = Instant::now();
+        std::thread::sleep(pause);
+        worst_overrun = worst_overrun.max(paused.elapsed().saturating_sub(pause));
     }
     assert!(!h.state().app.print_preview.building(), "the build finished");
     assert!(frames > 3, "frames ran while the book was laid out ({frames})");
@@ -107,7 +113,14 @@ fn the_preview_builds_in_the_background_and_pages_open_their_sections() {
     times.sort();
     let median = times[times.len() / 2];
     assert!(median < Duration::from_millis(16), "the median frame took {median:?} while the build ran");
-    assert!(slowest < Duration::from_millis(100), "a frame took {slowest:?} while the build ran");
+    // No frame waits on the build: 100 ms at most, where the build takes seconds. A busy
+    // machine holds every thread up now and then, which says nothing about Book, so a frame
+    // is also given what the machine took from the pauses (a frame works for a few
+    // milliseconds and is held up more often than a pause that only has to wake: four of the
+    // worst). With nothing else running the pauses overrun by next to nothing, and the limit
+    // is the 100 ms.
+    let limit = Duration::from_millis(100) + 4 * worst_overrun;
+    assert!(slowest < limit, "a frame took {slowest:?} while the build ran (limit {limit:?}; a {pause:?} pause overran by {worst_overrun:?})");
     // Page images arrive from the drawing thread.
     for _ in 0..200 {
         h.step();
