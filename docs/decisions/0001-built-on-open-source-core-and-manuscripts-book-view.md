@@ -22,11 +22,16 @@ view version 1). Book needs both and must not duplicate either.
   tag is not a release tag; Manuscript's release tags await a person. Book moves to a release tag
   only when a step needs something a later commit has. Book reads version 1 of the view only and
   refuses others with a clear message. Book never writes a Manuscript project; fixes go back as
-  offers in the file beside the project folder (`offers` module, version 1).
+  offers in the file beside the project folder (`offers` module, version 1). Since 2026-11-26
+  the tag is `book-view-1.1`: the same book view version 1, cut after Manuscript moved to core
+  `v0.1.16`.
 - **Two copies of the core.** Manuscript at `book-view-1` depends on core `v0.1.4`; Book is
   ahead. Cargo builds both. No `jcj-` type crosses from Manuscript's crates into Book's (the book
   view gives Manuscript's own types), so this builds; it costs compile time and disk. The request
-  to move Manuscript is in `docs/requests-to-manuscript.md`.
+  to move Manuscript is in `docs/requests-to-manuscript.md`. This ended on 2026-11-26: Book and
+  Manuscript's `book-view-1.1` both pin core `v0.1.16`, and `cargo xtask core-pin` (in the gate)
+  fails if the lock file holds two cores again. The two move to a new core together, Manuscript
+  first (core decision 0015).
 - **Eight crates and two apps**, in layers (plan section 5.2, AGENTS.md):
   `book-model`, `book-format`, `book-design`, `book-import`, `book-typeset`, `book-epub`,
   `book-check`, `book-ui`, and `apps/book` (the desktop app) and `apps/book-cli` (`book-cli`).

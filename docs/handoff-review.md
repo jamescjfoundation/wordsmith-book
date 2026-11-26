@@ -65,10 +65,11 @@ Each is also a request in `docs/requests-to-manuscript.md`.
 4. **Raw blocks.** `Block::Raw` keeps content for one target format; the contract does not say
    which formats Book should honour. Book drops raw blocks and lists each in the build report.
    (Request 6.)
-5. **The tag is not a release.** `book-view-1` is a tag on an unreleased commit. Book moves to a
+5. **The tag is not a release.** `book-view-1.1` (first `book-view-1`) is a tag on an unreleased commit. Book moves to a
    release tag when one exists with book view version 1. (Request 7.)
 6. **Two copies of the core.** Manuscript at `book-view-1` depends on core v0.1.4; Book is on a
-   newer core, so builds carry both. (Request 1.)
+   newer core, so builds carry both. (Request 1; settled 2026-11-26, when Manuscript moved to
+   core v0.1.16 and Book to the tag `book-view-1.1`.)
 7. **Notes are per section with the writer's labels.** Book numbers notes itself (per chapter or
    for the whole book, as the design says); the writer's labels are not shown. Nothing needed;
    recorded so the contract can say so.
