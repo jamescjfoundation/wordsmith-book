@@ -38,7 +38,7 @@ cargo run -p wordsmith-book-cli -- help    # the command line (the program is `b
 | `xtask/` | The gate: the core's shared modules, and Book's own in `main.rs` and `book.rs` |
 
 <!-- BEGIN open-source-core: contributing -->
-<!-- Owned by open-source-core (template/CONTRIBUTING.md). Change it there, never in a copy: `cargo xtask sync` rewrites the copies. -->
+<!-- Owned by open-source-core (template/CONTRIBUTING.md). Change it there, never in a copy: its tooling rewrites the copies. -->
 ## Rules for a public repository
 
 ### Personal information

@@ -24,7 +24,7 @@ view version 1). Book needs both and must not duplicate either.
   refuses others with a clear message. Book never writes a Manuscript project; fixes go back as
   offers in the file beside the project folder (`offers` module, version 1). Since 2026-11-26
   the tag is `book-view-1.N`: the same book view version 1, cut again each time Manuscript moves
-  to a newer core (`book-view-1.1` on core `v0.1.16`, `book-view-1.2` on `v0.1.17`). `Cargo.toml`
+  to a newer core (`book-view-1.1` on core `v0.1.16`, `book-view-1.2` on `v0.1.17`, and so on; the "Tags" table in Manuscript's `docs/book-handoff.md` lists them). `Cargo.toml`
   names the current one.
 - **Two copies of the core.** Manuscript at `book-view-1` depends on core `v0.1.4`; Book is
   ahead. Cargo builds both. No `jcj-` type crosses from Manuscript's crates into Book's (the book
