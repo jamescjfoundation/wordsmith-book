@@ -3,8 +3,8 @@
 //! standard EPUB validator is (PRE-2), the Java runtime that runs it, where the accessibility
 //! checker is, their time limit, and the interface language.
 
-use jcj_i18n::{tl, tr};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tl, tr};
 use serde::{Deserialize, Serialize};
 use wordsmith_book_check::validator::Settings;
 

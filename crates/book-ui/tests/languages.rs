@@ -42,19 +42,19 @@ fn sources() -> String {
 #[test]
 fn every_interface_text_is_in_every_catalog_and_none_is_unused() {
     let src = sources();
-    let used = jcj_i18n::texts_in(&src);
+    let used = jcj_shell::i18n::texts_in(&src);
     assert!(used.len() > 150, "{} texts", used.len());
-    let singulars = jcj_i18n::singulars_in(&src);
+    let singulars = jcj_shell::i18n::singulars_in(&src);
     assert_eq!(languages::CATALOGS.len(), languages::LANGUAGES.len() - 1, "every language but English has a catalog");
     for (code, text) in languages::CATALOGS {
-        let cat = jcj_i18n::Catalog::parse(text).unwrap_or_else(|e| panic!("{code}: {e}"));
-        let (missing, unused) = jcj_i18n::compare(&cat, &used, &singulars);
+        let cat = jcj_shell::i18n::Catalog::parse(text).unwrap_or_else(|e| panic!("{code}: {e}"));
+        let (missing, unused) = jcj_shell::i18n::compare(&cat, &used, &singulars);
         assert!(missing.is_empty(), "{code} lacks:\n{}", missing.join("\n"));
         assert!(unused.is_empty(), "{code} keeps texts nothing uses:\n{}", unused.join("\n"));
         // Placeholders survive translation.
         for key in cat.keys() {
             let want: Vec<&str> = key.match_indices('{').map(|(i, _)| &key[i..=key[i..].find('}').map_or(i, |j| i + j)]).collect();
-            if let Some(jcj_i18n::Entry::Text(t)) = cat.get(key) {
+            if let Some(jcj_shell::i18n::Entry::Text(t)) = cat.get(key) {
                 for w in &want {
                     assert!(t.contains(w), "{code}: “{t}” lacks {w} of “{key}”");
                 }

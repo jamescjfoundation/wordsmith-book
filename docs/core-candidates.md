@@ -2,8 +2,10 @@
 
 Every core change Book needs and every `// core-candidate:` in this repository, with its core
 issue and state (plan section 5.5). States: **released in core vX** (promoted or changed in the
-core), **app-first** (built here, marked `// core-candidate: open-source-core#N`, waiting for a
-second app), **open** (not started), **not needed**.
+core), **in core vX, used here** (the core has it and Book uses the core's; its issue stays open
+while another app still holds a copy of its own, as the core's rule for a promotion says),
+**app-first** (built here, marked `// core-candidate: open-source-core#N`, waiting for a second
+app), **open** (not started), **not needed**.
 
 The rows, the markers in the code and the core's issues are kept in step: a row says "released"
 only when its issue is closed, and each app-first row's issue is open, labelled `core-candidate`
@@ -29,3 +31,4 @@ and names the file here that holds the code. Last checked against the issues on 
 | – | `jcj-doc`: section settings and note kinds reachable | – | [#24](https://github.com/jamescjfoundation/open-source-core/issues/24) | released in core v0.1.7 |
 | – | Trim and bleed boxes on exported PDFs (`jcj_output::set_page_boxes`) | – | [#25](https://github.com/jamescjfoundation/open-source-core/issues/25) | released in core v0.1.11 |
 | – | EPUB import (`jcj_interchange::import` with `Format::Epub`, used by IMP-9) | – | [#13](https://github.com/jamescjfoundation/open-source-core/issues/13) | released in core v0.1.3, before Book began; the issue is still open. The reader keeps no notes and gives back no structure from the package, so `crates/book-import/src/epub.rs` takes the notes out before the core reads the file and puts them back, and reads the package's roles itself |
+| – | The translation lookups through the shell (`jcj_shell::i18n`: `tr`, `tr_with`, `trn`, `tl`, and the catalog test's `Catalog`, `texts_in`, `singulars_in`, `compare`) | – | [#32](https://github.com/jamescjfoundation/open-source-core/issues/32) | in core v0.1.20, used here: since 2026-11-26 `crates/book-ui` has no `jcj-i18n` line and the layer table does not name it |

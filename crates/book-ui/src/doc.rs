@@ -86,10 +86,10 @@ impl OpenBook {
         {
             b.files = recovered;
             b.revision = 1;
-            b.notice = Some(jcj_i18n::tr("Unsaved work from last time was recovered. Save to keep it."));
+            b.notice = Some(jcj_shell::i18n::tr("Unsaved work from last time was recovered. Save to keep it."));
         }
         if let Err(e) = &b.source {
-            b.notice = Some(jcj_i18n::tr_with("The book's source could not be opened: {why}", &[("why", &e.to_string())]));
+            b.notice = Some(jcj_shell::i18n::tr_with("The book's source could not be opened: {why}", &[("why", &e.to_string())]));
         }
         Ok(b)
     }
@@ -308,7 +308,7 @@ impl OpenBook {
             (Ok(s), Some(old)) => {
                 let n = source::changed_sections(&old, &source::checksums(&s.book)).len();
                 if n > 0 {
-                    self.notice = Some(jcj_i18n::trn(
+                    self.notice = Some(jcj_shell::i18n::trn(
                         "The manuscript changed: {n} section read again.",
                         "The manuscript changed: {n} sections read again.",
                         n as u64,
@@ -316,7 +316,7 @@ impl OpenBook {
                     ));
                 }
             }
-            (Err(e), _) => self.notice = Some(jcj_i18n::tr_with("The book's source could not be opened: {why}", &[("why", &e.to_string())])),
+            (Err(e), _) => self.notice = Some(jcj_shell::i18n::tr_with("The book's source could not be opened: {why}", &[("why", &e.to_string())])),
             _ => {}
         }
         true

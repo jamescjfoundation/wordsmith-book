@@ -325,7 +325,7 @@ current one). The contract is Manuscript's
 | `book-import`, `book-epub` | 3 | Imports and structure detection; the ebook writer | layers 1–2, `jcj-interchange`, `jcj-layout`, `jcj-output`, `jcj-proof`, `jcj-features` |
 | `book-typeset` | 3 | Print typesetting on the core's layout (decision 0003) | the same; and, should an embedded typesetting engine ever be added, it stays in this crate: `typst` (only here), `typst-pdf` (only here), `typst-render` (only here) |
 | `book-check` | 4 | Preflight, print profiles, external validators | layers 1–3 |
-| `book-ui` | 5 | Views, commands, ribbon tabs, panels, agent tools | everything below, `jcj-engine`, `jcj-shell`, `jcj-i18n`, `jcj-theme`, `jcj-agents`, `eframe`, `egui_kittest` |
+| `book-ui` | 5 | Views, commands, ribbon tabs, panels, agent tools | everything below, `jcj-engine`, `jcj-shell`, `jcj-theme`, `jcj-agents`, `eframe`, `egui_kittest` |
 | `apps/*` | 6 | The desktop app, the command line | the crates above |
 <!-- END layer table -->
 

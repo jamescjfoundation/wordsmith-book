@@ -5,8 +5,8 @@
 use std::sync::mpsc::{Receiver, channel};
 use std::time::Duration;
 
-use jcj_i18n::{tr, tr_with, trn};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with, trn};
 use serde_json::{Value, json};
 use wordsmith_book_check::preflight::{Finding, Link, Report};
 use wordsmith_book_model::Severity;

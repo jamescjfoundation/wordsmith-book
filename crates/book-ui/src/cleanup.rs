@@ -4,8 +4,8 @@
 
 use std::collections::BTreeSet;
 
-use jcj_i18n::{tr, tr_with, trn};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with, trn};
 use serde_json::{Value, json};
 use wordsmith_book_import::cleanup::{self, Change};
 

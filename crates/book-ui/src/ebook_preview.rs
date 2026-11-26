@@ -7,8 +7,8 @@
 use std::sync::mpsc::{Receiver, channel};
 use std::time::Duration;
 
-use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with};
 use wordsmith_book_typeset::screen::{self, DEVICES, TEXT_SIZES};
 
 use crate::doc::OpenBook;

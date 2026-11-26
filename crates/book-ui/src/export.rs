@@ -7,8 +7,8 @@ use std::path::{Path, PathBuf};
 use std::sync::mpsc::{Receiver, channel};
 use std::time::Duration;
 
-use jcj_i18n::{tr, tr_with, trn};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with, trn};
 use wordsmith_book_check::export::{self, Built, Error};
 
 use crate::doc::OpenBook;

@@ -4,9 +4,9 @@
 
 use std::path::PathBuf;
 
-use jcj_i18n::{tl, tr, tr_with};
 use jcj_shell::CommandInfo;
 use jcj_shell::commands::ids;
+use jcj_shell::i18n::{tl, tr, tr_with};
 use jcj_shell::tree::Zone;
 use serde_json::{Value, json};
 use wordsmith_book_model::{Element, ElementKind, Placement, SectionId, Source};

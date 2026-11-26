@@ -3,8 +3,8 @@
 //! editions with their ISBNs (checked), trims, paper and price notes, and what the book still
 //! needs. Book's additions live in `book.toml`; a linked source is never written.
 
-use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with};
 use serde_json::{Value, json};
 use wordsmith_book_format::needs::needs;
 use wordsmith_book_model::{Contributor, Edition, Format, Imprint, Paper, Role, isbn};

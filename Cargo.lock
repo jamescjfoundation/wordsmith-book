@@ -5545,7 +5545,6 @@ dependencies = [
  "jcj-doc",
  "jcj-engine",
  "jcj-features",
- "jcj-i18n",
  "jcj-output",
  "jcj-shell",
  "serde",

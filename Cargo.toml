@@ -47,7 +47,6 @@ jcj-project = { git = "https://github.com/jamescjfoundation/open-source-core", t
 jcj-features = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.20" }
 jcj-interchange = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.20" }
 jcj-shell = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.20" }
-jcj-i18n = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.20" }
 jcj-engine = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.20" }
 jcj-agents = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.20" }
 serde = { version = "1", features = ["derive"] }

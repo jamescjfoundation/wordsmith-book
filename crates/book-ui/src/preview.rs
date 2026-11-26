@@ -12,8 +12,8 @@ use std::sync::Arc;
 use std::sync::mpsc::{Receiver, Sender, channel};
 use std::time::{Duration, Instant};
 
-use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with};
 use wordsmith_book_check::build::{self, Print};
 use wordsmith_book_model::Edition;
 

@@ -4,8 +4,8 @@
 
 use std::path::{Path, PathBuf};
 
-use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with};
 use serde_json::{Value, json};
 use wordsmith_book_import::detect::{self, Kind, Mark, Para};
 use wordsmith_book_import::{Format, Report};

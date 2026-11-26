@@ -3,7 +3,7 @@
 //! Book's own elements reorder by drag; the source's sections show in the writer's order,
 //! read-only ("Change this in Manuscript").
 
-use jcj_i18n::{tl, tr, tr_with};
+use jcj_shell::i18n::{tl, tr, tr_with};
 use wordsmith_book_model::{BookProject, Element, Placement, SectionId};
 use wordsmith_manuscript_format::book::{Book, FrontKind, Section};
 use wordsmith_manuscript_model::Role;

@@ -29,9 +29,9 @@ pub mod preview;
 
 use std::path::PathBuf;
 
-use jcj_i18n::{tl, tr, tr_with};
 use jcj_shell::commands::ids;
 use jcj_shell::egui;
+use jcj_shell::i18n::{tl, tr, tr_with};
 use jcj_shell::tree::{TreeEvent, TreeState};
 use jcj_shell::{About, App, Cmd, CommandInfo, Commands, PanelSpec, Shell, ShellOptions, Side, TemplateSpec};
 use serde_json::{Value, json};
@@ -521,8 +521,8 @@ impl App for BookApp {
 pub mod views {
     //! The central view: the selected section's text, read-only, or the book's summary.
 
-    use jcj_i18n::{tr, tr_with};
     use jcj_shell::egui;
+    use jcj_shell::i18n::{tr, tr_with};
     use wordsmith_manuscript_model::Block;
 
     use crate::doc::OpenBook;

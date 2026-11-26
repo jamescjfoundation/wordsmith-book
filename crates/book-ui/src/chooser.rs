@@ -2,8 +2,8 @@
 //! The design chooser (DSN-5): every design the book can use, filtered by genre and mood, each
 //! with a preview of the book's own first chapter. Choosing one is one undo step.
 
-use jcj_i18n::{tr, tr_with};
 use jcj_shell::egui;
+use jcj_shell::i18n::{tr, tr_with};
 use serde_json::{Value, json};
 use wordsmith_book_design::Design;
 
