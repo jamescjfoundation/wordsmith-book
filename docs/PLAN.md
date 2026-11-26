@@ -43,9 +43,8 @@ This plan is meant to be carried out step by step, by people and coding agents, 
   and one pull request, or commits straight to `main`, is set by whoever runs the work; the
   step's "Done when" is the same either way.
 - **Each step's "Done when"** is its acceptance test. A step is finished when every item there is
-  true, its tests pass, `cargo clippy --workspace --all-targets`, `cargo xtask app-layers`,
-  `cargo xtask privacy` and `cargo xtask names` are clean, and the step's tests are committed with
-  it. While working, run `cargo test` for the affected crates; at the end of every step run
+  true, its tests pass, `cargo clippy --workspace --all-targets`, `cargo xtask app-layers` and
+  `cargo xtask privacy` are clean, and the step's tests are committed with it. While working, run `cargo test` for the affected crates; at the end of every step run
   `cargo test --workspace` once (it gives the count below). The full `cargo xtask ci` runs
   before a release.
 - **Progress** is recorded in `docs/progress.md`: one line per finished step (date, step, what
@@ -131,6 +130,14 @@ The loop the app is designed around:
 ## 4. Ground rules
 
 These hold for every step. `AGENTS.md` in this repository carries them for agents (step M0.1).
+
+**Since 2026-11-26** three of them are replaced, and `AGENTS.md` has the current text. Rules 2
+and 4, and "named only in" in rule 5, give way to
+[project decision 0003](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0003-naming-other-companies-programs-and-formats.md):
+another company, program, service or file format may be named where that is a fact a reader
+needs; interface names, designs and font role names stay our own; `cargo xtask names` and its
+private list are removed. The route in rule 7 is now an issue in the Manuscript repository
+(core decision 0015), indexed in `docs/requests-to-manuscript.md`.
 
 1. **Public, forever.** This repository is public, history included. No one's name, email or
    account, no details of anyone's machine (no home-folder paths), no private writing (even as test
@@ -676,7 +683,8 @@ gives the same bytes. This runs as an end-to-end test (M9.4).
   `names` check in `xtask`. `names` reads `.private/names.txt` when it exists (one name per line)
   and fails when a tracked file or a commit message on `main` holds one as a whole word, case
   ignored; `ATTRIBUTION.md`, `assets/fonts/` and the public-domain texts under
-  `tests/fixtures/novels/` are exempt (section 12).
+  `tests/fixtures/novels/` are exempt (section 12). (The `names` check was removed on 2026-11-26: see the
+  note at the head of section 4.)
 - `wordsmith-manuscript-format` and `-model` as dependencies at the reference of decision 0001.
 - C10: its core issue opened, the change made in the core (Manuscript's address in `deny.toml`'s
   `allow-git`), released as a patch; Book pinned to it.
@@ -1081,7 +1089,7 @@ never committed.
 | Ebook rendering differs between reading systems | Ugly ebooks on some devices | Conservative CSS per design; store editions; the preview labelled as one; manual checks by a person before release |
 | Messy word-processor files | Wrong structure, lost italics | Import review with editable rules; the "online word processor" fixture from M0.5 |
 | Typography not good enough | Low adoption | Designs reviewed against SPEC's rules; golden files; a person reviews each design before release |
-| Naming a company or product by habit (stores, print services, fonts) | Public-repo rule broken | Section 4 rules 2, 4, 5; `cargo xtask names` checks tracked files and commit messages against a word list kept only in `.private/names.txt` (the list itself would name them, so it is never committed), whole words only, with fonts' own files, `ATTRIBUTION.md` and the public-domain texts exempt; presets named by trim and format |
+| Naming a company or product by habit (stores, print services, fonts) | Public-repo rule broken | Section 4 rules 2, 4, 5; `cargo xtask names` checks tracked files and commit messages against a word list kept only in `.private/names.txt` (the list itself would name them, so it is never committed), whole words only, with fonts' own files, `ATTRIBUTION.md` and the public-domain texts exempt; presets named by trim and format. Until 2026-11-26: project decision 0003 replaced the rule and removed the check |
 | External validators not installed | Checks skipped | Book's own structural checks always run; external results are additional |
 | Scope creep into writing | Duplicates Manuscript | Light fixes only; anything more opens Manuscript |
 | Font licensing | Rejected files, legal exposure | Embedding bits read in preflight; bundled fonts only open-licensed |

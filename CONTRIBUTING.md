@@ -10,8 +10,10 @@ cargo xtask install-hooks        # once: pre-commit and pre-push hooks
 cargo xtask ci                   # the full gate (CI runs the same)
 cargo xtask ci --changed         # only the packages your change affects, and their dependents
 cargo xtask app-layers           # Book's crates depend only on the layers under them
-cargo xtask names                # no company, product or bundled font family named
+cargo xtask fixtures             # write the Manuscript project fixture again
+cargo xtask screenshots          # draw the README's pictures into docs/images
 cargo run -p wordsmith-book      # the desktop app
+cargo run -p wordsmith-book-cli -- help    # the command line (the program is `book-cli`)
 ```
 
 `cargo xtask help` lists every task.
@@ -21,17 +23,19 @@ cargo run -p wordsmith-book      # the desktop app
 | Path | What it is |
 | --- | --- |
 | `crates/book-model` | Book's own layer: editions, design choices, overrides, fixes, metadata additions |
-| `crates/book-format` | The Book project folder, the source and the offers file |
+| `crates/book-format` | The Book project folder, the source, the offers file and the house file |
 | `crates/book-design` | The design schema and the built-in designs |
 | `crates/book-import` | Imports into an owned source, structure detection, cleanup |
-| `crates/book-typeset` | Print typesetting through the embedded engine |
+| `crates/book-typeset` | Print typesetting on the core's layout (decision 0003) |
 | `crates/book-epub` | The ebook writer |
-| `crates/book-check` | Preflight |
-| `crates/book-ui` | The views |
+| `crates/book-check` | Preflight, print profiles, external validators, export and the ONIX record |
+| `crates/book-ui` | The views, commands, ribbon tabs, panels and agent tools |
 | `apps/book`, `apps/book-cli` | The desktop app and the command line |
-| `assets/` | Brand, fonts, designs and print profiles |
-| `docs/` | The plan, spec, formats, decisions, guide and progress |
-| `tests/fixtures/`, `tools/` | Fixtures and the scripts that make them |
+| `assets/` | Brand (copies of the Wordsmith brand kit, and Book's theme), fonts, designs, print profiles and interface catalogs |
+| `docs/` | The spec, formats, decisions, guide (`docs/guide/`), golden-file and fixture records, progress, and the finished build plan |
+| `tests/fixtures/`, `tests/golden/`, `tools/` | Fixtures, the reviewed reference outputs, and the scripts that make fixtures and the brand mask |
+| `packaging/` | What a release puts around the programs on each system |
+| `xtask/` | The gate: the core's shared modules, and Book's own in `main.rs` and `book.rs` |
 
 <!-- BEGIN open-source-core: contributing -->
 <!-- Owned by open-source-core (template/CONTRIBUTING.md). Change it there, never in a copy: `cargo xtask sync` rewrites the copies. -->
@@ -80,8 +84,18 @@ than "as discussed".
 
 ## Wordsmith Book's own rules
 
-- Never name another company or commercial product (AGENTS.md, "Wordsmith Book's own rules").
-- Commit subjects name the plan step (`M1.1 m1/format: the book project folder`).
+`AGENTS.md`, "Wordsmith Book's own rules", has them in full. The ones a change most often meets:
+
+- Another company, program, service or file format may be named where that is a fact a reader
+  needs; interface names, designs and font role names stay our own, and people are never named
+  ([project decision 0003](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0003-naming-other-companies-programs-and-formats.md)).
+- Nothing the author wrote is dropped or rewritten, and Book never writes a Manuscript project.
+- A change that alters a golden file is deliberate and recorded in `docs/golden.md`.
+- Add a row to `docs/progress.md` for each piece of work that lands, with the test count. The
+  step ids in older rows and commit subjects (`M1.1 m1/format`) are the finished plan's; a new
+  commit's subject says what the change does.
+- What Book needs from Wordsmith Manuscript is asked for in an issue in the Manuscript
+  repository and listed in `docs/requests-to-manuscript.md`.
 
 ## Conduct
 

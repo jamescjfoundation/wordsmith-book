@@ -14,6 +14,11 @@ guide are recorded generically ("a print-on-demand service's public file guide")
 addresses are kept privately for a person to recheck, and every such rule is data in
 `assets/print/` so it can be corrected without code. No company or product is named here.
 
+Since 2026-11-26 a service may be named and its guide cited by address
+([project decision 0003](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0003-naming-other-companies-programs-and-formats.md)).
+The rules below were recorded before then and still read generically; each takes its source's
+name and address when it is next checked against the guide.
+
 Sources used:
 
 - [EPUB 3.3](https://www.w3.org/TR/epub-33/) and [EPUB Reading Systems 3.3](https://www.w3.org/TR/epub-rs-33/) (W3C).

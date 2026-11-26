@@ -137,17 +137,17 @@ format, structure and the matter Book makes, designs, print profiles and typeset
 writer, import into a book's own source, preflight and the validators, and the house file and
 ONIX. `AGENTS.md` says how a change that belongs in the core is made.
 
-Before merging anything to `main`, run the gate:
+Before anything goes to `main`, run the gate:
 
 ```sh
 cargo xtask ci
 ```
 
 It runs rustfmt, the crate-root lint check, a check that no local core link is left, a check that
-the settings shared with the core match the pinned core release (`cargo xtask sync --check`), the
-layers checks (no upstream crate is named here, and each Book crate uses only the layers under
-it), the asset attribution check, the names check, the privacy check, the license allowlist,
-clippy and all tests. CI also runs [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) for
+every `jcj-` dependency names one core release (`cargo xtask core-pin`), a check that the files
+and rules shared with the core match that release (`cargo xtask sync --check`), the layers checks
+(no upstream crate is named here, and each Book crate uses only the layers under it), the asset
+attribution check, the privacy check, the license allowlist, clippy and all tests. CI also runs [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) for
 licenses, security advisories and crate sources.
 
 - `docs/PLAN.md`: the build plan. `docs/SPEC.md`: the behavior it was built from.
@@ -155,7 +155,8 @@ licenses, security advisories and crate sources.
 - `docs/decisions/`: the choices the spec left open.
 - `docs/golden.md`: the reviewed reference outputs. `docs/fixtures.md`: where every test file
   comes from.
-- `docs/requests-to-manuscript.md`: what Book asks of Wordsmith Manuscript.
+- `docs/requests-to-manuscript.md`: the index of what Book asks of Wordsmith Manuscript; each
+  request is an issue in that repository.
   `docs/core-candidates.md`: what may move into the core.
 - `docs/progress.md`: one line per finished step. `CHANGELOG.md`: what changed.
 

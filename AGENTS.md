@@ -208,38 +208,40 @@ interface back out is not.
 
 ## Wordsmith Book's own rules
 
-The build plan is `docs/PLAN.md`; behavior comes from `docs/SPEC.md`; the files are specified in
-`docs/format.md` and `docs/design-format.md`. Decisions about this app go in `docs/decisions/`,
-and every finished step adds a line to `docs/progress.md`.
+Behavior comes from `docs/SPEC.md`; the files are specified in `docs/format.md` and
+`docs/design-format.md`. Decisions about this app go in `docs/decisions/`. The build plan,
+`docs/PLAN.md`, is finished: every milestone in its section 10 is done and only the releases
+are left. Where its ground rules (section 4) differ from this file, this file holds. Each piece
+of work that lands on `main` adds a row to `docs/progress.md`; a change users will see also goes
+in `CHANGELOG.md` and `docs/guide/` ([Route C](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-c)).
 
-1. **No other companies or commercial products, anywhere.** Code, docs, interface text, commit
-   messages, fixtures, design names and test names never name another company, store, print
-   service, distributor, ISBN agency, commercial font or commercial book tool, and never say the
-   app replaces, follows or is inspired by another product. Use generic words: "an online ebook
-   store", "a print-on-demand service", "the national ISBN agency", "an e-ink reader". Print and
-   ebook presets are named by trim size, binding and format ("6 × 9 in paperback, cream paper",
-   `pod-paperback`). Open-source projects we build on are named only where we depend on them
-   (`Cargo.toml`, plan section 14, `ATTRIBUTION.md`, `NOTICE`). People are never named either,
-   not even in technical terms ("optimal-fit paragraph breaking"). `cargo xtask names` checks
-   tracked files and commit messages against a list kept only in `.private/names.txt`.
+1. **Naming others** ([project decision 0003](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0003-naming-other-companies-programs-and-formats.md)).
+   Code, docs, commit messages and fixtures may name another company, program, service or file
+   format where that is a fact a reader needs: what Book opens or writes, what a store or a
+   printer requires, where a rule comes from. Book is never described as replacing, following or
+   being inspired by another product. People are never named, not even in technical terms
+   ("optimal-fit paragraph breaking").
 2. **Our own names and design.** Every interface name, menu label, help text, design and icon is
-   our own. Book's names: **Designs**, **Chapter openings**, **Scene breaks**, **Editions**,
-   **Store editions**, **Preflight**, **House styles**.
-3. **Sources.** Published standards (W3C, ISO) are cited by URL. Rules taken from a service's
-   public file guide are recorded generically ("a print-on-demand service's public file guide,
-   checked 2026-11-25"); the guide's address goes only in `.private/sources.md`.
-4. **Fonts.** Bundled fonts have open licenses (OFL-1.1 or the core allowlist) and are named only
-   in `ATTRIBUTION.md` and their own files under `assets/fonts/`. Everywhere else they go by role
-   names ("classic serif", "reading serif", "display", "ornaments"). Preflight refuses fonts
-   whose embedding bits forbid embedding.
+   our own, never another product's name or its distinctive feature name. Book's names:
+   **Designs**, **Chapter openings**, **Scene breaks**, **Editions**, **Store editions**,
+   **Preflight**, **House styles**. Print and ebook presets are named by trim size, binding and
+   format ("6 × 9 in paperback, cream paper", `pod-paperback`), never by a company.
+3. **Sources.** A published standard (W3C, ISO) is cited by its address. A rule taken from a
+   service's public file guide names the service, gives the guide's address and the date it was
+   checked, and is kept as data in `assets/print/` so it can be corrected without code.
+   **Today:** the rules recorded before 2026-11-26 still say "a print-on-demand service's public
+   file guide" (`docs/SPEC.md`, `assets/print/`); name the source when a rule is next checked
+   against its guide.
+4. **Fonts.** Bundled fonts have open licenses (OFL-1.1 or the core allowlist) and each is listed
+   in `ATTRIBUTION.md`. In the interface and in design files they go by our role names
+   (`classic-serif`, `reading-serif`, `display`, `inscription`, `sans`; `docs/design-format.md`), never by
+   family: a design names a role. Preflight refuses fonts whose embedding bits forbid embedding.
 5. **The author's words are sacred.** Nothing the author wrote is dropped or rewritten by
    importing, building or exporting. Every importer and exporter proves it with a word-for-word
    test. Cleanup happens only as listed changes the user accepted. Light fixes to a linked
    Manuscript project are offers the writer decides on, never edits.
-6. **Book never writes a Manuscript project** and never edits the Manuscript repository. Every
-   test that uses a linked source checks the project folder's bytes are unchanged. What Book
-   needs from Manuscript is asked for in an issue in the Manuscript repository, as the block
-   above says, and listed in `docs/requests-to-manuscript.md`.
+6. **Book never writes a Manuscript project.** Every test that uses a linked source checks the
+   project folder's bytes are unchanged.
 7. **Golden files are the judge.** Print PDFs (text, page breaks, page boxes) and EPUB structure
    are compared with reviewed reference files. A change that alters them is deliberate, reviewed
    and recorded in `docs/golden.md`.
@@ -248,6 +250,37 @@ and every finished step adds a line to `docs/progress.md`.
 9. **Print stays in `book-typeset`** (decision 0003): it builds a print document in the core's
    model and the core lays it out and writes it. Book's text is only ever the text of runs, never
    instructions; print uses only Book's bundled fonts and fonts added to the project.
+10. **The brand comes from the kit.** The logos, icons and palette card in `assets/brand/` are
+    copies of the Wordsmith brand kit (the wordsmith repository, `brand/wordsmith-book/`,
+    `production/` and `app-icon/`; `icon.ico` is the kit's `wordsmith-book.ico`). They are never
+    edited, recolored or redrawn here: a change is made in the kit and copied over
+    ([Route F](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-f)).
+    Book's own files there are three: `tokens.json`, the interface theme in the core's token
+    format, whose palette colors must match the kit (decision 0004); `mark-mask.png`, drawn from
+    the kit's mark by `tools/brand-mask.py` and drawn again when the mark changes; and
+    `README.md`, the kit's guide with rows added for those two and the icon sizes.
+    **Today:** nothing here compares the copies with the kit.
+
+### Book and Wordsmith Manuscript
+
+Book builds on Manuscript's `wordsmith-manuscript-model` and `wordsmith-manuscript-format`
+crates, as git dependencies at a `book-view-1.N` tag (decision 0001; `Cargo.toml` names the
+current one). The contract is Manuscript's
+[`docs/book-handoff.md`](https://github.com/jamescjfoundation/wordsmith-manuscript/blob/main/docs/book-handoff.md).
+
+- **A need goes in as an issue in the Manuscript repository**, as the block above says
+  ([Route B](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-b)).
+  Anyone working here, an agent included, may open it. `docs/requests-to-manuscript.md` is
+  Book's index of them, with what Book does meanwhile. A Book change never edits the Manuscript
+  repository.
+- **One core.** Book and the Manuscript tag it names pin the same core release, and
+  `cargo xtask core-pin` fails when `Cargo.lock` holds two. So Book moves to a newer core only
+  after Manuscript has moved and cut the next `book-view-1.N` tag on it; then both pins move in
+  one change here ([Route I](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-i)).
+  Until that tag exists, Book can still take the core's files and marked blocks:
+  `cargo xtask sync <this folder>`, run in a checkout of the core at that release, writes them,
+  and Book's own `cargo xtask sync --check` passes once its pin has moved.
+- Book reads book view version 1 only and refuses others with a clear message.
 
 ### Where each crate's code goes
 
@@ -257,9 +290,12 @@ and every finished step adds a line to `docs/progress.md`.
 | `book-format`, `book-design` | 2 | The project folder, the source, offers; the design schema, built-in designs, mixing | the model, `wordsmith-manuscript-format`, `jcj-project` |
 | `book-import`, `book-typeset`, `book-epub` | 3 | Imports and structure detection; print typesetting on the core's layout (decision 0003); the ebook writer | layers 1–2, `jcj-interchange`, `jcj-layout`, `jcj-output`, `jcj-proof`, `jcj-features` |
 | `book-check` | 4 | Preflight, print profiles, external validators | layers 1–3 |
-| `book-ui` | 5 | Views, commands, ribbon tabs, panels, agent tools | everything below, `jcj-engine`, `jcj-shell`, `jcj-theme`, `jcj-agents` |
+| `book-ui` | 5 | Views, commands, ribbon tabs, panels, agent tools | everything below, `jcj-engine`, `jcj-shell`, `jcj-i18n`, `jcj-theme`, `jcj-agents` |
 | `apps/*` | 6 | The desktop app, the command line | the crates above |
 
 `book-typeset`, `book-epub` and `book-check` never depend on interface code, so the command line
-builds books with no window. `cargo xtask app-layers` checks the table. Code that a second app may
-want is marked `// core-candidate: open-source-core#N` and listed in `docs/core-candidates.md`.
+builds books with no window. `cargo xtask app-layers` checks this: a package depends only on
+packages of a lower layer, and each outside crate named above is used only from its layer up
+(`LAYERS` and `FIRST_LAYER` in `xtask/src/book.rs`; change the table and the code together). An
+outside crate the code's table does not name is not checked. Code that a second app may want is
+marked `// core-candidate: open-source-core#N` and listed in `docs/core-candidates.md`.

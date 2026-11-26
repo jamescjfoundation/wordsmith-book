@@ -38,11 +38,10 @@ const TASKS: &[(&str, &str)] = &[
     ("lint-roots", "every crate root forbids unsafe and denies the panicking lints"),
     ("unlinked", "no local core dev-link is left in .cargo/config.toml"),
     ("core-pin", "every jcj- dependency names one core release tag, and Cargo.lock holds one core"),
-    ("sync", "shared settings and the patch block match the pinned core release"),
+    ("sync", "shared files, marked blocks and the patch block match the pinned core release"),
     ("layers", "only jcj- interfaces of the core are used, never upstream crates or jcj-upstream"),
-    ("app-layers", "Book's crates depend only on the layers under them (plan section 5.2)"),
+    ("app-layers", "Book's crates depend only on the layers under them (the table in AGENTS.md)"),
     ("assets", "every file under assets/ is listed in ATTRIBUTION.md; the legal files exist"),
-    ("names", "no company, product or bundled font family named (.private/names.txt)"),
     ("privacy", "no personal details or secrets in files or commit identities"),
     ("licenses", "every dependency's license is on the allowlist"),
     ("clippy", "clippy on all targets, warnings are errors"),
@@ -74,7 +73,7 @@ fn main() -> ExitCode {
             Some((n, _)) => run_task(n, &root, &Affected::All),
             None => {
                 println!(
-                    "usage: cargo xtask <ci [--changed] [--base <ref>] | dev-link <core> | dev-unlink | sync [--check] | deny | install-hooks | screenshots>"
+                    "usage: cargo xtask <ci [--changed] [--base <ref>] | dev-link <core> | dev-unlink | sync [--check] | core-pin [--behind] | deny | install-hooks | third-party-licenses [file] | fixtures | screenshots>"
                 );
                 for (name, about) in TASKS {
                     println!("  {name:<12} {about}");
@@ -146,7 +145,6 @@ fn run_task(name: &str, root: &Path, scope: &Affected) -> TaskResult {
         "layers" => check_layers(root),
         "app-layers" => book::app_layers(root),
         "assets" => book::assets(root),
-        "names" => book::names(root),
         "privacy" => privacy::task(root, &[]),
         "licenses" => check_licenses(root),
         "clippy" => scoped(root, scope, &["clippy", "--locked", "--all-targets"], &["--", "-D", "warnings"]),
