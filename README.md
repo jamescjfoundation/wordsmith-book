@@ -88,10 +88,9 @@ cargo run --release -p wordsmith-book-cli -- build my-book --out dist
 bundle's `Info.plist` for macOS and the file-type registration for Windows. `cargo xtask
 third-party-licenses` writes the license text of every shipped dependency.
 
-**Status:** 1.0 is prepared (see [CHANGELOG.md](CHANGELOG.md)) and waits for a maintainer to
-approve the first release; no release has been published yet. Print is laid out by the core's
-own layout for now, which does not hyphenate words by itself ([decision
-0003](docs/decisions/0003-print-typesetting.md)).
+**Status:** 1.0 is prepared (see [CHANGELOG.md](CHANGELOG.md)); no release has been published
+yet. Print is laid out by the core's own layout for now, which does not hyphenate words by itself
+([decision 0003](docs/decisions/0003-print-typesetting.md)).
 
 ### Checking a download
 
@@ -126,7 +125,7 @@ for personal information, security problems, names and copied code. Report secur
 privately, as [SECURITY.md](SECURITY.md) says.
 
 The app is built on
-[open-source-core](https://github.com/jamescjfoundation/open-source-core), the J. C. J.
+[open-source-core](https://github.com/jamescjfoundation/open-source-core), The James C. J.
 Foundation's shared base for its desktop apps. The document model, layout, PDF, the command
 engine, document import, the window around the views (ribbon, panels, File page, preferences,
 updates), translation catalogs and the agent server all come from its `jcj-` crates. It reads

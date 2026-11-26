@@ -1,8 +1,8 @@
 # Notes for coding agents (and people)
 
 Wordsmith Book is built on [open-source-core](https://github.com/jamescjfoundation/open-source-core),
-the J. C. J. Foundation's shared base. The core holds what every app needs; this repository holds
-only what is about this app.
+The James C. J. Foundation's shared base. The core holds what every app needs; this repository
+holds only what is about this app.
 
 The blocks below marked `open-source-core` are the core's rules, which every app carries word for
 word. `cargo xtask sync` writes them from the pinned core release and `cargo xtask sync --check`

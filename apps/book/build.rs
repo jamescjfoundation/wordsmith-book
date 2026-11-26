@@ -19,7 +19,7 @@ fn main() -> std::io::Result<()> {
     res.set_icon(ICON)
         .set("ProductName", "Wordsmith Book")
         .set("FileDescription", "Wordsmith Book")
-        .set("CompanyName", "The J. C. J. Foundation")
-        .set("LegalCopyright", "The J. C. J. Foundation. MIT OR Apache-2.0");
+        .set("CompanyName", "The James C. J. Foundation")
+        .set("LegalCopyright", "Copyright (c) 2026 the Wordsmith Book contributors. MIT OR Apache-2.0");
     res.compile()
 }

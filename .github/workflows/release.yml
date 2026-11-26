@@ -1,6 +1,11 @@
-# Release: when a maintainer pushes a version tag (v0.1.0), check, test the v0.1 test on the three
-# desktop platforms, build the packages, attest them, and publish a release whose notes are the
-# tag's CHANGELOG.md section. Publishing waits for the `release` environment's approval.
+# Release: when a version tag (v0.1.0) is pushed, run the full gate, run the v0.1 test on the
+# three desktop platforms, build the packages, attest them, and publish a release whose notes are
+# the tag's CHANGELOG.md section.
+#
+# A person or an agent may push the tag once the full gate has passed on the commit (project
+# decision 0002 in the wordsmith repository, core decision 0011). The publish job runs in the
+# `release` environment, which only `v*` tags may use. The environment has no reviewers, so
+# publishing does not wait for an approval.
 #
 # Only GitHub's own actions, pinned to full commit SHAs.
 name: Release
@@ -94,6 +99,7 @@ jobs:
     name: attest and publish
     needs: package
     runs-on: ubuntu-latest
+    # Only `v*` tags may use this environment; it has no reviewers.
     environment: release
     permissions:
       contents: write

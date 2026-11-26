@@ -2,10 +2,16 @@
 
 As of 2026-11-24. Status: accepted as the build plan; changed only by a commit that says why.
 
-Wordsmith Book is the J. C. J. Foundation's open-source app for designing and typesetting books. A
-writer or a small press brings a finished manuscript, picks a book design, sets the trim size,
-fonts, chapter openings and front and back matter, and exports a print-ready PDF for paperback and
-hardcover and a valid, accessible EPUB for ebook stores, every word checked against the source.
+**Since 2026-11-26** the plan is finished: every milestone in section 10 is done and only the
+releases are left. It is kept as the record of the build. `AGENTS.md` holds the rules in force,
+and a note dated like this one marks each place where a later decision changed what the plan
+says.
+
+Wordsmith Book is The James C. J. Foundation's open-source app for designing and typesetting
+books. A writer or a small press brings a finished manuscript, picks a book design, sets the trim
+size, fonts, chapter openings and front and back matter, and exports a print-ready PDF for
+paperback and hardcover and a valid, accessible EPUB for ebook stores, every word checked against
+the source.
 
 It is the third app on [open-source-core](https://github.com/jamescjfoundation/open-source-core),
 after [Wordsmith Script](https://github.com/jamescjfoundation/wordsmith-script) and
@@ -35,6 +41,10 @@ project. This repository holds only what is about making a book.
 ## 1. How to follow this plan
 
 This plan is meant to be carried out step by step, by people and coding agents, until v1.0.
+
+**Since 2026-11-26** changes land as core decision 0013 says: the full `cargo xtask ci` passes
+before each push to `main`, not only before a release, and a pull request is optional. The step
+ids below are this plan's; a new commit's subject says what the change does.
 
 - **Order.** Milestones run in the order of section 10. Steps inside a milestone run in order
   unless they say they can run in parallel.
@@ -243,6 +253,10 @@ Each layer calls only the layers under it; `cargo xtask app-layers` checks the t
 `book-typeset`, `book-epub` and `book-check` never depend on interface code, so the command line
 builds books with no window.
 
+**Since 2026-11-26** the table in force is the one in `AGENTS.md`, "Where each crate's code goes",
+kept together with `LAYERS` and `FIRST_LAYER` in `xtask/src/book.rs`. It adds `jcj-i18n` to
+layer 5, which the table above and the one in section 5.3 lack.
+
 ### 5.3 What the core gives Book
 
 | Need | Core crate | How Book uses it |
@@ -298,10 +312,19 @@ Manuscript's crates into Book's (the book view gives Manuscript's own types), so
 it costs compile time and disk. Book records the request "move to core vX" in
 `docs/requests-to-manuscript.md` and moves its Manuscript reference when a newer one exists.
 
+**Since 2026-11-26** "The dependency" and "Two copies of the core" are history. The tag is
+`book-view-1.N`, cut again each time Manuscript moves to a newer core (`Cargo.toml` names the
+current one). Book and the tag it names pin one core release, and `cargo xtask core-pin` fails
+when the lock file holds two (core decisions 0011 and 0015; decision 0001 as amended).
+
 **Requests and review.** `docs/requests-to-manuscript.md` lists what Book needs from Manuscript
 (for example chosen fonts, a cover role on an asset, an edition list), each with why; a person
 carries them over. `docs/handoff-review.md` is Book's side of the review of the hand-off contract
 (step M1.2): what Book accepts, what it relies on beyond the contract, and the gaps.
+
+**Since 2026-11-26** no person carries a request over: each is an issue in the Manuscript
+repository, which anyone working here may open, and `docs/requests-to-manuscript.md` is the index
+of them (core decision 0015).
 
 ### 5.5 Core changes Book needs
 
@@ -318,6 +341,15 @@ The core's rule that apps stay at most one core release behind cannot hold durin
 Book's promotions release several patches while Script and Manuscript stay where they are. Every
 release here is additive ("What apps must do: nothing"), and moving the other apps is recorded for
 a person in Book's `docs/progress.md`.
+
+**Since 2026-11-26** the core's own records hold what the two paragraphs above set aside for this
+build. Core decision 0011, as amended: a person or an agent may cut a core release, patch or
+minor, once its full gate has passed; and an app moves to the newest core before new work starts
+on it and before its own release, instead of staying one release behind. Core decision 0004: a
+person or an agent may move an upstream pin once the contract tests and the gate pass. Script
+and Manuscript moved to the newest core that day. One rule above is still written only here:
+that the first app's own copy stays after a promotion. When a promotion is finished is asked in
+open-source-core#30.
 
 | Id | Change | Kind | Needed by | Core issue |
 | --- | --- | --- | --- | --- |
@@ -663,6 +695,11 @@ Section 5.8.
 | R3 | 0.3 | Designs, series and standards | done (the release itself waits for a person) |
 | R4 | 1.0 | Publishing house | done (the release itself waits for a person) |
 
+**Since 2026-11-26** "waits for a person", here and in step M9.4, no longer holds. A person or
+an agent may release once the full gate has passed on the commit
+([project decision 0002](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0002-how-changes-land-and-who-releases.md), core decision 0011). The repository's `release` environment exists: only `v*` tags may use
+it and it has no reviewers, so the publish job waits for no approval.
+
 **The test of v0.1**: two public-domain novels (one of at least 150,000 words, one with parts,
 notes and verse) go from a DOCX file and from a Manuscript project fixture to a 6 × 9 in
 paperback PDF and an EPUB in each of the six designs; every word of both outputs matches the
@@ -1002,7 +1039,8 @@ platforms, packages, attestation, release from the changelog) run when a maintai
 tag; update checks from this repository's releases; CHANGELOG.md for 0.1.0.
 - Tests: the test of v0.1.
 - Done when: it passes locally and the full `cargo xtask ci` passes; the release itself waits for
-  a person's approval.
+  a person's approval. (Since 2026-11-26 it waits for no approval: the note under this section's
+  table.)
 
 ### R2 (v0.2): parity for most novels
 
@@ -1074,6 +1112,10 @@ v0.1 test still passes.
 Private manuscripts may be run through the same tests locally from `.private/`; their results are
 never committed.
 
+**Since 2026-11-26** the core's gate runs before each push to `main`, and in CI on each push
+that changes more than documentation (core decisions 0003 and 0013). `cargo xtask help` lists
+what it runs today: `names` is gone, and `core-pin` and `docs` are new.
+
 ## 12. Risks
 
 | Risk | Impact | Mitigation |
@@ -1083,8 +1125,8 @@ never committed.
 | The core's layout changes between releases | Print output moves | Golden files; core moves are their own step (R4.6) |
 | Word-processor layout falls short of book typography | Lower quality than a typesetting engine | Book's own passes (right-hand starts, gutter, optimal-fit breaking); designs reviewed by a person; revisit decision 0003 if the engine becomes buildable |
 | No PDF/X output | Some print services ask for PDF/X | Most print-on-demand services take plain PDF with embedded fonts; PDF/X recorded as blocked upstream (PRT-14), not waited on |
-| Manuscript has no release tags yet | Book pins a non-release tag (`book-view-1`) | Decision 0001 records it; Book moves to a release tag when a step needs one |
-| Two copies of the core (Book ahead of Manuscript's pin) | Slower builds, more disk | No `jcj-` types cross the boundary; request Manuscript to move; move Book's Manuscript reference when one exists |
+| Manuscript has no release tags yet | Book pins a non-release tag (`book-view-1`) | Decision 0001 records it; Book moves to a release tag when a step needs one. Since 2026-11-26: the tag is `book-view-1.N`, and a release tag is asked for in wordsmith-manuscript#12 |
+| Two copies of the core (Book ahead of Manuscript's pin) | Slower builds, more disk | No `jcj-` types cross the boundary; request Manuscript to move; move Book's Manuscript reference when one exists. Until 2026-11-26: Book and the Manuscript tag it names now pin one core, and `cargo xtask core-pin` checks it |
 | Disk space (a large build cache) | Builds fail mid-step | `CARGO_INCREMENTAL=0`; `cargo clean` below 15 GB free; no other repositories' `target/` kept |
 | Ebook rendering differs between reading systems | Ugly ebooks on some devices | Conservative CSS per design; store editions; the preview labelled as one; manual checks by a person before release |
 | Messy word-processor files | Wrong structure, lost italics | Import review with editable rules; the "online word processor" fixture from M0.5 |
@@ -1118,6 +1160,11 @@ None open for the build. Answered on 2026-11-24 (decisions 0001 and 0003 record 
 
 Still open for people, not blocking the build: who reviews the built-in designs before 0.1 is
 released; files saved by real word processors for the fixtures.
+
+**Since 2026-11-26** answer 1's limits are lifted in the core: a minor release or an upstream
+pin move may be made by a person or an agent once the gate has passed (core decisions 0011 and
+0004), and a change to a fork follows the core's `docs/UPSTREAM.md`. In answer 2 the tag is now
+`book-view-1.N`.
 
 ## 14. Third-party building blocks
 

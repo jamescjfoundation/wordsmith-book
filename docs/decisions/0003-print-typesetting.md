@@ -1,6 +1,7 @@
 # 0003: Print typesetting on the core's layout
 
-Date: 2026-11-24. Status: accepted (the plan's fallback, taken because the spike failed).
+Date: 2026-11-24 · Status: accepted (the plan's fallback, taken because the spike failed) ·
+Addendum 2026-11-25 (R4.6) · Amended 2026-11-26 (the spike's test file; who may move a pin)
 
 ## Context
 
@@ -91,4 +92,18 @@ its own (`jcj-typeset`, core decision 0002).
 Print stays on the core's layout and moved with each core release up to v0.1.15, the newest;
 no core move changed a golden file (`docs/golden.md`). Moving to the embedded engine still needs
 a person (`docs/progress.md`, "Waiting on a person").
+
+## Amended 2026-11-26
+
+- **The spike's test file.** `crates/book-typeset/tests/spike.rs`, named under "The spike's
+  results", is gone: step M5.1 replaced it with the whole-book print tests in
+  `crates/book-check/tests/` (`print.rs`: both test books print every letter and every word;
+  `print_pdf.rs`, from M5.4: the golden print PDFs).
+- **Who may move a pin.** That only a person may move a pin was the rule on 2026-11-24. Since
+  [core decision 0004](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/decisions/0004-follow-hold-own.md)
+  was accepted, a person or an agent may move an upstream pin in the core once its contract
+  tests and full gate pass. The finding stands: the engine at 0.15.1 does not build against the
+  core's patch block, and trying a newer engine or a moved pin is work in the core
+  ([Route K](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-k)),
+  not here.
 

@@ -1,6 +1,6 @@
 # 0004: The brand and the interface colors
 
-Date: 2026-11-25. Status: accepted.
+Date: 2026-11-25 · Status: accepted
 
 ## Context
 

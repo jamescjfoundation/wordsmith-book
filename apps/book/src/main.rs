@@ -60,7 +60,7 @@ fn main() -> ExitCode {
             name: NAME,
             tagline: "Make print and ebook editions of a finished book",
             repo: "jamescjfoundation/wordsmith-book",
-            developer: "The J. C. J. Foundation",
+            developer: "The James C. J. Foundation",
             version: env!("CARGO_PKG_VERSION"),
             // In place where the updater can replace the app; elsewhere the check offers the download.
             installs_in_place: !cfg!(target_os = "macos"),

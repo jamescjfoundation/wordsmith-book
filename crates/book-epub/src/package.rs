@@ -6,8 +6,8 @@
 //! reading order, the table of contents and landmarks, and metadata, and writes the container
 //! around them. The same package gives the same bytes every time.
 //!
-// core-candidate: C6, an EPUB 3 package layer any app that writes EPUB could use
-// (core issue #20).
+// core-candidate: open-source-core#20 (C6). An EPUB 3 package layer any app that writes EPUB
+// could use.
 
 use std::io::{Cursor, Write as _};
 

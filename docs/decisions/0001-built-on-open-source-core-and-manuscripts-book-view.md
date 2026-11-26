@@ -1,6 +1,7 @@
 # 0001: Built on open-source-core and Manuscript's book view
 
-Date: 2026-11-24. Status: accepted.
+Date: 2026-11-24 · Status: accepted · Amended 2026-11-26 (the `book-view-1.N` tags; one core in
+the graph)
 
 ## Context
 
