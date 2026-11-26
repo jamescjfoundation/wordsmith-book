@@ -16,7 +16,7 @@ use wordsmith_book_model::{SectionId, Source};
 use wordsmith_manuscript_format::book::{self, Book, Section};
 use wordsmith_manuscript_model::{Project, Role, Text};
 
-use crate::{Error, reads_book_view};
+use crate::{Error, Outside, reads_book_view, reads_manuscript_schema};
 
 /// The kind of source that was opened.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -61,20 +61,26 @@ pub fn resolve(project_root: &Path, source: &Source) -> PathBuf {
     }
 }
 
-/// Refuse a book view this build does not read.
+/// Refuse a book view this build does not read ([`crate::BOOK_VIEWS`]).
 pub fn check_version(b: &Book) -> Result<(), Error> {
-    if reads_book_view(b.version) {
-        Ok(())
-    } else {
-        Err(Error::Source(format!(
-            "the Manuscript project gives book view version {}; this version of Wordsmith Book reads version {}. Update Wordsmith Book to open it.",
-            b.version,
-            crate::BOOK_VIEW_VERSIONS.iter().map(u32::to_string).collect::<Vec<_>>().join(", ")
-        )))
-    }
+    if reads_book_view(b.version) { Ok(()) } else { Err(Error::SourceVersion(Outside::BookView(b.version))) }
 }
 
+/// Refuse a Manuscript project format this build does not read ([`crate::MANUSCRIPT_SCHEMAS`]).
+pub fn check_schema(schema: u32) -> Result<(), Error> {
+    if reads_manuscript_schema(schema) { Ok(()) } else { Err(Error::SourceVersion(Outside::Schema(schema))) }
+}
+
+/// Why Manuscript's reader or writer refused, as Book says it. The reader reads a project's
+/// format before anything else and stops at one newer than it knows, giving the format it
+/// found: whether Book reads that format is Book's to say ([`check_schema`]), in Book's words
+/// and not in the reader's, which are written for Manuscript's own users.
 fn source_err(e: wordsmith_manuscript_format::Error) -> Error {
+    if let wordsmith_manuscript_format::Error::Newer { found, .. } = e
+        && let Err(outside) = check_schema(found)
+    {
+        return outside;
+    }
     Error::Source(e.to_string())
 }
 

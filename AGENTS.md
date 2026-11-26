@@ -310,13 +310,35 @@ in `CHANGELOG.md` and `docs/guide/` ([Route C](https://github.com/jamescjfoundat
 Book builds on Manuscript's `wordsmith-manuscript-model` and `wordsmith-manuscript-format`
 crates, as git dependencies at a `book-view-1.N` tag (decision 0001; `Cargo.toml` names the
 current one). The contract is Manuscript's
-[`docs/book-handoff.md`](https://github.com/jamescjfoundation/wordsmith-manuscript/blob/main/docs/book-handoff.md).
+[`docs/book-handoff.md`](https://github.com/jamescjfoundation/wordsmith-manuscript/blob/main/docs/book-handoff.md),
+and Manuscript owns it.
 
+- **What Book uses is listed in the contract, by name.** The contract is the list of what
+  Book's code really names in the two crates (types, functions, constants), with the project
+  format and the packed format. Book names nothing of Manuscript's that the list lacks. Code
+  here that needs one more item asks for it first (next point) and uses it once the contract
+  names it and a tag carries it.
 - **A need goes in as an issue in the Manuscript repository**, as the block above says
   ([Route B](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-b)).
   Anyone working here, an agent included, may open it. `docs/requests-to-manuscript.md` is
-  Book's index of them, with what Book does meanwhile. A Book change never edits the Manuscript
-  repository.
+  Book's index of them, with what Book does meanwhile; the requests for something new in the
+  book view are Manuscript issues #9, #10, #11 and #13. A Book change never edits the
+  Manuscript repository.
+- **Book moves to a new `book-view` tag only when Manuscript has cut it.** `main` never names
+  a branch or a commit of Manuscript's. A change in Manuscript that Book must follow arrives
+  as a new tag and, where Book has work to do, an issue here.
+- **Manuscript's CI builds Book.** A job on Manuscript's side builds Book against Manuscript's
+  branch, so a change there that breaks Book fails before it lands. For that to say anything,
+  Book's `main` must stay buildable against Manuscript's newest `book-view` tag: move to a new
+  tag soon after it is cut, and never leave `main` needing something only an older tag has.
+- **The versions Book reads are stated in one place**: `MANUSCRIPT_SCHEMAS` (the project
+  formats, the `schema` of a project's `project.toml`) and `BOOK_VIEWS` (the book view's
+  versions) in `crates/book-format/src/lib.rs`. Every source is held to both when it is opened,
+  folder or packed, linked or owned, and one outside them is refused in Book's own words, naming
+  the version found and the versions Book reads. A test keeps the newest format equal to the one
+  the pinned crates read, so a tag with a new format fails it: raise the range on purpose, once
+  Book has been checked against that format, with a line in `CHANGELOG.md` and in the guide
+  (`docs/guide/manuscript.md`, "Versions").
 - **One core.** Book and the Manuscript tag it names pin the same core release, and
   `cargo xtask core-pin` fails when `Cargo.lock` holds two. So Book moves to a newer core only
   after Manuscript has moved and cut the next `book-view-1.N` tag on it; then both pins move in
@@ -324,7 +346,10 @@ current one). The contract is Manuscript's
   Until that tag exists, Book can still take the core's files and marked blocks:
   `cargo xtask sync <this folder>`, run in a checkout of the core at that release, writes them,
   and Book's own `cargo xtask sync --check` passes once its pin has moved.
-- Book reads book view version 1 only and refuses others with a clear message.
+
+**Today (2026-11-26):** the list and the job are being added on Manuscript's side. Until the
+contract carries the list, Manuscript issue #7 holds it: the items Book names, as asked for
+there.
 
 ### Where each crate's code goes
 

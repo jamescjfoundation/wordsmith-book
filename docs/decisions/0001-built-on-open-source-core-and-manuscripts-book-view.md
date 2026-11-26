@@ -1,7 +1,7 @@
 # 0001: Built on open-source-core and Manuscript's book view
 
 Date: 2026-11-24 · Status: accepted · Amended 2026-11-26 (the `book-view-1.N` tags; one core in
-the graph)
+the graph; the contract's shape and the versions Book reads, at the end)
 
 ## Context
 
@@ -54,3 +54,31 @@ view version 1). Book needs both and must not duplicate either.
 ## Revisit when
 
 Manuscript publishes a release tag with a newer book view, or moves to a newer core release.
+
+## Amended 2026-11-26: the contract's shape, and the versions Book reads
+
+The decision above stands. Two things it left open are settled.
+
+- **The contract is a named list.** "Manuscript gives the book" named two whole crates at a
+  tag, and Book came to use more of them than the contract's text named, with nothing on
+  Manuscript's side to notice a change that breaks Book. The contract is now the list of what
+  Book's code really names in the two crates, with the project format and the packed format,
+  written in Manuscript's `docs/book-handoff.md`. Manuscript holds it with a test and with a CI
+  job that builds Book against Manuscript's branch. On Book's side: Book names nothing the list
+  lacks; a need is an issue in the Manuscript repository; Book moves to a new `book-view` tag
+  only when Manuscript has cut it; and Book's `main` stays buildable against the newest tag,
+  because that is what Manuscript's job builds. `AGENTS.md`, "Book and Wordsmith Manuscript",
+  carries these as rules.
+- **Book states the range it reads, in one place, and words its own refusal.** "Book reads
+  version 1 of the view only and refuses others" was checked against a number compiled into
+  Book with the view itself, so the check could not fail. What does change under a released
+  Book is the format of the project a newer Manuscript saves (the `schema` of its
+  `project.toml`), and that was refused by Manuscript's reader in words written for
+  Manuscript's users. Now `crates/book-format/src/lib.rs` states both ranges
+  (`MANUSCRIPT_SCHEMAS`, formats 1 to 3; `BOOK_VIEWS`, version 1); every source is held to
+  them when it is opened, as a folder or packed, linked or owned; and a project outside them
+  is refused in Book's words, naming the version found and the versions this Book reads. The
+  project's format is found by Manuscript's reader, which reads it before anything else and
+  gives it back; whether Book reads it is decided here. A test keeps the newest format Book
+  states equal to the one the pinned crates read, so moving to a tag with a new format fails
+  until the range is raised on purpose.

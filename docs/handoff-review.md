@@ -74,6 +74,27 @@ Each is also a request in `docs/requests-to-manuscript.md`.
    for the whole book, as the design says); the writer's labels are not shown. Nothing needed;
    recorded so the contract can say so.
 
+## Since this review (2026-11-26)
+
+Dated notes; the review above is as it was written.
+
+- **The contract's shape is decided**: a named list of what Book really uses, in Manuscript's
+  `docs/book-handoff.md`, held by a test and by a CI job on Manuscript's side that builds Book
+  (decision 0001, amended). "What Book relies on beyond the contract" above is what that list
+  must hold; request 2 (Manuscript issue #7) carries it, completed in a comment there with
+  every item the code names.
+- **A correction to "What Book accepts".** Book does not call `book::open_folder` or
+  `book::open_packed`. It opens the project with `folder::Folder::open` or `pack::read_packed`,
+  which it needs for the project behind the view, and takes the view with `book::from_project`.
+- **The version check now covers the version that changes.** The book view's version is
+  compiled into Book with the view, so that check alone could not fail. Book now also states
+  the Manuscript project formats it reads (1 to 3) and refuses a project outside them in its
+  own words, naming both versions (`book-format`, `MANUSCRIPT_SCHEMAS`, `source::check_schema`;
+  tested with a project inside the range and one outside, as a folder, packed and as an owned
+  source).
+- Gap 6 is settled, as it says. Gaps 1 to 5 are open requests in Manuscript's repository
+  (`docs/requests-to-manuscript.md`).
+
 ## Sign-off
 
 - [ ] A person from the Book side has read this review and the contract and agrees, or has

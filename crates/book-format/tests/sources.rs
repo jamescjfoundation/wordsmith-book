@@ -220,9 +220,71 @@ fn other_book_view_versions_are_refused_clearly() {
     assert!(source::check_version(&b).is_ok());
     b.version = 2;
     let e = source::check_version(&b).unwrap_err();
-    assert!(e.to_string().contains("book view version 2") && e.to_string().contains("reads version 1"), "{e}");
+    assert_eq!(e, wordsmith_book_format::Error::SourceVersion(wordsmith_book_format::Outside::BookView(2)));
+    assert!(e.to_string().contains("book view version 2") && e.to_string().contains("reads book view version 1"), "{e}");
     // A path that is not a Manuscript project is refused before anything is read.
     assert!(source::open(Path::new("."), &Source::Manuscript("../notes.txt".into())).is_err());
+}
+
+/// The fixture as a project of format `schema`: a copy with that number in its `project.toml`.
+fn fixture_in_format(dir: &Path, schema: u32) -> PathBuf {
+    let ms = dir.join("My Novel.wsm");
+    copy(&fixture(), &ms);
+    let toml = std::fs::read_to_string(ms.join("project.toml")).unwrap();
+    let now = format!("schema = {}\n", wordsmith_manuscript_format::SCHEMA);
+    assert!(toml.starts_with(&now), "the fixture is in the newest format Book reads");
+    std::fs::write(ms.join("project.toml"), toml.replacen(&now, &format!("schema = {schema}\n"), 1)).unwrap();
+    ms
+}
+
+#[test]
+fn a_manuscript_project_in_a_format_book_reads_opens_as_a_folder_and_packed() {
+    let newest = *wordsmith_book_format::MANUSCRIPT_SCHEMAS.end();
+    assert!(source::check_schema(newest).is_ok() && source::check_schema(*wordsmith_book_format::MANUSCRIPT_SCHEMAS.start()).is_ok());
+    let dir = tmp("format-inside");
+    let ms = fixture_in_format(&dir, newest);
+    let project_root = dir.join("Book.wsbk");
+    std::fs::create_dir_all(&project_root).unwrap();
+    let folder = source::open(&project_root, &Source::Manuscript("../My Novel.wsm".into())).unwrap();
+    assert_eq!(folder.kind, Kind::LinkedFolder);
+    std::fs::write(dir.join("My Novel.wsmz"), wordsmith_manuscript_format::pack::pack_folder(&ms).unwrap()).unwrap();
+    let packed = source::open(&project_root, &Source::Manuscript("../My Novel.wsmz".into())).unwrap();
+    assert_eq!(packed.kind, Kind::LinkedPacked);
+    assert_eq!(book::words(&packed.book), book::words(&folder.book));
+}
+
+#[test]
+fn a_manuscript_project_in_a_format_outside_the_range_is_refused_in_books_words() {
+    use wordsmith_book_format::{Error, Outside};
+    let newer = *wordsmith_book_format::MANUSCRIPT_SCHEMAS.end() + 1;
+    assert_eq!(source::check_schema(newer), Err(Error::SourceVersion(Outside::Schema(newer))));
+    let dir = tmp("format-outside");
+    let ms = fixture_in_format(&dir, newer);
+    let before = tree(&ms);
+    let project_root = dir.join("Book.wsbk");
+    std::fs::create_dir_all(&project_root).unwrap();
+    // As a folder, and as the packed project a newer Manuscript would write.
+    std::fs::write(dir.join("My Novel.wsmz"), wordsmith_manuscript_format::pack::pack_folder(&ms).unwrap()).unwrap();
+    for link in ["../My Novel.wsm", "../My Novel.wsmz"] {
+        let Err(e) = source::open(&project_root, &Source::Manuscript(link.into())) else { panic!("{link} opened") };
+        assert_eq!(e, Error::SourceVersion(Outside::Schema(newer)), "{link}");
+        let said = e.to_string();
+        // Both versions by name, and Book's advice, not Manuscript's ("Update the app").
+        assert!(said.contains(&format!("is in format {newer}")), "{said}");
+        assert!(said.contains(&format!("reads Manuscript formats 1 to {}", newer - 1)), "{said}");
+        assert!(
+            said.contains(concat!("Wordsmith Book ", env!("CARGO_PKG_VERSION"))) && said.ends_with("Update Wordsmith Book to open it."),
+            "{said}"
+        );
+        assert!(!said.contains("Update the app"), "{said}");
+    }
+    // An owned source a newer Manuscript saved is refused the same way, and is not written over.
+    let own = dir.join("Own.wsbk");
+    copy(&ms, &own.join(wordsmith_book_model::OWNED_SOURCE));
+    let (project, _) = gulliver::project(&fixture_text());
+    assert_eq!(source::write_owned(&own, wordsmith_book_model::OWNED_SOURCE, &project), Err(Error::SourceVersion(Outside::Schema(newer))));
+    assert_eq!(tree(&own.join(wordsmith_book_model::OWNED_SOURCE)), before);
+    assert_eq!(tree(&ms), before, "Book wrote nothing into the project");
 }
 
 #[test]

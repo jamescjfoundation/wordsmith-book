@@ -20,6 +20,8 @@ pub mod pack;
 pub mod source;
 pub mod toml_file;
 
+use std::ops::RangeInclusive;
+
 pub use folder::{Files, Folder, Saved};
 pub use wordsmith_book_model::SectionId;
 
@@ -28,12 +30,64 @@ pub const EXTENSION: &str = "wsbk";
 /// A packed Book project's extension (decision 0002).
 pub const PACKED_EXTENSION: &str = "wsbkz";
 
-/// The versions of Manuscript's book view this build reads (plan section 5.4).
-pub const BOOK_VIEW_VERSIONS: &[u32] = &[1];
+/// What this build reads of Wordsmith Manuscript's, stated here and nowhere else: the range
+/// Book declares under the hand-off contract (decision 0001; Manuscript's `docs/book-handoff.md`,
+/// "Versions"). [`source::open`] holds every linked and owned source to both ranges, and a
+/// project outside one is refused in Book's own words ([`Outside`]).
+///
+/// The Manuscript project formats Book reads: the `schema` a project's `project.toml` declares,
+/// in a folder or in a packed project. Raise the end only when Book has been checked against
+/// that format: a test keeps it equal to the newest format the Manuscript crates Book builds on
+/// can read, so moving to a tag with a new format fails until this line is changed on purpose.
+pub const MANUSCRIPT_SCHEMAS: RangeInclusive<u32> = 1..=3;
+
+/// The versions of Manuscript's book view Book reads.
+pub const BOOK_VIEWS: RangeInclusive<u32> = 1..=1;
+
+/// Whether this build reads a Manuscript project of format `schema`.
+pub fn reads_manuscript_schema(schema: u32) -> bool {
+    MANUSCRIPT_SCHEMAS.contains(&schema)
+}
 
 /// Whether this build reads book view `version`.
 pub fn reads_book_view(version: u32) -> bool {
-    BOOK_VIEW_VERSIONS.contains(&version)
+    BOOK_VIEWS.contains(&version)
+}
+
+/// A version of a Manuscript project that is outside what this build reads.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Outside {
+    /// The project's format (its schema) is not in [`MANUSCRIPT_SCHEMAS`].
+    Schema(u32),
+    /// The book view the project gives is not in [`BOOK_VIEWS`].
+    BookView(u32),
+}
+
+/// "format 3", "formats 1 to 3".
+fn span(one: &str, range: &RangeInclusive<u32>) -> String {
+    if range.start() == range.end() { format!("{one} {}", range.start()) } else { format!("{one}s {} to {}", range.start(), range.end()) }
+}
+
+impl std::fmt::Display for Outside {
+    /// Both versions by name: the project's, and what this version of Book reads.
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let book = concat!("Wordsmith Book ", env!("CARGO_PKG_VERSION"));
+        let (found, range) = match self {
+            Outside::Schema(found) => {
+                write!(f, "this Manuscript project is in format {found}. {book} reads Manuscript {}.", span("format", &MANUSCRIPT_SCHEMAS))?;
+                (*found, &MANUSCRIPT_SCHEMAS)
+            }
+            Outside::BookView(found) => {
+                write!(f, "this Manuscript project gives book view version {found}. {book} reads book view {}.", span("version", &BOOK_VIEWS))?;
+                (*found, &BOOK_VIEWS)
+            }
+        };
+        if found > *range.end() {
+            write!(f, " Update Wordsmith Book to open it.")
+        } else {
+            write!(f, " Save the project with a current Wordsmith Manuscript to open it.")
+        }
+    }
 }
 
 /// Why a project could not be read or written.
@@ -71,6 +125,8 @@ pub enum Error {
     },
     /// The source cannot be used.
     Source(String),
+    /// The source is a Manuscript project of a version this build does not read.
+    SourceVersion(Outside),
     /// Something could not be written.
     Write(String),
 }
@@ -87,6 +143,7 @@ impl std::fmt::Display for Error {
             Error::Damaged { file, why } => write!(f, "{file} is damaged: {why}"),
             Error::Io { file, why } => write!(f, "{file}: {why}"),
             Error::Source(why) => write!(f, "the book's source cannot be used: {why}"),
+            Error::SourceVersion(outside) => write!(f, "the book's source cannot be used: {outside}"),
             Error::Write(why) => write!(f, "could not write the project: {why}"),
         }
     }
@@ -123,5 +180,34 @@ mod tests {
     fn reads_the_book_view_manuscript_gives() {
         assert!(reads_book_view(wordsmith_manuscript_format::book::VERSION));
         assert!(!reads_book_view(2));
+    }
+
+    #[test]
+    fn the_formats_book_states_are_the_ones_the_pinned_manuscript_crates_read() {
+        // The newest format: moving to a Manuscript tag with a newer one fails here until
+        // `MANUSCRIPT_SCHEMAS` is raised on purpose. The oldest: Manuscript reads from 1.
+        assert_eq!(*MANUSCRIPT_SCHEMAS.end(), wordsmith_manuscript_format::SCHEMA);
+        assert_eq!(*MANUSCRIPT_SCHEMAS.start(), 1);
+        assert!(reads_manuscript_schema(wordsmith_manuscript_format::SCHEMA) && !reads_manuscript_schema(0));
+        assert!(!reads_manuscript_schema(wordsmith_manuscript_format::SCHEMA + 1));
+    }
+
+    #[test]
+    fn a_version_outside_the_range_is_refused_naming_both_versions() {
+        let book = concat!("Wordsmith Book ", env!("CARGO_PKG_VERSION"));
+        assert_eq!(
+            Outside::Schema(4).to_string(),
+            format!("this Manuscript project is in format 4. {book} reads Manuscript formats 1 to 3. Update Wordsmith Book to open it.")
+        );
+        assert_eq!(
+            Outside::BookView(2).to_string(),
+            format!("this Manuscript project gives book view version 2. {book} reads book view version 1. Update Wordsmith Book to open it.")
+        );
+        assert!(Outside::Schema(0).to_string().ends_with("Save the project with a current Wordsmith Manuscript to open it."));
+        assert!(
+            Error::SourceVersion(Outside::Schema(4))
+                .to_string()
+                .starts_with("the book's source cannot be used: this Manuscript project is in format 4.")
+        );
     }
 }

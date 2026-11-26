@@ -26,6 +26,12 @@ build records 16 MB (100). File names inside the project have no folders above t
 names and no control characters. A project from a newer version is refused with a message
 naming both versions.
 
+The source is a Wordsmith Manuscript project, and Book states which it reads in one place
+(`MANUSCRIPT_SCHEMAS` and `BOOK_VIEWS` in `crates/book-format/src/lib.rs`): project formats 1 to
+3 (the `schema` of the project's `project.toml`) and book view version 1. A linked project, a
+packed one or an owned source outside that range is refused when it is opened, in Book's own
+words, naming the version found and the versions Book reads.
+
 Saving writes only the files whose bytes changed, each atomically (written beside, then moved
 into place), `book.toml` last, so an interrupted save leaves the previous `book.toml` pointing
 at whole files.

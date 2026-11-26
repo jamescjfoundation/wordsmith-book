@@ -54,6 +54,11 @@ record distributors read.
 - **The window's *Open…* is the system's Open dialog**, in place of a box to type a path into.
   Choose a project's `book.toml`, or a packed project (`.wsbkz`); where the system shows a
   `.wsbk` folder as one document, choose that. A path can still be given when starting the app.
+- **A Manuscript project Book cannot read is refused in Book's own words**, naming both
+  versions: the project's format, and the formats this version of Book reads, with what to do
+  ("Update Wordsmith Book to open it."). Before, a project saved by a newer Manuscript was
+  refused with Manuscript's message, which said to update "the app". Book reads Manuscript
+  project formats 1 to 3 and book view version 1.
 - **The Wordsmith Book brand.** The app icon, the mark (the letter B and a ribbon cursor) and
   the window's colors come from the Wordsmith brand kit: Iron Gall Ink on Page White, Margin Blue
   for links and focus, Ribbon Green as the one accent, and Night for the dark themes. The Windows
