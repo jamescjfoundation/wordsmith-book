@@ -23,13 +23,14 @@ view version 1). Book needs both and must not duplicate either.
   only when a step needs something a later commit has. Book reads version 1 of the view only and
   refuses others with a clear message. Book never writes a Manuscript project; fixes go back as
   offers in the file beside the project folder (`offers` module, version 1). Since 2026-11-26
-  the tag is `book-view-1.1`: the same book view version 1, cut after Manuscript moved to core
-  `v0.1.16`.
+  the tag is `book-view-1.N`: the same book view version 1, cut again each time Manuscript moves
+  to a newer core (`book-view-1.1` on core `v0.1.16`, `book-view-1.2` on `v0.1.17`). `Cargo.toml`
+  names the current one.
 - **Two copies of the core.** Manuscript at `book-view-1` depends on core `v0.1.4`; Book is
   ahead. Cargo builds both. No `jcj-` type crosses from Manuscript's crates into Book's (the book
   view gives Manuscript's own types), so this builds; it costs compile time and disk. The request
   to move Manuscript is in `docs/requests-to-manuscript.md`. This ended on 2026-11-26: Book and
-  Manuscript's `book-view-1.1` both pin core `v0.1.16`, and `cargo xtask core-pin` (in the gate)
+  the Manuscript tag it names pin the same core release, and `cargo xtask core-pin` (in the gate)
   fails if the lock file holds two cores again. The two move to a new core together, Manuscript
   first (core decision 0015).
 - **Eight crates and two apps**, in layers (plan section 5.2, AGENTS.md):
