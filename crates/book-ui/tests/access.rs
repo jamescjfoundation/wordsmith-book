@@ -146,11 +146,7 @@ fn every_control_in_every_view_has_a_name() {
     }
     h.state_mut().shell.run(jcj_shell::Cmd::new(jcj_shell::commands::shell_ids::CLOSE_FILE_PAGE));
     h.run_steps(2);
-    // The dialogs.
-    h.state_mut().app.open_dialog = Some(String::new());
-    h.run_steps(3);
-    problems.extend(unnamed(&h, "the open dialog"));
-    h.state_mut().app.open_dialog = None;
+    // The dialogs (Open is the system's own, shown by the window).
     h.state_mut().shell.run(jcj_shell::Cmd::new(jcj_shell::commands::shell_ids::PALETTE));
     h.run_steps(3);
     problems.extend(unnamed(&h, "the command palette"));

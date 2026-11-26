@@ -8,6 +8,9 @@ the book's own made by importing a file.
 1. **Make a book.** From the start window or File › New, choose *From a Manuscript project* to
    link one, or *An empty book* and then **Import a File…** (Mod+Shift+I) for a DOCX, ODT, RTF,
    Markdown or text file.
+   To come back to a book, use **Open…** (Mod+O) or the recent list. A project is a folder, so
+   in the system's Open dialog step into it and choose its `book.toml`; or choose a packed
+   project (`.wsbkz`). Where the system shows a `.wsbk` folder as one document, choose that.
 2. **Look at the outline** (the Outline panel on the left): front matter, the chapters and parts,
    back matter. Add a dedication or an about-the-author page there.
 3. **Choose a design** in the Designs panel; each card shows your own first chapter.

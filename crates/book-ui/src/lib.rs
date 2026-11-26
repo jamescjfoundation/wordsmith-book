@@ -31,6 +31,7 @@ use std::path::PathBuf;
 
 use jcj_shell::commands::ids;
 use jcj_shell::egui;
+use jcj_shell::files::FileAsk;
 use jcj_shell::i18n::{tl, tr, tr_with};
 use jcj_shell::tree::{TreeEvent, TreeState};
 use jcj_shell::{About, App, Cmd, CommandInfo, Commands, PanelSpec, Shell, ShellOptions, Side, TemplateSpec};
@@ -57,8 +58,6 @@ pub struct BookApp {
     pub book: Option<OpenBook>,
     /// The outline's tree state.
     pub outline: TreeState<Key>,
-    /// The open dialog's path field, while it shows.
-    pub open_dialog: Option<String>,
     /// The import review, while it shows.
     pub review: Option<import_review::Review>,
     /// The last import's report.
@@ -103,6 +102,14 @@ fn today() -> String {
     format!("{y:04}-{m:02}-{d:02}")
 }
 
+/// The Open dialog (the window's *Open…*). A project is a folder, which an Open dialog steps
+/// into: the file to choose is the project's `book.toml`, or a packed project. Where the system
+/// shows a `.wsbk` folder as one document, that is chosen itself.
+pub fn open_ask() -> FileAsk {
+    let kinds = [wordsmith_book_format::EXTENSION, wordsmith_book_format::PACKED_EXTENSION, "toml"];
+    FileAsk::open().title(tr("Open a Book")).filter(tr("Wordsmith Book projects"), &kinds)
+}
+
 fn str_param<'a>(params: &'a Value, key: &str) -> Result<&'a str, String> {
     params.get(key).and_then(Value::as_str).ok_or_else(|| format!("`{key}` is needed"))
 }
@@ -134,28 +141,6 @@ impl BookApp {
         let out = commands::run(self, id, params)?;
         self.revision += 1;
         Ok(out)
-    }
-
-    fn draw_open_dialog(&mut self, ctx: &egui::Context, shell: &mut Shell) {
-        let Some(mut path) = self.open_dialog.take() else { return };
-        let mut keep = true;
-        egui::Window::new(tr("Open a Book")).collapsible(false).resizable(false).show(ctx, |ui| {
-            let label = ui.label(tr("The path of a book project (.wsbk folder or .wsbkz file):"));
-            let r = ui.text_edit_singleline(&mut path).labelled_by(label.id);
-            ui.horizontal(|ui| {
-                let enter = r.lost_focus() && ui.input(|i| i.key_pressed(egui::Key::Enter));
-                if ui.button(tr("Open")).clicked() || enter {
-                    shell.run(Cmd::with(ids::OPEN_PATH, json!({ "path": path.clone() })));
-                    keep = false;
-                }
-                if ui.button(tr("Cancel")).clicked() {
-                    keep = false;
-                }
-            });
-        });
-        if keep {
-            self.open_dialog = Some(path);
-        }
     }
 
     fn fix_editor(&mut self, ctx: &egui::Context) {
@@ -269,14 +254,24 @@ impl App for BookApp {
 
     fn run(&mut self, cmd: &Cmd, shell: &mut Shell) -> Result<(), String> {
         match cmd.id.as_str() {
+            // The system's Open dialog, through the shell: its answer runs `OPEN_PATH` with the
+            // file chosen. A project is a folder, so the file to choose is its `book.toml`.
             ids::OPEN => {
-                self.open_dialog = Some(String::new());
-                Ok(())
+                if shell.ask_file(open_ask(), Cmd::new(ids::OPEN_PATH)) {
+                    Ok(())
+                } else {
+                    Err(tr("Too many file dialogs are waiting."))
+                }
             }
             ids::OPEN_PATH => {
                 let path = str_param(&cmd.params, "path")?.to_owned();
                 self.open_path(&path)?;
-                jcj_shell::prefs::add_recent(&mut shell.recent, &path);
+                // The recent list names the project, not the `book.toml` chosen inside it.
+                let named = match (&self.book, path.ends_with("book.toml")) {
+                    (Some(b), true) => b.root.display().to_string(),
+                    _ => path,
+                };
+                jcj_shell::prefs::add_recent(&mut shell.recent, &named);
                 Ok(())
             }
             id => self.command(id, &cmd.params).map(|_| ()),
@@ -293,7 +288,6 @@ impl App for BookApp {
     fn document_ui(&mut self, ui: &mut egui::Ui, shell: &mut Shell) {
         let ctx = ui.ctx().clone();
         brand::ensure_fonts(&ctx);
-        self.draw_open_dialog(&ctx, shell);
         if let Some(b) = &mut self.book
             && ctx.input(|i| i.focused)
             && b.refresh_source()
@@ -505,7 +499,7 @@ impl App for BookApp {
     }
 
     fn has_document(&self) -> bool {
-        self.book.is_some() || self.review.is_some() || self.open_dialog.is_some()
+        self.book.is_some() || self.review.is_some()
     }
 
     fn about(&self) -> About {

@@ -14,6 +14,8 @@ use wordsmith_book_ui::{BookApp, NAME, brand, shell_options};
 
 struct Window {
     shell: Shell,
+    /// The system's file dialogs the shell was asked for (the window shows them).
+    files: jcj_shell::files::FileDialogs,
     app: BookApp,
     prefs: Option<PrefsFile<Prefs<BookPrefs>>>,
 }
@@ -31,8 +33,9 @@ impl Window {
 }
 
 impl eframe::App for Window {
-    fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
+    fn ui(&mut self, ui: &mut egui::Ui, frame: &mut eframe::Frame) {
         self.shell.ui(ui, &mut self.app);
+        self.files.show(&mut self.shell, ui.ctx(), Some(&*frame));
         self.save_prefs(false);
         // An installed update starts when this window closes.
         if self.shell.close_requested() {
@@ -82,7 +85,7 @@ fn main() -> ExitCode {
     {
         app.message = Some(e);
     }
-    let window = Window { shell, app, prefs };
+    let window = Window { shell, files: jcj_shell::files::FileDialogs::new(), app, prefs };
     let mut viewport = egui::ViewportBuilder::default().with_title(NAME).with_app_id("org.jcjfoundation.book");
     if let Some(icon) = icon() {
         viewport = viewport.with_icon(icon);

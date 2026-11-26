@@ -25,6 +25,9 @@ record distributors read.
 
 ### Changed
 
+- **The window's *Open…* is the system's Open dialog**, in place of a box to type a path into.
+  Choose a project's `book.toml`, or a packed project (`.wsbkz`); where the system shows a
+  `.wsbk` folder as one document, choose that. A path can still be given when starting the app.
 - **The Wordsmith Book brand.** The app icon, the mark (the letter B and a ribbon cursor) and
   the window's colors come from the Wordsmith brand kit: Iron Gall Ink on Page White, Margin Blue
   for links and focus, Ribbon Green as the one accent, and Night for the dark themes. The Windows
