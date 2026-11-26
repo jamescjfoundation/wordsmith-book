@@ -80,9 +80,9 @@ Dated notes; the review above is as it was written.
 
 - **The contract's shape is decided**: a named list of what Book really uses, in Manuscript's
   `docs/book-handoff.md`, held by a test and by a CI job on Manuscript's side that builds Book
-  (decision 0001, amended). "What Book relies on beyond the contract" above is what that list
-  must hold; request 2 (Manuscript issue #7) carries it, completed in a comment there with
-  every item the code names.
+  (decision 0001, amended). "What Book relies on beyond the contract" above is in that list
+  now, with the rest of what Book's code names (the contract's "What Book may use"; request 2,
+  Manuscript issue #7, closed).
 - **A correction to "What Book accepts".** Book does not call `book::open_folder` or
   `book::open_packed`. It opens the project with `folder::Folder::open` or `pack::read_packed`,
   which it needs for the project behind the view, and takes the view with `book::from_project`.
@@ -92,8 +92,10 @@ Dated notes; the review above is as it was written.
   own words, naming both versions (`book-format`, `MANUSCRIPT_SCHEMAS`, `source::check_schema`;
   tested with a project inside the range and one outside, as a folder, packed and as an owned
   source).
-- Gap 6 is settled, as it says. Gaps 1 to 5 are open requests in Manuscript's repository
-  (`docs/requests-to-manuscript.md`).
+- Gap 1 is decided: the anchors stay and the contract says so (request 3). Gap 5 is
+  answered: the contract's "Tags" says how tags are named and cut, and there is no release tag
+  yet (request 7). Gap 6 is settled, as it says. Gaps 2, 3 and 4 are open requests in
+  Manuscript's repository (`docs/requests-to-manuscript.md`).
 
 ## Sign-off
 

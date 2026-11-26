@@ -193,7 +193,7 @@ pub fn section_words(s: &Section) -> Vec<String> {
         out.extend(wordsmith_manuscript_model::words::words(&s.title));
     }
     let t = Text { blocks: s.content.clone(), notes: s.notes.clone() };
-    out.extend(t.words());
+    out.extend(t.plain_paragraphs().iter().flat_map(|p| wordsmith_manuscript_model::words::words(p)));
     out
 }
 

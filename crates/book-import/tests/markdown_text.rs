@@ -6,7 +6,7 @@ use std::path::{Path, PathBuf};
 
 use wordsmith_book_import::{Format, import};
 use wordsmith_book_model::ImportRules;
-use wordsmith_manuscript_model::Block;
+use wordsmith_manuscript_model::{Block, Inline};
 
 fn novels() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/novels")
@@ -42,7 +42,11 @@ fn plain_text_imports_by_chapter_lines_with_its_front_matter() {
     assert!(made(&i.report, "front matter") >= 2, "{:?}", i.report.made);
     // `_underscores_` became italic, the underscores gone.
     let book = wordsmith_manuscript_format::book::from_project(&i.project);
-    let italic = book.front.iter().flat_map(|s| &s.content).any(|b| matches!(b, Block::Para(c) if c.iter().any(|x| x.marks().italic)));
+    let italic = book
+        .front
+        .iter()
+        .flat_map(|s| &s.content)
+        .any(|b| matches!(b, Block::Para(c) if c.iter().any(|x| matches!(x, Inline::Span { marks, .. } if marks.italic))));
     assert!(italic);
     // Kept literally when the rule is off: every underscore stays.
     let lit = import(Format::Text, &text, &ImportRules { off: vec!["underscores-italic".into()], ..ImportRules::default() }, "Gulliver").unwrap();

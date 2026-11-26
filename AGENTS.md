@@ -347,9 +347,13 @@ and Manuscript owns it.
   `cargo xtask sync <this folder>`, run in a checkout of the core at that release, writes them,
   and Book's own `cargo xtask sync --check` passes once its pin has moved.
 
-**Today (2026-11-26):** the list and the job are being added on Manuscript's side. Until the
-contract carries the list, Manuscript issue #7 holds it: the items Book names, as asked for
-there.
+The list is the contract's "What Book may use". Manuscript's test
+`crates/manuscript-format/tests/book_contract.rs` uses each item the way Book does, and its
+workflow "Book consumer" runs Book's whole gate against a change to the two crates.
+
+**Today:** nothing here compares Book's code with the list. An item Book starts to use without
+asking is found only when a change in Manuscript breaks it, so check a new
+`wordsmith_manuscript_` name against the list by hand.
 
 ### Where each crate's code goes
 

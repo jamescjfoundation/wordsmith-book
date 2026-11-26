@@ -128,7 +128,7 @@ fn the_fixture_through_the_book_view_gives_every_word_role_and_id() {
                     w.extend(wordsmith_manuscript_model::words::words(&s.title));
                 }
                 let t = wordsmith_manuscript_model::Text { blocks: s.content.clone(), notes: Vec::new() };
-                w.extend(t.words());
+                w.extend(t.plain_paragraphs().iter().flat_map(|p| wordsmith_manuscript_model::words::words(p)));
                 stack.extend(s.children.iter().rev());
             }
             w
@@ -148,7 +148,7 @@ fn the_fixture_through_the_book_view_gives_every_word_role_and_id() {
     // What the hand-off review records: the view keeps comment anchors on the text (the comments
     // themselves are not in it); Book ignores them.
     let first = &chapters[0].content[0];
-    assert!(matches!(first, Block::Para(c) if c.first().is_some_and(|i| i.marks().comment.is_some())));
+    assert!(matches!(first, Block::Para(c) if matches!(c.first(), Some(Inline::Span { marks, .. }) if marks.comment.is_some())));
     // Nothing was written into the Manuscript folder.
     assert_eq!(tree(&fixture()), before);
     assert_eq!(tree(&dir.join("Gulliver.wsm")), before);
@@ -250,7 +250,7 @@ fn a_manuscript_project_in_a_format_book_reads_opens_as_a_folder_and_packed() {
     std::fs::write(dir.join("My Novel.wsmz"), wordsmith_manuscript_format::pack::pack_folder(&ms).unwrap()).unwrap();
     let packed = source::open(&project_root, &Source::Manuscript("../My Novel.wsmz".into())).unwrap();
     assert_eq!(packed.kind, Kind::LinkedPacked);
-    assert_eq!(book::words(&packed.book), book::words(&folder.book));
+    assert_eq!(source::checksums(&packed.book), source::checksums(&folder.book), "the same words in every section");
 }
 
 #[test]
