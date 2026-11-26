@@ -1,215 +1,73 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
-//! `cargo xtask <task>` for a foundation app built on open-source-core.
+//! `cargo xtask <task>` for Wordsmith Book, built on open-source-core.
 //!
-//! Started from the core's `template/`. This file and `book.rs` are the app's own; the other
-//! modules in this folder are owned by the core and kept identical by `cargo xtask sync`.
+//! This file is the app's own, and it holds only what is Book's: its data (`APP`) and its own
+//! task (`fixtures`). The gate, every shared task and the list of them are in the modules under
+//! `shared`, which the core owns and `cargo xtask sync` keeps identical in every app;
+//! `cargo xtask help` lists them. Book's layers are the table in `AGENTS.md`, which
+//! `cargo xtask app-layers` reads.
 
 #![forbid(unsafe_code)]
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
-mod book;
-mod changed;
-mod corepin;
-mod docs;
-mod json;
-mod licenses;
-mod link;
-mod lintroots;
-mod privacy;
-mod spdx;
-// `core_task` is the core's side of sync.
-#[allow(dead_code)]
-mod sync;
-mod util;
+mod shared;
 
-use std::collections::BTreeSet;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use std::process::ExitCode;
 
-use changed::Affected;
-use util::{TaskResult, cargo, cargo_output, report, workspace_members};
+use shared::gate::{self, App, Task};
+use shared::link::Provider;
+use shared::util::{TaskResult, cargo};
 
-/// The programs this app ships (for THIRD-PARTY-LICENSES.txt). Change to the app's binaries.
-const SHIPPED: &[&str] = &["wordsmith-book", "book-cli"];
-/// The product name used in generated files. Change to the app's name.
-const PRODUCT: &str = "Wordsmith Book";
+/// What the shared tasks need to know about Book.
+const APP: App = App {
+    product: "Wordsmith Book",
+    // The programs Book ships (for THIRD-PARTY-LICENSES.txt).
+    shipped: &["wordsmith-book", "book-cli"],
+    // Book builds on Manuscript's model and format crates (decision 0001). The name is what
+    // `cargo xtask dev-link manuscript=<folder>` links; the address is the one `Cargo.toml`
+    // names, which `cargo xtask sync` writes into `deny.toml` as Book's own source.
+    providers: &[Provider { name: "manuscript", git: "https://github.com/jamescjfoundation/wordsmith-manuscript" }],
+    // `cargo xtask screenshots` redraws docs/images from a public-domain sample
+    // (`crates/book-ui/examples/screenshots.rs`).
+    screenshots: Some("wordsmith-book-ui"),
+    tasks: TASKS,
+    ..App::DEFAULT
+};
 
-const TASKS: &[(&str, &str)] = &[
-    ("fmt", "rustfmt in check mode"),
-    ("lint-roots", "every crate root forbids unsafe and denies the panicking lints"),
-    ("unlinked", "no local core dev-link is left in .cargo/config.toml"),
-    ("core-pin", "every jcj- dependency names one core release tag, and Cargo.lock holds one core"),
-    ("sync", "shared files, marked blocks and the patch block match the pinned core release"),
-    ("docs", "links in Markdown lead somewhere, decision references name a record, core-candidate markers name an issue"),
-    ("layers", "only jcj- interfaces of the core are used, never upstream crates or jcj-upstream"),
-    ("app-layers", "Book's crates depend only on the layers under them (the table in AGENTS.md)"),
-    ("assets", "every file under assets/ is listed in ATTRIBUTION.md; the legal files exist"),
-    ("privacy", "no personal details or secrets in files or commit identities"),
-    ("licenses", "every dependency's license is on the allowlist"),
-    ("clippy", "clippy on all targets, warnings are errors"),
-    ("test", "all tests"),
-];
+/// Book's own tasks.
+const TASKS: &[Task] = &[Task::other("fixtures", "write the fixtures that need Rust: the Manuscript project", fixtures)];
 
 fn main() -> ExitCode {
-    let args: Vec<String> = std::env::args().skip(1).collect();
-    let task = args.first().map(String::as_str).unwrap_or("help");
-    let rest = args.get(1..).unwrap_or_default();
-    let root = workspace_root();
-    let result = match task {
-        "ci" => ci(&root, rest),
-        "dev-link" => match rest.first() {
-            Some(a) if a == "--check" => link::check_unlinked(&root),
-            Some(core) => link::dev_link(&root, core),
-            None => Err("usage: cargo xtask dev-link <path to open-source-core>".to_owned()),
-        },
-        "dev-unlink" => link::dev_unlink(&root),
-        "sync" => sync::app_task(&root, rest.iter().any(|a| a == "--check")),
-        "core-pin" => corepin::task(&root, rest),
-        "deny" => cargo(&root, &["deny", "--locked", "check"]),
-        "install-hooks" => util::git_output(&root, &["config", "core.hooksPath", "hooks"]).map(|_| println!("git hooks on")),
-        "third-party-licenses" => licenses::task(&root, SHIPPED, PRODUCT, rest.first().map(String::as_str)),
-        "privacy" => privacy::task(&root, rest),
-        "fixtures" => book::fixtures(&root),
-        "screenshots" => screenshots(&root),
-        name => match TASKS.iter().find(|(n, _)| *n == name) {
-            Some((n, _)) => run_task(n, &root, &Affected::All),
-            None => {
-                println!(
-                    "usage: cargo xtask <ci [--changed] [--base <ref>] | dev-link <core> | dev-unlink | sync [--check] | core-pin [--behind] | deny | install-hooks | third-party-licenses [file] | fixtures | screenshots>"
-                );
-                for (name, about) in TASKS {
-                    println!("  {name:<12} {about}");
-                }
-                if name == "help" { Ok(()) } else { Err(format!("unknown task '{name}'")) }
-            }
-        },
-    };
-    match result {
-        Ok(()) => ExitCode::SUCCESS,
-        Err(msg) => {
-            eprintln!("\nxtask: FAILED: {msg}");
-            ExitCode::FAILURE
+    gate::main(&APP)
+}
+
+/// The Manuscript project fixture: its source text and the folder written from it.
+const MANUSCRIPT_FIXTURE: (&str, &str) = ("tests/fixtures/novels/gullivers-travels.txt", "tests/fixtures/novels/gullivers-travels.wsm");
+
+/// `cargo xtask fixtures`: the Manuscript project fixture, written through Manuscript's public
+/// writer. The other fixtures come from `tools/make-fixtures.py`.
+fn fixtures(root: &Path, _: &[String]) -> TaskResult {
+    let (src, out) = MANUSCRIPT_FIXTURE;
+    cargo(root, &["run", "--quiet", "-p", "wordsmith-book-format", "--example", "manuscript_fixture", "--", src, out])
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_task_table_is_sound() {
+        assert_eq!(gate::table_problems(&APP), Vec::<String>::new());
+        let in_gate = gate::gate_names(&APP);
+        assert!(in_gate.contains(&"app-layers") && !in_gate.contains(&"fixtures"));
+    }
+
+    #[test]
+    fn the_provider_is_the_address_the_manifest_names() {
+        let manifest = std::fs::read_to_string(Path::new(env!("CARGO_MANIFEST_DIR")).join("../Cargo.toml")).unwrap();
+        for provider in APP.providers {
+            assert!(manifest.contains(&format!("git = \"{}\"", provider.git)), "Cargo.toml names no dependency from {}", provider.git);
         }
     }
-}
-
-/// The README's pictures in `docs/images/`, drawn by the app itself offscreen from a public-domain
-/// sample (`crates/book-ui/examples/screenshots.rs`). Not part of `ci`.
-fn screenshots(root: &Path) -> TaskResult {
-    let out = root.join("docs/images");
-    let out = out.to_str().ok_or_else(|| format!("{} is not UTF-8", out.display()))?;
-    cargo(root, &["run", "--release", "--locked", "-p", "wordsmith-book-ui", "--example", "screenshots", "--", out])
-}
-
-fn workspace_root() -> PathBuf {
-    let manifest = Path::new(env!("CARGO_MANIFEST_DIR"));
-    manifest.parent().map_or_else(|| manifest.to_path_buf(), Path::to_path_buf)
-}
-
-fn ci(root: &Path, args: &[String]) -> TaskResult {
-    let names: Vec<&str> = TASKS.iter().map(|(n, _)| *n).collect();
-    let mut skip_args = Vec::new();
-    let mut it = args.iter();
-    while let Some(a) = it.next() {
-        match a.as_str() {
-            "--changed" => {}
-            "--base" => {
-                it.next();
-            }
-            _ => skip_args.push(a.clone()),
-        }
-    }
-    let skip = util::skipped(&skip_args, &names)?;
-    util::warn_if_hooks_off(root, "hooks");
-    let scope = if args.iter().any(|a| a == "--changed") {
-        let base = args.iter().position(|a| a == "--base").and_then(|i| args.get(i + 1)).cloned().unwrap_or_else(|| "origin/main".to_owned());
-        changed::affected(root, &base)?
-    } else {
-        Affected::All
-    };
-    for (name, _) in TASKS {
-        if skip.iter().any(|s| s == name) {
-            continue;
-        }
-        run_task(name, root, &scope)?;
-    }
-    println!("\nxtask: all checks passed");
-    Ok(())
-}
-
-fn run_task(name: &str, root: &Path, scope: &Affected) -> TaskResult {
-    println!("\n==> {name}");
-    let result = match name {
-        "fmt" => cargo(root, &["fmt", "--all", "--", "--check"]),
-        "lint-roots" => lintroots::check_lint_roots(root, &[], &[]),
-        "unlinked" => link::check_unlinked(root),
-        "core-pin" => corepin::task(root, &[]),
-        "sync" => sync::app_task(root, true),
-        "docs" => docs::app_task(root),
-        "layers" => check_layers(root),
-        "app-layers" => book::app_layers(root),
-        "assets" => book::assets(root),
-        "privacy" => privacy::task(root, &[]),
-        "licenses" => check_licenses(root),
-        "clippy" => scoped(root, scope, &["clippy", "--locked", "--all-targets"], &["--", "-D", "warnings"]),
-        "test" => scoped(root, scope, &["test", "--locked"], &[]),
-        other => Err(format!("no runner for task '{other}'")),
-    };
-    result.map_err(|e| format!("{name}: {e}"))
-}
-
-fn scoped(root: &Path, scope: &Affected, head: &[&str], tail: &[&str]) -> TaskResult {
-    if scope.is_empty() {
-        println!("nothing to do: no package affected");
-        return Ok(());
-    }
-    let pkgs = scope.cargo_args();
-    let mut args: Vec<&str> = head.to_vec();
-    args.extend(pkgs.iter().map(String::as_str));
-    args.extend(tail);
-    cargo(root, &args)
-}
-
-/// Apps reach upstream only through the core's `jcj-` interfaces (core plan, "Things agents must
-/// not do").
-fn check_layers(root: &Path) -> TaskResult {
-    let members = workspace_members(root)?;
-    let names: BTreeSet<&str> = members.iter().map(|m| m.name.as_str()).collect();
-    let mut failures = Vec::new();
-    for member in &members {
-        if member.name == "xtask" {
-            continue;
-        }
-        for dep in util::direct_deps(root, &member.name)? {
-            if names.contains(dep.as_str()) {
-                continue;
-            }
-            if dep.starts_with("wordcraft-") || dep.starts_with("craft-") || dep == "jcj-upstream" {
-                failures.push(format!("{} depends on {dep}; use the core's jcj- interfaces", member.name));
-            }
-        }
-    }
-    report(failures, "the app uses only the core's jcj- interfaces")
-}
-
-fn check_licenses(root: &Path) -> TaskResult {
-    let out = cargo_output(
-        root,
-        &["tree", "--workspace", "--locked", "--target", "all", "-e", "normal,build,dev", "--prefix", "none", "--format", "{p}\t{l}"],
-    )?;
-    let mut failures = Vec::new();
-    let mut checked = BTreeSet::new();
-    for line in out.lines().filter(|l| !l.trim().is_empty()) {
-        let line = line.trim().trim_end_matches("(*)").trim_end();
-        let Some((pkg, license)) = line.split_once('\t') else { continue };
-        if !checked.insert(pkg.to_owned()) {
-            continue;
-        }
-        match spdx::is_allowed(license.trim()) {
-            Ok(true) => {}
-            Ok(false) => failures.push(format!("{pkg}: license '{license}' is not on the allowlist")),
-            Err(e) => failures.push(format!("{pkg}: {e}")),
-        }
-    }
-    report(failures, "licenses are on the allowlist")
 }
