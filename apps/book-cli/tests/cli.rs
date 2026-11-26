@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 //! The command line (plan M9.2, AUT-1): each command on the fixtures, with its exit code.
+//! `command_line.rs` holds the program to the core's convention (which code, which output).
 
 use std::path::{Path, PathBuf};
 use std::process::{Command, Output};
@@ -31,7 +32,8 @@ fn usage_and_unknown_commands_exit_with_two() {
     assert!(text(&o).contains("unknown command"));
     assert_eq!(cli(&["help"]).status.code(), Some(0));
     assert_eq!(cli(&["build"]).status.code(), Some(2));
-    assert_eq!(cli(&["build", "/no/such/book.wsbk"]).status.code(), Some(2));
+    // A file that cannot be opened is a failure, not a wrong command line.
+    assert_eq!(cli(&["build", "/no/such/book.wsbk"]).status.code(), Some(1));
     let o = cli(&["commands"]);
     assert_eq!(o.status.code(), Some(0));
     assert!(text(&o).contains("book.export") && text(&o).contains("book.preflight"));
@@ -45,7 +47,7 @@ fn convert_report_run_check_build_and_verify_a_book() {
     // convert: a DOCX into a Book project.
     let o = cli(&["convert", root().join("tests/fixtures/novels/gullivers-travels.docx").to_str().unwrap(), p, "--title", "Gulliver's Travels"]);
     assert_eq!(o.status.code(), Some(0), "{}", text(&o));
-    assert_eq!(cli(&["convert", "x.docx", p]).status.code(), Some(2), "an existing project is not overwritten");
+    assert_eq!(cli(&["convert", "x.docx", p]).status.code(), Some(1), "an existing project is not overwritten");
     // report
     let o = cli(&["report", p]);
     assert_eq!(o.status.code(), Some(0), "{}", text(&o));
@@ -77,21 +79,25 @@ fn convert_report_run_check_build_and_verify_a_book() {
     // The source document holds the book's words.
     let o = cli(&["verify", p, docx.to_str().unwrap()]);
     assert_eq!(o.status.code(), Some(0), "{}", text(&o));
-    // A different book's words fail with exit code 1.
+    // A different book's words: the check ran and said no, so 3, with its answer as the result.
     let o = cli(&["verify", p, root().join("tests/fixtures/novels/waverley.txt").to_str().unwrap()]);
-    assert_eq!(o.status.code(), Some(1), "{}", text(&o));
-    assert!(text(&o).contains("differ") || text(&o).contains("expected"), "{}", text(&o));
-    // A failing check: an edition with a wrong ISBN blocks; exit code 1 and nothing written.
+    assert_eq!(o.status.code(), Some(3), "{}", text(&o));
+    let said = String::from_utf8_lossy(&o.stdout);
+    assert!(said.contains("differ") || said.contains("expected"), "{}", text(&o));
+    assert!(o.stderr.is_empty(), "{}", text(&o));
+    // A failing check: an edition with a wrong ISBN blocks; exit code 3 and nothing written.
     let toml = std::fs::read_to_string(project.join("book.toml")).unwrap();
     let broken = toml.replacen("id = \"paperback\"", "id = \"paperback\"\nisbn = \"978-0-306-40615-8\"", 1);
     assert_ne!(broken, toml);
     std::fs::write(project.join("book.toml"), broken).unwrap();
     let o = cli(&["check", p]);
-    assert_eq!(o.status.code(), Some(1), "{}", text(&o));
-    assert!(text(&o).contains("Blocks export"));
+    assert_eq!(o.status.code(), Some(3), "{}", text(&o));
+    assert!(String::from_utf8_lossy(&o.stdout).contains("Blocks export") && o.stderr.is_empty(), "{}", text(&o));
     let out2 = dir.join("out2");
     let o = cli(&["build", p, "--out", out2.to_str().unwrap()]);
-    assert_eq!(o.status.code(), Some(1), "{}", text(&o));
+    assert_eq!(o.status.code(), Some(3), "{}", text(&o));
+    let said = String::from_utf8_lossy(&o.stdout);
+    assert!(said.contains("Blocks export") && said.contains("nothing was exported") && o.stderr.is_empty(), "{}", text(&o));
     assert!(!out2.exists());
 }
 

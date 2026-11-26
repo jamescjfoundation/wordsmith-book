@@ -5449,6 +5449,7 @@ dependencies = [
 name = "wordsmith-book-cli"
 version = "0.1.0"
 dependencies = [
+ "jcj-agents",
  "serde_json",
  "wordsmith-book-check",
  "wordsmith-book-format",

@@ -580,9 +580,12 @@ From 0.3 (DSN-6), seven more, on the same rules unless the row says otherwise:
 
 1. Every command has an id, a label and, where useful, a key; every command is an agent tool
    (AUT-2). [Designed]
-2. The command line (AUT-1) builds, checks, verifies, converts and reports with exit codes:
-   0 success, 1 a check found blocking problems, 2 bad usage, 3 a file could not be read or
-   written. [Designed]
+2. The command line (AUT-1) builds, checks, verifies, converts and reports, and follows the
+   core's convention for command lines (core decision 0017): results on standard output, what
+   went wrong on standard error; exit codes 0 done, 1 it could not be done (a file could not be
+   read or written, a command refused), 2 the command line was wrong, 3 a check of the content
+   did not pass (the words differ, or preflight blocks export). `mcp` takes the two folders an
+   agent's commands may read and write. [Designed]
 3. Light and dark themes and every command by keyboard come from the shell (ACC-1). [Designed]
 4. Auto-save, backups and recovery follow the core's timing (FIL-1). [Designed]
 5. **Screen readers** (ACC-2, from 0.2): every control Book and the shell draw (buttons, check

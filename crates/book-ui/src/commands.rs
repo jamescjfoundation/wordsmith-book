@@ -694,6 +694,11 @@ fn preview_command(app: &mut BookApp, id: &str, params: &Value) -> Result<Value,
     Ok(json!({ "section": piece }))
 }
 
+/// Where [`EBOOK_OPEN`] writes the ebook: a folder of Book's in the system's temporary folder.
+pub fn ebook_preview_folder() -> PathBuf {
+    std::env::temp_dir().join("wordsmith-book-preview")
+}
+
 /// Build the book's first ebook edition into the system's temporary folder and, with `open`,
 /// hand it to the reading app the user has installed.
 fn ebook_open(b: &mut OpenBook, open: bool) -> Result<Value, String> {
@@ -704,7 +709,7 @@ fn ebook_open(b: &mut OpenBook, open: bool) -> Result<Value, String> {
     let (assembled, ebook) = wordsmith_book_check::build::ebook(project, &b.files.designs, &book, &edition, &|p| b.picture(p))?;
     let name: String = assembled.meta.title.chars().filter(|c| c.is_alphanumeric() || *c == ' ' || *c == '-').collect();
     let name = if name.trim().is_empty() { "Book".to_owned() } else { name.trim().to_owned() };
-    let dir = std::env::temp_dir().join("wordsmith-book-preview");
+    let dir = ebook_preview_folder();
     std::fs::create_dir_all(&dir).map_err(|e| e.to_string())?;
     let path = dir.join(format!("{name}.epub"));
     std::fs::write(&path, &ebook.bytes).map_err(|e| e.to_string())?;

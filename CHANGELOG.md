@@ -9,6 +9,12 @@ record distributors read.
 
 ### Added
 
+- **An agent can be kept to folders.** `book-cli mcp [<file>] [--read-root <folder>]
+  [--write-root <folder>]`: the two folders are the only ones the agent's commands may read
+  and write files in. The project named on the command line is yours and is saved where it
+  lives; a project the agent opens or makes is read only inside the read folder and changed
+  only inside the write folder. With neither flag nothing is confined, as before, and
+  `book-cli` now says so when it starts.
 - **The house file.** A press keeps its imprints, series and the ISBNs it owns in one
   `house.toml` (its path in Preferences). A book joins an imprint, a series, or both, and keeps a
   copy of what it takes, so it builds the same anywhere.
@@ -25,6 +31,26 @@ record distributors read.
 
 ### Changed
 
+- **The command line follows one convention**, the same as every app built on the same base
+  (core decision 0017), so a script that has learned one app's command line knows the next.
+  What a script or a person will notice:
+  - **Exit code 3** is new: the command ran, and a check of the content did not pass. `verify`
+    ends with 3 when the words differ (it was 1), `check` with 3 when something blocks export
+    (it was 1), and `build` with 3 when a check stops it (it was 1). What the check found is
+    now on standard output, as a result; it was on standard error.
+  - **Exit code 1** is "it could not be done": a project or a file that cannot be opened or
+    read, a project that is there already, a failed import, a file of a kind Book cannot check.
+    These were 2. **Exit code 2** is now only a wrong command line.
+  - Run with **no argument**, `book-cli` prints the usage on standard error (it was standard
+    output); the code is still 2.
+  - **`--version`** and **`-V`** print `book-cli` and its version.
+  - What went wrong is written as **`book-cli: <reason>`**.
+  - `commands` refuses an argument it does not take.
+- **Agents see only Book's own tools.** `book-cli mcp` serves the `book_…` tools, under the
+  same names as before. The general document tools it also listed (`execute`, `list_commands`,
+  typing, inspecting, rendering, opening and saving a document) are gone: they worked on an
+  empty document Book never had. `book_isbn_list` and `book_cover_check` now say they only
+  read.
 - **The window's *Open…* is the system's Open dialog**, in place of a box to type a path into.
   Choose a project's `book.toml`, or a packed project (`.wsbkz`); where the system shows a
   `.wsbk` folder as one document, choose that. A path can still be given when starting the app.

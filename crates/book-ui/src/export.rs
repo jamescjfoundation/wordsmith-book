@@ -81,8 +81,43 @@ pub fn proof(b: &OpenBook, edition: &str, folder: &Path) -> Result<PathBuf, Stri
     Ok(path)
 }
 
+/// Why an export wrote nothing.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum Stopped {
+    /// A check of the content blocks export: the edition's preflight report.
+    Blocked(Box<wordsmith_book_check::preflight::Report>),
+    /// The export could not be done: the source is not open, an edition could not be built, a
+    /// file could not be written.
+    Failed(String),
+}
+
+impl std::fmt::Display for Stopped {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Stopped::Blocked(report) => write!(f, "{}", Error::Blocked(report.clone())),
+            Stopped::Failed(why) => f.write_str(why),
+        }
+    }
+}
+
 /// Export `editions` (and the bundle) of the open book into `folder` on this thread; gives the
-/// paths written.
+/// paths written, or why nothing was (the command line tells a blocked export from a failure).
+pub fn run_checked(
+    b: &OpenBook,
+    editions: &[String],
+    bundle: bool,
+    folder: &Path,
+    validator: Option<&wordsmith_book_check::validator::Settings>,
+) -> Result<Vec<PathBuf>, Stopped> {
+    let src = b.source.as_ref().map_err(|e| Stopped::Failed(e.clone()))?;
+    let built = export::build_all(&b.files.project, &b.files.designs, src, editions, &|p| b.picture(p), validator).map_err(|e| match e {
+        Error::Blocked(report) => Stopped::Blocked(report),
+        e => Stopped::Failed(e.to_string()),
+    })?;
+    write(b, built, bundle, folder).map_err(Stopped::Failed)
+}
+
+/// [`run_checked`], with the reason as text.
 pub fn run(
     b: &OpenBook,
     editions: &[String],
@@ -90,9 +125,7 @@ pub fn run(
     folder: &Path,
     validator: Option<&wordsmith_book_check::validator::Settings>,
 ) -> Result<Vec<PathBuf>, String> {
-    let src = b.source.as_ref().map_err(Clone::clone)?;
-    let built = export::build_all(&b.files.project, &b.files.designs, src, editions, &|p| b.picture(p), validator).map_err(|e| e.to_string())?;
-    write(b, built, bundle, folder)
+    run_checked(b, editions, bundle, folder, validator).map_err(|e| e.to_string())
 }
 
 fn write(b: &OpenBook, built: Vec<Built>, bundle: bool, folder: &Path) -> Result<Vec<PathBuf>, String> {

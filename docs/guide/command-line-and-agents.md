@@ -1,6 +1,8 @@
 # Command line and agents
 
-**The command line (AUT-1).** `book-cli` runs the same code as the window:
+## The command line (AUT-1)
+
+`book-cli` runs the same code as the window:
 
 | Command | What it does |
 | --- | --- |
@@ -11,12 +13,73 @@
 | `report <project>` | Title, author, design, sections, words and details, as JSON |
 | `run <project> <command id> [<JSON>]` | Run any Book command; changes are saved |
 | `commands` | Every command and its label |
-| `mcp [<project>]` | Serve Book's commands to an agent over stdio |
+| `mcp [<file>] [--read-root <folder>] [--write-root <folder>]` | Serve Book's commands to an agent over stdio ([below](#agent-tools-aut-2)) |
+| `--help`, `-h`, `help` | The usage |
+| `--version`, `-V` | `book-cli` and its version, on one line |
 
-Exit codes: **0** done, **1** a check failed or a command refused (nothing was written), **2** the
-command line was wrong or a file could not be opened.
+Results are written to standard output. What went wrong is written to standard error, as
+`book-cli: <reason>`. Run with no argument, `book-cli` prints the usage on standard error and
+ends with code 2: nothing was asked, so nothing was done.
 
-**Agent tools (AUT-2).** `book-cli mcp` serves every Book command as a tool over the Model
-Context Protocol: `book_import`, `book_design_choose`, `book_preflight`, `book_export`,
+### Exit codes
+
+| Code | Means |
+| --- | --- |
+| **0** | Done. For `check` and `verify`: the check passed |
+| **1** | It could not be done: a project or a file could not be opened or read, a project is there already, a command refused, an edition could not be built |
+| **2** | The command line was wrong: no command, an unknown command or option, a missing or extra argument, parameters that are not JSON. Nothing was done |
+| **3** | It ran, and a check of the content did not pass: `verify` found that the words differ, `check` found a problem that blocks export, or `build` was stopped by one. Nothing was written |
+
+3 is not a failure. A script reads 0 as "the same" or "nothing blocks", 3 as "they differ" or
+"something blocks", and 1 or 2 as "the check did not run". What the check found (the word that
+differs, each finding) is its result, so it is on standard output.
+
+These are the codes of every app built on the same base, so a script written for one knows
+the next.
+
+## Agent tools (AUT-2)
+
+`book-cli mcp` serves every Book command as a tool over the Model Context Protocol, until its
+standard input ends: `book_import`, `book_design_choose`, `book_preflight`, `book_export`,
 `book_save` and the rest, each described with its parameters. An agent can import, design, build
 and check a book with the tools alone. A linked Manuscript project is never changed.
+
+- **Every tool is Book's own and is named `book_<command>`.** The general document tools of
+  the base (`execute`, `list_commands`, typing, inspecting and rendering a document) are not
+  served: Book has a project, not a document, behind its tools.
+- **`<file>`** is a Book project to open first. Without it the agent opens or makes one
+  (`book_open`, `book_new`, `book_import`).
+
+### Keeping an agent to folders
+
+| Flag | Means |
+| --- | --- |
+| `--read-root <folder>` | The only folder the agent's commands may read files in |
+| `--write-root <folder>` | The only folder the agent's commands may write files in |
+
+- Each flag takes a folder that exists. A flag given alone grants only its own kind of access:
+  with `--read-root` alone the agent can write nothing.
+- With neither flag nothing is confined, and `book-cli` says so in one line on standard error
+  when it starts.
+- The folders hold for every file an agent names (the file to import, the folder to export
+  to, a house file, a manuscript to link) and for what Book writes without being told where:
+  the export folder beside a project, the new book beside an imported file.
+- **The project you name on the command line is yours, not the agent's.** It is opened before
+  the folders hold, and it is changed, saved and backed up where it lives, wherever that is.
+  Its exports still go only where the agent may write.
+- **A project the agent opens or makes is held to the folders.** It is read only inside the read
+  folder, with the manuscript it links, and changed or saved only inside the write folder. So an
+  agent that is to make a book needs a write folder that it can also read: one inside the read
+  folder, or the same folder for both.
+- A book in the read folder alone can be read, checked and exported into the write folder,
+  and is never changed.
+- Opening the ebook in a reading app (`book_ebook_openInReadingApp`) is refused while folders
+  hold: a program Book starts cannot be kept to a folder.
+
+```sh
+# The agent may read the whole `books` folder and write only into its `out` folder.
+book-cli mcp --read-root books --write-root books/out
+
+# Your own book, wherever it is; the agent's files go into `out`.
+book-cli mcp "My Novel.wsbk" --read-root books --write-root books/out
+```

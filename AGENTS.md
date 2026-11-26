@@ -294,6 +294,17 @@ in `CHANGELOG.md` and `docs/guide/` ([Route C](https://github.com/jamescjfoundat
     `README.md`, the kit's guide with rows added for those two and the icon sizes.
     **Today:** nothing here compares the copies with the kit.
 
+11. **The command line and the agent tools follow the core's convention**
+    ([core decision 0017](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/decisions/0017-command-lines-and-agent-tools.md),
+    the core's `docs/command-lines-and-agent-tools.md`): exit codes 0 done, 1 failed, 2 usage,
+    3 a check of the content did not pass; results on standard output and `book-cli: <reason>`
+    on standard error; `mcp [<file>] [--read-root <folder>] [--write-root <folder>]`; every
+    tool named `book_<command>`, served through the core's adapter. A test runs the built
+    program to hold it there (`apps/book-cli/tests/command_line.rs`). A command that takes a
+    path names the parameter in `files_of` (`crates/book-ui/src/agents.rs`), and one that reads
+    or writes somewhere no parameter names is checked in `BookTools`: otherwise an agent kept
+    to folders is not held to them for that path.
+
 ### Book and Wordsmith Manuscript
 
 Book builds on Manuscript's `wordsmith-manuscript-model` and `wordsmith-manuscript-format`

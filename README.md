@@ -46,7 +46,7 @@ own imported from a document. A project is a folder of plain-text files that rea
   and "Also by" built from the series, each ISBN checked and used once, and an ONIX for Books 3.0
   record for each edition.
 - **Automation.** `book-cli` builds, checks, verifies, converts and reports, and serves every
-  command to agents over MCP.
+  command to agents over MCP, kept to the folders you name.
 
 The window has an Outline on the left (front matter, parts, chapters and back matter), panels on
 the right (Details, Designs, Print Preview, Ebook Preview, Preflight and Cleanup), a File page for

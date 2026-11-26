@@ -3,20 +3,30 @@
 //! commands and mcp. Every command goes through the same code as the window and the agent
 //! tools.
 //!
-//! Exit codes, for scripts: 0 done; 1 a check failed (export blocked, words differ, a command
-//! refused); 2 the command line was wrong or a file could not be opened.
+//! It follows the core's convention for command lines (core decision 0017): results on
+//! standard output, what went wrong on standard error as `book-cli: <reason>`, and the exit
+//! codes of [`Exit`]: 0 done; 1 it could not be done (a file could not be read or written, a
+//! command refused); 2 the command line was wrong; 3 it ran, and a check of the content did not
+//! pass (the words differ, or preflight blocks export).
 
 #![forbid(unsafe_code)]
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use std::process::ExitCode;
 
+use jcj_agents::cli::{Exit, McpArgs, Standard, standard, version_line};
 use serde_json::{Value, json};
-use wordsmith_book_check::preflight::{Finding, Link};
+use wordsmith_book_check::preflight::{Finding, Link, Report};
+use wordsmith_book_ui::export::Stopped;
 use wordsmith_book_ui::{BookApp, commands};
 
-const USAGE: &str = "usage: book-cli <command> [arguments]
+/// The program's name, as it is run.
+const PROGRAM: &str = "book-cli";
+
+fn usage_text() -> String {
+    format!(
+        "usage: {PROGRAM} <command> [arguments]
 
   build <project> [--edition <id>]... [--out <folder>] [--bundle]
         Build editions (all when none is named), check them, and write the files.
@@ -32,23 +42,43 @@ const USAGE: &str = "usage: book-cli <command> [arguments]
         Run any Book command (see `commands`) and print what it gives, as JSON.
   commands
         Every Book command, with its label.
-  mcp [<project>]
-        Serve Book's commands as agent tools (Model Context Protocol over stdio).
+  {}
+        Serve Book's commands to an agent as tools (Model Context Protocol over stdio).
+        <file> is a Book project to open first; the two folders are the only ones the
+        agent's commands may read and write files in.
+  --help | --version
 
-Exit codes: 0 done, 1 a check failed or a command refused, 2 a usage or file error.";
+Exit codes: 0 done; 1 it could not be done; 2 the command line was wrong;
+3 a check did not pass (the words differ, or preflight blocks export).",
+        McpArgs::USAGE
+    )
+}
 
-/// A failure and its exit code.
-struct Fail(u8, String);
+/// Why a command did not end with a result.
+enum Fail {
+    /// It could not do what was asked ([`Exit::Failed`]).
+    Failed(String),
+    /// The command line was wrong ([`Exit::Usage`]).
+    Usage(String),
+}
 
-fn usage(why: &str) -> Fail {
-    Fail(2, format!("{why}\n\n{USAGE}"))
+/// How a command ended: [`Exit::Done`], or [`Exit::Differs`] with the check's answer already
+/// on standard output.
+type Outcome = Result<Exit, Fail>;
+
+fn usage(why: impl Into<String>) -> Fail {
+    Fail::Usage(why.into())
+}
+
+fn failed(why: impl std::fmt::Display) -> Fail {
+    Fail::Failed(why.to_string())
 }
 
 fn open(path: &str) -> Result<BookApp, Fail> {
     let mut app = BookApp::new();
-    app.open_path(path).map_err(|e| Fail(2, format!("{path}: {e}")))?;
+    app.open_path(path).map_err(|e| failed(format!("{path}: {e}")))?;
     if let Some(Err(e)) = app.book.as_ref().map(|b| &b.source) {
-        return Err(Fail(2, format!("{path}: the source could not be read: {e}")));
+        return Err(failed(format!("{path}: the source could not be read: {e}")));
     }
     Ok(app)
 }
@@ -63,11 +93,11 @@ fn options(args: &[String], names: &[&str], flags: &[&str]) -> Result<(Vec<(Stri
             if flags.contains(&name) {
                 set.push(name.to_owned());
             } else if names.contains(&name) {
-                let v = args.get(i + 1).ok_or_else(|| usage(&format!("--{name} needs a value")))?;
+                let v = args.get(i + 1).ok_or_else(|| usage(format!("--{name} needs a value")))?;
                 opts.push((name.to_owned(), v.clone()));
                 i += 1;
             } else {
-                return Err(usage(&format!("unknown option --{name}")));
+                return Err(usage(format!("unknown option --{name}")));
             }
         } else {
             rest.push(a.clone());
@@ -97,73 +127,98 @@ fn line(f: &Finding) -> String {
     format!("{}: {}{link}", f.severity.title(), f.message)
 }
 
-fn build(args: &[String]) -> Result<(), Fail> {
-    let (opts, flags, rest) = options(args, &["edition", "out"], &["bundle"])?;
-    let [project] = rest.as_slice() else { return Err(usage("build takes one project")) };
-    let mut app = open(project)?;
-    let eds = editions(&app, &opts);
-    let mut params = json!({ "editions": eds, "bundle": flags.iter().any(|f| f == "bundle") });
-    if let Some((_, out)) = opts.iter().find(|(k, _)| k == "out") {
-        params["folder"] = json!(out);
+/// Print an edition's preflight report: a result, so on standard output.
+fn print_report(r: &Report) {
+    println!("{} — {}", r.edition, if r.blocked() { "export is blocked" } else { "nothing blocks export" });
+    for f in &r.findings {
+        println!("  {}", line(f));
     }
-    let v = app.command(commands::EXPORT, &params).map_err(|e| Fail(1, e))?;
-    for f in v["files"].as_array().into_iter().flatten() {
-        println!("{}", f.as_str().unwrap_or(""));
-    }
-    Ok(())
 }
 
-fn check(args: &[String]) -> Result<(), Fail> {
+fn build(args: &[String]) -> Outcome {
+    let (opts, flags, rest) = options(args, &["edition", "out"], &["bundle"])?;
+    let [project] = rest.as_slice() else { return Err(usage("build takes one project")) };
+    let app = open(project)?;
+    let b = app.book.as_ref().ok_or_else(|| failed("no book"))?;
+    let folder = opts.iter().find(|(k, _)| k == "out").map_or_else(|| wordsmith_book_ui::export::default_folder(b), |(_, out)| PathBuf::from(out));
+    let bundle = flags.iter().any(|f| f == "bundle");
+    // The same export as the window's and the agents' (`book.export`), with its reason kept.
+    match wordsmith_book_ui::export::run_checked(b, &editions(&app, &opts), bundle, &folder, Some(&app.prefs.validator_settings())) {
+        Ok(files) => {
+            for f in files {
+                println!("{}", f.display());
+            }
+            Ok(Exit::Done)
+        }
+        // The check ran and said no: its answer is the result, and nothing was written.
+        Err(Stopped::Blocked(report)) => {
+            print_report(&report);
+            println!("{}", Stopped::Blocked(report));
+            Ok(Exit::Differs)
+        }
+        Err(Stopped::Failed(why)) => Err(failed(why)),
+    }
+}
+
+fn check(args: &[String]) -> Outcome {
     let (opts, _, rest) = options(args, &["edition"], &[])?;
     let [project] = rest.as_slice() else { return Err(usage("check takes one project")) };
     let app = open(project)?;
-    let b = app.book.as_ref().ok_or_else(|| Fail(2, "no book".into()))?;
+    let b = app.book.as_ref().ok_or_else(|| failed("no book"))?;
     let validator = app.prefs.validator_settings();
     let mut blocked = false;
     for e in editions(&app, &opts) {
-        let r = wordsmith_book_ui::preflight::run(b, &e, &validator).map_err(|m| Fail(2, m))?;
-        println!("{} — {}", r.edition, if r.blocked() { "export is blocked" } else { "nothing blocks export" });
-        for f in &r.findings {
-            println!("  {}", line(f));
-        }
+        let r = wordsmith_book_ui::preflight::run(b, &e, &validator).map_err(failed)?;
+        print_report(&r);
         blocked |= r.blocked();
     }
-    if blocked { Err(Fail(1, "preflight found problems that block export".into())) } else { Ok(()) }
+    if blocked {
+        println!("preflight found problems that block export");
+        Ok(Exit::Differs)
+    } else {
+        Ok(Exit::Done)
+    }
 }
 
-fn verify(args: &[String]) -> Result<(), Fail> {
+fn verify(args: &[String]) -> Outcome {
     let (_, _, rest) = options(args, &[], &[])?;
     let [project, file] = rest.as_slice() else { return Err(usage("verify takes a project and a file")) };
     let app = open(project)?;
-    let b = app.book.as_ref().ok_or_else(|| Fail(2, "no book".into()))?;
-    let src = b.source.as_ref().map_err(|e| Fail(2, e.clone()))?;
+    let b = app.book.as_ref().ok_or_else(|| failed("no book"))?;
+    let src = b.source.as_ref().map_err(failed)?;
     let book = wordsmith_book_format::fixes::book_for_build(&b.files.project.fixes, src);
-    let bytes = std::fs::read(file).map_err(|e| Fail(2, format!("{file}: {e}")))?;
+    let bytes = std::fs::read(file).map_err(|e| failed(format!("{file}: {e}")))?;
     let ext = Path::new(file).extension().and_then(|e| e.to_str()).unwrap_or("").to_ascii_lowercase();
     let source_words = wordsmith_book_check::verify::book_words(&book, true);
-    let differs = |found: &[String]| match wordsmith_book_check::verify::compare(&source_words, found) {
+    // What the check found is its answer: on standard output, with 0 for "the same" and 3 for
+    // "they differ".
+    let compare = |found: &[String]| match wordsmith_book_check::verify::compare(&source_words, found) {
         Ok(n) => {
             println!("every word matches ({n} words)");
-            Ok(())
+            Exit::Done
         }
-        Err(d) => Err(Fail(1, format!("{file}: {d}"))),
+        Err(d) => {
+            println!("{file}: {d}");
+            Exit::Differs
+        }
     };
     match ext.as_str() {
-        "epub" => differs(&wordsmith_book_check::epub::words(&bytes, true).map_err(|e| Fail(2, e))?),
+        "epub" => Ok(compare(&wordsmith_book_check::epub::words(&bytes, true).map_err(failed)?)),
         "pdf" => {
             // A PDF is checked against this project's own layout of its print edition.
-            let edition =
-                b.files.project.editions.iter().find(|e| e.format.is_print()).ok_or_else(|| Fail(2, "the book has no print edition".into()))?;
-            let print =
-                wordsmith_book_check::build::print(&b.files.project, &b.files.designs, &book, edition, &|p| b.picture(p)).map_err(|e| Fail(2, e))?;
+            let edition = b.files.project.editions.iter().find(|e| e.format.is_print()).ok_or_else(|| failed("the book has no print edition"))?;
+            let print = wordsmith_book_check::build::print(&b.files.project, &b.files.designs, &book, edition, &|p| b.picture(p)).map_err(failed)?;
             let found = wordsmith_book_check::preflight::print_words(&print, &bytes, &book);
-            match found.first() {
+            Ok(match found.first() {
                 None => {
                     println!("every letter matches");
-                    Ok(())
+                    Exit::Done
                 }
-                Some(f) => Err(Fail(1, format!("{file}: {}", f.message))),
-            }
+                Some(f) => {
+                    println!("{file}: {}", f.message);
+                    Exit::Differs
+                }
+            })
         }
         _ => {
             let format = match ext.as_str() {
@@ -172,39 +227,40 @@ fn verify(args: &[String]) -> Result<(), Fail> {
                 "rtf" => wordsmith_book_import::Format::Rtf,
                 "md" | "markdown" => wordsmith_book_import::Format::Markdown,
                 "txt" => wordsmith_book_import::Format::Text,
-                _ => return Err(usage(&format!("{file}: Book reads PDF, EPUB, DOCX, ODT, RTF, Markdown and text files"))),
+                // The command line is right; this file is one Book cannot check.
+                _ => return Err(failed(format!("{file}: Book reads PDF, EPUB, DOCX, ODT, RTF, Markdown and text files"))),
             };
             // A document is read as Book imports it, so its words compare with the book's.
-            let i = wordsmith_book_import::import(format, &bytes, &b.files.project.cleanup.rules, "").map_err(|e| Fail(2, e.to_string()))?;
-            differs(&wordsmith_book_check::verify::book_words(&wordsmith_manuscript_format::book::from_project(&i.project), true))
+            let i = wordsmith_book_import::import(format, &bytes, &b.files.project.cleanup.rules, "").map_err(failed)?;
+            Ok(compare(&wordsmith_book_check::verify::book_words(&wordsmith_manuscript_format::book::from_project(&i.project), true)))
         }
     }
 }
 
-fn convert(args: &[String]) -> Result<(), Fail> {
+fn convert(args: &[String]) -> Outcome {
     let (opts, _, rest) = options(args, &["title"], &[])?;
     let [file, project] = rest.as_slice() else { return Err(usage("convert takes a file and a project folder")) };
     if Path::new(project).exists() {
-        return Err(Fail(2, format!("{project} already exists")));
+        return Err(failed(format!("{project} already exists")));
     }
     let mut app = BookApp::new();
-    let v = app.command(commands::IMPORT, &json!({ "file": file, "path": project })).map_err(|e| Fail(1, e))?;
+    let v = app.command(commands::IMPORT, &json!({ "file": file, "path": project })).map_err(failed)?;
     if let Some((_, t)) = opts.iter().find(|(k, _)| k == "title") {
-        app.command(commands::METADATA_SET, &json!({ "field": "title", "value": t })).map_err(|e| Fail(1, e))?;
-        app.book.as_mut().map(|b| b.save()).transpose().map_err(|e| Fail(1, e))?;
+        app.command(commands::METADATA_SET, &json!({ "field": "title", "value": t })).map_err(failed)?;
+        app.book.as_mut().map(|b| b.save()).transpose().map_err(failed)?;
     }
     println!("{}", serde_json::to_string_pretty(&v).unwrap_or_default());
-    Ok(())
+    Ok(Exit::Done)
 }
 
-fn report(args: &[String]) -> Result<(), Fail> {
+fn report(args: &[String]) -> Outcome {
     let (_, _, rest) = options(args, &[], &[])?;
     let [project] = rest.as_slice() else { return Err(usage("report takes one project")) };
     let mut app = open(project)?;
-    let meta = app.command(commands::METADATA, &json!({})).map_err(|e| Fail(1, e))?;
-    let outline = app.command(commands::OUTLINE, &json!({})).map_err(|e| Fail(1, e))?;
-    let b = app.book.as_ref().ok_or_else(|| Fail(2, "no book".into()))?;
-    let src = b.source.as_ref().map_err(|e| Fail(2, e.clone()))?;
+    let meta = app.command(commands::METADATA, &json!({})).map_err(failed)?;
+    let outline = app.command(commands::OUTLINE, &json!({})).map_err(failed)?;
+    let b = app.book.as_ref().ok_or_else(|| failed("no book"))?;
+    let src = b.source.as_ref().map_err(failed)?;
     let words = wordsmith_book_check::verify::book_words(&src.book, true).len();
     // The title and byline as the book prints them: Book's additions over the source's.
     let shown = wordsmith_book_format::assemble::assemble(&b.files.project, &src.book, None).meta;
@@ -213,73 +269,92 @@ fn report(args: &[String]) -> Result<(), Fail> {
         "sections": outline.as_array().map_or(0, Vec::len), "words": words, "metadata": meta,
     });
     println!("{}", serde_json::to_string_pretty(&out).unwrap_or_default());
-    Ok(())
+    Ok(Exit::Done)
 }
 
-fn run(args: &[String]) -> Result<(), Fail> {
+fn run(args: &[String]) -> Outcome {
     let (_, _, rest) = options(args, &[], &[])?;
     let (project, id, params) = match rest.as_slice() {
         [p, id] => (p, id, json!({})),
-        [p, id, json] => (p, id, serde_json::from_str::<Value>(json).map_err(|e| usage(&format!("the parameters are not JSON: {e}")))?),
+        [p, id, json] => (p, id, serde_json::from_str::<Value>(json).map_err(|e| usage(format!("the parameters are not JSON: {e}")))?),
         _ => return Err(usage("run takes a project, a command id and optional JSON parameters")),
     };
     let mut app = open(project)?;
-    let v = app.command(id, &params).map_err(|e| Fail(1, e))?;
+    let v = app.command(id, &params).map_err(failed)?;
     // Commands that change the project save it, as the window's auto-save would.
     if let Some(b) = app.book.as_mut()
         && b.is_dirty()
     {
-        b.save().map_err(|e| Fail(1, e))?;
+        b.save().map_err(failed)?;
     }
     println!("{}", serde_json::to_string_pretty(&v).unwrap_or_default());
-    Ok(())
+    Ok(Exit::Done)
 }
 
-fn list() {
+fn list(args: &[String]) -> Outcome {
+    if let Some(extra) = args.first() {
+        return Err(usage(format!("commands takes no argument, and {extra} is one")));
+    }
     for c in commands::list() {
         println!("{:<32} {}", c.id, c.label);
     }
+    Ok(Exit::Done)
 }
 
-fn mcp(args: &[String]) -> Result<(), Fail> {
-    let app = match args {
-        [] => BookApp::new(),
-        [project] => open(project)?,
-        _ => return Err(usage("mcp takes at most a project")),
+/// `mcp [<file>] [--read-root <folder>] [--write-root <folder>]`: serve Book's commands as
+/// tools until standard input ends. Standard output carries the protocol and nothing else.
+fn mcp(args: &[String]) -> Outcome {
+    let args = McpArgs::parse(args).map_err(usage)?;
+    // A folder that does not exist is a wrong command line: said before anything is opened.
+    args.roots().map_err(usage)?;
+    // The project named here is the person's choice, not the agent's: it is opened before the
+    // folders are put in force.
+    let app = match &args.file {
+        Some(project) => open(project)?,
+        None => BookApp::new(),
     };
-    let mut server = wordsmith_book_ui::agents::server(app, env!("CARGO_PKG_VERSION"));
-    server.serve_stdio().map_err(|e| Fail(2, e.to_string()))
+    let roots = args.confine(PROGRAM).map_err(usage)?;
+    wordsmith_book_ui::agents::server(app, env!("CARGO_PKG_VERSION"), roots).serve_stdio().map_err(|e| failed(format!("mcp: {e}")))?;
+    Ok(Exit::Done)
 }
 
 fn main() -> ExitCode {
     let args: Vec<String> = std::env::args().skip(1).collect();
-    let Some((cmd, rest)) = args.split_first() else {
-        println!("{USAGE}");
-        return ExitCode::from(2);
-    };
-    let out = match cmd.as_str() {
-        "build" => build(rest),
-        "check" => check(rest),
-        "verify" => verify(rest),
-        "convert" => convert(rest),
-        "report" => report(rest),
-        "run" => run(rest),
-        "commands" => {
-            list();
-            Ok(())
+    let rest = args.get(1..).unwrap_or(&[]);
+    let outcome = match (standard(&args), args.first().map(String::as_str)) {
+        (Some(Standard::Help), _) => {
+            println!("{}", usage_text());
+            Ok(Exit::Done)
         }
-        "mcp" => mcp(rest),
-        "help" | "--help" | "-h" => {
-            println!("{USAGE}");
-            Ok(())
+        (Some(Standard::Version), _) => {
+            println!("{}", version_line(PROGRAM, env!("CARGO_PKG_VERSION")));
+            Ok(Exit::Done)
         }
-        other => Err(usage(&format!("unknown command “{other}”"))),
+        // Nothing was asked, so nothing was done: a caller that lost its arguments must not
+        // read success.
+        (Some(Standard::NoCommand), _) | (None, None) => Err(usage("no command was given")),
+        (None, Some("build")) => build(rest),
+        (None, Some("check")) => check(rest),
+        (None, Some("verify")) => verify(rest),
+        (None, Some("convert")) => convert(rest),
+        (None, Some("report")) => report(rest),
+        (None, Some("run")) => run(rest),
+        (None, Some("commands")) => list(rest),
+        (None, Some("mcp")) => mcp(rest),
+        (None, Some(option)) if option.starts_with('-') => Err(usage(format!("unknown option {option}"))),
+        (None, Some(other)) => Err(usage(format!("unknown command “{other}”"))),
     };
-    match out {
-        Ok(()) => ExitCode::SUCCESS,
-        Err(Fail(code, m)) => {
-            eprintln!("{m}");
-            ExitCode::from(code)
+    match outcome {
+        Ok(exit) => exit.into(),
+        // Results go to standard output; what went wrong, to standard error.
+        Err(Fail::Failed(why)) => {
+            eprintln!("{PROGRAM}: {why}");
+            Exit::Failed.into()
+        }
+        Err(Fail::Usage(why)) => {
+            eprintln!("{PROGRAM}: {why}");
+            eprintln!("{}", usage_text());
+            Exit::Usage.into()
         }
     }
 }
