@@ -24,7 +24,15 @@ deep; a project holds at most 100 editions, 1,000 elements, 100,000 section sett
 fixes; design files are at most 1 MB (1,000 of them), assets 256 MB each (10,000, 2 GB in all),
 build records 16 MB (100). File names inside the project have no folders above them, no hidden
 names and no control characters. A project from a newer version is refused with a message
-naming both versions.
+naming both versions. Folders under `designs/`, `assets/` and `builds/` are read 16 levels deep;
+a symbolic link is never followed, `book.toml` included, and any other file in the folder is
+the user's: never read, packed, changed or removed.
+
+The folder is a project folder as open-source-core specifies it (its `crates/jcj-project/FOLDER.md`,
+core decision 0018), and Book reads and writes it through the core's `jcj_project::folder`:
+`book.toml` is the manifest, written last alone; a path belongs to the project when no part of it
+is hidden and it holds no control character; Book keeps no conflict copies. What each file holds,
+and the limits above, are Book's.
 
 The source is a Wordsmith Manuscript project, and Book states which it reads in one place
 (`MANUSCRIPT_SCHEMAS` and `BOOK_VIEWS` in `crates/book-format/src/lib.rs`): project formats 1 to
@@ -270,14 +278,18 @@ linked.wsmz              a packed copy of a linked Manuscript project (read-only
 
 Reading never trusts the file: at most 2 GB packed, 50,000 entries, 512 MB an entry and 4 GB
 unpacked; entries are read one by one into memory (never extracted); names are checked (no
-folders above, no absolute or hidden names); `mimetype` must come first and match. A pack opens
-as a new project folder, never over a folder that holds something.
+folders above, no absolute or hidden names, at most 512 bytes); `mimetype` must come first and
+match. `.wsmz`, `.png` and `.jpg` entries are stored as they are, every other is compressed. A
+pack opens as a new project folder, never over a folder that holds something, and only once the
+whole file has been read and Book has read the project from it; its files are written as the
+pack holds them.
 
 **Recovery.** While there are unsaved changes, the project's own files are packed to
 `.recovery/unsaved.wsbkz` inside the project folder before each save; a save that finishes
-removes it. After a crash the project opens whole (each file is written atomically) and the
-recovered work is offered.
+removes it, and the `.recovery` folder when it is then empty. After a crash the project opens
+whole (each file is written atomically) and the recovered work is offered.
 
-**Backups** are packed projects named `<name> <YYYY-MM-DD HH.MM.SS> UTC.wsbkz` (a number added for
-a second backup in the same second), in a folder the app chooses, the oldest removed beyond the
-number kept.
+**Backups** are packed projects named `<name> <YYYY-MM-DD HH.MM.SS> UTC.wsbkz` (a space and a
+number from 2 added for a second backup in the same second; a file is never replaced), in a
+folder the app chooses, the oldest removed beyond the number kept, in the order they were made.
+Only a file with exactly such a name is one of the project's backups.

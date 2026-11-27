@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
-//! The Book project folder (plan section 6.2): reading it with limits, and saving only the files
-//! that changed, each atomically, `book.toml` last.
+//! The Book project folder (plan section 6.2): what its files hold, and Book's names over the
+//! core's folder layer (`jcj_project::folder`, core decision 0018), which reads the folder with
+//! limits and saves only the files that changed, each atomically, `book.toml` last.
 //!
 //! ```text
 //! My Book.wsbk/
@@ -11,17 +12,38 @@
 //!   builds/<edition>.json   the last build's record
 //!   .recovery/              unsaved work while the app runs
 //! ```
+//!
+//! What is Book's here is the layout ([`FORMAT`]), what each file holds ([`Files`]) and the
+//! limits on them; the reading, the saving, the atomic writes and the sinks are the core's.
 
 use std::collections::BTreeMap;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 
-use sha2::{Digest, Sha256};
+use jcj_project::folder as core;
+pub use jcj_project::folder::{Disk, Saved, Sink};
 use wordsmith_book_model::BookProject;
 
 use crate::{Error, limits, toml_file};
 
-/// The folders this module manages, besides `book.toml`.
+/// The folders Book reads into [`Files`], besides `book.toml`.
 pub const MANAGED_DIRS: [&str; 3] = ["designs", "assets", "builds"];
+
+/// Whether a path is one of a Book project's files: no part of it hidden, no control character
+/// (the core has made sure it is a plain path already).
+fn belongs(path: &str) -> bool {
+    path.split('/').all(|part| !part.starts_with('.')) && !path.chars().any(char::is_control)
+}
+
+/// The Book project folder's layout, for the core's folder layer: `book.toml` at the schema of
+/// Book's model, written last alone; any path that is not hidden; the packed form's type and
+/// extension; a linked source's packed copy and pictures stored in a packed project as they
+/// are; no conflict copies; `book.toml` at most [`limits::MAX_BOOK_TOML`].
+pub const FORMAT: core::Format = core::Format {
+    belongs,
+    stored: &[".wsmz", ".png", ".jpg"],
+    limits: core::Limits { manifest: limits::MAX_BOOK_TOML, ..core::Limits::DEFAULT },
+    ..core::Format::new("book.toml", wordsmith_book_model::SCHEMA, crate::pack::MIMETYPE, crate::PACKED_EXTENSION)
+};
 
 /// Everything in a Book project folder that Book reads and writes as files (the owned source
 /// has its own format and is not here).
@@ -40,14 +62,7 @@ pub struct Files {
 /// Whether `name` is a safe file name inside the project: no folders above, no absolute path, no
 /// control characters, not hidden.
 pub fn safe_name(name: &str) -> bool {
-    !name.is_empty()
-        && name.len() <= limits::MAX_NAME
-        && !name.starts_with('/')
-        && !name.starts_with('.')
-        && !name.contains('\\')
-        && !name.contains(':')
-        && name.split('/').all(|seg| !seg.is_empty() && seg != "." && seg != ".." && !seg.starts_with('.'))
-        && !name.chars().any(char::is_control)
+    core::plain_path(name, limits::MAX_NAME) && belongs(name)
 }
 
 /// Whether `id` is a safe design or edition id (a file name without folders).
@@ -139,176 +154,51 @@ fn bad(file: &str, why: &str) -> Error {
     Error::Damaged { file: file.into(), why: why.into() }
 }
 
-fn io(file: &str, e: impl std::fmt::Display) -> Error {
-    Error::Io { file: file.into(), why: e.to_string() }
-}
-
-fn digest(bytes: &[u8]) -> [u8; 32] {
-    Sha256::digest(bytes).into()
-}
-
-/// Read every managed file of the folder at `root` into memory, checking sizes and counts as it
-/// goes (never more than the limits are read).
-pub fn read_folder(root: &Path) -> Result<BTreeMap<String, Vec<u8>>, Error> {
-    let mut out = BTreeMap::new();
-    let toml = root.join("book.toml");
-    if !toml.is_file() {
-        return Err(Error::NotABook);
-    }
-    out.insert("book.toml".to_owned(), read_bounded(&toml, "book.toml", limits::MAX_BOOK_TOML)?);
-    let mut count = 0usize;
-    for dir in MANAGED_DIRS {
-        let base = root.join(dir);
-        if !base.is_dir() {
-            continue;
-        }
-        let mut stack = vec![(base, String::from(dir))];
-        while let Some((path, rel)) = stack.pop() {
-            let entries = std::fs::read_dir(&path).map_err(|e| io(&rel, e))?;
-            let mut names: Vec<(PathBuf, String)> = Vec::new();
-            for e in entries {
-                let e = e.map_err(|e| io(&rel, e))?;
-                let name = e.file_name().to_string_lossy().into_owned();
-                if name.starts_with('.') {
-                    continue;
-                }
-                names.push((e.path(), format!("{rel}/{name}")));
-            }
-            names.sort();
-            for (p, r) in names {
-                count += 1;
-                if count > limits::MAX_ASSETS + limits::MAX_DESIGNS + limits::MAX_BUILDS {
-                    return Err(Error::TooLarge {
-                        what: "the project's files".into(),
-                        limit: (limits::MAX_ASSETS + limits::MAX_DESIGNS + limits::MAX_BUILDS) as u64,
-                    });
-                }
-                let meta = std::fs::symlink_metadata(&p).map_err(|e| io(&r, e))?;
-                if meta.is_dir() {
-                    if r.matches('/').count() < 8 {
-                        stack.push((p, r));
-                    }
-                } else if meta.is_file() {
-                    let limit = if dir == "assets" { limits::MAX_ASSET } else { limits::MAX_BUILD.max(limits::MAX_DESIGN) };
-                    out.insert(r.clone(), read_bounded(&p, &r, limit)?);
-                }
-            }
-        }
-    }
-    Ok(out)
-}
-
-fn read_bounded(path: &Path, rel: &str, limit: u64) -> Result<Vec<u8>, Error> {
-    jcj_project::files::read_bounded(path, limit).map_err(|e| {
-        let msg = e.to_string();
-        if msg.contains("larger") || msg.contains("too large") || msg.contains("limit") {
-            Error::TooLarge { what: rel.into(), limit }
-        } else {
-            io(rel, msg)
-        }
-    })
-}
-
-/// Where saved files go: the disk, or a test's sink that can fail on purpose.
-pub trait Sink {
-    /// Write a file atomically.
-    fn write(&mut self, rel: &str, bytes: &[u8]) -> Result<(), Error>;
-    /// Remove a file.
-    fn remove(&mut self, rel: &str) -> Result<(), Error>;
-}
-
-/// Writes into a project folder on disk, each file atomically.
-pub struct Disk<'a>(pub &'a Path);
-
-impl Sink for Disk<'_> {
-    fn write(&mut self, rel: &str, bytes: &[u8]) -> Result<(), Error> {
-        let path = self.0.join(rel);
-        if let Some(dir) = path.parent() {
-            std::fs::create_dir_all(dir).map_err(|e| io(rel, e))?;
-        }
-        jcj_project::files::write_atomic(&path, bytes).map_err(|e| io(rel, e))
-    }
-
-    fn remove(&mut self, rel: &str) -> Result<(), Error> {
-        match std::fs::remove_file(self.0.join(rel)) {
-            Ok(()) => Ok(()),
-            Err(e) if e.kind() == std::io::ErrorKind::NotFound => Ok(()),
-            Err(e) => Err(io(rel, e)),
-        }
-    }
-}
-
-/// What a save did.
-#[derive(Clone, Debug, Default, PartialEq, Eq)]
-pub struct Saved {
-    /// Files written, in order.
-    pub written: Vec<String>,
-    /// Files removed.
-    pub removed: Vec<String>,
-}
-
-/// An open project folder: where it is and what its files held when last read or written.
+/// An open project folder: the core's folder, which remembers what each file held when it was
+/// last read or written.
 #[derive(Clone, Debug)]
-pub struct Folder {
-    root: PathBuf,
-    index: BTreeMap<String, [u8; 32]>,
-}
+pub struct Folder(core::Folder);
 
 impl Folder {
-    /// Open the project folder at `root`.
+    /// Open the project folder at `root`: `book.toml`, then every file under the folders Book
+    /// keeps ([`MANAGED_DIRS`]), each within its limit.
     pub fn open(root: &Path) -> Result<(Folder, Files), Error> {
-        let map = read_folder(root)?;
+        let mut folder = core::Folder::open(root, &FORMAT).map_err(|e| Error::from_core(e, "book.toml"))?;
+        let mut map = BTreeMap::new();
+        let toml = core::Source::read(&mut folder, FORMAT.manifest, FORMAT.limits.manifest).map_err(|e| Error::from_core(e, "book.toml"))?;
+        map.insert(FORMAT.manifest.to_owned(), toml.ok_or(Error::NotABook)?);
+        for dir in MANAGED_DIRS {
+            let limit = if dir == "assets" { limits::MAX_ASSET } else { limits::MAX_BUILD.max(limits::MAX_DESIGN) };
+            map.extend(folder.read_tree(dir, limit).map_err(|e| Error::from_core(e, dir))?);
+        }
         let files = Files::from_map(&map)?;
-        let index = map.iter().map(|(k, v)| (k.clone(), digest(v))).collect();
-        Ok((Folder { root: root.to_path_buf(), index }, files))
+        Ok((Folder(folder), files))
     }
 
     /// Create a project folder at `root` (which must not hold a project yet) with `files`.
     pub fn create(root: &Path, files: &Files) -> Result<Folder, Error> {
-        if root.join("book.toml").exists() {
-            return Err(Error::Io { file: "book.toml".into(), why: "a project is already there".into() });
-        }
-        std::fs::create_dir_all(root).map_err(|e| io("", e))?;
-        let mut f = Folder { root: root.to_path_buf(), index: BTreeMap::new() };
-        f.save(files)?;
-        Ok(f)
+        core::Folder::create(root, &FORMAT, &files.render()?).map(Folder).map_err(|e| Error::from_core(e, "book.toml"))
     }
 
     /// The project folder.
     pub fn root(&self) -> &Path {
-        &self.root
+        self.0.root()
     }
 
     /// Save: write the files whose bytes changed since the last read or write, each atomically,
     /// `book.toml` last, and remove managed files that are gone. A failure leaves every file
     /// either as it was or as it is now.
     pub fn save(&mut self, files: &Files) -> Result<Saved, Error> {
-        let root = self.root.clone();
-        self.save_to(files, &mut Disk(&root))
+        self.0.save(&files.render()?).map_err(|e| Error::from_core(e, "the project"))
     }
 
     /// [`Folder::save`] into any sink.
     pub fn save_to(&mut self, files: &Files, sink: &mut dyn Sink) -> Result<Saved, Error> {
-        let rendered = files.render()?;
-        let mut saved = Saved::default();
-        let mut order: Vec<&String> = rendered.keys().filter(|k| k.as_str() != "book.toml").collect();
-        order.extend(rendered.keys().filter(|k| k.as_str() == "book.toml"));
-        for rel in order {
-            let Some(bytes) = rendered.get(rel) else { continue };
-            let d = digest(bytes);
-            if self.index.get(rel) == Some(&d) {
-                continue;
-            }
-            sink.write(rel, bytes)?;
-            self.index.insert(rel.clone(), d);
-            saved.written.push(rel.clone());
-        }
-        let gone: Vec<String> = self.index.keys().filter(|k| !rendered.contains_key(*k)).cloned().collect();
-        for rel in gone {
-            sink.remove(&rel)?;
-            self.index.remove(&rel);
-            saved.removed.push(rel);
-        }
-        Ok(saved)
+        self.0.save_to(&files.render()?, sink).map_err(|e| Error::from_core(e, "the project"))
+    }
+
+    /// [`Folder::save`] with recovery around it ([`crate::pack::save_safely`]).
+    pub(crate) fn save_safely(&mut self, files: &Files) -> Result<Saved, Error> {
+        self.0.save_safely(&files.render()?).map_err(|e| Error::from_core(e, "the project"))
     }
 }
