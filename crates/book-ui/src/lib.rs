@@ -15,6 +15,7 @@ pub mod chooser;
 pub mod cleanup;
 pub mod commands;
 pub mod designs;
+pub mod desktop;
 pub mod doc;
 pub mod ebook_preview;
 pub mod export;

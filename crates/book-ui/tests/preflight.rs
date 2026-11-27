@@ -76,7 +76,7 @@ fn preflight_lists_findings_and_follows_their_links() {
     assert_eq!(isbn["severity"], "Blocks export");
     assert_eq!(isbn["link"]["edition"], first.as_str());
     // Through the panel.
-    let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
+    let shell = Shell::new(NAME, "0.1.0", brand::BRAND.tokens()).with_options(shell_options());
     let mut h =
         Harness::builder().with_size(egui::vec2(1600.0, 1000.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
     h.run_steps(2);

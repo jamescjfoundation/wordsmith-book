@@ -41,7 +41,7 @@ fn open_asks_for_a_file_and_opens_the_book_chosen() {
         seen.borrow_mut().push(ask.clone());
         next.borrow_mut().take().map_or(FileAnswer::Cancelled, |p| FileAnswer::Chosen(vec![p]))
     })));
-    let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
+    let shell = Shell::new(NAME, "0.1.0", brand::BRAND.tokens()).with_options(shell_options());
     let mut h = Harness::builder().with_size(egui::vec2(1200.0, 800.0)).build_ui_state(frame, St { shell, files, app: BookApp::new() });
     h.run_steps(2);
 

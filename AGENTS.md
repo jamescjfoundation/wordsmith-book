@@ -353,10 +353,12 @@ rules (section 4) differ from this file, this file holds. Each piece of work tha
     id, `wordsmith-book`, which is the desktop program, the stem of every release file, the id
     of the update check's source and the settings folder; and the app id,
     `org.jcjfoundation.book`, which the window is given. Every other program is named
-    `wordsmith-book-<name>`. The desktop program hands its arguments to the updater first of
-    all, closes its window when the shell asks, and tells the shell last that it ends: drop one
-    of the three and an update is installed and never started. The first public release is
-    0.9.0 and 1.0.0 follows; the stages 0.1 to 1.0 of the plan were never released, and
+    `wordsmith-book-<name>`. The desktop program starts through the core's `jcj_shell::desktop`
+    (`Desktop` data in `apps/book/src/main.rs`, Book's `DesktopApp` in
+    `crates/book-ui/src/desktop.rs`), which closes the window when an installed update asks and
+    starts the update's helper last; `main` hands its arguments to the updater first of all,
+    before it reads `--version`, or an update on Windows is never finished. The first public
+    release is 0.9.0 and 1.0.0 follows; the stages 0.1 to 1.0 of the plan were never released, and
     `CHANGELOG.md` keeps them under "Before the first release". The gate runs on macOS and
     Windows only in the release workflow, so a test must not assume a Unix path, a line end, a
     file permission or a font of the system (`[cfg(unix)]` the whole test file when its

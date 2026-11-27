@@ -129,7 +129,7 @@ struct St {
 #[test]
 fn the_app_opens_the_fixtures_outline_and_shows_a_chapter() {
     let (app, _) = linked_app("window");
-    let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
+    let shell = Shell::new(NAME, "0.1.0", brand::BRAND.tokens()).with_options(shell_options());
     let mut h =
         Harness::builder().with_size(egui::vec2(1400.0, 900.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
     h.run();
@@ -175,7 +175,7 @@ fn a_thousand_section_outline_draws_within_50_ms_a_frame() {
     let mut h = Harness::builder().with_size(egui::vec2(320.0, 800.0)).build_ui_state(
         |ui, t: &mut T| {
             if !t.styled {
-                let tokens = brand::tokens();
+                let tokens = brand::BRAND.tokens();
                 jcj_shell::theme::install_fonts(ui.ctx(), &tokens.fonts, &jcj_shell::theme::default_faces());
                 jcj_shell::theme::apply(ui.ctx(), &tokens.theme(jcj_shell::theme::Mode::Light));
                 t.styled = true;
