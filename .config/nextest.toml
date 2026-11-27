@@ -1,0 +1,12 @@
+# Settings for cargo-nextest, which runs the tests of `cargo xtask ci` when it is installed
+# (core decision 0003). `cargo test` does not read this file.
+#
+# cargo-nextest runs several test programs at a time. The programs below assert how long the
+# interface takes to answer, so each takes every test slot and nothing runs beside it.
+[[profile.default.overrides]]
+filter = 'package(wordsmith-book-ui) & binary(live)'
+threads-required = "num-test-threads"
+
+[[profile.default.overrides]]
+filter = 'package(wordsmith-book-ui) & binary(preview)'
+threads-required = "num-test-threads"
