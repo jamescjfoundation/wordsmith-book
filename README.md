@@ -12,6 +12,16 @@ link a Wordsmith Manuscript project, which it reads and never changes, or keep a
 own imported from a document. A project is a folder of plain-text files that read well in
 `git diff`.
 
+> **A note from the founder**
+>
+> A lot of work has already gone into laying a solid foundation. The apps aren't ready for everyday use yet, but the idea is sound and the pieces are in place. From here, the plan is slow, steady development and testing.
+>
+> I've been a wannabe developer for years. AI has finally given me the tools to bring an idea like this together, but my time and resources are limited. Ideas, feedback, bug reports, fixes and feature improvements are all welcome. If you care about this as much as we do, we're also open to deeper partnerships.
+>
+> I'll keep improving the ecosystem where I can while building out the rest of the foundation.
+>
+> — Dylan J.
+
 ![A chapter of Gulliver's Travels open from the Outline on the left, with its print pages as spreads in the Print Preview on the right](docs/images/print-preview.png)
 
 ## What it does
