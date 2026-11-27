@@ -3,7 +3,7 @@
 A Book project can link a Manuscript project (a folder or a `.wsmz` file). Book reads the
 manuscript's book view, the sections, their roles and the text, and **never writes to it**.
 
-**When the manuscript changes (FIL-2).** When you come back to Book, it notices that the linked
+**When the manuscript changes.** When you come back to Book, it notices that the linked
 project changed, reads it again and says which sections changed. Book's settings for a section
 stay with it, because sections are matched by their lasting ids.
 

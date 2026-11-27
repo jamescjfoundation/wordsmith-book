@@ -1,8 +1,10 @@
 # Command line and agents
 
-## The command line (AUT-1)
+## The command line
 
-`book-cli` runs the same code as the window:
+`wordsmith-book-cli` does the app's work without its window, with the same code. It comes in
+every download beside the app ([Installing and updating](installing.md) says where it is on
+each system), and it makes no network request.
 
 | Command | What it does |
 | --- | --- |
@@ -13,13 +15,16 @@
 | `report <project>` | Title, author, design, sections, words and details, as JSON |
 | `run <project> <command id> [<JSON>]` | Run any Book command; changes are saved |
 | `commands` | Every command and its label |
-| `mcp [<file>] [--read-root <folder>] [--write-root <folder>]` | Serve Book's commands to an agent over stdio ([below](#agent-tools-aut-2)) |
+| `mcp [<file>] [--read-root <folder>] [--write-root <folder>]` | Serve Book's commands to an agent over stdio ([below](#agent-tools)) |
 | `--help`, `-h`, `help` | The usage |
-| `--version`, `-V` | `book-cli` and its version, on one line |
+| `--version`, `-V` | `wordsmith-book-cli` and its version, on one line |
 
 Results are written to standard output. What went wrong is written to standard error, as
-`book-cli: <reason>`. Run with no argument, `book-cli` prints the usage on standard error and
+`wordsmith-book-cli: <reason>`. Run with no argument, it prints the usage on standard error and
 ends with code 2: nothing was asked, so nothing was done.
+
+The app itself takes two things on its command line: `wordsmith-book <project>` opens the
+project, and `wordsmith-book --version` prints its name and version and opens no window.
 
 ### Exit codes
 
@@ -37,9 +42,9 @@ differs, each finding) is its result, so it is on standard output.
 These are the codes of every app built on the same base, so a script written for one knows
 the next.
 
-## Agent tools (AUT-2)
+## Agent tools
 
-`book-cli mcp` serves every Book command as a tool over the Model Context Protocol, until its
+`wordsmith-book-cli mcp` serves every Book command as a tool over the Model Context Protocol, until its
 standard input ends: `book_import`, `book_design_choose`, `book_preflight`, `book_export`,
 `book_save` and the rest, each described with its parameters. An agent can import, design, build
 and check a book with the tools alone. A linked Manuscript project is never changed.
@@ -59,7 +64,7 @@ and check a book with the tools alone. A linked Manuscript project is never chan
 
 - Each flag takes a folder that exists. A flag given alone grants only its own kind of access:
   with `--read-root` alone the agent can write nothing.
-- With neither flag nothing is confined, and `book-cli` says so in one line on standard error
+- With neither flag nothing is confined, and the program says so in one line on standard error
   when it starts.
 - The folders hold for every file an agent names (the file to import, the folder to export
   to, a house file, a manuscript to link) and for what Book writes without being told where:
@@ -78,8 +83,8 @@ and check a book with the tools alone. A linked Manuscript project is never chan
 
 ```sh
 # The agent may read the whole `books` folder and write only into its `out` folder.
-book-cli mcp --read-root books --write-root books/out
+wordsmith-book-cli mcp --read-root books --write-root books/out
 
 # Your own book, wherever it is; the agent's files go into `out`.
-book-cli mcp "My Novel.wsbk" --read-root books --write-root books/out
+wordsmith-book-cli mcp "My Novel.wsbk" --read-root books --write-root books/out
 ```

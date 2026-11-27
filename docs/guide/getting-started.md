@@ -1,5 +1,7 @@
 # Getting started
 
+![A chapter open from the Outline on the left, with its print pages as spreads in the Print Preview on the right](../images/print-preview.png)
+
 A Book project is a folder ending in `.wsbk` (or one packed file ending in `.wsbkz`). It holds
 Book's own layer: the design, the editions, front and back matter, fixes and settings. The words
 come from a source: a Wordsmith Manuscript project Book reads and never changes, or a source of
@@ -20,9 +22,9 @@ the book's own made by importing a file.
 6. **Export** from File › Export: the paperback PDF, the EPUB and, if you like, the whole project
    in one file.
 
-**Saving and safety (FIL-1).** Book saves when you ask (Mod+S) and on its own while you work, as
-set in Preferences; it keeps packed backups beside the project (`<name> Backups`) and recovers
-unsaved work after a crash. **Themes and keys (ACC-1):** light, dark or the system's theme, a
+**Saving and safety.** Book saves when you ask (Mod+S) and on its own while you work, as
+set in Preferences, and recovers unsaved work after a crash;
+[Files, saving and backups](files.md) says what is kept where. **Themes and keys:** light, dark or the system's theme, a
 command palette (Mod+Shift+P), key tips (F10) and every command on a key or in the palette (see
 [Keys](keys.md)).
 
