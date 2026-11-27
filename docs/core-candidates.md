@@ -9,7 +9,7 @@ app), **open** (not started), **not needed**.
 
 The rows, the markers in the code and the core's issues are kept in step: a row says "released"
 only when its issue is closed, and each app-first row's issue is open, labelled `core-candidate`
-and names the file here that holds the code. Last checked against the issues on 2026-11-26.
+and names the file here that holds the code. Last checked against the issues on 2026-11-27.
 
 | Id | What | `// core-candidate:` location | Core issue | State |
 | --- | --- | --- | --- | --- |
@@ -35,3 +35,6 @@ and names the file here that holds the code. Last checked against the issues on 
 | – | The system's file dialogs through the shell (`Shell::ask_file`, `jcj_shell::files`) | – | [#28](https://github.com/jamescjfoundation/open-source-core/issues/28) | in core v0.1.20, used here: since 2026-11-26 the window's *Open…* is the system's dialog, in place of a box to type a path into |
 | – | An app's own commands as agent tools, and one convention for command lines (`jcj_agents::AppCommands`, `AgentServer::for_app`, `jcj_agents::cli`; core decision 0017) | – | – | released in core v0.1.20; since 2026-11-26 Book's own adapter (engine commands standing for Book's, around a global) is gone and `crates/book-ui/src/agents.rs` gives Book's commands to the core's |
 | – | A file dialog that cannot be shown runs neither of its commands, so an app cannot fall back to a typed path | – | [#43](https://github.com/jamescjfoundation/open-source-core/issues/43) | open; no step waits on it. Where the system can show no dialog, *Open…* says so in the status bar; a book still opens from the recent list or from a path given when the app starts |
+| – | A check for files an app carries from elsewhere, against a record with checksums (the brand kit's files in `assets/brand/`) | `xtask/src/brand.rs` | [#47](https://github.com/jamescjfoundation/open-source-core/issues/47) | app-first: `cargo xtask brand`, in the gate since 2026-11-27. Wordsmith Manuscript holds the same check for its own folder |
+| – | One start-up for every desktop app (`jcj_shell::desktop`), and brand loading beside the theme | – | [#46](https://github.com/jamescjfoundation/open-source-core/issues/46) | in core v0.1.21, not used here yet: `apps/book/src/main.rs` keeps its own start-up, with the updater's three steps since 2026-11-27. Moving onto the core's is [issue 9](https://github.com/jamescjfoundation/wordsmith-book/issues/9) here |
+| – | One release contract and one pipeline for every app (`cargo xtask package`, `cargo xtask release`, the shared release workflow; core decision 0019) | – | – | released in core v0.1.22, used here since 2026-11-27: `packaging/` and Book's own release workflow are gone, and what a release carries is data in `xtask/src/main.rs` |

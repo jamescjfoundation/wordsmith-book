@@ -15,6 +15,7 @@ role names (`docs/design-format.md`).
 | `assets/designs/` | The built-in designs, written by the project | MIT OR Apache-2.0 (this project) |
 | `assets/brand/tokens.json` | Wordsmith Book's design tokens, in the brand kit's palette | MIT OR Apache-2.0 (this project) |
 | `assets/brand/README.md` | How to use the brand assets, from the Wordsmith brand kit | MIT OR Apache-2.0 (this project) |
+| `assets/brand/kit.json` | The record the brand kit's tool leaves: the kit commit the files were taken at, and what the folder holds | MIT OR Apache-2.0 (this project) |
 | `assets/brand/mark-mask.png` | The mark's letter as a white mask, drawn from `assets/brand/wordsmith-book-mark-ink.svg` by `tools/brand-mask.py` | Trademark of The James C. J. Foundation; use unmodified (`assets/brand/README.md`) |
 | `assets/brand/favicon.svg` | The app icon tuned for small sizes, from the brand kit | Trademark of The James C. J. Foundation; use unmodified (`assets/brand/README.md`) |
 | `assets/brand/icon-1024.png` | The app icon, 1024 px, from the brand kit | Trademark of The James C. J. Foundation; use unmodified (`assets/brand/README.md`) |
