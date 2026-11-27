@@ -93,9 +93,9 @@ Dated notes; the review above is as it was written.
   tested with a project inside the range and one outside, as a folder, packed and as an owned
   source).
 - Gap 1 is decided: the anchors stay and the contract says so (request 3). Gap 5 is
-  answered: the contract's "Tags" says how tags are named and cut, and there is no release tag
-  yet (request 7). Gap 6 is settled, as it says. Gaps 2, 3 and 4 are open requests in
-  Manuscript's repository (`docs/requests-to-manuscript.md`).
+  answered: the contract's "Tags" says how tags are named and cut, and Manuscript's first
+  release tag, `v0.9.0`, is in its table (request 7). Gap 6 is settled, as it says. Gaps 2, 3
+  and 4 are open requests in Manuscript's repository (`docs/requests-to-manuscript.md`).
 
 ## Sign-off
 

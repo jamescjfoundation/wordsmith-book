@@ -14,7 +14,8 @@ setup were reworded to say what was checked and with which kind of tool. **Since
 two things the rows before that date say no longer hold. "The release waits for a person": a person or an agent may release
 once the full gate has passed on the commit
 ([project decision 0002](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0002-how-changes-land-and-who-releases.md), core decision 0011). "Publishing behind the `release` environment's approval": the
-environment takes only `v*` tags and has no reviewers.
+environment takes only `v*` tags and has no reviewers, and since 2026-11-27 no workflow uses it
+([issue 20](https://github.com/jamescjfoundation/wordsmith-book/issues/20)).
 
 | Date | Step | What changed | Tests |
 | --- | --- | --- | --- |
@@ -108,6 +109,7 @@ environment takes only `v*` tags and has no reviewers.
 | 2026-11-27 | guide | The guide for the wiki (issue 2): `installing.md` (the three files, how each is opened unsigned, checking a download, updates, what the app sends, the programs it starts on your computer) and `files.md` (the project folder, the packed file, saving, recovery, backups, other versions); the six pictures shown where they are described; when Book breaks a word, in `print.md`; a one-line description after every link of the index; no version claimed; feature ids out of the reading text and into `feature-ids.md`, which the test of feature ids reads with the rest | — |
 | 2026-11-27 | tests on three systems | Read for what assumes Unix before the gate's first run on macOS and Windows: the tests with shell-script stand-ins for the validators are a module for Unix, with their helpers and imports (they left code unused on Windows, which clippy refuses); the test that every fixture is listed builds a fixture's name with `/` on every system; cargo-nextest runs every test after a failure. The test that read the two project types out of `packaging/`'s files reads them out of the release data. No product code changed | 358 |
 | 2026-11-27 | 0.9.0 | The release commit of the first public release, a preview of 1.0.0 (decision 0005): the changelog's section for it is dated. The version was 0.9.0 already. Before it: the Linux package built here and held to the core's contract (its name, its checksum, its layout; both programs print their version); a dry run of the release workflow with the whole gate on Linux, macOS and Windows, green on its first run ([run 45952560735](https://github.com/jamescjfoundation/wordsmith-book/actions/runs/45952560735)), which built the three packages and `SHA256SUMS.txt`; and the core's own test, which read those files as an installed copy's update check would | 358 |
+| 2026-11-27 | docs/stale-claims | A sweep of the documents for claims that are no longer true. `docs/design-format.md` says, as `docs/format.md` does, that version 1 was extended in place until the first release, 0.9.0. `docs/handoff-review.md` says that Manuscript's first release tag is in the contract's table. `docs/golden.md` names core v0.1.22 as the newest core move, with its row (no golden file changed). Every link, every link to another repository and every `cargo xtask` task a living document names was checked | |
 
 ## Final report
 

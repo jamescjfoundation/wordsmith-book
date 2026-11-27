@@ -3,8 +3,9 @@
 Version 1 (`schema = 1`). A design is a small TOML file: Book's built-in designs ship in the app
 (`assets/designs/`), the user's own are `designs/<id>.toml` in a project, and a design can be
 exported and imported as one file (DSN-4). A design is data, never code: print and the ebook read
-its values. Until Book's first release tag, version 1 is extended in place (plan section 6.1);
-version 0 is a draft that was never released, kept to test the migration path.
+its values. Version 1 was extended in place until Book's first release, 0.9.0; from that release
+on, a change to the format raises the version and brings a migration (decision 0005, plan
+section 6.1). Version 0 is a draft that was never released, kept to test the migration path.
 
 Fonts are named by role, never by family: `classic-serif`, `reading-serif`, `display`,
 `inscription`, `sans` (the families are listed in `ATTRIBUTION.md`).
