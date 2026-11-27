@@ -2,12 +2,14 @@
 
 What changed in each release of Wordsmith Book, newest first, for people who make books with
 it. `## Unreleased` holds what the next release will bring; when that release is cut, the
-section takes its version and date (`## 0.9.0 (2026-12-01)`), and the next `## Unreleased` opens
-above it.
+section takes its version and date (as `## 0.9.0 (2026-11-27)` below), and a new, empty
+`## Unreleased` opens above it.
 
 The first public release is 0.9.0, a preview; 1.0.0 follows it (decision 0005). Nothing was
 published before it: the versions under "Before the first release", at the end, were the stages
 of the build plan, each prepared as a release and none released.
+
+## Unreleased
 
 ## 0.9.0 (2026-11-27)
 
