@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 //! The user guide (plan M9.3): the keys page is made from the commands and no two commands share
-//! a key; every 0.1 feature id appears in the guide. `BOOK_BLESS=1` writes the keys page again.
+//! a key; every 0.1 feature id appears in the guide. `UPDATE_GOLDEN=1` writes the keys page again.
 
 use std::path::{Path, PathBuf};
 
@@ -29,10 +29,10 @@ fn no_two_commands_share_a_key() {
 fn the_keys_page_is_made_from_the_commands() {
     let path = root().join("docs/guide/keys.md");
     let page = keys_page();
-    if std::env::var_os("BOOK_BLESS").is_some() {
+    if std::env::var_os("UPDATE_GOLDEN").is_some() {
         std::fs::write(&path, &page).unwrap();
     }
-    assert_eq!(std::fs::read_to_string(&path).unwrap_or_default(), page, "docs/guide/keys.md is out of date: run with BOOK_BLESS=1");
+    assert_eq!(std::fs::read_to_string(&path).unwrap_or_default(), page, "docs/guide/keys.md is out of date: run with UPDATE_GOLDEN=1");
     assert!(page.contains("| Mod+S | Save |"));
 }
 

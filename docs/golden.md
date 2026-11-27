@@ -3,7 +3,10 @@
 Golden files hold what an output looked like when a person last approved it. A test compares
 each new build with its golden file and fails on any difference. When a change is meant to move
 the output, a person looks at the new output, then the golden files are written again with
-`BOOK_BLESS=1` and committed with the change.
+`UPDATE_GOLDEN=1` and committed with the change. It is the switch Wordsmith Script and Wordsmith
+Manuscript use too, and here it also writes the guide's page of keys again (`docs/guide/keys.md`,
+made from the commands). Until 2026-11-27 the switch was `BOOK_BLESS=1`; no golden file changed
+with the name.
 
 ## Print PDFs (M5.4)
 

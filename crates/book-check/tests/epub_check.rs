@@ -2,7 +2,7 @@
 //! Book's own EPUB checks (plan M6.3): each check against an EPUB broken for it; every design's
 //! EPUB of the v0.1 test books passes, reads back through the core's reader word for word as
 //! Book's reader reads it, holds exactly the source's words, and matches its golden structure
-//! (`tests/golden/epub/`, docs/golden.md). Set `BOOK_BLESS=1` to write the golden files again.
+//! (`tests/golden/epub/`, docs/golden.md). Set `UPDATE_GOLDEN=1` to write the golden files again.
 //! When `BOOK_EPUB_VALIDATOR` names the standard validator's jar (and `BOOK_JAVA` a Java runtime,
 //! else `java`), it is run on each EPUB too.
 
@@ -202,7 +202,7 @@ fn structure(bytes: &[u8]) -> String {
 #[test]
 fn every_designs_epub_matches_its_golden_structure() {
     let dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/golden/epub");
-    let bless = std::env::var_os("BOOK_BLESS").is_some();
+    let bless = std::env::var_os("UPDATE_GOLDEN").is_some();
     let mut failures = Vec::new();
     for (book_name, b) in [("gulliver", gulliver()), ("waverley", waverley())] {
         for d in builtin::all() {
@@ -214,7 +214,7 @@ fn every_designs_epub_matches_its_golden_structure() {
                 std::fs::write(&path, &got).unwrap();
                 continue;
             }
-            let want = std::fs::read_to_string(&path).unwrap_or_else(|_| panic!("{name}: no golden file; run with BOOK_BLESS=1"));
+            let want = std::fs::read_to_string(&path).unwrap_or_else(|_| panic!("{name}: no golden file; run with UPDATE_GOLDEN=1"));
             if let Some(line) =
                 got.lines().zip(want.lines()).position(|(a, b)| a != b).or((got != want).then(|| got.lines().count().min(want.lines().count())))
             {

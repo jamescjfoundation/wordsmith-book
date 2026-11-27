@@ -2,7 +2,7 @@
 //! The print PDF (plan M5.4, PRT-6): for each built-in design on the v0.1 test books, under the
 //! `pod-paperback` and `generic-pdf` profiles, the PDF has single pages at trim size, embeds every
 //! font, and has no annotations, links or bookmarks; its text, page breaks and page boxes match
-//! the golden summaries in `tests/golden/print/` (docs/golden.md). Set `BOOK_BLESS=1` to write
+//! the golden summaries in `tests/golden/print/` (docs/golden.md). Set `UPDATE_GOLDEN=1` to write
 //! the summaries again after a change a person has looked at.
 
 mod common;
@@ -47,7 +47,7 @@ fn build_one(book: &wordsmith_manuscript_format::book::Book, design: &str, profi
 }
 
 fn golden(book_name: &str, book: &wordsmith_manuscript_format::book::Book, profile: &str, trim: &str) {
-    let bless = std::env::var_os("BOOK_BLESS").is_some();
+    let bless = std::env::var_os("UPDATE_GOLDEN").is_some();
     let prof = wordsmith_book_check::profile::get(profile).unwrap();
     let t = prof.trim(trim).unwrap();
     let size = (f64::from(t.width) * 72.0, f64::from(t.height) * 72.0);
@@ -64,7 +64,7 @@ fn golden(book_name: &str, book: &wordsmith_manuscript_format::book::Book, profi
             std::fs::write(&path, &got).unwrap();
             continue;
         }
-        let want = std::fs::read_to_string(&path).unwrap_or_else(|_| panic!("{name}: no golden summary; run with BOOK_BLESS=1"));
+        let want = std::fs::read_to_string(&path).unwrap_or_else(|_| panic!("{name}: no golden summary; run with UPDATE_GOLDEN=1"));
         if got != want {
             let line = got.lines().zip(want.lines()).position(|(a, b)| a != b).unwrap_or(got.lines().count().min(want.lines().count()));
             failures.push(format!(

@@ -6,7 +6,7 @@
 //! tests). Every word of both outputs matches the source; the PDFs pass preflight for
 //! `pod-paperback` and match their golden files (`tests/golden/v0.1/`, docs/golden.md); the
 //! EPUBs pass Book's structural checks (and the standard EPUB validator where it is set up,
-//! `BOOK_EPUB_VALIDATOR`); building twice gives the same bytes. `BOOK_BLESS=1` writes the golden
+//! `BOOK_EPUB_VALIDATOR`); building twice gives the same bytes. `UPDATE_GOLDEN=1` writes the golden
 //! files again.
 
 mod common;
@@ -49,7 +49,7 @@ fn paperback() -> Edition {
 
 #[test]
 fn the_test_of_v0_1() {
-    let bless = std::env::var_os("BOOK_BLESS").is_some();
+    let bless = std::env::var_os("UPDATE_GOLDEN").is_some();
     let golden = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/golden/v0.1");
     let validator = std::env::var("BOOK_EPUB_VALIDATOR").ok().map(|program| validator::Settings {
         program,
@@ -117,5 +117,5 @@ fn the_test_of_v0_1() {
             }
         }
     }
-    assert!(failures.is_empty(), "{}\nRun with BOOK_BLESS=1 after looking at the PDFs.", failures.join("\n"));
+    assert!(failures.is_empty(), "{}\nRun with UPDATE_GOLDEN=1 after looking at the PDFs.", failures.join("\n"));
 }
