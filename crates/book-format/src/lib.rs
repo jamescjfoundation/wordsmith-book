@@ -129,6 +129,23 @@ pub enum Error {
     SourceVersion(Outside),
     /// Something could not be written.
     Write(String),
+    /// The core's folder layer refused the project, for a reason with no variant of its own
+    /// here (a limit of the folder or of a packed project, a folder that is not empty).
+    Project(String),
+}
+
+impl Error {
+    /// The core folder layer's error as Book's, `file` naming what was being read or written.
+    pub fn from_core(e: jcj_project::Error, file: &str) -> Error {
+        match e {
+            jcj_project::Error::NotAProject => Error::NotABook,
+            jcj_project::Error::NewerApp { found, supported } => Error::Newer { found, supported },
+            jcj_project::Error::Damaged(why) => Error::Damaged { file: file.into(), why },
+            jcj_project::Error::Io { path, source } => Error::Io { file: path.display().to_string(), why: source.to_string() },
+            jcj_project::Error::TooLarge(why) | jcj_project::Error::Invalid(why) | jcj_project::Error::Refused(why) => Error::Project(why),
+            other => Error::Project(other.to_string()),
+        }
+    }
 }
 
 impl std::fmt::Display for Error {
@@ -145,6 +162,7 @@ impl std::fmt::Display for Error {
             Error::Source(why) => write!(f, "the book's source cannot be used: {why}"),
             Error::SourceVersion(outside) => write!(f, "the book's source cannot be used: {outside}"),
             Error::Write(why) => write!(f, "could not write the project: {why}"),
+            Error::Project(why) => write!(f, "{why}"),
         }
     }
 }

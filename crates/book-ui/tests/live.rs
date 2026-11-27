@@ -98,7 +98,7 @@ fn the_first_preview_page_shows_within_a_second_of_a_design_change_on_the_long_b
         &json!({ "file": root().join("tests/fixtures/novels/waverley.docx").display().to_string(), "path": dir.join("Waverley.wsbk").display().to_string() }),
     )
     .unwrap();
-    let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
+    let shell = Shell::new(NAME, "0.1.0", brand::BRAND.tokens()).with_options(shell_options());
     let mut h =
         Harness::builder().with_size(egui::vec2(1600.0, 1000.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
     h.run_steps(2);

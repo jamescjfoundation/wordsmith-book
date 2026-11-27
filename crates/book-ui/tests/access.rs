@@ -108,7 +108,7 @@ fn panel(h: &mut Harness<'_, St>, id: &str) {
 #[test]
 fn every_control_in_every_view_has_a_name() {
     let app = linked_app();
-    let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
+    let shell = Shell::new(NAME, "0.1.0", brand::BRAND.tokens()).with_options(shell_options());
     let mut h =
         Harness::builder().with_size(egui::vec2(1600.0, 1100.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
     h.run_steps(3);

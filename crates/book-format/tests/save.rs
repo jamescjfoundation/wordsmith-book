@@ -10,7 +10,7 @@ use std::path::{Path, PathBuf};
 use std::time::{Duration, SystemTime};
 
 use wordsmith_book_format::folder::{Disk, Sink};
-use wordsmith_book_format::{Error, Files, Folder, pack, source};
+use wordsmith_book_format::{Files, Folder, pack, source};
 use wordsmith_book_model::{BookProject, Source};
 
 fn tmp(name: &str) -> PathBuf {
@@ -39,23 +39,23 @@ fn after() -> Files {
 }
 
 /// A sink that writes to disk and then stops, as a crash would, after `left` writes.
-struct Crash<'a> {
-    disk: Disk<'a>,
+struct Crash {
+    disk: Disk,
     left: usize,
 }
 
-impl Sink for Crash<'_> {
-    fn write(&mut self, rel: &str, bytes: &[u8]) -> Result<(), Error> {
+impl Sink for Crash {
+    fn write(&mut self, rel: &str, bytes: &[u8]) -> jcj_project::Result<()> {
         if self.left == 0 {
-            return Err(Error::Io { file: rel.into(), why: "the machine stopped".into() });
+            return Err(jcj_project::Error::Invalid(format!("{rel}: the machine stopped")));
         }
         self.left -= 1;
         self.disk.write(rel, bytes)
     }
 
-    fn remove(&mut self, rel: &str) -> Result<(), Error> {
+    fn remove(&mut self, rel: &str) -> jcj_project::Result<()> {
         if self.left == 0 {
-            return Err(Error::Io { file: rel.into(), why: "the machine stopped".into() });
+            return Err(jcj_project::Error::Invalid(format!("{rel}: the machine stopped")));
         }
         self.left -= 1;
         self.disk.remove(rel)
@@ -74,7 +74,7 @@ fn every_crash_reopens_to_the_last_good_save_or_the_recovered_work() {
         let dir = tmp(&format!("crash-{n}")).join("A.wsbk");
         let mut folder = Folder::create(&dir, &before()).unwrap();
         pack::write_recovery(&dir, &after()).unwrap();
-        let result = folder.save_to(&after(), &mut Crash { disk: Disk(&dir), left: n });
+        let result = folder.save_to(&after(), &mut Crash { disk: Disk::new(&dir), left: n });
         // The machine comes back: the project opens (every file whole), and the work is either
         // saved or recoverable.
         let (_, opened) = Folder::open(&dir).unwrap_or_else(|e| panic!("after {n} writes: {e}"));
@@ -181,8 +181,13 @@ fn backups_keep_the_newest_and_never_overwrite_one() {
     assert_ne!(a, b, "a second backup in the same second gets a number");
     let c = pack::backup(&root, &after(), &dir, "A", 2, t0 + Duration::from_secs(60)).unwrap();
     let all = pack::backups(&dir, "A");
-    assert_eq!(all.len(), 2);
-    assert!(all.contains(&c));
+    // The oldest goes first: of two in one second, the one made first.
+    assert_eq!(all, [b.clone(), c.clone()]);
+    // A file that is not named as one of the book's backups is never counted or removed.
+    std::fs::write(dir.join("A notes.wsbkz"), b"mine").unwrap();
+    pack::backup(&root, &after(), &dir, "A", 2, t0 + Duration::from_secs(120)).unwrap();
+    assert_eq!(pack::backups(&dir, "A").len(), 2);
+    assert!(dir.join("A notes.wsbkz").exists());
     assert!(a.file_name().unwrap().to_string_lossy().ends_with(" UTC.wsbkz"));
     assert_eq!(pack::unpack(&std::fs::read(&c).unwrap()).unwrap().files, after());
 }
@@ -198,7 +203,22 @@ fn recovery_keeps_unsaved_work_until_it_is_discarded() {
     assert_eq!(Folder::open(&root).unwrap().1, before());
     pack::discard_recovery(&root).unwrap();
     assert_eq!(pack::recovered(&root), None);
+    // The recovery folder goes with its copy.
+    assert!(!root.join(".recovery").exists());
     // A damaged recovery file is ignored, not trusted.
+    std::fs::create_dir_all(root.join(".recovery")).unwrap();
     std::fs::write(pack::recovery_path(&root), b"damaged").unwrap();
     assert_eq!(pack::recovered(&root), None);
+}
+
+#[test]
+fn a_long_asset_name_packs_and_unpacks() {
+    // An asset's name is at most 200 bytes; with `assets/` before it the packed name is longer,
+    // and the packed project still opens.
+    let root = tmp("long-name").join("A.wsbk");
+    let mut files = after();
+    files.assets.insert(format!("{}.png", "n".repeat(196)), vec![7; 3]);
+    Folder::create(&root, &files).unwrap();
+    let bytes = pack::pack_folder(&root, &files).unwrap();
+    assert_eq!(pack::unpack(&bytes).unwrap().files, files);
 }

@@ -72,6 +72,22 @@ same twice. It takes about two minutes.
 **R2.4:** every golden file above was written again when printed notes became footnotes and the
 ebook's notes pop-up footnotes (the editions' default); they await a person's look again.
 
+## The files a project writes
+
+`tests/golden/project-files.txt`, checked by `crates/book-format/tests/on_disk.rs`
+(`the_files_on_disk_are_the_reference_bytes`; the steps are in `tests/on_disk/scenario.rs`):
+the SHA-256 of every file each way of writing a project puts on disk. A new project folder on an
+owned source (a design, pictures stored as they are, a font compressed, one in a folder, a build
+record, and a file of the user's own), the folder after a save, after a save of `book.toml`
+edited by hand, the folder packed and the project packed from memory, the recovery copy, the
+folder after a save with recovery, two backups in the same second at a fixed time, a packed
+project unpacked, a book on a linked source packed and unpacked elsewhere, and a schema 0
+project saved.
+
+| Date | What changed | Reviewed |
+| --- | --- | --- |
+| 2026-11-27 | First version, written by Wordsmith Book 0.9.0's own folder code, before the folder layer became the core's (core issue #45): the move must leave every byte the same | Checked by the author of the change; awaits a maintainer's review |
+
 ## The engine and the core's releases (R4.6)
 
 Print is on the core's layout (decision 0003), at the newest core release: v0.1.23 (2026-11-27).

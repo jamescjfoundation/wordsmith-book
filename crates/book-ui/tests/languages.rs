@@ -74,7 +74,7 @@ fn the_window_shows_the_language_chosen_and_english_again() {
     let _ = std::fs::remove_dir_all(&dir);
     let mut app = BookApp::new();
     app.command(commands::NEW, &json!({ "path": dir.join("Own.wsbk").display().to_string(), "date": "2026-11-24" })).unwrap();
-    let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
+    let shell = Shell::new(NAME, "0.1.0", brand::BRAND.tokens()).with_options(shell_options());
     let mut h =
         Harness::builder().with_size(egui::vec2(1600.0, 1000.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
     h.run_steps(2);

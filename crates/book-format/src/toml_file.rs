@@ -9,47 +9,12 @@ use wordsmith_book_model::{BookProject, SCHEMA};
 
 use crate::{Error, limits};
 
-/// How deep `[`/`{` nest in `text`, outside strings (a cheap guard before parsing).
-pub fn nesting(text: &str) -> usize {
-    let (mut depth, mut max) = (0usize, 0usize);
-    let mut in_str: Option<char> = None;
-    let mut escape = false;
-    let mut comment = false;
-    for c in text.chars() {
-        if comment {
-            comment = c != '\n';
-            continue;
-        }
-        if let Some(q) = in_str {
-            if escape {
-                escape = false;
-            } else if c == '\\' && q == '"' {
-                escape = true;
-            } else if c == q || (c == '\n' && q != '\0') {
-                in_str = None;
-            }
-            continue;
-        }
-        match c {
-            '#' => comment = true,
-            '"' | '\'' => in_str = Some(c),
-            '[' | '{' => {
-                depth += 1;
-                max = max.max(depth);
-            }
-            ']' | '}' => depth = depth.saturating_sub(1),
-            _ => {}
-        }
-    }
-    max
-}
-
 /// Parse TOML text that is not trusted: size and nesting first.
 pub fn parse_table(text: &str, file: &str, limit: u64) -> Result<toml::Table, Error> {
     if text.len() as u64 > limit {
         return Err(Error::TooLarge { what: file.into(), limit });
     }
-    if nesting(text) > limits::MAX_DEPTH {
+    if jcj_project::folder::toml_nesting(text) > limits::MAX_DEPTH {
         return Err(Error::Damaged { file: file.into(), why: format!("tables and arrays nest deeper than {}", limits::MAX_DEPTH) });
     }
     text.parse::<toml::Table>().map_err(|e| Error::Damaged { file: file.into(), why: e.message().to_owned() })

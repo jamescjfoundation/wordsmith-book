@@ -73,7 +73,7 @@ fn sample(dir: &Path) -> Result<BookApp, String> {
 /// previews' page images are made again for it; the frames are spaced out so the background
 /// builds can finish before the last one.
 fn shot(app: &mut BookApp, out: &Path, name: &str, open: &[&str], mode: Mode, frames: usize) -> Result<(), String> {
-    let mut shell = Shell::new(NAME, env!("CARGO_PKG_VERSION"), brand::tokens()).with_options(shell_options());
+    let mut shell = Shell::new(NAME, env!("CARGO_PKG_VERSION"), brand::BRAND.tokens()).with_options(shell_options());
     shell.tour_seen = true;
     shell.mode = mode;
     shell.layout = Layout::with_open(&app.panels(), open);

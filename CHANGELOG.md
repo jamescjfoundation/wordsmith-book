@@ -11,6 +11,34 @@ of the build plan, each prepared as a release and none released.
 
 ## Unreleased
 
+### Starting and updating
+
+The app starts the way every app on open-source-core starts, with the same steps in the same
+order. The command line, `--version` and the window's title are as before. What you may notice:
+
+- A preference you change within a second of another is written straight away, without waiting
+  for your next key press or click.
+- When the app cannot make its settings folder, it says that your preferences could not be
+  saved. Before, it said nothing and kept none.
+
+### Files
+
+Projects, packed `.wsbkz` files, recovery copies and backups are read and written by the shared
+project-folder code of open-source-core, which Wordsmith Manuscript uses too. Every file they
+hold is the same, byte for byte, as 0.9.0 writes. What you may notice:
+
+- Of two backups made within the same second, the one made first is now the first removed when
+  more than ten are kept. Before, the numbered second one sorted first and went first.
+- Only files named as the book's backups count as its backups: a file you put in the
+  `Backups` folder under another name is never counted among the ten kept or removed.
+- The hidden `.recovery` folder inside a project is removed after a save, when nothing else is
+  in it. Before, the empty folder stayed.
+- A `book.toml` that is a symbolic link is not followed, so such a folder does not open as a
+  book. Book already left out linked files and folders under `designs/`, `assets/` and `builds/`.
+- Pictures and fonts in folders under `assets/` are read up to 16 folders deep, where 8 was the
+  limit, and a packed project whose file names are longer than 200 bytes, up to 512, now opens
+  (a project with such a name could be saved, but its packed copy could not be opened).
+
 ## 0.9.0 (2026-11-27)
 
 The first public release of Wordsmith Book, 0.9.0: a preview of 1.0.0, for trying the app, its

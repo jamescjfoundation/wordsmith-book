@@ -36,7 +36,7 @@ fn the_review_shows_what_was_found_and_imports_it() {
     let file = fixture("gullivers-travels-online.docx", &dir);
     let mut app = BookApp::new();
     app.command(commands::IMPORT_REVIEW, &json!({ "file": file.display().to_string() })).unwrap();
-    let shell = Shell::new(NAME, "0.1.0", brand::tokens()).with_options(shell_options());
+    let shell = Shell::new(NAME, "0.1.0", brand::BRAND.tokens()).with_options(shell_options());
     let mut h =
         Harness::builder().with_size(egui::vec2(1400.0, 1000.0)).build_ui_state(|ui, st: &mut St| st.shell.ui(ui, &mut st.app), St { shell, app });
     h.run();

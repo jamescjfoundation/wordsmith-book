@@ -17,6 +17,10 @@ A book that links a Manuscript project holds no copy of its words: `book.toml` n
 project, and Book reads it where it is and never writes to it
 ([Working with Wordsmith Manuscript](manuscript.md)).
 
+A file in the project that is a symbolic link is not followed: the app does not read it, pack it
+or write over it. Any file in the folder that is not one of those above is yours: Book never
+reads, packs, changes or removes it.
+
 To open a book, choose its `book.toml` in the Open dialog, or the `.wsbk` folder where your
 system shows it as one document. After the install steps of
 [Installing and updating](installing.md), a book also opens from your file manager.
@@ -46,13 +50,17 @@ already holds something.
 While a book has unsaved changes, Book keeps them in a hidden folder inside the project
 (`.recovery`). If the app or the computer stops before a save, the book opens as it was last
 saved, and Book says "Unsaved work from last time was recovered. Save to keep it." Save, and the
-recovered work is the book; close without saving, and it is gone.
+recovered work is the book; close without saving, and it is gone. A save that finishes removes
+the copy, and the `.recovery` folder with it when nothing else is there.
 
 ## Backups
 
 **Back Up Now** (in the command palette) writes the whole project as one packed file into a
-folder beside it, `<the book's name> Backups`, named with the date and time. The newest ten are
-kept. A backup opens like any other `.wsbkz` file.
+folder beside it, `<the book's name> Backups`, named with the book's name and the date and time
+it was made (`My Book 2026-11-27 10.00.00 UTC.wsbkz`). A second backup in the same second gets a
+number after the time and never replaces the first. The newest ten are kept, and the oldest
+removed; a file you put in the folder under another name is never counted or removed. A backup
+opens like any other `.wsbkz` file.
 
 A backup holds what the project holds. For a linked manuscript that is a copy as it was at that
 moment; the writer's own project is backed up by Manuscript.
