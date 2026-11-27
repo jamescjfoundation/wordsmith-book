@@ -365,8 +365,10 @@ rules (section 4) differ from this file, this file holds. Each piece of work tha
 ### Book and Wordsmith Manuscript
 
 Book builds on Manuscript's `wordsmith-manuscript-model` and `wordsmith-manuscript-format`
-crates, as git dependencies at a `book-view-1.N` tag (decision 0001; `Cargo.toml` names the
-current one). The contract is Manuscript's
+crates, as git dependencies at a `book-view-<view version>.<count>` tag (decision 0001;
+`Cargo.toml` names the current one; the contract's
+["How a tag is named"](https://github.com/jamescjfoundation/wordsmith-manuscript/blob/main/docs/book-handoff.md#how-a-tag-is-named)
+says how the name is made). The contract is Manuscript's
 [`docs/book-handoff.md`](https://github.com/jamescjfoundation/wordsmith-manuscript/blob/main/docs/book-handoff.md),
 and Manuscript owns it.
 
@@ -398,7 +400,7 @@ and Manuscript owns it.
   (`docs/guide/manuscript.md`, "Versions").
 - **One core.** Book and the Manuscript tag it names pin the same core release, and
   `cargo xtask core-pin` fails when `Cargo.lock` holds two. So Book moves to a newer core only
-  after Manuscript has moved and cut the next `book-view-1.N` tag on it; then both pins move in
+  after Manuscript has moved and cut the next `book-view` tag on it; then both pins move in
   one change here ([Route I](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-i)).
   Until that tag exists, Book can still take the core's files and marked blocks:
   `cargo xtask sync <this folder>`, run in a checkout of the core at that release, writes them,
