@@ -105,7 +105,7 @@ fn a_series_brings_its_own_house_design_and_keeps_it_without_the_house_file() {
     app.book.as_mut().unwrap().save().unwrap();
     std::fs::remove_dir_all(house.parent().unwrap()).unwrap();
     let mut again = BookApp::new();
-    again.open_path(&path.display().to_string()).unwrap();
+    again.open_path(&path).unwrap();
     changes_refused(&mut again);
     assert_eq!(design(&again), "voyage-house");
     // Undoing the join (one step) frees the design too.

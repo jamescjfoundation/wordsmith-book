@@ -4,7 +4,7 @@
 //! tools.
 //!
 //! It follows the core's convention for command lines (core decision 0017): results on
-//! standard output, what went wrong on standard error as `book-cli: <reason>`, and the exit
+//! standard output, what went wrong on standard error as `wordsmith-book-cli: <reason>`, and the exit
 //! codes of [`Exit`]: 0 done; 1 it could not be done (a file could not be read or written, a
 //! command refused); 2 the command line was wrong; 3 it ran, and a check of the content did not
 //! pass (the words differ, or preflight blocks export).
@@ -22,7 +22,7 @@ use wordsmith_book_ui::export::Stopped;
 use wordsmith_book_ui::{BookApp, commands};
 
 /// The program's name, as it is run.
-const PROGRAM: &str = "book-cli";
+const PROGRAM: &str = "wordsmith-book-cli";
 
 fn usage_text() -> String {
     format!(

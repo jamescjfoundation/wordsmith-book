@@ -209,6 +209,29 @@ interface back out is not.
   `jcj-` line names one tag. `cargo xtask core-pin` says how far behind an app is, and a
   scheduled check opens an issue when it is more than three releases behind.
 
+### Releasing an app
+
+One contract and one workflow for every app
+([core decision 0019](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/decisions/0019-app-releases.md);
+the contract, with what each release file is named and holds, is the core's
+[`docs/app-releases.md`](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/app-releases.md)).
+The gate runs first and the workflow makes the tag, as for the core.
+
+1. Move the app to the newest core. Write what the release changes under `## Unreleased` of
+   `CHANGELOG.md`.
+2. `cargo xtask release X.Y.Z` makes the changes of the release commit: the version in
+   `Cargo.toml` and `Cargo.lock`, and the changelog heading with the date. Run `cargo xtask ci`,
+   commit, push to `main`.
+3. `gh workflow run release.yml --ref main`. It checks the release commit, runs the whole gate
+   on Linux, macOS and Windows, builds and checks the package of each system and
+   `SHA256SUMS.txt`, and only then makes the tag `vX.Y.Z` and publishes. A red job leaves no
+   tag: fix the cause on `main` and start it again.
+4. To try it without releasing: `gh workflow run release.yml -f dry-run=true`. The same dry run
+   starts by itself every week. `cargo xtask package` makes this computer's package in `dist/`.
+
+What a release carries is data in `xtask/src/main.rs` (`package`). The packaging and the
+workflow are the core's: an app has no release workflow and no packaging script of its own.
+
 ### Things agents must not do
 
 - Name WordCraft or craft-libs types in an app repository. Use the `jcj-` interfaces; if one is
@@ -222,6 +245,8 @@ interface back out is not.
   [0004](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/decisions/0004-follow-hold-own.md)
   and
   [0011](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/decisions/0011-releases-and-versioning.md)).
+- Push a `v*` tag, or create or edit a release, by hand: in the core and in an app the release
+  workflow makes both, after the gate. A tag cannot be taken back.
 - Edit WordCraft or craft-libs code anywhere but our forks' topic branches.
 - Edit a file or a marked block the core owns anywhere but in the core.
 - Commit personal details, private files or secrets.
@@ -242,11 +267,13 @@ interface back out is not.
 ## Wordsmith Book's own rules
 
 Behavior comes from `docs/SPEC.md`; the files are specified in `docs/format.md` and
-`docs/design-format.md`. Decisions about this app go in `docs/decisions/`. The build plan,
-`docs/PLAN.md`, is finished: every milestone in its section 10 is done and only the releases
-are left. Where its ground rules (section 4) differ from this file, this file holds. Each piece
-of work that lands on `main` adds a row to `docs/progress.md`; a change users will see also goes
-in `CHANGELOG.md` and `docs/guide/` ([Route C](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-c)).
+`docs/design-format.md`. Decisions about this app go in `docs/decisions/`. What is planned is
+the [`v1` milestone](https://github.com/jamescjfoundation/wordsmith-book/milestone/1) of this
+repository's issues (`ROADMAP.md`): open work is an issue there, never a list in a file. The
+build plan, `docs/PLAN.md`, is history: every milestone in it is done, and where its ground
+rules (section 4) differ from this file, this file holds. Each piece of work that lands on
+`main` adds a row to `docs/progress.md`; a change users will see also goes in `CHANGELOG.md`
+(under `## Unreleased`) and `docs/guide/` ([Route C](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-c)).
 
 1. **Naming others** ([project decision 0003](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0003-naming-other-companies-programs-and-formats.md)).
    Code, docs, commit messages and fixtures may name another company, program, service or file
@@ -264,7 +291,7 @@ in `CHANGELOG.md` and `docs/guide/` ([Route C](https://github.com/jamescjfoundat
    checked, and is kept as data in `assets/print/` so it can be corrected without code.
    **Today:** the rules recorded before 2026-11-26 still say "a print-on-demand service's public
    file guide" (`docs/SPEC.md`, `assets/print/`); name the source when a rule is next checked
-   against its guide.
+   against its guide ([issue 14](https://github.com/jamescjfoundation/wordsmith-book/issues/14)).
 4. **Fonts.** Bundled fonts have open licenses (OFL-1.1 or the core allowlist) and each is listed
    in `ATTRIBUTION.md`. In the interface and in design files they go by our role names
    (`classic-serif`, `reading-serif`, `display`, `inscription`, `sans`; `docs/design-format.md`), never by
@@ -277,33 +304,59 @@ in `CHANGELOG.md` and `docs/guide/` ([Route C](https://github.com/jamescjfoundat
    project folder's bytes are unchanged.
 7. **Golden files are the judge.** Print PDFs (text, page breaks, page boxes) and EPUB structure
    are compared with reviewed reference files. A change that alters them is deliberate, reviewed
-   and recorded in `docs/golden.md`.
+   and recorded in `docs/golden.md`. `UPDATE_GOLDEN=1` writes them again, and the guide's page
+   of keys with them: the one switch of the three Wordsmith apps.
 8. **Fixtures** are public-domain texts or written for the test, made by scripts in `tools/`
    (standard library only) or by `cargo xtask fixtures`, and recorded in `docs/fixtures.md`.
 9. **Print stays in `book-typeset`** (decision 0003): it builds a print document in the core's
    model and the core lays it out and writes it. Book's text is only ever the text of runs, never
    instructions; print uses only Book's bundled fonts and fonts added to the project.
 10. **The brand comes from the kit.** The logos, icons and palette card in `assets/brand/` are
-    copies of the Wordsmith brand kit (the wordsmith repository, `brand/wordsmith-book/`,
-    `production/` and `app-icon/`; `icon.ico` is the kit's `wordsmith-book.ico`). They are never
-    edited, recolored or redrawn here: a change is made in the kit and copied over
-    ([Route F](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-f)).
+    files of the Wordsmith brand kit (the wordsmith repository, `brand/`), written here by the
+    kit's tool with a record, `assets/brand/kit.json`: the kit commit they were taken at and
+    what the folder holds
+    ([project decision 0007](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0007-brand-files-reach-the-apps-by-one-route.md)).
+    They are never edited, recolored or redrawn here, and the record is never edited by hand: a
+    change is made in the kit and taken again
+    ([Route F](https://github.com/jamescjfoundation/wordsmith/blob/main/project/README.md#route-f)):
+    with the wordsmith repository checked out beside this one, `npm run brand -- --app book` in
+    its `website/wiki`, and the result committed here, naming the wordsmith commit.
     Book's own files there are three: `tokens.json`, the interface theme in the core's token
-    format, whose palette colors must match the kit (decision 0004); `mark-mask.png`, drawn from
-    the kit's mark by `tools/brand-mask.py` and drawn again when the mark changes; and
-    `README.md`, the kit's guide with rows added for those two and the icon sizes.
-    **Today:** nothing here compares the copies with the kit.
+    format, whose palette holds the kit's seven colors (decision 0004); `mark-mask.png`, drawn
+    from the kit's mark by `tools/brand-mask.py` and drawn again when the mark changes; and
+    `README.md`, the kit's guide with rows added for those two and the icon sizes. A new file of
+    Book's own in that folder is added to the kit's list (`brand/apps.json`) first.
+    `cargo xtask brand`, in the gate, holds the folder to the record: each kit file by its
+    checksum, no file the record does not name, and the theme's palette. `cargo xtask brand
+    --kit` asks whether the kit has moved since; the workflow `brand-kit.yml` runs it every
+    week and is red until the files are taken again (`xtask/src/brand.rs`).
 
 11. **The command line and the agent tools follow the core's convention**
     ([core decision 0017](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/decisions/0017-command-lines-and-agent-tools.md),
     the core's `docs/command-lines-and-agent-tools.md`): exit codes 0 done, 1 failed, 2 usage,
-    3 a check of the content did not pass; results on standard output and `book-cli: <reason>`
-    on standard error; `mcp [<file>] [--read-root <folder>] [--write-root <folder>]`; every
+    3 a check of the content did not pass; results on standard output and
+    `wordsmith-book-cli: <reason>` on standard error; `mcp [<file>] [--read-root <folder>] [--write-root <folder>]`; every
     tool named `book_<command>`, served through the core's adapter. A test runs the built
     program to hold it there (`apps/book-cli/tests/command_line.rs`). A command that takes a
     path names the parameter in `files_of` (`crates/book-ui/src/agents.rs`), and one that reads
     or writes somewhere no parameter names is checked in `BookTools`: otherwise an agent kept
     to folders is not held to them for that path.
+
+12. **Releases, names and versions** (decision 0005). A release is cut by the steps of
+    "Releasing an app" above; this repository has no release workflow and no packaging of its
+    own. What a release carries is `package` in `xtask/src/main.rs`. Two names there are also
+    in the program, and a test on each side holds them (`apps/book/src/main.rs`): the release
+    id, `wordsmith-book`, which is the desktop program, the stem of every release file, the id
+    of the update check's source and the settings folder; and the app id,
+    `org.jcjfoundation.book`, which the window is given. Every other program is named
+    `wordsmith-book-<name>`. The desktop program hands its arguments to the updater first of
+    all, closes its window when the shell asks, and tells the shell last that it ends: drop one
+    of the three and an update is installed and never started. The first public release is
+    0.9.0 and 1.0.0 follows; the stages 0.1 to 1.0 of the plan were never released, and
+    `CHANGELOG.md` keeps them under "Before the first release". The gate runs on macOS and
+    Windows only in the release workflow, so a test must not assume a Unix path, a line end, a
+    file permission or a font of the system (`[cfg(unix)]` the whole test file when its
+    stand-ins exist only there).
 
 ### Book and Wordsmith Manuscript
 
@@ -351,9 +404,9 @@ The list is the contract's "What Book may use". Manuscript's test
 `crates/manuscript-format/tests/book_contract.rs` uses each item the way Book does, and its
 workflow "Book consumer" runs Book's whole gate against a change to the two crates.
 
-**Today:** nothing here compares Book's code with the list. An item Book starts to use without
-asking is found only when a change in Manuscript breaks it, so check a new
-`wordsmith_manuscript_` name against the list by hand.
+**Today:** nothing here compares Book's code with the list ([issue 24](https://github.com/jamescjfoundation/wordsmith-book/issues/24)). An
+item Book starts to use without asking is found only when a change in Manuscript breaks it, so
+check a new `wordsmith_manuscript_` name against the list by hand.
 
 ### Where each crate's code goes
 

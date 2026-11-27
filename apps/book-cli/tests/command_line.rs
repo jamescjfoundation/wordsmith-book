@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
-//! `book-cli`, held to the core's convention for command lines and agent tools (core decision
+//! `wordsmith-book-cli`, held to the core's convention for command lines and agent tools (core decision
 //! 0017, the core's `docs/command-lines-and-agent-tools.md`): the program itself is run, and
 //! its exit code, its standard output and its standard error are read.
 
@@ -11,8 +11,13 @@ use jcj_agents::cli::Exit;
 use serde_json::{Value, json};
 
 fn run(args: &[&str], input: &str) -> Output {
-    let mut child =
-        Command::new(env!("CARGO_BIN_EXE_book-cli")).args(args).stdin(Stdio::piped()).stdout(Stdio::piped()).stderr(Stdio::piped()).spawn().unwrap();
+    let mut child = Command::new(env!("CARGO_BIN_EXE_wordsmith-book-cli"))
+        .args(args)
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
     child.stdin.take().unwrap().write_all(input.as_bytes()).unwrap();
     child.wait_with_output().unwrap()
 }
@@ -62,7 +67,7 @@ fn help_and_version_are_answered_on_standard_output() {
     for version in ["--version", "-V"] {
         let o = run(&[version], "");
         assert_eq!(code(&o), exit(Exit::Done), "{version}");
-        assert_eq!(text(&o.stdout).lines().next(), Some(concat!("book-cli ", env!("CARGO_PKG_VERSION"))));
+        assert_eq!(text(&o.stdout).lines().next(), Some(concat!("wordsmith-book-cli ", env!("CARGO_PKG_VERSION"))));
         assert!(o.stderr.is_empty(), "{version}");
     }
 }
@@ -90,7 +95,7 @@ fn a_wrong_command_line_is_a_usage_error_on_standard_error() {
         let o = run(bad, "");
         assert_eq!(code(&o), exit(Exit::Usage), "{bad:?}");
         assert!(o.stdout.is_empty(), "{bad:?}: nothing on standard output");
-        assert!(text(&o.stderr).starts_with("book-cli: ") && text(&o.stderr).contains("usage:"), "{bad:?}: {}", text(&o.stderr));
+        assert!(text(&o.stderr).starts_with("wordsmith-book-cli: ") && text(&o.stderr).contains("usage:"), "{bad:?}: {}", text(&o.stderr));
     }
 }
 
@@ -120,15 +125,15 @@ fn what_could_not_be_done_is_a_failure_on_standard_error() {
         assert_eq!(code(&o), exit(Exit::Failed), "{failed:?}: {}", text(&o.stderr));
         assert!(o.stdout.is_empty(), "{failed:?}: nothing on standard output");
         let said = text(&o.stderr);
-        assert!(said.starts_with("book-cli: ") && !said.contains("usage:"), "{failed:?}: {said}");
+        assert!(said.starts_with("wordsmith-book-cli: ") && !said.contains("usage:"), "{failed:?}: {said}");
     }
     // A command that refuses, and an import that cannot be read.
     let o = run(&["run", &project, "book.design.choose", r#"{"id": "none-such"}"#], "");
     assert_eq!(code(&o), exit(Exit::Failed));
-    assert!(o.stdout.is_empty() && text(&o.stderr).starts_with("book-cli: "), "{}", text(&o.stderr));
+    assert!(o.stdout.is_empty() && text(&o.stderr).starts_with("wordsmith-book-cli: "), "{}", text(&o.stderr));
     let o = run(&["convert", &unreadable, &path(&dir.join("Other.wsbk"))], "");
     assert_eq!(code(&o), exit(Exit::Failed));
-    assert!(text(&o.stderr).starts_with("book-cli: "), "{}", text(&o.stderr));
+    assert!(text(&o.stderr).starts_with("wordsmith-book-cli: "), "{}", text(&o.stderr));
 }
 
 #[test]
@@ -160,7 +165,7 @@ fn a_check_that_does_not_pass_is_an_answer_not_a_failure() {
     // A build that cannot run is a failure: there is no such edition.
     let o = run(&["build", &project, "--edition", "no-such-edition", "--out", &path(&out)], "");
     assert_eq!(code(&o), exit(Exit::Failed));
-    assert!(o.stdout.is_empty() && text(&o.stderr).starts_with("book-cli: "), "{}", text(&o.stderr));
+    assert!(o.stdout.is_empty() && text(&o.stderr).starts_with("wordsmith-book-cli: "), "{}", text(&o.stderr));
 }
 
 fn request(id: u64, method: &str, params: Value) -> String {

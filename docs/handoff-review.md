@@ -1,6 +1,6 @@
 # The hand-off from Wordsmith Manuscript: Book's review
 
-Status: **awaiting a person's sign-off.** Written in step M1.2 (2026-11-24) against
+Status: **awaiting a person's sign-off** ([issue 12](https://github.com/jamescjfoundation/wordsmith-book/issues/12)). Written in step M1.2 (2026-11-24) against
 Manuscript's `docs/book-handoff.md` (book view version 1) at the tag `book-view-1` (decision
 0001). Manuscript's `docs/SPEC.md` is reviewed on Manuscript's side, not here.
 

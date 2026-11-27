@@ -1,6 +1,7 @@
 # 0002: The name and the file extensions
 
-Date: 2026-11-24 · Status: accepted
+Date: 2026-11-24 · Status: accepted · Amended 2026-11-27 (the command-line program's name;
+where the file type registrations are written from)
 
 ## Context
 
@@ -28,11 +29,14 @@ public extension lists as known on 2026-11-24; a person may recheck before packa
 
 - The app's name is **Wordsmith Book**; the desktop binary is `wordsmith-book`, the command line
   `book-cli`; the app id is `org.jcjfoundation.book`.
+  **Since 2026-11-27** the command line is `wordsmith-book-cli`: every program of a release is
+  named after the app (decision 0005, core decision 0019).
 - A Book project folder ends in **`.wsbk`**; the packed project is **`.wsbkz`** (a deterministic
   zip, `mimetype` first, as core decision 0009 describes). The packed name follows the folder's,
   as Manuscript's does, so `.wsbz` is not used either.
 - Packaging (M9.4) registers `.wsbkz` as a document type and `.wsbk` as a package or folder type
-  where the platform has one.
+  where the platform has one. **Since 2026-11-27** the registrations are written from the file
+  types in `xtask/src/main.rs` by the core's `cargo xtask package`.
 - The plan (sections 6.2, 10 and 14) uses these extensions from this step on.
 
 ## Consequences

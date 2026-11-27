@@ -10,7 +10,7 @@ fn root() -> PathBuf {
 }
 
 fn cli(args: &[&str]) -> Output {
-    Command::new(env!("CARGO_BIN_EXE_book-cli")).args(args).output().unwrap()
+    Command::new(env!("CARGO_BIN_EXE_wordsmith-book-cli")).args(args).output().unwrap()
 }
 
 fn text(o: &Output) -> String {
@@ -104,7 +104,7 @@ fn convert_report_run_check_build_and_verify_a_book() {
 #[test]
 fn mcp_serves_the_tools_over_stdio() {
     use std::io::Write as _;
-    let mut child = Command::new(env!("CARGO_BIN_EXE_book-cli"))
+    let mut child = Command::new(env!("CARGO_BIN_EXE_wordsmith-book-cli"))
         .arg("mcp")
         .stdin(std::process::Stdio::piped())
         .stdout(std::process::Stdio::piped())

@@ -1,128 +1,93 @@
-# Release: when a version tag (v0.1.0) is pushed, run the full gate, run the v0.1 test on the
-# three desktop platforms, build the packages, attest them, and publish a release whose notes are
-# the tag's CHANGELOG.md section.
+# The release of an app built on open-source-core. Owned by the core
+# (template/.github/workflows/release.yml) and kept identical in every app by `cargo xtask sync`.
 #
-# A person or an agent may push the tag once the full gate has passed on the commit (project
-# decision 0002 in the wordsmith repository, core decision 0011). The publish job runs in the
-# `release` environment, which only `v*` tags may use. The environment has no reviewers, so
-# publishing does not wait for an approval.
+# This file only says when the release workflow runs, which token its jobs get and which secrets
+# they are handed. The jobs are the core's shared workflow, called at the tag `workflows-v1`
+# (ci.yml in this folder says how that tag works):
+# https://github.com/jamescjfoundation/open-source-core/blob/workflows-v1/.github/workflows/shared-release.yml
+# What a release is made of, file by file, is the core's contract:
+# https://github.com/jamescjfoundation/open-source-core/blob/main/docs/app-releases.md
 #
-# Only GitHub's own actions, pinned to full commit SHAs.
+# To release: make the release commit (`cargo xtask release <version>`), run `cargo xtask ci`,
+# push it to main, then
+#
+#   gh workflow run release.yml --ref main
+#
+# The run checks that the commit is a release commit that is not released yet, runs the whole
+# gate on Linux, macOS and Windows with cargo-deny, builds the release file of each system and
+# writes SHA256SUMS.txt. Only when all of that has passed does it make the tag `vX.Y.Z` and
+# publish the GitHub release, with the changelog section as its text. A person or an agent may
+# start it. Never push a `v*` tag by hand: nothing runs for it, and it cannot be taken back.
+#
+# To try it without releasing: `gh workflow run release.yml --ref <branch> -f dry-run=true`.
+# It builds and checks every release file on any commit and stops; the files are kept with the
+# run for a week. The same dry run starts by itself once a week, so a release that would fail
+# is known before it is needed; when that run fails, an issue is opened here.
+#
+# The macOS and Windows programs are signed, and the macOS disk image notarised, when the
+# repository or the organisation has the secrets named below; without them the packages are
+# unsigned and the run says so. The contract says what each secret holds.
+#
+# GitHub switches a scheduled workflow off when its repository has had no activity for 60 days,
+# and tells nobody: `gh workflow enable release.yml` switches it back on.
+#
+# Core decisions: https://github.com/jamescjfoundation/open-source-core/tree/main/docs/decisions
 name: Release
 
 on:
-  push:
-    tags: ["v*"]
+  schedule:
+    - cron: "23 6 * * 2"
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: "Build and check every release file, and stop: no tag, no release"
+        type: boolean
+        default: false
+      gate:
+        description: "In a dry run: also run the full gate on the three systems"
+        type: boolean
+        default: false
+      commit:
+        description: "The release commit, on main. Empty: the newest commit of the branch this is started on."
+        type: string
+        default: ""
+      older-core:
+        description: "Release although the app is not on the newest open-source-core release"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
-env:
-  CARGO_TERM_COLOR: always
-  CARGO_INCREMENTAL: "0"
-  CARGO_NET_RETRY: "10"
+# One release at a time; a second one waits.
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
-  gate:
-    name: cargo xtask ci (everything)
-    runs-on: ubuntu-latest
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - name: Toolchain
-        run: rustup show active-toolchain || rustup toolchain install
-      - name: The version is the tag's
-        run: |
-          version=$(cargo metadata --no-deps --format-version 1 | python3 -c 'import sys,json; print([p["version"] for p in json.load(sys.stdin)["packages"] if p["name"]=="wordsmith-book"][0])')
-          test "v$version" = "$GITHUB_REF_NAME" || { echo "the tag $GITHUB_REF_NAME is not v$version"; exit 1; }
-          grep -q "^## $version " CHANGELOG.md || { echo "CHANGELOG.md has no section for $version"; exit 1; }
-      - name: cargo xtask ci
-        run: cargo xtask ci
-
-  package:
-    name: v0.1 test and package (${{ matrix.os }})
-    needs: gate
-    strategy:
-      fail-fast: true
-      matrix:
-        include:
-          - { runner: ubuntu-latest, os: linux, arch: x86_64 }
-          - { runner: macos-latest, os: macos, arch: arm64 }
-          - { runner: windows-latest, os: windows, arch: x64 }
-    runs-on: ${{ matrix.runner }}
-    timeout-minutes: 150
-    defaults:
-      run:
-        shell: bash
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - name: Toolchain
-        run: rustup show active-toolchain || rustup toolchain install
-      - name: The test of v0.1
-        run: cargo test --locked --release -p wordsmith-book-check --test v0_1
-      - name: Build
-        run: cargo build --locked --release -p wordsmith-book -p wordsmith-book-cli
-      - name: The icon is in the program
-        if: runner.os == 'Windows'
-        shell: bash
-        # Every image of assets/brand/icon.ico must appear, byte for byte, in the executable's
-        # resources (apps/book/build.rs embeds it).
-        run: |
-          python3 - <<'PY'
-          import struct
-          ico = open('assets/brand/icon.ico', 'rb').read()
-          exe = open('target/release/wordsmith-book.exe', 'rb').read()
-          count = struct.unpack('<H', ico[4:6])[0]
-          for i in range(count):
-              w, _, _, _, _, _, size, offset = struct.unpack('<BBBBHHII', ico[6 + 16 * i:22 + 16 * i])
-              assert ico[offset:offset + size] in exe, f'the {w or 256} px icon is not in the program'
-          print(f'all {count} icon images are embedded')
-          PY
-      - name: Package
-        id: pkg
-        run: |
-          version=${GITHUB_REF_NAME#v}
-          file=$(packaging/package.sh "${{ matrix.os }}" "${{ matrix.arch }}" "$version" | tail -n 1)
-          echo "file=$file" >> "$GITHUB_OUTPUT"
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: package-${{ matrix.os }}
-          path: ${{ steps.pkg.outputs.file }}
-          if-no-files-found: error
-
-  publish:
-    name: attest and publish
-    needs: package
-    runs-on: ubuntu-latest
-    # Only `v*` tags may use this environment; it has no reviewers.
-    environment: release
+  release:
+    # The most any job of the shared workflow may take; each takes less. Read the code and the
+    # runs' cache; write the tag and the release (the last job alone); sign the attestation of
+    # the files; open an issue when a scheduled dry run fails.
     permissions:
       contents: write
+      actions: read
       id-token: write
       attestations: write
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
-        with:
-          path: dist
-          pattern: package-*
-          merge-multiple: true
-      - uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
-        with:
-          subject-path: dist/*
-      - name: Release notes from CHANGELOG.md
-        run: |
-          version=${GITHUB_REF_NAME#v}
-          awk -v v="## $version " 'index($0, v) == 1 { on = 1; next } /^## / { on = 0 } on' CHANGELOG.md > notes.md
-          test -s notes.md
-      - name: Publish
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release create "$GITHUB_REF_NAME" dist/* --title "Wordsmith Book ${GITHUB_REF_NAME#v}" --notes-file notes.md --verify-tag
+      issues: write
+    uses: jamescjfoundation/open-source-core/.github/workflows/shared-release.yml@workflows-v1
+    with:
+      # Only a run started by hand can release; the scheduled one is always a dry run.
+      dry-run: ${{ github.event_name != 'workflow_dispatch' || inputs.dry-run == true }}
+      gate: ${{ inputs.gate == true }}
+      commit: ${{ inputs.commit }}
+      older-core: ${{ inputs.older-core == true }}
+    # Named one by one: the shared workflow is handed these and no other secret.
+    secrets:
+      MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
+      MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+      MACOS_NOTARY_KEY: ${{ secrets.MACOS_NOTARY_KEY }}
+      MACOS_NOTARY_KEY_ID: ${{ secrets.MACOS_NOTARY_KEY_ID }}
+      MACOS_NOTARY_ISSUER_ID: ${{ secrets.MACOS_NOTARY_ISSUER_ID }}
+      WINDOWS_CERTIFICATE_PFX: ${{ secrets.WINDOWS_CERTIFICATE_PFX }}
+      WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}

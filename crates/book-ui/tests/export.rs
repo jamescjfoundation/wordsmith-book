@@ -83,7 +83,7 @@ fn exports_repeat_byte_for_byte_and_the_bundle_reopens_as_the_same_project() {
     let copy = elsewhere.join(bundle_name);
     std::fs::write(&copy, bundle).unwrap();
     let mut other = BookApp::new();
-    other.open_path(&copy.display().to_string()).unwrap();
+    other.open_path(&copy).unwrap();
     let (x, y) = (app.book.as_ref().unwrap(), other.book.as_ref().unwrap());
     assert_eq!(x.files.project, y.files.project);
     assert_eq!(x.files.designs, y.files.designs);

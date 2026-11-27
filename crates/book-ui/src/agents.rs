@@ -10,7 +10,7 @@
 //! undo, redo, open a path) have `book.` names too ([`ALIASES`]), so every Book action is a
 //! `book_…` tool.
 //!
-//! While folders are in force (`book-cli mcp --read-root … --write-root …`):
+//! While folders are in force (`wordsmith-book-cli mcp --read-root … --write-root …`):
 //!
 //! - which parameters of a command name files it reads and files it writes is said in one
 //!   place, [`files_of`], and the server checks them;

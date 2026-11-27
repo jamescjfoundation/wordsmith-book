@@ -286,16 +286,15 @@ proptest! {
     }
 }
 
+/// A release registers both project types from the data in `xtask/src/main.rs`
+/// (`cargo xtask package` writes the menu entry, the MIME file, the property list and the
+/// Windows scripts from it). The packed type's media type there is the one this crate writes
+/// first into every packed project; the xtask cannot read this crate, so the test reads its data.
 #[test]
-fn the_packages_register_both_project_types() {
-    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../packaging");
-    let read = |p: &str| std::fs::read_to_string(root.join(p)).unwrap();
-    let mime = read("linux/org.jcjfoundation.book.xml");
-    assert!(mime.contains(wordsmith_book_format::pack::MIMETYPE) && mime.contains("*.wsbkz") && mime.contains("*.wsbk\""));
-    let desktop = read("linux/org.jcjfoundation.book.desktop");
-    assert!(desktop.contains(wordsmith_book_format::pack::MIMETYPE) && desktop.contains("application/x-wordsmith-book;"));
-    let plist = read("macos/Info.plist");
-    assert!(plist.contains("<string>wsbk</string>") && plist.contains("<string>wsbkz</string>"));
-    let win = read("windows/register-file-types.cmd");
-    assert!(win.contains(".wsbkz") && win.contains("*.wsbk"));
+fn the_release_data_registers_both_project_types() {
+    let data = std::fs::read_to_string(std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../xtask/src/main.rs")).unwrap();
+    let packed = format!("mime: \"{}\"", wordsmith_book_format::pack::MIMETYPE);
+    assert!(data.contains(&packed), "the packed project's media type in the release data is not {}", wordsmith_book_format::pack::MIMETYPE);
+    assert!(data.contains("mime: \"application/x-wordsmith-book\""), "the project folder's media type");
+    assert!(data.contains("extensions: &[\"wsbk\"]") && data.contains("extensions: &[\"wsbkz\"]"), "both extensions");
 }

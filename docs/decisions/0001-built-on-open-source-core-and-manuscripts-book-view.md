@@ -1,7 +1,8 @@
 # 0001: Built on open-source-core and Manuscript's book view
 
 Date: 2026-11-24 · Status: accepted · Amended 2026-11-26 (the `book-view-1.N` tags; one core in
-the graph; the contract's shape and the versions Book reads, at the end)
+the graph; the contract's shape and the versions Book reads, at the end) and 2026-11-27 (the
+command-line program's name)
 
 ## Context
 
@@ -36,7 +37,8 @@ view version 1). Book needs both and must not duplicate either.
   first (core decision 0015).
 - **Eight crates and two apps**, in layers (plan section 5.2, AGENTS.md):
   `book-model`, `book-format`, `book-design`, `book-import`, `book-typeset`, `book-epub`,
-  `book-check`, `book-ui`, and `apps/book` (the desktop app) and `apps/book-cli` (`book-cli`).
+  `book-check`, `book-ui`, and `apps/book` (the desktop app) and `apps/book-cli` (`book-cli`;
+  since 2026-11-27 the program is `wordsmith-book-cli`, decision 0005).
   `cargo xtask app-layers` checks the table. Package names are `wordsmith-book-*`; the app id is
   `org.jcjfoundation.book`; extension keys use the `book.` namespace (core decision 0006).
 - **Owned sources are Manuscript folders.** A book imported from a word-processor file becomes a

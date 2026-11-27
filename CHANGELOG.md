@@ -1,13 +1,146 @@
 # Changelog
 
-Each release says what changed for people who make books with Wordsmith Book.
+What changed in each release of Wordsmith Book, newest first, for people who make books with
+it. `## Unreleased` holds what the next release will bring; when that release is cut, the
+section takes its version and date (`## 0.9.0 (2026-12-01)`), and the next `## Unreleased` opens
+above it.
 
-## 1.0.0 (unreleased)
+The first public release is 0.9.0, a preview; 1.0.0 follows it (decision 0005). Nothing was
+published before it: the versions under "Before the first release", at the end, were the stages
+of the build plan, each prepared as a release and none released.
+
+## Unreleased
+
+The first public release of Wordsmith Book, 0.9.0: a preview of 1.0.0, for trying the app, its
+downloads and its update check. Everything the app does is in it. The user guide is at
+<https://wordsmithand.ink/wiki/book/>, and in `docs/guide/` of the repository.
+
+### Getting it
+
+- One download for each system, and a list of their checksums:
+  `wordsmith-book-0.9.0-linux-x86_64.tar.gz` (Linux, 64-bit Intel or AMD; needs the C library of
+  Ubuntu 24.04 or newer), `wordsmith-book-0.9.0-macos-aarch64.dmg` (a Mac with Apple silicon,
+  macOS 11 or later), `wordsmith-book-0.9.0-windows-x64-portable.zip` (Windows, 64-bit; nothing
+  is installed system-wide) and `SHA256SUMS.txt`.
+- **The builds are not signed with a publisher's certificate yet.** macOS and Windows ask before
+  they open the app the first time. On macOS: System Settings › Privacy & Security › Open
+  Anyway. On Windows: More info, then Run anyway. The guide's "Installing and updating" page has
+  the steps for each system, and how to check a download against its checksum and its build
+  attestation.
+- Each download holds the app (`wordsmith-book`), the command line (`wordsmith-book-cli`) and
+  the license texts of everything they are built from, the fonts of the designs included. The
+  Linux package has an install script that puts the app in your menu and registers the project
+  file types for your account; the Windows package has a script that registers them.
+- The app looks for a newer release when it starts, and File › About has Check for Updates. On
+  Linux a copy installed under your home folder replaces itself and starts the new version; on
+  macOS and Windows the app shows the release page. The check is the only request the app
+  makes, and File › Preferences turns it off.
+
+### What the app does
+
+- **Sources.** Link a Wordsmith Manuscript project, which Book reads and never changes (a
+  correction goes back to the writer as an offered fix), or import DOCX, ODT, RTF, Markdown,
+  text or EPUB into a source of the book's own, with a review before the import and a cleanup
+  of quotes, dashes and spaces after it. A new version of the file is compared word by word
+  before it replaces the old text. Every import is checked word for word.
+- **Structure.** Parts and chapters numbered the way you choose; a half title, title page,
+  copyright page and contents made from the book's details; a dedication, a foreword, an
+  epilogue, a glossary and the other kinds of front and back matter, each placed by convention; parts that appear only in print or only in the ebook; box
+  sets of several books in one.
+- **Designs.** Thirteen designs to filter by genre and mood, each previewed with your own first
+  chapter; parts mixed between them; your own designs saved and shared as a file; a large-print
+  variant of any of them.
+- **Print.** Eighteen trim sizes, paperback and hardcover profiles, mirrored margins with a
+  gutter by page count, bleed and full-page pictures, footnotes on the page that calls them,
+  asides, and hints for words that must not break. A full-wrap cover template from the page
+  count and paper, and a check of the cover you bring. PDF/A-2b and PDF/UA-1, and proofs with a
+  watermark and numbered lines.
+- **Ebook.** EPUB 3.3 with navigation, accessibility metadata, required alternative text,
+  embedded fonts, pop-up notes and the print edition's page numbers. Store editions, each with
+  only its own links.
+- **Checking.** Print spreads and an ebook preview at phone, e-ink reader and tablet sizes.
+  Preflight on the built files, each finding with a button to its page or setting; typographic
+  warnings by page; the standard EPUB, accessibility and PDF validators when you installed
+  them. Export writes nothing when a check fails, and the same book gives the same bytes every
+  time.
+- **A publishing house.** One house file a press shares: imprints, series and ISBNs. House
+  designs that stay put, title and copyright pages from the imprint, a series line and "Also
+  by" from the series, each ISBN used once, and an ONIX for Books 3.0 record for each edition.
+- **Files.** A book is a folder of plain text files (`.wsbk`), or one packed file (`.wsbkz`).
+  Saving writes only what changed, each file safely; unsaved work is kept for recovery; Back Up
+  Now keeps the newest ten backups beside the book.
+- **The interface** in English and Spanish, light and dark, named for screen readers
+  throughout, with every command in the command palette and every key yours to change.
+
+### The command line and agents
+
+- `wordsmith-book-cli` does the app's work without its window: `build`, `check`, `verify`,
+  `convert`, `report`, `run` and `commands`. It makes no network request.
+- One convention with the other Wordsmith apps: a result on standard output; a reason on
+  standard error; exit code 0 when it did what was asked, 1 when it could not, 2 when the
+  command line was wrong and nothing was done, and 3 when a check of the content did not pass
+  (`verify` found the words differ, or preflight blocks export).
+- `wordsmith-book-cli mcp [<file>]` serves every Book command to an agent as a tool named
+  `book_` and the command's id. `--read-root <folder>` and `--write-root <folder>` keep the
+  files an agent's commands name to folders you choose.
+- `wordsmith-book --version` and `wordsmith-book-cli --version` print the program's name and
+  version.
+
+### With Wordsmith Manuscript
+
+- This release reads Manuscript project formats 1 to 3 and book view version 1: every project
+  Wordsmith Manuscript 0.9.0 saves. A project saved in a newer format is refused in Book's own
+  words, naming both versions, until Book is updated.
+
+### Not yet
+
+- Signed builds, and with them an update installed in place on Windows.
+- Words hyphenated by Book itself: in print a word breaks only where the manuscript or your
+  line-break hints allow it (the guide's Print page, "Line breaks and hyphens").
+- Command replies (what agents read), preflight findings and build messages are in English
+  whatever the interface language.
+
+### If you built the app from source before this release
+
+What changed since the last stage of the build plan was prepared (1.0.0, below):
+
+- **The command-line program is `wordsmith-book-cli`** (it was `book-cli`), in its file name,
+  its usage, its version line and the start of every message. Scripts and agent configurations
+  that name the old program must be changed. Every program of a release is named after the
+  app, so two Wordsmith apps installed in one folder share no name.
+- **Release files have the names above, with checksums and license texts.** The earlier, unused
+  release workflow named the macOS file `…-macos-arm64.dmg`, which the update check does not
+  find, published no checksum file and put no third-party license texts in a package. Releases
+  are made by the shared workflow of open-source-core now
+  ([core decision 0019](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/decisions/0019-app-releases.md)),
+  started by hand on `main`; a pushed tag starts nothing. `packaging/` is gone: `cargo xtask
+  package` writes the menu entry, the file types and the scripts from data.
+- **On Windows an update is finished by the program itself.** The updater ends its work through
+  a copy of the app started with its own arguments; the app now hands them over before it reads
+  its command line. A project whose name is not Unicode opens (the program stopped on one).
+- On Linux a `.wsbkz` file is told by its name, no longer by its first bytes. The macOS app's
+  file types are named `org.jcjfoundation.book.wsbk` and `.wsbkz`.
+- **`UPDATE_GOLDEN=1` rewrites the golden files and the guide's page of keys** (it was
+  `BOOK_BLESS=1`), the switch Wordsmith Script and Wordsmith Manuscript use.
+- The brand files in `assets/brand/` are held to the brand kit's by `cargo xtask brand`, in
+  the gate; the files themselves did not change.
+- The guide has pages for installing and updating and for files, shows its pictures, and names
+  features without their ids, which are in one index page.
+
+## Before the first release
+
+The four sections below are the stages of the build plan (`docs/PLAN.md`), written as each was
+finished, between 2026-11-24 and 2026-11-26. None was published: no release and no tag carries
+any of these numbers. They are kept as the record of what each stage built. Where they say
+`book-cli`, the program is `wordsmith-book-cli` since 0.9.0; "the first release" in the oldest
+one meant the stage, not a publication.
+
+### 1.0.0 (prepared, never released)
 
 A publishing house: shared imprints, series and ISBNs, house designs that stay put, and the
 record distributors read.
 
-### Added
+#### Added
 
 - **An agent can be kept to folders.** `book-cli mcp [<file>] [--read-root <folder>]
   [--write-root <folder>]`: the two folders are the only ones the agent's commands may read
@@ -29,7 +162,7 @@ record distributors read.
 - **ONIX for Books 3.0.** One record for each edition, validated against the published schema
   and its code lists.
 
-### Changed
+#### Changed after the stage was prepared (2026-11-26)
 
 - **The command line follows one convention**, the same as every app built on the same base
   (core decision 0017), so a script that has learned one app's command line knows the next.
@@ -69,12 +202,12 @@ record distributors read.
 - In Details, each edition's other settings (*Take an ISBN from the House*, *PDF/A and PDF/UA*)
   are on a line of their own.
 
-## 0.3.0 (unreleased)
+### 0.3.0 (prepared, never released)
 
 Designs, series and standards: thirteen designs, large print from any of them, box sets, EPUB
 import, PDF/A and PDF/UA, and proofs.
 
-### Added
+#### Added
 
 - **Designs.** Seven more: Memoir, Historical, Young Adult, Horror, Cozy, Poetry and Large Print
   (thirteen in all), each with its genres and moods for the chooser.
@@ -92,18 +225,18 @@ import, PDF/A and PDF/UA, and proofs.
 - **Proofs.** A print edition's proof: PROOF across every page and every line numbered, for
   reading and marking; written only when asked for, never as part of an export.
 
-### Changed
+#### Changed
 
 - Front and back matter inside the body (a box set's book keeps its own) is set as matter, as
   at a book's front or back.
 
-## 0.2.0 (unreleased)
+### 0.2.0 (prepared, never released)
 
 Parity for most novels: every common trim, hardcovers, bleed, notes, asides, more front and back
 matter, store editions, covers, re-import, typographic checks, an accessibility checker,
 line-break hints, a Spanish interface and screen-reader names throughout.
 
-### Added
+#### Added
 
 - **Trims.** Eighteen sizes in the print-on-demand and generic profiles, metric ones included,
   each with its gutter table and page limits.
@@ -139,24 +272,24 @@ line-break hints, a Spanish interface and screen-reader names throughout.
 - **Screen readers.** Every button, field, link, tab and page preview has a name a screen reader
   reads (the core named its last two unnamed fields in 0.1.14).
 
-### Changed
+#### Changed
 
 - The ebook's page list names its source with `dc:source`, refined as the source of the
   pagination, which both the standard EPUB validator and accessibility checkers read.
 - Book's word checks leave soft hyphens out of words, so hinted words still match the source.
 
-### Known limits
+#### Known limits
 
 - Command replies (what agents read), preflight findings and build messages are in English.
 - The core's layout does not hyphenate on its own; words break only at soft hyphens (from the
   manuscript or from Book's hints).
 
-## 0.1.0 (unreleased)
+### 0.1.0 (prepared, never released)
 
 The first release: a finished manuscript to a print-ready paperback PDF and a valid, accessible
 EPUB, every word checked against the source.
 
-### Added
+#### Added
 
 - **Sources.** Link a Wordsmith Manuscript project (read, never written, followed when it
   changes), or import a DOCX, ODT, RTF, Markdown or text file into a source of the book's own,

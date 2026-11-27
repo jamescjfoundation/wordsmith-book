@@ -1,6 +1,10 @@
 # Progress
 
 One line per finished step on `main`, newest last. Feature ids are the plan's (section 7).
+This file is a log of what was done. What is planned is the
+[`v1` milestone](https://github.com/jamescjfoundation/wordsmith-book/milestone/1) of the issues
+(`ROADMAP.md`), and the list "Waiting on a person" at the end is closed: each item still open
+is an issue, named there.
 **Tests** is the sum of the "passed" counts of every `test result:` line of
 `cargo test --workspace` at the end of the step.
 
@@ -98,6 +102,9 @@ environment takes only `v*` tags and has no reviewers.
 | 2026-11-26 | manuscript-contract | Book's side of the contract with Manuscript. `crates/book-format/src/lib.rs` states, in one place, the Manuscript project formats Book reads (`MANUSCRIPT_SCHEMAS`, 1 to 3) and the book view versions (`BOOK_VIEWS`, 1); every source is held to them when it is opened, folder or packed, linked or owned; a project outside them is refused in Book's own words, naming the version found and the versions this Book reads (before, a newer project got Manuscript's own message). Tests: a project inside the range and one outside, as a folder, packed and as an owned source, and the stated range against the pinned crates. `AGENTS.md` carries the route as rules (the contract is the list of what Book uses; a need is an issue in Manuscript's repository; a new `book-view` tag only when Manuscript has cut it; `main` stays buildable against the newest tag, which Manuscript's job builds). Decision 0001, `docs/handoff-review.md` and `docs/requests-to-manuscript.md` amended with dated lines. No golden file changed | 324 |
 | 2026-11-26 | preview-timing | The print preview's test said no frame may take 100 ms while the book is laid out, to show that no frame waits on the build. On a machine busy with other builds a frame was held up for 135 ms and the gate failed, with nothing wrong in Book. The limit is now 100 ms plus four times the worst overrun of the 5 ms pauses between frames, where none of Book's code runs: with nothing else running that is still 100 ms, and a frame that waited on the build would take seconds. The median of 16 ms (`docs/performance.md`) is as it was. No product code changed | 324 |
 | 2026-11-26 | inside-the-contract | Manuscript's contract now lists what Book may use ("What Book may use" in its `docs/book-handoff.md`), and Book's code is inside it: a section's words come from `Text::plain_paragraphs` and `words::words`, which is what `Text::words` does, so every checksum is the same; two tests read a span's marks from the span and no longer call `Inline::marks`; a test added today compares sections' checksums and not `book::words`. Requests 2, 3 and 7 to Manuscript are done (its issues #7, #8 and #12 are closed) and the index, `AGENTS.md` and the hand-off review say so. No golden file changed | 324 |
+| 2026-11-27 | core/v0.1.22 and 0.9.0 | Core v0.1.22 and Manuscript's crates at `book-view-1.7` (book view version 1, unchanged; the two crates are 0.9.0 in the lock file). Releases by the core's contract (core decision 0019): `cargo xtask sync` replaced Book's release workflow with the managed one, `packaging/` is gone, and what a release carries is `package` in `xtask/src/main.rs`. The command-line program is `wordsmith-book-cli` (it was `book-cli`). The desktop program hands its arguments to the updater first, reads a project's name as the system gave it, and prints its version for `--version`; tests hold the release id and the app id on both sides. The workspace's version is 0.9.0, the first public release (decision 0005); the changelog has the core's form, with the four prepared stages kept as never released. `UPDATE_GOLDEN=1` in place of `BOOK_BLESS=1` (issue 5). The plan is the `v1` milestone: `ROADMAP.md`, `docs/PLAN.md` labelled history, the "Waiting on a person" list closed into issues 9 to 24. Requests 2, 3 and 7 to Manuscript marked closed there (issue 8). No golden file changed | — |
+| 2026-11-27 | brand-kit | The files in `assets/brand/` taken with the brand kit's tool at wordsmith `49e6318`: no file changed, and `assets/brand/kit.json` records the kit commit and what the folder holds. `cargo xtask brand` (`xtask/src/brand.rs`, Book's own, in the gate) holds each kit file to its recorded checksum, the folder to the record's list and the theme's palette to the kit's seven colors; `cargo xtask brand --kit` compares the record with the kit's published list, weekly in `brand-kit.yml`. Marked `core-candidate` (open-source-core#47): Manuscript holds the same check (issue 3) | — |
+| 2026-11-27 | guide | The guide for the wiki (issue 2): `installing.md` (the three files, how each is opened unsigned, checking a download, updates, what the app sends, the programs it starts on your computer) and `files.md` (the project folder, the packed file, saving, recovery, backups, other versions); the six pictures shown where they are described; when Book breaks a word, in `print.md`; a one-line description after every link of the index; no version claimed; feature ids out of the reading text and into `feature-ids.md`, which the test of feature ids reads with the rest | — |
 
 ## Final report
 
@@ -145,6 +152,24 @@ names recheck, moving Script and Manuscript to core v0.1.15, and a native speake
 Spanish catalogs.
 
 ## Waiting on a person
+
+**Since 2026-11-27 this list is closed.** It is kept as written; nothing is added to it and no
+item is struck out here. What was still open is an issue, and the plan is the
+[`v1` milestone](https://github.com/jamescjfoundation/wordsmith-book/milestone/1):
+
+| The item below | Where it is now |
+| --- | --- |
+| Requests to Manuscript | Manuscript's issues, indexed in `docs/requests-to-manuscript.md`; Book's use of what they bring is [issue 19](https://github.com/jamescjfoundation/wordsmith-book/issues/19) |
+| Print engine | [issue 22](https://github.com/jamescjfoundation/wordsmith-book/issues/22), no milestone |
+| Fixtures | [issue 15](https://github.com/jamescjfoundation/wordsmith-book/issues/15) |
+| Golden files | [issue 13](https://github.com/jamescjfoundation/wordsmith-book/issues/13) |
+| Layout, Hyphenation | [issue 21](https://github.com/jamescjfoundation/wordsmith-book/issues/21), waiting for [open-source-core#19](https://github.com/jamescjfoundation/open-source-core/issues/19) |
+| Release (four of them) | Done otherwise: the first public release is 0.9.0, made by the core's workflow (decision 0005). Signing is [issue 10](https://github.com/jamescjfoundation/wordsmith-book/issues/10); trying the macOS and Windows packages by hand is [issue 11](https://github.com/jamescjfoundation/wordsmith-book/issues/11); the unused `release` environment is [issue 20](https://github.com/jamescjfoundation/wordsmith-book/issues/20) |
+| Details panel | [issue 16](https://github.com/jamescjfoundation/wordsmith-book/issues/16) |
+| Reviews | The specification and the hand-off review: [issue 12](https://github.com/jamescjfoundation/wordsmith-book/issues/12). The sourced rules: [issue 14](https://github.com/jamescjfoundation/wordsmith-book/issues/14) |
+| Names | [issue 18](https://github.com/jamescjfoundation/wordsmith-book/issues/18) |
+| Core | Done on 2026-11-26 |
+| Interface languages | The review: [issue 17](https://github.com/jamescjfoundation/wordsmith-book/issues/17). Translating replies and findings: [issue 23](https://github.com/jamescjfoundation/wordsmith-book/issues/23), no milestone |
 
 **Since 2026-11-26** parts of this list are settled or have moved. The items are kept as written
 on 2026-11-25; this is what changed:

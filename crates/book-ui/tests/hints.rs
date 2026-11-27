@@ -57,7 +57,7 @@ fn hints_are_set_refused_undone_and_saved() {
     assert_eq!(app.command(commands::HINTS, &json!({})).unwrap()["keep"], json!(["Mr. Smith"]));
     app.book.as_mut().unwrap().save().unwrap();
     let mut again = BookApp::new();
-    again.open_path(&path.display().to_string()).unwrap();
+    again.open_path(&path).unwrap();
     assert_eq!(again.command(commands::HINTS, &json!({})).unwrap(), json!({ "keep": ["Mr. Smith"], "hyphenate": ["Lil-li-put"] }));
 }
 

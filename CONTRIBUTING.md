@@ -13,7 +13,9 @@ cargo xtask app-layers           # Book's crates depend only on the layers under
 cargo xtask fixtures             # write the Manuscript project fixture again
 cargo xtask screenshots          # draw the README's pictures into docs/images
 cargo run -p wordsmith-book      # the desktop app
-cargo run -p wordsmith-book-cli -- help    # the command line (the program is `book-cli`)
+cargo run -p wordsmith-book-cli -- help    # the command line
+cargo xtask brand                # the files in assets/brand/ are the brand kit's (in the gate)
+cargo xtask package              # this computer's release package, into dist/
 ```
 
 `cargo xtask help` lists every task.
@@ -32,10 +34,10 @@ cargo run -p wordsmith-book-cli -- help    # the command line (the program is `b
 | `crates/book-ui` | The views, commands, ribbon tabs, panels and agent tools |
 | `apps/book`, `apps/book-cli` | The desktop app and the command line |
 | `assets/` | Brand (copies of the Wordsmith brand kit, and Book's theme), fonts, designs, print profiles and interface catalogs |
-| `docs/` | The spec, formats, decisions, guide (`docs/guide/`), golden-file and fixture records, progress, and the finished build plan |
+| `docs/` | The spec, formats, decisions, guide (`docs/guide/`), golden-file and fixture records, progress, and the finished build plan (history) |
+| `ROADMAP.md` | Where the plan is: the `v1` milestone of this repository's issues |
 | `tests/fixtures/`, `tests/golden/`, `tools/` | Fixtures, the reviewed reference outputs, and the scripts that make fixtures and the brand mask |
-| `packaging/` | What a release puts around the programs on each system |
-| `xtask/` | The gate: the core's shared modules, and in `main.rs` Book's data and its own task |
+| `xtask/` | The gate and the packaging: the core's shared modules; in `main.rs` Book's data, which includes what a release carries, and in `brand.rs` its check of the brand files |
 
 <!-- BEGIN open-source-core: contributing -->
 <!-- Owned by open-source-core (template/CONTRIBUTING.md). Change it there, never in a copy: its tooling rewrites the copies. -->
@@ -95,11 +97,16 @@ than "as discussed".
   ([project decision 0003](https://github.com/jamescjfoundation/wordsmith/blob/main/project/decisions/0003-naming-other-companies-programs-and-formats.md)).
 - Nothing the author wrote is dropped or rewritten, and Book never writes a Manuscript project.
 - A change that alters a golden file is deliberate and recorded in `docs/golden.md`.
+  `UPDATE_GOLDEN=1` writes the golden files, and the guide's page of keys, again.
 - Add a row to `docs/progress.md` for each piece of work that lands, with the test count. The
   step ids in older rows and commit subjects (`M1.1 m1/format`) are the finished plan's; a new
   commit's subject says what the change does.
 - What Book needs from Wordsmith Manuscript is asked for in an issue in the Manuscript
   repository and listed in `docs/requests-to-manuscript.md`.
+- What is planned is an issue under the `v1` milestone, never a list in a file (`ROADMAP.md`).
+- A release is cut by the steps of "Releasing an app" in `AGENTS.md`: the core's workflow, from
+  the data in `xtask/src/main.rs`. This repository has no release workflow and no packaging of
+  its own (decision 0005).
 
 ## Conduct
 

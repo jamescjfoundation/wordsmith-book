@@ -150,7 +150,7 @@ fn the_set_is_one_undo_step_and_is_saved() {
     }
     app.book.as_mut().unwrap().save().unwrap();
     let mut again = BookApp::new();
-    again.open_path(&path.display().to_string()).unwrap();
+    again.open_path(&path).unwrap();
     assert_eq!(again.book.as_ref().unwrap().files.project.box_set.len(), 2);
     assert_eq!(again.book.as_ref().unwrap().source.as_ref().unwrap().book.body.len(), 2);
     assert!(app.book.as_mut().unwrap().undo());

@@ -27,8 +27,6 @@ pub mod preflight;
 pub mod prefs;
 pub mod preview;
 
-use std::path::PathBuf;
-
 use jcj_shell::commands::ids;
 use jcj_shell::egui;
 use jcj_shell::files::FileAsk;
@@ -126,8 +124,8 @@ impl BookApp {
     }
 
     /// Open the project at `path`.
-    pub fn open_path(&mut self, path: &str) -> Result<(), String> {
-        let b = OpenBook::open(&PathBuf::from(path))?;
+    pub fn open_path(&mut self, path: impl AsRef<std::path::Path>) -> Result<(), String> {
+        let b = OpenBook::open(path.as_ref())?;
         self.message = b.notice.clone();
         self.book = Some(b);
         self.outline = TreeState::default();

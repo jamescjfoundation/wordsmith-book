@@ -1,11 +1,18 @@
 # Wordsmith Book: build plan
 
-As of 2026-11-24. Status: accepted as the build plan; changed only by a commit that says why.
+**This is history: the plan the app was built from, finished on 2026-11-25.** It is kept as it
+was written and is not maintained. Every milestone in its section 10 is done. Its stages 0.1,
+0.2, 0.3 and 1.0 were never released under those numbers: the first public release is 0.9.0
+(decision 0005). Where it says a release waits for a person, or names a release workflow,
+`packaging/`, a `release` environment, a program called `book-cli` or the switch `BOOK_BLESS`,
+that is how things stood then. What is planned now is the
+[`v1` milestone](https://github.com/jamescjfoundation/wordsmith-book/milestone/1)
+(`ROADMAP.md`); what the app does is `docs/SPEC.md`, the guide and `CHANGELOG.md`; the rules in
+force are `AGENTS.md`. A note that begins "Since 2026-11-26" marks a place where a later
+decision changed what the plan says. Its table of features (section 7) is still read by a test,
+which holds the guide to every feature id.
 
-**Since 2026-11-26** the plan is finished: every milestone in section 10 is done and only the
-releases are left. It is kept as the record of the build. `AGENTS.md` holds the rules in force,
-and a note dated like this one marks each place where a later decision changed what the plan
-says.
+As of 2026-11-24. Status then: accepted as the build plan; changed only by a commit that says why.
 
 Wordsmith Book is The James C. J. Foundation's open-source app for designing and typesetting
 books. A writer or a small press brings a finished manuscript, picks a book design, sets the trim

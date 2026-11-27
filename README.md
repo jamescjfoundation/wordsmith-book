@@ -45,7 +45,7 @@ own imported from a document. A project is a folder of plain-text files that rea
   designs locked by imprint or series, title and copyright pages from the imprint, a series line
   and "Also by" built from the series, each ISBN checked and used once, and an ONIX for Books 3.0
   record for each edition.
-- **Automation.** `book-cli` builds, checks, verifies, converts and reports, and serves every
+- **Automation.** `wordsmith-book-cli` builds, checks, verifies, converts and reports, and serves every
   command to agents over MCP, kept to the folders you name.
 
 The window has an Outline on the left (front matter, parts, chapters and back matter), panels on
@@ -66,7 +66,16 @@ which is in the public domain, linked as a Wordsmith Manuscript project.
 
 ## Getting started
 
-Read the [user guide](docs/guide/README.md). To build and run:
+Download the release for your computer from the
+[releases page](https://github.com/jamescjfoundation/wordsmith-book/releases): one file each for
+Linux (x86_64, `.tar.gz`), macOS (Apple silicon, `.dmg`) and Windows (x64, a portable `.zip`),
+with `SHA256SUMS.txt`. Each holds the app, `wordsmith-book`, the command line,
+`wordsmith-book-cli`, and the license texts. The builds are not signed with a publisher's
+certificate yet, so macOS and Windows ask before the first start;
+[Installing and updating](docs/guide/installing.md) has the steps for each system. Then read the
+[user guide](docs/guide/README.md), which is also at <https://wordsmithand.ink/wiki/book/>.
+
+To build and run from source:
 
 ```sh
 cargo run --release -p wordsmith-book
@@ -84,23 +93,32 @@ cargo run --release -p wordsmith-book-cli -- convert draft.docx my-book
 cargo run --release -p wordsmith-book-cli -- build my-book --out dist
 ```
 
-`packaging/` holds the release packaging: the desktop entry and file types for Linux, the app
-bundle's `Info.plist` for macOS and the file-type registration for Windows. `cargo xtask
-third-party-licenses` writes the license text of every shipped dependency.
+`cargo xtask package` builds this computer's release package into `dist/`, from the data in
+`xtask/src/main.rs`; the packaging and the release workflow are open-source-core's, one for
+every app built on it
+([the contract](https://github.com/jamescjfoundation/open-source-core/blob/main/docs/app-releases.md)).
 
-**Status:** 1.0 is prepared (see [CHANGELOG.md](CHANGELOG.md)); no release has been published
-yet. Print is laid out by the core's own layout for now, which does not hyphenate words by itself
-([decision 0003](docs/decisions/0003-print-typesetting.md)).
+**Status:** the first public release is 0.9.0, a preview of 1.0.0, with everything the app does
+in it ([CHANGELOG.md](CHANGELOG.md)); what is planned before 1.0.0 is the
+[`v1` milestone](https://github.com/jamescjfoundation/wordsmith-book/milestone/1)
+([ROADMAP.md](ROADMAP.md)). Print is laid out by the core's own layout for now, which does not
+hyphenate words by itself ([decision 0003](docs/decisions/0003-print-typesetting.md)).
 
 ### Checking a download
 
-Release files come only from this repository's GitHub releases. Each one has a build provenance
-attestation, which shows it was built from this repository by its release workflow. With the
-GitHub CLI:
+Release files come only from this repository's GitHub releases. Check a file against
+`SHA256SUMS.txt` of the same release (`sha256sum --check --ignore-missing SHA256SUMS.txt`). Each
+file also has a build provenance attestation, which shows it was built from this repository by
+the release workflow. With the GitHub CLI:
 
 ```sh
-gh attestation verify wordsmith-book-<version>-<os>-<arch>.tar.gz --repo jamescjfoundation/wordsmith-book
+gh attestation verify wordsmith-book-<version>-linux-x86_64.tar.gz \
+  --repo jamescjfoundation/wordsmith-book \
+  --signer-repo jamescjfoundation/open-source-core
 ```
+
+`--signer-repo` names open-source-core because the jobs that build the files are that
+repository's shared release workflow.
 
 ## Privacy
 
@@ -113,7 +131,7 @@ gh attestation verify wordsmith-book-<version>-<os>-<arch>.tar.gz --repo jamescj
   and its version, nothing else. An update is downloaded only when you choose to install it,
   from the release on github.com.
 - **Turning it off:** clear "Check for updates when the app starts" in File › Preferences.
-  Nothing is sent unless you then check by hand. `book-cli` never checks.
+  Nothing is sent unless you then check by hand. `wordsmith-book-cli` never checks.
 - **Checking programs** (the EPUB, accessibility and PDF validators) run only when you set one up
   in Preferences, and only on your computer. "Open in a Reading App" hands the ebook to the
   reading app on your computer.
@@ -146,10 +164,14 @@ It runs rustfmt, the crate-root lint check, a check that no local core link is l
 every `jcj-` dependency names one core release (`cargo xtask core-pin`), a check that the files
 and rules shared with the core match that release (`cargo xtask sync --check`), the layers checks
 (no upstream crate is named here, and each Book crate uses only the layers under it), the asset
-attribution check, the privacy check, the license allowlist, clippy and all tests. CI also runs [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) for
+attribution check, a check that the brand files are the brand kit's (`cargo xtask brand`), a
+check of the release data, the documents' links, the privacy check, the license allowlist,
+clippy and all tests. CI also runs [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) for
 licenses, security advisories and crate sources.
 
-- `docs/PLAN.md`: the build plan. `docs/SPEC.md`: the behavior it was built from.
+- `ROADMAP.md`: what is planned, which is the `v1` milestone of the issues.
+- `docs/SPEC.md`: the behavior the app was built from. `docs/PLAN.md`: the finished build plan,
+  kept as history.
 - `docs/format.md`: the project format. `docs/design-format.md`: the design format.
 - `docs/decisions/`: the choices the spec left open.
 - `docs/golden.md`: the reviewed reference outputs. `docs/fixtures.md`: where every test file

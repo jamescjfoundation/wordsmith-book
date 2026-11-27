@@ -16,7 +16,7 @@ members = [
 ]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.9.0"
 edition = "2024"
 rust-version = "1.95"
 license = "MIT OR Apache-2.0"
@@ -35,20 +35,20 @@ wordsmith-book-check = { path = "crates/book-check" }
 wordsmith-book-ui = { path = "crates/book-ui" }
 
 # Wordsmith Manuscript's book view, at the tag of decision 0001 (book view version 1).
-wordsmith-manuscript-model = { git = "https://github.com/jamescjfoundation/wordsmith-manuscript", tag = "book-view-1.6" }
-wordsmith-manuscript-format = { git = "https://github.com/jamescjfoundation/wordsmith-manuscript", tag = "book-view-1.6" }
+wordsmith-manuscript-model = { git = "https://github.com/jamescjfoundation/wordsmith-manuscript", tag = "book-view-1.7" }
+wordsmith-manuscript-format = { git = "https://github.com/jamescjfoundation/wordsmith-manuscript", tag = "book-view-1.7" }
 
 # The core, at a release tag. Apps use only jcj- interface crates (never jcj-upstream, WordCraft or
 # craft-libs); `cargo xtask layers` checks it. Move all of them together.
-jcj-doc = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-layout = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-output = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-project = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-features = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-interchange = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-shell = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-engine = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
-jcj-agents = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.21" }
+jcj-doc = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-layout = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-output = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-project = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-features = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-interchange = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-shell = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-engine = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
+jcj-agents = { git = "https://github.com/jamescjfoundation/open-source-core", tag = "v0.1.22" }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 toml = "1"

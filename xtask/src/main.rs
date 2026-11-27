@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT OR Apache-2.0
 //! `cargo xtask <task>` for Wordsmith Book, built on open-source-core.
 //!
-//! This file is the app's own, and it holds only what is Book's: its data (`APP`) and its own
-//! task (`fixtures`). The gate, every shared task and the list of them are in the modules under
-//! `shared`, which the core owns and `cargo xtask sync` keeps identical in every app;
-//! `cargo xtask help` lists them. Book's layers are the table in `AGENTS.md`, which
-//! `cargo xtask app-layers` reads.
+//! This file is the app's own, and it holds only what is Book's: its data (`APP`), which
+//! includes what a release carries (`package`: the core's `docs/app-releases.md` says what each
+//! field is), and its own task (`fixtures`). The gate, the packaging, every shared task and the
+//! list of them are in the modules under `shared`, which the core owns and `cargo xtask sync`
+//! keeps identical in every app; `cargo xtask help` lists them. Book's layers are the table in
+//! `AGENTS.md`, which `cargo xtask app-layers` reads.
 
 #![forbid(unsafe_code)]
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
@@ -17,13 +18,55 @@ use std::process::ExitCode;
 
 use shared::gate::{self, App, Task};
 use shared::link::Provider;
+use shared::package::{FileType, Package};
 use shared::util::{TaskResult, cargo};
 
 /// What the shared tasks need to know about Book.
 const APP: App = App {
     product: "Wordsmith Book",
-    // The programs Book ships (for THIRD-PARTY-LICENSES.txt).
-    shipped: &["wordsmith-book", "book-cli"],
+    // The packages that build the programs Book ships, the desktop program's first. Each
+    // program has its package's name.
+    shipped: &["wordsmith-book", "wordsmith-book-cli"],
+    package: Some(Package {
+        // Also the `id` of the update check's source and the settings folder's name
+        // (`apps/book/src/main.rs`, whose tests hold the two places together).
+        id: "wordsmith-book",
+        // Also the app id the window is given.
+        app_id: "org.jcjfoundation.book",
+        summary: "Make print and ebook editions of a finished book",
+        categories: "Office;Publishing;",
+        icons: &[
+            (32, "assets/brand/icon-32.png"),
+            (256, "assets/brand/icon-256.png"),
+            (512, "assets/brand/icon-512.png"),
+            (1024, "assets/brand/icon-1024.png"),
+        ],
+        // The kit's icon drawn for macOS, with the margin and corners that system expects.
+        macos_icons: &[(1024, "assets/brand/icon-macos-1024.png")],
+        // `apps/book/build.rs` embeds it in the Windows program.
+        windows_icon: Some("assets/brand/icon.ico"),
+        // The project types (decision 0002): a project is a folder, a packed project a zip.
+        file_types: &[
+            FileType {
+                name: "Wordsmith Book project",
+                extensions: &["wsbk"],
+                mime: "application/x-wordsmith-book",
+                folder: true,
+                ..FileType::DEFAULT
+            },
+            FileType {
+                name: "Wordsmith Book project (one file)",
+                extensions: &["wsbkz"],
+                mime: "application/x-wordsmith-book-packed",
+                parent: "application/zip",
+                ..FileType::DEFAULT
+            },
+        ],
+        // The license texts of the fonts the designs embed (`ATTRIBUTION.md` lists them).
+        license_files: &["assets/fonts"],
+        // Every field is given, so there is no `..Package::DEFAULT` here; a field a later core
+        // release adds is given here when Book moves to it.
+    }),
     // Book builds on Manuscript's model and format crates (decision 0001). The name is what
     // `cargo xtask dev-link manuscript=<folder>` links; the address is the one `Cargo.toml`
     // names, which `cargo xtask sync` writes into `deny.toml` as Book's own source.
@@ -60,7 +103,20 @@ mod tests {
     fn the_task_table_is_sound() {
         assert_eq!(gate::table_problems(&APP), Vec::<String>::new());
         let in_gate = gate::gate_names(&APP);
-        assert!(in_gate.contains(&"app-layers") && !in_gate.contains(&"fixtures"));
+        for check in ["app-layers", "assets", "release-data"] {
+            assert!(in_gate.contains(&check), "{check} is not in ci");
+        }
+        assert!(!in_gate.contains(&"fixtures"));
+    }
+
+    /// The release names every reader of a release relies on (the core's `docs/app-releases.md`).
+    /// `apps/book/src/main.rs` has the other half: the program gives the same two ids.
+    #[test]
+    fn the_release_carries_books_names() {
+        assert_eq!(APP.shipped, ["wordsmith-book", "wordsmith-book-cli"]);
+        let package = APP.package.as_ref().map(|p| (p.id, p.app_id));
+        assert_eq!(package, Some(("wordsmith-book", "org.jcjfoundation.book")));
+        assert_eq!(shared::package::data_problems(&APP), Vec::<String>::new());
     }
 
     #[test]
