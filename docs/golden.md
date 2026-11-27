@@ -74,7 +74,7 @@ ebook's notes pop-up footnotes (the editions' default); they await a person's lo
 
 ## The engine and the core's releases (R4.6)
 
-Print is on the core's layout (decision 0003), at the newest core release: v0.1.22 (2026-11-27).
+Print is on the core's layout (decision 0003), at the newest core release: v0.1.23 (2026-11-27).
 Every golden file was compared at each core move, by the print, EPUB and v0.1 tests in the full
 run of that step; `crates/book-check/tests/golden_complete.rs` checks that the folders hold
 exactly the files those tests compare (none missing, none stale).
@@ -93,6 +93,7 @@ exactly the files those tests compare (none missing, none stale).
 | v0.1.20 | core/v0.1.20, with Manuscript's `book-view-1.4` | unchanged |
 | v0.1.21 | core/v0.1.21, with Manuscript's `book-view-1.6` | unchanged |
 | v0.1.22 | core/v0.1.22 and 0.9.0, with Manuscript's `book-view-1.7` | unchanged |
+| v0.1.23 | core/v0.1.23, with Manuscript's `book-view-1.8` | unchanged |
 
 The changes since they were written are Book's own, each reviewed in its step and recorded
 there: footnotes (R2.4), asides (R2.6), the page list (R2.10), the page list's source (R2.14),
