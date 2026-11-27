@@ -10,3 +10,9 @@ threads-required = "num-test-threads"
 [[profile.default.overrides]]
 filter = 'package(wordsmith-book-ui) & binary(preview)'
 threads-required = "num-test-threads"
+
+# Run every test even after one has failed. The whole gate runs on macOS and Windows only in the
+# release workflow, so a failure there should name every test that fails on that system in one
+# run, not the first.
+[profile.default]
+fail-fast = false

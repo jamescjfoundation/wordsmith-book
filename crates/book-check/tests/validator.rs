@@ -2,8 +2,7 @@
 //! The external EPUB validator (plan M8.2, PRE-2): its report read into findings, a validator that
 //! is not set up is a note, and one that runs past its time limit is stopped.
 
-use std::path::{Path, PathBuf};
-use std::time::{Duration, Instant};
+use std::path::Path;
 
 use wordsmith_book_check::preflight::Link;
 use wordsmith_book_check::validator::{self, Outcome, Settings};
@@ -20,13 +19,6 @@ INFO(ACC-009): book.epub/EPUB/package.opf: something worth knowing
 Check finished with errors
 Messages: 1 fatal / 2 errors / 1 warning / 1 info
 ";
-
-fn tmp(name: &str) -> PathBuf {
-    let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join(name);
-    let _ = std::fs::remove_dir_all(&dir);
-    std::fs::create_dir_all(&dir).unwrap();
-    dir
-}
 
 #[test]
 fn the_report_becomes_findings_with_their_files() {
@@ -54,39 +46,55 @@ fn a_validator_that_is_not_set_up_is_a_note() {
     }
 }
 
+/// The tests that run a program in the validator's place. The stand-ins are shell scripts, so the
+/// whole module is for Unix: on Windows nothing in it is built, and nothing outside it is left
+/// unused there. What the tests show holds on every system: the program is started the same way.
 #[cfg(unix)]
-fn script(dir: &Path, name: &str, body: &str) -> String {
-    use std::os::unix::fs::PermissionsExt as _;
-    let p = dir.join(name);
-    std::fs::write(&p, format!("#!/bin/sh\n{body}\n")).unwrap();
-    std::fs::set_permissions(&p, std::fs::Permissions::from_mode(0o755)).unwrap();
-    p.display().to_string()
-}
+mod with_a_stand_in_program {
+    use std::path::PathBuf;
+    use std::time::{Duration, Instant};
 
-#[cfg(unix)]
-#[test]
-fn a_program_that_reports_is_read_and_one_that_runs_too_long_is_stopped() {
-    let dir = tmp("validator");
-    std::fs::write(dir.join("report.txt"), SAMPLE).unwrap();
-    let reporting = script(&dir, "reporting", &format!("cat '{}'", dir.join("report.txt").display()));
-    let f = validator::check(&Settings { program: reporting, ..Settings::default() }, b"PK");
-    assert_eq!(f.len(), 5);
-    assert_eq!(f.iter().filter(|x| x.severity == Severity::Blocks).count(), 3);
-    let slow = script(&dir, "slow", "sleep 30");
-    let start = Instant::now();
-    let o = validator::run(&Settings { program: slow, seconds: 1, ..Settings::default() }, &dir.join("book.epub"));
-    assert_eq!(o, Outcome::TimedOut(Duration::from_secs(1)));
-    assert!(start.elapsed() < Duration::from_secs(10), "stopped promptly");
-    let f = validator::findings(&o);
-    assert_eq!(f[0].severity, Severity::Warning);
-    assert!(f[0].message.contains("was stopped"));
-    // A program that is not a program.
-    let not = dir.join("not-a-program");
-    std::fs::write(&not, "plain text").unwrap();
-    assert!(matches!(
-        validator::run(&Settings { program: not.display().to_string(), ..Settings::default() }, &dir.join("book.epub")),
-        Outcome::Failed(_)
-    ));
+    use super::*;
+
+    fn tmp(name: &str) -> PathBuf {
+        let dir = Path::new(env!("CARGO_TARGET_TMPDIR")).join(name);
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        dir
+    }
+
+    fn script(dir: &Path, name: &str, body: &str) -> String {
+        use std::os::unix::fs::PermissionsExt as _;
+        let p = dir.join(name);
+        std::fs::write(&p, format!("#!/bin/sh\n{body}\n")).unwrap();
+        std::fs::set_permissions(&p, std::fs::Permissions::from_mode(0o755)).unwrap();
+        p.display().to_string()
+    }
+
+    #[test]
+    fn a_program_that_reports_is_read_and_one_that_runs_too_long_is_stopped() {
+        let dir = tmp("validator");
+        std::fs::write(dir.join("report.txt"), SAMPLE).unwrap();
+        let reporting = script(&dir, "reporting", &format!("cat '{}'", dir.join("report.txt").display()));
+        let f = validator::check(&Settings { program: reporting, ..Settings::default() }, b"PK");
+        assert_eq!(f.len(), 5);
+        assert_eq!(f.iter().filter(|x| x.severity == Severity::Blocks).count(), 3);
+        let slow = script(&dir, "slow", "sleep 30");
+        let start = Instant::now();
+        let o = validator::run(&Settings { program: slow, seconds: 1, ..Settings::default() }, &dir.join("book.epub"));
+        assert_eq!(o, Outcome::TimedOut(Duration::from_secs(1)));
+        assert!(start.elapsed() < Duration::from_secs(10), "stopped promptly");
+        let f = validator::findings(&o);
+        assert_eq!(f[0].severity, Severity::Warning);
+        assert!(f[0].message.contains("was stopped"));
+        // A program that is not a program.
+        let not = dir.join("not-a-program");
+        std::fs::write(&not, "plain text").unwrap();
+        assert!(matches!(
+            validator::run(&Settings { program: not.display().to_string(), ..Settings::default() }, &dir.join("book.epub")),
+            Outcome::Failed(_)
+        ));
+    }
 }
 
 #[test]

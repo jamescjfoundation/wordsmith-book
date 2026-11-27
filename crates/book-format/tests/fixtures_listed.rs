@@ -8,6 +8,13 @@ fn root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")
 }
 
+/// A path under `base` as `docs/fixtures.md` writes it: from the root, with `/` between its
+/// parts on every system (on Windows a path prints with `\`).
+fn listed_name(p: &Path, base: &Path) -> String {
+    let parts: Vec<String> = p.strip_prefix(base).unwrap_or(p).components().map(|c| c.as_os_str().to_string_lossy().into_owned()).collect();
+    parts.join("/")
+}
+
 fn walk(dir: &Path, base: &Path, out: &mut BTreeSet<String>) {
     let Ok(entries) = std::fs::read_dir(dir) else { return };
     for e in entries.flatten() {
@@ -16,12 +23,12 @@ fn walk(dir: &Path, base: &Path, out: &mut BTreeSet<String>) {
             // A Manuscript or Book project folder is one fixture: list the folder.
             let name = p.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
             if name.ends_with(".wsm") || name.ends_with(".wsbk") {
-                out.insert(format!("{}/", p.strip_prefix(base).unwrap_or(&p).display()));
+                out.insert(format!("{}/", listed_name(&p, base)));
             } else {
                 walk(&p, base, out);
             }
         } else {
-            out.insert(p.strip_prefix(base).unwrap_or(&p).display().to_string());
+            out.insert(listed_name(&p, base));
         }
     }
 }
